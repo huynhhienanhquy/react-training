@@ -1,27 +1,28 @@
 import { useState } from "react";
 import ProductCard from "./components/ProductCard";
+import type { Product } from "./type";
 
-const products = [
+const products: Product[] = [
   {
     id: 1,
     name: "MacBook Pro",
     price: 2500,
     inStock: true,
-    description: "Apple M4 Pro"
+    description: "Apple M4 Pro",
   },
   {
     id: 2,
     name: "iPhone 17",
     price: 1400,
     inStock: false,
-    description: "Out of stock"
-  }
+    description: "Out of stock",
+  },
 ];
 
 export default function App() {
-  const [selectedId, setSelectedId] = useState(null);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
-  function handleBuy(product) {
+  function handleBuy(product: Product): void {
     alert(`Buying ${product.name}`);
   }
 
@@ -29,14 +30,14 @@ export default function App() {
     <div style={{ padding: 30 }}>
       <h1>Product List</h1>
 
-      {products.map(product => (
+      {products.map((product) => (
         <ProductCard
           key={product.id}
           product={product}
           isOpen={selectedId === product.id}
           onToggle={() =>
-            setSelectedId(
-              selectedId === product.id
+            setSelectedId((prevSelectedId) =>
+              prevSelectedId === product.id
                 ? null
                 : product.id
             )

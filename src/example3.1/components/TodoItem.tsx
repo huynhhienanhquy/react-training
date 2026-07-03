@@ -1,8 +1,16 @@
+import type { Todo } from "../type";
+
+interface TodoItemProps {
+  todo: Todo;
+  isSelected: boolean;
+  onSelect: (id: number) => void;
+}
+
 export default function TodoItem({
   todo,
   isSelected,
-  onSelect
-}) {
+  onSelect,
+}: TodoItemProps) {
   return (
     <div
       style={{
@@ -10,7 +18,7 @@ export default function TodoItem({
         padding: 10,
         cursor: "pointer",
         border: "1px solid black",
-        background: isSelected ? "#ddd" : "white"
+        background: isSelected ? "#ddd" : "white",
       }}
       onClick={() => onSelect(todo.id)}
     >

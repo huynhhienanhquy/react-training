@@ -3,15 +3,22 @@ import Card from "./components/Card";
 import StudentCard from "./components/StudentCard";
 import Footer from "./components/Footer";
 
+interface Student {
+  name: string;
+  age: number;
+  major: string;
+  avatar: string;
+}
+
 export default function App() {
-  const student1 = {
+  const student1: Student = {
     name: "Nguyen Van A",
     age: 21,
     major: "Information Technology",
     avatar: "https://picsum.photos/200?1",
   };
 
-  const student2 = {
+   const student2: Student = {
     name: "Tran Thi B",
     age: 20,
     major: "Software Engineering",
@@ -20,21 +27,14 @@ export default function App() {
 
   return (
     <>
-      <title>Example 2.2</title>
-
       <Header />
 
       <Card>
-        <StudentCard
-          student={student1}
-        />
+        <StudentCard student={student1}/>
       </Card>
 
       <Card>
-        <StudentCard
-          student={student2}
-          avatarSize={90}
-        />
+        <StudentCard student={student2} avatarSize={150}/>
       </Card>
 
       <Footer />
