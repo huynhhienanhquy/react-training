@@ -21,3 +21,6 @@ public
 *.suo
 *.sln
 *.sw?
+
+*storybook.log
+storybook-static
