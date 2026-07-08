@@ -3,7 +3,7 @@ import { DashboardLayout } from "./layouts/DashboardLayout";
 import { DashboardPage } from "./pages/DashboardPage";
 import { StudentsPage } from "./pages/StudentsPage";
 import { CoursesPage } from "./pages/CoursesPage";
-import { SettingsPage } from "./pages/SettingsPages";
+import { SettingsPage } from "./pages/SettingsPage";
 
 export default function App() {
   return (
