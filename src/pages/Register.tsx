@@ -1,10 +1,11 @@
+// src/pages/Register.tsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthLayout } from '../components/auth/AuthLayout';
 import { SocialButton } from '../components/ui/button/SocialButton';
 import iconGoogle from '../assets/icons/logo-google.png';
 import iconApple from '../assets/icons/logo-apple.png';
-import iconEye from '../assets/icons/eye.png'
+import iconEye from '../assets/icons/eye.png';
 import { Button } from '../components/ui/button/Button';
 
 export const Register: React.FC = () => {
@@ -17,7 +18,15 @@ export const Register: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setTimeout(() => setIsLoading(false), 2000); // Simulate a registration API call.
+
+    // Giả lập gọi API đăng ký hệ thống
+    setTimeout(() => {
+      setIsLoading(false);
+
+      // ✅ Đã sửa: Chuyển hướng người dùng sang trang onboarding sau khi đăng ký thành công
+      navigate('/onboarding');
+
+    }, 2000);
   };
 
   return (
@@ -97,14 +106,14 @@ export const Register: React.FC = () => {
             label="Continue with Google"
             altText="Google"
             className="!bg-[#edf2fe] !border-none !text-[#2563eb] font-bold py-3.5 rounded-xl"
-            onClick={() => console.log('Đăng ký bằng Google')}
+            onClick={() => console.log('Register with Google')}
           />
           <SocialButton
             icon={iconApple}
             label="Continue with Apple"
             altText="Apple"
             className="!bg-[#edf2fe] !border-none !text-[#2563eb] font-bold py-3.5 rounded-xl"
-            onClick={() => console.log('Đăng ký bằng Apple')}
+            onClick={() => console.log('Register with Apple')}
           />
         </div>
 
@@ -118,7 +127,7 @@ export const Register: React.FC = () => {
       <div className="text-center text-[15px] text-gray-400 mt-12">
         Already have an account?{" "}
         <span
-          onClick={() => navigate('/login')} // Chuyển hướng sang trang Login
+          onClick={() => navigate('/onboarding')} // Redirect to the Login page
           className="text-[#1d4ed8] font-bold hover:underline cursor-pointer ml-1"
         >
           Sign In
