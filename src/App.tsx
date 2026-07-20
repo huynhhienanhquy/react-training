@@ -43,11 +43,12 @@ const App: React.FC = () => {
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/verify-otp" element={<VerifyOTP />} />
             <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/onboarding" element={<Onboarding />} />
           </Route>
 
           {/* Protected pages (Login required) */}
           <Route element={<ProtectedRoute />}>
-            <Route path="/onboarding" element={<Onboarding />} />
+
             <Route path="/dashboard" element={<DashboardMock />} />
           </Route>
 
