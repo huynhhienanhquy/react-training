@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import iconEye from '../../../assets/icons/eye.png'; // Cập nhật đúng đường dẫn icon eye của bạn
+import iconEye from '../../../assets/icons/eye.png';
 
 interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  isPassword?: boolean; // Nếu là true sẽ có nút toggle ẩn/hiện mật khẩu
+  isPassword?: boolean;
 }
 
 export const InputField: React.FC<InputFieldProps> = ({
@@ -15,7 +15,7 @@ export const InputField: React.FC<InputFieldProps> = ({
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
-  // Xác định kiểu input thực tế (dựa vào prop isPassword & state showPassword)
+  // Determine the actual input type (based on the prop `isPassword` and the state `showPassword`).
   const inputType = isPassword ? (showPassword ? 'text' : 'password') : type;
 
   return (
@@ -34,7 +34,7 @@ export const InputField: React.FC<InputFieldProps> = ({
           {...props}
         />
 
-        {/* Nút bật/tắt hiển thị mật khẩu nếu là field Password */}
+        {/* The toggle switch to display the password is for the Password field.*/}
         {isPassword && (
           <button
             type="button"
