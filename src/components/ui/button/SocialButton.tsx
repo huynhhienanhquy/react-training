@@ -1,28 +1,28 @@
+// src/components/ui/button/SocialButton.tsx
 import React from 'react';
 
-interface SocialButtonProps {
+interface SocialButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon: string;
   label: string;
-  onClick?: () => void;
   altText?: string;
-  className?: string;
 }
 
 export const SocialButton: React.FC<SocialButtonProps> = ({
   icon,
   label,
-  onClick,
-  altText = 'icon',
+  altText = 'Social icon',
   className = '',
+  type = 'button',
+  ...props
 }) => {
   return (
     <button
-      type="button"
-      onClick={onClick}
-      className={`auth-btn-social flex items-center justify-center gap-2.5 px-4 py-2.5 border border-slate-200 rounded-xl text-sm font-semibold text-slate-800 hover:bg-slate-50 transition active:scale-[0.98] ${className}`}
+      type={type}
+      className={`w-full bg-[#edf2fe] border-none text-[#2563eb] font-bold py-3.5 rounded-xl transition hover:bg-blue-100/70 active:scale-[0.98] flex items-center justify-center gap-2.5 ${className}`}
+      {...props}
     >
-      <img src={icon} className="w-5 h-5 object-contain" alt={altText} />
-      <span className="text-xs">{label}</span>
+      <img src={icon} alt={altText} className="w-5 h-5 object-contain" />
+      <span className="text-sm">{label}</span>
     </button>
   );
 };
