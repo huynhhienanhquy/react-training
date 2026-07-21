@@ -1,3 +1,4 @@
+// src/pages/Login.tsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
@@ -5,9 +6,9 @@ import { AuthLayout } from '../components/auth/AuthLayout';
 import { getAuthErrorMessage } from '../utils/authHelpers';
 import iconGoogle from '../assets/icons/logo-google.png';
 import iconApple from '../assets/icons/logo-apple.png';
-import iconEye from '../assets/icons/eye.png';
 import { SocialButton } from '../components/ui/button/SocialButton';
 import { Button } from '../components/ui/button/Button';
+import { InputField } from '../components/ui/input/InputField';
 
 export const Login: React.FC = () => {
   const { login } = useAuth();
@@ -17,7 +18,6 @@ export const Login: React.FC = () => {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [apiError, setApiError] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -47,47 +47,26 @@ export const Login: React.FC = () => {
 
       <form className="space-y-6" onSubmit={handleLogin}>
         {/* 2. Email Field */}
-        <div className="flex flex-col space-y-2">
-          <label className="text-[15px] font-bold text-[#0d1b3e]">
-            Email address
-          </label>
-          <input
-            type="email"
-            placeholder="Enter your email"
-            className="w-full px-5 py-3.5 rounded-xl border border-gray-100 bg-gray-50/30 text-base focus:outline-none focus:border-blue-500 transition placeholder:text-gray-300"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+        <InputField
+          label="Email address"
+          type="email"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+
+        {/* 3. Password Field & Forgot Password */}
+        <div className="space-y-1">
+          <InputField
+            label="Password"
+            isPassword={true}
+            placeholder="Enter your password"
+            autoComplete="new-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </div>
-
-        {/* 3. Password Field */}
-        <div className="flex flex-col space-y-2 relative">
-          <label className="text-[15px] font-bold text-[#0d1b3e]">
-            Password
-          </label>
-          <div className="relative">
-            <input
-              type={showPassword ? "text" : "password"}
-              placeholder="Enter your password"
-              autoComplete="new-password"
-              className="w-full px-5 py-3.5 rounded-xl border border-gray-100 bg-blue-50/40 text-base focus:outline-none focus:border-blue-400 focus:bg-blue-50/50 transition placeholder:text-gray-300 tracking-widest font-mono pr-12"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute inset-y-0 right-4 flex items-center justify-center transition active:scale-95 select-none"
-            >
-              <img
-                src={iconEye}
-                alt="Toggle Password"
-                className={`w-5 h-5 object-contain transition-opacity ${showPassword ? 'opacity-40' : 'opacity-80 hover:opacity-100'}`}
-              />
-            </button>
-          </div>
 
           {/* Button Forgot Password */}
           <div className="text-right pt-1">
@@ -95,17 +74,19 @@ export const Login: React.FC = () => {
               onClick={() => navigate('/forgot-password')}
               className="text-[14px] font-bold text-[#0d1b3e] hover:text-blue-600 cursor-pointer transition"
             >
-              Forgot Password
+              Forgot Password?
             </span>
           </div>
         </div>
 
         {apiError && (
-          <p className="text-sm text-red-500 font-medium">{apiError}</p>
+          <p className="text-sm text-red-500 font-medium px-1 bg-red-50/50 rounded-lg py-1 border border-red-100/40 text-center">
+            {apiError}
+          </p>
         )}
 
         {/* 4. Social Login Buttons */}
-        <div className="grid grid-cols-2 gap-4 pt-4">
+        <div className="grid grid-cols-2 gap-4 pt-2">
           <SocialButton
             icon={iconGoogle}
             label="Continue with Google"
@@ -123,19 +104,19 @@ export const Login: React.FC = () => {
         </div>
 
         {/* 5. Submit Button */}
-        <Button isLoading={isLoading}>
-          Create a Free Account &rarr;
+        <Button isLoading={isLoading} showArrow={true}>
+          Sign In
         </Button>
       </form>
 
       {/* 6. Footer */}
       <div className="text-center text-[15px] text-gray-400 mt-12">
-        Already have an account?{" "}
+        Don't have an account?{" "}
         <span
           onClick={() => navigate('/register')}
           className="text-[#1d4ed8] font-bold hover:underline cursor-pointer ml-1"
         >
-          Sign In
+          Sign Up
         </span>
       </div>
     </AuthLayout>

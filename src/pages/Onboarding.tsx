@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthLayout } from '../components/auth/AuthLayout';
 import { Button } from '../components/ui/button/Button';
+import iconArrowDown from '../assets/icons/arrow-down.png'
 
 export const Onboarding: React.FC = () => {
   const navigate = useNavigate();
@@ -65,7 +66,7 @@ export const Onboarding: React.FC = () => {
             </select>
             {/*  Dropdown arrow */}
             <div className="pointer-events-none absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 text-[10px]">
-              ▼
+              <img src={iconArrowDown} alt="iconArrowDown" />
             </div>
           </div>
         </div>

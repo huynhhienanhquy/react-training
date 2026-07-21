@@ -48,7 +48,6 @@ const App: React.FC = () => {
 
           {/* Protected pages (Login required) */}
           <Route element={<ProtectedRoute />}>
-
             <Route path="/dashboard" element={<DashboardMock />} />
           </Route>
 

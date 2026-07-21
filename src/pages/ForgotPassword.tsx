@@ -16,6 +16,7 @@ export const ForgotPassword: React.FC = () => {
     setTimeout(() => {
       setIsLoading(false);
       alert("OTP code has been sent to your email!");
+      navigate('/verify-otp');
     }, 1500);
   };
 

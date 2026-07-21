@@ -1,13 +1,17 @@
+// src/components/ui/button/Button.tsx
 import React from 'react';
+import iconArrowRight from '../../../assets/icons/arrow-right.png';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   isLoading?: boolean;
+  showArrow?: boolean;
 }
 
 export const Button: React.FC<ButtonProps> = ({
   children,
   isLoading,
+  showArrow = false,
   className = '',
   disabled,
   type = 'submit',
@@ -21,10 +25,21 @@ export const Button: React.FC<ButtonProps> = ({
       {...props}
     >
       {isLoading ? (
-        // The spinning effect occurs when you click submit and wait for the API.
+        // Hiệu ứng xoay tròn (Spinner) khi bấm submit
         <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
       ) : (
-        children
+        <>
+          <span>{children}</span>
+
+          {/* 💡 Sử dụng trực tiếp ảnh icon từ folder */}
+          {showArrow && (
+            <img
+              src={iconArrowRight}
+              alt="Arrow Right"
+              className="w-4 h-4 object-contain"
+            />
+          )}
+        </>
       )}
     </button>
   );
