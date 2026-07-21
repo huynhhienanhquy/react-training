@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { AuthLayout } from '../components/auth/AuthLayout';
 import { Button } from '../components/ui/button/Button';
 import iconArrowDown from '../assets/icons/arrow-down.png'
+import { AuthHeader } from '../components/auth/AuthHeader';
+import { InputField } from '../components/ui/input/InputField';
+
 
 export const Onboarding: React.FC = () => {
   const navigate = useNavigate();
@@ -17,36 +20,27 @@ export const Onboarding: React.FC = () => {
     setTimeout(() => {
       setIsLoading(false);
       navigate('/dashboard');
-    }, 1500);
+    }, 300);
   };
 
   return (
     <AuthLayout isLoading={isLoading}>
       {/* 1. Header */}
-      <div className="space-y-2 mb-10">
-        <h2 className="text-[32px] font-bold text-[#0d1b3e] tracking-tight">
-          Let's Get To Know You!
-        </h2>
-        <p className="text-[15px] text-gray-400 font-normal">
-          Provide your information so that Tripal can know you better
-        </p>
-      </div>
+      <AuthHeader
+        title="Let’s Get To Know You!"
+        subtitle="Provide only the information provided so that Tripal can know you better"
+      />
 
       <form className="space-y-6" onSubmit={handleStartPlanning} autoComplete="off">
         {/* 2. Enter Full Name */}
-        <div className="flex flex-col space-y-2">
-          <label className="text-[15px] font-bold text-[#0d1b3e]">
-            Full Name
-          </label>
-          <input
-            type="text"
-            placeholder="Enter your full name"
-            className="w-full px-5 py-3.5 rounded-xl border border-gray-100 bg-gray-50/30 text-base focus:outline-none focus:border-blue-500 transition placeholder:text-gray-300"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            required
-          />
-        </div>
+        <InputField
+          label="Full Name"
+          type="text"
+          placeholder="Enter your full name"
+          value={fullName}
+          onChange={(e) => setFullName(e.target.value)}
+          required
+        />
 
         {/* 3. Country Selection Dropdown*/}
         <div className="flex flex-col space-y-2">
