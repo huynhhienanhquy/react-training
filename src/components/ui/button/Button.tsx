@@ -1,6 +1,6 @@
 // src/components/ui/button/Button.tsx
 import React from 'react';
-import iconArrowRight from '../../../assets/icons/arrow-right.png'; // 💡 Đường dẫn icon mũi tên của bạn
+import iconArrowRight from '../../../assets/icons/arrow-right.png';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
