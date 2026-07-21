@@ -1,50 +1,44 @@
+// src/components/auth/AuthLayout.tsx
 import React from 'react';
-import travelBg from '../../assets/images/background.png';
+import { LoadingOverlay } from '../ui/LoadingOverlay';
+import authBg from '../../assets/images/background.png'; // 💡 Đường dẫn ảnh nền của bạn
 
 interface AuthLayoutProps {
   children: React.ReactNode;
   isLoading?: boolean;
 }
 
-export const AuthLayout: React.FC<AuthLayoutProps> = ({ children, isLoading }) => {
+export const AuthLayout: React.FC<AuthLayoutProps> = ({ children, isLoading = false }) => {
   return (
-    <div className="relative min-h-screen w-full flex items-center justify-end overflow-hidden bg-slate-900 font-sans">
+    <div
+      className="min-h-screen w-full relative flex items-center justify-center p-6 md:p-12 bg-cover bg-center overflow-hidden"
+      style={{ backgroundImage: `url(${authBg})` }}
+    >
+      {/* 💡 LoadingOverlay phủ lên TOÀN MÀN HÌNH (trên cả background và card) */}
+      <LoadingOverlay isVisible={isLoading} />
 
-      {/* 1. BACKGROUND IMAGE */}
-      <div className="fixed inset-0 w-full h-full z-0">
-        <img
-          src={travelBg}
-          alt="Tripal Background"
-          className="w-full h-full object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-black/10" />
-      </div>
+      {/* Lớp phủ gradient tối góc dưới */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
 
-      {/* 2. TEXT LEFT */}
-      <div className="absolute bottom-24 left-16 z-10 max-w-2xl text-white hidden lg:block select-none">
-        <h1 className="text-[56px] font-bold tracking-tight leading-[1.1] mb-6">
-          Discover Amazing Deals &<br />Thrilling Adventures
-        </h1>
-        <p className="text-lg text-white/90 max-w-xl font-normal leading-relaxed">
-          Tripal is designed to ease trip and vacation planning. Explore amazing deals and offers.
-        </p>
-      </div>
+      {/* Nội dung chính */}
+      <div className="relative z-10 w-full max-w-[1280px] h-full flex flex-col md:flex-row items-center justify-between gap-8">
 
-      {/* 3.CARD FORM ON THE RIGHT  */}
-      <div className="relative z-10 w-full max-w-[640px] h-[96vh] bg-white rounded-[40px] shadow-[0_20px_70px_-10px_rgba(0,0,0,0.25)] p-12 md:p-14 mr-4 md:mr-6 my-auto flex flex-col justify-center transition-all duration-300">
+        {/* Cột trái: Text trên background */}
+        <div className="w-full md:w-[45%] text-white space-y-4 p-4 self-end mb-6 hidden md:block">
+          <h1 className="text-4xl lg:text-[44px] font-bold leading-[1.2] tracking-tight">
+            Discover Amazing Deals & Thrilling Adventures
+          </h1>
+          <p className="text-base text-gray-200 font-light max-w-[480px]">
+            Tripal is designed to ease trip and vacation planning. Explore amazing deals and offers
+          </p>
+        </div>
 
-        {isLoading && (
-          <div className="absolute inset-0 bg-white/80 rounded-[40px] z-50 flex items-center justify-center backdrop-blur-[2px]">
-            <div className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-          </div>
-        )}
-
-        <div className="w-full text-slate-900">
+        {/* Cột phải: Card trắng chứa Form */}
+        <div className="relative w-full md:w-[500px] lg:w-[540px] bg-white rounded-[32px] p-8 md:p-12 shadow-2xl overflow-hidden flex flex-col justify-between min-h-[600px]">
           {children}
         </div>
 
       </div>
-
     </div>
   );
 };
