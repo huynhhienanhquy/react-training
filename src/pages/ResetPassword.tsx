@@ -1,4 +1,3 @@
-// src/pages/ResetPassword.tsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthLayout } from '../components/auth/AuthLayout';
@@ -25,7 +24,7 @@ export const ResetPassword: React.FC = () => {
 
     setIsLoading(true);
 
-    // Giả lập gọi API cập nhật mật khẩu mới
+    // Simulate an API call to update the new password.
     setTimeout(() => {
       setIsLoading(false);
       alert("Password reset successfully! Redirecting to Sign In...");
@@ -42,7 +41,7 @@ export const ResetPassword: React.FC = () => {
       />
 
       <form className="space-y-6" onSubmit={handleResetPassword} autoComplete="off">
-        {/* 2. Trường nhập mật khẩu mới */}
+        {/* 2. Enter a new password. */}
         <InputField
           label="New Password"
           isPassword={true}
@@ -53,7 +52,7 @@ export const ResetPassword: React.FC = () => {
           required
         />
 
-        {/* 3. Trường xác nhận mật khẩu mới */}
+        {/* 3. Confirm your new password. */}
         <InputField
           label="Confirm New Password"
           isPassword={true}
@@ -64,14 +63,14 @@ export const ResetPassword: React.FC = () => {
           required
         />
 
-        {/* 4. Thông báo lỗi nếu mật khẩu không khớp */}
+        {/* 4. Error message if password does not match */}
         {error && (
           <p className="text-sm text-red-500 font-medium px-1 bg-red-50/50 rounded-lg py-1 border border-red-100/40 text-center">
             {error}
           </p>
         )}
 
-        {/* 5. Nút submit dùng chung */}
+        {/* 5. Button submit*/}
         <div className="pt-2">
           <Button type="submit" isLoading={isLoading} showArrow={true}>
             Save and Continue to Sign In
