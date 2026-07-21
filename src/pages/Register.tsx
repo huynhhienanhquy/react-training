@@ -1,4 +1,3 @@
-// src/pages/Register.tsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthLayout } from '../components/auth/AuthLayout';
@@ -19,11 +18,9 @@ export const Register: React.FC = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Giả lập gọi API đăng ký hệ thống
     setTimeout(() => {
       setIsLoading(false);
 
-      // ✅ Đã sửa: Chuyển hướng người dùng sang trang onboarding sau khi đăng ký thành công
       navigate('/onboarding');
 
     }, 2000);
