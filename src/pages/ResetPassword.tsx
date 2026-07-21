@@ -5,6 +5,7 @@ import { AuthLayout } from '../components/auth/AuthLayout';
 import { Button } from '../components/ui/button/Button';
 import { AuthHeader } from '../components/auth/AuthHeader';
 import { InputField } from '../components/ui/input/InputField';
+import { AuthFooter } from '../components/auth/AuthFooter';
 
 export const ResetPassword: React.FC = () => {
   const navigate = useNavigate();
@@ -79,15 +80,11 @@ export const ResetPassword: React.FC = () => {
       </form>
 
       {/* 6. Footer */}
-      <div className="text-center text-[15px] text-gray-400 mt-12">
-        Don't have an account?{" "}
-        <span
-          onClick={() => navigate('/register')}
-          className="text-[#1d4ed8] font-bold hover:underline cursor-pointer ml-1"
-        >
-          Sign Up
-        </span>
-      </div>
+      <AuthFooter
+        questionText="Don't have an account?"
+        actionText="Sign Up"
+        onActionClick={() => navigate('/register')}
+      />
     </AuthLayout>
   );
 };

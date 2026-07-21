@@ -5,7 +5,7 @@ import { Button } from '../components/ui/button/Button';
 import iconArrowDown from '../assets/icons/arrow-down.png'
 import { AuthHeader } from '../components/auth/AuthHeader';
 import { InputField } from '../components/ui/input/InputField';
-
+import { AuthFooter } from '../components/auth/AuthFooter';
 
 export const Onboarding: React.FC = () => {
   const navigate = useNavigate();
@@ -74,15 +74,11 @@ export const Onboarding: React.FC = () => {
       </form>
 
       {/* 5. Footer */}
-      <div className="text-center text-[15px] text-gray-400 mt-12">
-        Already have an account?{" "}
-        <span
-          onClick={() => navigate('/login')}
-          className="text-[#1d4ed8] font-bold hover:underline cursor-pointer ml-1"
-        >
-          Sign In
-        </span>
-      </div>
+      <AuthFooter
+        questionText="Already have an account?"
+        actionText="Sign In"
+        onActionClick={() => navigate('/login')}
+      />
     </AuthLayout>
   );
 };
