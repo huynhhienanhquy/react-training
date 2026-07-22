@@ -1,4 +1,3 @@
-// src/components/chat/ThinkingLoader.tsx
 import React from 'react';
 
 interface ThinkingLoaderProps {
@@ -10,7 +9,7 @@ export const ThinkingLoader: React.FC<ThinkingLoaderProps> = ({
 }) => {
   return (
     <div className="flex items-center gap-2.5 py-2 px-1 text-slate-400 select-none">
-      {/* 🔹 iOS Style Spinner (12 tia xoay tròn) */}
+      {/* 🔹 iOS Style Spinner  */}
       <svg
         className="animate-spin w-4 h-4 text-slate-400 shrink-0"
         xmlns="http://www.w3.org/2000/svg"
