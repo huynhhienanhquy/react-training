@@ -30,11 +30,11 @@ export const ItineraryCardWidget: React.FC<ItineraryCardWidgetProps> = ({
         </div>
       </div>
 
-      {/* List các ngày trong lịch trình */}
+      {/* List the dates in the schedule. */}
       <div className="space-y-4">
         {itinerary.map((dayPlan) => (
           <div key={dayPlan.day} className="space-y-2">
-            {/* Tiêu đề từng ngày */}
+            {/* Daily headlines */}
             <div className="flex items-center gap-2">
               <span className="bg-blue-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">
                 Ngày {dayPlan.day}
@@ -44,7 +44,7 @@ export const ItineraryCardWidget: React.FC<ItineraryCardWidgetProps> = ({
               </h5>
             </div>
 
-            {/* Danh sách các hoạt động trong ngày */}
+            {/* List of activities for the day*/}
             <div className="bg-white rounded-2xl border border-slate-100 p-3 space-y-3 shadow-xs">
               {dayPlan.activities.map((act, index) => (
                 <div
@@ -55,13 +55,13 @@ export const ItineraryCardWidget: React.FC<ItineraryCardWidgetProps> = ({
                       : ''
                   }`}
                 >
-                  {/* Thời gian */}
+                  {/* Time*/}
                   <div className="flex items-center gap-1 text-[11px] font-bold text-blue-600 shrink-0 mt-0.5 w-18">
                     <Clock className="w-3 h-3" />
                     <span>{act.time}</span>
                   </div>
 
-                  {/* Chi tiết hoạt động */}
+                  {/* Activity details */}
                   <div className="flex-1 min-w-0 space-y-0.5">
                     <h6 className="text-xs font-bold text-[#14153E] truncate">
                       {act.title}
