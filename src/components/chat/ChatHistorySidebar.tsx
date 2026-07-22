@@ -1,11 +1,10 @@
-// src/components/chat/ChatHistorySidebar.tsx
 import React from 'react';
 import iconSearch from '../../assets/icons/search-normal.png'
 
 export interface ChatSession {
   id: string;
   title: string;
-  group?: string; // Ví dụ: "TODAY", "YESTERDAY", "2ND JANUARY, 2026"
+  group?: string;
 }
 
 interface ChatHistorySidebarProps {
@@ -23,12 +22,12 @@ export const ChatHistorySidebar: React.FC<ChatHistorySidebarProps> = ({
   activeSessionId,
   onSelectSession,
 }) => {
-  // 1. Lọc cuộc hội thoại theo từ khóa tìm kiếm
+  // 1. Filter conversations by search keywords.
   const filteredSessions = sessions.filter((s) =>
     s.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // 2. Tự động gom nhóm các cuộc hội thoại theo trường group (Mặc định là TODAY nếu chưa truyền)
+  // 2. Automatically group conversations by the group field (Default is TODAY if not assigned).
   const groupedSessions = filteredSessions.reduce((acc, session) => {
     const groupName = session.group || 'TODAY';
     if (!acc[groupName]) {
@@ -56,7 +55,7 @@ export const ChatHistorySidebar: React.FC<ChatHistorySidebarProps> = ({
         </div>
       </div>
 
-      {/* Danh sách các nhóm lịch sử */}
+      {/* List of historical groups */}
       <div className="flex-1 overflow-y-auto px-5 py-3 space-y-6">
         {Object.keys(groupedSessions).length === 0 ? (
           <div className="text-center py-8 text-xs text-slate-400">
@@ -65,12 +64,12 @@ export const ChatHistorySidebar: React.FC<ChatHistorySidebarProps> = ({
         ) : (
           Object.entries(groupedSessions).map(([groupTitle, items]) => (
             <div key={groupTitle} className="space-y-2">
-              {/* Tiêu đề nhóm (TODAY, YESTERDAY, ...) */}
+              {/* Group title (TODAY, YESTERDAY, ...) */}
               <h3 className="text-[11px] font-bold text-slate-400/90 tracking-wider uppercase px-1">
                 {groupTitle}
               </h3>
 
-              {/* Danh sách các item trong nhóm */}
+              {/* List of items in the group */}
               <div className="space-y-1">
                 {items.map((session) => {
                   const isActive = session.id === activeSessionId;
