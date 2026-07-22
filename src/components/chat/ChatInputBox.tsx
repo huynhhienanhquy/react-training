@@ -1,7 +1,5 @@
-// src/components/chat/ChatInputBox.tsx
 import React from 'react';
 
-// 💡 Import các file Icon local từ thư mục assets của bạn
 import iconPlus from '../../assets/icons/add-dark.png';
 import iconMic from '../../assets/icons/microphone-2.png';
 import iconSend from '../../assets/icons/send-2.png';
@@ -38,7 +36,7 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = ({
       />
 
       <div className="flex items-center justify-between pt-2 border-t border-slate-100 mt-2">
-        {/* Nút Plus / Add attachment */}
+        {/* Button Plus / Add attachment */}
         <button className="w-9 h-9 rounded-full flex items-center justify-center hover:bg-slate-100 transition p-2">
           <img
             src={iconPlus}
@@ -48,7 +46,7 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = ({
         </button>
 
         <div className="flex items-center gap-3">
-          {/* Nút Voice / Microphone */}
+          {/* Button Voice / Microphone */}
           <button
             onClick={() => setIsRecording((prev) => !prev)}
             className={`w-9 h-9 rounded-full flex items-center justify-center transition p-2 ${
@@ -64,7 +62,7 @@ export const ChatInputBox: React.FC<ChatInputBoxProps> = ({
             />
           </button>
 
-          {/* Nút Send */}
+          {/* Button Send */}
           <button
             onClick={onSend}
             className="w-10 h-10 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl flex items-center justify-center p-2.5 shadow-md shadow-blue-500/30 transition transform active:scale-95 shrink-0"
