@@ -26,7 +26,7 @@ export const Login: React.FC = () => {
     setApiError("");
     try {
       await login(email, password);
-      navigate('/dashboard');
+      navigate('/chats');
     } catch (error) {
       setApiError(getAuthErrorMessage(error));
     } finally {
@@ -100,7 +100,7 @@ export const Login: React.FC = () => {
 
         {/* 5. Submit Button */}
         <Button isLoading={isLoading} showArrow={true}>
-          Sign In
+          Create a Free Account
         </Button>
       </form>
 
