@@ -38,10 +38,10 @@ export const ChatHistorySidebar: React.FC<ChatHistorySidebarProps> = ({
   }, {} as Record<string, ChatSession[]>);
 
   return (
-    <aside className="w-72 md:w-80 bg-[#F8F9FB] flex flex-col h-full shrink-0 border-r border-slate-200/50 select-none">
+    <aside className="w-72 md:w-80 bg-surface-sidebar flex flex-col h-full shrink-0 border-r border-slate-200/50 select-none">
       {/* Header Chats & Search Box */}
       <div className="p-6 pb-2">
-        <h1 className="text-2xl font-bold text-[#14153E] tracking-tight">Chats</h1>
+        <h1 className="text-2xl font-bold text-brand-dark tracking-tight">Chats</h1>
 
         <div className="mt-4 relative">
           <img src={iconSearch} alt="Search" className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
@@ -65,7 +65,7 @@ export const ChatHistorySidebar: React.FC<ChatHistorySidebarProps> = ({
           Object.entries(groupedSessions).map(([groupTitle, items]) => (
             <div key={groupTitle} className="space-y-2">
               {/* Group title (TODAY, YESTERDAY, ...) */}
-              <h3 className="text-[11px] font-bold text-slate-400/90 tracking-wider uppercase px-1">
+              <h3 className="text-xxs font-bold text-slate-400/90 tracking-wider uppercase px-1">
                 {groupTitle}
               </h3>
 
@@ -79,8 +79,8 @@ export const ChatHistorySidebar: React.FC<ChatHistorySidebarProps> = ({
                       onClick={() => onSelectSession(session.id)}
                       className={`w-full text-left px-3.5 py-3 rounded-2xl text-xs md:text-sm transition font-medium truncate block ${
                         isActive
-                          ? 'bg-[#EFEFEF] text-[#14153E] font-semibold'
-                          : 'text-[#14153E] hover:bg-slate-100/60'
+                          ? 'bg-surface-active text-brand-dark font-semibold'
+                          : 'text-brand-dark hover:bg-slate-100/60'
                       }`}
                     >
                       {session.title}

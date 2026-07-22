@@ -24,7 +24,7 @@ export const WelcomeState: React.FC<WelcomeStateProps> = ({ prompts, onSelectPro
         </div>
       </div>
 
-      <h2 className="text-2xl md:text-4xl font-extrabold text-[#111827] tracking-tight mb-8">
+      <h2 className="text-2xl md:text-4xl font-extrabold text-gray-900 tracking-tight mb-8">
         Let’s Plan Your Next Adventure
       </h2>
 

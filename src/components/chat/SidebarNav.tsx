@@ -67,7 +67,7 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({ activeNav, setActiveNav 
   };
 
   return (
-    <aside className="w-18 md:w-20 bg-[#F8F9FB] border-r-[10px] border-[#EEF3FC] flex flex-col items-center justify-between py-6 z-20 shrink-0 select-none">
+    <aside className="w-18 md:w-20 bg-surface-sidebar border-r-[10px] border-surface-section flex flex-col items-center justify-between py-6 z-20 shrink-0 select-none">
       <div className="flex flex-col items-center gap-7 w-full px-2">
         {/* App Logo */}
         <button className="w-11 h-11 rounded-2xl flex items-center justify-center p-1.5 hover:opacity-90 transition">
@@ -145,7 +145,7 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({ activeNav, setActiveNav 
           <div className="absolute bottom-2 left-16 w-48 bg-white rounded-2xl shadow-xl border border-slate-100 p-2 z-50 animate-in fade-in zoom-in-95 duration-150">
             <div className="px-3 py-2 border-b border-slate-100 mb-1">
               <p className="text-xs font-semibold text-slate-800 truncate">Alex Developer</p>
-              <p className="text-[10px] text-slate-400 truncate">user@gmail.com</p>
+              <p className="text-2xs text-slate-400 truncate">user@gmail.com</p>
             </div>
 
             <button

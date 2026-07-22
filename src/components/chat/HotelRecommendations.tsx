@@ -55,8 +55,8 @@ export const HotelRecommendations: React.FC<HotelRecommendationsProps> = ({
   };
 
   return (
-    <div className="w-full bg-[#F4F7FE] p-5 rounded-3xl space-y-4 my-2 border border-slate-100/60 shadow-sm max-w-2xl">
-      <h3 className="text-base md:text-lg font-bold text-[#14153E]">
+    <div className="w-full bg-surface-section-alt p-5 rounded-3xl space-y-4 my-2 border border-slate-100/60 shadow-sm max-w-2xl">
+      <h3 className="text-base md:text-lg font-bold text-brand-dark">
         {title}
       </h3>
 
@@ -67,7 +67,7 @@ export const HotelRecommendations: React.FC<HotelRecommendationsProps> = ({
           return (
             <div
               key={hotel.id}
-              className="bg-[#FAFBFD] hover:bg-white rounded-2xl p-4 transition-all duration-200 border border-slate-100/80 flex flex-col sm:flex-row gap-4 items-center justify-between shadow-sm"
+              className="bg-surface hover:bg-white rounded-2xl p-4 transition-all duration-200 border border-slate-100/80 flex flex-col sm:flex-row gap-4 items-center justify-between shadow-sm"
             >
               {/* Image + Information on the left */}
               <div className="flex flex-col sm:flex-row gap-4 items-center flex-1">
@@ -81,7 +81,7 @@ export const HotelRecommendations: React.FC<HotelRecommendationsProps> = ({
 
                 <div className="flex-1 flex flex-col justify-between h-28 py-0.5">
                   <div>
-                    <h4 className="text-sm md:text-base font-bold text-[#14153E]">
+                    <h4 className="text-sm md:text-base font-bold text-brand-dark">
                       {hotel.name}
                     </h4>
                     <p className="text-xs text-slate-400 line-clamp-2 mt-1 leading-relaxed">
@@ -101,14 +101,14 @@ export const HotelRecommendations: React.FC<HotelRecommendationsProps> = ({
               <div className="flex flex-col items-end justify-between gap-2.5 shrink-0 self-stretch">
                 <div>
                   {hotel.tag && (
-                    <span className="px-3 py-1 bg-[#F2FBF5] text-[#22C55E] text-[11px] font-semibold rounded-full border border-green-200/40">
+                    <span className="px-3 py-1 bg-success-light text-success text-xxs font-semibold rounded-full border border-green-200/40">
                       {hotel.tag}
                     </span>
                   )}
                 </div>
 
                 <div className="flex items-baseline gap-0.5">
-                  <span className="text-lg md:text-xl font-bold text-[#14153E]">
+                  <span className="text-lg md:text-xl font-bold text-brand-dark">
                     {hotel.price}
                   </span>
                   <span className="text-xs text-slate-400 font-normal">
@@ -122,7 +122,7 @@ export const HotelRecommendations: React.FC<HotelRecommendationsProps> = ({
                     className={`w-10 h-10 rounded-2xl flex items-center justify-center transition p-2.5 ${
                       isFav
                         ? 'bg-blue-100 border border-blue-200'
-                        : 'bg-[#EEF3FC] hover:bg-blue-100/60'
+                        : 'bg-surface-section hover:bg-blue-100/60'
                     }`}
                   >
                     <img
@@ -136,7 +136,7 @@ export const HotelRecommendations: React.FC<HotelRecommendationsProps> = ({
 
                   <button
                     onClick={() => onBookNow && onBookNow(hotel.id)}
-                    className="px-4 py-2.5 bg-[#EEF3FC] hover:bg-blue-600 hover:text-white text-blue-600 text-xs font-semibold rounded-2xl transition-all duration-200"
+                    className="px-4 py-2.5 bg-surface-section hover:bg-blue-600 hover:text-white text-blue-600 text-xs font-semibold rounded-2xl transition-all duration-200"
                   >
                     Book Now
                   </button>
@@ -149,7 +149,7 @@ export const HotelRecommendations: React.FC<HotelRecommendationsProps> = ({
 
       <button
         onClick={onSeeAll}
-        className="w-full py-3 bg-[#EEF3FD]/80 hover:bg-[#EEF3FD] text-blue-600 text-xs md:text-sm font-semibold rounded-xl transition text-center"
+        className="w-full py-3 bg-surface-see-more/80 hover:bg-surface-see-more text-blue-600 text-xs md:text-sm font-semibold rounded-xl transition text-center"
       >
         See all recommendations
       </button>

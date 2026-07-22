@@ -25,7 +25,7 @@ export const PlacesCardWidget: React.FC<PlacesCardWidgetProps> = ({
   };
 
   return (
-    <div className="bg-[#FAFBFD] rounded-3xl border border-slate-200/80 p-5 max-w-md w-full shadow-sm my-3 space-y-4">
+    <div className="bg-surface rounded-3xl border border-slate-200/80 p-5 max-w-md w-full shadow-sm my-3 space-y-4">
       {/* Header Widget */}
       <div className="flex items-center justify-between pb-3 border-b border-slate-100">
         <div className="flex items-center gap-2.5">
@@ -33,10 +33,10 @@ export const PlacesCardWidget: React.FC<PlacesCardWidgetProps> = ({
             <MapPin className="w-4 h-4" />
           </div>
           <div>
-            <h4 className="text-xs font-bold text-[#14153E] uppercase tracking-wider">
+            <h4 className="text-xs font-bold text-brand-dark uppercase tracking-wider">
               Địa điểm nổi bật
             </h4>
-            <p className="text-[11px] text-slate-400 font-medium">
+            <p className="text-xxs text-slate-400 font-medium">
               {places.length} gợi ý xung quanh
             </p>
           </div>
@@ -63,7 +63,7 @@ export const PlacesCardWidget: React.FC<PlacesCardWidgetProps> = ({
               <div className="flex-1 min-w-0 space-y-1">
                 <div className="flex items-center justify-between gap-2">
                   <span
-                    className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-md border ${badge.color}`}
+                    className={`inline-flex items-center gap-1 text-2xs font-bold px-2 py-0.5 rounded-md border ${badge.color}`}
                   >
                     <CategoryIcon className="w-3 h-3" />
                     {badge.label}
@@ -71,17 +71,17 @@ export const PlacesCardWidget: React.FC<PlacesCardWidgetProps> = ({
 
                   <div className="flex items-center gap-1">
                     <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
-                    <span className="text-xs font-bold text-[#14153E]">
+                    <span className="text-xs font-bold text-brand-dark">
                       {place.rating}
                     </span>
                   </div>
                 </div>
 
-                <h5 className="font-bold text-xs text-[#14153E] truncate">
+                <h5 className="font-bold text-xs text-brand-dark truncate">
                   {place.name}
                 </h5>
 
-                <p className="text-[11px] text-slate-400 truncate flex items-center gap-1">
+                <p className="text-xxs text-slate-400 truncate flex items-center gap-1">
                   <MapPin className="w-3 h-3 shrink-0" />
                   <span>{place.address}</span>
                 </p>
@@ -94,7 +94,7 @@ export const PlacesCardWidget: React.FC<PlacesCardWidgetProps> = ({
       {/* Button Action */}
       <button
         onClick={onViewAll}
-        className="w-full py-3 bg-[#EEF3FC] hover:bg-blue-600 hover:text-white text-blue-600 rounded-2xl text-xs font-bold transition flex items-center justify-center gap-2"
+        className="w-full py-3 bg-surface-section hover:bg-blue-600 hover:text-white text-blue-600 rounded-2xl text-xs font-bold transition flex items-center justify-center gap-2"
       >
         <span>Xem danh sách đầy đủ</span>
         <ArrowRight className="w-3.5 h-3.5" />

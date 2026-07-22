@@ -32,7 +32,7 @@ export const Topbar: React.FC<TopbarProps> = ({
               {chatTitle}
             </button>
             <span className="text-slate-400">&gt;</span>
-            <span className="font-bold text-[#14153E]">Select Fare</span>
+            <span className="font-bold text-brand-dark">Select Fare</span>
           </>
         ) : (
           <h2 className="text-base font-semibold text-slate-800">
