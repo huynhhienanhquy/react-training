@@ -1,4 +1,3 @@
-// src/components/chat/HotelRecommendations.tsx
 import React, { useState } from 'react';
 import { Wifi, ParkingCircle, Utensils } from 'lucide-react';
 
@@ -70,7 +69,7 @@ export const HotelRecommendations: React.FC<HotelRecommendationsProps> = ({
               key={hotel.id}
               className="bg-[#FAFBFD] hover:bg-white rounded-2xl p-4 transition-all duration-200 border border-slate-100/80 flex flex-col sm:flex-row gap-4 items-center justify-between shadow-sm"
             >
-              {/* Ảnh + Thông tin bên trái */}
+              {/* Image + Information on the left */}
               <div className="flex flex-col sm:flex-row gap-4 items-center flex-1">
                 <div className="w-full sm:w-36 h-28 sm:h-28 rounded-xl overflow-hidden shrink-0">
                   <img
@@ -98,7 +97,7 @@ export const HotelRecommendations: React.FC<HotelRecommendationsProps> = ({
                 </div>
               </div>
 
-              {/* Cột bên phải: Tag Cheap, Giá, Nút Heart + Book Now */}
+              {/* Right column: Tag Cheap, Price, Heart button + Book Now */}
               <div className="flex flex-col items-end justify-between gap-2.5 shrink-0 self-stretch">
                 <div>
                   {hotel.tag && (
