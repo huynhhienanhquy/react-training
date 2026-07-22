@@ -1,4 +1,3 @@
-// src/App.tsx
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthProvider';
@@ -21,7 +20,7 @@ const App: React.FC = () => {
     <BrowserRouter>
       <AuthProvider>
         <Routes>
-          {/* Public pages (Chưa đăng nhập) */}
+          {/* Public pages (Not logged in) */}
           <Route element={<GuestRoute />}>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
@@ -31,13 +30,13 @@ const App: React.FC = () => {
             <Route path="/onboarding" element={<Onboarding />} />
           </Route>
 
-          {/* Protected pages (Đã đăng nhập) */}
+          {/* Protected pages (Logged in) */}
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<ChatPage />} />
             <Route path="/chats" element={<ChatPage />} />
           </Route>
 
-          {/* Mặc định điều hướng khi URL không hợp lệ */}
+          {/* Default navigation when URL is invalid */}
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </AuthProvider>
