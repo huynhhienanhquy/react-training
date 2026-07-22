@@ -16,9 +16,9 @@ export const FareHeader: React.FC<FareHeaderProps> = ({
   priceUnit,
 }) => {
   return (
-    <div className="bg-[#FAFBFD] p-6 rounded-3xl border border-slate-100 flex items-center justify-between shadow-sm">
+    <div className="bg-surface p-6 rounded-3xl border border-slate-100 flex items-center justify-between shadow-sm">
       <div>
-        <h2 className="text-xl md:text-2xl font-bold text-[#14153E]">
+        <h2 className="text-xl md:text-2xl font-bold text-brand-dark">
           {destination}
         </h2>
         <p className="text-xs md:text-sm text-slate-400 font-medium mt-1">
@@ -27,7 +27,7 @@ export const FareHeader: React.FC<FareHeaderProps> = ({
       </div>
 
       <div className="text-right">
-        <span className="text-2xl md:text-3xl font-bold text-[#14153E]">
+        <span className="text-2xl md:text-3xl font-bold text-brand-dark">
           ${price}
         </span>
         <p className="text-xs text-slate-400 mt-0.5">{priceUnit}</p>

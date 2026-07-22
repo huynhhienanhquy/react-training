@@ -24,7 +24,7 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children, isLoading = fa
 
         {/* Left column: Text on background */}
         <div className="w-full md:w-[45%] text-white space-y-4 p-4 self-end mb-6 hidden md:block">
-          <h1 className="text-4xl lg:text-[44px] font-bold leading-[1.2] tracking-tight">
+          <h1 className="text-4xl lg:text-display-md font-bold leading-[1.2] tracking-tight">
             Discover Amazing Deals & Thrilling Adventures
           </h1>
           <p className="text-base text-gray-200 font-light max-w-[480px]">
@@ -33,10 +33,10 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children, isLoading = fa
         </div>
 
         {/* Right column: White card containing the form */}
-        <div className="ml-auto p-1.5 rounded-[42px] bg-white/20 border border-white/70 shadow-[0_15px_50px_rgba(0,0,0,0.25)] backdrop-blur-md w-full md:w-[540px] lg:w-[640px]">
+        <div className="ml-auto p-1.5 rounded-5xl bg-white/20 border border-white/70 shadow-auth backdrop-blur-md w-full md:w-[540px] lg:w-[640px]">
 
           {/* Card  */}
-          <div className="relative w-full bg-white rounded-[36px] p-8 md:p-12 shadow-sm flex flex-col justify-between min-h-[620px]">
+          <div className="relative w-full bg-white rounded-4xl p-8 md:p-12 shadow-sm flex flex-col justify-between min-h-[620px]">
             {children}
           </div>
 

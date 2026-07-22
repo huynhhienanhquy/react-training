@@ -91,7 +91,7 @@ export const SelectFarePage: React.FC<SelectFarePageProps> = ({
       <SidebarNav activeNav={activeNav} setActiveNav={setActiveNav} />
 
       {/* 2. Main Content */}
-      <main className="flex-1 bg-[#EEF3FC] flex flex-col h-full overflow-y-auto">
+        <main className="flex-1 bg-surface-section flex flex-col h-full overflow-y-auto">
         {/* topbar displays Breadcrumb mode. */}
         <Topbar
           isBreadcrumbMode={true}
@@ -137,7 +137,7 @@ export const SelectFarePage: React.FC<SelectFarePageProps> = ({
                 Important information
               </h3>
 
-              <div className="bg-[#FAFBFD] p-6 rounded-3xl border border-slate-100 text-xs text-slate-400 leading-relaxed space-y-2 shadow-sm">
+              <div className="bg-surface p-6 rounded-3xl border border-slate-100 text-xs text-slate-400 leading-relaxed space-y-2 shadow-sm">
                 {MOCK_FARE_DATA.importantInformation.map((paragraph, index) => (
                   <p key={index}>{paragraph}</p>
                 ))}

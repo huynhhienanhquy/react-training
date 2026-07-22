@@ -20,7 +20,7 @@ export const InputField: React.FC<InputFieldProps> = ({
 
   return (
     <div className="flex flex-col space-y-2 relative">
-      <label className="text-[15px] font-bold text-[#0d1b3e]">
+      <label className="text-sm2 font-bold text-brand-dark-alt">
         {label}
       </label>
       <div className="relative">

@@ -83,7 +83,7 @@ export const VerifyOTP: React.FC = () => {
                 onChange={(e) => handleChange(e.target, index)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
                 onPaste={handlePaste}
-                className="w-12 h-14 text-center text-xl font-bold rounded-xl border border-gray-100 bg-gray-50/30 text-[#0d1b3e] focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 focus:bg-white transition shadow-sm font-mono"
+                className="w-12 h-14 text-center text-xl font-bold rounded-xl border border-gray-100 bg-gray-50/30 text-brand-dark-alt focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 focus:bg-white transition shadow-sm font-mono"
               />
               {index === 2 && (
                 <span className="text-gray-300 font-normal mx-1 select-none">—</span>
@@ -102,15 +102,15 @@ export const VerifyOTP: React.FC = () => {
       </form>
 
       {/* 4. The timer sends the code back. */}
-      <div className="text-center text-[15px] text-gray-400 mt-12">
+      <div className="text-center text-sm2 text-gray-400 mt-12">
         Didn't receive OTP?{" "}
         {counter > 0 ? (
-          <span className="text-[#1d4ed8] font-bold ml-1">
+          <span className="text-blue-700 font-bold ml-1">
             Resend in 00:{counter < 10 ? `0${counter}` : counter}
           </span>
         ) : (
           <span
-            className="text-[#1d4ed8] font-bold hover:underline cursor-pointer ml-1 transition"
+            className="text-blue-700 font-bold hover:underline cursor-pointer ml-1 transition"
             onClick={() => setCounter(29)}
           >
             Resend OTP

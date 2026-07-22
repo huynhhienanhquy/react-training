@@ -69,7 +69,7 @@ export const Login: React.FC = () => {
           <div className="text-right pt-1">
             <span
               onClick={() => navigate('/forgot-password')}
-              className="text-[14px] font-bold text-[#0d1b3e] hover:text-blue-600 cursor-pointer transition"
+              className="text-sm font-bold text-brand-dark-alt hover:text-blue-600 cursor-pointer transition"
             >
               Forgot Password?
             </span>

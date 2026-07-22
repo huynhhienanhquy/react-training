@@ -35,7 +35,7 @@ export const FareCards: React.FC<FareCardsProps> = ({
           return (
             <div
               key={fare.id}
-              className={`bg-[#FAFBFD] p-6 rounded-3xl border transition-all shadow-sm flex flex-col justify-between space-y-6 ${
+               className={`bg-surface p-6 rounded-3xl border transition-all shadow-sm flex flex-col justify-between space-y-6 ${
                 isSelected
                   ? 'border-blue-500 ring-2 ring-blue-500/20'
                   : 'border-slate-100'
@@ -54,7 +54,7 @@ export const FareCards: React.FC<FareCardsProps> = ({
                 </div>
 
                 <div>
-                  <div className="text-2xl font-bold text-[#14153E]">
+                  <div className="text-2xl font-bold text-brand-dark">
                     ${fare.price}
                   </div>
                   <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mt-0.5">
@@ -77,7 +77,7 @@ export const FareCards: React.FC<FareCardsProps> = ({
                 className={`w-full py-3 rounded-2xl text-xs font-bold transition ${
                   isSelected
                     ? 'bg-blue-600 text-white'
-                    : 'bg-[#EEF3FC] text-blue-600 hover:bg-blue-100'
+                    : 'bg-surface-section text-blue-600 hover:bg-blue-100'
                 }`}
               >
                 Select

@@ -10,7 +10,7 @@ export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ isVisible = true
 
   return (
     //  Matte finish for the ENTIRE screen
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-[3px] transition-all duration-300">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-xs transition-all duration-300">
 
       {/* Spinner ring + Logo are located in the center of the screen.*/}
       <div className="relative flex items-center justify-center w-16 h-16">

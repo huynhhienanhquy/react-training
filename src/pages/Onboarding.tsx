@@ -44,7 +44,7 @@ export const Onboarding: React.FC = () => {
 
         {/* 3. Country Selection Dropdown*/}
         <div className="flex flex-col space-y-2">
-          <label className="text-[15px] font-bold text-[#0d1b3e]">
+          <label className="text-sm2 font-bold text-brand-dark-alt">
             Country
           </label>
           <div className="relative">
@@ -59,7 +59,7 @@ export const Onboarding: React.FC = () => {
               <option value="US">United States</option>
             </select>
             {/*  Dropdown arrow */}
-            <div className="pointer-events-none absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 text-[10px]">
+            <div className="pointer-events-none absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 text-2xs">
               <img src={iconArrowDown} alt="iconArrowDown" />
             </div>
           </div>

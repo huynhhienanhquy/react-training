@@ -13,10 +13,10 @@ export const AuthHeader: React.FC<AuthHeaderProps> = ({
 }) => {
   return (
     <div className={`space-y-2 mb-10 ${className}`}>
-      <h2 className="text-[38px] font-bold text-[#0d1b3e] tracking-tight">
+      <h2 className="text-display-sm font-bold text-brand-dark-alt tracking-tight">
         {title}
       </h2>
-      <p className="text-[15px] text-gray-400 font-normal">
+      <p className="text-sm2 text-gray-400 font-normal">
         {subtitle}
       </p>
     </div>

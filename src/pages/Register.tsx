@@ -66,7 +66,7 @@ export const Register: React.FC = () => {
             required
           />
           <label htmlFor="terms" className="text-sm text-gray-400 select-none cursor-pointer leading-tight">
-            I agree to the <span className="text-[#1d4ed8] font-bold hover:underline">Terms of Service</span> and <span className="text-[#1d4ed8] font-bold hover:underline">Privacy Policy</span>
+            I agree to the <span className="text-blue-700 font-bold hover:underline">Terms of Service</span> and <span className="text-blue-700 font-bold hover:underline">Privacy Policy</span>
           </label>
         </div>
 

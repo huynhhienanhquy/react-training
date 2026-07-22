@@ -14,11 +14,11 @@ export const AuthFooter: React.FC<AuthFooterProps> = ({
   className = '',
 }) => {
   return (
-    <div className={`text-center text-[15px] text-gray-400 mt-12 ${className}`}>
+    <div className={`text-center text-sm2 text-gray-400 mt-12 ${className}`}>
       {questionText}{" "}
       <span
         onClick={onActionClick}
-        className="text-[#1d4ed8] font-bold hover:underline cursor-pointer ml-1"
+        className="text-blue-700 font-bold hover:underline cursor-pointer ml-1"
       >
         {actionText}
       </span>

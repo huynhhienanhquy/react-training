@@ -136,7 +136,7 @@ export const ChatPage: React.FC = () => {
         onSelectSession={handleSelectSession}
       />
 
-      <main className="flex-1 bg-[#EEF3FC] flex flex-col h-full relative overflow-hidden">
+      <main className="flex-1 bg-surface-section flex flex-col h-full relative overflow-hidden">
         <Topbar
           hasMessages={currentMessages.length > 0}
           onNewChat={handleStartNewChat}

@@ -31,7 +31,7 @@ export const SelectedFlightBox: React.FC<SelectedFlightBoxProps> = ({
         Selected flights
       </h3>
 
-      <div className="bg-[#FAFBFD] p-6 rounded-3xl border border-slate-100 space-y-4 shadow-sm">
+      <div className="bg-surface p-6 rounded-3xl border border-slate-100 space-y-4 shadow-sm">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <img
@@ -48,13 +48,13 @@ export const SelectedFlightBox: React.FC<SelectedFlightBoxProps> = ({
             <button
               onClick={() => setIsFavorite(!isFavorite)}
               className={`w-9 h-9 rounded-xl flex items-center justify-center transition p-2 ${
-                isFavorite ? 'bg-blue-100' : 'bg-[#EEF3FC] hover:bg-blue-100'
+                isFavorite ? 'bg-blue-100' : 'bg-surface-section hover:bg-blue-100'
               }`}
             >
               <img src={iconHeart} alt="Favorite" className="w-4 h-4 object-contain" />
             </button>
 
-            <button className="px-4 py-2 bg-[#EEF3FC] hover:bg-blue-100 text-blue-600 text-xs font-semibold rounded-xl transition">
+            <button className="px-4 py-2 bg-surface-section hover:bg-blue-100 text-blue-600 text-xs font-semibold rounded-xl transition">
               Change Flight
             </button>
           </div>
@@ -64,7 +64,7 @@ export const SelectedFlightBox: React.FC<SelectedFlightBoxProps> = ({
         <div className="space-y-2 text-xs md:text-sm pt-2">
           {legs.map((leg) => (
             <div key={leg.id} className="flex items-center gap-4">
-              <span className="font-bold text-[#14153E] w-32">{leg.times}</span>
+              <span className="font-bold text-brand-dark w-32">{leg.times}</span>
               <span className="text-slate-400">
                 {leg.route} • {leg.duration} • {leg.stops}
               </span>
