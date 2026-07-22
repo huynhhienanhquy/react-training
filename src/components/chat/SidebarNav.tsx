@@ -1,11 +1,8 @@
-// src/components/chat/SidebarNav.tsx
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// 🔹 Import useAuth từ Context của bạn
 import { useAuth } from '../../context/AuthContext'; // Đảm bảo đúng đường dẫn tới AuthProvider.tsx
 
-// Import các file Icon local từ assets
 import logo from '../../assets/icons/Logo.png';
 import iconChat from '../../assets/icons/chat.png';
 import iconHeart from '../../assets/icons/heart.png';
@@ -23,7 +20,7 @@ interface SidebarNavProps {
 export const SidebarNav: React.FC<SidebarNavProps> = ({ activeNav, setActiveNav }) => {
   const navigate = useNavigate();
 
-  // 🔹 Lấy hàm logout (hoặc setUser) từ AuthContext
+  // Get the logout (or setUser) function from AuthContext.
   const { logout } = useAuth();
 
   const [showProfileMenu, setShowProfileMenu] = useState(false);
@@ -48,13 +45,13 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({ activeNav, setActiveNav 
     { id: 'settings', icon: iconSettings, alt: 'Settings' },
   ];
 
-  // 🔹 Hàm xử lý đăng xuất đã được cập nhật
+  // The logout handler function has been updated.
   const handleLogout = async () => {
     try {
-      // 1. Đóng menu dropdown
+      //  1. Close the dropdown menu.
       setShowProfileMenu(false);
 
-      // 2. Gọi hàm logout trong AuthContext để xóa state user & Token
+      // 2. Call the logout function in AuthContext to clear the user and token states.
       if (logout) {
         await logout();
       } else {
@@ -62,7 +59,7 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({ activeNav, setActiveNav 
         sessionStorage.clear();
       }
 
-      // 3. Chuyển hướng về trang login
+      // 3.Redirect to login page
       navigate('/login', { replace: true });
     } catch (error) {
       console.error('Logout error:', error);
@@ -81,7 +78,7 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({ activeNav, setActiveNav 
           />
         </button>
 
-        {/* 🔹 Navigation Items (Icon sắc nét, không bị mờ) */}
+        {/* 🔹 Navigation Items*/}
         <nav className="flex flex-col gap-3.5 items-center w-full">
           {navItems.map((item) => {
             const isActive = activeNav === item.id;
@@ -101,7 +98,7 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({ activeNav, setActiveNav 
                   className={`w-5 h-5 object-contain transition-all duration-200 ${
                     isActive
                       ? 'opacity-100 scale-105'
-                      : 'opacity-70 hover:opacity-100' // Bỏ opacity-40 giúp icon không bị mờ nữa
+                      : 'opacity-70 hover:opacity-100'
                   }`}
                 />
               </button>
@@ -112,11 +109,9 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({ activeNav, setActiveNav 
 
       {/* User Avatar & Logout Popover */}
       <div className="relative" ref={menuRef}>
-        {/* 🔹 SVG Filter định nghĩa viền trắng bo tròn (Render 1 lần) */}
         <svg width="0" height="0" className="absolute">
           <defs>
             <clipPath id="pentagon-clip" clipPathUnits="objectBoundingBox">
-              {/* Đường path hình ngũ giác 5 đỉnh có góc bo tròn */}
               <path d="M 0.5 0.05 C 0.52 0.05, 0.93 0.32, 0.95 0.35 C 0.97 0.38, 0.88 0.88, 0.85 0.92 C 0.82 0.96, 0.18 0.96, 0.15 0.92 C 0.12 0.88, 0.03 0.38, 0.05 0.35 C 0.07 0.32, 0.48 0.05, 0.5 0.05 Z" />
             </clipPath>
           </defs>
@@ -126,12 +121,12 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({ activeNav, setActiveNav 
           onClick={() => setShowProfileMenu((prev) => !prev)}
           className="w-12 h-12 transition transform active:scale-95 flex items-center justify-center focus:outline-none relative drop-shadow-sm"
         >
-          {/* 1. Lớp viền màu trắng bên ngoài (Outer White Border) */}
+          {/* 1. Outer White Border */}
           <div
             className="w-full h-full bg-white flex items-center justify-center p-1"
             style={{ clipPath: 'url(#pentagon-clip)' }}
           >
-            {/* 2. Lớp ảnh bên trong (Inner Avatar) */}
+            {/* 2.Inner Avatar */}
             <div
               className="w-full h-full bg-slate-200 overflow-hidden"
               style={{ clipPath: 'url(#pentagon-clip)' }}
