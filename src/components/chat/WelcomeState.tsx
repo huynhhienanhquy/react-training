@@ -1,4 +1,3 @@
-// src/components/chat/WelcomeState.tsx
 import React from 'react';
 import image1 from '../../assets/images/Rectangle 1.png'
 import image2 from '../../assets/images/Rectangle 2.png'
