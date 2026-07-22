@@ -1,3 +1,4 @@
+// src/App.tsx
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthProvider';
@@ -13,30 +14,14 @@ import { Onboarding } from './pages/Onboarding';
 import { ForgotPassword } from './pages/ForgotPassword';
 import { VerifyOTP } from './pages/VerifyOTP';
 import { ResetPassword } from './pages/ResetPassword';
-
-import { useAuth } from './hooks/useAuth';
-
-
-// The simulated main page after successful login.
-const DashboardMock = () => {
-  const { logout, user } = useAuth();
-  return (
-    <div className="p-8 bg-slate-50 min-h-screen">
-      <h1 className="text-2xl font-bold">Welcome to Tripal Main App! ✈️</h1>
-      <p className="text-slate-600 mt-2">Hello, {user?.email}</p>
-      <button onClick={logout} className="mt-4 px-4 py-2 bg-red-600 text-white text-sm font-medium rounded-lg">
-        Log Out
-      </button>
-    </div>
-  );
-};
+import { ChatPage } from './pages/ChatPage';
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
       <AuthProvider>
         <Routes>
-          {/* Public pages (Not logged in) */}
+          {/* Public pages (Chưa đăng nhập) */}
           <Route element={<GuestRoute />}>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
@@ -46,12 +31,13 @@ const App: React.FC = () => {
             <Route path="/onboarding" element={<Onboarding />} />
           </Route>
 
-          {/* Protected pages (Login required) */}
+          {/* Protected pages (Đã đăng nhập) */}
           <Route element={<ProtectedRoute />}>
-            <Route path="/dashboard" element={<DashboardMock />} />
+            <Route path="/dashboard" element={<ChatPage />} />
+            <Route path="/chats" element={<ChatPage />} />
           </Route>
 
-          {/* Default navigation if URL is entered incorrectly */}
+          {/* Mặc định điều hướng khi URL không hợp lệ */}
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </AuthProvider>
