@@ -1,15 +1,13 @@
-// src/components/chat/FlightRecommendations.tsx
 import React, { useState } from 'react';
 
-// 🔹 Import icon local từ folder assets
 import iconHeart from '../../assets/icons/heart-blue.png';
-import defaultFlightLogo from '../../assets/icons/ellipse.png'; // Hoặc icon hãng máy bay trong folder của bạn
+import defaultFlightLogo from '../../assets/icons/ellipse.png';
 
 export interface FlightLeg {
-  time: string;       // "9:15am - 9:15pm"
-  route: string;      // "QOW - LAG"
-  duration: string;   // "9h 24m"
-  stops: string;      // "1 stop"
+  time: string;
+  route: string;
+  duration: string;
+  stops: string;
 }
 
 export interface FlightOption {
@@ -18,8 +16,8 @@ export interface FlightOption {
   logoUrl?: string;
   outbound: FlightLeg;
   returnLeg: FlightLeg;
-  price: string;      // "$1200"
-  tag?: string;        // "Cheap"
+  price: string;
+  tag?: string;
   isFavorite?: boolean;
 }
 
@@ -81,12 +79,12 @@ export const FlightRecommendations: React.FC<FlightRecommendationsProps> = ({
 
   return (
     <div className="w-full bg-[#F4F7FE] p-5 rounded-3xl space-y-4 my-2 border border-slate-100/60 shadow-sm max-w-2xl">
-      {/* Tiêu đề */}
+      {/* Title*/}
       <h3 className="text-base md:text-lg font-bold text-[#14153E]">
         {title}
       </h3>
 
-      {/* Danh sách thẻ chuyến bay */}
+      {/* List of flight tickets*/}
       <div className="space-y-3.5">
         {flights.map((flight) => {
           const isFav = favorites[flight.id] || flight.isFavorite;
@@ -96,10 +94,10 @@ export const FlightRecommendations: React.FC<FlightRecommendationsProps> = ({
               key={flight.id}
               className="bg-[#FAFBFD] hover:bg-white rounded-2xl p-4 md:p-5 transition-all duration-200 border border-slate-100/80 flex flex-col gap-3 shadow-sm"
             >
-              {/* Header: Logo + Hãng hàng không & Nút Tim + Nút Book Now */}
+              {/* Header */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
-                  {/* 🔹 Icon chuyến bay / Logo hãng từ folder icons */}
+                  {/* Logo*/}
                   <div className="w-6 h-6 flex items-center justify-center shrink-0 overflow-hidden">
                     <img
                       src={flight.logoUrl || defaultFlightLogo}
@@ -112,7 +110,7 @@ export const FlightRecommendations: React.FC<FlightRecommendationsProps> = ({
                   </span>
                 </div>
 
-                {/* Nút Tim & Nút Book Now */}
+                {/* Heart Button & Book Now Button */}
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => toggleFavorite(flight.id)}
@@ -122,7 +120,7 @@ export const FlightRecommendations: React.FC<FlightRecommendationsProps> = ({
                         : 'bg-[#EEF3FC] hover:bg-blue-100/60'
                     }`}
                   >
-                    {/* 🔹 Icon Heart từ folder icons */}
+                    {/* 🔹 Icon Heart  */}
                     <img
                       src={iconHeart}
                       alt="Favorite"
@@ -141,11 +139,11 @@ export const FlightRecommendations: React.FC<FlightRecommendationsProps> = ({
                 </div>
               </div>
 
-              {/* Thông tin 2 chiều & Tag Cheap / Giá */}
+              {/* Two-way information & Tag Cheap / Price */}
               <div className="flex items-end justify-between pt-1">
-                {/* Thời gian & chặng bay */}
+                {/* Flight times and routes */}
                 <div className="space-y-2 text-xs md:text-sm">
-                  {/* Chuyến đi */}
+                  {/* Trip */}
                   <div className="flex items-center gap-4">
                     <span className="font-bold text-[#14153E] w-32">
                       {flight.outbound.time}
@@ -155,7 +153,7 @@ export const FlightRecommendations: React.FC<FlightRecommendationsProps> = ({
                     </span>
                   </div>
 
-                  {/* Chuyến về */}
+                  {/* Return trip */}
                   <div className="flex items-center gap-4">
                     <span className="font-bold text-[#14153E] w-32">
                       {flight.returnLeg.time}
@@ -166,7 +164,7 @@ export const FlightRecommendations: React.FC<FlightRecommendationsProps> = ({
                   </div>
                 </div>
 
-                {/* Badge Cheap & Giá tiền */}
+                {/* Badge Cheap & Price*/}
                 <div className="flex flex-col items-end gap-1.5 shrink-0">
                   {flight.tag && (
                     <span className="px-3 py-0.5 bg-[#EAF8F0] text-[#22C55E] text-[11px] font-semibold rounded-full border border-green-200/50">
