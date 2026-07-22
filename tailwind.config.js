@@ -5,7 +5,55 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        brand: {
+          dark: '#14153E',
+          'dark-alt': '#0d1b3e',
+        },
+        surface: {
+          DEFAULT: '#FAFBFD',
+          sidebar: '#F8F9FB',
+          section: '#EEF3FC',
+          'section-alt': '#F4F7FE',
+          'see-more': '#EEF3FD',
+          active: '#EFEFEF',
+        },
+        success: {
+          DEFAULT: '#22C55E',
+          light: '#F2FBF5',
+          'light-alt': '#EAF8F0',
+        },
+        social: {
+          bg: '#edf2fe',
+        },
+      },
+      spacing: {
+        18: '4.5rem',
+        22: '5.5rem',
+      },
+      fontSize: {
+        '2xs': ['10px', { lineHeight: '14px' }],
+        'xxs': ['11px', { lineHeight: '16px' }],
+        'sm2': ['15px', { lineHeight: '22px' }],
+        'display-sm': ['38px', { lineHeight: '46px' }],
+        'display-md': ['44px', { lineHeight: '52px' }],
+      },
+      borderRadius: {
+        '4xl': '36px',
+        '5xl': '42px',
+      },
+      boxShadow: {
+        auth: '0 15px 50px rgba(0,0,0,0.25)',
+        'blue-btn': '0 4px 6px -1px rgba(29, 78, 216, 0.3)',
+        search: '0 1px 2px 0 rgba(148, 163, 184, 0.5)',
+        chat: '0 1px 3px 0 rgba(148, 163, 184, 0.6)',
+        nav: '0 1px 2px 0 rgba(191, 219, 254, 0.5)',
+      },
+      backdropBlur: {
+        xs: '3px',
+      },
+    },
   },
   plugins: [],
 }
