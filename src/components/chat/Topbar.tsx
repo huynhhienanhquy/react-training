@@ -1,14 +1,13 @@
-// src/components/chat/Topbar.tsx
 import React from 'react';
 import { StartNewChatButton } from '../ui/button/StartNewChatButton';
 
 interface TopbarProps {
-  // Mode hiển thị breadcrumb (dùng cho các trang như Select Fare)
+  // Mode display breadcrumb
   isBreadcrumbMode?: boolean;
   chatTitle?: string;
   onBackToChat?: () => void;
 
-  // Props mặc định cho màn hình Chat
+  // Default props for the Chat screen
   hasMessages?: boolean;
   onNewChat?: () => void;
 }
@@ -22,7 +21,7 @@ export const Topbar: React.FC<TopbarProps> = ({
   return (
     <header
       className="w-full flex items-center justify-between sticky top-0 z-10 shrink-0 border-b transition-colors bg-white/80 backdrop-blur-md border-slate-200/80 px-6 py-3.5 shadow-sm">
-      {/* Khối bên trái: Breadcrumb HOẶC Tiêu đề trang */}
+      {/* Left-hand block: Breadcrumb OR Page Title */}
       <div className="flex items-center gap-2 text-sm">
         {isBreadcrumbMode ? (
           <>
@@ -41,7 +40,7 @@ export const Topbar: React.FC<TopbarProps> = ({
         )}
       </div>
 
-      {/* Nút Start New Chat dùng chung */}
+      {/* Button Start New */}
       <StartNewChatButton onClick={onNewChat} />
     </header>
   );
