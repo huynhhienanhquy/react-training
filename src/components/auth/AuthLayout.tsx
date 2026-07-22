@@ -35,7 +35,7 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children, isLoading = fa
         {/* Right column: White card containing the form */}
         <div className="ml-auto p-1.5 rounded-[42px] bg-white/20 border border-white/70 shadow-[0_15px_50px_rgba(0,0,0,0.25)] backdrop-blur-md w-full md:w-[540px] lg:w-[640px]">
 
-          {/* Card trắng bên trong */}
+          {/* Card  */}
           <div className="relative w-full bg-white rounded-[36px] p-8 md:p-12 shadow-sm flex flex-col justify-between min-h-[620px]">
             {children}
           </div>
