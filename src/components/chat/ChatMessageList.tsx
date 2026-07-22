@@ -1,4 +1,3 @@
-// src/components/chat/ChatMessageList.tsx
 import React, { useEffect, useRef } from 'react';
 import { ThinkingLoader } from '../ui/ThinkingLoader';
 import { FlightRecommendations } from './FlightRecommendations';
@@ -49,21 +48,21 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
       {messages.map((msg, index) => {
         const textLower = msg.text.toLowerCase();
 
-        // Lấy tin nhắn người dùng ngay phía trước (nếu có)
+        // Get the user's message right before it (if available).
         const prevMsg = index > 0 ? messages[index - 1] : null;
         const prevTextLower = prevMsg ? prevMsg.text.toLowerCase() : '';
 
-        // ✈️ Chuyến Bay
+        // Flight
         const isFlightType =
           msg.type === 'flight' ||
           (msg.sender === 'ai' && (textLower.includes('flight') || prevTextLower.includes('flight')));
 
-        // 🏨 Khách Sạn
+        // Hotel
         const isHotelType =
           msg.type === 'hotel' ||
           (msg.sender === 'ai' && (textLower.includes('hotel') || prevTextLower.includes('hotel') || textLower.includes('bahamas')));
 
-        // 📍 Địa điểm (Places)
+        // Places
         const isPlacesType =
           msg.type === 'places' ||
           (msg.sender === 'ai' && (
@@ -73,7 +72,7 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
             prevTextLower.includes('địa điểm')
           ));
 
-        // 📅 Lịch trình (Itinerary)
+        // Itinerary
         const isItineraryType =
           msg.type === 'itinerary' ||
           (msg.sender === 'ai' && (
@@ -83,14 +82,14 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
             prevTextLower.includes('lịch trình')
           ));
 
-        // Lấy data nếu có, nếu không thì lấy DEFAULT_PLACES cho Places
+        // Get the data if available; otherwise, get DEFAULT_PLACES for Places.
         const placesData = (Array.isArray(msg.data) && msg.data.length > 0)
           ? (msg.data as PlaceItem[])
           : DEFAULT_PLACES;
 
        const itineraryData = (Array.isArray(msg.data) && msg.data.length > 0)
           ? (msg.data as DayItinerary[])
-          : DEFAULT_ITINERARY; // 👈 Tự động dùng mặc định tương tự như placesData!
+          : DEFAULT_ITINERARY;
 
         return (
           <div
@@ -98,7 +97,7 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
             className={`flex ${msg.sender === 'user' ? 'justify-end' : 'items-start gap-3'}`}
           >
             <div className="flex flex-col gap-2 max-w-2xl w-full">
-              {/* Nội dung tin nhắn văn bản */}
+              {/* Text message content */}
               <div
                 className={`px-5 py-3 rounded-2xl shadow-sm text-sm md:text-base whitespace-pre-line w-fit ${
                   msg.sender === 'user'
@@ -109,7 +108,7 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
                 {msg.text}
               </div>
 
-              {/* ✈️ Chuyến Bay */}
+              {/* Flight*/}
               {isFlightType && msg.sender === 'ai' && (
                 <FlightRecommendations
                   title="Recommended Flights For a Round Trip Journey"
@@ -119,7 +118,7 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
                 />
               )}
 
-              {/* 🏨 Khách Sạn */}
+              {/* Hotel*/}
               {isHotelType && msg.sender === 'ai' && (
                 <HotelRecommendations
                   title="Recommended Hotels For a Three-Night Staycation"
@@ -128,7 +127,7 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
                 />
               )}
 
-              {/* 📍 Địa Điểm (Đã tự động fallback về DEFAULT_PLACES nếu không có data) */}
+              {/* Place */}
               {isPlacesType && msg.sender === 'ai' && (
                 <PlacesCardWidget
                   places={placesData}
@@ -136,7 +135,7 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
                 />
               )}
 
-              {/* 📅 Lịch Trình */}
+              {/* itinerary */}
               {isItineraryType && msg.sender === 'ai' && itineraryData && (
                 <ItineraryCardWidget
                   itinerary={itineraryData}
@@ -148,7 +147,7 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
         );
       })}
 
-      {/* Hiển thị Loader khi AI đang trả lời */}
+      {/* Display Loader while AI is responding */}
       {isTyping && (
         <div className="flex items-center gap-3 pl-1">
           <ThinkingLoader text="Travelpal is thinking..." />
