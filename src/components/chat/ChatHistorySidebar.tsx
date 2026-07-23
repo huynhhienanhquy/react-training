@@ -38,7 +38,7 @@ export const ChatHistorySidebar: React.FC<ChatHistorySidebarProps> = ({
   }, {} as Record<string, ChatSession[]>);
 
   return (
-    <aside className="w-72 md:w-80 bg-surface-sidebar flex flex-col h-full shrink-0 border-r border-slate-200/50 select-none">
+    <aside className="hidden lg:flex w-72 md:w-80 bg-surface-sidebar flex-col h-full shrink-0 border-r border-slate-200/50 select-none">
       {/* Header Chats & Search Box */}
       <div className="p-6 pb-2">
         <h1 className="text-2xl font-bold text-brand-dark tracking-tight">Chats</h1>
@@ -77,7 +77,7 @@ export const ChatHistorySidebar: React.FC<ChatHistorySidebarProps> = ({
                     <button
                       key={session.id}
                       onClick={() => onSelectSession(session.id)}
-                      className={`w-full text-left px-3.5 py-3 rounded-2xl text-xs md:text-sm transition font-medium truncate block ${
+                      className={`w-full text-left px-3.5 py-3 min-h-11 rounded-2xl text-xs md:text-sm transition font-medium truncate block ${
                         isActive
                           ? 'bg-surface-active text-brand-dark font-semibold'
                           : 'text-brand-dark hover:bg-slate-100/60'
