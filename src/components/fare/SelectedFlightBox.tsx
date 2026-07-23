@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import { SectionHeader } from '../ui/SectionHeader';
+import { Card } from '../ui/Card';
 
+// Interface defining a flight leg/segment structure
 export interface FlightLeg {
   id: string;
   times: string;
@@ -8,6 +11,7 @@ export interface FlightLeg {
   stops: string;
 }
 
+// Props definition for the selected flight summary card
 interface SelectedFlightBoxProps {
   airlineName: string;
   defaultFlightLogo: string;
@@ -23,16 +27,18 @@ export const SelectedFlightBox: React.FC<SelectedFlightBoxProps> = ({
   legs,
   cancellationPolicy,
 }) => {
+  // State to manage bookmark / favorite button toggle
   const [isFavorite, setIsFavorite] = useState(false);
 
   return (
     <div className="space-y-3">
-      <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-        Selected flights
-      </h3>
+      {/* Section Title */}
+      <SectionHeader title="Selected flights" />
 
-      <div className="bg-surface p-6 rounded-3xl border border-slate-100 space-y-4 shadow-sm">
+      <Card variant="surface" className="p-6 space-y-4">
+        {/* Header: Airline info, favorite button, and change flight action */}
         <div className="flex items-center justify-between">
+          {/* Airline Logo & Name */}
           <div className="flex items-center gap-2.5">
             <img
               src={defaultFlightLogo}
@@ -44,38 +50,48 @@ export const SelectedFlightBox: React.FC<SelectedFlightBoxProps> = ({
             </span>
           </div>
 
+          {/* Action Buttons */}
           <div className="flex items-center gap-2">
+            {/* Bookmark / Favorite Toggle Button */}
             <button
               onClick={() => setIsFavorite(!isFavorite)}
-              className={`w-9 h-9 rounded-xl flex items-center justify-center transition p-2 ${
+              className={`w-9 h-9 rounded-xl flex items-center justify-center transition p-2 cursor-pointer active:scale-95 ${
                 isFavorite ? 'bg-blue-100' : 'bg-surface-section hover:bg-blue-100'
               }`}
             >
-              <img src={iconHeart} alt="Favorite" className="w-4 h-4 object-contain" />
+              <img
+                src={iconHeart}
+                alt="Favorite"
+                className={`w-4 h-4 object-contain transition-transform ${
+                  isFavorite ? 'scale-110' : ''
+                }`}
+              />
             </button>
 
-            <button className="px-4 py-2 bg-surface-section hover:bg-blue-100 text-blue-600 text-xs font-semibold rounded-xl transition">
+            {/* Button to switch or re-select flight */}
+            <button className="px-4 py-2 bg-surface-section hover:bg-blue-100 text-blue-600 text-xs font-semibold rounded-xl transition cursor-pointer active:scale-95">
               Change Flight
             </button>
           </div>
         </div>
 
-        {/* Map danh sách chặng bay */}
+        {/* List of Flight Legs / Routes */}
         <div className="space-y-2 text-xs md:text-sm pt-2">
           {legs.map((leg) => (
             <div key={leg.id} className="flex items-center gap-4">
-              <span className="font-bold text-brand-dark w-32">{leg.times}</span>
-              <span className="text-slate-400">
+              <span className="font-bold text-brand-dark w-24 md:w-32 text-xs md:text-sm">{leg.times}</span>
+              <span className="text-slate-400 text-xs md:text-sm">
                 {leg.route} • {leg.duration} • {leg.stops}
               </span>
             </div>
           ))}
         </div>
 
+        {/* Cancellation policy note */}
         <p className="text-xs text-slate-400 pt-2 border-t border-slate-100">
           {cancellationPolicy}
         </p>
-      </div>
+      </Card>
     </div>
   );
 };

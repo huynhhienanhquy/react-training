@@ -1,5 +1,8 @@
 import React from 'react';
+import { Card } from '../ui/Card';
+import { InfoRow } from '../ui/InfoRow';
 
+// Props definition for price calculation breakdown
 interface PriceDetailsSidebarProps {
   pricePerTraveller: number;
   flightDues: number;
@@ -14,31 +17,18 @@ export const PriceDetailsSidebar: React.FC<PriceDetailsSidebarProps> = ({
   totalAmount,
 }) => {
   return (
-    <div className="bg-surface p-6 rounded-3xl border border-slate-100 space-y-6 sticky top-24 shadow-sm">
+    /* Sticky sidebar card for price summary */
+    <Card variant="surface" className="p-6 space-y-6 lg:sticky lg:top-24">
+      {/* Sidebar Header */}
       <h3 className="text-lg font-bold text-brand-dark">Price Details</h3>
 
-      <div className="space-y-4 text-xs md:text-sm">
-        <div className="flex justify-between text-slate-500">
-          <span>Price per traveller</span>
-          <span className="font-semibold text-brand-dark">
-            ${pricePerTraveller}
-          </span>
-        </div>
+      {/* Itemized Price Breakdown */}
+      <div className="space-y-4">
+        <InfoRow label="Price per traveller" value={`$${pricePerTraveller}`} />
+        <InfoRow label="Flight dues" value={`$${flightDues}`} />
+        <InfoRow label="Taxes and fees" value={`$${taxesAndFees}`} />
 
-        <div className="flex justify-between text-slate-500">
-          <span>Flight dues</span>
-          <span className="font-semibold text-brand-dark">
-            ${flightDues}
-          </span>
-        </div>
-
-        <div className="flex justify-between text-slate-500">
-          <span>Taxes and fees</span>
-          <span className="font-semibold text-brand-dark">
-            ${taxesAndFees}
-          </span>
-        </div>
-
+        {/* Total Cost Display */}
         <div className="pt-4 border-t border-slate-100 flex justify-between items-center">
           <span className="font-bold text-brand-dark">Trip Total</span>
           <span className="text-xl font-bold text-brand-dark">
@@ -47,9 +37,10 @@ export const PriceDetailsSidebar: React.FC<PriceDetailsSidebarProps> = ({
         </div>
       </div>
 
-      <button className="w-full py-3.5 bg-surface-section hover:bg-blue-600 hover:text-white text-blue-600 font-semibold text-xs md:text-sm rounded-2xl transition">
+      {/* Primary Call To Action (CTA) Button */}
+      <button className="w-full py-3.5 bg-surface-section hover:bg-blue-600 hover:text-white text-blue-600 font-semibold text-xs md:text-sm rounded-2xl transition cursor-pointer active:scale-95">
         Select booking platform
       </button>
-    </div>
+    </Card>
   );
 };

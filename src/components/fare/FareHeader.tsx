@@ -1,5 +1,8 @@
 import React from 'react';
+import { Card } from '../ui/Card';
+import { PriceDisplay } from '../ui/PriceDisplay';
 
+// Interface defining properties for the FareHeader component
 interface FareHeaderProps {
   destination: string;
   tripType: string;
@@ -16,7 +19,8 @@ export const FareHeader: React.FC<FareHeaderProps> = ({
   priceUnit,
 }) => {
   return (
-    <div className="bg-surface p-6 rounded-3xl border border-slate-100 flex items-center justify-between shadow-sm">
+    <Card variant="surface" className="p-6 flex items-center justify-between">
+      {/* Left side: Destination name & flight details summary */}
       <div>
         <h2 className="text-xl md:text-2xl font-bold text-brand-dark">
           {destination}
@@ -26,12 +30,11 @@ export const FareHeader: React.FC<FareHeaderProps> = ({
         </p>
       </div>
 
+      {/* Right side: Base price amount & unit label */}
       <div className="text-right">
-        <span className="text-2xl md:text-3xl font-bold text-brand-dark">
-          ${price}
-        </span>
+        <PriceDisplay amount={`$${price}`} size="md" />
         <p className="text-xs text-slate-400 mt-0.5">{priceUnit}</p>
       </div>
-    </div>
+    </Card>
   );
 };
