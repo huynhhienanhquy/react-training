@@ -8,7 +8,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Save current user information.
   const [user, setUser] = useState<User | null>(null);
   // Waiting state while re-checking login session
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState(true);
 
   // Automatically check and restore the old login session when the page reloads.
   useEffect(() => {
