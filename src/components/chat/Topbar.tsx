@@ -1,46 +1,65 @@
 import React from 'react';
+import { ArrowLeft } from 'lucide-react';
 import { StartNewChatButton } from '../ui/button/StartNewChatButton';
 
+export type { ChatMessage } from './ChatMessageList';
+import type { ChatMessage } from './ChatMessageList';
+
 interface TopbarProps {
-  // Mode display breadcrumb
   isBreadcrumbMode?: boolean;
   chatTitle?: string;
+  messages?: ChatMessage[];
   onBackToChat?: () => void;
-
-  // Default props for the Chat screen
-  hasMessages?: boolean;
   onNewChat?: () => void;
 }
 
 export const Topbar: React.FC<TopbarProps> = ({
   isBreadcrumbMode = false,
-  chatTitle = 'Cheap flights to Lagos',
+  chatTitle,
+  messages = [],
   onBackToChat,
   onNewChat,
 }) => {
+  const firstUserMessage = messages.find((m) => m.sender === 'user')?.text;
+  const displayTitle =
+    chatTitle ||
+    (firstUserMessage
+      ? firstUserMessage.length > 30
+        ? `${firstUserMessage.slice(0, 30)}...`
+        : firstUserMessage
+      : '');
+
   return (
     <header
-      className="w-full flex items-center justify-between sticky top-0 z-10 shrink-0 border-b transition-colors bg-white/80 backdrop-blur-md border-slate-200/80 px-6 py-3.5 shadow-sm">
-      {/* Left-hand block: Breadcrumb OR Page Title */}
-      <div className="flex items-center gap-2 text-sm">
+      className="w-full flex items-center justify-between sticky top-0 z-10 shrink-0 border-b transition-colors bg-white/80 backdrop-blur-md border-slate-200/80 px-4 md:px-6 py-3.5 shadow-sm">
+      <div className="flex items-center gap-1 md:gap-2 text-sm min-w-0">
         {isBreadcrumbMode ? (
           <>
+            {onBackToChat && (
+              <button
+                onClick={onBackToChat}
+                className="md:hidden w-8 h-8 rounded-xl flex items-center justify-center hover:bg-slate-100 transition shrink-0"
+              >
+                <ArrowLeft className="w-4 h-4 text-slate-600" />
+              </button>
+            )}
             <button
               onClick={onBackToChat}
-              className="text-slate-500 hover:text-blue-600 font-medium transition"
+              className="hidden md:inline text-slate-500 hover:text-blue-600 font-medium transition truncate max-w-[120px] md:max-w-[200px]"
+              title={displayTitle}
             >
-              {chatTitle}
+              {displayTitle}
             </button>
-            <span className="text-slate-400">&gt;</span>
-            <span className="font-bold text-brand-dark">Select Fare</span>
+            <span className="text-slate-400 hidden md:inline">&gt;</span>
+            <span className="font-bold text-slate-800 truncate text-xs md:text-sm">Select Fare</span>
           </>
         ) : (
-          <h2 className="text-base font-semibold text-slate-800">
+          <h2 className="text-sm md:text-base font-semibold text-slate-800 truncate max-w-[120px] md:max-w-md">
+            {displayTitle}
           </h2>
         )}
       </div>
 
-      {/* Button Start New */}
       <StartNewChatButton onClick={onNewChat} />
     </header>
   );

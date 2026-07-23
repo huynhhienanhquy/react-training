@@ -1,7 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import { useAuth } from '../../context/AuthContext'; // Đảm bảo đúng đường dẫn tới AuthProvider.tsx
+import { Menu } from 'lucide-react';
+import { useClickOutside } from '../../hooks/useClickOutside';
+import { useAuth } from '../../hooks/useAuth';
 
 import logo from '../../assets/icons/Logo.png';
 import iconChat from '../../assets/icons/chat.png';
@@ -15,26 +16,18 @@ import userAvatar from '../../assets/icons/user.png';
 interface SidebarNavProps {
   activeNav: string;
   setActiveNav: (id: string) => void;
+  isMobileOpen?: boolean;
+  onMobileToggle?: () => void;
 }
 
-export const SidebarNav: React.FC<SidebarNavProps> = ({ activeNav, setActiveNav }) => {
+export const SidebarNav: React.FC<SidebarNavProps> = ({ activeNav, setActiveNav, isMobileOpen, onMobileToggle }) => {
   const navigate = useNavigate();
 
   // Get the logout (or setUser) function from AuthContext.
   const { logout } = useAuth();
 
   const [showProfileMenu, setShowProfileMenu] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setShowProfileMenu(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  const menuRef = useClickOutside<HTMLDivElement>(() => setShowProfileMenu(false));
 
   const navItems = [
     { id: 'chats', icon: iconChat, alt: 'Chats' },
@@ -51,13 +44,7 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({ activeNav, setActiveNav 
       //  1. Close the dropdown menu.
       setShowProfileMenu(false);
 
-      // 2. Call the logout function in AuthContext to clear the user and token states.
-      if (logout) {
-        await logout();
-      } else {
-        localStorage.clear();
-        sessionStorage.clear();
-      }
+      await logout();
 
       // 3.Redirect to login page
       navigate('/login', { replace: true });
@@ -67,7 +54,19 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({ activeNav, setActiveNav 
   };
 
   return (
-    <aside className="w-18 md:w-20 bg-surface-sidebar border-r-[10px] border-surface-section flex flex-col items-center justify-between py-6 z-20 shrink-0 select-none">
+    <>
+      {/* Mobile hamburger button */}
+      {onMobileToggle && (
+        <button
+          onClick={onMobileToggle}
+          className="md:hidden fixed top-3 left-3 z-30 w-11 h-11 bg-white rounded-xl shadow-md border border-slate-100 flex items-center justify-center"
+        >
+          <Menu className="w-5 h-5 text-slate-700" />
+        </button>
+      )}
+
+      {/* Desktop sidebar */}
+      <aside className="hidden md:flex w-18 md:w-20 bg-surface-sidebar border-r-[10px] border-surface-section flex-col items-center justify-between py-6 z-20 shrink-0 select-none">
       <div className="flex flex-col items-center gap-7 w-full px-2">
         {/* App Logo */}
         <button className="w-11 h-11 rounded-2xl flex items-center justify-center p-1.5 hover:opacity-90 transition">
@@ -78,7 +77,7 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({ activeNav, setActiveNav 
           />
         </button>
 
-        {/* 🔹 Navigation Items*/}
+        {/* Navigation Items*/}
         <nav className="flex flex-col gap-3.5 items-center w-full">
           {navItems.map((item) => {
             const isActive = activeNav === item.id;
@@ -143,11 +142,6 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({ activeNav, setActiveNav 
         {/* Dropdown Logout */}
         {showProfileMenu && (
           <div className="absolute bottom-2 left-16 w-48 bg-white rounded-2xl shadow-xl border border-slate-100 p-2 z-50 animate-in fade-in zoom-in-95 duration-150">
-            <div className="px-3 py-2 border-b border-slate-100 mb-1">
-              <p className="text-xs font-semibold text-slate-800 truncate">Alex Developer</p>
-              <p className="text-2xs text-slate-400 truncate">user@gmail.com</p>
-            </div>
-
             <button
               onClick={handleLogout}
               className="w-full text-left px-3 py-2 rounded-xl text-xs font-medium text-red-600 hover:bg-red-50 flex items-center gap-2.5 transition"
@@ -158,5 +152,43 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({ activeNav, setActiveNav 
         )}
       </div>
     </aside>
+
+      {/* Mobile drawer overlay */}
+      {isMobileOpen && (
+        <div className="md:hidden fixed inset-0 z-40 flex">
+          <div className="fixed inset-0 bg-black/40" onClick={onMobileToggle} />
+          <aside className="relative w-64 bg-surface-sidebar h-full flex flex-col items-center py-6 z-50 shadow-xl">
+            <div className="flex flex-col items-center gap-7 w-full px-2">
+              <button className="w-11 h-11 rounded-2xl flex items-center justify-center p-1.5">
+                <img src={logo} alt="Logo" className="w-full h-full object-contain" />
+              </button>
+              <nav className="flex flex-col gap-3.5 items-center w-full">
+                {navItems.map((item) => {
+                  const isActive = activeNav === item.id;
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => { setActiveNav(item.id); onMobileToggle?.(); }}
+                      className={`w-11 h-11 rounded-2xl flex items-center justify-center transition p-2.5 ${
+                        isActive
+                          ? 'bg-white border border-blue-200 shadow-sm shadow-blue-100/50'
+                          : 'bg-transparent border border-transparent hover:bg-white/80 hover:border-slate-200/60'
+                      }`}
+                    >
+                      <img src={item.icon} alt={item.alt} className="w-5 h-5 object-contain transition-all duration-200 ${
+                        isActive ? 'opacity-100 scale-105' : 'opacity-70 hover:opacity-100'
+                      }" />
+                    </button>
+                  );
+                })}
+              </nav>
+            </div>
+            <button onClick={handleLogout} className="mt-auto text-xs font-medium text-red-600 hover:bg-red-50 px-4 py-2 rounded-xl transition">
+              Log out
+            </button>
+          </aside>
+        </div>
+      )}
+    </>
   );
 };
