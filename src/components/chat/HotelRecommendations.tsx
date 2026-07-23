@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { Wifi, ParkingCircle, Utensils } from 'lucide-react';
+import { RecommendationWrapper } from './RecommendationWrapper';
+import { FavoriteButton } from '../ui/button/FavoriteButton';
+import { BookButton } from '../ui/button/BookButton';
+import { PriceDisplay } from '../ui/PriceDisplay';
 
-import iconHeart from '../../assets/icons/heart-blue.png';
-
+// Interface defining individual hotel option data structure
 export interface HotelOption {
   id: string;
   name: string;
@@ -14,6 +17,7 @@ export interface HotelOption {
   isFavorite?: boolean;
 }
 
+// Props interface for hotel recommendation section component
 interface HotelRecommendationsProps {
   title?: string;
   hotels?: HotelOption[];
@@ -21,6 +25,7 @@ interface HotelRecommendationsProps {
   onSeeAll?: () => void;
 }
 
+// Mock fallback dataset for hotel recommendations
 const DEFAULT_HOTELS: HotelOption[] = [
   {
     id: '1',
@@ -48,111 +53,91 @@ export const HotelRecommendations: React.FC<HotelRecommendationsProps> = ({
   onBookNow,
   onSeeAll,
 }) => {
+  // State map to track user's favorited hotel items locally
   const [favorites, setFavorites] = useState<Record<string, boolean>>({});
 
+  // Handler to toggle favorite state for a specific hotel ID
   const toggleFavorite = (id: string) => {
     setFavorites((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
   return (
-    <div className="w-full bg-surface-section-alt p-5 rounded-3xl space-y-4 my-2 border border-slate-100/60 shadow-sm max-w-2xl">
-      <h3 className="text-base md:text-lg font-bold text-brand-dark">
-        {title}
-      </h3>
+    /* Card wrapper component supplying unified layout and optional "See All" header */
+    <RecommendationWrapper title={title} onSeeAll={onSeeAll}>
+      {hotels.map((hotel) => {
+        // Resolve whether this specific hotel is bookmarked
+        const isFav = !!(favorites[hotel.id] || hotel.isFavorite);
 
-      <div className="space-y-3.5">
-        {hotels.map((hotel) => {
-          const isFav = favorites[hotel.id] || hotel.isFavorite;
-
-          return (
-            <div
-              key={hotel.id}
-              className="bg-surface hover:bg-white rounded-2xl p-4 transition-all duration-200 border border-slate-100/80 flex flex-col sm:flex-row gap-4 items-center justify-between shadow-sm"
-            >
-              {/* Image + Information on the left */}
-              <div className="flex flex-col sm:flex-row gap-4 items-center flex-1">
-                <div className="w-full sm:w-36 h-28 sm:h-28 rounded-xl overflow-hidden shrink-0">
-                  <img
-                    src={hotel.imageUrl}
-                    alt={hotel.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-
-                <div className="flex-1 flex flex-col justify-between h-28 py-0.5">
-                  <div>
-                    <h4 className="text-sm md:text-base font-bold text-brand-dark">
-                      {hotel.name}
-                    </h4>
-                    <p className="text-xs text-slate-400 line-clamp-2 mt-1 leading-relaxed">
-                      {hotel.description}
-                    </p>
-                  </div>
-
-                  <div className="flex items-center gap-2.5 text-slate-300 mt-2">
-                    <Wifi className="w-3.5 h-3.5" />
-                    <ParkingCircle className="w-3.5 h-3.5" />
-                    <Utensils className="w-3.5 h-3.5" />
-                  </div>
-                </div>
+        return (
+          <div
+            key={hotel.id}
+            className="bg-[#F8FAFC] rounded-2xl p-4 flex flex-col sm:flex-row gap-4 items-center justify-between border-none"
+          >
+            {/* Left Section: Hotel Thumbnail & Detailed Information */}
+            <div className="flex flex-col sm:flex-row gap-3.5 items-center flex-1 w-full sm:w-auto">
+              {/* Hotel Image Thumbnail */}
+              <div className="w-full sm:w-32 h-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-200">
+                <img
+                  src={hotel.imageUrl}
+                  alt={hotel.name}
+                  className="w-full h-full object-cover"
+                />
               </div>
 
-              {/* Right column: Tag Cheap, Price, Heart button + Book Now */}
-              <div className="flex flex-col items-end justify-between gap-2.5 shrink-0 self-stretch">
+              {/* Text Info & Amenity Icons */}
+              <div className="flex-1 flex flex-col justify-between h-auto sm:h-24 py-0.5 w-full">
                 <div>
-                  {hotel.tag && (
-                    <span className="px-3 py-1 bg-success-light text-success text-xxs font-semibold rounded-full border border-green-200/40">
-                      {hotel.tag}
-                    </span>
-                  )}
+                  <h4 className="text-sm md:text-base font-bold text-slate-900">
+                    {hotel.name}
+                  </h4>
+                  <p className="text-xs text-slate-500 line-clamp-2 mt-1 font-medium">
+                    {hotel.description}
+                  </p>
                 </div>
 
-                <div className="flex items-baseline gap-0.5">
-                  <span className="text-lg md:text-xl font-bold text-brand-dark">
-                    {hotel.price}
-                  </span>
-                  <span className="text-xs text-slate-400 font-normal">
-                    {hotel.pricePeriod || '/per night'}
-                  </span>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={() => toggleFavorite(hotel.id)}
-                    className={`w-10 h-10 rounded-2xl flex items-center justify-center transition p-2.5 ${
-                      isFav
-                        ? 'bg-blue-100 border border-blue-200'
-                        : 'bg-surface-section hover:bg-blue-100/60'
-                    }`}
-                  >
-                    <img
-                      src={iconHeart}
-                      alt="Favorite"
-                      className={`w-4 h-4 object-contain transition-all ${
-                        isFav ? 'scale-110' : 'opacity-80 hover:opacity-100'
-                      }`}
-                    />
-                  </button>
-
-                  <button
-                    onClick={() => onBookNow && onBookNow(hotel.id)}
-                    className="px-4 py-2.5 bg-surface-section hover:bg-blue-600 hover:text-white text-blue-600 text-xs font-semibold rounded-2xl transition-all duration-200"
-                  >
-                    Book Now
-                  </button>
+                {/* Amenity Badges (WiFi, Parking, Dining) */}
+                <div className="flex items-center gap-3 text-slate-400 mt-2">
+                  <Wifi className="w-3.5 h-3.5" />
+                  <ParkingCircle className="w-3.5 h-3.5" />
+                  <Utensils className="w-3.5 h-3.5" />
                 </div>
               </div>
             </div>
-          );
-        })}
-      </div>
 
-      <button
-        onClick={onSeeAll}
-        className="w-full py-3 bg-surface-see-more/80 hover:bg-surface-see-more text-blue-600 text-xs md:text-sm font-semibold rounded-xl transition text-center"
-      >
-        See all recommendations
-      </button>
-    </div>
+            {/* Right Section: Pricing, Highlight Badge & CTA Actions */}
+            <div className="flex sm:flex-col flex-row items-end justify-between gap-3 shrink-0 w-full sm:w-auto sm:self-stretch pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-200/50">
+              {/* Highlight Tag & Price Display */}
+              <div className="flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto">
+                {hotel.tag ? (
+                  <span className="px-3 py-1 bg-emerald-100/70 text-emerald-700 text-[11px] font-bold rounded-full">
+                    {hotel.tag}
+                  </span>
+                ) : (
+                  <div />
+                )}
+
+                <PriceDisplay
+                  amount={hotel.price}
+                  period={hotel.pricePeriod || '/per night'}
+                  size="sm"
+                  className="mt-1"
+                />
+              </div>
+
+              {/* Action Controls: Favorite & Book Buttons */}
+              <div className="flex items-center gap-2">
+                <FavoriteButton
+                  isFavorite={isFav}
+                  onToggle={() => toggleFavorite(hotel.id)}
+                />
+                <BookButton onClick={() => onBookNow?.(hotel.id)}>
+                  Book Now
+                </BookButton>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </RecommendationWrapper>
   );
 };
