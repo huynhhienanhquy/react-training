@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useFormState } from '../hooks/useFormState';
 import { AuthLayout } from '../components/auth/AuthLayout';
 import { Button } from '../components/ui/button/Button';
 import { InputField } from '../components/ui/input/InputField';
@@ -9,16 +10,16 @@ import { AuthFooter } from '../components/auth/AuthFooter';
 
 export const ForgotPassword: React.FC = () => {
   const navigate = useNavigate();
+  const { isLoading, startLoading, stopLoading } = useFormState();
   const [email, setEmail] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleSendOTP = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
+    startLoading();
 
     // Simulate successful OTP delivery, then redirect to another page.
     setTimeout(() => {
-      setIsLoading(false);
+      stopLoading();
       alert("OTP code has been sent to your email!");
       navigate('/verify-otp');
     }, 300);

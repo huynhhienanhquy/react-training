@@ -1,20 +1,21 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useFormState } from '../hooks/useFormState';
 import { AuthLayout } from '../components/auth/AuthLayout';
 import { Button } from '../components/ui/button/Button';
 import { AuthHeader } from '../components/auth/AuthHeader';
 
 export const VerifyOTP: React.FC = () => {
   const navigate = useNavigate();
-  const [otp, setOtp] = useState<string[]>(new Array(6).fill(""));
-  const [counter, setCounter] = useState<number>(29);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { isLoading, startLoading, stopLoading } = useFormState();
+  const [otp, setOtp] = useState(new Array(6).fill(""));
+  const [counter, setCounter] = useState(29);
   const inputRefs = useRef<HTMLInputElement[]>([]);
 
-  // OTP countdown timer
   useEffect(() => {
-    const timer = counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
-    return () => { if (timer) clearInterval(timer); };
+    if (counter === 0) return;
+    const timer = setInterval(() => setCounter(prev => prev - 1), 1000);
+    return () => clearInterval(timer);
   }, [counter]);
 
   const handleChange = (element: HTMLInputElement, index: number) => {
@@ -52,11 +53,11 @@ export const VerifyOTP: React.FC = () => {
 
   const handleVerify = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
+    startLoading();
 
     // Simulated OTP authentication successful.
     setTimeout(() => {
-      setIsLoading(false);
+      stopLoading();
       navigate('/reset-password');
     }, 300);
   };
@@ -71,7 +72,7 @@ export const VerifyOTP: React.FC = () => {
 
       <form className="space-y-8" onSubmit={handleVerify}>
         {/* 2. The 6-cell OTP input area is clustered with hyphens. */}
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center justify-center gap-1 md:gap-2">
           {otp.map((data, index) => (
             <React.Fragment key={index}>
               <input
@@ -83,7 +84,7 @@ export const VerifyOTP: React.FC = () => {
                 onChange={(e) => handleChange(e.target, index)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
                 onPaste={handlePaste}
-                className="w-12 h-14 text-center text-xl font-bold rounded-xl border border-gray-100 bg-gray-50/30 text-brand-dark-alt focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 focus:bg-white transition shadow-sm font-mono"
+                className="w-10 md:w-12 h-12 md:h-14 text-center text-lg md:text-xl font-bold rounded-xl border border-gray-100 bg-gray-50/30 text-brand-dark-alt focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 focus:bg-white transition shadow-sm font-mono"
               />
               {index === 2 && (
                 <span className="text-gray-300 font-normal mx-1 select-none">—</span>

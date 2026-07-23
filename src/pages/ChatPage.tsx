@@ -6,6 +6,7 @@ import { WelcomeState } from '../components/chat/WelcomeState';
 import { ChatMessageList, type ChatMessage } from '../components/chat/ChatMessageList';
 import { ChatInputBox } from '../components/chat/ChatInputBox';
 import { SelectFarePage } from './SelectFarePage';
+import { SelectHotelPage } from './SelectHotelPage';
 
 export const ChatPage: React.FC = () => {
   const [activeNav, setActiveNav] = useState('chats');
@@ -13,9 +14,10 @@ export const ChatPage: React.FC = () => {
   const [inputMessage, setInputMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // State switches to the Select Fare page when you click "Book Now".
   const [isViewingFare, setIsViewingFare] = useState(false);
+  const [isViewingHotel, setIsViewingHotel] = useState(false);
 
   // Manage chat and messaging sessions by session ID.
   const [sessions, setSessions] = useState<ChatSession[]>([]);
@@ -106,12 +108,14 @@ export const ChatPage: React.FC = () => {
     setInputMessage('');
     setActiveSessionId(null);
     setIsViewingFare(false);
+    setIsViewingHotel(false);
   };
 
   // Chọn đoạn chat từ Sidebar
   const handleSelectSession = (sessionId: string) => {
     setActiveSessionId(sessionId);
     setIsViewingFare(false);
+    setIsViewingHotel(false);
   };
 
   // If you are viewing ticket details (Select Fare)
@@ -124,9 +128,19 @@ export const ChatPage: React.FC = () => {
     );
   }
 
+  // If you are viewing hotel details
+  if (isViewingHotel) {
+    return (
+      <SelectHotelPage
+        onBackToChat={() => setIsViewingHotel(false)}
+        onStartNewChat={handleStartNewChat}
+      />
+    );
+  }
+
   return (
     <div className="bg-slate-100 font-sans text-slate-700 h-screen overflow-hidden flex antialiased">
-      <SidebarNav activeNav={activeNav} setActiveNav={setActiveNav} />
+      <SidebarNav activeNav={activeNav} setActiveNav={setActiveNav} isMobileOpen={isMobileMenuOpen} onMobileToggle={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
 
       <ChatHistorySidebar
         searchQuery={searchQuery}
@@ -138,7 +152,6 @@ export const ChatPage: React.FC = () => {
 
       <main className="flex-1 bg-surface-section flex flex-col h-full relative overflow-hidden">
         <Topbar
-          hasMessages={currentMessages.length > 0}
           onNewChat={handleStartNewChat}
         />
 
@@ -153,6 +166,7 @@ export const ChatPage: React.FC = () => {
               messages={currentMessages}
               isTyping={isTyping}
               onBookFlight={() => setIsViewingFare(true)}
+              onBookHotel={() => setIsViewingHotel(true)}
             />
           )}
 

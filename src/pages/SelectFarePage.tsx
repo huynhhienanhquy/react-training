@@ -3,8 +3,9 @@ import { SidebarNav } from '../components/chat/SidebarNav';
 
 import iconHeart from '../assets/icons/heart-blue.png';
 import defaultFlightLogo from '../assets/icons/ellipse.png';
+import { SectionHeader } from '../components/ui/SectionHeader';
 
-import { Topbar } from '../components/chat/Topbar';
+import { Topbar, type ChatMessage } from '../components/chat/Topbar';
 import { FareHeader } from '../components/fare/FareHeader';
 import { SelectedFlightBox } from '../components/fare/SelectedFlightBox';
 import { FareCards } from '../components/fare/FareCards';
@@ -61,18 +62,28 @@ const MOCK_FARE_DATA = {
 };
 
 interface SelectFarePageProps {
-  chatTitle?: string; // Tiêu đề đoạn chat truyền từ ngoài vào
+  chatTitle?: string;
+  messages?: ChatMessage[];
   onBackToChat?: () => void;
   onStartNewChat?: () => void;
 }
 
 export const SelectFarePage: React.FC<SelectFarePageProps> = ({
-  chatTitle = 'Cheap flights to Lagos',
+  chatTitle,
+  messages = [],
   onBackToChat,
   onStartNewChat,
 }) => {
   const [activeNav, setActiveNav] = useState('chats');
   const [selectedFareId, setSelectedFareId] = useState<'economy' | 'business'>('economy');
+
+  // Automatically find the most suitable title:
+  // Prioritize chatTitle -> User's first message -> fallback about flight name "Cheap flights to Lagos"
+  const firstUserMessage = messages.find((m) => m.sender === 'user')?.text;
+  const resolvedChatTitle =
+    chatTitle ||
+    firstUserMessage ||
+    `Cheap flights to ${MOCK_FARE_DATA.destination.split('-')[0].trim()}`;
 
   // Retrieve selected data tickets from JSON.
   const selectedFare =
@@ -91,11 +102,12 @@ export const SelectFarePage: React.FC<SelectFarePageProps> = ({
       <SidebarNav activeNav={activeNav} setActiveNav={setActiveNav} />
 
       {/* 2. Main Content */}
-        <main className="flex-1 bg-surface-section flex flex-col h-full overflow-y-auto">
-        {/* topbar displays Breadcrumb mode. */}
+      <main className="flex-1 bg-surface-section flex flex-col h-full overflow-y-auto">
+        {/* Topbar displays Breadcrumb mode */}
         <Topbar
           isBreadcrumbMode={true}
-          chatTitle={chatTitle}
+          chatTitle={resolvedChatTitle}
+          messages={messages}
           onBackToChat={onBackToChat}
           onNewChat={onStartNewChat}
         />
@@ -133,9 +145,7 @@ export const SelectFarePage: React.FC<SelectFarePageProps> = ({
 
             {/* Important Information */}
             <div className="space-y-3 pt-2">
-              <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-                Important information
-              </h3>
+              <SectionHeader title="Important information" />
 
               <div className="bg-surface p-6 rounded-3xl border border-slate-100 text-xs text-slate-400 leading-relaxed space-y-2 shadow-sm">
                 {MOCK_FARE_DATA.importantInformation.map((paragraph, index) => (

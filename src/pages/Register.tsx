@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useFormState } from '../hooks/useFormState';
 import { AuthLayout } from '../components/auth/AuthLayout';
 import { SocialButton } from '../components/ui/button/SocialButton';
 import iconGoogle from '../assets/icons/logo-google.png';
@@ -11,19 +12,17 @@ import { AuthFooter } from '../components/auth/AuthFooter';
 
 export const Register: React.FC = () => {
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
+  const { isLoading, startLoading, stopLoading } = useFormState();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
+    startLoading();
 
     setTimeout(() => {
-      setIsLoading(false);
-
+      stopLoading();
       navigate('/onboarding');
-
     }, 300);
   };
 
@@ -71,7 +70,7 @@ export const Register: React.FC = () => {
         </div>
 
         {/* 5. Button Social Login */}
-        <div className="grid grid-cols-2 gap-4 pt-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
           <SocialButton
             icon={iconGoogle}
             label="Continue with Google"

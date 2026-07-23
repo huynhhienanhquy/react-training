@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useFormState } from '../hooks/useFormState';
 import { AuthLayout } from '../components/auth/AuthLayout';
 import { Button } from '../components/ui/button/Button';
 import iconArrowDown from '../assets/icons/arrow-down.png'
@@ -9,16 +10,16 @@ import { AuthFooter } from '../components/auth/AuthFooter';
 
 export const Onboarding: React.FC = () => {
   const navigate = useNavigate();
+  const { isLoading, startLoading, stopLoading } = useFormState();
   const [fullName, setFullName] = useState("");
   const [country, setCountry] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleStartPlanning = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
+    startLoading();
 
     setTimeout(() => {
-      setIsLoading(false);
+      stopLoading();
       navigate('/dashboard');
     }, 300);
   };

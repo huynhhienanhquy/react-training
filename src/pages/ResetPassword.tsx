@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useFormState } from '../hooks/useFormState';
 import { AuthLayout } from '../components/auth/AuthLayout';
 import { Button } from '../components/ui/button/Button';
 import { AuthHeader } from '../components/auth/AuthHeader';
 import { InputField } from '../components/ui/input/InputField';
+import { ErrorMessage } from '../components/ui/ErrorMessage';
 import { AuthFooter } from '../components/auth/AuthFooter';
 
 export const ResetPassword: React.FC = () => {
   const navigate = useNavigate();
+  const { isLoading, error, startLoading, stopLoading, setError } = useFormState();
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const [error, setError] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleResetPassword = (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,11 +23,11 @@ export const ResetPassword: React.FC = () => {
       return;
     }
 
-    setIsLoading(true);
+    startLoading();
 
     // Simulate an API call to update the new password.
     setTimeout(() => {
-      setIsLoading(false);
+      stopLoading();
       alert("Password reset successfully! Redirecting to Sign In...");
       navigate('/login');
     }, 300);
@@ -64,11 +65,7 @@ export const ResetPassword: React.FC = () => {
         />
 
         {/* 4. Error message if password does not match */}
-        {error && (
-          <p className="text-sm text-red-500 font-medium px-1 bg-red-50/50 rounded-lg py-1 border border-red-100/40 text-center">
-            {error}
-          </p>
-        )}
+        <ErrorMessage message={error} />
 
         {/* 5. Button submit*/}
         <div className="pt-2">
