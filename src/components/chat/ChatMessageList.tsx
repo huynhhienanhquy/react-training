@@ -7,9 +7,10 @@ import { ItineraryCardWidget } from './ItineraryCardWidget';
 import { DEFAULT_PLACES, type PlaceItem } from './placesData';
 import { DEFAULT_ITINERARY, type DayItinerary } from './itineraryData';
 
-
+// Represents optional custom payload inside a chat message
 export type MessageData = PlaceItem[] | DayItinerary[] | unknown;
 
+// Type definition for an individual chat message item
 export interface ChatMessage {
   id: string;
   sender: 'user' | 'ai';
@@ -18,10 +19,12 @@ export interface ChatMessage {
   data?: MessageData;
 }
 
+// Props definition for managing chat message list rendering and callbacks
 interface ChatMessageListProps {
   messages: ChatMessage[];
   isTyping: boolean;
   onBookFlight?: (flightId?: string) => void;
+  onBookHotel?: (hotelId?: string) => void;
   onViewAllPlaces?: (places?: PlaceItem[]) => void;
   onViewAllItinerary?: (itinerary?: DayItinerary[]) => void;
 }
@@ -30,11 +33,14 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
   messages,
   isTyping,
   onBookFlight,
+  onBookHotel,
   onViewAllPlaces,
   onViewAllItinerary,
 }) => {
+  // Reference for auto-scrolling to the latest message
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  // Smooth scroll to bottom whenever messages array updates or typing state changes
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -44,25 +50,26 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
   }, [messages, isTyping]);
 
   return (
-    <div className="w-full flex-1 overflow-y-auto space-y-4 py-4 px-2">
+    /* Message stream container with custom hidden scrollbars */
+    <div className="w-full flex-1 overflow-y-auto space-y-4 py-4 px-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
       {messages.map((msg, index) => {
         const textLower = msg.text.toLowerCase();
 
-        // Get the user's message right before it (if available).
+        // Get the previous message to infer context if necessary
         const prevMsg = index > 0 ? messages[index - 1] : null;
         const prevTextLower = prevMsg ? prevMsg.text.toLowerCase() : '';
 
-        // Flight
+        // Detect if current message should render Flight recommendations
         const isFlightType =
           msg.type === 'flight' ||
           (msg.sender === 'ai' && (textLower.includes('flight') || prevTextLower.includes('flight')));
 
-        // Hotel
+        // Detect if current message should render Hotel recommendations
         const isHotelType =
           msg.type === 'hotel' ||
           (msg.sender === 'ai' && (textLower.includes('hotel') || prevTextLower.includes('hotel') || textLower.includes('bahamas')));
 
-        // Places
+        // Detect if current message should render Places widget
         const isPlacesType =
           msg.type === 'places' ||
           (msg.sender === 'ai' && (
@@ -72,7 +79,7 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
             prevTextLower.includes('địa điểm')
           ));
 
-        // Itinerary
+        // Detect if current message should render Itinerary widget
         const isItineraryType =
           msg.type === 'itinerary' ||
           (msg.sender === 'ai' && (
@@ -82,12 +89,12 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
             prevTextLower.includes('lịch trình')
           ));
 
-        // Get the data if available; otherwise, get DEFAULT_PLACES for Places.
+        // Fallback to default mock datasets if no custom payload is provided
         const placesData = (Array.isArray(msg.data) && msg.data.length > 0)
           ? (msg.data as PlaceItem[])
           : DEFAULT_PLACES;
 
-       const itineraryData = (Array.isArray(msg.data) && msg.data.length > 0)
+        const itineraryData = (Array.isArray(msg.data) && msg.data.length > 0)
           ? (msg.data as DayItinerary[])
           : DEFAULT_ITINERARY;
 
@@ -97,18 +104,18 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
             className={`flex ${msg.sender === 'user' ? 'justify-end' : 'items-start gap-3'}`}
           >
             <div className="flex flex-col gap-2 max-w-2xl w-full">
-              {/* Text message content */}
+              {/* Message text bubble */}
               <div
-                className={`px-5 py-3 rounded-2xl shadow-sm text-sm md:text-base whitespace-pre-line w-fit ${
+                className={`text-sm md:text-base whitespace-pre-line w-fit ${
                   msg.sender === 'user'
-                    ? 'bg-blue-600 text-white rounded-tr-none ml-auto'
-                    : 'bg-white border border-slate-200 text-slate-800 rounded-tl-none'
+                    ? 'bg-white text-slate-900 px-6 py-4 rounded-2xl rounded-br-none ml-auto shadow-none'
+                    : 'bg-transparent border-none text-slate-800 p-0 shadow-none'
                 }`}
               >
                 {msg.text}
               </div>
 
-              {/* Flight*/}
+              {/* Render Flight Recommendation Card */}
               {isFlightType && msg.sender === 'ai' && (
                 <FlightRecommendations
                   title="Recommended Flights For a Round Trip Journey"
@@ -118,16 +125,18 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
                 />
               )}
 
-              {/* Hotel*/}
+              {/* Render Hotel Recommendation Card */}
               {isHotelType && msg.sender === 'ai' && (
                 <HotelRecommendations
                   title="Recommended Hotels For a Three-Night Staycation"
-                  onBookNow={(id) => console.log(`Book Hotel ${id}`)}
+                  onBookNow={(id) => {
+                    if (onBookHotel) onBookHotel(id);
+                  }}
                   onSeeAll={() => console.log('See all recommendations')}
                 />
               )}
 
-              {/* Place */}
+              {/* Render Places Card Widget */}
               {isPlacesType && msg.sender === 'ai' && (
                 <PlacesCardWidget
                   places={placesData}
@@ -135,7 +144,7 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
                 />
               )}
 
-              {/* itinerary */}
+              {/* Render Itinerary Card Widget */}
               {isItineraryType && msg.sender === 'ai' && itineraryData && (
                 <ItineraryCardWidget
                   itinerary={itineraryData}
@@ -147,13 +156,14 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
         );
       })}
 
-      {/* Display Loader while AI is responding */}
+      {/* Render AI thinking indicator when processing a query */}
       {isTyping && (
         <div className="flex items-center gap-3 pl-1">
           <ThinkingLoader text="Travelpal is thinking..." />
         </div>
       )}
 
+      {/* Scroll anchor target */}
       <div ref={messagesEndRef} />
     </div>
   );
