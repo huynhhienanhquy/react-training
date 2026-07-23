@@ -22,21 +22,21 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children, isLoading = fa
       {/* Main content */}
       <div className="relative z-10 w-full max-w-[1440px] h-full flex flex-col md:flex-row items-center justify-between gap-8">
 
-        {/* Left column: Text on background */}
+        {/* Left column: Brand text */}
         <div className="w-full md:w-[45%] text-white space-y-4 p-4 self-end mb-6 hidden md:block">
-          <h1 className="text-4xl lg:text-display-md font-bold leading-[1.2] tracking-tight">
+          <h1 className="text-3xl lg:text-display-md font-bold leading-[1.2] tracking-tight">
             Discover Amazing Deals & Thrilling Adventures
           </h1>
-          <p className="text-base text-gray-200 font-light max-w-[480px]">
+          <p className="text-sm md:text-base text-gray-200 font-light max-w-[480px]">
             Tripal is designed to ease trip and vacation planning. Explore amazing deals and offers
           </p>
         </div>
 
-        {/* Right column: White card containing the form */}
-        <div className="ml-auto p-1.5 rounded-5xl bg-white/20 border border-white/70 shadow-auth backdrop-blur-md w-full md:w-[540px] lg:w-[640px]">
+        {/* Right column: Card */}
+        <div className="ml-auto p-1.5 rounded-5xl bg-white/20 border border-white/70 shadow-auth backdrop-blur-md w-full max-w-[540px] lg:max-w-[640px]">
 
-          {/* Card  */}
-          <div className="relative w-full bg-white rounded-4xl p-8 md:p-12 shadow-sm flex flex-col justify-between min-h-[620px]">
+          {/* Card */}
+          <div className="relative w-full bg-white rounded-4xl p-6 md:p-8 lg:p-12 shadow-sm flex flex-col justify-between min-h-0 md:min-h-[620px]">
             {children}
           </div>
 
