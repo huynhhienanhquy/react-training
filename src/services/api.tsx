@@ -1,14 +1,15 @@
 import axios, { AxiosError } from 'axios';
 
+// The baseURL points precisely to the Project Prefix on the MockAPI.
 const api = axios.create({
-  baseURL: 'https://travel-login.free.beeceptor.com',
+  baseURL: 'https://6a6314591bffb2ffab8baf11.mockapi.io/flight',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-// Request Interceptor: Tự động đính Token
+// Request Interceptor: Automatically attach tokens
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('accessToken');
@@ -20,12 +21,12 @@ api.interceptors.request.use(
   (error: AxiosError) => Promise.reject(error)
 );
 
-// 💡 BỔ SUNG: Response Interceptor xử lý lỗi status từ Beeceptor
+// Response Interceptor: Handles feedback and normalizes errors.
 api.interceptors.response.use(
   (response) => {
-    // Nếu Beeceptor trả về HTTP 200 nhưng body chứa status === "error"
+    // How to handle the case where the API returns 200 OK but the body contains the status === "error"
     if (response.data && response.data.status === 'error') {
-      const errorMessage = response.data.message || 'Invalid email or password';
+      const errorMessage = response.data.message || 'Operation failed';
       return Promise.reject(new Error(errorMessage));
     }
     return response;
