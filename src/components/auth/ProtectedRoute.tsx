@@ -6,6 +6,7 @@ export const ProtectedRoute: React.FC = () => {
   const { user, loading } = useAuth();
   const location = useLocation();
 
+  // 1. Hiển thị màn hình Loading trong lúc lấy thông tin phiên làm việc
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-950 text-white">
@@ -14,14 +15,11 @@ export const ProtectedRoute: React.FC = () => {
     );
   }
 
+  // 2. Nếu CHƯA đăng nhập -> Chuyển hướng về trang /login
   if (!user) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  // If you've logged in but haven't entered your Name & Country and you try to access the main page, you'll be taken back to the Onboarding page.
-  if (!user.isOnboarded && location.pathname !== '/onboarding') {
-    return <Navigate to="/onboarding" replace />;
-  }
-
+  // 3. Nếu ĐÃ đăng nhập -> Cho phép truy cập vào các Router con (Chats, Dashboard...)
   return <Outlet />;
 };
