@@ -17,7 +17,7 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children, isLoading = fa
       <LoadingOverlay isVisible={isLoading} />
 
       {/* Background Dim */}
-      <div className="absolute inset-0 bg-black/50 pointer-events-none" />
+      <div className="absolute inset-0 bg-black/30 pointer-events-none" />
 
       {/* Dark gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
