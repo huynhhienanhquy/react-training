@@ -1,23 +1,24 @@
-import React, { useState } from 'react';
-import { Wifi, ParkingCircle, Utensils } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { AxiosError } from 'axios';
 import { RecommendationWrapper } from './RecommendationWrapper';
 import { FavoriteButton } from '../ui/button/FavoriteButton';
 import { Button } from '../ui/Button';
-import { PriceDisplay } from '../ui/PriceDisplay';
+import { getHotelListApi, type HotelData } from '../../services/hotelService';
 
-// Interface defining individual hotel option data structure
+// Fallback hotel photos if the API lacks images.
+const defaultHotelImg =
+  'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80';
+
 export interface HotelOption {
   id: string;
   name: string;
   description: string;
-  imageUrl: string;
-  price: string;
-  pricePeriod?: string;
+  price: number;
+  imageUrl?: string;
   tag?: string;
   isFavorite?: boolean;
 }
 
-// Props interface for hotel recommendation section component
 interface HotelRecommendationsProps {
   title?: string;
   hotels?: HotelOption[];
@@ -25,119 +26,178 @@ interface HotelRecommendationsProps {
   onSeeAll?: () => void;
 }
 
-// Mock fallback dataset for hotel recommendations
-const DEFAULT_HOTELS: HotelOption[] = [
-  {
-    id: '1',
-    name: 'Five Star Hotel, Bahamas',
-    description: 'Exclusive suites and large rooms dedicated to your comfort and luxury. Free wifi available',
-    imageUrl: 'https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=600&q=80',
-    price: '$1200',
-    pricePeriod: '/per night',
+  //Map data from HotelData to HotelOption for display.
+const mapHotelDataToOption = (hotel: HotelData, index: number): HotelOption => {
+  const lowestPrice = hotel.roomOptions?.[0]?.price ?? 1200;
+
+  return {
+    id: hotel.id ? String(hotel.id) : `hotel-${index + 1}`,
+    name: hotel.hotelName || 'Five Star Hotel, Bahamas',
+    description:
+      hotel.description ||
+      'Exclusive suites and large rooms dedicated to your comfort and luxury. Free wifi available',
+    price: lowestPrice,
     tag: 'Cheap',
-  },
-  {
-    id: '2',
-    name: 'Five Star Hotel, Bahamas',
-    description: 'Exclusive suites and large rooms dedicated to your comfort and luxury. Free wifi available',
-    imageUrl: 'https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=600&q=80',
-    price: '$1200',
-    pricePeriod: '/per night',
-    tag: 'Cheap',
-  },
-];
+    imageUrl: hotel.coverImage || hotel.images?.[0] || defaultHotelImg,
+  };
+};
 
 export const HotelRecommendations: React.FC<HotelRecommendationsProps> = ({
-  title = "Recommended Hotels For a Three-Night Staycation",
-  hotels = DEFAULT_HOTELS,
+  title = 'Recommended Hotels',
+  hotels: initialHotels,
   onBookNow,
   onSeeAll,
 }) => {
-  // State map to track user's favorited hotel items locally
+  const [hotelList, setHotelList] = useState<HotelOption[]>(initialHotels || []);
+  const [loading, setLoading] = useState<boolean>(!initialHotels);
+  const [error, setError] = useState<string | null>(null);
+
+  // State manages the favorites list.
   const [favorites, setFavorites] = useState<Record<string, boolean>>({});
 
-  // Handler to toggle favorite state for a specific hotel ID
+  useEffect(() => {
+    if (initialHotels) return;
+
+    const fetchHotels = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const data = await getHotelListApi();
+        const items = Array.isArray(data) ? data : [data];
+        setHotelList(items.map((item, idx) => mapHotelDataToOption(item, idx)));
+      } catch (err: unknown) {
+        if (err instanceof AxiosError) {
+          setError(err.response?.data?.message || err.message || 'Lỗi kết nối máy chủ');
+        } else if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError('Unable to load hotel list');
+        }
+        setHotelList([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchHotels();
+  }, [initialHotels]);
+
   const toggleFavorite = (id: string) => {
     setFavorites((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
   return (
-    /* Card wrapper component supplying unified layout and optional "See All" header */
     <RecommendationWrapper title={title} onSeeAll={onSeeAll}>
-      {hotels.map((hotel) => {
-        // Resolve whether this specific hotel is bookmarked
-        const isFav = !!(favorites[hotel.id] || hotel.isFavorite);
+      {/* LOADING STATE */}
+      {loading && (
+        <div className="py-8 flex flex-col items-center justify-center gap-2">
+          <div className="w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
+          <p className="text-xs text-slate-400 font-medium">Đang tải danh sách khách sạn...</p>
+        </div>
+      )}
 
-        return (
-          <div
-            key={hotel.id}
-            className="bg-[#F8FAFC] rounded-2xl p-4 flex flex-col sm:flex-row gap-4 items-center justify-between border-none"
-          >
-            {/* Left Section: Hotel Thumbnail & Detailed Information */}
-            <div className="flex flex-col sm:flex-row gap-3.5 items-center flex-1 w-full sm:w-auto">
-              {/* Hotel Image Thumbnail */}
-              <div className="w-full sm:w-32 h-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-200">
+      {/* ERROR STATE */}
+      {error && !loading && (
+        <div className="p-4 bg-red-50 text-red-600 rounded-2xl border border-red-100 text-xs text-center font-medium my-2">
+          {error}
+        </div>
+      )}
+
+      {/* EMPTY STATE */}
+      {!loading && !error && hotelList.length === 0 && (
+        <div className="p-6 text-center text-xs text-slate-400">
+          No suitable hotels were found.
+        </div>
+      )}
+
+      {/* HOTEL LIST DISPLAY */}
+      {!loading &&
+        !error &&
+        hotelList.map((hotel, idx) => {
+          const isFav = !!(favorites[hotel.id] || hotel.isFavorite);
+          const uniqueKey = `${hotel.id}-${idx}`;
+
+          return (
+            <div
+              key={uniqueKey}
+              className="bg-[#F8FAFC] rounded-2xl p-4 flex flex-col md:flex-row items-center gap-4 mb-3 border-none"
+            >
+              {/* 1. The Square Hotel on the Left (Image) */}
+              <div className="w-full md:w-36 h-36 md:h-32 rounded-xl overflow-hidden shrink-0">
                 <img
-                  src={hotel.imageUrl}
+                  src={hotel.imageUrl || defaultHotelImg}
                   alt={hotel.name}
                   className="w-full h-full object-cover"
                 />
               </div>
 
-              {/* Text Info & Amenity Icons */}
-              <div className="flex-1 flex flex-col justify-between h-auto sm:h-24 py-0.5 w-full">
+              {/* 2. Details in the Middle*/}
+              <div className="flex-1 flex flex-col justify-between h-full space-y-2 text-left w-full">
                 <div>
-                  <h4 className="text-sm md:text-base font-bold text-slate-900">
+                  <h3 className="text-base md:text-lg font-bold text-[#101828] leading-snug">
                     {hotel.name}
-                  </h4>
-                  <p className="text-xs text-slate-500 line-clamp-2 mt-1 font-medium">
+                  </h3>
+                  <p className="text-xs text-slate-500 line-clamp-2 mt-1 leading-relaxed">
                     {hotel.description}
                   </p>
                 </div>
 
-                {/* Amenity Badges (WiFi, Parking, Dining) */}
-                <div className="flex items-center gap-3 text-slate-400 mt-2">
-                  <Wifi className="w-3.5 h-3.5" />
-                  <ParkingCircle className="w-3.5 h-3.5" />
-                  <Utensils className="w-3.5 h-3.5" />
+                {/* Icons(Wifi, Parking, Food) */}
+                <div className="flex items-center gap-3 text-slate-400 pt-2">
+                  {/* Wifi Icon */}
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.071-7.071a10 10 0 0114.142 0M1.05 8.05a15 15 0 0121.9 0" />
+                  </svg>
+                  {/* Parking Icon */}
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16V6a1 1 0 00-1-1H7v11h2v-4h3a1 1 0 001-1zm0 0l2 2" />
+                  </svg>
+                  {/* Meal/Buffet Icon */}
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                </div>
+              </div>
+
+              {/* 3. Price and Right-Hand Control Buttons */}
+              <div className="flex flex-col items-end justify-between w-full md:w-auto h-full self-stretch space-y-3 shrink-0">
+                {/* Badge Tag "Cheap" */}
+                <div>
+                  {hotel.tag && (
+                    <span className="px-3 py-0.5 bg-emerald-50 text-emerald-600 text-[11px] font-medium rounded-full border border-emerald-100">
+                      {hotel.tag}
+                    </span>
+                  )}
+                </div>
+
+                {/* Display Prices */}
+                <div className="text-right my-1">
+                  <span className="text-xl md:text-2xl font-bold text-[#101828]">
+                    {hotel.price}
+                  </span>
+                  <span className="text-xs text-slate-400 font-normal">/per night</span>
+                </div>
+
+                {/* Group of Action Buttons */}
+                <div className="flex items-center gap-2">
+                  <FavoriteButton
+                    isFavorite={isFav}
+                    onToggle={() => toggleFavorite(hotel.id)}
+                  />
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    className="bg-blue-50 hover:bg-blue-100 text-blue-600 border-none font-semibold px-4 rounded-xl"
+                    onClick={() => onBookNow?.(hotel.id)}
+                  >
+                    Book Now
+                  </Button>
                 </div>
               </div>
             </div>
-
-            {/* Right Section: Pricing, Highlight Badge & CTA Actions */}
-            <div className="flex sm:flex-col flex-row items-end justify-between gap-3 shrink-0 w-full sm:w-auto sm:self-stretch pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-200/50">
-              {/* Highlight Tag & Price Display */}
-              <div className="flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto">
-                {hotel.tag ? (
-                  <span className="px-3 py-1 bg-emerald-100/70 text-emerald-700 text-[11px] font-bold rounded-full">
-                    {hotel.tag}
-                  </span>
-                ) : (
-                  <div />
-                )}
-
-                <PriceDisplay
-                  amount={hotel.price}
-                  period={hotel.pricePeriod || '/per night'}
-                  size="sm"
-                  className="mt-1"
-                />
-              </div>
-
-              {/* Action Controls: Favorite & Book Buttons */}
-              <div className="flex items-center gap-2">
-                <FavoriteButton
-                  isFavorite={isFav}
-                  onToggle={() => toggleFavorite(hotel.id)}
-                />
-                <Button variant="secondary" size="sm" onClick={() => onBookNow?.(hotel.id)}>
-                  Book Now
-                </Button>
-              </div>
-            </div>
-          </div>
-        );
-      })}
+          );
+        })}
     </RecommendationWrapper>
   );
 };
