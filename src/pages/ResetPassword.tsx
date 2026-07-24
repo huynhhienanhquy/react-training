@@ -69,8 +69,8 @@ export const ResetPassword: React.FC = () => {
 
         {/* 5. Button submit*/}
         <div className="pt-2">
-          <Button type="submit" isLoading={isLoading} showArrow={true}>
-            Save and Continue to Sign In
+          <Button isLoading={isLoading} showArrow={true}>
+            Create a Free Account
           </Button>
         </div>
       </form>

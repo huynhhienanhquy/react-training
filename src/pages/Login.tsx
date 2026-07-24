@@ -97,7 +97,7 @@ export const Login: React.FC = () => {
 
         {/* 5. Submit Button */}
         <Button isLoading={isLoading} showArrow={true}>
-          Sign In
+         Create a Free Account
         </Button>
       </form>
 

@@ -68,8 +68,8 @@ export const Onboarding: React.FC = () => {
 
         {/* 4. Button submit*/}
         <div className="pt-4">
-          <Button type="submit" isLoading={isLoading}>
-            Start Planning Trips &rarr;
+          <Button isLoading={isLoading} showArrow={true}>
+            Create a Free Account
           </Button>
         </div>
       </form>

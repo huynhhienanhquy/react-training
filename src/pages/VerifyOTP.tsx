@@ -96,8 +96,8 @@ export const VerifyOTP: React.FC = () => {
 
         {/* 3. Button submit*/}
         <div className="pt-2">
-          <Button type="submit" isLoading={isLoading}>
-            Verify & Proceed &rarr;
+          <Button isLoading={isLoading} showArrow={true}>
+            Create a Free Account
           </Button>
         </div>
       </form>

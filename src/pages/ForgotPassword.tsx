@@ -46,8 +46,8 @@ export const ForgotPassword: React.FC = () => {
 
         {/* 3. Submit button: Use the Button component*/}
         <div className="pt-4">
-          <Button type="submit" isLoading={isLoading}>
-            Send OTP &rarr;
+          <Button isLoading={isLoading} showArrow={true}>
+            Create a Free Account
           </Button>
         </div>
       </form>

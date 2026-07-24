@@ -86,8 +86,8 @@ export const Register: React.FC = () => {
         </div>
 
         {/* 6. Button submit  */}
-        <Button isLoading={isLoading}>
-          Create a Free Account &rarr;
+        <Button isLoading={isLoading} showArrow={true}>
+          Create a Free Account
         </Button>
       </form>
 
