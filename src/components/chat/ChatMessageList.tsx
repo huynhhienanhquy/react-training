@@ -4,11 +4,10 @@ import { FlightRecommendations } from './FlightRecommendations';
 import { HotelRecommendations } from './HotelRecommendations';
 import { PlacesCardWidget } from './PlacesCardWidget';
 import { ItineraryCardWidget } from './ItineraryCardWidget';
-import { DEFAULT_PLACES, type PlaceItem } from './placesData';
-import { DEFAULT_ITINERARY, type DayItinerary } from './itineraryData';
+import type { PlaceData, DayItinerary } from '../../services/travelService';
 
-// Represents optional custom payload inside a chat message
-export type MessageData = PlaceItem[] | DayItinerary[] | unknown;
+// Custom payload inside a chat message
+export type MessageData = PlaceData[] | DayItinerary[] | unknown;
 
 // Type definition for an individual chat message item
 export interface ChatMessage {
@@ -25,7 +24,7 @@ interface ChatMessageListProps {
   isTyping: boolean;
   onBookFlight?: (flightId?: string) => void;
   onBookHotel?: (hotelId?: string) => void;
-  onViewAllPlaces?: (places?: PlaceItem[]) => void;
+  onViewAllPlaces?: (places?: PlaceData[]) => void;
   onViewAllItinerary?: (itinerary?: DayItinerary[]) => void;
 }
 
@@ -89,14 +88,14 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
             prevTextLower.includes('lịch trình')
           ));
 
-        // Fallback to default mock datasets if no custom payload is provided
+        // Pass custom payload if exists; otherwise undefined so widgets fetch via API
         const placesData = (Array.isArray(msg.data) && msg.data.length > 0)
-          ? (msg.data as PlaceItem[])
-          : DEFAULT_PLACES;
+          ? (msg.data as PlaceData[])
+          : undefined;
 
         const itineraryData = (Array.isArray(msg.data) && msg.data.length > 0)
           ? (msg.data as DayItinerary[])
-          : DEFAULT_ITINERARY;
+          : undefined;
 
         return (
           <div
@@ -105,15 +104,17 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
           >
             <div className="flex flex-col gap-2 max-w-2xl w-full">
               {/* Message text bubble */}
-              <div
-                className={`text-sm md:text-base whitespace-pre-line w-fit ${
-                  msg.sender === 'user'
-                    ? 'bg-white text-slate-900 px-6 py-4 rounded-2xl rounded-br-none ml-auto shadow-none'
-                    : 'bg-transparent border-none text-slate-800 p-0 shadow-none'
-                }`}
-              >
-                {msg.text}
-              </div>
+              {msg.text && (
+                <div
+                  className={`text-sm md:text-base whitespace-pre-line w-fit ${
+                    msg.sender === 'user'
+                      ? 'bg-white text-slate-900 px-6 py-4 rounded-2xl rounded-br-none ml-auto shadow-none border border-slate-100'
+                      : 'bg-transparent border-none text-slate-800 p-0 shadow-none'
+                  }`}
+                >
+                  {msg.text}
+                </div>
+              )}
 
               {/* Render Flight Recommendation Card */}
               {isFlightType && msg.sender === 'ai' && (
@@ -145,7 +146,7 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
               )}
 
               {/* Render Itinerary Card Widget */}
-              {isItineraryType && msg.sender === 'ai' && itineraryData && (
+              {isItineraryType && msg.sender === 'ai' && (
                 <ItineraryCardWidget
                   itinerary={itineraryData}
                   onViewAll={() => onViewAllItinerary?.(itineraryData)}
