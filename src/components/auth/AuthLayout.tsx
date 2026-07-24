@@ -16,7 +16,7 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children, isLoading = fa
       {/* LoadingOverlay covers the FULL SCREEN */}
       <LoadingOverlay isVisible={isLoading} />
 
-      {/* LỚP PHỦ LÀM TỐI HÌNH NỀN (Điều chỉnh /40, /50, /60 để tăng/giảm độ tối) */}
+      {/* OVERLAY TO DARKEN THE BACKGROUND (Adjust /40, /50, /60 to increase/decrease darkness) */}
       <div className="absolute inset-0 bg-black/25 pointer-events-none" />
 
       {/* Dark gradient overlay at the bottom corner */}
