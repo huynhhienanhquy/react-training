@@ -1,7 +1,8 @@
 export interface User {
   id: string;
   email: string;
+  password?: string;
   fullName?: string;
-  country?: string;
-  isOnboarded?: boolean;
+  avatar?: string;
+  [key: string]: unknown;
 }
