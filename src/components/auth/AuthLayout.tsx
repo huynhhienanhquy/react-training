@@ -13,8 +13,11 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children, isLoading = fa
       className="font-helvetica min-h-screen w-full relative flex items-center justify-center pl-6 pr-4 md:pl-12 md:pr-8 bg-cover bg-center overflow-hidden"
       style={{ backgroundImage: `url(${authBg})` }}
     >
-      {/* LoadingOverlay covers the FULL SCREEN  */}
+      {/* LoadingOverlay covers the FULL SCREEN */}
       <LoadingOverlay isVisible={isLoading} />
+
+      {/* LỚP PHỦ LÀM TỐI HÌNH NỀN (Điều chỉnh /40, /50, /60 để tăng/giảm độ tối) */}
+      <div className="absolute inset-0 bg-black/25 pointer-events-none" />
 
       {/* Dark gradient overlay at the bottom corner */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
