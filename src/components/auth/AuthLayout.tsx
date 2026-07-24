@@ -10,22 +10,20 @@ interface AuthLayoutProps {
 export const AuthLayout: React.FC<AuthLayoutProps> = ({ children, isLoading = false }) => {
   return (
     <div
-      className="font-helvetica min-h-screen w-full relative flex items-center justify-center pl-6 pr-4 md:pl-12 md:pr-8 bg-cover bg-center overflow-hidden"
+      className="min-h-screen w-full relative flex items-center justify-center pl-6 pr-4 md:pl-12 md:pr-8 bg-cover bg-center overflow-hidden"
       style={{ backgroundImage: `url(${authBg})` }}
     >
-      {/* LoadingOverlay covers the FULL SCREEN */}
+      {/* LoadingOverlay */}
       <LoadingOverlay isVisible={isLoading} />
 
-      {/* OVERLAY TO DARKEN THE BACKGROUND (Adjust /40, /50, /60 to increase/decrease darkness) */}
-      <div className="absolute inset-0 bg-black/25 pointer-events-none" />
+      {/* Background Dim */}
+      <div className="absolute inset-0 bg-black/50 pointer-events-none" />
 
-      {/* Dark gradient overlay at the bottom corner */}
+      {/* Dark gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
 
       {/* Main content */}
       <div className="relative z-10 w-full max-w-[1440px] h-full flex flex-col md:flex-row items-center justify-between gap-8">
-
-        {/* Left column: Brand text */}
         <div className="w-full md:w-[45%] text-white space-y-4 p-4 self-end mb-6 hidden md:block">
           <h1 className="text-3xl lg:text-display-md font-bold leading-[1.2] tracking-tight">
             Discover Amazing Deals & Thrilling Adventures
@@ -35,16 +33,11 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children, isLoading = fa
           </p>
         </div>
 
-        {/* Right column: Card */}
         <div className="ml-auto p-1.5 rounded-5xl bg-white/20 border border-white/70 shadow-auth backdrop-blur-md w-full max-w-[540px] lg:max-w-[640px]">
-
-          {/* Card */}
           <div className="relative w-full bg-white rounded-4xl p-6 md:p-8 lg:p-12 shadow-sm flex flex-col justify-between min-h-0 md:min-h-[620px]">
             {children}
           </div>
-
         </div>
-
       </div>
     </div>
   );

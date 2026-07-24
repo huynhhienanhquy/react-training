@@ -1,6 +1,6 @@
 import React from 'react';
 import { Calendar, Clock, MapPin } from 'lucide-react';
-import { ViewAllButton } from '../ui/button/ViewAllButton';
+import { Button } from '../ui/Button';
 import { DEFAULT_ITINERARY, type DayItinerary } from './itineraryData';
 
 interface ItineraryCardWidgetProps {
@@ -80,9 +80,9 @@ export const ItineraryCardWidget: React.FC<ItineraryCardWidgetProps> = ({
 
       {/* Primary Action Button */}
       <div className="pt-1">
-        <ViewAllButton onClick={onViewAll}>
+        <Button variant="dark" size="md" className="w-full rounded-2xl" rightIcon={<svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>} onClick={onViewAll}>
           View Full Itinerary Details
-        </ViewAllButton>
+        </Button>
       </div>
     </div>
   );

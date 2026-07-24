@@ -1,21 +1,17 @@
 import React, { useState } from 'react';
-import iconEye from '../../../assets/icons/eye.png';
 
-interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
+type InputFieldProps = {
   label: string;
-  isPassword?: boolean;
-}
+} & React.InputHTMLAttributes<HTMLInputElement>;
 
 export const InputField: React.FC<InputFieldProps> = ({
   label,
-  isPassword = false,
   type = 'text',
   className = '',
   ...props
 }) => {
+  const isPassword = type === 'password';
   const [showPassword, setShowPassword] = useState(false);
-
-  // Determine the actual input type (based on the prop `isPassword` and the state `showPassword`).
   const inputType = isPassword ? (showPassword ? 'text' : 'password') : type;
 
   return (
@@ -34,20 +30,24 @@ export const InputField: React.FC<InputFieldProps> = ({
           {...props}
         />
 
-        {/* The toggle switch to display the password is for the Password field.*/}
         {isPassword && (
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
             className="absolute inset-y-0 right-4 flex items-center justify-center transition active:scale-95 select-none"
+            tabIndex={-1}
           >
-            <img
-              src={iconEye}
-              alt="Toggle Password"
-              className={`w-5 h-5 object-contain transition-opacity ${
-                showPassword ? 'opacity-40' : 'opacity-80 hover:opacity-100'
-              }`}
-            />
+            {showPassword ? (
+              <svg className="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+                <line x1="1" y1="1" x2="23" y2="23" />
+              </svg>
+            ) : (
+              <svg className="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            )}
           </button>
         )}
       </div>

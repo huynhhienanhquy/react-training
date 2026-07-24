@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Wifi, ParkingCircle, Utensils } from 'lucide-react';
 import { RecommendationWrapper } from './RecommendationWrapper';
 import { FavoriteButton } from '../ui/button/FavoriteButton';
-import { BookButton } from '../ui/button/BookButton';
+import { Button } from '../ui/Button';
 import { PriceDisplay } from '../ui/PriceDisplay';
 
 // Interface defining individual hotel option data structure
@@ -130,9 +130,9 @@ export const HotelRecommendations: React.FC<HotelRecommendationsProps> = ({
                   isFavorite={isFav}
                   onToggle={() => toggleFavorite(hotel.id)}
                 />
-                <BookButton onClick={() => onBookNow?.(hotel.id)}>
+                <Button variant="secondary" size="sm" onClick={() => onBookNow?.(hotel.id)}>
                   Book Now
-                </BookButton>
+                </Button>
               </div>
             </div>
           </div>

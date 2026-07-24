@@ -1,6 +1,6 @@
 import React from 'react';
 import { MapPin, Star, Utensils, Camera, ShoppingBag, Compass } from 'lucide-react';
-import { ViewAllButton } from '../ui/button/ViewAllButton';
+import { Button } from '../ui/Button';
 import { DEFAULT_PLACES, type PlaceItem } from './placesData';
 
 interface PlacesCardWidgetProps {
@@ -105,9 +105,9 @@ export const PlacesCardWidget: React.FC<PlacesCardWidgetProps> = ({
 
       {/* Action Button */}
       <div className="pt-1">
-        <ViewAllButton onClick={onViewAll}>
+        <Button variant="dark" size="md" className="w-full rounded-2xl" rightIcon={<svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>} onClick={onViewAll}>
           See All Recommended Locations
-        </ViewAllButton>
+        </Button>
       </div>
     </div>
   );

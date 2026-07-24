@@ -6,9 +6,8 @@ import { AuthLayout } from '../components/auth/AuthLayout';
 import { getAuthErrorMessage } from '../utils/authHelpers';
 import iconGoogle from '../assets/icons/logo-google.png';
 import iconApple from '../assets/icons/logo-apple.png';
-import { SocialButton } from '../components/ui/button/SocialButton';
-import { Button } from '../components/ui/button/Button';
-import { InputField } from '../components/ui/input/InputField';
+import { Button } from '../components/ui/Button';
+import { InputField } from '../components/ui/InputField';
 import { ErrorMessage } from '../components/ui/ErrorMessage';
 import { AuthHeader } from '../components/auth/AuthHeader';
 import { AuthFooter } from '../components/auth/AuthFooter';
@@ -58,7 +57,7 @@ export const Login: React.FC = () => {
         <div className="space-y-1">
           <InputField
             label="Password"
-            isPassword={true}
+            type="password"
             placeholder="Enter your password"
             autoComplete="new-password"
             value={password}
@@ -81,22 +80,16 @@ export const Login: React.FC = () => {
 
         {/* 4. Social Login Buttons */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-          <SocialButton
-            icon={iconGoogle}
-            label="Continue with Google"
-            altText="Google"
-            onClick={() => console.log('Google')}
-          />
-          <SocialButton
-            icon={iconApple}
-            label="Continue with Apple"
-            altText="Apple"
-            onClick={() => console.log('Apple')}
-          />
+          <Button variant="social" size="md" leftIcon={<img src={iconGoogle} alt="Google" className="w-5 h-5 object-contain" />} onClick={() => console.log('Google')}>
+            Continue with Google
+          </Button>
+          <Button variant="social" size="md" leftIcon={<img src={iconApple} alt="Apple" className="w-5 h-5 object-contain" />} onClick={() => console.log('Apple')}>
+            Continue with Apple
+          </Button>
         </div>
 
         {/* 5. Submit Button */}
-        <Button isLoading={isLoading} showArrow={true}>
+        <Button isLoading={isLoading} rightIcon={<svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>}>
          Create a Free Account
         </Button>
       </form>

@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormState } from '../hooks/useFormState';
 import { AuthLayout } from '../components/auth/AuthLayout';
-import { Button } from '../components/ui/button/Button';
+import { Button } from '../components/ui/Button';
 import { AuthHeader } from '../components/auth/AuthHeader';
 
 export const VerifyOTP: React.FC = () => {
@@ -96,7 +96,7 @@ export const VerifyOTP: React.FC = () => {
 
         {/* 3. Button submit*/}
         <div className="pt-2">
-          <Button isLoading={isLoading} showArrow={true}>
+          <Button isLoading={isLoading} rightIcon={<svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>}>
             Create a Free Account
           </Button>
         </div>

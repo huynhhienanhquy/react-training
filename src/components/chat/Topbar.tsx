@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowLeft } from 'lucide-react';
-import { StartNewChatButton } from '../ui/button/StartNewChatButton';
+import { Button } from '../ui/Button';
+import iconAdd from '../../assets/icons/add-light.png';
 
 export type { ChatMessage } from './ChatMessageList';
 import type { ChatMessage } from './ChatMessageList';
@@ -60,7 +61,9 @@ export const Topbar: React.FC<TopbarProps> = ({
         )}
       </div>
 
-      <StartNewChatButton onClick={onNewChat} />
+      <Button variant="primary" size="sm" leftIcon={<img src={iconAdd} alt="Add" className="w-4 h-4" />} onClick={onNewChat}>
+        <span className="hidden sm:inline">Start New Chat</span>
+      </Button>
     </header>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { RecommendationWrapper } from './RecommendationWrapper';
 import { FavoriteButton } from '../ui/button/FavoriteButton';
-import { BookButton } from '../ui/button/BookButton';
+import { Button } from '../ui/Button';
 import { PriceDisplay } from '../ui/PriceDisplay';
 import defaultFlightLogo from '../../assets/icons/ellipse.png';
 
@@ -101,9 +101,9 @@ export const FlightRecommendations: React.FC<FlightRecommendationsProps> = ({
                   isFavorite={isFav}
                   onToggle={() => toggleFavorite(flight.id)}
                 />
-                <BookButton onClick={() => onBookNow?.(flight.id)}>
+                <Button variant="secondary" size="sm" onClick={() => onBookNow?.(flight.id)}>
                   Book Now
-                </BookButton>
+                </Button>
               </div>
             </div>
 

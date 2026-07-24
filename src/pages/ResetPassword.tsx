@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormState } from '../hooks/useFormState';
 import { AuthLayout } from '../components/auth/AuthLayout';
-import { Button } from '../components/ui/button/Button';
+import { Button } from '../components/ui/Button';
 import { AuthHeader } from '../components/auth/AuthHeader';
-import { InputField } from '../components/ui/input/InputField';
+import { InputField } from '../components/ui/InputField';
 import { ErrorMessage } from '../components/ui/ErrorMessage';
 import { AuthFooter } from '../components/auth/AuthFooter';
 
@@ -45,7 +45,7 @@ export const ResetPassword: React.FC = () => {
         {/* 2. Enter a new password. */}
         <InputField
           label="New Password"
-          isPassword={true}
+          type="password"
           placeholder="Enter your password"
           autoComplete="new-password"
           value={password}
@@ -56,7 +56,7 @@ export const ResetPassword: React.FC = () => {
         {/* 3. Confirm your new password. */}
         <InputField
           label="Confirm New Password"
-          isPassword={true}
+          type="password"
           placeholder="Confirm your password"
           autoComplete="new-password"
           value={confirmPassword}
@@ -69,7 +69,7 @@ export const ResetPassword: React.FC = () => {
 
         {/* 5. Button submit*/}
         <div className="pt-2">
-          <Button isLoading={isLoading} showArrow={true}>
+          <Button isLoading={isLoading} rightIcon={<svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>}>
             Create a Free Account
           </Button>
         </div>

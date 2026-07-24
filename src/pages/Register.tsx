@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormState } from '../hooks/useFormState';
 import { AuthLayout } from '../components/auth/AuthLayout';
-import { SocialButton } from '../components/ui/button/SocialButton';
 import iconGoogle from '../assets/icons/logo-google.png';
 import iconApple from '../assets/icons/logo-apple.png';
-import { Button } from '../components/ui/button/Button';
+import { Button } from '../components/ui/Button';
 import { AuthHeader } from '../components/auth/AuthHeader';
-import { InputField } from '../components/ui/input/InputField';
+import { InputField } from '../components/ui/InputField';
 import { AuthFooter } from '../components/auth/AuthFooter';
 
 export const Register: React.FC = () => {
@@ -48,7 +47,7 @@ export const Register: React.FC = () => {
         {/* 3. The password input field has a toggle switch that can be hidden or shown. */}
           <InputField
             label="Password"
-            isPassword={true}
+            type="password"
             placeholder="Enter your password"
             autoComplete="new-password"
             value={password}
@@ -71,22 +70,16 @@ export const Register: React.FC = () => {
 
         {/* 5. Button Social Login */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-          <SocialButton
-            icon={iconGoogle}
-            label="Continue with Google"
-            altText="Google"
-            onClick={() => console.log('Register with Google')}
-          />
-          <SocialButton
-            icon={iconApple}
-            label="Continue with Apple"
-            altText="Apple"
-            onClick={() => console.log('Register with Apple')}
-          />
+          <Button variant="social" size="md" leftIcon={<img src={iconGoogle} alt="Google" className="w-5 h-5 object-contain" />} onClick={() => console.log('Register with Google')}>
+            Continue with Google
+          </Button>
+          <Button variant="social" size="md" leftIcon={<img src={iconApple} alt="Apple" className="w-5 h-5 object-contain" />} onClick={() => console.log('Register with Apple')}>
+            Continue with Apple
+          </Button>
         </div>
 
         {/* 6. Button submit  */}
-        <Button isLoading={isLoading} showArrow={true}>
+        <Button isLoading={isLoading} rightIcon={<svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>}>
           Create a Free Account
         </Button>
       </form>

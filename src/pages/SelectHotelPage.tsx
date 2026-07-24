@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { SidebarNav } from '../components/chat/SidebarNav';
 import { Topbar } from '../components/chat/Topbar';
-import { BookButton } from '../components/ui/button/BookButton';
+import { Button } from '../components/ui/Button';
 
 // Provider option data structure
 interface ProviderOption {
@@ -175,12 +175,13 @@ export const SelectHotelPage: React.FC<SelectHotelPageProps> = ({
                     {hotel.bestPrice}
                   </span>
 
-                  <BookButton
-                    variant="wide"
+                  <Button
+                    variant="secondary"
+                    size="md"
                     onClick={() => onBookHotel?.(hotel.id, hotel.providers[0]?.name || 'Direct')}
                   >
                     Book Hotel
-                  </BookButton>
+                  </Button>
                 </div>
               </div>
             ))}
