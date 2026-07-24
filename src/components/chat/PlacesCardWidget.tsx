@@ -18,7 +18,7 @@ export const PlacesCardWidget: React.FC<PlacesCardWidgetProps> = ({
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Nếu có truyền places trực tiếp qua props thì không cần gọi API
+    // If places are passed directly via props, then there's no need to call the API.
     if (initialPlaces) return;
 
     const fetchPlaces = async () => {
@@ -34,7 +34,7 @@ export const PlacesCardWidget: React.FC<PlacesCardWidgetProps> = ({
         } else if (err instanceof Error) {
           setError(err.message);
         } else {
-          setError('Không thể tải danh sách địa điểm');
+          setError('Unable to load the list of locations');
         }
         setPlacesList([]);
       } finally {
@@ -118,7 +118,7 @@ export const PlacesCardWidget: React.FC<PlacesCardWidgetProps> = ({
           {placesList.map((place) => {
             const badge = getCategoryBadge(place.category);
             const CategoryIcon = badge.icon;
-            // Map linh hoạt giữa imageUrl hoặc image, location hoặc address
+            // Map flexibly between imageURL or image, location or address
             const imageSrc = place.imageUrl || (place as unknown as { image?: string }).image || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80';
             const addressText = place.location || (place as unknown as { address?: string }).address || 'N/A';
 
