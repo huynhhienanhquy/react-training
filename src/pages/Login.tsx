@@ -17,18 +17,26 @@ export const Login: React.FC = () => {
   const navigate = useNavigate();
   const { isLoading, error, startLoading, stopLoading, setError } = useFormState();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // State for managing email and password (Initialized to empty)
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     startLoading();
-    setError("");
+    setError('');
+
     try {
       await login(email, password);
+      // Login successful -> redirected to the /chats page
       navigate('/chats');
-    } catch (error) {
-      setError(getAuthErrorMessage(error));
+    } catch (err: unknown) {
+      // Prioritize retrieving error messages returned from the API/AuthProvider.
+      if (err instanceof Error && err.message) {
+        setError(err.message);
+      } else {
+        setError(getAuthErrorMessage(err));
+      }
     } finally {
       stopLoading();
     }
@@ -42,7 +50,7 @@ export const Login: React.FC = () => {
         subtitle="We're happy you're back. Let's get back to planning your adventures"
       />
 
-      <form className="space-y-6" onSubmit={handleLogin}>
+      <form className="space-y-6 font-helvetica" onSubmit={handleLogin}>
         {/* 2. Email Field */}
         <InputField
           label="Email address"
@@ -59,13 +67,13 @@ export const Login: React.FC = () => {
             label="Password"
             type="password"
             placeholder="Enter your password"
-            autoComplete="new-password"
+            autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
 
-          {/* Button Forgot Password */}
+          {/* Forgot Password Button */}
           <div className="text-right pt-1">
             <span
               onClick={() => navigate('/forgot-password')}
@@ -76,21 +84,43 @@ export const Login: React.FC = () => {
           </div>
         </div>
 
+        {/* An error message will be displayed here if login fails. */}
         <ErrorMessage message={error} />
 
         {/* 4. Social Login Buttons */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-          <Button variant="social" size="md" leftIcon={<img src={iconGoogle} alt="Google" className="w-5 h-5 object-contain" />} onClick={() => console.log('Google')}>
+          <Button
+            type="button"
+            variant="social"
+            size="md"
+            leftIcon={<img src={iconGoogle} alt="Google" className="w-5 h-5 object-contain" />}
+            onClick={() => console.log('Google login')}
+          >
             Continue with Google
           </Button>
-          <Button variant="social" size="md" leftIcon={<img src={iconApple} alt="Apple" className="w-5 h-5 object-contain" />} onClick={() => console.log('Apple')}>
+
+          <Button
+            type="button"
+            variant="social"
+            size="md"
+            leftIcon={<img src={iconApple} alt="Apple" className="w-5 h-5 object-contain" />}
+            onClick={() => console.log('Apple login')}
+          >
             Continue with Apple
           </Button>
         </div>
 
         {/* 5. Submit Button */}
-        <Button isLoading={isLoading} rightIcon={<svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>}>
-         Create a Free Account
+        <Button
+          type="submit"
+          isLoading={isLoading}
+          rightIcon={
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          }
+        >
+          Sign In
         </Button>
       </form>
 

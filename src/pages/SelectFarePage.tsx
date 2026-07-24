@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { AxiosError } from 'axios';
 import { SidebarNav } from '../components/chat/SidebarNav';
 
 import iconHeart from '../assets/icons/heart-blue.png';
@@ -11,55 +12,8 @@ import { SelectedFlightBox } from '../components/fare/SelectedFlightBox';
 import { FareCards } from '../components/fare/FareCards';
 import { PriceDetailsSidebar } from '../components/fare/PriceDetailsSidebar';
 
-const MOCK_FARE_DATA = {
-  id: 'flight-001',
-  destination: 'Lagos - Abuja',
-  tripType: 'Round Trip',
-  cabinClass: 'Economy',
-  priceUnit: 'per person',
-  airlineName: 'AirPeace Airways, Nigerian',
-  legs: [
-    {
-      id: 'leg-1',
-      times: '9:15am - 9:15pm',
-      route: 'QOW - LAG',
-      duration: '9h 24m',
-      stops: '1 stop',
-    },
-    {
-      id: 'leg-2',
-      times: '4:25am - 10:20pm',
-      route: 'LAG - QOW',
-      duration: '9h 24m',
-      stops: '1 stop',
-    },
-  ],
-  cancellationPolicy: 'Free cancellation within 43 hours of booking',
-  fareOptions: [
-    {
-      id: 'economy' as const,
-      name: 'ECONOMY',
-      airline: 'AirPeace Airways, Nigerian',
-      price: 1200,
-      features: Array(5).fill('Free cancellation within 43 hours of booking'),
-    },
-    {
-      id: 'business' as const,
-      name: 'BUSINESS',
-      airline: 'AirPeace Airways, Nigerian',
-      price: 1600,
-      features: Array(5).fill('Free cancellation within 43 hours of booking'),
-    },
-  ],
-  importantInformation: [
-    "Once confirmed, airline change penalties and restrictions apply. Most tickets are non-refundable. See your airline's full fare rules here. Airline tickets are non-transferrable. Name changes or adjustments are not allowed once purchased. Airfares and flight availability are not guaranteed until purchased.",
-    'You will be issued electronic tickets. All travelers will need a valid passport and you may also need to show additional documentation at your destination and/or in connecting countries.',
-  ],
-  priceBreakdown: {
-    flightDues: 100,
-    taxesAndFees: 40,
-  },
-};
+// Import Service & Types
+import { getFareDetailsApi, type FareData } from '../services/fareService';
 
 interface SelectFarePageProps {
   chatTitle?: string;
@@ -77,33 +31,75 @@ export const SelectFarePage: React.FC<SelectFarePageProps> = ({
   const [activeNav, setActiveNav] = useState('chats');
   const [selectedFareId, setSelectedFareId] = useState<'economy' | 'business'>('economy');
 
-  // Automatically find the most suitable title:
-  // Prioritize chatTitle -> User's first message -> fallback about flight name "Cheap flights to Lagos"
+  // State API data management
+  const [fareData, setFareData] = useState<FareData | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Call the Service when a component is mounted.
+  useEffect(() => {
+    const fetchFare = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        // Calling APIs via Service
+        const rawData = await getFareDetailsApi();
+
+        //  Flexible handling of cases where MockAPI returns a list array.
+        const data = Array.isArray(rawData) ? rawData[0] : rawData;
+
+        if (data) {
+          setFareData(data);
+        } else {
+          setError('No matching flight data available.');
+        }
+      } catch (err: unknown) {
+        console.error('Error loading flights data:', err);
+
+        // Standard TypeScript error handling
+        if (err instanceof AxiosError) {
+          setError(err.response?.data?.message || err.message || 'Server connection error');
+        } else if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError('Unable to retrieve flight data.');
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFare();
+  }, []);
+
+  // Title Chat
   const firstUserMessage = messages.find((m) => m.sender === 'user')?.text;
   const resolvedChatTitle =
     chatTitle ||
     firstUserMessage ||
-    `Cheap flights to ${MOCK_FARE_DATA.destination.split('-')[0].trim()}`;
+    `Cheap flights to ${fareData?.destination ? fareData.destination.split('-')[0].trim() : 'Destination'}`;
 
-  // Retrieve selected data tickets from JSON.
+  // Securely calculate ticket data with Optional Chaining.
+  const fareOptions = fareData?.fareOptions || [];
   const selectedFare =
-    MOCK_FARE_DATA.fareOptions.find((f) => f.id === selectedFareId) ||
-    MOCK_FARE_DATA.fareOptions[0];
+    fareOptions.find((f) => f.id === selectedFareId) ||
+    fareOptions[0];
 
-  // Calculate the total amount
-  const totalAmount =
-    selectedFare.price +
-    MOCK_FARE_DATA.priceBreakdown.flightDues +
-    MOCK_FARE_DATA.priceBreakdown.taxesAndFees;
+  const priceBreakdown = fareData?.priceBreakdown || { flightDues: 0, taxesAndFees: 0 };
+
+  const totalAmount = selectedFare && fareData
+    ? selectedFare.price + priceBreakdown.flightDues + priceBreakdown.taxesAndFees
+    : 0;
 
   return (
-    <div className="bg-slate-100 font-sans text-slate-700 h-screen overflow-hidden flex antialiased">
+    <div className="bg-slate-100 font-helvetica text-slate-700 h-screen overflow-hidden flex antialiased">
       {/* 1. Sidebar Navigation */}
       <SidebarNav activeNav={activeNav} setActiveNav={setActiveNav} />
 
       {/* 2. Main Content */}
       <main className="flex-1 bg-surface-section flex flex-col h-full overflow-y-auto">
-        {/* Topbar displays Breadcrumb mode */}
+        {/* Topbar */}
         <Topbar
           isBreadcrumbMode={true}
           chatTitle={resolvedChatTitle}
@@ -112,61 +108,79 @@ export const SelectFarePage: React.FC<SelectFarePageProps> = ({
           onNewChat={onStartNewChat}
         />
 
-        {/* Content Body Grid */}
-        <div className="max-w-6xl w-full mx-auto p-6 md:p-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* CỘT TRÁI (2/3) */}
-          <div className="lg:col-span-2 space-y-6">
+        {/* LOADING STATE */}
+        {loading && (
+          <div className="flex-1 flex items-center justify-center p-8">
+            <div className="flex flex-col items-center gap-3">
+              <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
+              <p className="text-sm font-medium text-slate-500">Đang tải thông tin chuyến bay...</p>
+            </div>
+          </div>
+        )}
 
-            {/* Header Flight */}
-            <FareHeader
-              destination={MOCK_FARE_DATA.destination}
-              tripType={MOCK_FARE_DATA.tripType}
-              cabinClass={MOCK_FARE_DATA.cabinClass}
-              price={selectedFare.price}
-              priceUnit={MOCK_FARE_DATA.priceUnit}
-            />
+        {/* ERROR STATE */}
+        {error && !loading && (
+          <div className="flex-1 flex items-center justify-center p-8">
+            <div className="bg-red-50 text-red-600 p-6 rounded-2xl border border-red-100 max-w-md text-center">
+              <p className="font-semibold">{error}</p>
+              <button
+                onClick={() => window.location.reload()}
+                className="mt-4 px-4 py-2 bg-red-600 text-white text-xs font-bold rounded-xl hover:bg-red-700 transition"
+              >
+                Retry
+              </button>
+            </div>
+          </div>
+        )}
 
-            {/* Selected Flights Box */}
-            <SelectedFlightBox
-              airlineName={MOCK_FARE_DATA.airlineName}
-              defaultFlightLogo={defaultFlightLogo}
-              iconHeart={iconHeart}
-              legs={MOCK_FARE_DATA.legs}
-              cancellationPolicy={MOCK_FARE_DATA.cancellationPolicy}
-            />
+        {/* MAIN DATA GRID */}
+        {!loading && !error && fareData && selectedFare && (
+          <div className="max-w-6xl w-full mx-auto p-6 md:p-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2 space-y-6">
+              <FareHeader
+                destination={fareData.destination || ''}
+                tripType={fareData.tripType || ''}
+                cabinClass={fareData.cabinClass || ''}
+                price={selectedFare.price}
+                priceUnit={fareData.priceUnit || ''}
+              />
 
-            {/* Select Fare Cards */}
-            <FareCards
-              fareOptions={MOCK_FARE_DATA.fareOptions}
-              selectedFareId={selectedFareId}
-              defaultFlightLogo={defaultFlightLogo}
-              onSelectFare={setSelectedFareId}
-            />
+              <SelectedFlightBox
+                airlineName={fareData.airlineName || ''}
+                defaultFlightLogo={defaultFlightLogo}
+                iconHeart={iconHeart}
+                legs={fareData.legs || []}
+                cancellationPolicy={fareData.cancellationPolicy || ''}
+              />
 
-            {/* Important Information */}
-            <div className="space-y-3 pt-2">
-              <SectionHeader title="Important information" />
+              <FareCards
+                fareOptions={fareOptions}
+                selectedFareId={selectedFareId}
+                defaultFlightLogo={defaultFlightLogo}
+                onSelectFare={(id) => setSelectedFareId(id as 'economy' | 'business')}
+              />
 
-              <div className="bg-surface p-6 rounded-3xl border border-slate-100 text-xs text-slate-400 leading-relaxed space-y-2 shadow-sm">
-                {MOCK_FARE_DATA.importantInformation.map((paragraph, index) => (
-                  <p key={index}>{paragraph}</p>
-                ))}
+              <div className="space-y-3 pt-2">
+                <SectionHeader title="Important information" />
+                <div className="bg-surface p-6 rounded-3xl border border-slate-100 text-xs text-slate-400 leading-relaxed space-y-2 shadow-sm">
+                  {(fareData.importantInformation || []).map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
+                  ))}
+                </div>
               </div>
             </div>
 
+            {/* Price Details Sticky Sidebar */}
+            <div className="lg:col-span-1">
+              <PriceDetailsSidebar
+                pricePerTraveller={selectedFare.price}
+                flightDues={priceBreakdown.flightDues}
+                taxesAndFees={priceBreakdown.taxesAndFees}
+                totalAmount={totalAmount}
+              />
+            </div>
           </div>
-
-          {/* Price Details Sticky Sidebar */}
-          <div className="lg:col-span-1">
-            <PriceDetailsSidebar
-              pricePerTraveller={selectedFare.price}
-              flightDues={MOCK_FARE_DATA.priceBreakdown.flightDues}
-              taxesAndFees={MOCK_FARE_DATA.priceBreakdown.taxesAndFees}
-              totalAmount={totalAmount}
-            />
-          </div>
-
-        </div>
+        )}
       </main>
     </div>
   );
