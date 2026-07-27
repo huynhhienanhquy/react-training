@@ -5,6 +5,10 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily: {
+      sans: ['"Helvetica Now Display"', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+      helvetica: ['"Helvetica Now Display"', 'sans-serif'],
+    },
     extend: {
       colors: {
         brand: {
@@ -56,4 +60,4 @@ export default {
     },
   },
   plugins: [],
-}
+};
