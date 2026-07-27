@@ -18,6 +18,7 @@ export interface HotelData {
   reviewCount: number;
   priceUnit: string;
   coverImage?: string;
+  imageUrl?: string;
   images: string[];
   description: string;
   amenities: string[];
