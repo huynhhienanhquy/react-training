@@ -5,7 +5,6 @@ import { FavoriteButton } from '../ui/button/FavoriteButton';
 import { Button } from '../ui/Button';
 import { getHotelListApi, type HotelData } from '../../services/hotelService';
 
-// Fallback hotel photos if the API lacks images.
 const defaultHotelImg =
   'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80';
 
@@ -17,18 +16,18 @@ export interface HotelOption {
   imageUrl?: string;
   tag?: string;
   isFavorite?: boolean;
+  rawData?: HotelData;
 }
 
 interface HotelRecommendationsProps {
   title?: string;
   hotels?: HotelOption[];
-  onBookNow?: (hotelId: string) => void;
+  onBookNow?: (hotel: HotelOption) => void;
   onSeeAll?: () => void;
 }
 
-  //Map data from HotelData to HotelOption for display.
 const mapHotelDataToOption = (hotel: HotelData, index: number): HotelOption => {
-  const lowestPrice = hotel.roomOptions?.[0]?.price ?? 1200;
+  const lowestPrice = hotel.roomOptions?.[0]?.price ?? hotel.priceBreakdown?.roomRate ?? 1200;
 
   return {
     id: hotel.id ? String(hotel.id) : `hotel-${index + 1}`,
@@ -39,6 +38,7 @@ const mapHotelDataToOption = (hotel: HotelData, index: number): HotelOption => {
     price: lowestPrice,
     tag: 'Cheap',
     imageUrl: hotel.coverImage || hotel.images?.[0] || defaultHotelImg,
+    rawData: hotel,
   };
 };
 
@@ -51,8 +51,6 @@ export const HotelRecommendations: React.FC<HotelRecommendationsProps> = ({
   const [hotelList, setHotelList] = useState<HotelOption[]>(initialHotels || []);
   const [loading, setLoading] = useState<boolean>(!initialHotels);
   const [error, setError] = useState<string | null>(null);
-
-  // State manages the favorites list.
   const [favorites, setFavorites] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
@@ -87,9 +85,20 @@ export const HotelRecommendations: React.FC<HotelRecommendationsProps> = ({
     setFavorites((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
+  // 🎯 ĐỒNG BỘ: Lưu dữ liệu khách sạn được chọn và truyền ra ngoài
+  const handleBookNow = (e: React.MouseEvent, hotel: HotelOption) => {
+    e.stopPropagation();
+
+    // Lưu vào LocalStorage đồng bộ cho toàn app
+    localStorage.setItem('selectedHotel', JSON.stringify(hotel.rawData || hotel));
+
+    if (onBookNow) {
+      onBookNow(hotel);
+    }
+  };
+
   return (
     <RecommendationWrapper title={title} onSeeAll={onSeeAll}>
-      {/* LOADING STATE */}
       {loading && (
         <div className="py-8 flex flex-col items-center justify-center gap-2">
           <div className="w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
@@ -97,21 +106,18 @@ export const HotelRecommendations: React.FC<HotelRecommendationsProps> = ({
         </div>
       )}
 
-      {/* ERROR STATE */}
       {error && !loading && (
         <div className="p-4 bg-red-50 text-red-600 rounded-2xl border border-red-100 text-xs text-center font-medium my-2">
           {error}
         </div>
       )}
 
-      {/* EMPTY STATE */}
       {!loading && !error && hotelList.length === 0 && (
         <div className="p-6 text-center text-xs text-slate-400">
           No suitable hotels were found.
         </div>
       )}
 
-      {/* HOTEL LIST DISPLAY */}
       {!loading &&
         !error &&
         hotelList.map((hotel, idx) => {
@@ -123,7 +129,6 @@ export const HotelRecommendations: React.FC<HotelRecommendationsProps> = ({
               key={uniqueKey}
               className="bg-[#F8FAFC] rounded-2xl p-4 flex flex-col md:flex-row items-center gap-4 mb-3 border-none"
             >
-              {/* 1. The Square Hotel on the Left (Image) */}
               <div className="w-full md:w-36 h-36 md:h-32 rounded-xl overflow-hidden shrink-0">
                 <img
                   src={hotel.imageUrl || defaultHotelImg}
@@ -132,7 +137,6 @@ export const HotelRecommendations: React.FC<HotelRecommendationsProps> = ({
                 />
               </div>
 
-              {/* 2. Details in the Middle*/}
               <div className="flex-1 flex flex-col justify-between h-full space-y-2 text-left w-full">
                 <div>
                   <h3 className="text-base md:text-lg font-bold text-[#101828] leading-snug">
@@ -143,26 +147,20 @@ export const HotelRecommendations: React.FC<HotelRecommendationsProps> = ({
                   </p>
                 </div>
 
-                {/* Icons(Wifi, Parking, Food) */}
                 <div className="flex items-center gap-3 text-slate-400 pt-2">
-                  {/* Wifi Icon */}
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.071-7.071a10 10 0 0114.142 0M1.05 8.05a15 15 0 0121.9 0" />
                   </svg>
-                  {/* Parking Icon */}
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16V6a1 1 0 00-1-1H7v11h2v-4h3a1 1 0 001-1zm0 0l2 2" />
                   </svg>
-                  {/* Meal/Buffet Icon */}
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                   </svg>
                 </div>
               </div>
 
-              {/* 3. Price and Right-Hand Control Buttons */}
               <div className="flex flex-col items-end justify-between w-full md:w-auto h-full self-stretch space-y-3 shrink-0">
-                {/* Badge Tag "Cheap" */}
                 <div>
                   {hotel.tag && (
                     <span className="px-3 py-0.5 bg-emerald-50 text-emerald-600 text-[11px] font-medium rounded-full border border-emerald-100">
@@ -171,15 +169,13 @@ export const HotelRecommendations: React.FC<HotelRecommendationsProps> = ({
                   )}
                 </div>
 
-                {/* Display Prices */}
                 <div className="text-right my-1">
                   <span className="text-xl md:text-2xl font-bold text-[#101828]">
-                    {hotel.price}
+                    ${hotel.price}
                   </span>
                   <span className="text-xs text-slate-400 font-normal">/per night</span>
                 </div>
 
-                {/* Group of Action Buttons */}
                 <div className="flex items-center gap-2">
                   <FavoriteButton
                     isFavorite={isFav}
@@ -188,8 +184,8 @@ export const HotelRecommendations: React.FC<HotelRecommendationsProps> = ({
                   <Button
                     variant="secondary"
                     size="sm"
-                    className="bg-blue-50 hover:bg-blue-100 text-blue-600 border-none font-semibold px-4 rounded-xl"
-                    onClick={() => onBookNow?.(hotel.id)}
+                    className="bg-blue-50 hover:bg-blue-100 text-blue-600 border-none font-semibold px-4 rounded-xl cursor-pointer"
+                    onClick={(e) => handleBookNow(e, hotel)}
                   >
                     Book Now
                   </Button>

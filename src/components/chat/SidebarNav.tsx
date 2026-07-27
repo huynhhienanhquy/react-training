@@ -22,8 +22,6 @@ interface SidebarNavProps {
 
 export const SidebarNav: React.FC<SidebarNavProps> = ({ activeNav, setActiveNav, isMobileOpen, onMobileToggle }) => {
   const navigate = useNavigate();
-
-  // Get the logout (or setUser) function from AuthContext.
   const { logout } = useAuth();
 
   const [showProfileMenu, setShowProfileMenu] = useState(false);
@@ -38,15 +36,10 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({ activeNav, setActiveNav,
     { id: 'settings', icon: iconSettings, alt: 'Settings' },
   ];
 
-  // The logout handler function has been updated.
   const handleLogout = async () => {
     try {
-      //  1. Close the dropdown menu.
       setShowProfileMenu(false);
-
       await logout();
-
-      // 3.Redirect to login page
       navigate('/login', { replace: true });
     } catch (error) {
       console.error('Logout error:', error);
@@ -67,123 +60,138 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({ activeNav, setActiveNav,
 
       {/* Desktop sidebar */}
       <aside className="hidden md:flex w-18 md:w-20 bg-surface-sidebar border-r-[10px] border-surface-section flex-col items-center justify-between py-6 z-20 shrink-0 select-none">
-      <div className="flex flex-col items-center gap-7 w-full px-2">
-        {/* App Logo */}
-        <button className="w-11 h-11 rounded-2xl flex items-center justify-center p-1.5 hover:opacity-90 transition">
-          <img
-            src={logo}
-            alt="Logo"
-            className="w-full h-full object-contain"
-          />
-        </button>
+        <div className="flex flex-col items-center gap-7 w-full px-2">
+          {/* App Logo */}
+          <button className="w-11 h-11 rounded-2xl flex items-center justify-center p-1.5 hover:opacity-90 transition">
+            <img
+              src={logo}
+              alt="Logo"
+              className="w-full h-full object-contain"
+            />
+          </button>
 
-        {/* Navigation Items*/}
-        <nav className="flex flex-col gap-3.5 items-center w-full">
-          {navItems.map((item) => {
-            const isActive = activeNav === item.id;
-            return (
-              <button
-                key={item.id}
-                onClick={() => setActiveNav(item.id)}
-                className={`w-11 h-11 rounded-2xl flex items-center justify-center transition p-2.5 ${
-                  isActive
-                    ? 'bg-white border border-blue-200 shadow-sm shadow-blue-100/50'
-                    : 'bg-transparent border border-transparent hover:bg-white/80 hover:border-slate-200/60'
-                }`}
-              >
-                <img
-                  src={item.icon}
-                  alt={item.alt}
-                  className={`w-5 h-5 object-contain transition-all duration-200 ${
+          {/* Navigation Items */}
+          <nav className="flex flex-col gap-3.5 items-center w-full">
+            {navItems.map((item) => {
+              const isActive = activeNav === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => setActiveNav(item.id)}
+                  className={`w-11 h-11 rounded-2xl flex items-center justify-center transition p-2.5 ${
                     isActive
-                      ? 'opacity-100 scale-105'
-                      : 'opacity-70 hover:opacity-100'
+                      ? 'bg-blue-50 border border-blue-200 shadow-sm shadow-blue-100/50'
+                      : 'bg-transparent border border-transparent hover:bg-white/80 hover:border-slate-200/60'
                   }`}
-                />
-              </button>
-            );
-          })}
-        </nav>
-      </div>
+                >
+                  <img
+                    src={item.icon}
+                    alt={item.alt}
+                    className={`w-5 h-5 object-contain transition-all duration-200 ${
+                      isActive
+                        ? 'opacity-100 scale-105 [filter:invert(38%)_sepia(88%)_saturate(2421%)_hue-rotate(200deg)_brightness(98%)_contrast(96%)]'
+                        : 'opacity-70 hover:opacity-100'
+                    }`}
+                  />
+                </button>
+              );
+            })}
+          </nav>
+        </div>
 
-      {/* User Avatar & Logout Popover */}
-      <div className="relative" ref={menuRef}>
-        <svg width="0" height="0" className="absolute">
-          <defs>
-            <clipPath id="pentagon-clip" clipPathUnits="objectBoundingBox">
-              <path d="M 0.5 0.05 C 0.52 0.05, 0.93 0.32, 0.95 0.35 C 0.97 0.38, 0.88 0.88, 0.85 0.92 C 0.82 0.96, 0.18 0.96, 0.15 0.92 C 0.12 0.88, 0.03 0.38, 0.05 0.35 C 0.07 0.32, 0.48 0.05, 0.5 0.05 Z" />
-            </clipPath>
-          </defs>
-        </svg>
+        {/* User Avatar & Logout Popover */}
+        <div className="relative" ref={menuRef}>
+          <svg width="0" height="0" className="absolute">
+            <defs>
+              <clipPath id="pentagon-clip" clipPathUnits="objectBoundingBox">
+                <path d="M 0.5 0.05 C 0.52 0.05, 0.93 0.32, 0.95 0.35 C 0.97 0.38, 0.88 0.88, 0.85 0.92 C 0.82 0.96, 0.18 0.96, 0.15 0.92 C 0.12 0.88, 0.03 0.38, 0.05 0.35 C 0.07 0.32, 0.48 0.05, 0.5 0.05 Z" />
+              </clipPath>
+            </defs>
+          </svg>
 
-        <button
-          onClick={() => setShowProfileMenu((prev) => !prev)}
-          className="w-12 h-12 transition transform active:scale-95 flex items-center justify-center focus:outline-none relative drop-shadow-sm"
-        >
-          {/* 1. Outer White Border */}
-          <div
-            className="w-full h-full bg-white flex items-center justify-center p-1"
-            style={{ clipPath: 'url(#pentagon-clip)' }}
+          <button
+            onClick={() => setShowProfileMenu((prev) => !prev)}
+            className="w-12 h-12 transition transform active:scale-95 flex items-center justify-center focus:outline-none relative drop-shadow-sm"
           >
-            {/* 2.Inner Avatar */}
             <div
-              className="w-full h-full bg-slate-200 overflow-hidden"
+              className="w-full h-full bg-white flex items-center justify-center p-1"
               style={{ clipPath: 'url(#pentagon-clip)' }}
             >
-              <img
-                src={userAvatar}
-                alt="User Avatar"
-                className="w-full h-full object-cover scale-110"
-              />
+              <div
+                className="w-full h-full bg-slate-200 overflow-hidden"
+                style={{ clipPath: 'url(#pentagon-clip)' }}
+              >
+                <img
+                  src={userAvatar}
+                  alt="User Avatar"
+                  className="w-full h-full object-cover scale-110"
+                />
+              </div>
             </div>
-          </div>
-        </button>
+          </button>
 
-        {/* Dropdown Logout */}
-        {showProfileMenu && (
-          <div className="absolute bottom-2 left-16 w-48 bg-white rounded-2xl shadow-xl border border-slate-100 p-2 z-50 animate-in fade-in zoom-in-95 duration-150">
-            <button
-              onClick={handleLogout}
-              className="w-full text-left px-3 py-2 rounded-xl text-xs font-medium text-red-600 hover:bg-red-50 flex items-center gap-2.5 transition"
-            >
-              <span>Log out</span>
-            </button>
-          </div>
-        )}
-      </div>
-    </aside>
+          {/* Dropdown Logout */}
+          {showProfileMenu && (
+            <div className="absolute bottom-2 left-16 w-48 bg-white rounded-2xl shadow-xl border border-slate-100 p-2 z-50 animate-in fade-in zoom-in-95 duration-150">
+              <button
+                onClick={handleLogout}
+                className="w-full text-left px-3 py-2 rounded-xl text-xs font-medium text-red-600 hover:bg-red-50 flex items-center gap-2.5 transition"
+              >
+                <span>Log out</span>
+              </button>
+            </div>
+          )}
+        </div>
+      </aside>
 
       {/* Mobile drawer overlay */}
       {isMobileOpen && (
         <div className="md:hidden fixed inset-0 z-40 flex">
-          <div className="fixed inset-0 bg-black/40" onClick={onMobileToggle} />
-          <aside className="relative w-64 bg-surface-sidebar h-full flex flex-col items-center py-6 z-50 shadow-xl">
+          <div className="fixed inset-0 bg-black/40 backdrop-blur-xs" onClick={onMobileToggle} />
+
+          {/* Đã chỉnh: w-18 md:w-20 để thu nhỏ thanh Sidebar trên Mobile */}
+          <aside className="relative w-18 bg-surface-sidebar h-full flex flex-col items-center justify-between py-6 z-50 shadow-2xl select-none animate-in slide-in-from-left duration-200">
             <div className="flex flex-col items-center gap-7 w-full px-2">
               <button className="w-11 h-11 rounded-2xl flex items-center justify-center p-1.5">
                 <img src={logo} alt="Logo" className="w-full h-full object-contain" />
               </button>
+
               <nav className="flex flex-col gap-3.5 items-center w-full">
                 {navItems.map((item) => {
                   const isActive = activeNav === item.id;
                   return (
                     <button
                       key={item.id}
-                      onClick={() => { setActiveNav(item.id); onMobileToggle?.(); }}
+                      onClick={() => {
+                        setActiveNav(item.id);
+                        onMobileToggle?.();
+                      }}
                       className={`w-11 h-11 rounded-2xl flex items-center justify-center transition p-2.5 ${
                         isActive
-                          ? 'bg-white border border-blue-200 shadow-sm shadow-blue-100/50'
+                          ? 'bg-blue-50 border border-blue-200 shadow-sm shadow-blue-100/50'
                           : 'bg-transparent border border-transparent hover:bg-white/80 hover:border-slate-200/60'
                       }`}
                     >
-                      <img src={item.icon} alt={item.alt} className="w-5 h-5 object-contain transition-all duration-200 ${
-                        isActive ? 'opacity-100 scale-105' : 'opacity-70 hover:opacity-100'
-                      }" />
+                      <img
+                        src={item.icon}
+                        alt={item.alt}
+                        className={`w-5 h-5 object-contain transition-all duration-200 ${
+                          isActive
+                            ? 'opacity-100 scale-105 [filter:invert(38%)_sepia(88%)_saturate(2421%)_hue-rotate(200deg)_brightness(98%)_contrast(96%)]'
+                            : 'opacity-70 hover:opacity-100'
+                        }`}
+                      />
                     </button>
                   );
                 })}
               </nav>
             </div>
-            <button onClick={handleLogout} className="mt-auto text-xs font-medium text-red-600 hover:bg-red-50 px-4 py-2 rounded-xl transition">
+
+            {/* Nút Log out dạng Icon hoặc Text thu nhỏ vừa vặn với chiều rộng 18 */}
+            <button
+              onClick={handleLogout}
+              className="text-[11px] font-semibold text-red-600 hover:bg-red-50 px-2 py-1.5 rounded-lg transition"
+            >
               Log out
             </button>
           </aside>

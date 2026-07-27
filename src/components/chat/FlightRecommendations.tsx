@@ -7,7 +7,7 @@ import { PriceDisplay } from '../ui/PriceDisplay';
 import defaultFlightLogo from '../../assets/icons/ellipse.png';
 
 // Import Service API
-import {  getFlightListApi, type FareData } from '../../services/fareService';
+import { getFlightListApi, type FareData } from '../../services/fareService';
 
 // Type definitions for outbound/return flights
 export interface FlightLeg {
@@ -37,10 +37,6 @@ interface FlightRecommendationsProps {
   onSeeAll?: () => void;
 }
 
-
-  //This function helps convert data from the API (FareData) to a display format (FlightOption).
-  //Secured with Optional Chaining (?.) to prevent crashes when a field is missing.
-
 const mapFareDataToFlightOption = (fareData: FareData, index: number): FlightOption => {
   const legs = fareData?.legs || [];
   const fareOptions = fareData?.fareOptions || [];
@@ -50,7 +46,6 @@ const mapFareDataToFlightOption = (fareData: FareData, index: number): FlightOpt
   const lowestPrice = fareOptions[0]?.price ?? 0;
 
   return {
-    // Add a fallback index if IDs are duplicated or missing from MockAPI.
     id: fareData?.id ? String(fareData.id) : `flight-${index + 1}`,
     airline: fareData?.airlineName || 'Airline',
     outbound: {
@@ -80,11 +75,9 @@ export const FlightRecommendations: React.FC<FlightRecommendationsProps> = ({
   const [loading, setLoading] = useState<boolean>(!initialFlights);
   const [error, setError] = useState<string | null>(null);
 
-  // State tracks flights marked as favorites.
   const [favorites, setFavorites] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
-    // If you pass flights directly through props, don't call the API.
     if (initialFlights) return;
 
     const fetchFlights = async () => {
@@ -92,10 +85,7 @@ export const FlightRecommendations: React.FC<FlightRecommendationsProps> = ({
         setLoading(true);
         setError(null);
 
-        // Call the API to retrieve the complete list of flights.
         const data = await getFlightListApi();
-
-        // Flexible handling regardless of whether the API returns an Array or a Single Object.
         const items = Array.isArray(data) ? data : [data];
         const mappedList = items.map((item, index) => mapFareDataToFlightOption(item, index));
 
@@ -117,7 +107,6 @@ export const FlightRecommendations: React.FC<FlightRecommendationsProps> = ({
     fetchFlights();
   }, [initialFlights]);
 
-  // Handler toggle favorite status
   const toggleFavorite = (id: string) => {
     setFavorites((prev) => ({ ...prev, [id]: !prev[id] }));
   };
@@ -151,17 +140,16 @@ export const FlightRecommendations: React.FC<FlightRecommendationsProps> = ({
         !error &&
         flightList.map((flight, idx) => {
           const isFav = !!(favorites[flight.id] || flight.isFavorite);
-          // Ensure the key remains unique even if the API returns duplicate IDs.
           const uniqueKey = `${flight.id}-${idx}`;
 
           return (
             <div
               key={uniqueKey}
-              className="bg-[#F8FAFC] rounded-2xl p-4 md:p-5 flex flex-col gap-4 border-none mb-3"
+              className="bg-[#F8FAFC] rounded-2xl p-3.5 sm:p-5 flex flex-col gap-3.5 border-none mb-3 overflow-hidden"
             >
               {/* Header: Logo, Airline Name & Action Controls */}
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2.5">
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2 min-w-0">
                   <div className="w-6 h-6 flex items-center justify-center shrink-0 overflow-hidden">
                     <img
                       src={flight.logoUrl || defaultFlightLogo}
@@ -169,12 +157,12 @@ export const FlightRecommendations: React.FC<FlightRecommendationsProps> = ({
                       className="w-full h-full object-contain"
                     />
                   </div>
-                  <span className="text-xs md:text-sm font-semibold text-slate-600">
+                  <span className="text-xs sm:text-sm font-semibold text-slate-700 truncate">
                     {flight.airline}
                   </span>
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
                   <FavoriteButton
                     isFavorite={isFav}
                     onToggle={() => toggleFavorite(flight.id)}
@@ -186,33 +174,34 @@ export const FlightRecommendations: React.FC<FlightRecommendationsProps> = ({
               </div>
 
               {/* Schedules & Pricing Details */}
-              <div className="grid grid-cols-[1fr_auto] gap-2 items-end pt-1">
-                <div className="space-y-3 text-xs md:text-sm">
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 pt-1 border-t border-slate-100/60">
+                {/* Outbound & Return Legs */}
+                <div className="space-y-2 text-xs sm:text-sm flex-1">
                   {/* Outbound Leg */}
-                  <div className="flex items-center gap-4 md:gap-8">
-                    <span className="font-bold text-slate-900 w-24 md:w-32 shrink-0 text-xs md:text-sm">
+                  <div className="flex flex-wrap sm:flex-nowrap items-baseline sm:items-center gap-x-3 gap-y-0.5">
+                    <span className="font-bold text-slate-900 shrink-0 text-xs sm:text-sm">
                       {flight.outbound.time}
                     </span>
-                    <span className="text-slate-500 font-medium truncate text-xs md:text-sm">
+                    <span className="text-slate-500 font-medium text-[11px] sm:text-xs leading-tight">
                       {flight.outbound.route} • {flight.outbound.duration} • {flight.outbound.stops}
                     </span>
                   </div>
 
                   {/* Return Leg */}
-                  <div className="flex items-center gap-4 md:gap-8">
-                    <span className="font-bold text-slate-900 w-24 md:w-32 shrink-0 text-xs md:text-sm">
+                  <div className="flex flex-wrap sm:flex-nowrap items-baseline sm:items-center gap-x-3 gap-y-0.5">
+                    <span className="font-bold text-slate-900 shrink-0 text-xs sm:text-sm">
                       {flight.returnLeg.time}
                     </span>
-                    <span className="text-slate-500 font-medium truncate text-xs md:text-sm">
+                    <span className="text-slate-500 font-medium text-[11px] sm:text-xs leading-tight">
                       {flight.returnLeg.route} • {flight.returnLeg.duration} • {flight.returnLeg.stops}
                     </span>
                   </div>
                 </div>
 
-                {/* Price Display and Highlight Tag */}
-                <div className="flex flex-col items-end gap-2 shrink-0">
+                {/* Price Display and Tag */}
+                <div className="flex items-center sm:flex-col justify-between sm:justify-end sm:items-end gap-1.5 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-200/40 shrink-0">
                   {flight.tag && (
-                    <span className="px-3 py-1 bg-emerald-100/70 text-emerald-700 text-[11px] font-bold rounded-full">
+                    <span className="px-2.5 py-0.5 bg-emerald-100/80 text-emerald-700 text-[10px] sm:text-[11px] font-bold rounded-full">
                       {flight.tag}
                     </span>
                   )}
