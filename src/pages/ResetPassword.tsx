@@ -25,7 +25,6 @@ export const ResetPassword: React.FC = () => {
 
     startLoading();
 
-    // Simulate an API call to update the new password.
     setTimeout(() => {
       stopLoading();
       alert("Password reset successfully! Redirecting to Sign In...");
@@ -35,52 +34,57 @@ export const ResetPassword: React.FC = () => {
 
   return (
     <AuthLayout isLoading={isLoading}>
-      {/* 1. Header */}
-      <AuthHeader
-        title="Reset Password"
-        subtitle="You’re all set. Please change your password now"
-      />
-
-      <form className="space-y-6" onSubmit={handleResetPassword} autoComplete="off">
-        {/* 2. Enter a new password. */}
-        <InputField
-          label="New Password"
-          type="password"
-          placeholder="Enter your password"
-          autoComplete="new-password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
+      {/* Reduce the overall spacing between blocks to space-y-3.5 */}
+      <div className="flex flex-col space-y-3.5">
+        {/* 1. Header */}
+        <AuthHeader
+          title="Reset Password"
+          subtitle="You’re all set. Please change your password now"
         />
 
-        {/* 3. Confirm your new password. */}
-        <InputField
-          label="Confirm New Password"
-          type="password"
-          placeholder="Confirm your password"
-          autoComplete="new-password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
+        {/* 2. Form */}
+        <form className="space-y-3" onSubmit={handleResetPassword} autoComplete="off">
+          <InputField
+            label="New Password"
+            type="password"
+            placeholder="Enter your password"
+            autoComplete="new-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
-        {/* 4. Error message if password does not match */}
-        <ErrorMessage message={error} />
+          <InputField
+            label="Confirm New Password"
+            type="password"
+            placeholder="Confirm your password"
+            autoComplete="new-password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
 
-        {/* 5. Button submit*/}
-        <div className="pt-2">
-          <Button isLoading={isLoading} rightIcon={<svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>}>
-            Create a Free Account
+          <ErrorMessage message={error} />
+
+          <Button
+            isLoading={isLoading}
+            rightIcon={
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            }
+          >
+            Reset Password
           </Button>
-        </div>
-      </form>
+        </form>
 
-      {/* 6. Footer */}
-      <AuthFooter
-        questionText="Don't have an account?"
-        actionText="Sign Up"
-        onActionClick={() => navigate('/register')}
-      />
+        {/* 3. Footer  */}
+        <AuthFooter
+          questionText="Don't have an account?"
+          actionText="Sign Up"
+          onActionClick={() => navigate('/register')}
+        />
+      </div>
     </AuthLayout>
   );
 };
