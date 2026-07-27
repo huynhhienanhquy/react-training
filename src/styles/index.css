@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 1. Khai báo Font Custom Fonts */
 @font-face {
   font-family: 'Helvetica Now Display';
   src: url('/fonts/HelveticaNowDisplay-Regular.woff2') format('woff2');
@@ -27,7 +26,6 @@
   font-display: swap;
 }
 
-/* 2. Áp dụng Font chuẩn qua Tailwind Layer Base */
 @layer base {
   html, body, #root {
     margin: 0;
@@ -43,7 +41,6 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Ép tất cả các thẻ form trong ChatPage (input, button, v.v.) kế thừa font chuẩn */
   input, button, textarea, select {
     font-family: inherit;
   }
