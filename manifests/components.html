@@ -1,0 +1,3622 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Components Manifest</title>
+  <style>
+      :root {
+          --bg: #0b0c10;
+          --panel: #121318;
+          --muted: #9aa0a6;
+          --fg: #e8eaed;
+          --ok: #22c55e;
+          --info: #1e88e5;
+          --err: #c62828;
+          --ok-bg: #0c1a13;
+          --info-bg: #0c1624;
+          --err-bg: #1a0e0e;
+          --chip: #1f2330;
+          --border: #2b2f3a;
+          --link: #8ab4f8;
+          --active-ring: 1px; /* 1px active ring for pills and toggles */
+      }
+
+      * {
+          box-sizing: border-box;
+      }
+
+      html,
+      body {
+          margin: 0;
+          background: var(--bg);
+          color: var(--fg);
+          font: 14px/1.5 system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Ubuntu,
+          Cantarell,
+          'Helvetica Neue',
+          Arial,
+          'Noto Sans';
+      }
+
+      .wrap {
+          max-width: 1100px;
+          margin: 0 auto;
+          padding: 16px 20px;
+      }
+
+      header {
+          position: sticky;
+          top: 0;
+          backdrop-filter: blur(6px);
+          background: color-mix(in srgb, var(--bg) 84%, transparent);
+          border-bottom: 1px solid var(--border);
+          z-index: 10;
+      }
+
+      h1 {
+          font-size: 20px;
+          margin: 0 0 6px;
+      }
+
+      .summary {
+          display: flex;
+          gap: 12px;
+          flex-wrap: wrap;
+          align-items: center;
+      }
+
+      /* Top filter pills */
+      .filter-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 6px 12px;
+          border: 1px solid var(--border);
+          border-radius: 999px;
+          background: var(--panel);
+          text-decoration: none;
+          cursor: pointer;
+          user-select: none;
+          color: var(--fg);
+      }
+
+      .filter-pill.ok {
+          color: #b9f6ca;
+          border-color: color-mix(in srgb, var(--ok) 55%, var(--border));
+          background: color-mix(in srgb, var(--ok) 18%, #000);
+      }
+
+      .filter-pill.info {
+          color: #b3d9ff;
+          border-color: color-mix(in srgb, var(--info) 55%, var(--border));
+          background: var(--info-bg);
+      }
+
+      .filter-pill.err {
+          color: #ff9aa0;
+          border-color: color-mix(in srgb, var(--err) 55%, var(--border));
+          background: var(--err-bg);
+      }
+
+      .filter-pill.all {
+          color: #d7dbe0;
+          border-color: var(--border);
+          background: var(--panel);
+      }
+
+      .filter-pill[aria-disabled='true'] {
+          cursor: default;
+          text-decoration: none;
+      }
+
+      .filter-pill:focus,
+      .filter-pill:active {
+          outline: none;
+          box-shadow: none;
+      }
+
+      /* Selected top pill ring via :target */
+      #filter-all:target ~ header .filter-pill[data-k='all'],
+      #filter-errors:target ~ header .filter-pill[data-k='errors'],
+      #filter-infos:target ~ header .filter-pill[data-k='infos'],
+      #filter-story-errors:target ~ header .filter-pill[data-k='story-errors'],
+      #filter-doc-errors:target ~ header .filter-pill[data-k='docs'],
+      #filter-docs:target ~ header .filter-pill[data-k='docs'] {
+          box-shadow: 0 0 0 var(--active-ring) currentColor;
+          border-color: currentColor;
+      }
+
+      /* Hidden targets for filtering */
+      #filter-all,
+      #filter-errors,
+      #filter-infos,
+      #filter-story-errors,
+      #filter-doc-errors,
+      #filter-docs {
+          display: none;
+      }
+
+      main {
+          padding: 36px 0 40px;
+      }
+
+      .grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 18px;
+      }
+
+      /* one card per row */
+
+      .card {
+          border: 1px solid var(--border);
+          background: var(--panel);
+          border-radius: 14px;
+          padding: 14px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+      }
+
+      .head {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+      }
+
+      .title {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 10px;
+      }
+
+      .title h2 {
+          font-size: 16px;
+          margin: 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+      }
+
+      .meta {
+          font-size: 12px;
+          color: var(--muted);
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+      }
+
+      .kv {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+      }
+
+      .chip {
+          font-size: 12px;
+          padding: 4px 8px;
+          border-radius: 999px;
+          background: var(--chip);
+          border: 1px solid var(--border);
+      }
+
+      .hint {
+          color: var(--muted);
+          font-size: 12px;
+      }
+
+      .badges {
+          display: flex;
+          gap: 8px;
+          flex-wrap: wrap;
+      }
+
+      /* Per-card badges: labels become toggles when clickable */
+      .badge {
+          font-size: 12px;
+          padding: 3px 8px;
+          border-radius: 999px;
+          border: 1px solid var(--border);
+          background: var(--chip);
+          color: #d7dbe0;
+      }
+
+      .badge.ok {
+          color: #b9f6ca;
+          border-color: color-mix(in srgb, var(--ok) 55%, var(--border));
+      }
+
+      .badge.info {
+          color: #b3d9ff;
+          border-color: color-mix(in srgb, var(--info) 55%, var(--border));
+      }
+
+      .badge.err {
+          color: #ff9aa0;
+          border-color: color-mix(in srgb, var(--err) 55%, var(--border));
+      }
+
+      .as-toggle {
+          cursor: pointer;
+      }
+
+      /* 1px ring on active toggle */
+      .tg-err:checked + label.as-toggle,
+      .tg-info:checked + label.as-toggle,
+      .tg-stories:checked + label.as-toggle,
+      .tg-docs:checked + label.as-toggle,
+      .tg-subcomponents:checked + label.as-toggle,
+      .tg-content:checked + label.as-toggle,
+      .tg-props:checked + label.as-toggle {
+          box-shadow: 0 0 0 var(--active-ring) currentColor;
+          border-color: currentColor;
+      }
+
+      /* Panels: hidden by default, shown when respective toggle checked */
+      .panels {
+          display: grid;
+          gap: 10px;
+      }
+
+      .panel {
+          display: none;
+      }
+
+      .tg-err:checked ~ .panels .panel-err {
+          display: grid;
+      }
+
+      .tg-info:checked ~ .panels .panel-info {
+          display: grid;
+          gap: 8px;
+      }
+
+      .tg-stories:checked ~ .panels .panel-stories {
+          display: grid;
+          gap: 8px;
+      }
+
+      .tg-docs:checked ~ .panels .panel-docs {
+          display: grid;
+          gap: 8px;
+      }
+
+      .tg-subcomponents:checked ~ .panels .panel-subcomponents {
+          display: grid;
+          gap: 8px;
+      }
+
+      .tg-content:checked ~ .panels .panel-content {
+          display: grid;
+          gap: 8px;
+      }
+
+      .tg-props:checked ~ .panels .panel-props {
+          display: grid;
+      }
+
+      /* Colored notes for prop type error + info */
+      .note {
+          padding: 12px;
+          border: 1px solid var(--border);
+          border-radius: 10px;
+      }
+
+      .note.err {
+          border-color: color-mix(in srgb, var(--err) 55%, var(--border));
+          background: var(--err-bg);
+          color: #ffd1d4;
+      }
+
+      .note.info {
+          border-color: color-mix(in srgb, var(--info) 55%, var(--border));
+          background: var(--info-bg);
+          color: #d6e8ff;
+      }
+
+      .note.ok {
+          border-color: color-mix(in srgb, var(--ok) 55%, var(--border));
+          background: var(--ok-bg);
+          color: var(--fg);
+      }
+
+      .note-title {
+          font-weight: 600;
+          margin-bottom: 6px;
+      }
+
+      .note-body {
+          white-space: normal;
+      }
+
+      /* Story error cards */
+      .ex {
+          padding: 10px;
+          border: 1px solid var(--border);
+          border-radius: 10px;
+          background: #0f131b;
+      }
+
+      .ex.err {
+          border-color: color-mix(in srgb, var(--err) 55%, var(--border));
+      }
+
+      .row {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          flex-wrap: wrap;
+      }
+
+      .status-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          display: inline-block;
+      }
+
+      .dot-ok {
+          background: var(--ok);
+      }
+
+      .dot-err {
+          background: var(--err);
+      }
+
+      .ex-name {
+          font-weight: 600;
+      }
+
+      /* Error groups (visible in errors filter) */
+      .error-groups {
+          display: none;
+          margin-bottom: 16px;
+      }
+
+      .group {
+          border: 1px solid var(--border);
+          background: var(--panel);
+          border-radius: 14px;
+          overflow: hidden;
+      }
+
+      .group + .group {
+          margin-top: 12px;
+      }
+
+      .group-header {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 12px 14px;
+          cursor: pointer;
+          border-bottom: 1px solid var(--border);
+      }
+
+      .group-header:hover {
+          background: #141722;
+      }
+
+      .group-title {
+          font-weight: 600;
+          flex: 1;
+      }
+
+      .group-count {
+          font-size: 12px;
+          color: var(--muted);
+      }
+
+      .group-cards {
+          display: none;
+          padding: 12px;
+      }
+
+      .group .card {
+          margin: 12px 0;
+      }
+
+      .group .card:first-child {
+          margin-top: 0;
+      }
+
+      .group .card:last-child {
+          margin-bottom: 0;
+      }
+
+      /* caret rotation */
+      .group-tg:checked + label .caret {
+          transform: rotate(90deg);
+      }
+
+      .caret {
+          transition: transform 0.15s ease;
+      }
+
+      /* toggle body */
+      .group-tg:checked ~ .group-cards {
+          display: block;
+      }
+
+      /* CSS-only filtering of cards via top pills */
+      #filter-errors:target ~ main .card:not(.has-error):not(.has-story-error) {
+          display: none;
+      }
+
+      #filter-infos:target ~ main .card:not(.has-info) {
+          display: none;
+      }
+
+      #filter-story-errors:target ~ main .card:not(.has-story-error) {
+          display: none;
+      }
+
+      #filter-doc-errors:target ~ main .card:not(.has-doc-error) {
+          display: none;
+      }
+
+      #filter-docs:target ~ main .card:has(> .tg-docs),
+      #filter-docs:target ~ main .card.is-doc {
+          display: block;
+      }
+
+      #filter-docs:target ~ main .card:not(:has(> .tg-docs)):not(.is-doc) {
+          display: none;
+      }
+
+      #filter-all:target ~ main .card {
+          display: block;
+      }
+
+      /* In errors view, hide standalone component-error cards in the regular grid (they will appear in groups) */
+      #filter-errors:target ~ main .grid .card.has-error {
+          display: none;
+      }
+
+      /* Show grouped section only in errors view */
+      #filter-errors:target ~ main .error-groups {
+          display: block;
+      }
+
+      /* Section titles */
+      .section-title {
+          font-size: 16px;
+          font-weight: 600;
+          color: var(--muted);
+          margin: 24px 0 12px;
+          padding-bottom: 8px;
+          border-bottom: 1px solid var(--border);
+      }
+      .section-title:first-child {
+          margin-top: 0;
+      }
+
+      /* When a toggle is checked, show the corresponding panel */
+      .card > .tg-err:checked ~ .panels .panel-err {
+          display: grid;
+      }
+      
+      .card > .tg-info:checked ~ .panels .panel-info {
+          display: grid;
+      }
+      
+      .card > .tg-stories:checked ~ .panels .panel-stories {
+          display: grid;
+      }
+
+      .card > .tg-docs:checked ~ .panels .panel-docs {
+          display: grid;
+      }
+
+      .card > .tg-subcomponents:checked ~ .panels .panel-subcomponents {
+          display: grid;
+      }
+
+      .card > .tg-content:checked ~ .panels .panel-content {
+          display: grid;
+      }
+
+      /* Add vertical spacing around panels only when any panel is visible */
+      .card > .tg-err:checked ~ .panels,
+      .card > .tg-info:checked ~ .panels,
+      .card > .tg-stories:checked ~ .panels,
+      .card > .tg-docs:checked ~ .panels,
+      .card > .tg-subcomponents:checked ~ .panels,
+      .card > .tg-content:checked ~ .panels,
+      .card > .tg-props:checked ~ .panels {
+          margin: 10px 0;
+      }
+
+      /* Optional: a subtle 1px ring on the active badge, using :has() if available */
+      @supports selector(.card:has(.tg-err:checked)) {
+          .card:has(.tg-err:checked) label[for$='-err'],
+          .card:has(.tg-info:checked) label[for$='-info'],
+          .card:has(.tg-stories:checked) label[for$='-stories'],
+          .card:has(.tg-docs:checked) label[for$='-docs'],
+          .card:has(.tg-subcomponents:checked) label[for$='-subcomponents'],
+          .card:has(.tg-content:checked) label[for$='-content'],
+          .card:has(.tg-props:checked) label[for$='-props'] {
+              box-shadow: 0 0 0 1px currentColor;
+              border-color: currentColor;
+          }
+      }
+
+      /* Wrap long lines in code blocks at ~120 characters */
+      pre, code {
+          font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      }
+      pre {
+          white-space: pre-wrap;
+          overflow-wrap: anywhere;
+          word-break: break-word;
+          overflow-x: auto; /* fallback for extremely long tokens */
+          margin: 8px 0 0;
+      }
+      pre > code {
+          display: block;
+          white-space: inherit;
+          overflow-wrap: inherit;
+          word-break: inherit;
+          inline-size: min(100%, 120ch);
+      }
+
+      /* MDX content container for docs */
+      .mdx-content {
+          background: #0f131b;
+          border: 1px solid var(--border);
+          border-radius: 10px;
+          padding: 12px;
+          max-height: 400px;
+          overflow-y: auto;
+          margin-top: 8px;
+      }
+  </style>
+</head>
+<body>
+<!-- Hidden targets for the top-level filters -->
+<span id="filter-all"></span>
+<span id="filter-errors"></span>
+<span id="filter-infos"></span>
+<span id="filter-story-errors"></span>
+<span id="filter-doc-errors"></span>
+<span id="filter-docs"></span>
+<header>
+  <div class="wrap">
+    <h1>Manifest Debugger</h1>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><span class="filter-pill ok" aria-disabled="true">28 components ok</span><a class="filter-pill info" data-k="infos" href="#filter-infos">28/28 infos</a><span class="filter-pill ok" aria-disabled="true">77 stories ok</span></div>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <div class="note info" style="margin-bottom: 16px;">
+            <strong>Tip:</strong> You are using <code>react-docgen</code> (the default). Generation took <strong>0.6s</strong>. For higher quality prop types, consider switching to <code>react-docgen-typescript</code> in your <code>main.ts</code>:
+            <pre><code>typescript: {
+  reactDocgen: 'react-docgen-typescript',
+}</code></pre>
+            Note: <code>react-docgen-typescript</code> can be slower. If performance is acceptable for your project, it generally produces better results.
+            <a href="https://storybook.js.org/docs/api/main-config/main-config-typescript#reactdocgen" target="_blank">Learn more</a>
+          </div>
+    <h2 class="section-title">Components</h2>
+    <div class="grid" role="list">
+      
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="AuthFooter">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> AuthFooter</h2>
+      <div class="badges">
+        <label for="c-0-auth-authfooter-props" class="badge ok as-toggle">4 prop types</label>
+        <label for="c-0-auth-authfooter-info" class="badge info as-toggle">1 info</label>
+        <label for="c-0-auth-authfooter-stories" class="badge ok as-toggle">2 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/auth/AuthFooter.stories.tsx">auth-authfooter · ./src/components/auth/AuthFooter.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-0-auth-authfooter-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-0-auth-authfooter-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-0-auth-authfooter-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">4 prop types</span>
+            </div>
+            <pre><code>Component: src\components\auth\AuthFooter.tsx::AuthFooter</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>actionText: string
+
+className?: string = &#39;&#39;
+
+onActionClick: () =&gt; void
+
+questionText: string</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { AuthFooter } from "example1";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Sign In</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const SignIn = () =&gt; &lt;AuthFooter
+    questionText=&quot;Don&#39;t have an account?&quot;
+    actionText=&quot;Sign Up&quot;
+    onActionClick={() =&gt; alert(&#39;Navigate to Sign Up&#39;)} /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Sign Up</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const SignUp = () =&gt; &lt;AuthFooter
+    questionText=&quot;Already have an account?&quot;
+    actionText=&quot;Sign In&quot;
+    onActionClick={() =&gt; alert(&#39;Navigate to Sign In&#39;)} /&gt;;</code></pre>
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="AuthHeader">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> AuthHeader</h2>
+      <div class="badges">
+        <label for="c-1-auth-authheader-props" class="badge ok as-toggle">3 prop types</label>
+        <label for="c-1-auth-authheader-info" class="badge info as-toggle">1 info</label>
+        <label for="c-1-auth-authheader-stories" class="badge ok as-toggle">3 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/auth/AuthHeader.stories.tsx">auth-authheader · ./src/components/auth/AuthHeader.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-1-auth-authheader-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-1-auth-authheader-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-1-auth-authheader-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">3 prop types</span>
+            </div>
+            <pre><code>Component: src\components\auth\AuthHeader.tsx::AuthHeader</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>className?: string = &#39;&#39;
+
+subtitle: string
+
+title: string</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { AuthHeader } from "example1";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Login</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Login = () =&gt; &lt;AuthHeader
+    title=&quot;Continue Planning Your Trips&quot;
+    subtitle=&quot;We&#39;re happy you&#39;re back. Let&#39;s get back to planning your adventures&quot; /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Register</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Register = () =&gt; &lt;AuthHeader
+    title=&quot;Unlock Your Next Adventure&quot;
+    subtitle=&quot;Create a free account to start planning trips with Tripal&quot; /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Minimal</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Minimal = () =&gt; &lt;AuthHeader title=&quot;Reset Password&quot; subtitle=&quot;Enter your new password below&quot; /&gt;;</code></pre>
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="AuthLayout">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> AuthLayout</h2>
+      <div class="badges">
+        <label for="c-2-auth-authlayout-props" class="badge ok as-toggle">2 prop types</label>
+        <label for="c-2-auth-authlayout-info" class="badge info as-toggle">1 info</label>
+        <label for="c-2-auth-authlayout-stories" class="badge ok as-toggle">2 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/auth/AuthLayout.stories.tsx">auth-authlayout · ./src/components/auth/AuthLayout.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-2-auth-authlayout-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-2-auth-authlayout-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-2-auth-authlayout-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">2 prop types</span>
+            </div>
+            <pre><code>Component: src\components\auth\AuthLayout.tsx::AuthLayout</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>children: React.ReactNode
+
+isLoading?: boolean = false</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { AuthFooter, AuthHeader, AuthLayout, Button, InputField } from "example1";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Default</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Default = () =&gt; &lt;AuthLayout isLoading={false}&gt;(&lt;div className=&quot;flex flex-col gap-6&quot;&gt;
+      &lt;AuthHeader
+        title=&quot;Continue Planning Your Trips&quot;
+        subtitle=&quot;Welcome back. Let&#39;s get back to planning your adventures&quot;
+      /&gt;
+      &lt;InputField label=&quot;Email address&quot; type=&quot;email&quot; placeholder=&quot;Enter your email&quot; /&gt;
+      &lt;InputField label=&quot;Password&quot; type=&quot;password&quot; placeholder=&quot;Enter your password&quot; /&gt;
+      &lt;Button&gt;Sign In&lt;/Button&gt;
+      &lt;AuthFooter questionText=&quot;Don&#39;t have an account?&quot; actionText=&quot;Sign Up&quot; onActionClick={() =&gt; {}} /&gt;
+    &lt;/div&gt;)&lt;/AuthLayout&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Loading</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Loading = () =&gt; &lt;AuthLayout isLoading&gt;&lt;div /&gt;&lt;/AuthLayout&gt;;</code></pre>
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="Button">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> Button</h2>
+      <div class="badges">
+        <label for="c-3-ui-button-props" class="badge ok as-toggle">7 prop types</label>
+        <label for="c-3-ui-button-info" class="badge info as-toggle">1 info</label>
+        <label for="c-3-ui-button-stories" class="badge ok as-toggle">9 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/ui/Button.stories.tsx">ui-button · ./src/components/ui/Button.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-3-ui-button-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-3-ui-button-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-3-ui-button-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">7 prop types</span>
+            </div>
+            <pre><code>Component: src\components\ui\Button.tsx::Button</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>children: React.ReactNode
+
+className?: any = &#39;&#39;
+
+isLoading?: boolean = false
+
+leftIcon?: React.ReactNode
+
+rightIcon?: React.ReactNode
+
+size?: &#39;sm&#39; | &#39;md&#39; | &#39;lg&#39; = &#39;lg&#39;
+
+variant?: &#39;primary&#39; | &#39;secondary&#39; | &#39;social&#39; | &#39;dark&#39; | &#39;ghost&#39; = &#39;primary&#39;</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { Button } from "example1";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Primary</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Primary = () =&gt; &lt;Button variant=&quot;primary&quot; size=&quot;lg&quot;&gt;Create a Free Account&lt;/Button&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Secondary</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Secondary = () =&gt; &lt;Button variant=&quot;secondary&quot; size=&quot;sm&quot;&gt;Book Now&lt;/Button&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Social</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Social = () =&gt; &lt;Button
+    variant=&quot;social&quot;
+    size=&quot;md&quot;
+    leftIcon={(&lt;svg className=&quot;w-5 h-5&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+      &lt;path fill=&quot;#4285F4&quot; d=&quot;M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z&quot;/&gt;
+      &lt;path fill=&quot;#34A853&quot; d=&quot;M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z&quot;/&gt;
+      &lt;path fill=&quot;#FBBC05&quot; d=&quot;M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z&quot;/&gt;
+      &lt;path fill=&quot;#EA4335&quot; d=&quot;M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z&quot;/&gt;
+    &lt;/svg&gt;)}&gt;Continue with Google&lt;/Button&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Dark</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Dark = () =&gt; &lt;Button variant=&quot;dark&quot; size=&quot;md&quot; className=&quot;w-full&quot;&gt;View Full Itinerary&lt;/Button&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Ghost</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Ghost = () =&gt; &lt;Button variant=&quot;ghost&quot; size=&quot;md&quot;&gt;Cancel&lt;/Button&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">With Right Icon</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const WithRightIcon = () =&gt; &lt;Button
+    variant=&quot;primary&quot;
+    size=&quot;lg&quot;
+    rightIcon={(&lt;svg className=&quot;w-4 h-4&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; strokeWidth=&quot;2&quot;&gt;
+      &lt;path d=&quot;M5 12h14M12 5l7 7-7 7&quot; /&gt;
+    &lt;/svg&gt;)}&gt;Continue&lt;/Button&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Loading</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Loading = () =&gt; &lt;Button variant=&quot;primary&quot; size=&quot;lg&quot; isLoading&gt;Please wait...&lt;/Button&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Disabled</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Disabled = () =&gt; &lt;Button variant=&quot;primary&quot; size=&quot;lg&quot; disabled&gt;Submit&lt;/Button&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Small</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Small = () =&gt; &lt;Button variant=&quot;primary&quot; size=&quot;sm&quot;&gt;Start New Chat&lt;/Button&gt;;</code></pre>
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="Card">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> Card</h2>
+      <div class="badges">
+        <label for="c-4-ui-card-props" class="badge ok as-toggle">3 prop types</label>
+        <label for="c-4-ui-card-info" class="badge info as-toggle">1 info</label>
+        <label for="c-4-ui-card-stories" class="badge ok as-toggle">3 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/ui/Card.stories.tsx">ui-card · ./src/components/ui/Card.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-4-ui-card-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-4-ui-card-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-4-ui-card-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">3 prop types</span>
+            </div>
+            <pre><code>Component: src\components\ui\Card.tsx::Card</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>children: React.ReactNode
+
+className?: string = &#39;&#39;
+
+variant?: &#39;default&#39; | &#39;surface&#39; = &#39;default&#39;</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { Card } from "example1";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Default</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Default = () =&gt; &lt;Card variant=&quot;default&quot;&gt;&lt;div className=&quot;p-6 text-slate-700&quot;&gt;Card content&lt;/div&gt;&lt;/Card&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Surface</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Surface = () =&gt; &lt;Card variant=&quot;surface&quot;&gt;&lt;div className=&quot;p-6 text-slate-700&quot;&gt;Surface card content&lt;/div&gt;&lt;/Card&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Custom Class</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const CustomClass = () =&gt; &lt;Card className=&quot;rounded-2xl&quot;&gt;&lt;div className=&quot;p-6 text-slate-700&quot;&gt;Card with extra rounding&lt;/div&gt;&lt;/Card&gt;;</code></pre>
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="ChatHistorySidebar">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> ChatHistorySidebar</h2>
+      <div class="badges">
+        <label for="c-5-chat-chathistorysidebar-props" class="badge ok as-toggle">5 prop types</label>
+        <label for="c-5-chat-chathistorysidebar-info" class="badge info as-toggle">1 info</label>
+        <label for="c-5-chat-chathistorysidebar-stories" class="badge ok as-toggle">3 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/chat/ChatHistorySidebar.stories.tsx">chat-chathistorysidebar · ./src/components/chat/ChatHistorySidebar.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-5-chat-chathistorysidebar-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-5-chat-chathistorysidebar-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-5-chat-chathistorysidebar-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">5 prop types</span>
+            </div>
+            <pre><code>Component: src\components\chat\ChatHistorySidebar.tsx::ChatHistorySidebar</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>activeSessionId: string | null
+
+onSelectSession: (id: string) =&gt; void
+
+searchQuery: string
+
+sessions: ChatSession[]
+
+setSearchQuery: (q: string) =&gt; void</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { ChatHistorySidebar } from "example1";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Default</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Default = () =&gt; &lt;ChatHistorySidebar
+    searchQuery=&quot;&quot;
+    setSearchQuery={() =&gt; {}}
+    sessions={MOCK_SESSIONS}
+    activeSessionId=&quot;1&quot;
+    onSelectSession={(id) =&gt; console.log(&#39;Select session:&#39;, id)} /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">With Search</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const WithSearch = () =&gt; &lt;ChatHistorySidebar
+    searchQuery=&quot;flights&quot;
+    setSearchQuery={() =&gt; {}}
+    sessions={MOCK_SESSIONS}
+    activeSessionId={null}
+    onSelectSession={() =&gt; {}} /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Empty</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Empty = () =&gt; &lt;ChatHistorySidebar
+    searchQuery=&quot;&quot;
+    setSearchQuery={() =&gt; {}}
+    sessions={[]}
+    activeSessionId={null}
+    onSelectSession={() =&gt; {}} /&gt;;</code></pre>
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="ChatInputBox">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> ChatInputBox</h2>
+      <div class="badges">
+        <label for="c-6-chat-chatinputbox-props" class="badge ok as-toggle">5 prop types</label>
+        <label for="c-6-chat-chatinputbox-info" class="badge info as-toggle">1 info</label>
+        <label for="c-6-chat-chatinputbox-stories" class="badge ok as-toggle">3 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/chat/ChatInputBox.stories.tsx">chat-chatinputbox · ./src/components/chat/ChatInputBox.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-6-chat-chatinputbox-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-6-chat-chatinputbox-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-6-chat-chatinputbox-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">5 prop types</span>
+            </div>
+            <pre><code>Component: src\components\chat\ChatInputBox.tsx::ChatInputBox</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>inputMessage: string
+
+isRecording: boolean
+
+onSend: () =&gt; void
+
+setInputMessage: (val: string) =&gt; void
+
+setIsRecording: React.Dispatch&lt;React.SetStateAction&lt;boolean&gt;&gt;</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { ChatInputBox } from "example1";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Default</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Default = () =&gt; &lt;ChatInputBoxWithState /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Recording</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Recording = () =&gt; &lt;ChatInputBoxWithState isRecording /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">With Text</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const WithText = () =&gt; {
+  const [inputMessage, setInputMessage] = useState(&#39;Find flights to Lagos&#39;)
+  const [isRecording, setIsRecording] = useState(false)
+
+  return (
+    &lt;ChatInputBox
+      inputMessage={inputMessage}
+      setInputMessage={setInputMessage}
+      onSend={() =&gt; {}}
+      isRecording={isRecording}
+      setIsRecording={setIsRecording}
+    /&gt;
+  )
+};</code></pre>
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="ChatMessageList">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> ChatMessageList</h2>
+      <div class="badges">
+        <label for="c-7-chat-chatmessagelist-props" class="badge ok as-toggle">6 prop types</label>
+        <label for="c-7-chat-chatmessagelist-info" class="badge info as-toggle">1 info</label>
+        <label for="c-7-chat-chatmessagelist-stories" class="badge ok as-toggle">3 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/chat/ChatMessageList.stories.tsx">chat-chatmessagelist · ./src/components/chat/ChatMessageList.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-7-chat-chatmessagelist-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-7-chat-chatmessagelist-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-7-chat-chatmessagelist-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">6 prop types</span>
+            </div>
+            <pre><code>Component: src\components\chat\ChatMessageList.tsx::ChatMessageList</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>isTyping: boolean
+
+messages: ChatMessage[]
+
+onBookFlight?: (flightId?: string) =&gt; void
+
+onBookHotel?: (hotelId?: string) =&gt; void
+
+onViewAllItinerary?: (itinerary?: DayItinerary[]) =&gt; void
+
+onViewAllPlaces?: (places?: PlaceData[]) =&gt; void</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { ChatMessageList } from "example1";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Simple Chat</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const SimpleChat = () =&gt; &lt;ChatMessageList messages={TEXT_MESSAGES} isTyping={false} /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">With Typing</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const WithTyping = () =&gt; &lt;ChatMessageList messages={FLIGHT_MESSAGES} isTyping /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Empty</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Empty = () =&gt; &lt;ChatMessageList messages={[]} isTyping={false} /&gt;;</code></pre>
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="ErrorMessage">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> ErrorMessage</h2>
+      <div class="badges">
+        <label for="c-8-ui-errormessage-props" class="badge ok as-toggle">2 prop types</label>
+        <label for="c-8-ui-errormessage-info" class="badge info as-toggle">1 info</label>
+        <label for="c-8-ui-errormessage-stories" class="badge ok as-toggle">3 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/ui/ErrorMessage.stories.tsx">ui-errormessage · ./src/components/ui/ErrorMessage.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-8-ui-errormessage-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-8-ui-errormessage-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-8-ui-errormessage-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">2 prop types</span>
+            </div>
+            <pre><code>Component: src\components\ui\ErrorMessage.tsx::ErrorMessage</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>className?: string = &#39;&#39;
+
+message: string</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { ErrorMessage } from "example1";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">With Message</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const WithMessage = () =&gt; &lt;ErrorMessage message=&quot;Invalid email or password. Please try again.&quot; /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Empty</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Empty = () =&gt; &lt;ErrorMessage message=&quot;&quot; /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Custom Class</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const CustomClass = () =&gt; &lt;ErrorMessage message=&quot;Something went wrong.&quot; className=&quot;text-red-600 font-bold&quot; /&gt;;</code></pre>
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="FareCards">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> FareCards</h2>
+      <div class="badges">
+        <label for="c-9-fare-farecards-props" class="badge ok as-toggle">4 prop types</label>
+        <label for="c-9-fare-farecards-info" class="badge info as-toggle">1 info</label>
+        <label for="c-9-fare-farecards-stories" class="badge ok as-toggle">2 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/fare/FareCards.stories.tsx">fare-farecards · ./src/components/fare/FareCards.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-9-fare-farecards-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-9-fare-farecards-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-9-fare-farecards-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">4 prop types</span>
+            </div>
+            <pre><code>Component: src\components\fare\FareCards.tsx::FareCards</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>defaultFlightLogo: string
+
+fareOptions: FareOption[]
+
+onSelectFare: (id: &#39;economy&#39; | &#39;business&#39;) =&gt; void
+
+selectedFareId: &#39;economy&#39; | &#39;business&#39;</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { FareCards } from "example1";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Economy Selected</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const EconomySelected = () =&gt; &lt;FareCards
+    fareOptions={MOCK_OPTIONS}
+    selectedFareId=&quot;economy&quot;
+    defaultFlightLogo=&quot;https://via.placeholder.com/20&quot;
+    onSelectFare={(id) =&gt; console.log(&#39;Selected fare:&#39;, id)} /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Business Selected</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const BusinessSelected = () =&gt; &lt;FareCards
+    fareOptions={MOCK_OPTIONS}
+    selectedFareId=&quot;business&quot;
+    defaultFlightLogo=&quot;https://via.placeholder.com/20&quot;
+    onSelectFare={(id) =&gt; console.log(&#39;Selected fare:&#39;, id)} /&gt;;</code></pre>
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="FareHeader">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> FareHeader</h2>
+      <div class="badges">
+        <label for="c-10-fare-fareheader-props" class="badge ok as-toggle">5 prop types</label>
+        <label for="c-10-fare-fareheader-info" class="badge info as-toggle">1 info</label>
+        <label for="c-10-fare-fareheader-stories" class="badge ok as-toggle">2 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/fare/FareHeader.stories.tsx">fare-fareheader · ./src/components/fare/FareHeader.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-10-fare-fareheader-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-10-fare-fareheader-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-10-fare-fareheader-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">5 prop types</span>
+            </div>
+            <pre><code>Component: src\components\fare\FareHeader.tsx::FareHeader</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>cabinClass: string
+
+destination: string
+
+price: number
+
+priceUnit: string
+
+tripType: string</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { FareHeader } from "example1";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Default</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Default = () =&gt; &lt;FareHeader
+    destination=&quot;Lagos, Nigeria (LOS)&quot;
+    tripType=&quot;Round Trip&quot;
+    cabinClass=&quot;Economy&quot;
+    price={1200}
+    priceUnit=&quot;per person&quot; /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Business Class</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const BusinessClass = () =&gt; &lt;FareHeader
+    destination=&quot;Dubai, UAE (DXB)&quot;
+    tripType=&quot;One Way&quot;
+    cabinClass=&quot;Business&quot;
+    price={3500}
+    priceUnit=&quot;per person&quot; /&gt;;</code></pre>
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="FavoriteButton">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> FavoriteButton</h2>
+      <div class="badges">
+        <label for="c-11-ui-favoritebutton-props" class="badge ok as-toggle">3 prop types</label>
+        <label for="c-11-ui-favoritebutton-info" class="badge info as-toggle">1 info</label>
+        <label for="c-11-ui-favoritebutton-stories" class="badge ok as-toggle">3 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/ui/button/FavoriteButton.stories.tsx">ui-favoritebutton · ./src/components/ui/button/FavoriteButton.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-11-ui-favoritebutton-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-11-ui-favoritebutton-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-11-ui-favoritebutton-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">3 prop types</span>
+            </div>
+            <pre><code>Component: src\components\ui\button\FavoriteButton.tsx::FavoriteButton</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>className?: string = &#39;&#39;
+
+isFavorite: boolean
+
+onToggle: () =&gt; void</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { FavoriteButton } from "example1";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Inactive</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Inactive = () =&gt; &lt;FavoriteButton isFavorite={false} onToggle={() =&gt; {}} /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Active</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Active = () =&gt; &lt;FavoriteButton isFavorite onToggle={() =&gt; {}} /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Custom Class</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const CustomClass = () =&gt; &lt;FavoriteButton isFavorite={false} onToggle={() =&gt; {}} className=&quot;shadow-md&quot; /&gt;;</code></pre>
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="FlightRecommendations">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> FlightRecommendations</h2>
+      <div class="badges">
+        <label for="c-12-chat-flightrecommendations-props" class="badge ok as-toggle">4 prop types</label>
+        <label for="c-12-chat-flightrecommendations-info" class="badge info as-toggle">1 info</label>
+        <label for="c-12-chat-flightrecommendations-stories" class="badge ok as-toggle">1 story</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/chat/FlightRecommendations.stories.tsx">chat-flightrecommendations · ./src/components/chat/FlightRecommendations.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-12-chat-flightrecommendations-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-12-chat-flightrecommendations-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-12-chat-flightrecommendations-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">4 prop types</span>
+            </div>
+            <pre><code>Component: src\components\chat\FlightRecommendations.tsx::FlightRecommendations</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>flights?: FlightOption[]
+
+onBookNow?: (flightId: string) =&gt; void
+
+onSeeAll?: () =&gt; void
+
+title?: string = &#39;Recommended Flights For a Round Trip Journey&#39;</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { FlightRecommendations } from "example1";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Default</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Default = () =&gt; &lt;FlightRecommendations
+    title=&quot;Recommended Flights For a Round Trip Journey&quot;
+    flights={MOCK_FLIGHTS}
+    onBookNow={(id) =&gt; alert(&#39;Book flight: &#39; + id)}
+    onSeeAll={() =&gt; alert(&#39;See all flights&#39;)} /&gt;;</code></pre>
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="HotelRecommendations">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> HotelRecommendations</h2>
+      <div class="badges">
+        <label for="c-13-chat-hotelrecommendations-props" class="badge ok as-toggle">4 prop types</label>
+        <label for="c-13-chat-hotelrecommendations-info" class="badge info as-toggle">1 info</label>
+        <label for="c-13-chat-hotelrecommendations-stories" class="badge ok as-toggle">1 story</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/chat/HotelRecommendations.stories.tsx">chat-hotelrecommendations · ./src/components/chat/HotelRecommendations.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-13-chat-hotelrecommendations-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-13-chat-hotelrecommendations-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-13-chat-hotelrecommendations-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">4 prop types</span>
+            </div>
+            <pre><code>Component: src\components\chat\HotelRecommendations.tsx::HotelRecommendations</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>hotels?: HotelOption[]
+
+onBookNow?: (hotelId: string) =&gt; void
+
+onSeeAll?: () =&gt; void
+
+title?: string = &#39;Recommended Hotels&#39;</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { HotelRecommendations } from "example1";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Default</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Default = () =&gt; &lt;HotelRecommendations
+    title=&quot;Recommended Hotels For a Three-Night Staycation&quot;
+    hotels={MOCK_HOTELS}
+    onBookNow={(id) =&gt; alert(&#39;Book hotel: &#39; + id)}
+    onSeeAll={() =&gt; alert(&#39;See all hotels&#39;)} /&gt;;</code></pre>
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="InfoRow">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> InfoRow</h2>
+      <div class="badges">
+        <label for="c-14-ui-inforow-props" class="badge ok as-toggle">3 prop types</label>
+        <label for="c-14-ui-inforow-info" class="badge info as-toggle">1 info</label>
+        <label for="c-14-ui-inforow-stories" class="badge ok as-toggle">3 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/ui/InfoRow.stories.tsx">ui-inforow · ./src/components/ui/InfoRow.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-14-ui-inforow-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-14-ui-inforow-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-14-ui-inforow-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">3 prop types</span>
+            </div>
+            <pre><code>Component: src\components\ui\InfoRow.tsx::InfoRow</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>className?: string = &#39;&#39;
+
+label: string
+
+value: string</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { InfoRow } from "example1";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Default</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Default = () =&gt; &lt;InfoRow label=&quot;Airline&quot; value=&quot;Emirates&quot; /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Price</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Price = () =&gt; &lt;InfoRow label=&quot;Total&quot; value=&quot;$1,200&quot; /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Custom Class</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const CustomClass = () =&gt; &lt;InfoRow label=&quot;Duration&quot; value=&quot;9h 24m&quot; className=&quot;text-sm&quot; /&gt;;</code></pre>
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="InputField">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> InputField</h2>
+      <div class="badges">
+        <label for="c-15-ui-inputfield-props" class="badge ok as-toggle">3 prop types</label>
+        <label for="c-15-ui-inputfield-info" class="badge info as-toggle">1 info</label>
+        <label for="c-15-ui-inputfield-stories" class="badge ok as-toggle">4 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/ui/InputField.stories.tsx">ui-inputfield · ./src/components/ui/InputField.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-15-ui-inputfield-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-15-ui-inputfield-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-15-ui-inputfield-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">3 prop types</span>
+            </div>
+            <pre><code>Component: src\components\ui\InputField.tsx::InputField</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>className?: any = &#39;&#39;
+
+label: string
+
+type?: any = &#39;text&#39;</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { InputField } from "example1";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Text</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Text = () =&gt; &lt;InputField label=&quot;Full Name&quot; type=&quot;text&quot; placeholder=&quot;Enter your full name&quot; /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Email</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Email = () =&gt; &lt;InputField label=&quot;Email address&quot; type=&quot;email&quot; placeholder=&quot;Enter your email&quot; /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Password</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Password = () =&gt; &lt;InputField label=&quot;Password&quot; type=&quot;password&quot; placeholder=&quot;Enter your password&quot; /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">With Value</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const WithValue = () =&gt; &lt;InputField
+    label=&quot;Email address&quot;
+    type=&quot;email&quot;
+    value=&quot;user@example.com&quot;
+    onChange={() =&gt; {}} /&gt;;</code></pre>
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="ItineraryCardWidget">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> ItineraryCardWidget</h2>
+      <div class="badges">
+        <label for="c-16-chat-itinerarycardwidget-props" class="badge ok as-toggle">2 prop types</label>
+        <label for="c-16-chat-itinerarycardwidget-info" class="badge info as-toggle">1 info</label>
+        <label for="c-16-chat-itinerarycardwidget-stories" class="badge ok as-toggle">3 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/chat/ItineraryCardWidget.stories.tsx">chat-itinerarycardwidget · ./src/components/chat/ItineraryCardWidget.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-16-chat-itinerarycardwidget-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-16-chat-itinerarycardwidget-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-16-chat-itinerarycardwidget-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">2 prop types</span>
+            </div>
+            <pre><code>Component: src\components\chat\ItineraryCardWidget.tsx::ItineraryCardWidget</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>itinerary?: DayItinerary[]
+
+onViewAll?: () =&gt; void</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { ItineraryCardWidget } from "example1";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Default</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Default = () =&gt; &lt;ItineraryCardWidget itinerary={MOCK_ITINERARY} onViewAll={() =&gt; alert(&#39;View full itinerary&#39;)} /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Single Day</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const SingleDay = () =&gt; &lt;ItineraryCardWidget itinerary={[MOCK_ITINERARY[0]]} /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Loading</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Loading = () =&gt; &lt;ItineraryCardWidget /&gt;;</code></pre>
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="LoadingOverlay">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> LoadingOverlay</h2>
+      <div class="badges">
+        <label for="c-17-ui-loadingoverlay-props" class="badge ok as-toggle">1 prop type</label>
+        <label for="c-17-ui-loadingoverlay-info" class="badge info as-toggle">1 info</label>
+        <label for="c-17-ui-loadingoverlay-stories" class="badge ok as-toggle">2 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/ui/LoadingOverlay.stories.tsx">ui-loadingoverlay · ./src/components/ui/LoadingOverlay.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-17-ui-loadingoverlay-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-17-ui-loadingoverlay-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-17-ui-loadingoverlay-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">1 prop type</span>
+            </div>
+            <pre><code>Component: src\components\ui\LoadingOverlay.tsx::LoadingOverlay</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>isVisible?: boolean = true</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { LoadingOverlay } from "example1";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Visible</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Visible = () =&gt; &lt;LoadingOverlay isVisible /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Hidden</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Hidden = () =&gt; &lt;LoadingOverlay isVisible={false} /&gt;;</code></pre>
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="PlacesCardWidget">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> PlacesCardWidget</h2>
+      <div class="badges">
+        <label for="c-18-chat-placescardwidget-props" class="badge ok as-toggle">2 prop types</label>
+        <label for="c-18-chat-placescardwidget-info" class="badge info as-toggle">1 info</label>
+        <label for="c-18-chat-placescardwidget-stories" class="badge ok as-toggle">3 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/chat/PlacesCardWidget.stories.tsx">chat-placescardwidget · ./src/components/chat/PlacesCardWidget.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-18-chat-placescardwidget-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-18-chat-placescardwidget-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-18-chat-placescardwidget-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">2 prop types</span>
+            </div>
+            <pre><code>Component: src\components\chat\PlacesCardWidget.tsx::PlacesCardWidget</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>onViewAll?: () =&gt; void
+
+places?: PlaceData[]</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { PlacesCardWidget } from "example1";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Default</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Default = () =&gt; &lt;PlacesCardWidget places={MOCK_PLACES} onViewAll={() =&gt; alert(&#39;View all places&#39;)} /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Single Place</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const SinglePlace = () =&gt; &lt;PlacesCardWidget places={[MOCK_PLACES[0]]} /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Loading</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Loading = () =&gt; &lt;PlacesCardWidget /&gt;;</code></pre>
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="PriceDetailsSidebar">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> PriceDetailsSidebar</h2>
+      <div class="badges">
+        <label for="c-19-fare-pricedetailssidebar-props" class="badge ok as-toggle">4 prop types</label>
+        <label for="c-19-fare-pricedetailssidebar-info" class="badge info as-toggle">1 info</label>
+        <label for="c-19-fare-pricedetailssidebar-stories" class="badge ok as-toggle">2 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/fare/PriceDetailsSidebar.stories.tsx">fare-pricedetailssidebar · ./src/components/fare/PriceDetailsSidebar.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-19-fare-pricedetailssidebar-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-19-fare-pricedetailssidebar-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-19-fare-pricedetailssidebar-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">4 prop types</span>
+            </div>
+            <pre><code>Component: src\components\fare\PriceDetailsSidebar.tsx::PriceDetailsSidebar</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>flightDues: number
+
+pricePerTraveller: number
+
+taxesAndFees: number
+
+totalAmount: number</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { PriceDetailsSidebar } from "example1";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Default</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Default = () =&gt; &lt;PriceDetailsSidebar
+    pricePerTraveller={1200}
+    flightDues={50}
+    taxesAndFees={150}
+    totalAmount={1400} /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Business Class</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const BusinessClass = () =&gt; &lt;PriceDetailsSidebar
+    pricePerTraveller={3500}
+    flightDues={100}
+    taxesAndFees={350}
+    totalAmount={3950} /&gt;;</code></pre>
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="PriceDisplay">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> PriceDisplay</h2>
+      <div class="badges">
+        <label for="c-20-ui-pricedisplay-props" class="badge ok as-toggle">4 prop types</label>
+        <label for="c-20-ui-pricedisplay-info" class="badge info as-toggle">1 info</label>
+        <label for="c-20-ui-pricedisplay-stories" class="badge ok as-toggle">4 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/ui/PriceDisplay.stories.tsx">ui-pricedisplay · ./src/components/ui/PriceDisplay.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-20-ui-pricedisplay-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-20-ui-pricedisplay-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-20-ui-pricedisplay-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">4 prop types</span>
+            </div>
+            <pre><code>Component: src\components\ui\PriceDisplay.tsx::PriceDisplay</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>amount: string
+
+className?: string = &#39;&#39;
+
+period?: string
+
+size?: &#39;sm&#39; | &#39;md&#39; | &#39;lg&#39; = &#39;sm&#39;</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { PriceDisplay } from "example1";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Small</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Small = () =&gt; &lt;PriceDisplay amount=&quot;$1,200&quot; size=&quot;sm&quot; /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">With Period</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const WithPeriod = () =&gt; &lt;PriceDisplay amount=&quot;$1,200&quot; period=&quot;/per night&quot; size=&quot;sm&quot; /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Medium</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Medium = () =&gt; &lt;PriceDisplay amount=&quot;$899&quot; size=&quot;md&quot; /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Large</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Large = () =&gt; &lt;PriceDisplay amount=&quot;$2,500&quot; size=&quot;lg&quot; /&gt;;</code></pre>
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="RecommendationWrapper">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> RecommendationWrapper</h2>
+      <div class="badges">
+        <label for="c-21-chat-recommendationwrapper-props" class="badge ok as-toggle">4 prop types</label>
+        <label for="c-21-chat-recommendationwrapper-info" class="badge info as-toggle">1 info</label>
+        <label for="c-21-chat-recommendationwrapper-stories" class="badge ok as-toggle">3 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/chat/RecommendationWrapper.stories.tsx">chat-recommendationwrapper · ./src/components/chat/RecommendationWrapper.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-21-chat-recommendationwrapper-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-21-chat-recommendationwrapper-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-21-chat-recommendationwrapper-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">4 prop types</span>
+            </div>
+            <pre><code>Component: src\components\chat\RecommendationWrapper.tsx::RecommendationWrapper</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>children: React.ReactNode
+
+onSeeAll?: () =&gt; void
+
+seeAllText?: string = &#39;See all recommendations&#39;
+
+title: string</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { RecommendationWrapper } from "example1";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Default</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Default = () =&gt; &lt;RecommendationWrapper title=&quot;Recommended Flights&quot; onSeeAll={() =&gt; alert(&#39;See all&#39;)}&gt;(&lt;div className=&quot;p-4 text-slate-600 text-sm&quot;&gt;Flight card content goes here&lt;/div&gt;)&lt;/RecommendationWrapper&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Without See All</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const WithoutSeeAll = () =&gt; &lt;RecommendationWrapper title=&quot;Recommended Hotels&quot;&gt;(&lt;div className=&quot;p-4 text-slate-600 text-sm&quot;&gt;Hotel card content goes here&lt;/div&gt;)&lt;/RecommendationWrapper&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Custom Text</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const CustomText = () =&gt; &lt;RecommendationWrapper title=&quot;Places to Visit&quot; onSeeAll={() =&gt; {}} seeAllText=&quot;View All Places&quot;&gt;(&lt;div className=&quot;p-4 text-slate-600 text-sm&quot;&gt;Place recommendations here&lt;/div&gt;)&lt;/RecommendationWrapper&gt;;</code></pre>
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="SectionHeader">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> SectionHeader</h2>
+      <div class="badges">
+        <label for="c-22-ui-sectionheader-props" class="badge ok as-toggle">2 prop types</label>
+        <label for="c-22-ui-sectionheader-info" class="badge info as-toggle">1 info</label>
+        <label for="c-22-ui-sectionheader-stories" class="badge ok as-toggle">2 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/ui/SectionHeader.stories.tsx">ui-sectionheader · ./src/components/ui/SectionHeader.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-22-ui-sectionheader-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-22-ui-sectionheader-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-22-ui-sectionheader-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">2 prop types</span>
+            </div>
+            <pre><code>Component: src\components\ui\SectionHeader.tsx::SectionHeader</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>className?: string = &#39;&#39;
+
+title: string</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { SectionHeader } from "example1";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Default</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Default = () =&gt; &lt;SectionHeader title=&quot;Flight Details&quot; /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Custom Class</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const CustomClass = () =&gt; &lt;SectionHeader title=&quot;Hotel Information&quot; className=&quot;text-blue-600&quot; /&gt;;</code></pre>
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="SelectedFlightBox">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> SelectedFlightBox</h2>
+      <div class="badges">
+        <label for="c-23-fare-selectedflightbox-props" class="badge ok as-toggle">5 prop types</label>
+        <label for="c-23-fare-selectedflightbox-info" class="badge info as-toggle">1 info</label>
+        <label for="c-23-fare-selectedflightbox-stories" class="badge ok as-toggle">2 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/fare/SelectedFlightBox.stories.tsx">fare-selectedflightbox · ./src/components/fare/SelectedFlightBox.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-23-fare-selectedflightbox-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-23-fare-selectedflightbox-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-23-fare-selectedflightbox-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">5 prop types</span>
+            </div>
+            <pre><code>Component: src\components\fare\SelectedFlightBox.tsx::SelectedFlightBox</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>airlineName: string
+
+cancellationPolicy: string
+
+defaultFlightLogo: string
+
+iconHeart: string
+
+legs: FlightLeg[]</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { SelectedFlightBox } from "example1";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Default</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Default = () =&gt; &lt;SelectedFlightBox
+    airlineName=&quot;AirPeace Airways, Nigerian&quot;
+    defaultFlightLogo=&quot;https://via.placeholder.com/20&quot;
+    iconHeart=&quot;https://via.placeholder.com/16&quot;
+    legs={MOCK_LEGS}
+    cancellationPolicy=&quot;Free cancellation 24 hours before departure&quot; /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Direct Flight</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const DirectFlight = () =&gt; &lt;SelectedFlightBox
+    airlineName=&quot;Green Africa Airways&quot;
+    defaultFlightLogo=&quot;https://via.placeholder.com/20&quot;
+    iconHeart=&quot;https://via.placeholder.com/16&quot;
+    legs={[
+      { id: &#39;leg3&#39;, times: &#39;6:00am - 8:30am&#39;, route: &#39;LOS - ABV&#39;, duration: &#39;2h 30m&#39;, stops: &#39;Direct&#39; },
+    ]}
+    cancellationPolicy=&quot;Non-refundable&quot; /&gt;;</code></pre>
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="SidebarNav">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> SidebarNav</h2>
+      <div class="badges">
+        <label for="c-24-chat-sidebarnav-props" class="badge ok as-toggle">4 prop types</label>
+        <label for="c-24-chat-sidebarnav-info" class="badge info as-toggle">1 info</label>
+        <label for="c-24-chat-sidebarnav-stories" class="badge ok as-toggle">2 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/chat/SidebarNav.stories.tsx">chat-sidebarnav · ./src/components/chat/SidebarNav.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-24-chat-sidebarnav-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-24-chat-sidebarnav-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-24-chat-sidebarnav-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">4 prop types</span>
+            </div>
+            <pre><code>Component: src\components\chat\SidebarNav.tsx::SidebarNav</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>activeNav: string
+
+isMobileOpen?: boolean
+
+onMobileToggle?: () =&gt; void
+
+setActiveNav: (id: string) =&gt; void</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { SidebarNav } from "example1";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Chats Active</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const ChatsActive = () =&gt; &lt;SidebarNav activeNav=&quot;chats&quot; setActiveNav={(id) =&gt; console.log(&#39;Navigate to&#39;, id)} /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Favorites Active</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const FavoritesActive = () =&gt; &lt;SidebarNav
+    activeNav=&quot;favorites&quot;
+    setActiveNav={(id) =&gt; console.log(&#39;Navigate to&#39;, id)} /&gt;;</code></pre>
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="ThinkingLoader">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> ThinkingLoader</h2>
+      <div class="badges">
+        <label for="c-25-ui-thinkingloader-props" class="badge ok as-toggle">1 prop type</label>
+        <label for="c-25-ui-thinkingloader-info" class="badge info as-toggle">1 info</label>
+        <label for="c-25-ui-thinkingloader-stories" class="badge ok as-toggle">2 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/ui/ThinkingLoader.stories.tsx">ui-thinkingloader · ./src/components/ui/ThinkingLoader.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-25-ui-thinkingloader-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-25-ui-thinkingloader-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-25-ui-thinkingloader-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">1 prop type</span>
+            </div>
+            <pre><code>Component: src\components\ui\ThinkingLoader.tsx::ThinkingLoader</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>text?: string = &quot;Travelpal is thinking...&quot;</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { ThinkingLoader } from "example1";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Default</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Default = () =&gt; &lt;ThinkingLoader /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Custom Text</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const CustomText = () =&gt; &lt;ThinkingLoader text=&quot;Searching for flights...&quot; /&gt;;</code></pre>
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="Topbar">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> Topbar</h2>
+      <div class="badges">
+        <label for="c-26-chat-topbar-props" class="badge ok as-toggle">5 prop types</label>
+        <label for="c-26-chat-topbar-info" class="badge info as-toggle">1 info</label>
+        <label for="c-26-chat-topbar-stories" class="badge ok as-toggle">3 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/chat/Topbar.stories.tsx">chat-topbar · ./src/components/chat/Topbar.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-26-chat-topbar-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-26-chat-topbar-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-26-chat-topbar-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">5 prop types</span>
+            </div>
+            <pre><code>Component: src\components\chat\Topbar.tsx::Topbar</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>chatTitle?: string
+
+isBreadcrumbMode?: boolean = false
+
+messages?: ChatMessage[] = []
+
+onBackToChat?: () =&gt; void
+
+onNewChat?: () =&gt; void</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { Topbar } from "example1";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Default</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Default = () =&gt; &lt;Topbar
+    chatTitle=&quot;Cheap flights to Lagos&quot;
+    messages={[{ id: &#39;1&#39;, sender: &#39;user&#39;, text: &#39;Find cheap flights from Owerri to Lagos&#39;, type: &#39;text&#39; }]} /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Breadcrumb Mode</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const BreadcrumbMode = () =&gt; &lt;Topbar
+    isBreadcrumbMode
+    chatTitle=&quot;Cheap flights to Lagos&quot;
+    onBackToChat={() =&gt; alert(&#39;Back to chat&#39;)}
+    onNewChat={() =&gt; alert(&#39;New chat&#39;)} /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Empty</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Empty = () =&gt; &lt;Topbar messages={[]} /&gt;;</code></pre>
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+<article
+  class="card 
+  no-error 
+  has-info 
+  no-story-error
+  no-doc-error"
+  role="listitem"
+  aria-label="WelcomeState">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> WelcomeState</h2>
+      <div class="badges">
+        <label for="c-27-chat-welcomestate-props" class="badge ok as-toggle">2 prop types</label>
+        <label for="c-27-chat-welcomestate-info" class="badge info as-toggle">1 info</label>
+        <label for="c-27-chat-welcomestate-stories" class="badge ok as-toggle">2 stories</label>
+        
+        
+      </div>
+    </div>
+    <div class="meta" title="./src/components/chat/WelcomeState.stories.tsx">chat-welcomestate · ./src/components/chat/WelcomeState.stories.tsx</div>
+    
+    
+    
+  </div>
+
+  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="c-27-chat-welcomestate-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-27-chat-welcomestate-stories" class="tg tg-stories" type="checkbox" hidden />
+  
+  
+  <input id="c-27-chat-welcomestate-props" class="tg tg-props" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-info">
+          
+    <div class="note info">
+      <div class="note-title">Info</div>
+      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
+    </div>
+        </div>
+    
+        <div class="panel panel-props">
+          <div class="note ok">
+            <div class="row">
+              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
+              <span class="badge ok">2 prop types</span>
+            </div>
+            <pre><code>Component: src\components\chat\WelcomeState.tsx::WelcomeState</code></pre>
+            <pre><code>Props:</code></pre>
+            <pre><code>onSelectPrompt: (prompt: string) =&gt; void
+
+prompts: string[]</code></pre>
+          </div>
+        </div>
+    
+        <div class="panel panel-stories">
+          
+          
+          
+          <div class="note ok">
+                <div class="row">
+                  <span class="ex-name">Imports</span>
+                </div>
+                <pre><code>import { WelcomeState } from "example1";</code></pre>
+              </div>
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Default</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Default = () =&gt; &lt;WelcomeState
+    prompts={DEFAULT_PROMPTS}
+    onSelectPrompt={(prompt) =&gt; alert(&#39;Selected: &#39; + prompt)} /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Many Prompts</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const ManyPrompts = () =&gt; &lt;WelcomeState
+    prompts={[
+      &#39;Find cheap flights to Lagos&#39;,
+      &#39;Hotels with pool in Dubai&#39;,
+      &#39;Best restaurants in Paris&#39;,
+      &#39;Flights from New York to London&#39;,
+      &#39;All-inclusive resorts in Maldives&#39;,
+      &#39;Weekend getaway to Bali&#39;,
+    ]}
+    onSelectPrompt={(prompt) =&gt; console.log(prompt)} /&gt;;</code></pre>
+            </div>
+        </div>
+    
+    
+  </div>
+</article>
+    </div>
+    
+    
+    
+  </div>
+</main>
+</body>
+</html>  

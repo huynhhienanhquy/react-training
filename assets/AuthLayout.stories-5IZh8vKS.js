@@ -1,0 +1,18 @@
+import{i as e}from"./preload-helper-CT_b8DTk.js";import{N as t}from"./iframe-C-YwG8bY.js";import{t as n}from"./jsx-runtime-DqZldVDK.js";import{n as r,t as i}from"./AuthFooter-DqMr3Aog.js";import{n as a,t as o}from"./AuthHeader-f4xDsvcX.js";import{n as s,t as c}from"./LoadingOverlay-D3-HRQcc.js";import{n as l,t as u}from"./Button-DA5stp35.js";import{n as d,t as f}from"./InputField-CpcLzyzf.js";var p,m=e((()=>{p=``+new URL(`background-BSbtvChw.png`,import.meta.url).href})),h,g,_=e((()=>{t(),s(),m(),h=n(),g=({children:e,isLoading:t=!1})=>(0,h.jsxs)(`div`,{className:`min-h-screen w-full relative flex items-center justify-center pl-6 pr-4 md:pl-12 md:pr-8 bg-cover bg-center overflow-hidden`,style:{backgroundImage:`url(${p})`},children:[(0,h.jsx)(c,{isVisible:t}),(0,h.jsx)(`div`,{className:`absolute inset-0 bg-black/30 pointer-events-none`}),(0,h.jsx)(`div`,{className:`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none`}),(0,h.jsxs)(`div`,{className:`relative z-10 w-full max-w-[1440px] min-h-screen flex items-center justify-end`,children:[(0,h.jsxs)(`div`,{className:`absolute bottom-10 left-0 w-full md:w-[45%] text-white space-y-4 p-4 hidden md:block`,children:[(0,h.jsx)(`h1`,{className:`text-3xl lg:text-display-md font-bold leading-[1.2] tracking-tight`,children:`Discover Amazing Deals & Thrilling Adventures`}),(0,h.jsx)(`p`,{className:`text-sm md:text-base text-gray-200 font-light max-w-[480px]`,children:`Tripal is designed to ease trip and vacation planning. Explore amazing deals and offers`})]}),(0,h.jsx)(`div`,{className:`ml-auto p-2 rounded-[32px] bg-white/15 backdrop-blur-md shadow-auth
+              w-[600px] h-[700px]`,children:(0,h.jsx)(`div`,{className:`relative w-full h-full bg-white rounded-[26px] p-10 shadow-sm flex flex-col`,children:e})})]})]}),g.__docgenInfo={description:``,methods:[],displayName:`AuthLayout`,props:{children:{required:!0,tsType:{name:`ReactReactNode`,raw:`React.ReactNode`},description:``},isLoading:{required:!1,tsType:{name:`boolean`},description:``,defaultValue:{value:`false`,computed:!1}}}}})),v,y,b,x,S;e((()=>{_(),a(),r(),l(),d(),v=n(),y={title:`Auth/AuthLayout`,component:g,argTypes:{isLoading:{control:`boolean`}}},b={args:{isLoading:!1,children:(0,v.jsxs)(`div`,{className:`flex flex-col gap-6`,children:[(0,v.jsx)(o,{title:`Continue Planning Your Trips`,subtitle:`Welcome back. Let's get back to planning your adventures`}),(0,v.jsx)(f,{label:`Email address`,type:`email`,placeholder:`Enter your email`}),(0,v.jsx)(f,{label:`Password`,type:`password`,placeholder:`Enter your password`}),(0,v.jsx)(u,{children:`Sign In`}),(0,v.jsx)(i,{questionText:`Don't have an account?`,actionText:`Sign Up`,onActionClick:()=>{}})]})}},x={args:{isLoading:!0,children:(0,v.jsx)(`div`,{})}},b.parameters={...b.parameters,docs:{...b.parameters?.docs,source:{originalSource:`{
+  args: {
+    isLoading: false,
+    children: <div className="flex flex-col gap-6">\r
+        <AuthHeader title="Continue Planning Your Trips" subtitle="Welcome back. Let's get back to planning your adventures" />\r
+        <InputField label="Email address" type="email" placeholder="Enter your email" />\r
+        <InputField label="Password" type="password" placeholder="Enter your password" />\r
+        <Button>Sign In</Button>\r
+        <AuthFooter questionText="Don't have an account?" actionText="Sign Up" onActionClick={() => {}} />\r
+      </div>
+  }
+}`,...b.parameters?.docs?.source}}},x.parameters={...x.parameters,docs:{...x.parameters?.docs,source:{originalSource:`{
+  args: {
+    isLoading: true,
+    children: <div />
+  }
+}`,...x.parameters?.docs?.source}}},S=[`Default`,`Loading`]}))();export{b as Default,x as Loading,S as __namedExportsOrder,y as default};

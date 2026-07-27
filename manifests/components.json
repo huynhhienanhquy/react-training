@@ -1,0 +1,2156 @@
+{
+  "v": 0,
+  "components": {
+    "auth-authfooter": {
+      "id": "auth-authfooter",
+      "name": "AuthFooter",
+      "path": "./src/components/auth/AuthFooter.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "AuthFooter",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\auth\\AuthFooter.tsx",
+        "actualName": "AuthFooter",
+        "exportName": "AuthFooter",
+        "props": {
+          "questionText": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "actionText": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "onActionClick": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "() => void",
+              "signature": {
+                "arguments": [],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          },
+          "className": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "''",
+              "computed": false
+            }
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "auth-authfooter--sign-in",
+          "name": "Sign In",
+          "snippet": "const SignIn = () => <AuthFooter\r\n    questionText=\"Don't have an account?\"\r\n    actionText=\"Sign Up\"\r\n    onActionClick={() => alert('Navigate to Sign Up')} />;"
+        },
+        {
+          "id": "auth-authfooter--sign-up",
+          "name": "Sign Up",
+          "snippet": "const SignUp = () => <AuthFooter\r\n    questionText=\"Already have an account?\"\r\n    actionText=\"Sign In\"\r\n    onActionClick={() => alert('Navigate to Sign In')} />;"
+        }
+      ],
+      "import": "import { AuthFooter } from \"example1\";"
+    },
+    "auth-authheader": {
+      "id": "auth-authheader",
+      "name": "AuthHeader",
+      "path": "./src/components/auth/AuthHeader.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "AuthHeader",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\auth\\AuthHeader.tsx",
+        "actualName": "AuthHeader",
+        "exportName": "AuthHeader",
+        "props": {
+          "title": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "subtitle": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "className": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "''",
+              "computed": false
+            }
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "auth-authheader--login",
+          "name": "Login",
+          "snippet": "const Login = () => <AuthHeader\r\n    title=\"Continue Planning Your Trips\"\r\n    subtitle=\"We're happy you're back. Let's get back to planning your adventures\" />;"
+        },
+        {
+          "id": "auth-authheader--register",
+          "name": "Register",
+          "snippet": "const Register = () => <AuthHeader\r\n    title=\"Unlock Your Next Adventure\"\r\n    subtitle=\"Create a free account to start planning trips with Tripal\" />;"
+        },
+        {
+          "id": "auth-authheader--minimal",
+          "name": "Minimal",
+          "snippet": "const Minimal = () => <AuthHeader title=\"Reset Password\" subtitle=\"Enter your new password below\" />;"
+        }
+      ],
+      "import": "import { AuthHeader } from \"example1\";"
+    },
+    "auth-authlayout": {
+      "id": "auth-authlayout",
+      "name": "AuthLayout",
+      "path": "./src/components/auth/AuthLayout.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "AuthLayout",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\auth\\AuthLayout.tsx",
+        "actualName": "AuthLayout",
+        "exportName": "AuthLayout",
+        "props": {
+          "children": {
+            "required": true,
+            "tsType": {
+              "name": "ReactReactNode",
+              "raw": "React.ReactNode"
+            },
+            "description": ""
+          },
+          "isLoading": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "false",
+              "computed": false
+            }
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "auth-authlayout--default",
+          "name": "Default",
+          "snippet": "const Default = () => <AuthLayout isLoading={false}>(<div className=\"flex flex-col gap-6\">\r\n      <AuthHeader\r\n        title=\"Continue Planning Your Trips\"\r\n        subtitle=\"Welcome back. Let's get back to planning your adventures\"\r\n      />\r\n      <InputField label=\"Email address\" type=\"email\" placeholder=\"Enter your email\" />\r\n      <InputField label=\"Password\" type=\"password\" placeholder=\"Enter your password\" />\r\n      <Button>Sign In</Button>\r\n      <AuthFooter questionText=\"Don't have an account?\" actionText=\"Sign Up\" onActionClick={() => {}} />\r\n    </div>)</AuthLayout>;"
+        },
+        {
+          "id": "auth-authlayout--loading",
+          "name": "Loading",
+          "snippet": "const Loading = () => <AuthLayout isLoading><div /></AuthLayout>;"
+        }
+      ],
+      "import": "import { AuthFooter, AuthHeader, AuthLayout, Button, InputField } from \"example1\";"
+    },
+    "chat-chathistorysidebar": {
+      "id": "chat-chathistorysidebar",
+      "name": "ChatHistorySidebar",
+      "path": "./src/components/chat/ChatHistorySidebar.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "ChatHistorySidebar",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\chat\\ChatHistorySidebar.tsx",
+        "actualName": "ChatHistorySidebar",
+        "exportName": "ChatHistorySidebar",
+        "props": {
+          "searchQuery": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "setSearchQuery": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(q: string) => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "type": {
+                      "name": "string"
+                    },
+                    "name": "q"
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          },
+          "sessions": {
+            "required": true,
+            "tsType": {
+              "name": "Array",
+              "elements": [
+                {
+                  "name": "ChatSession"
+                }
+              ],
+              "raw": "ChatSession[]"
+            },
+            "description": ""
+          },
+          "activeSessionId": {
+            "required": true,
+            "tsType": {
+              "name": "union",
+              "raw": "string | null",
+              "elements": [
+                {
+                  "name": "string"
+                },
+                {
+                  "name": "null"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "onSelectSession": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(id: string) => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "type": {
+                      "name": "string"
+                    },
+                    "name": "id"
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "chat-chathistorysidebar--default",
+          "name": "Default",
+          "snippet": "const Default = () => <ChatHistorySidebar\r\n    searchQuery=\"\"\r\n    setSearchQuery={() => {}}\r\n    sessions={MOCK_SESSIONS}\r\n    activeSessionId=\"1\"\r\n    onSelectSession={(id) => console.log('Select session:', id)} />;"
+        },
+        {
+          "id": "chat-chathistorysidebar--with-search",
+          "name": "With Search",
+          "snippet": "const WithSearch = () => <ChatHistorySidebar\r\n    searchQuery=\"flights\"\r\n    setSearchQuery={() => {}}\r\n    sessions={MOCK_SESSIONS}\r\n    activeSessionId={null}\r\n    onSelectSession={() => {}} />;"
+        },
+        {
+          "id": "chat-chathistorysidebar--empty",
+          "name": "Empty",
+          "snippet": "const Empty = () => <ChatHistorySidebar\r\n    searchQuery=\"\"\r\n    setSearchQuery={() => {}}\r\n    sessions={[]}\r\n    activeSessionId={null}\r\n    onSelectSession={() => {}} />;"
+        }
+      ],
+      "import": "import { ChatHistorySidebar } from \"example1\";"
+    },
+    "chat-chatinputbox": {
+      "id": "chat-chatinputbox",
+      "name": "ChatInputBox",
+      "path": "./src/components/chat/ChatInputBox.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "ChatInputBox",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\chat\\ChatInputBox.tsx",
+        "actualName": "ChatInputBox",
+        "exportName": "ChatInputBox",
+        "props": {
+          "inputMessage": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "setInputMessage": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(val: string) => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "type": {
+                      "name": "string"
+                    },
+                    "name": "val"
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          },
+          "onSend": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "() => void",
+              "signature": {
+                "arguments": [],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          },
+          "isRecording": {
+            "required": true,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": ""
+          },
+          "setIsRecording": {
+            "required": true,
+            "tsType": {
+              "name": "ReactDispatch",
+              "raw": "React.Dispatch<React.SetStateAction<boolean>>",
+              "elements": [
+                {
+                  "name": "ReactSetStateAction",
+                  "raw": "React.SetStateAction<boolean>",
+                  "elements": [
+                    {
+                      "name": "boolean"
+                    }
+                  ]
+                }
+              ]
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "chat-chatinputbox--default",
+          "name": "Default",
+          "snippet": "const Default = () => <ChatInputBoxWithState />;"
+        },
+        {
+          "id": "chat-chatinputbox--recording",
+          "name": "Recording",
+          "snippet": "const Recording = () => <ChatInputBoxWithState isRecording />;"
+        },
+        {
+          "id": "chat-chatinputbox--with-text",
+          "name": "With Text",
+          "snippet": "const WithText = () => {\r\n  const [inputMessage, setInputMessage] = useState('Find flights to Lagos')\r\n  const [isRecording, setIsRecording] = useState(false)\r\n\r\n  return (\r\n    <ChatInputBox\r\n      inputMessage={inputMessage}\r\n      setInputMessage={setInputMessage}\r\n      onSend={() => {}}\r\n      isRecording={isRecording}\r\n      setIsRecording={setIsRecording}\r\n    />\r\n  )\r\n};"
+        }
+      ],
+      "import": "import { ChatInputBox } from \"example1\";"
+    },
+    "chat-chatmessagelist": {
+      "id": "chat-chatmessagelist",
+      "name": "ChatMessageList",
+      "path": "./src/components/chat/ChatMessageList.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "ChatMessageList",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\chat\\ChatMessageList.tsx",
+        "actualName": "ChatMessageList",
+        "exportName": "ChatMessageList",
+        "props": {
+          "messages": {
+            "required": true,
+            "tsType": {
+              "name": "Array",
+              "elements": [
+                {
+                  "name": "ChatMessage"
+                }
+              ],
+              "raw": "ChatMessage[]"
+            },
+            "description": ""
+          },
+          "isTyping": {
+            "required": true,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": ""
+          },
+          "onBookFlight": {
+            "required": false,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(flightId?: string) => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "type": {
+                      "name": "string"
+                    },
+                    "name": "flightId"
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          },
+          "onBookHotel": {
+            "required": false,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(hotelId?: string) => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "type": {
+                      "name": "string"
+                    },
+                    "name": "hotelId"
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          },
+          "onViewAllPlaces": {
+            "required": false,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(places?: PlaceData[]) => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "type": {
+                      "name": "Array",
+                      "elements": [
+                        {
+                          "name": "PlaceData"
+                        }
+                      ],
+                      "raw": "PlaceData[]"
+                    },
+                    "name": "places"
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          },
+          "onViewAllItinerary": {
+            "required": false,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(itinerary?: DayItinerary[]) => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "type": {
+                      "name": "Array",
+                      "elements": [
+                        {
+                          "name": "DayItinerary"
+                        }
+                      ],
+                      "raw": "DayItinerary[]"
+                    },
+                    "name": "itinerary"
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "chat-chatmessagelist--simple-chat",
+          "name": "Simple Chat",
+          "snippet": "const SimpleChat = () => <ChatMessageList messages={TEXT_MESSAGES} isTyping={false} />;"
+        },
+        {
+          "id": "chat-chatmessagelist--with-typing",
+          "name": "With Typing",
+          "snippet": "const WithTyping = () => <ChatMessageList messages={FLIGHT_MESSAGES} isTyping />;"
+        },
+        {
+          "id": "chat-chatmessagelist--empty",
+          "name": "Empty",
+          "snippet": "const Empty = () => <ChatMessageList messages={[]} isTyping={false} />;"
+        }
+      ],
+      "import": "import { ChatMessageList } from \"example1\";"
+    },
+    "chat-flightrecommendations": {
+      "id": "chat-flightrecommendations",
+      "name": "FlightRecommendations",
+      "path": "./src/components/chat/FlightRecommendations.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "FlightRecommendations",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\chat\\FlightRecommendations.tsx",
+        "actualName": "FlightRecommendations",
+        "exportName": "FlightRecommendations",
+        "props": {
+          "title": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "'Recommended Flights For a Round Trip Journey'",
+              "computed": false
+            }
+          },
+          "flights": {
+            "required": false,
+            "tsType": {
+              "name": "Array",
+              "elements": [
+                {
+                  "name": "FlightOption"
+                }
+              ],
+              "raw": "FlightOption[]"
+            },
+            "description": ""
+          },
+          "onBookNow": {
+            "required": false,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(flightId: string) => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "type": {
+                      "name": "string"
+                    },
+                    "name": "flightId"
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          },
+          "onSeeAll": {
+            "required": false,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "() => void",
+              "signature": {
+                "arguments": [],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "chat-flightrecommendations--default",
+          "name": "Default",
+          "snippet": "const Default = () => <FlightRecommendations\r\n    title=\"Recommended Flights For a Round Trip Journey\"\r\n    flights={MOCK_FLIGHTS}\r\n    onBookNow={(id) => alert('Book flight: ' + id)}\r\n    onSeeAll={() => alert('See all flights')} />;"
+        }
+      ],
+      "import": "import { FlightRecommendations } from \"example1\";"
+    },
+    "chat-hotelrecommendations": {
+      "id": "chat-hotelrecommendations",
+      "name": "HotelRecommendations",
+      "path": "./src/components/chat/HotelRecommendations.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "HotelRecommendations",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\chat\\HotelRecommendations.tsx",
+        "actualName": "HotelRecommendations",
+        "exportName": "HotelRecommendations",
+        "props": {
+          "title": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "'Recommended Hotels'",
+              "computed": false
+            }
+          },
+          "hotels": {
+            "required": false,
+            "tsType": {
+              "name": "Array",
+              "elements": [
+                {
+                  "name": "HotelOption"
+                }
+              ],
+              "raw": "HotelOption[]"
+            },
+            "description": ""
+          },
+          "onBookNow": {
+            "required": false,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(hotelId: string) => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "type": {
+                      "name": "string"
+                    },
+                    "name": "hotelId"
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          },
+          "onSeeAll": {
+            "required": false,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "() => void",
+              "signature": {
+                "arguments": [],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "chat-hotelrecommendations--default",
+          "name": "Default",
+          "snippet": "const Default = () => <HotelRecommendations\r\n    title=\"Recommended Hotels For a Three-Night Staycation\"\r\n    hotels={MOCK_HOTELS}\r\n    onBookNow={(id) => alert('Book hotel: ' + id)}\r\n    onSeeAll={() => alert('See all hotels')} />;"
+        }
+      ],
+      "import": "import { HotelRecommendations } from \"example1\";"
+    },
+    "chat-itinerarycardwidget": {
+      "id": "chat-itinerarycardwidget",
+      "name": "ItineraryCardWidget",
+      "path": "./src/components/chat/ItineraryCardWidget.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "ItineraryCardWidget",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\chat\\ItineraryCardWidget.tsx",
+        "actualName": "ItineraryCardWidget",
+        "exportName": "ItineraryCardWidget",
+        "props": {
+          "itinerary": {
+            "required": false,
+            "tsType": {
+              "name": "Array",
+              "elements": [
+                {
+                  "name": "DayItinerary"
+                }
+              ],
+              "raw": "DayItinerary[]"
+            },
+            "description": ""
+          },
+          "onViewAll": {
+            "required": false,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "() => void",
+              "signature": {
+                "arguments": [],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "chat-itinerarycardwidget--default",
+          "name": "Default",
+          "snippet": "const Default = () => <ItineraryCardWidget itinerary={MOCK_ITINERARY} onViewAll={() => alert('View full itinerary')} />;"
+        },
+        {
+          "id": "chat-itinerarycardwidget--single-day",
+          "name": "Single Day",
+          "snippet": "const SingleDay = () => <ItineraryCardWidget itinerary={[MOCK_ITINERARY[0]]} />;"
+        },
+        {
+          "id": "chat-itinerarycardwidget--loading",
+          "name": "Loading",
+          "snippet": "const Loading = () => <ItineraryCardWidget />;"
+        }
+      ],
+      "import": "import { ItineraryCardWidget } from \"example1\";"
+    },
+    "chat-placescardwidget": {
+      "id": "chat-placescardwidget",
+      "name": "PlacesCardWidget",
+      "path": "./src/components/chat/PlacesCardWidget.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "PlacesCardWidget",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\chat\\PlacesCardWidget.tsx",
+        "actualName": "PlacesCardWidget",
+        "exportName": "PlacesCardWidget",
+        "props": {
+          "places": {
+            "required": false,
+            "tsType": {
+              "name": "Array",
+              "elements": [
+                {
+                  "name": "PlaceData"
+                }
+              ],
+              "raw": "PlaceData[]"
+            },
+            "description": ""
+          },
+          "onViewAll": {
+            "required": false,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "() => void",
+              "signature": {
+                "arguments": [],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "chat-placescardwidget--default",
+          "name": "Default",
+          "snippet": "const Default = () => <PlacesCardWidget places={MOCK_PLACES} onViewAll={() => alert('View all places')} />;"
+        },
+        {
+          "id": "chat-placescardwidget--single-place",
+          "name": "Single Place",
+          "snippet": "const SinglePlace = () => <PlacesCardWidget places={[MOCK_PLACES[0]]} />;"
+        },
+        {
+          "id": "chat-placescardwidget--loading",
+          "name": "Loading",
+          "snippet": "const Loading = () => <PlacesCardWidget />;"
+        }
+      ],
+      "import": "import { PlacesCardWidget } from \"example1\";"
+    },
+    "chat-recommendationwrapper": {
+      "id": "chat-recommendationwrapper",
+      "name": "RecommendationWrapper",
+      "path": "./src/components/chat/RecommendationWrapper.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "RecommendationWrapper",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\chat\\RecommendationWrapper.tsx",
+        "actualName": "RecommendationWrapper",
+        "exportName": "RecommendationWrapper",
+        "props": {
+          "title": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "children": {
+            "required": true,
+            "tsType": {
+              "name": "ReactReactNode",
+              "raw": "React.ReactNode"
+            },
+            "description": ""
+          },
+          "onSeeAll": {
+            "required": false,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "() => void",
+              "signature": {
+                "arguments": [],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          },
+          "seeAllText": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "'See all recommendations'",
+              "computed": false
+            }
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "chat-recommendationwrapper--default",
+          "name": "Default",
+          "snippet": "const Default = () => <RecommendationWrapper title=\"Recommended Flights\" onSeeAll={() => alert('See all')}>(<div className=\"p-4 text-slate-600 text-sm\">Flight card content goes here</div>)</RecommendationWrapper>;"
+        },
+        {
+          "id": "chat-recommendationwrapper--without-see-all",
+          "name": "Without See All",
+          "snippet": "const WithoutSeeAll = () => <RecommendationWrapper title=\"Recommended Hotels\">(<div className=\"p-4 text-slate-600 text-sm\">Hotel card content goes here</div>)</RecommendationWrapper>;"
+        },
+        {
+          "id": "chat-recommendationwrapper--custom-text",
+          "name": "Custom Text",
+          "snippet": "const CustomText = () => <RecommendationWrapper title=\"Places to Visit\" onSeeAll={() => {}} seeAllText=\"View All Places\">(<div className=\"p-4 text-slate-600 text-sm\">Place recommendations here</div>)</RecommendationWrapper>;"
+        }
+      ],
+      "import": "import { RecommendationWrapper } from \"example1\";"
+    },
+    "chat-sidebarnav": {
+      "id": "chat-sidebarnav",
+      "name": "SidebarNav",
+      "path": "./src/components/chat/SidebarNav.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "SidebarNav",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\chat\\SidebarNav.tsx",
+        "actualName": "SidebarNav",
+        "exportName": "SidebarNav",
+        "props": {
+          "activeNav": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "setActiveNav": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(id: string) => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "type": {
+                      "name": "string"
+                    },
+                    "name": "id"
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          },
+          "isMobileOpen": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": ""
+          },
+          "onMobileToggle": {
+            "required": false,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "() => void",
+              "signature": {
+                "arguments": [],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "chat-sidebarnav--chats-active",
+          "name": "Chats Active",
+          "snippet": "const ChatsActive = () => <SidebarNav activeNav=\"chats\" setActiveNav={(id) => console.log('Navigate to', id)} />;"
+        },
+        {
+          "id": "chat-sidebarnav--favorites-active",
+          "name": "Favorites Active",
+          "snippet": "const FavoritesActive = () => <SidebarNav\r\n    activeNav=\"favorites\"\r\n    setActiveNav={(id) => console.log('Navigate to', id)} />;"
+        }
+      ],
+      "import": "import { SidebarNav } from \"example1\";"
+    },
+    "chat-topbar": {
+      "id": "chat-topbar",
+      "name": "Topbar",
+      "path": "./src/components/chat/Topbar.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "Topbar",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\chat\\Topbar.tsx",
+        "actualName": "Topbar",
+        "exportName": "Topbar",
+        "props": {
+          "isBreadcrumbMode": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "false",
+              "computed": false
+            }
+          },
+          "chatTitle": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "messages": {
+            "required": false,
+            "tsType": {
+              "name": "Array",
+              "elements": [
+                {
+                  "name": "ChatMessage"
+                }
+              ],
+              "raw": "ChatMessage[]"
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "[]",
+              "computed": false
+            }
+          },
+          "onBackToChat": {
+            "required": false,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "() => void",
+              "signature": {
+                "arguments": [],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          },
+          "onNewChat": {
+            "required": false,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "() => void",
+              "signature": {
+                "arguments": [],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "chat-topbar--default",
+          "name": "Default",
+          "snippet": "const Default = () => <Topbar\r\n    chatTitle=\"Cheap flights to Lagos\"\r\n    messages={[{ id: '1', sender: 'user', text: 'Find cheap flights from Owerri to Lagos', type: 'text' }]} />;"
+        },
+        {
+          "id": "chat-topbar--breadcrumb-mode",
+          "name": "Breadcrumb Mode",
+          "snippet": "const BreadcrumbMode = () => <Topbar\r\n    isBreadcrumbMode\r\n    chatTitle=\"Cheap flights to Lagos\"\r\n    onBackToChat={() => alert('Back to chat')}\r\n    onNewChat={() => alert('New chat')} />;"
+        },
+        {
+          "id": "chat-topbar--empty",
+          "name": "Empty",
+          "snippet": "const Empty = () => <Topbar messages={[]} />;"
+        }
+      ],
+      "import": "import { Topbar } from \"example1\";"
+    },
+    "chat-welcomestate": {
+      "id": "chat-welcomestate",
+      "name": "WelcomeState",
+      "path": "./src/components/chat/WelcomeState.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "WelcomeState",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\chat\\WelcomeState.tsx",
+        "actualName": "WelcomeState",
+        "exportName": "WelcomeState",
+        "props": {
+          "prompts": {
+            "required": true,
+            "tsType": {
+              "name": "Array",
+              "elements": [
+                {
+                  "name": "string"
+                }
+              ],
+              "raw": "string[]"
+            },
+            "description": ""
+          },
+          "onSelectPrompt": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(prompt: string) => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "type": {
+                      "name": "string"
+                    },
+                    "name": "prompt"
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "chat-welcomestate--default",
+          "name": "Default",
+          "snippet": "const Default = () => <WelcomeState\r\n    prompts={DEFAULT_PROMPTS}\r\n    onSelectPrompt={(prompt) => alert('Selected: ' + prompt)} />;"
+        },
+        {
+          "id": "chat-welcomestate--many-prompts",
+          "name": "Many Prompts",
+          "snippet": "const ManyPrompts = () => <WelcomeState\r\n    prompts={[\r\n      'Find cheap flights to Lagos',\r\n      'Hotels with pool in Dubai',\r\n      'Best restaurants in Paris',\r\n      'Flights from New York to London',\r\n      'All-inclusive resorts in Maldives',\r\n      'Weekend getaway to Bali',\r\n    ]}\r\n    onSelectPrompt={(prompt) => console.log(prompt)} />;"
+        }
+      ],
+      "import": "import { WelcomeState } from \"example1\";"
+    },
+    "fare-farecards": {
+      "id": "fare-farecards",
+      "name": "FareCards",
+      "path": "./src/components/fare/FareCards.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "FareCards",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\fare\\FareCards.tsx",
+        "actualName": "FareCards",
+        "exportName": "FareCards",
+        "props": {
+          "fareOptions": {
+            "required": true,
+            "tsType": {
+              "name": "Array",
+              "elements": [
+                {
+                  "name": "FareOption"
+                }
+              ],
+              "raw": "FareOption[]"
+            },
+            "description": ""
+          },
+          "selectedFareId": {
+            "required": true,
+            "tsType": {
+              "name": "union",
+              "raw": "'economy' | 'business'",
+              "elements": [
+                {
+                  "name": "literal",
+                  "value": "'economy'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'business'"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "defaultFlightLogo": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "onSelectFare": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(id: 'economy' | 'business') => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "type": {
+                      "name": "union",
+                      "raw": "'economy' | 'business'",
+                      "elements": [
+                        {
+                          "name": "literal",
+                          "value": "'economy'"
+                        },
+                        {
+                          "name": "literal",
+                          "value": "'business'"
+                        }
+                      ]
+                    },
+                    "name": "id"
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "fare-farecards--economy-selected",
+          "name": "Economy Selected",
+          "snippet": "const EconomySelected = () => <FareCards\r\n    fareOptions={MOCK_OPTIONS}\r\n    selectedFareId=\"economy\"\r\n    defaultFlightLogo=\"https://via.placeholder.com/20\"\r\n    onSelectFare={(id) => console.log('Selected fare:', id)} />;"
+        },
+        {
+          "id": "fare-farecards--business-selected",
+          "name": "Business Selected",
+          "snippet": "const BusinessSelected = () => <FareCards\r\n    fareOptions={MOCK_OPTIONS}\r\n    selectedFareId=\"business\"\r\n    defaultFlightLogo=\"https://via.placeholder.com/20\"\r\n    onSelectFare={(id) => console.log('Selected fare:', id)} />;"
+        }
+      ],
+      "import": "import { FareCards } from \"example1\";"
+    },
+    "fare-fareheader": {
+      "id": "fare-fareheader",
+      "name": "FareHeader",
+      "path": "./src/components/fare/FareHeader.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "FareHeader",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\fare\\FareHeader.tsx",
+        "actualName": "FareHeader",
+        "exportName": "FareHeader",
+        "props": {
+          "destination": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "tripType": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "cabinClass": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "price": {
+            "required": true,
+            "tsType": {
+              "name": "number"
+            },
+            "description": ""
+          },
+          "priceUnit": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "fare-fareheader--default",
+          "name": "Default",
+          "snippet": "const Default = () => <FareHeader\r\n    destination=\"Lagos, Nigeria (LOS)\"\r\n    tripType=\"Round Trip\"\r\n    cabinClass=\"Economy\"\r\n    price={1200}\r\n    priceUnit=\"per person\" />;"
+        },
+        {
+          "id": "fare-fareheader--business-class",
+          "name": "Business Class",
+          "snippet": "const BusinessClass = () => <FareHeader\r\n    destination=\"Dubai, UAE (DXB)\"\r\n    tripType=\"One Way\"\r\n    cabinClass=\"Business\"\r\n    price={3500}\r\n    priceUnit=\"per person\" />;"
+        }
+      ],
+      "import": "import { FareHeader } from \"example1\";"
+    },
+    "fare-pricedetailssidebar": {
+      "id": "fare-pricedetailssidebar",
+      "name": "PriceDetailsSidebar",
+      "path": "./src/components/fare/PriceDetailsSidebar.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "PriceDetailsSidebar",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\fare\\PriceDetailsSidebar.tsx",
+        "actualName": "PriceDetailsSidebar",
+        "exportName": "PriceDetailsSidebar",
+        "props": {
+          "pricePerTraveller": {
+            "required": true,
+            "tsType": {
+              "name": "number"
+            },
+            "description": ""
+          },
+          "flightDues": {
+            "required": true,
+            "tsType": {
+              "name": "number"
+            },
+            "description": ""
+          },
+          "taxesAndFees": {
+            "required": true,
+            "tsType": {
+              "name": "number"
+            },
+            "description": ""
+          },
+          "totalAmount": {
+            "required": true,
+            "tsType": {
+              "name": "number"
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "fare-pricedetailssidebar--default",
+          "name": "Default",
+          "snippet": "const Default = () => <PriceDetailsSidebar\r\n    pricePerTraveller={1200}\r\n    flightDues={50}\r\n    taxesAndFees={150}\r\n    totalAmount={1400} />;"
+        },
+        {
+          "id": "fare-pricedetailssidebar--business-class",
+          "name": "Business Class",
+          "snippet": "const BusinessClass = () => <PriceDetailsSidebar\r\n    pricePerTraveller={3500}\r\n    flightDues={100}\r\n    taxesAndFees={350}\r\n    totalAmount={3950} />;"
+        }
+      ],
+      "import": "import { PriceDetailsSidebar } from \"example1\";"
+    },
+    "fare-selectedflightbox": {
+      "id": "fare-selectedflightbox",
+      "name": "SelectedFlightBox",
+      "path": "./src/components/fare/SelectedFlightBox.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "SelectedFlightBox",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\fare\\SelectedFlightBox.tsx",
+        "actualName": "SelectedFlightBox",
+        "exportName": "SelectedFlightBox",
+        "props": {
+          "airlineName": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "defaultFlightLogo": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "iconHeart": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "legs": {
+            "required": true,
+            "tsType": {
+              "name": "Array",
+              "elements": [
+                {
+                  "name": "FlightLeg"
+                }
+              ],
+              "raw": "FlightLeg[]"
+            },
+            "description": ""
+          },
+          "cancellationPolicy": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "fare-selectedflightbox--default",
+          "name": "Default",
+          "snippet": "const Default = () => <SelectedFlightBox\r\n    airlineName=\"AirPeace Airways, Nigerian\"\r\n    defaultFlightLogo=\"https://via.placeholder.com/20\"\r\n    iconHeart=\"https://via.placeholder.com/16\"\r\n    legs={MOCK_LEGS}\r\n    cancellationPolicy=\"Free cancellation 24 hours before departure\" />;"
+        },
+        {
+          "id": "fare-selectedflightbox--direct-flight",
+          "name": "Direct Flight",
+          "snippet": "const DirectFlight = () => <SelectedFlightBox\r\n    airlineName=\"Green Africa Airways\"\r\n    defaultFlightLogo=\"https://via.placeholder.com/20\"\r\n    iconHeart=\"https://via.placeholder.com/16\"\r\n    legs={[\r\n      { id: 'leg3', times: '6:00am - 8:30am', route: 'LOS - ABV', duration: '2h 30m', stops: 'Direct' },\r\n    ]}\r\n    cancellationPolicy=\"Non-refundable\" />;"
+        }
+      ],
+      "import": "import { SelectedFlightBox } from \"example1\";"
+    },
+    "ui-button": {
+      "id": "ui-button",
+      "name": "Button",
+      "path": "./src/components/ui/Button.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "Button",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\ui\\Button.tsx",
+        "actualName": "Button",
+        "exportName": "Button",
+        "props": {
+          "variant": {
+            "required": false,
+            "tsType": {
+              "name": "union",
+              "raw": "'primary' | 'secondary' | 'social' | 'dark' | 'ghost'",
+              "elements": [
+                {
+                  "name": "literal",
+                  "value": "'primary'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'secondary'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'social'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'dark'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'ghost'"
+                }
+              ]
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "'primary'",
+              "computed": false
+            }
+          },
+          "size": {
+            "required": false,
+            "tsType": {
+              "name": "union",
+              "raw": "'sm' | 'md' | 'lg'",
+              "elements": [
+                {
+                  "name": "literal",
+                  "value": "'sm'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'md'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'lg'"
+                }
+              ]
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "'lg'",
+              "computed": false
+            }
+          },
+          "leftIcon": {
+            "required": false,
+            "tsType": {
+              "name": "ReactReactNode",
+              "raw": "React.ReactNode"
+            },
+            "description": ""
+          },
+          "rightIcon": {
+            "required": false,
+            "tsType": {
+              "name": "ReactReactNode",
+              "raw": "React.ReactNode"
+            },
+            "description": ""
+          },
+          "isLoading": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "false",
+              "computed": false
+            }
+          },
+          "children": {
+            "required": true,
+            "tsType": {
+              "name": "ReactReactNode",
+              "raw": "React.ReactNode"
+            },
+            "description": ""
+          },
+          "className": {
+            "defaultValue": {
+              "value": "''",
+              "computed": false
+            },
+            "required": false
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "ui-button--primary",
+          "name": "Primary",
+          "snippet": "const Primary = () => <Button variant=\"primary\" size=\"lg\">Create a Free Account</Button>;"
+        },
+        {
+          "id": "ui-button--secondary",
+          "name": "Secondary",
+          "snippet": "const Secondary = () => <Button variant=\"secondary\" size=\"sm\">Book Now</Button>;"
+        },
+        {
+          "id": "ui-button--social",
+          "name": "Social",
+          "snippet": "const Social = () => <Button\r\n    variant=\"social\"\r\n    size=\"md\"\r\n    leftIcon={(<svg className=\"w-5 h-5\" viewBox=\"0 0 24 24\">\r\n      <path fill=\"#4285F4\" d=\"M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z\"/>\r\n      <path fill=\"#34A853\" d=\"M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z\"/>\r\n      <path fill=\"#FBBC05\" d=\"M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z\"/>\r\n      <path fill=\"#EA4335\" d=\"M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z\"/>\r\n    </svg>)}>Continue with Google</Button>;"
+        },
+        {
+          "id": "ui-button--dark",
+          "name": "Dark",
+          "snippet": "const Dark = () => <Button variant=\"dark\" size=\"md\" className=\"w-full\">View Full Itinerary</Button>;"
+        },
+        {
+          "id": "ui-button--ghost",
+          "name": "Ghost",
+          "snippet": "const Ghost = () => <Button variant=\"ghost\" size=\"md\">Cancel</Button>;"
+        },
+        {
+          "id": "ui-button--with-right-icon",
+          "name": "With Right Icon",
+          "snippet": "const WithRightIcon = () => <Button\r\n    variant=\"primary\"\r\n    size=\"lg\"\r\n    rightIcon={(<svg className=\"w-4 h-4\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2\">\r\n      <path d=\"M5 12h14M12 5l7 7-7 7\" />\r\n    </svg>)}>Continue</Button>;"
+        },
+        {
+          "id": "ui-button--loading",
+          "name": "Loading",
+          "snippet": "const Loading = () => <Button variant=\"primary\" size=\"lg\" isLoading>Please wait...</Button>;"
+        },
+        {
+          "id": "ui-button--disabled",
+          "name": "Disabled",
+          "snippet": "const Disabled = () => <Button variant=\"primary\" size=\"lg\" disabled>Submit</Button>;"
+        },
+        {
+          "id": "ui-button--small",
+          "name": "Small",
+          "snippet": "const Small = () => <Button variant=\"primary\" size=\"sm\">Start New Chat</Button>;"
+        }
+      ],
+      "import": "import { Button } from \"example1\";"
+    },
+    "ui-card": {
+      "id": "ui-card",
+      "name": "Card",
+      "path": "./src/components/ui/Card.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "Card",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\ui\\Card.tsx",
+        "actualName": "Card",
+        "exportName": "Card",
+        "props": {
+          "children": {
+            "required": true,
+            "tsType": {
+              "name": "ReactReactNode",
+              "raw": "React.ReactNode"
+            },
+            "description": ""
+          },
+          "variant": {
+            "required": false,
+            "tsType": {
+              "name": "union",
+              "raw": "'default' | 'surface'",
+              "elements": [
+                {
+                  "name": "literal",
+                  "value": "'default'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'surface'"
+                }
+              ]
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "'default'",
+              "computed": false
+            }
+          },
+          "className": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "''",
+              "computed": false
+            }
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "ui-card--default",
+          "name": "Default",
+          "snippet": "const Default = () => <Card variant=\"default\"><div className=\"p-6 text-slate-700\">Card content</div></Card>;"
+        },
+        {
+          "id": "ui-card--surface",
+          "name": "Surface",
+          "snippet": "const Surface = () => <Card variant=\"surface\"><div className=\"p-6 text-slate-700\">Surface card content</div></Card>;"
+        },
+        {
+          "id": "ui-card--custom-class",
+          "name": "Custom Class",
+          "snippet": "const CustomClass = () => <Card className=\"rounded-2xl\"><div className=\"p-6 text-slate-700\">Card with extra rounding</div></Card>;"
+        }
+      ],
+      "import": "import { Card } from \"example1\";"
+    },
+    "ui-errormessage": {
+      "id": "ui-errormessage",
+      "name": "ErrorMessage",
+      "path": "./src/components/ui/ErrorMessage.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "ErrorMessage",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\ui\\ErrorMessage.tsx",
+        "actualName": "ErrorMessage",
+        "exportName": "ErrorMessage",
+        "props": {
+          "message": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "className": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "''",
+              "computed": false
+            }
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "ui-errormessage--with-message",
+          "name": "With Message",
+          "snippet": "const WithMessage = () => <ErrorMessage message=\"Invalid email or password. Please try again.\" />;"
+        },
+        {
+          "id": "ui-errormessage--empty",
+          "name": "Empty",
+          "snippet": "const Empty = () => <ErrorMessage message=\"\" />;"
+        },
+        {
+          "id": "ui-errormessage--custom-class",
+          "name": "Custom Class",
+          "snippet": "const CustomClass = () => <ErrorMessage message=\"Something went wrong.\" className=\"text-red-600 font-bold\" />;"
+        }
+      ],
+      "import": "import { ErrorMessage } from \"example1\";"
+    },
+    "ui-inforow": {
+      "id": "ui-inforow",
+      "name": "InfoRow",
+      "path": "./src/components/ui/InfoRow.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "InfoRow",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\ui\\InfoRow.tsx",
+        "actualName": "InfoRow",
+        "exportName": "InfoRow",
+        "props": {
+          "label": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "value": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "className": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "''",
+              "computed": false
+            }
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "ui-inforow--default",
+          "name": "Default",
+          "snippet": "const Default = () => <InfoRow label=\"Airline\" value=\"Emirates\" />;"
+        },
+        {
+          "id": "ui-inforow--price",
+          "name": "Price",
+          "snippet": "const Price = () => <InfoRow label=\"Total\" value=\"$1,200\" />;"
+        },
+        {
+          "id": "ui-inforow--custom-class",
+          "name": "Custom Class",
+          "snippet": "const CustomClass = () => <InfoRow label=\"Duration\" value=\"9h 24m\" className=\"text-sm\" />;"
+        }
+      ],
+      "import": "import { InfoRow } from \"example1\";"
+    },
+    "ui-inputfield": {
+      "id": "ui-inputfield",
+      "name": "InputField",
+      "path": "./src/components/ui/InputField.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "InputField",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\ui\\InputField.tsx",
+        "actualName": "InputField",
+        "exportName": "InputField",
+        "props": {
+          "label": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "type": {
+            "defaultValue": {
+              "value": "'text'",
+              "computed": false
+            },
+            "required": false
+          },
+          "className": {
+            "defaultValue": {
+              "value": "''",
+              "computed": false
+            },
+            "required": false
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "ui-inputfield--text",
+          "name": "Text",
+          "snippet": "const Text = () => <InputField label=\"Full Name\" type=\"text\" placeholder=\"Enter your full name\" />;"
+        },
+        {
+          "id": "ui-inputfield--email",
+          "name": "Email",
+          "snippet": "const Email = () => <InputField label=\"Email address\" type=\"email\" placeholder=\"Enter your email\" />;"
+        },
+        {
+          "id": "ui-inputfield--password",
+          "name": "Password",
+          "snippet": "const Password = () => <InputField label=\"Password\" type=\"password\" placeholder=\"Enter your password\" />;"
+        },
+        {
+          "id": "ui-inputfield--with-value",
+          "name": "With Value",
+          "snippet": "const WithValue = () => <InputField\r\n    label=\"Email address\"\r\n    type=\"email\"\r\n    value=\"user@example.com\"\r\n    onChange={() => {}} />;"
+        }
+      ],
+      "import": "import { InputField } from \"example1\";"
+    },
+    "ui-loadingoverlay": {
+      "id": "ui-loadingoverlay",
+      "name": "LoadingOverlay",
+      "path": "./src/components/ui/LoadingOverlay.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "LoadingOverlay",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\ui\\LoadingOverlay.tsx",
+        "actualName": "LoadingOverlay",
+        "exportName": "LoadingOverlay",
+        "props": {
+          "isVisible": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "true",
+              "computed": false
+            }
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "ui-loadingoverlay--visible",
+          "name": "Visible",
+          "snippet": "const Visible = () => <LoadingOverlay isVisible />;"
+        },
+        {
+          "id": "ui-loadingoverlay--hidden",
+          "name": "Hidden",
+          "snippet": "const Hidden = () => <LoadingOverlay isVisible={false} />;"
+        }
+      ],
+      "import": "import { LoadingOverlay } from \"example1\";"
+    },
+    "ui-pricedisplay": {
+      "id": "ui-pricedisplay",
+      "name": "PriceDisplay",
+      "path": "./src/components/ui/PriceDisplay.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "PriceDisplay",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\ui\\PriceDisplay.tsx",
+        "actualName": "PriceDisplay",
+        "exportName": "PriceDisplay",
+        "props": {
+          "amount": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "period": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "size": {
+            "required": false,
+            "tsType": {
+              "name": "union",
+              "raw": "'sm' | 'md' | 'lg'",
+              "elements": [
+                {
+                  "name": "literal",
+                  "value": "'sm'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'md'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'lg'"
+                }
+              ]
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "'sm'",
+              "computed": false
+            }
+          },
+          "className": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "''",
+              "computed": false
+            }
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "ui-pricedisplay--small",
+          "name": "Small",
+          "snippet": "const Small = () => <PriceDisplay amount=\"$1,200\" size=\"sm\" />;"
+        },
+        {
+          "id": "ui-pricedisplay--with-period",
+          "name": "With Period",
+          "snippet": "const WithPeriod = () => <PriceDisplay amount=\"$1,200\" period=\"/per night\" size=\"sm\" />;"
+        },
+        {
+          "id": "ui-pricedisplay--medium",
+          "name": "Medium",
+          "snippet": "const Medium = () => <PriceDisplay amount=\"$899\" size=\"md\" />;"
+        },
+        {
+          "id": "ui-pricedisplay--large",
+          "name": "Large",
+          "snippet": "const Large = () => <PriceDisplay amount=\"$2,500\" size=\"lg\" />;"
+        }
+      ],
+      "import": "import { PriceDisplay } from \"example1\";"
+    },
+    "ui-sectionheader": {
+      "id": "ui-sectionheader",
+      "name": "SectionHeader",
+      "path": "./src/components/ui/SectionHeader.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "SectionHeader",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\ui\\SectionHeader.tsx",
+        "actualName": "SectionHeader",
+        "exportName": "SectionHeader",
+        "props": {
+          "title": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "className": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "''",
+              "computed": false
+            }
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "ui-sectionheader--default",
+          "name": "Default",
+          "snippet": "const Default = () => <SectionHeader title=\"Flight Details\" />;"
+        },
+        {
+          "id": "ui-sectionheader--custom-class",
+          "name": "Custom Class",
+          "snippet": "const CustomClass = () => <SectionHeader title=\"Hotel Information\" className=\"text-blue-600\" />;"
+        }
+      ],
+      "import": "import { SectionHeader } from \"example1\";"
+    },
+    "ui-thinkingloader": {
+      "id": "ui-thinkingloader",
+      "name": "ThinkingLoader",
+      "path": "./src/components/ui/ThinkingLoader.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "ThinkingLoader",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\ui\\ThinkingLoader.tsx",
+        "actualName": "ThinkingLoader",
+        "exportName": "ThinkingLoader",
+        "props": {
+          "text": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "\"Travelpal is thinking...\"",
+              "computed": false
+            }
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "ui-thinkingloader--default",
+          "name": "Default",
+          "snippet": "const Default = () => <ThinkingLoader />;"
+        },
+        {
+          "id": "ui-thinkingloader--custom-text",
+          "name": "Custom Text",
+          "snippet": "const CustomText = () => <ThinkingLoader text=\"Searching for flights...\" />;"
+        }
+      ],
+      "import": "import { ThinkingLoader } from \"example1\";"
+    },
+    "ui-favoritebutton": {
+      "id": "ui-favoritebutton",
+      "name": "FavoriteButton",
+      "path": "./src/components/ui/button/FavoriteButton.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "FavoriteButton",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\ui\\button\\FavoriteButton.tsx",
+        "actualName": "FavoriteButton",
+        "exportName": "FavoriteButton",
+        "props": {
+          "isFavorite": {
+            "required": true,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": ""
+          },
+          "onToggle": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "() => void",
+              "signature": {
+                "arguments": [],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          },
+          "className": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "''",
+              "computed": false
+            }
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "ui-favoritebutton--inactive",
+          "name": "Inactive",
+          "snippet": "const Inactive = () => <FavoriteButton isFavorite={false} onToggle={() => {}} />;"
+        },
+        {
+          "id": "ui-favoritebutton--active",
+          "name": "Active",
+          "snippet": "const Active = () => <FavoriteButton isFavorite onToggle={() => {}} />;"
+        },
+        {
+          "id": "ui-favoritebutton--custom-class",
+          "name": "Custom Class",
+          "snippet": "const CustomClass = () => <FavoriteButton isFavorite={false} onToggle={() => {}} className=\"shadow-md\" />;"
+        }
+      ],
+      "import": "import { FavoriteButton } from \"example1\";"
+    }
+  },
+  "meta": {
+    "docgen": "react-docgen",
+    "durationMs": 554
+  }
+}
