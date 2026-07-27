@@ -130,8 +130,14 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
               {isHotelType && msg.sender === 'ai' && (
                 <HotelRecommendations
                   title="Recommended Hotels For a Three-Night Staycation"
-                  onBookNow={(id) => {
-                    if (onBookHotel) onBookHotel(id);
+                  onBookNow={(hotel) => {
+                    if (!onBookHotel) return;
+
+                    if (typeof hotel === 'string') {
+                      onBookHotel(hotel);
+                    } else if (hotel && typeof hotel === 'object' && 'id' in hotel) {
+                      onBookHotel(String(hotel.id));
+                    }
                   }}
                   onSeeAll={() => console.log('See all recommendations')}
                 />
