@@ -122,9 +122,24 @@
           "snippet": "const Register = () => <AuthHeader\r\n    title=\"Unlock Your Next Adventure\"\r\n    subtitle=\"Create a free account to start planning trips with Tripal\" />;"
         },
         {
-          "id": "auth-authheader--minimal",
-          "name": "Minimal",
-          "snippet": "const Minimal = () => <AuthHeader title=\"Reset Password\" subtitle=\"Enter your new password below\" />;"
+          "id": "auth-authheader--resset-password",
+          "name": "Resset Password",
+          "snippet": "const RessetPassword = () => <AuthHeader title=\"Reset Password\" subtitle=\"Enter your new password below\" />;"
+        },
+        {
+          "id": "auth-authheader--onboarding",
+          "name": "Onboarding",
+          "snippet": "const Onboarding = () => <AuthHeader\r\n    title=\"Let’s Get To Know You!\"\r\n    subtitle=\"Provide only the information provided so that Tripal can know you better\" />;"
+        },
+        {
+          "id": "auth-authheader--forgot-password",
+          "name": "Forgot Password",
+          "snippet": "const ForgotPassword = () => <AuthHeader\r\n    title=\"Verify Email\"\r\n    subtitle=\"Enter your email address to receive verification OTP\" />;"
+        },
+        {
+          "id": "auth-authheader--verify-otp",
+          "name": "Verify OTP",
+          "snippet": "const VerifyOTP = () => <AuthHeader\r\n    title=\"Enter OTP\"\r\n    subtitle=\"Enter your email address to receive verification OTP\" />;"
         }
       ],
       "import": "import { AuthHeader } from \"example1\";"
@@ -532,14 +547,29 @@
       },
       "stories": [
         {
-          "id": "chat-chatmessagelist--simple-chat",
-          "name": "Simple Chat",
-          "snippet": "const SimpleChat = () => <ChatMessageList messages={TEXT_MESSAGES} isTyping={false} />;"
-        },
-        {
           "id": "chat-chatmessagelist--with-typing",
           "name": "With Typing",
           "snippet": "const WithTyping = () => <ChatMessageList messages={FLIGHT_MESSAGES} isTyping />;"
+        },
+        {
+          "id": "chat-chatmessagelist--flight-recommendations",
+          "name": "Flight Recommendations",
+          "snippet": "const FlightRecommendations = () => <ChatMessageList messages={TEXT_MESSAGES} isTyping={false} />;"
+        },
+        {
+          "id": "chat-chatmessagelist--hotel-recommendations",
+          "name": "Hotel Recommendations",
+          "snippet": "const HotelRecommendations = () => <ChatMessageList messages={HOTEL_MESSAGES} isTyping={false} />;"
+        },
+        {
+          "id": "chat-chatmessagelist--places-recommendations",
+          "name": "Places Recommendations",
+          "snippet": "const PlacesRecommendations = () => <ChatMessageList messages={PLACES_MESSAGES} isTyping={false} />;"
+        },
+        {
+          "id": "chat-chatmessagelist--itinerary-recommendations",
+          "name": "Itinerary Recommendations",
+          "snippet": "const ItineraryRecommendations = () => <ChatMessageList messages={ITINERARY_MESSAGES} isTyping={false} />;"
         },
         {
           "id": "chat-chatmessagelist--empty",
@@ -676,14 +706,14 @@
             "tsType": {
               "name": "signature",
               "type": "function",
-              "raw": "(hotelId: string) => void",
+              "raw": "(hotel: HotelOption) => void",
               "signature": {
                 "arguments": [
                   {
                     "type": {
-                      "name": "string"
+                      "name": "HotelOption"
                     },
-                    "name": "hotelId"
+                    "name": "hotel"
                   }
                 ],
                 "return": {
@@ -843,81 +873,6 @@
       ],
       "import": "import { PlacesCardWidget } from \"example1\";"
     },
-    "chat-recommendationwrapper": {
-      "id": "chat-recommendationwrapper",
-      "name": "RecommendationWrapper",
-      "path": "./src/components/chat/RecommendationWrapper.stories.tsx",
-      "jsDocTags": {},
-      "reactDocgen": {
-        "description": "",
-        "methods": [],
-        "displayName": "RecommendationWrapper",
-        "definedInFile": "D:\\react-training\\examples\\src\\components\\chat\\RecommendationWrapper.tsx",
-        "actualName": "RecommendationWrapper",
-        "exportName": "RecommendationWrapper",
-        "props": {
-          "title": {
-            "required": true,
-            "tsType": {
-              "name": "string"
-            },
-            "description": ""
-          },
-          "children": {
-            "required": true,
-            "tsType": {
-              "name": "ReactReactNode",
-              "raw": "React.ReactNode"
-            },
-            "description": ""
-          },
-          "onSeeAll": {
-            "required": false,
-            "tsType": {
-              "name": "signature",
-              "type": "function",
-              "raw": "() => void",
-              "signature": {
-                "arguments": [],
-                "return": {
-                  "name": "void"
-                }
-              }
-            },
-            "description": ""
-          },
-          "seeAllText": {
-            "required": false,
-            "tsType": {
-              "name": "string"
-            },
-            "description": "",
-            "defaultValue": {
-              "value": "'See all recommendations'",
-              "computed": false
-            }
-          }
-        }
-      },
-      "stories": [
-        {
-          "id": "chat-recommendationwrapper--default",
-          "name": "Default",
-          "snippet": "const Default = () => <RecommendationWrapper title=\"Recommended Flights\" onSeeAll={() => alert('See all')}>(<div className=\"p-4 text-slate-600 text-sm\">Flight card content goes here</div>)</RecommendationWrapper>;"
-        },
-        {
-          "id": "chat-recommendationwrapper--without-see-all",
-          "name": "Without See All",
-          "snippet": "const WithoutSeeAll = () => <RecommendationWrapper title=\"Recommended Hotels\">(<div className=\"p-4 text-slate-600 text-sm\">Hotel card content goes here</div>)</RecommendationWrapper>;"
-        },
-        {
-          "id": "chat-recommendationwrapper--custom-text",
-          "name": "Custom Text",
-          "snippet": "const CustomText = () => <RecommendationWrapper title=\"Places to Visit\" onSeeAll={() => {}} seeAllText=\"View All Places\">(<div className=\"p-4 text-slate-600 text-sm\">Place recommendations here</div>)</RecommendationWrapper>;"
-        }
-      ],
-      "import": "import { RecommendationWrapper } from \"example1\";"
-    },
     "chat-sidebarnav": {
       "id": "chat-sidebarnav",
       "name": "SidebarNav",
@@ -986,17 +941,22 @@
       },
       "stories": [
         {
-          "id": "chat-sidebarnav--chats-active",
-          "name": "Chats Active",
-          "snippet": "const ChatsActive = () => <SidebarNav activeNav=\"chats\" setActiveNav={(id) => console.log('Navigate to', id)} />;"
+          "id": "chat-sidebarnav--default-desktop",
+          "name": "Default Desktop",
+          "snippet": "const DefaultDesktop = () => <SidebarNav activeNav=\"chats\" isMobileOpen={false} />;"
         },
         {
-          "id": "chat-sidebarnav--favorites-active",
-          "name": "Favorites Active",
-          "snippet": "const FavoritesActive = () => <SidebarNav\r\n    activeNav=\"favorites\"\r\n    setActiveNav={(id) => console.log('Navigate to', id)} />;"
+          "id": "chat-sidebarnav--map-active",
+          "name": "Map Active",
+          "snippet": "const MapActive = () => <SidebarNav activeNav=\"map\" isMobileOpen={false} />;"
+        },
+        {
+          "id": "chat-sidebarnav--mobile-drawer-open",
+          "name": "Mobile Drawer Open",
+          "snippet": "const MobileDrawerOpen = () => <SidebarNav activeNav=\"chats\" isMobileOpen />;"
         }
       ],
-      "import": "import { SidebarNav } from \"example1\";"
+      "import": "import { AuthProvider, SidebarNav } from \"example1\";\nimport { MemoryRouter } from \"react-router-dom\";"
     },
     "chat-topbar": {
       "id": "chat-topbar",
@@ -1249,14 +1209,19 @@
       },
       "stories": [
         {
-          "id": "fare-farecards--economy-selected",
-          "name": "Economy Selected",
-          "snippet": "const EconomySelected = () => <FareCards\r\n    fareOptions={MOCK_OPTIONS}\r\n    selectedFareId=\"economy\"\r\n    defaultFlightLogo=\"https://via.placeholder.com/20\"\r\n    onSelectFare={(id) => console.log('Selected fare:', id)} />;"
+          "id": "fare-farecards--default-economy-selected",
+          "name": "Default Economy Selected",
+          "snippet": "const DefaultEconomySelected = () => <FareCards\r\n    fareOptions={MOCK_FARE_OPTIONS}\r\n    selectedFareId=\"economy\"\r\n    defaultFlightLogo={MOCK_FLIGHT_LOGO} />;"
         },
         {
           "id": "fare-farecards--business-selected",
           "name": "Business Selected",
-          "snippet": "const BusinessSelected = () => <FareCards\r\n    fareOptions={MOCK_OPTIONS}\r\n    selectedFareId=\"business\"\r\n    defaultFlightLogo=\"https://via.placeholder.com/20\"\r\n    onSelectFare={(id) => console.log('Selected fare:', id)} />;"
+          "snippet": "const BusinessSelected = () => <FareCards\r\n    fareOptions={MOCK_FARE_OPTIONS}\r\n    selectedFareId=\"business\"\r\n    defaultFlightLogo={MOCK_FLIGHT_LOGO} />;"
+        },
+        {
+          "id": "fare-farecards--interactive",
+          "name": "Interactive",
+          "snippet": "const Interactive = () => {\r\n    const [selectedId, setSelectedId] = useState<'economy' | 'business'>('economy')\r\n\r\n    return (\r\n        <FareCards\r\n            fareOptions={MOCK_FARE_OPTIONS}\r\n            defaultFlightLogo={MOCK_FLIGHT_LOGO}\r\n            selectedFareId={selectedId}\r\n            onSelectFare={(id) => {\r\n              setSelectedId(id)\r\n              args.onSelectFare?.(id)\r\n            }} />\r\n    );\r\n};"
         }
       ],
       "import": "import { FareCards } from \"example1\";"
@@ -1313,14 +1278,19 @@
       },
       "stories": [
         {
-          "id": "fare-fareheader--default",
-          "name": "Default",
-          "snippet": "const Default = () => <FareHeader\r\n    destination=\"Lagos, Nigeria (LOS)\"\r\n    tripType=\"Round Trip\"\r\n    cabinClass=\"Economy\"\r\n    price={1200}\r\n    priceUnit=\"per person\" />;"
+          "id": "fare-fareheader--round-trip",
+          "name": "Round Trip",
+          "snippet": "const RoundTrip = () => <FareHeader\r\n    destination=\"Lagos to Owerri\"\r\n    tripType=\"Round trip\"\r\n    cabinClass=\"Economy Class\"\r\n    price={320}\r\n    priceUnit=\"per passenger\" />;"
         },
         {
           "id": "fare-fareheader--business-class",
           "name": "Business Class",
-          "snippet": "const BusinessClass = () => <FareHeader\r\n    destination=\"Dubai, UAE (DXB)\"\r\n    tripType=\"One Way\"\r\n    cabinClass=\"Business\"\r\n    price={3500}\r\n    priceUnit=\"per person\" />;"
+          "snippet": "const BusinessClass = () => <FareHeader\r\n    destination=\"Tokyo to Paris\"\r\n    tripType=\"Round trip\"\r\n    cabinClass=\"Business Class\"\r\n    price={2450}\r\n    priceUnit=\"total base fare\" />;"
+        },
+        {
+          "id": "fare-fareheader--one-way",
+          "name": "One Way",
+          "snippet": "const OneWay = () => <FareHeader\r\n    destination=\"Da Nang to Hanoi\"\r\n    tripType=\"One way\"\r\n    cabinClass=\"Economy Class\"\r\n    price={85}\r\n    priceUnit=\"incl. taxes & fees\" />;"
         }
       ],
       "import": "import { FareHeader } from \"example1\";"
@@ -1370,14 +1340,19 @@
       },
       "stories": [
         {
-          "id": "fare-pricedetailssidebar--default",
-          "name": "Default",
-          "snippet": "const Default = () => <PriceDetailsSidebar\r\n    pricePerTraveller={1200}\r\n    flightDues={50}\r\n    taxesAndFees={150}\r\n    totalAmount={1400} />;"
+          "id": "fare-pricedetailssidebar--single-traveller",
+          "name": "Single Traveller",
+          "snippet": "const SingleTraveller = () => <PriceDetailsSidebar\r\n    pricePerTraveller={320}\r\n    flightDues={45}\r\n    taxesAndFees={35}\r\n    totalAmount={400} />;"
         },
         {
-          "id": "fare-pricedetailssidebar--business-class",
-          "name": "Business Class",
-          "snippet": "const BusinessClass = () => <PriceDetailsSidebar\r\n    pricePerTraveller={3500}\r\n    flightDues={100}\r\n    taxesAndFees={350}\r\n    totalAmount={3950} />;"
+          "id": "fare-pricedetailssidebar--family-group",
+          "name": "Family Group",
+          "snippet": "const FamilyGroup = () => <PriceDetailsSidebar\r\n    pricePerTraveller={1280}\r\n    flightDues={180}\r\n    taxesAndFees={140}\r\n    totalAmount={1600} />;"
+        },
+        {
+          "id": "fare-pricedetailssidebar--discounted-fare",
+          "name": "Discounted Fare",
+          "snippet": "const DiscountedFare = () => <PriceDetailsSidebar\r\n    pricePerTraveller={199}\r\n    flightDues={0}\r\n    taxesAndFees={21}\r\n    totalAmount={220} />;"
         }
       ],
       "import": "import { PriceDetailsSidebar } from \"example1\";"
@@ -1440,14 +1415,19 @@
       },
       "stories": [
         {
-          "id": "fare-selectedflightbox--default",
-          "name": "Default",
-          "snippet": "const Default = () => <SelectedFlightBox\r\n    airlineName=\"AirPeace Airways, Nigerian\"\r\n    defaultFlightLogo=\"https://via.placeholder.com/20\"\r\n    iconHeart=\"https://via.placeholder.com/16\"\r\n    legs={MOCK_LEGS}\r\n    cancellationPolicy=\"Free cancellation 24 hours before departure\" />;"
+          "id": "fare-selectedflightbox--round-trip",
+          "name": "Round Trip",
+          "snippet": "const RoundTrip = () => <SelectedFlightBox\r\n    airlineName=\"Qatar Airways\"\r\n    defaultFlightLogo={MOCK_AIRLINE_LOGO}\r\n    iconHeart={MOCK_HEART_ICON}\r\n    cancellationPolicy=\"Refundable up to 24 hours before departure (fee may apply).\"\r\n    legs={[\r\n      {\r\n        id: 'leg-1',\r\n        times: '08:30 - 14:15',\r\n        route: 'SGN - DOH',\r\n        duration: '7h 45m',\r\n        stops: 'Non-stop',\r\n      },\r\n      {\r\n        id: 'leg-2',\r\n        times: '18:00 - 06:20 (+1)',\r\n        route: 'DOH - SGN',\r\n        duration: '8h 20m',\r\n        stops: 'Non-stop',\r\n      },\r\n    ]} />;"
         },
         {
-          "id": "fare-selectedflightbox--direct-flight",
-          "name": "Direct Flight",
-          "snippet": "const DirectFlight = () => <SelectedFlightBox\r\n    airlineName=\"Green Africa Airways\"\r\n    defaultFlightLogo=\"https://via.placeholder.com/20\"\r\n    iconHeart=\"https://via.placeholder.com/16\"\r\n    legs={[\r\n      { id: 'leg3', times: '6:00am - 8:30am', route: 'LOS - ABV', duration: '2h 30m', stops: 'Direct' },\r\n    ]}\r\n    cancellationPolicy=\"Non-refundable\" />;"
+          "id": "fare-selectedflightbox--one-way",
+          "name": "One Way",
+          "snippet": "const OneWay = () => <SelectedFlightBox\r\n    airlineName=\"Vietnam Airlines\"\r\n    defaultFlightLogo={MOCK_AIRLINE_LOGO}\r\n    iconHeart={MOCK_HEART_ICON}\r\n    cancellationPolicy=\"Non-refundable. Ticket change allowed with a fee.\"\r\n    legs={[\r\n      {\r\n        id: 'leg-1',\r\n        times: '10:00 - 12:15',\r\n        route: 'HAN - DAD',\r\n        duration: '2h 15m',\r\n        stops: 'Direct',\r\n      },\r\n    ]} />;"
+        },
+        {
+          "id": "fare-selectedflightbox--multi-stop",
+          "name": "Multi Stop",
+          "snippet": "const MultiStop = () => <SelectedFlightBox\r\n    airlineName=\"Emirates\"\r\n    defaultFlightLogo={MOCK_AIRLINE_LOGO}\r\n    iconHeart={MOCK_HEART_ICON}\r\n    cancellationPolicy=\"Free cancellation within 24 hours of booking.\"\r\n    legs={[\r\n      {\r\n        id: 'leg-1',\r\n        times: '23:55 - 11:30 (+1)',\r\n        route: 'SGN - DXB - LHR',\r\n        duration: '15h 35m',\r\n        stops: '1 Stop (DXB)',\r\n      },\r\n    ]} />;"
         }
       ],
       "import": "import { SelectedFlightBox } from \"example1\";"
@@ -2151,6 +2131,6 @@
   },
   "meta": {
     "docgen": "react-docgen",
-    "durationMs": 554
+    "durationMs": 672
   }
 }

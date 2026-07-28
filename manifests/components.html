@@ -588,13 +588,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><span class="filter-pill ok" aria-disabled="true">28 components ok</span><a class="filter-pill info" data-k="infos" href="#filter-infos">28/28 infos</a><span class="filter-pill ok" aria-disabled="true">77 stories ok</span></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><span class="filter-pill ok" aria-disabled="true">27 components ok</span><a class="filter-pill info" data-k="infos" href="#filter-infos">27/27 infos</a><span class="filter-pill ok" aria-disabled="true">85 stories ok</span></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note info" style="margin-bottom: 16px;">
-            <strong>Tip:</strong> You are using <code>react-docgen</code> (the default). Generation took <strong>0.6s</strong>. For higher quality prop types, consider switching to <code>react-docgen-typescript</code> in your <code>main.ts</code>:
+            <strong>Tip:</strong> You are using <code>react-docgen</code> (the default). Generation took <strong>0.7s</strong>. For higher quality prop types, consider switching to <code>react-docgen-typescript</code> in your <code>main.ts</code>:
             <pre><code>typescript: {
   reactDocgen: 'react-docgen-typescript',
 }</code></pre>
@@ -721,7 +721,7 @@ questionText: string</code></pre>
       <div class="badges">
         <label for="c-1-auth-authheader-props" class="badge ok as-toggle">3 prop types</label>
         <label for="c-1-auth-authheader-info" class="badge info as-toggle">1 info</label>
-        <label for="c-1-auth-authheader-stories" class="badge ok as-toggle">3 stories</label>
+        <label for="c-1-auth-authheader-stories" class="badge ok as-toggle">6 stories</label>
         
         
       </div>
@@ -803,12 +803,45 @@ title: string</code></pre>
             </div>
             <div class="note ok">
               <div class="row">
-                <span class="ex-name">Minimal</span>
+                <span class="ex-name">Resset Password</span>
                 <span class="badge ok">story ok</span>
               </div>
               
               
-              <pre><code>const Minimal = () =&gt; &lt;AuthHeader title=&quot;Reset Password&quot; subtitle=&quot;Enter your new password below&quot; /&gt;;</code></pre>
+              <pre><code>const RessetPassword = () =&gt; &lt;AuthHeader title=&quot;Reset Password&quot; subtitle=&quot;Enter your new password below&quot; /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Onboarding</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Onboarding = () =&gt; &lt;AuthHeader
+    title=&quot;Let’s Get To Know You!&quot;
+    subtitle=&quot;Provide only the information provided so that Tripal can know you better&quot; /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Forgot Password</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const ForgotPassword = () =&gt; &lt;AuthHeader
+    title=&quot;Verify Email&quot;
+    subtitle=&quot;Enter your email address to receive verification OTP&quot; /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Verify OTP</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const VerifyOTP = () =&gt; &lt;AuthHeader
+    title=&quot;Enter OTP&quot;
+    subtitle=&quot;Enter your email address to receive verification OTP&quot; /&gt;;</code></pre>
             </div>
         </div>
     
@@ -1458,7 +1491,7 @@ setIsRecording: React.Dispatch&lt;React.SetStateAction&lt;boolean&gt;&gt;</code>
       <div class="badges">
         <label for="c-7-chat-chatmessagelist-props" class="badge ok as-toggle">6 prop types</label>
         <label for="c-7-chat-chatmessagelist-info" class="badge info as-toggle">1 info</label>
-        <label for="c-7-chat-chatmessagelist-stories" class="badge ok as-toggle">3 stories</label>
+        <label for="c-7-chat-chatmessagelist-stories" class="badge ok as-toggle">6 stories</label>
         
         
       </div>
@@ -1524,21 +1557,48 @@ onViewAllPlaces?: (places?: PlaceData[]) =&gt; void</code></pre>
           
             <div class="note ok">
               <div class="row">
-                <span class="ex-name">Simple Chat</span>
-                <span class="badge ok">story ok</span>
-              </div>
-              
-              
-              <pre><code>const SimpleChat = () =&gt; &lt;ChatMessageList messages={TEXT_MESSAGES} isTyping={false} /&gt;;</code></pre>
-            </div>
-            <div class="note ok">
-              <div class="row">
                 <span class="ex-name">With Typing</span>
                 <span class="badge ok">story ok</span>
               </div>
               
               
               <pre><code>const WithTyping = () =&gt; &lt;ChatMessageList messages={FLIGHT_MESSAGES} isTyping /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Flight Recommendations</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const FlightRecommendations = () =&gt; &lt;ChatMessageList messages={TEXT_MESSAGES} isTyping={false} /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Hotel Recommendations</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const HotelRecommendations = () =&gt; &lt;ChatMessageList messages={HOTEL_MESSAGES} isTyping={false} /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Places Recommendations</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const PlacesRecommendations = () =&gt; &lt;ChatMessageList messages={PLACES_MESSAGES} isTyping={false} /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Itinerary Recommendations</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const ItineraryRecommendations = () =&gt; &lt;ChatMessageList messages={ITINERARY_MESSAGES} isTyping={false} /&gt;;</code></pre>
             </div>
             <div class="note ok">
               <div class="row">
@@ -1670,7 +1730,7 @@ message: string</code></pre>
       <div class="badges">
         <label for="c-9-fare-farecards-props" class="badge ok as-toggle">4 prop types</label>
         <label for="c-9-fare-farecards-info" class="badge info as-toggle">1 info</label>
-        <label for="c-9-fare-farecards-stories" class="badge ok as-toggle">2 stories</label>
+        <label for="c-9-fare-farecards-stories" class="badge ok as-toggle">3 stories</label>
         
         
       </div>
@@ -1732,16 +1792,15 @@ selectedFareId: &#39;economy&#39; | &#39;business&#39;</code></pre>
           
             <div class="note ok">
               <div class="row">
-                <span class="ex-name">Economy Selected</span>
+                <span class="ex-name">Default Economy Selected</span>
                 <span class="badge ok">story ok</span>
               </div>
               
               
-              <pre><code>const EconomySelected = () =&gt; &lt;FareCards
-    fareOptions={MOCK_OPTIONS}
+              <pre><code>const DefaultEconomySelected = () =&gt; &lt;FareCards
+    fareOptions={MOCK_FARE_OPTIONS}
     selectedFareId=&quot;economy&quot;
-    defaultFlightLogo=&quot;https://via.placeholder.com/20&quot;
-    onSelectFare={(id) =&gt; console.log(&#39;Selected fare:&#39;, id)} /&gt;;</code></pre>
+    defaultFlightLogo={MOCK_FLIGHT_LOGO} /&gt;;</code></pre>
             </div>
             <div class="note ok">
               <div class="row">
@@ -1751,10 +1810,31 @@ selectedFareId: &#39;economy&#39; | &#39;business&#39;</code></pre>
               
               
               <pre><code>const BusinessSelected = () =&gt; &lt;FareCards
-    fareOptions={MOCK_OPTIONS}
+    fareOptions={MOCK_FARE_OPTIONS}
     selectedFareId=&quot;business&quot;
-    defaultFlightLogo=&quot;https://via.placeholder.com/20&quot;
-    onSelectFare={(id) =&gt; console.log(&#39;Selected fare:&#39;, id)} /&gt;;</code></pre>
+    defaultFlightLogo={MOCK_FLIGHT_LOGO} /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Interactive</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Interactive = () =&gt; {
+    const [selectedId, setSelectedId] = useState&lt;&#39;economy&#39; | &#39;business&#39;&gt;(&#39;economy&#39;)
+
+    return (
+        &lt;FareCards
+            fareOptions={MOCK_FARE_OPTIONS}
+            defaultFlightLogo={MOCK_FLIGHT_LOGO}
+            selectedFareId={selectedId}
+            onSelectFare={(id) =&gt; {
+              setSelectedId(id)
+              args.onSelectFare?.(id)
+            }} /&gt;
+    );
+};</code></pre>
             </div>
         </div>
     
@@ -1775,7 +1855,7 @@ selectedFareId: &#39;economy&#39; | &#39;business&#39;</code></pre>
       <div class="badges">
         <label for="c-10-fare-fareheader-props" class="badge ok as-toggle">5 prop types</label>
         <label for="c-10-fare-fareheader-info" class="badge info as-toggle">1 info</label>
-        <label for="c-10-fare-fareheader-stories" class="badge ok as-toggle">2 stories</label>
+        <label for="c-10-fare-fareheader-stories" class="badge ok as-toggle">3 stories</label>
         
         
       </div>
@@ -1839,17 +1919,17 @@ tripType: string</code></pre>
           
             <div class="note ok">
               <div class="row">
-                <span class="ex-name">Default</span>
+                <span class="ex-name">Round Trip</span>
                 <span class="badge ok">story ok</span>
               </div>
               
               
-              <pre><code>const Default = () =&gt; &lt;FareHeader
-    destination=&quot;Lagos, Nigeria (LOS)&quot;
-    tripType=&quot;Round Trip&quot;
-    cabinClass=&quot;Economy&quot;
-    price={1200}
-    priceUnit=&quot;per person&quot; /&gt;;</code></pre>
+              <pre><code>const RoundTrip = () =&gt; &lt;FareHeader
+    destination=&quot;Lagos to Owerri&quot;
+    tripType=&quot;Round trip&quot;
+    cabinClass=&quot;Economy Class&quot;
+    price={320}
+    priceUnit=&quot;per passenger&quot; /&gt;;</code></pre>
             </div>
             <div class="note ok">
               <div class="row">
@@ -1859,11 +1939,25 @@ tripType: string</code></pre>
               
               
               <pre><code>const BusinessClass = () =&gt; &lt;FareHeader
-    destination=&quot;Dubai, UAE (DXB)&quot;
-    tripType=&quot;One Way&quot;
-    cabinClass=&quot;Business&quot;
-    price={3500}
-    priceUnit=&quot;per person&quot; /&gt;;</code></pre>
+    destination=&quot;Tokyo to Paris&quot;
+    tripType=&quot;Round trip&quot;
+    cabinClass=&quot;Business Class&quot;
+    price={2450}
+    priceUnit=&quot;total base fare&quot; /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">One Way</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const OneWay = () =&gt; &lt;FareHeader
+    destination=&quot;Da Nang to Hanoi&quot;
+    tripType=&quot;One way&quot;
+    cabinClass=&quot;Economy Class&quot;
+    price={85}
+    priceUnit=&quot;incl. taxes &amp; fees&quot; /&gt;;</code></pre>
             </div>
         </div>
     
@@ -2120,7 +2214,7 @@ title?: string = &#39;Recommended Flights For a Round Trip Journey&#39;</code></
             <pre><code>Props:</code></pre>
             <pre><code>hotels?: HotelOption[]
 
-onBookNow?: (hotelId: string) =&gt; void
+onBookNow?: (hotel: HotelOption) =&gt; void
 
 onSeeAll?: () =&gt; void
 
@@ -2688,7 +2782,7 @@ places?: PlaceData[]</code></pre>
       <div class="badges">
         <label for="c-19-fare-pricedetailssidebar-props" class="badge ok as-toggle">4 prop types</label>
         <label for="c-19-fare-pricedetailssidebar-info" class="badge info as-toggle">1 info</label>
-        <label for="c-19-fare-pricedetailssidebar-stories" class="badge ok as-toggle">2 stories</label>
+        <label for="c-19-fare-pricedetailssidebar-stories" class="badge ok as-toggle">3 stories</label>
         
         
       </div>
@@ -2750,29 +2844,42 @@ totalAmount: number</code></pre>
           
             <div class="note ok">
               <div class="row">
-                <span class="ex-name">Default</span>
+                <span class="ex-name">Single Traveller</span>
                 <span class="badge ok">story ok</span>
               </div>
               
               
-              <pre><code>const Default = () =&gt; &lt;PriceDetailsSidebar
-    pricePerTraveller={1200}
-    flightDues={50}
-    taxesAndFees={150}
-    totalAmount={1400} /&gt;;</code></pre>
+              <pre><code>const SingleTraveller = () =&gt; &lt;PriceDetailsSidebar
+    pricePerTraveller={320}
+    flightDues={45}
+    taxesAndFees={35}
+    totalAmount={400} /&gt;;</code></pre>
             </div>
             <div class="note ok">
               <div class="row">
-                <span class="ex-name">Business Class</span>
+                <span class="ex-name">Family Group</span>
                 <span class="badge ok">story ok</span>
               </div>
               
               
-              <pre><code>const BusinessClass = () =&gt; &lt;PriceDetailsSidebar
-    pricePerTraveller={3500}
-    flightDues={100}
-    taxesAndFees={350}
-    totalAmount={3950} /&gt;;</code></pre>
+              <pre><code>const FamilyGroup = () =&gt; &lt;PriceDetailsSidebar
+    pricePerTraveller={1280}
+    flightDues={180}
+    taxesAndFees={140}
+    totalAmount={1600} /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Discounted Fare</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const DiscountedFare = () =&gt; &lt;PriceDetailsSidebar
+    pricePerTraveller={199}
+    flightDues={0}
+    taxesAndFees={21}
+    totalAmount={220} /&gt;;</code></pre>
             </div>
         </div>
     
@@ -2901,120 +3008,14 @@ size?: &#39;sm&#39; | &#39;md&#39; | &#39;lg&#39; = &#39;sm&#39;</code></pre>
   no-story-error
   no-doc-error"
   role="listitem"
-  aria-label="RecommendationWrapper">
-  <div class="head">
-    <div class="title">
-      <h2><span class="status-dot dot-ok"></span> RecommendationWrapper</h2>
-      <div class="badges">
-        <label for="c-21-chat-recommendationwrapper-props" class="badge ok as-toggle">4 prop types</label>
-        <label for="c-21-chat-recommendationwrapper-info" class="badge info as-toggle">1 info</label>
-        <label for="c-21-chat-recommendationwrapper-stories" class="badge ok as-toggle">3 stories</label>
-        
-        
-      </div>
-    </div>
-    <div class="meta" title="./src/components/chat/RecommendationWrapper.stories.tsx">chat-recommendationwrapper · ./src/components/chat/RecommendationWrapper.stories.tsx</div>
-    
-    
-    
-  </div>
-
-  <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
-  
-  <input id="c-21-chat-recommendationwrapper-info" class="tg tg-info" type="checkbox" hidden />
-  <input id="c-21-chat-recommendationwrapper-stories" class="tg tg-stories" type="checkbox" hidden />
-  
-  
-  <input id="c-21-chat-recommendationwrapper-props" class="tg tg-props" type="checkbox" hidden />
-
-  <div class="panels">
-    
-    
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
-    
-        <div class="panel panel-props">
-          <div class="note ok">
-            <div class="row">
-              <span class="ex-name">Prop types <small>(react-docgen)</small></span>
-              <span class="badge ok">4 prop types</span>
-            </div>
-            <pre><code>Component: src\components\chat\RecommendationWrapper.tsx::RecommendationWrapper</code></pre>
-            <pre><code>Props:</code></pre>
-            <pre><code>children: React.ReactNode
-
-onSeeAll?: () =&gt; void
-
-seeAllText?: string = &#39;See all recommendations&#39;
-
-title: string</code></pre>
-          </div>
-        </div>
-    
-        <div class="panel panel-stories">
-          
-          
-          
-          <div class="note ok">
-                <div class="row">
-                  <span class="ex-name">Imports</span>
-                </div>
-                <pre><code>import { RecommendationWrapper } from "example1";</code></pre>
-              </div>
-          
-          
-            <div class="note ok">
-              <div class="row">
-                <span class="ex-name">Default</span>
-                <span class="badge ok">story ok</span>
-              </div>
-              
-              
-              <pre><code>const Default = () =&gt; &lt;RecommendationWrapper title=&quot;Recommended Flights&quot; onSeeAll={() =&gt; alert(&#39;See all&#39;)}&gt;(&lt;div className=&quot;p-4 text-slate-600 text-sm&quot;&gt;Flight card content goes here&lt;/div&gt;)&lt;/RecommendationWrapper&gt;;</code></pre>
-            </div>
-            <div class="note ok">
-              <div class="row">
-                <span class="ex-name">Without See All</span>
-                <span class="badge ok">story ok</span>
-              </div>
-              
-              
-              <pre><code>const WithoutSeeAll = () =&gt; &lt;RecommendationWrapper title=&quot;Recommended Hotels&quot;&gt;(&lt;div className=&quot;p-4 text-slate-600 text-sm&quot;&gt;Hotel card content goes here&lt;/div&gt;)&lt;/RecommendationWrapper&gt;;</code></pre>
-            </div>
-            <div class="note ok">
-              <div class="row">
-                <span class="ex-name">Custom Text</span>
-                <span class="badge ok">story ok</span>
-              </div>
-              
-              
-              <pre><code>const CustomText = () =&gt; &lt;RecommendationWrapper title=&quot;Places to Visit&quot; onSeeAll={() =&gt; {}} seeAllText=&quot;View All Places&quot;&gt;(&lt;div className=&quot;p-4 text-slate-600 text-sm&quot;&gt;Place recommendations here&lt;/div&gt;)&lt;/RecommendationWrapper&gt;;</code></pre>
-            </div>
-        </div>
-    
-    
-  </div>
-</article>
-<article
-  class="card 
-  no-error 
-  has-info 
-  no-story-error
-  no-doc-error"
-  role="listitem"
   aria-label="SectionHeader">
   <div class="head">
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> SectionHeader</h2>
       <div class="badges">
-        <label for="c-22-ui-sectionheader-props" class="badge ok as-toggle">2 prop types</label>
-        <label for="c-22-ui-sectionheader-info" class="badge info as-toggle">1 info</label>
-        <label for="c-22-ui-sectionheader-stories" class="badge ok as-toggle">2 stories</label>
+        <label for="c-21-ui-sectionheader-props" class="badge ok as-toggle">2 prop types</label>
+        <label for="c-21-ui-sectionheader-info" class="badge info as-toggle">1 info</label>
+        <label for="c-21-ui-sectionheader-stories" class="badge ok as-toggle">2 stories</label>
         
         
       </div>
@@ -3027,11 +3028,11 @@ title: string</code></pre>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-22-ui-sectionheader-info" class="tg tg-info" type="checkbox" hidden />
-  <input id="c-22-ui-sectionheader-stories" class="tg tg-stories" type="checkbox" hidden />
+  <input id="c-21-ui-sectionheader-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-21-ui-sectionheader-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
-  <input id="c-22-ui-sectionheader-props" class="tg tg-props" type="checkbox" hidden />
+  <input id="c-21-ui-sectionheader-props" class="tg tg-props" type="checkbox" hidden />
 
   <div class="panels">
     
@@ -3105,9 +3106,9 @@ title: string</code></pre>
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> SelectedFlightBox</h2>
       <div class="badges">
-        <label for="c-23-fare-selectedflightbox-props" class="badge ok as-toggle">5 prop types</label>
-        <label for="c-23-fare-selectedflightbox-info" class="badge info as-toggle">1 info</label>
-        <label for="c-23-fare-selectedflightbox-stories" class="badge ok as-toggle">2 stories</label>
+        <label for="c-22-fare-selectedflightbox-props" class="badge ok as-toggle">5 prop types</label>
+        <label for="c-22-fare-selectedflightbox-info" class="badge info as-toggle">1 info</label>
+        <label for="c-22-fare-selectedflightbox-stories" class="badge ok as-toggle">3 stories</label>
         
         
       </div>
@@ -3120,11 +3121,11 @@ title: string</code></pre>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-23-fare-selectedflightbox-info" class="tg tg-info" type="checkbox" hidden />
-  <input id="c-23-fare-selectedflightbox-stories" class="tg tg-stories" type="checkbox" hidden />
+  <input id="c-22-fare-selectedflightbox-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-22-fare-selectedflightbox-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
-  <input id="c-23-fare-selectedflightbox-props" class="tg tg-props" type="checkbox" hidden />
+  <input id="c-22-fare-selectedflightbox-props" class="tg tg-props" type="checkbox" hidden />
 
   <div class="panels">
     
@@ -3171,33 +3172,76 @@ legs: FlightLeg[]</code></pre>
           
             <div class="note ok">
               <div class="row">
-                <span class="ex-name">Default</span>
+                <span class="ex-name">Round Trip</span>
                 <span class="badge ok">story ok</span>
               </div>
               
               
-              <pre><code>const Default = () =&gt; &lt;SelectedFlightBox
-    airlineName=&quot;AirPeace Airways, Nigerian&quot;
-    defaultFlightLogo=&quot;https://via.placeholder.com/20&quot;
-    iconHeart=&quot;https://via.placeholder.com/16&quot;
-    legs={MOCK_LEGS}
-    cancellationPolicy=&quot;Free cancellation 24 hours before departure&quot; /&gt;;</code></pre>
+              <pre><code>const RoundTrip = () =&gt; &lt;SelectedFlightBox
+    airlineName=&quot;Qatar Airways&quot;
+    defaultFlightLogo={MOCK_AIRLINE_LOGO}
+    iconHeart={MOCK_HEART_ICON}
+    cancellationPolicy=&quot;Refundable up to 24 hours before departure (fee may apply).&quot;
+    legs={[
+      {
+        id: &#39;leg-1&#39;,
+        times: &#39;08:30 - 14:15&#39;,
+        route: &#39;SGN - DOH&#39;,
+        duration: &#39;7h 45m&#39;,
+        stops: &#39;Non-stop&#39;,
+      },
+      {
+        id: &#39;leg-2&#39;,
+        times: &#39;18:00 - 06:20 (+1)&#39;,
+        route: &#39;DOH - SGN&#39;,
+        duration: &#39;8h 20m&#39;,
+        stops: &#39;Non-stop&#39;,
+      },
+    ]} /&gt;;</code></pre>
             </div>
             <div class="note ok">
               <div class="row">
-                <span class="ex-name">Direct Flight</span>
+                <span class="ex-name">One Way</span>
                 <span class="badge ok">story ok</span>
               </div>
               
               
-              <pre><code>const DirectFlight = () =&gt; &lt;SelectedFlightBox
-    airlineName=&quot;Green Africa Airways&quot;
-    defaultFlightLogo=&quot;https://via.placeholder.com/20&quot;
-    iconHeart=&quot;https://via.placeholder.com/16&quot;
+              <pre><code>const OneWay = () =&gt; &lt;SelectedFlightBox
+    airlineName=&quot;Vietnam Airlines&quot;
+    defaultFlightLogo={MOCK_AIRLINE_LOGO}
+    iconHeart={MOCK_HEART_ICON}
+    cancellationPolicy=&quot;Non-refundable. Ticket change allowed with a fee.&quot;
     legs={[
-      { id: &#39;leg3&#39;, times: &#39;6:00am - 8:30am&#39;, route: &#39;LOS - ABV&#39;, duration: &#39;2h 30m&#39;, stops: &#39;Direct&#39; },
-    ]}
-    cancellationPolicy=&quot;Non-refundable&quot; /&gt;;</code></pre>
+      {
+        id: &#39;leg-1&#39;,
+        times: &#39;10:00 - 12:15&#39;,
+        route: &#39;HAN - DAD&#39;,
+        duration: &#39;2h 15m&#39;,
+        stops: &#39;Direct&#39;,
+      },
+    ]} /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Multi Stop</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const MultiStop = () =&gt; &lt;SelectedFlightBox
+    airlineName=&quot;Emirates&quot;
+    defaultFlightLogo={MOCK_AIRLINE_LOGO}
+    iconHeart={MOCK_HEART_ICON}
+    cancellationPolicy=&quot;Free cancellation within 24 hours of booking.&quot;
+    legs={[
+      {
+        id: &#39;leg-1&#39;,
+        times: &#39;23:55 - 11:30 (+1)&#39;,
+        route: &#39;SGN - DXB - LHR&#39;,
+        duration: &#39;15h 35m&#39;,
+        stops: &#39;1 Stop (DXB)&#39;,
+      },
+    ]} /&gt;;</code></pre>
             </div>
         </div>
     
@@ -3216,9 +3260,9 @@ legs: FlightLeg[]</code></pre>
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> SidebarNav</h2>
       <div class="badges">
-        <label for="c-24-chat-sidebarnav-props" class="badge ok as-toggle">4 prop types</label>
-        <label for="c-24-chat-sidebarnav-info" class="badge info as-toggle">1 info</label>
-        <label for="c-24-chat-sidebarnav-stories" class="badge ok as-toggle">2 stories</label>
+        <label for="c-23-chat-sidebarnav-props" class="badge ok as-toggle">4 prop types</label>
+        <label for="c-23-chat-sidebarnav-info" class="badge info as-toggle">1 info</label>
+        <label for="c-23-chat-sidebarnav-stories" class="badge ok as-toggle">3 stories</label>
         
         
       </div>
@@ -3231,11 +3275,11 @@ legs: FlightLeg[]</code></pre>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-24-chat-sidebarnav-info" class="tg tg-info" type="checkbox" hidden />
-  <input id="c-24-chat-sidebarnav-stories" class="tg tg-stories" type="checkbox" hidden />
+  <input id="c-23-chat-sidebarnav-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-23-chat-sidebarnav-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
-  <input id="c-24-chat-sidebarnav-props" class="tg tg-props" type="checkbox" hidden />
+  <input id="c-23-chat-sidebarnav-props" class="tg tg-props" type="checkbox" hidden />
 
   <div class="panels">
     
@@ -3274,29 +3318,37 @@ setActiveNav: (id: string) =&gt; void</code></pre>
                 <div class="row">
                   <span class="ex-name">Imports</span>
                 </div>
-                <pre><code>import { SidebarNav } from "example1";</code></pre>
+                <pre><code>import { AuthProvider, SidebarNav } from "example1";
+import { MemoryRouter } from "react-router-dom";</code></pre>
               </div>
           
           
             <div class="note ok">
               <div class="row">
-                <span class="ex-name">Chats Active</span>
+                <span class="ex-name">Default Desktop</span>
                 <span class="badge ok">story ok</span>
               </div>
               
               
-              <pre><code>const ChatsActive = () =&gt; &lt;SidebarNav activeNav=&quot;chats&quot; setActiveNav={(id) =&gt; console.log(&#39;Navigate to&#39;, id)} /&gt;;</code></pre>
+              <pre><code>const DefaultDesktop = () =&gt; &lt;SidebarNav activeNav=&quot;chats&quot; isMobileOpen={false} /&gt;;</code></pre>
             </div>
             <div class="note ok">
               <div class="row">
-                <span class="ex-name">Favorites Active</span>
+                <span class="ex-name">Map Active</span>
                 <span class="badge ok">story ok</span>
               </div>
               
               
-              <pre><code>const FavoritesActive = () =&gt; &lt;SidebarNav
-    activeNav=&quot;favorites&quot;
-    setActiveNav={(id) =&gt; console.log(&#39;Navigate to&#39;, id)} /&gt;;</code></pre>
+              <pre><code>const MapActive = () =&gt; &lt;SidebarNav activeNav=&quot;map&quot; isMobileOpen={false} /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Mobile Drawer Open</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const MobileDrawerOpen = () =&gt; &lt;SidebarNav activeNav=&quot;chats&quot; isMobileOpen /&gt;;</code></pre>
             </div>
         </div>
     
@@ -3315,9 +3367,9 @@ setActiveNav: (id: string) =&gt; void</code></pre>
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> ThinkingLoader</h2>
       <div class="badges">
-        <label for="c-25-ui-thinkingloader-props" class="badge ok as-toggle">1 prop type</label>
-        <label for="c-25-ui-thinkingloader-info" class="badge info as-toggle">1 info</label>
-        <label for="c-25-ui-thinkingloader-stories" class="badge ok as-toggle">2 stories</label>
+        <label for="c-24-ui-thinkingloader-props" class="badge ok as-toggle">1 prop type</label>
+        <label for="c-24-ui-thinkingloader-info" class="badge info as-toggle">1 info</label>
+        <label for="c-24-ui-thinkingloader-stories" class="badge ok as-toggle">2 stories</label>
         
         
       </div>
@@ -3330,11 +3382,11 @@ setActiveNav: (id: string) =&gt; void</code></pre>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-25-ui-thinkingloader-info" class="tg tg-info" type="checkbox" hidden />
-  <input id="c-25-ui-thinkingloader-stories" class="tg tg-stories" type="checkbox" hidden />
+  <input id="c-24-ui-thinkingloader-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-24-ui-thinkingloader-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
-  <input id="c-25-ui-thinkingloader-props" class="tg tg-props" type="checkbox" hidden />
+  <input id="c-24-ui-thinkingloader-props" class="tg tg-props" type="checkbox" hidden />
 
   <div class="panels">
     
@@ -3406,9 +3458,9 @@ setActiveNav: (id: string) =&gt; void</code></pre>
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> Topbar</h2>
       <div class="badges">
-        <label for="c-26-chat-topbar-props" class="badge ok as-toggle">5 prop types</label>
-        <label for="c-26-chat-topbar-info" class="badge info as-toggle">1 info</label>
-        <label for="c-26-chat-topbar-stories" class="badge ok as-toggle">3 stories</label>
+        <label for="c-25-chat-topbar-props" class="badge ok as-toggle">5 prop types</label>
+        <label for="c-25-chat-topbar-info" class="badge info as-toggle">1 info</label>
+        <label for="c-25-chat-topbar-stories" class="badge ok as-toggle">3 stories</label>
         
         
       </div>
@@ -3421,11 +3473,11 @@ setActiveNav: (id: string) =&gt; void</code></pre>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-26-chat-topbar-info" class="tg tg-info" type="checkbox" hidden />
-  <input id="c-26-chat-topbar-stories" class="tg tg-stories" type="checkbox" hidden />
+  <input id="c-25-chat-topbar-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-25-chat-topbar-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
-  <input id="c-26-chat-topbar-props" class="tg tg-props" type="checkbox" hidden />
+  <input id="c-25-chat-topbar-props" class="tg tg-props" type="checkbox" hidden />
 
   <div class="panels">
     
@@ -3520,9 +3572,9 @@ onNewChat?: () =&gt; void</code></pre>
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> WelcomeState</h2>
       <div class="badges">
-        <label for="c-27-chat-welcomestate-props" class="badge ok as-toggle">2 prop types</label>
-        <label for="c-27-chat-welcomestate-info" class="badge info as-toggle">1 info</label>
-        <label for="c-27-chat-welcomestate-stories" class="badge ok as-toggle">2 stories</label>
+        <label for="c-26-chat-welcomestate-props" class="badge ok as-toggle">2 prop types</label>
+        <label for="c-26-chat-welcomestate-info" class="badge info as-toggle">1 info</label>
+        <label for="c-26-chat-welcomestate-stories" class="badge ok as-toggle">2 stories</label>
         
         
       </div>
@@ -3535,11 +3587,11 @@ onNewChat?: () =&gt; void</code></pre>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-27-chat-welcomestate-info" class="tg tg-info" type="checkbox" hidden />
-  <input id="c-27-chat-welcomestate-stories" class="tg tg-stories" type="checkbox" hidden />
+  <input id="c-26-chat-welcomestate-info" class="tg tg-info" type="checkbox" hidden />
+  <input id="c-26-chat-welcomestate-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
-  <input id="c-27-chat-welcomestate-props" class="tg tg-props" type="checkbox" hidden />
+  <input id="c-26-chat-welcomestate-props" class="tg tg-props" type="checkbox" hidden />
 
   <div class="panels">
     
