@@ -187,7 +187,7 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({ activeNav, setActiveNav,
               </nav>
             </div>
 
-            {/* Nút Log out dạng Icon hoặc Text thu nhỏ vừa vặn với chiều rộng 18 */}
+            {/* The logout button, in the form of a small icon or text, fits perfectly within a width of 18 inches.*/}
             <button
               onClick={handleLogout}
               className="text-[11px] font-semibold text-red-600 hover:bg-red-50 px-2 py-1.5 rounded-lg transition"
