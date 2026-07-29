@@ -6,12 +6,12 @@ import { ItineraryCardWidget } from './ItineraryCardWidget';
 import { getItineraryListApi } from '../../../../services/travelService';
 
 
-vi.mock('../../services/travelService', () => ({
+vi.mock('../../../../services/travelService', () => ({
   getItineraryListApi: vi.fn(),
 }));
 
 
-vi.mock('../ui/Button', () => ({
+vi.mock('../../../../components/Button/Button', () => ({
   Button: ({
     children,
     onClick,
@@ -114,7 +114,7 @@ describe('ItineraryCardWidget', () => {
 
     expect(
       screen.getByText(
-        'Chưa có lịch trình nào được khởi tạo.'
+        /No schedule has been created/i
       )
     )
       .toBeInTheDocument();
@@ -168,7 +168,7 @@ describe('ItineraryCardWidget', () => {
 
     expect(
       screen.getByText(
-        'Đang tải lịch trình từ server...'
+        /Loading schedule from server/i
       )
     )
       .toBeInTheDocument();

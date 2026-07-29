@@ -18,10 +18,10 @@ import { getHotelListApi } from "../../../../services/hotelService";
 import type { HotelData } from "../../../../services/hotelService";
 
 
-vi.mock("../../services/hotelService", async () => {
+vi.mock("../../../../services/hotelService", async () => {
   const actual = await vi.importActual<
     typeof import("../../../../services/hotelService")
-  >("../../services/hotelService");
+  >("../../../../services/hotelService");
 
   return {
     ...actual,
@@ -46,7 +46,7 @@ vi.mock("./RecommendationWrapper", () => ({
 }));
 
 
-vi.mock("../ui/button/FavoriteButton", () => ({
+vi.mock("../../../../components/Button/FavoriteButton", () => ({
   FavoriteButton: ({
     isFavorite,
     onToggle,
@@ -61,7 +61,7 @@ vi.mock("../ui/button/FavoriteButton", () => ({
 }));
 
 
-vi.mock("../ui/Button", () => ({
+vi.mock("../../../../components/Button/Button", () => ({
   Button: ({
     children,
     onClick,
@@ -208,7 +208,7 @@ describe("HotelRecommendations", () => {
 
     expect(
       screen.getByText(
-        /Đang tải danh sách khách sạn/i
+        /Loading hotel list/i
       )
     ).toBeInTheDocument();
 

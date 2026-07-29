@@ -11,13 +11,13 @@ vi.mock("react-router-dom", () => ({
 
 const mockLogout = vi.fn();
 
-vi.mock("../../hooks/useAuth", () => ({
+vi.mock("../../../../hooks/useAuth", () => ({
   useAuth: () => ({
     logout: mockLogout,
   }),
 }));
 
-vi.mock("../../hooks/useClickOutside", () => ({
+vi.mock("../../../../hooks/useClickOutside", () => ({
   useClickOutside: () => ({
     current: null,
   }),

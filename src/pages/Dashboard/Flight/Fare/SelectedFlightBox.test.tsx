@@ -3,11 +3,11 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { SelectedFlightBox, type FlightLeg } from './SelectedFlightBox';
 
-vi.mock('../ui/SectionHeader', () => ({
+vi.mock('../../../../components/SectionHeader/SectionHeader', () => ({
   SectionHeader: ({ title }: { title: string }) => <h2>{title}</h2>,
 }));
 
-vi.mock('../ui/Card', () => ({
+vi.mock('../../../../components/Card/Card', () => ({
   Card: ({
     children,
     variant,

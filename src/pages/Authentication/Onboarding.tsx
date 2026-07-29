@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useFormState } from '../../hooks/useFormState';
 import { AuthLayout } from '../../components/SectionAuthentication/AuthLayout';
 import { Button } from '../../components/Button/Button';
-import iconArrowDown from '../assets/icons/arrow-down.png'
+import iconArrowDown from '../../assets/icons/arrow-down.png'
 import { AuthHeader } from '../../components/SectionAuthentication/AuthHeader';
 import { InputField } from '../../components/TextField/InputField';
 import { AuthFooter } from '../../components/SectionAuthentication/AuthFooter';

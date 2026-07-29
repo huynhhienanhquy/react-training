@@ -84,9 +84,9 @@ describe('SelectHotelPage Component', () => {
     expect(screen.getByText('Grand Hyatt Lagos')).toBeInTheDocument()
     expect(screen.getByText('Eko Hotels & Suites')).toBeInTheDocument()
 
-    // Check locations
-    expect(screen.getByText('VICTORIA ISLAND, LAGOS')).toBeInTheDocument()
-    expect(screen.getByText('IKEJA, LAGOS')).toBeInTheDocument()
+    // Check locations (rendered as provided by API data)
+    expect(screen.getByText('Victoria Island, Lagos')).toBeInTheDocument()
+    expect(screen.getByText('Ikeja, Lagos')).toBeInTheDocument()
 
     // Check pricing providers
     expect(screen.getAllByText('Booking.com').length).toBeGreaterThan(0)
@@ -106,12 +106,14 @@ describe('SelectHotelPage Component', () => {
       expect(screen.getByText('Eko Hotels & Suites')).toBeInTheDocument()
     })
 
-    // Get all hotel headings rendered on page
-    const headings = screen.getAllByRole('heading', { level: 3 })
-
-    // "Eko Hotels & Suites" should be the first item in the list
-    expect(headings[0]).toHaveTextContent('Eko Hotels & Suites')
-    expect(headings[1]).toHaveTextContent('Grand Hyatt Lagos')
+    // Verify "Eko Hotels & Suites" renders before "Grand Hyatt Lagos" in the DOM
+    const allHotelNames = screen.getAllByRole('heading', { level: 3 })
+    // headings[0] is "Other available accommodations" (SectionHeader), so skip it
+    const hotelHeadings = allHotelNames.filter(
+      (h) => h.textContent !== 'Other available accommodations'
+    )
+    expect(hotelHeadings[0]).toHaveTextContent('Eko Hotels & Suites')
+    expect(hotelHeadings[1]).toHaveTextContent('Grand Hyatt Lagos')
   })
 
   it('handles "Book Hotel" action correctly', async () => {
@@ -167,8 +169,11 @@ describe('SelectHotelPage Component', () => {
   })
 
   it('reloads page when clicking Retry button on error', async () => {
-    // Spy directly on window.location.reload in a TypeScript-safe manner
-    const reloadSpy = vi.spyOn(window.location, 'reload').mockImplementation(() => {})
+    const reloadMock = vi.fn()
+    Object.defineProperty(window, 'location', {
+      configurable: true,
+      value: { ...window.location, reload: reloadMock },
+    })
 
     ;(getHotelDetailsApi as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('Server unavailable'))
 
@@ -181,8 +186,6 @@ describe('SelectHotelPage Component', () => {
     const retryButton = screen.getByRole('button', { name: /retry/i })
     fireEvent.click(retryButton)
 
-    expect(reloadSpy).toHaveBeenCalledTimes(1)
-
-    reloadSpy.mockRestore()
+    expect(reloadMock).toHaveBeenCalledTimes(1)
   })
 })

@@ -5,7 +5,7 @@ import { Topbar } from "./Topbar";
 import type { ChatMessage } from "./ChatMessageList";
 
 // Mock Button component
-vi.mock("../ui/Button", () => ({
+vi.mock("../../../../components/Button/Button", () => ({
   Button: ({
     children,
     onClick,

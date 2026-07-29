@@ -6,12 +6,12 @@ import { PlacesCardWidget } from "./PlacesCardWidget";
 import { getPlaceListApi } from "../../../../services/travelService";
 
 
-vi.mock("../../services/travelService", () => ({
+vi.mock("../../../../services/travelService", () => ({
   getPlaceListApi: vi.fn(),
 }));
 
 
-vi.mock("../ui/Button", () => ({
+vi.mock("../../../../components/Button/Button", () => ({
   Button: ({
     children,
     onClick,
@@ -193,7 +193,7 @@ describe("PlacesCardWidget", () => {
 
     expect(
       screen.getByText(
-        "Chưa có địa điểm nào."
+        /No location has been chosen/i
       )
     ).toBeInTheDocument();
   });
@@ -262,7 +262,7 @@ describe("PlacesCardWidget", () => {
 
     expect(
       screen.getByText(
-        "Đang tải danh sách địa điểm..."
+        /Loading list of locations/i
       )
     ).toBeInTheDocument();
   });
@@ -311,7 +311,7 @@ describe("PlacesCardWidget", () => {
 
     expect(
       await screen.findByText(
-        "Chưa có địa điểm nào."
+        /No location has been chosen/i
       )
     ).toBeInTheDocument();
   });

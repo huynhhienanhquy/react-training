@@ -10,12 +10,12 @@ beforeEach(() => {
 });
 
 // Mock ThinkingLoader
-vi.mock("../ui/ThinkingLoader", () => ({
+vi.mock("../../../../components/Thinking/ThinkingLoader", () => ({
   ThinkingLoader: ({ text }: { text: string }) => <div>{text}</div>,
 }));
 
 // Mock FlightRecommendations
-vi.mock("./FlightRecommendations", () => ({
+vi.mock("../Recommendations/FlightRecommendations", () => ({
   FlightRecommendations: ({
     onBookNow,
   }: {
@@ -32,7 +32,7 @@ type MockHotel = {
 };
 
 // Mock HotelRecommendations
-vi.mock("./HotelRecommendations", () => ({
+vi.mock("../Recommendations/HotelRecommendations", () => ({
   HotelRecommendations: ({
     onBookNow,
   }: {
@@ -45,7 +45,7 @@ vi.mock("./HotelRecommendations", () => ({
 }));
 
 // Mock PlacesCardWidget
-vi.mock("./PlacesCardWidget", () => ({
+vi.mock("../Recommendations/PlacesCardWidget", () => ({
   PlacesCardWidget: ({
     places,
     onViewAll,
@@ -60,7 +60,7 @@ vi.mock("./PlacesCardWidget", () => ({
 }));
 
 // Mock ItineraryCardWidget
-vi.mock("./ItineraryCardWidget", () => ({
+vi.mock("../Recommendations/ItineraryCardWidget", () => ({
   ItineraryCardWidget: ({
     itinerary,
     onViewAll,

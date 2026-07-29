@@ -8,13 +8,13 @@ import {
 } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { ChatPage } from "../ChatPage";
+import { ChatPage } from "./ChatPage";
 
-vi.mock("../components/chat/SidebarNav", () => ({
+vi.mock("./Sections/SidebarNav", () => ({
   SidebarNav: () => <div>SidebarNav</div>,
 }));
 
-vi.mock("../components/chat/ChatHistorySidebar", () => ({
+vi.mock("./Sections/ChatHistorySidebar", () => ({
   ChatHistorySidebar: ({
     sessions,
     onSelectSession,
@@ -36,7 +36,7 @@ vi.mock("../components/chat/ChatHistorySidebar", () => ({
   ),
 }));
 
-vi.mock("../components/chat/Topbar", () => ({
+vi.mock("./Sections/Topbar", () => ({
   Topbar: ({
     onNewChat,
   }: {
@@ -48,7 +48,7 @@ vi.mock("../components/chat/Topbar", () => ({
   ),
 }));
 
-vi.mock("../components/chat/WelcomeState", () => ({
+vi.mock("./Sections/WelcomeState", () => ({
   WelcomeState: ({
     onSelectPrompt,
   }: {
@@ -64,7 +64,7 @@ vi.mock("../components/chat/WelcomeState", () => ({
   ),
 }));
 
-vi.mock("../components/chat/ChatMessageList", () => ({
+vi.mock("./Sections/ChatMessageList", () => ({
   ChatMessageList: ({
     messages,
     onBookFlight,
@@ -90,7 +90,7 @@ vi.mock("../components/chat/ChatMessageList", () => ({
   ),
 }));
 
-vi.mock("../components/chat/ChatInputBox", () => ({
+vi.mock("./Sections/ChatInputBox", () => ({
   ChatInputBox: ({
     onSend,
   }: {
@@ -102,7 +102,7 @@ vi.mock("../components/chat/ChatInputBox", () => ({
   ),
 }));
 
-vi.mock("./SelectFarePage", () => ({
+vi.mock("../Flight/SelectFarePage", () => ({
   SelectFarePage: ({
     onBackToChat,
   }: {
@@ -114,7 +114,7 @@ vi.mock("./SelectFarePage", () => ({
   ),
 }));
 
-vi.mock("./SelectHotelPage", () => ({
+vi.mock("../Hotel/SelectHotelPage", () => ({
   SelectHotelPage: ({
     onBackToChat,
   }: {

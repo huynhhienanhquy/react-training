@@ -7,10 +7,10 @@ import { FlightRecommendations } from "./FlightRecommendations";
 import { getFlightListApi } from "../../../../services/fareService";
 
 
-vi.mock("../../services/fareService", async () => {
+vi.mock("../../../../services/fareService", async () => {
   const actual = await vi.importActual<
     typeof import("../../../../services/fareService")
-  >("../../services/fareService");
+  >("../../../../services/fareService");
 
   return {
     ...actual,
@@ -35,7 +35,7 @@ vi.mock("./RecommendationWrapper", () => ({
 }));
 
 
-vi.mock("../ui/button/FavoriteButton", () => ({
+vi.mock("../../../../components/Button/FavoriteButton", () => ({
   FavoriteButton: ({
     isFavorite,
     onToggle,
@@ -50,7 +50,7 @@ vi.mock("../ui/button/FavoriteButton", () => ({
 }));
 
 
-vi.mock("../ui/Button", () => ({
+vi.mock("../../../../components/Button/Button", () => ({
   Button: ({
     children,
     onClick,
@@ -65,7 +65,7 @@ vi.mock("../ui/Button", () => ({
 }));
 
 
-vi.mock("../ui/PriceDisplay", () => ({
+vi.mock("../../../../components/PriceDisplay/PriceDisplay", () => ({
   PriceDisplay: ({
     amount,
   }: {
@@ -201,7 +201,7 @@ describe("FlightRecommendations", () => {
 
     expect(
       screen.getByText(
-        /Đang tải danh sách chuyến bay/i
+        /Loading flight list/i
       )
     ).toBeInTheDocument();
 

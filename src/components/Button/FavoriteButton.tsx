@@ -1,5 +1,5 @@
 import React from 'react';
-import iconHeart from '../../../assets/icons/heart-blue.png';
+import iconHeart from '../../assets/icons/heart-blue.png';
 
 // Props definition for the reusable favorite/bookmark toggle button
 interface FavoriteButtonProps {

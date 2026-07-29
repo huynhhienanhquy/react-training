@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { ThinkingLoader } from '../../../../components/ui/ThinkingLoader';
+import { ThinkingLoader } from '../../../../components/Thinking/ThinkingLoader';
 import { FlightRecommendations } from '../Recommendations/FlightRecommendations';
 import { HotelRecommendations } from '../Recommendations/HotelRecommendations';
 import { PlacesCardWidget } from '../Recommendations/PlacesCardWidget';

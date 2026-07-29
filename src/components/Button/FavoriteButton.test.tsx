@@ -3,7 +3,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { FavoriteButton } from './FavoriteButton';
 
-vi.mock('../../../assets/icons/heart-blue.png', () => ({
+vi.mock('../../assets/icons/heart-blue.png', () => ({
   default: '/assets/heart-blue.png',
 }));
 

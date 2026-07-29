@@ -135,7 +135,11 @@ describe('SelectFarePage Component', () => {
   })
 
   it('reloads page when clicking Retry button on error', async () => {
-    const reloadSpy = vi.spyOn(window.location, 'reload').mockImplementation(() => {})
+    const reloadMock = vi.fn()
+    Object.defineProperty(window, 'location', {
+      configurable: true,
+      value: { ...window.location, reload: reloadMock },
+    })
 
     ;(getFareDetailsApi as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('Network Error'))
 
@@ -148,9 +152,6 @@ describe('SelectFarePage Component', () => {
     const retryButton = screen.getByRole('button', { name: /retry/i })
     fireEvent.click(retryButton)
 
-    expect(reloadSpy).toHaveBeenCalledTimes(1)
-
-    // Clean up spy
-    reloadSpy.mockRestore()
+    expect(reloadMock).toHaveBeenCalledTimes(1)
   })
 })
