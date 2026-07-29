@@ -1,0 +1,138 @@
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { describe, it, expect, vi } from 'vitest';
+import { WelcomeState } from './WelcomeState';
+
+describe('WelcomeState', () => {
+  const prompts = [
+    'Plan a trip to Paris',
+    'Find hotels in Tokyo',
+    'Suggest places in Vietnam',
+  ];
+
+  it('renders welcome title', () => {
+    render(
+      <WelcomeState
+        prompts={prompts}
+        onSelectPrompt={vi.fn()}
+      />
+    );
+
+    expect(
+      screen.getByText("Let’s Plan Your Next Adventure")
+    ).toBeInTheDocument();
+  });
+
+
+  it('renders all prompt buttons', () => {
+    render(
+      <WelcomeState
+        prompts={prompts}
+        onSelectPrompt={vi.fn()}
+      />
+    );
+
+    prompts.forEach((prompt) => {
+      expect(
+        screen.getByText(prompt)
+      ).toBeInTheDocument();
+    });
+  });
+
+
+  it('calls onSelectPrompt when clicking prompt button', async () => {
+    const user = userEvent.setup();
+
+    const onSelectPrompt = vi.fn();
+
+    render(
+      <WelcomeState
+        prompts={prompts}
+        onSelectPrompt={onSelectPrompt}
+      />
+    );
+
+
+    await user.click(
+      screen.getByText('Plan a trip to Paris')
+    );
+
+
+    expect(onSelectPrompt)
+      .toHaveBeenCalledTimes(1);
+
+    expect(onSelectPrompt)
+      .toHaveBeenCalledWith(
+        'Plan a trip to Paris'
+      );
+  });
+
+
+  it('renders images correctly', () => {
+    render(
+      <WelcomeState
+        prompts={prompts}
+        onSelectPrompt={vi.fn()}
+      />
+    );
+
+
+    expect(
+      screen.getByAltText('Beach')
+    ).toBeInTheDocument();
+
+
+    expect(
+      screen.getByAltText('Travel')
+    ).toBeInTheDocument();
+
+
+    expect(
+      screen.getByAltText('Resort')
+    ).toBeInTheDocument();
+  });
+
+
+  it('renders empty state when prompts is empty', () => {
+    render(
+      <WelcomeState
+        prompts={[]}
+        onSelectPrompt={vi.fn()}
+      />
+    );
+
+
+    expect(
+      screen.queryByRole('button')
+    ).not.toBeInTheDocument();
+  });
+
+
+  it('does not crash without prompts', () => {
+    expect(() =>
+      render(
+        <WelcomeState
+          prompts={[]}
+          onSelectPrompt={vi.fn()}
+        />
+      )
+    ).not.toThrow();
+  });
+
+
+  it('renders correct number of prompt buttons', () => {
+    render(
+      <WelcomeState
+        prompts={prompts}
+        onSelectPrompt={vi.fn()}
+      />
+    );
+
+
+    const buttons = screen.getAllByRole('button');
+
+
+    expect(buttons)
+      .toHaveLength(prompts.length);
+  });
+});
