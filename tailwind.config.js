@@ -1,5 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  // 1. Kích hoạt Dark Mode dựa theo class trên <html>
+  darkMode: 'class',
+
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -14,6 +17,8 @@ export default {
         brand: {
           dark: '#14153E',
           'dark-alt': '#0d1b3e',
+          // Mở rộng màu thương hiệu cho Dark Mode
+          light: '#F8FAFC',
         },
         surface: {
           DEFAULT: '#FAFBFD',
@@ -22,14 +27,24 @@ export default {
           'section-alt': '#F4F7FE',
           'see-more': '#EEF3FD',
           active: '#EFEFEF',
+
+          // Các biến màu tương ứng cho Dark Mode
+          'dark-DEFAULT': '#0F172A',     // slate-900
+          'dark-sidebar': '#0B0F19',     // slate-950
+          'dark-section': '#1E293B',     // slate-800
+          'dark-section-alt': '#1C2536', // slate-800/90
+          'dark-active': '#334155',      // slate-700
         },
         success: {
           DEFAULT: '#22C55E',
           light: '#F2FBF5',
           'light-alt': '#EAF8F0',
+          // Dark Mode
+          'dark-light': '#052E16',
         },
         social: {
           bg: '#edf2fe',
+          'dark-bg': '#1E293B',
         },
       },
       spacing: {
@@ -53,6 +68,8 @@ export default {
         search: '0 1px 2px 0 rgba(148, 163, 184, 0.5)',
         chat: '0 1px 3px 0 rgba(148, 163, 184, 0.6)',
         nav: '0 1px 2px 0 rgba(191, 219, 254, 0.5)',
+        // Shadow dịu hơn cho Dark Mode
+        'dark-card': '0 4px 20px -2px rgba(0, 0, 0, 0.5)',
       },
       backdropBlur: {
         xs: '3px',
