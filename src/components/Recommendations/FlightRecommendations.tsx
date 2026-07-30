@@ -1,7 +1,4 @@
-import { useEffect, useState } from 'react';
-import { AxiosError } from 'axios';
 import { RecommendationWrapper } from './RecommendationWrapper';
-import { FavoriteButton } from '../Button/FavoriteButton';
 import { Button } from '../Button/Button';
 import { PriceDisplay } from '../PriceDisplay/PriceDisplay';
 import defaultFlightLogo from '../../assets/icons/ellipse.png';
@@ -13,6 +10,8 @@ import type {
   FlightLegInfo,
   FlightRecommendationsProps,
 } from '../../types/flight';
+import { useAsyncData } from '../../hooks/useAsyncData';
+import { useFavorites } from '../../hooks/useFavorites';
 
 export type { FlightOption, FlightLegInfo };
 
@@ -53,65 +52,22 @@ export function FlightRecommendations({
   onBookNow,
   onSeeAll,
 }: FlightRecommendationsProps) {
-  const [apiFlights, setApiFlights] = useState<FlightOption[]>([]);
-  const [loading, setLoading] = useState(!initialFlights);
-  const [error, setError] = useState<string | null>(null);
+  const isControlled = !!initialFlights;
 
-  const [favorites, setFavorites] = useState<Record<string, boolean>>({});
+  const { data: apiFlights, loading, error } = useAsyncData(async () => {
+    const data = await getFlightListApi();
+    const items = Array.isArray(data) ? data : [data];
+    return items.map((item, index) => mapFareDataToFlightOption(item, index));
+  }, { skip: isControlled });
 
-  const flightList = initialFlights ?? apiFlights;
+  const { favorites, toggleFavorite } = useFavorites();
 
-  useEffect(() => {
-    if (initialFlights) {
-      return;
-    }
-
-    const fetchFlights = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-
-        const data = await getFlightListApi();
-        const items = Array.isArray(data) ? data : [data];
-
-        setApiFlights(
-          items.map((item, index) =>
-            mapFareDataToFlightOption(item, index),
-          ),
-        );
-      } catch (err: unknown) {
-        if (err instanceof AxiosError) {
-          setError(
-            err.response?.data?.message ??
-              err.message ??
-              'Server connection error',
-          );
-        } else if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError('Unable to load flight information from the server.');
-        }
-
-        setApiFlights([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    void fetchFlights();
-  }, [initialFlights]);
-
-  const toggleFavorite = (id: string) => {
-    setFavorites((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
-  };
+  const flightList = initialFlights ?? (apiFlights as FlightOption[]) ?? [];
 
   return (
     <RecommendationWrapper title={title} onSeeAll={onSeeAll}>
       {/* LOADING STATE */}
-      {loading && (
+      {!isControlled && loading && (
         <div className="py-8 flex flex-col items-center justify-center gap-2">
           <div className="w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
           <p className="text-xs text-slate-400 font-medium">Loading flight list...</p>
@@ -119,22 +75,21 @@ export function FlightRecommendations({
       )}
 
       {/* ERROR STATE */}
-      {error && !loading && (
+      {!isControlled && error && !loading && (
         <div className="p-4 bg-red-50 text-red-600 rounded-2xl border border-red-100 text-xs text-center font-medium my-2">
           {error}
         </div>
       )}
 
       {/* EMPTY STATE */}
-      {!loading && !error && flightList.length === 0 && (
+      {!isControlled && !loading && !error && flightList.length === 0 && (
         <div className="p-6 text-center text-xs text-slate-400">
           No suitable flights were found.
         </div>
       )}
 
       {/* FLIGHT LIST DISPLAY */}
-      {!loading &&
-        !error &&
+      {(isControlled || (!loading && !error)) &&
         flightList.map((flight, idx) => {
           const isFav = !!(favorites[flight.id] || flight.isFavorite);
           const uniqueKey = `${flight.id}-${idx}`;
@@ -160,11 +115,19 @@ export function FlightRecommendations({
                 </div>
 
                 <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-                  <FavoriteButton
+                  <Button
+                    type="button"
+                    variant="favorite"
+                    size="icon"
                     isFavorite={isFav}
-                    onToggle={() => toggleFavorite(flight.id)}
+                    onClick={() => toggleFavorite(flight.id)}
                   />
-                  <Button variant="secondary" size="sm" onClick={() => onBookNow?.(flight.id)}>
+
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => onBookNow?.(flight.id)}
+                  >
                     Book Now
                   </Button>
                 </div>

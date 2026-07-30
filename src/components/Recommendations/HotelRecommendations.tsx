@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { AxiosError } from 'axios';
+import React from 'react';
 import { RecommendationWrapper } from './RecommendationWrapper';
-import { FavoriteButton } from '../Button/FavoriteButton';
 import { Button } from '../Button/Button';
 import { getHotelListApi } from '../../services/hotelService';
 import type { HotelData, HotelOption, HotelRecommendationsProps } from '../../types/hotel';
+import { useAsyncData } from '../../hooks/useAsyncData';
+import { useFavorites } from '../../hooks/useFavorites';
 
 export type { HotelOption };
 
 const defaultHotelImg =
   'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80';
-
-
 
 const mapHotelDataToOption = (hotel: HotelData, index: number): HotelOption => {
   const lowestPrice = hotel.roomOptions?.[0]?.price ?? hotel.priceBreakdown?.roomRate ?? 1200;
@@ -35,42 +33,17 @@ export const HotelRecommendations: React.FC<HotelRecommendationsProps> = ({
   onBookNow,
   onSeeAll,
 }) => {
-  const [hotelList, setHotelList] = useState<HotelOption[]>(initialHotels || []);
-  const [loading, setLoading] = useState<boolean>(!initialHotels);
-  const [error, setError] = useState<string | null>(null);
-  const [favorites, setFavorites] = useState<Record<string, boolean>>({});
+  const isControlled = !!initialHotels;
 
-  useEffect(() => {
-    if (initialHotels) return;
+  const { data: apiHotels, loading, error } = useAsyncData(async () => {
+    const data = await getHotelListApi();
+    const items = Array.isArray(data) ? data : [data];
+    return items.map((item, index) => mapHotelDataToOption(item, index));
+  }, { skip: isControlled });
 
-    const fetchHotels = async () => {
-      try {
-        setLoading(true);
-        setError(null);
+  const { favorites, toggleFavorite } = useFavorites();
 
-        const data = await getHotelListApi();
-        const items = Array.isArray(data) ? data : [data];
-        setHotelList(items.map((item, idx) => mapHotelDataToOption(item, idx)));
-      } catch (err: unknown) {
-        if (err instanceof AxiosError) {
-          setError(err.response?.data?.message || err.message || 'Server connection error');
-        } else if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError('Unable to load hotel list');
-        }
-        setHotelList([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchHotels();
-  }, [initialHotels]);
-
-  const toggleFavorite = (id: string) => {
-    setFavorites((prev) => ({ ...prev, [id]: !prev[id] }));
-  };
+  const hotelList = initialHotels ?? (apiHotels as HotelOption[]) ?? [];
 
   // SYNCHRONIZATION: Saves selected hotel data and transmits it externally.
   const handleBookNow = (e: React.MouseEvent, hotel: HotelOption) => {
@@ -86,27 +59,26 @@ export const HotelRecommendations: React.FC<HotelRecommendationsProps> = ({
 
   return (
     <RecommendationWrapper title={title} onSeeAll={onSeeAll}>
-      {loading && (
+      {!isControlled && loading && (
         <div className="py-8 flex flex-col items-center justify-center gap-2">
           <div className="w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
           <p className="text-xs text-slate-400 font-medium">Loading hotel list...</p>
         </div>
       )}
 
-      {error && !loading && (
+      {!isControlled && error && !loading && (
         <div className="p-4 bg-red-50 text-red-600 rounded-2xl border border-red-100 text-xs text-center font-medium my-2">
           {error}
         </div>
       )}
 
-      {!loading && !error && hotelList.length === 0 && (
+      {!isControlled && !loading && !error && hotelList.length === 0 && (
         <div className="p-6 text-center text-xs text-slate-400">
           No suitable hotels were found.
         </div>
       )}
 
-      {!loading &&
-        !error &&
+      {(isControlled || (!loading && !error)) &&
         hotelList.map((hotel, idx) => {
           const isFav = !!(favorites[hotel.id] || hotel.isFavorite);
           const uniqueKey = `${hotel.id}-${idx}`;
@@ -164,14 +136,17 @@ export const HotelRecommendations: React.FC<HotelRecommendationsProps> = ({
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <FavoriteButton
+                  <Button
+                    type="button"
+                    variant="favorite"
+                    size="icon"
                     isFavorite={isFav}
-                    onToggle={() => toggleFavorite(hotel.id)}
+                    onClick={() => toggleFavorite(hotel.id)}
                   />
+
                   <Button
                     variant="secondary"
                     size="sm"
-                    className="bg-blue-50 hover:bg-blue-100 text-blue-600 border-none font-semibold px-4 rounded-xl cursor-pointer"
                     onClick={(e) => handleBookNow(e, hotel)}
                   >
                     Book Now

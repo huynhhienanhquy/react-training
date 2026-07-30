@@ -1,6 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormState } from '../../hooks/useFormState';
+import { useOtpInput } from '../../hooks/useOtpInput';
+import { useCountdown } from '../../hooks/useCountdown';
 import { AuthLayout } from '../../components/SectionAuthentication/AuthLayout';
 import { Button } from '../../components/Button/Button';
 import { AuthHeader } from '../../components/SectionAuthentication/AuthHeader';
@@ -8,44 +10,8 @@ import { AuthHeader } from '../../components/SectionAuthentication/AuthHeader';
 export const VerifyOTP: React.FC = () => {
   const navigate = useNavigate();
   const { isLoading, startLoading, stopLoading } = useFormState();
-  const [otp, setOtp] = useState(new Array(6).fill(""));
-  const [counter, setCounter] = useState(29);
-  const inputRefs = useRef<HTMLInputElement[]>([]);
-
-  useEffect(() => {
-    if (counter === 0) return;
-    const timer = setInterval(() => setCounter(prev => prev - 1), 1000);
-    return () => clearInterval(timer);
-  }, [counter]);
-
-  const handleChange = (element: HTMLInputElement, index: number) => {
-    if (isNaN(Number(element.value))) return;
-
-    const newOtp = [...otp];
-    newOtp[index] = element.value;
-    setOtp(newOtp);
-
-    if (element.value !== "" && index < 5) {
-      inputRefs.current[index + 1]?.focus();
-    }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
-    if (e.key === "Backspace" && !otp[index] && index > 0) {
-      inputRefs.current[index - 1]?.focus();
-    }
-  };
-
-  const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    const pastedData = e.clipboardData.getData("text").trim();
-
-    if (/^\d{6}$/.test(pastedData)) {
-      const digits = pastedData.split("");
-      setOtp(digits);
-      inputRefs.current[5]?.focus();
-    }
-  };
+  const { otp, inputRefs, handleChange, handleKeyDown, handlePaste } = useOtpInput(6);
+  const { counter, reset } = useCountdown(29);
 
   const handleVerify = (e: React.FormEvent) => {
     e.preventDefault();
@@ -78,7 +44,7 @@ export const VerifyOTP: React.FC = () => {
                   inputMode="numeric"
                   value={data}
                   ref={(el) => { if (el) inputRefs.current[index] = el; }}
-                  onChange={(e) => handleChange(e.target, index)}
+                  onChange={(e) => handleChange(index, e.target.value)}
                   onKeyDown={(e) => handleKeyDown(e, index)}
                   onPaste={handlePaste}
                   className="w-10 md:w-12 h-12 md:h-14 text-center text-lg md:text-xl font-bold rounded-xl border border-gray-200 bg-gray-50/50 text-slate-800 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 focus:bg-white transition shadow-xs font-mono"
@@ -112,7 +78,7 @@ export const VerifyOTP: React.FC = () => {
           ) : (
             <span
               className="text-blue-700 font-bold hover:underline cursor-pointer ml-1 transition"
-              onClick={() => setCounter(29)}
+              onClick={reset}
             >
               Resend OTP
             </span>

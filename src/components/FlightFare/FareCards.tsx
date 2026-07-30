@@ -1,24 +1,12 @@
   import React from 'react';
-  import { CheckCircle2 } from 'lucide-react';
-  import { SectionHeader } from '../../../../components/SectionHeader/SectionHeader';
-  import { PriceDisplay } from '../../../../components/PriceDisplay/PriceDisplay';
+import { CheckCircle2 } from 'lucide-react';
+import { SectionHeader } from '../../components/SectionHeader/SectionHeader';
+import { PriceDisplay } from '../../components/PriceDisplay/PriceDisplay';
 
-  // Interface defining the structure of each fare option card
-  export interface FareOption {
-    id: 'economy' | 'business';
-    name: string;
-    airline: string;
-    price: number;
-    features: string[];
-  }
+import type { FareOption } from '../../types/flight';
+import type { FareCardsProps } from '../../types/flightfare';
 
-  // Props required for the FareCards component
-  interface FareCardsProps {
-    fareOptions: FareOption[];
-    selectedFareId: 'economy' | 'business';
-    defaultFlightLogo: string;
-    onSelectFare: (id: 'economy' | 'business') => void;
-  }
+export type { FareOption };
 
   export const FareCards: React.FC<FareCardsProps> = ({
     fareOptions,

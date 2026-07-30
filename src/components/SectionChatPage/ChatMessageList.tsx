@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { ThinkingLoader } from '../Thinking/ThinkingLoader';
 import { FlightRecommendations } from '../Recommendations/FlightRecommendations';
 import { HotelRecommendations } from '../Recommendations/HotelRecommendations';
 import { PlacesCardWidget } from '../Recommendations/PlacesCardWidget';
 import { ItineraryCardWidget } from '../Recommendations/ItineraryCardWidget';
-import type {  PlaceData, DayItinerary } from '../../types/travel';
+import type { PlaceData, DayItinerary } from '../../types/travel';
+import { useAutoScroll } from '../../hooks/useAutoScroll';
 
 // Custom payload inside a chat message
 export type MessageData = PlaceData[] | DayItinerary[] | unknown;
@@ -36,17 +37,7 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
   onViewAllPlaces,
   onViewAllItinerary,
 }) => {
-  // Reference for auto-scrolling to the latest message
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  // Smooth scroll to bottom whenever messages array updates or typing state changes
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages, isTyping]);
+  const { ref: messagesEndRef } = useAutoScroll([messages, isTyping]);
 
   return (
     /* Message stream container with custom hidden scrollbars */
@@ -73,9 +64,9 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
           msg.type === 'places' ||
           (msg.sender === 'ai' && (
             textLower.includes('place') ||
-            textLower.includes('địa điểm') ||
+            textLower.includes('place') ||
             prevTextLower.includes('places') ||
-            prevTextLower.includes('địa điểm')
+            prevTextLower.includes('place')
           ));
 
         // Detect if current message should render Itinerary widget
@@ -83,9 +74,9 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
           msg.type === 'itinerary' ||
           (msg.sender === 'ai' && (
             textLower.includes('itinerary') ||
-            textLower.includes('lịch trình') ||
+            textLower.includes('itinerary') ||
             prevTextLower.includes('itinerary') ||
-            prevTextLower.includes('lịch trình')
+            prevTextLower.includes('itinerary')
           ));
 
         // Pass custom payload if exists; otherwise undefined so widgets fetch via API

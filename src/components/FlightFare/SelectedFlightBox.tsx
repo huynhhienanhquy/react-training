@@ -1,24 +1,11 @@
 import React, { useState } from 'react';
-import { SectionHeader } from '../../../../components/SectionHeader/SectionHeader';
-import { Card } from '../../../../components/Card/Card';
+import { SectionHeader } from '../../components/SectionHeader/SectionHeader';
+import { Card } from '../../components/Card/Card';
+import type { FlightLeg } from '../../types/flight';
+import type { SelectedFlightBoxProps } from '../../types/flightfare';
 
-// Interface defining a flight leg/segment structure
-export interface FlightLeg {
-  id: string;
-  times: string;
-  route: string;
-  duration: string;
-  stops: string;
-}
 
-// Props definition for the selected flight summary card
-interface SelectedFlightBoxProps {
-  airlineName: string;
-  defaultFlightLogo: string;
-  iconHeart: string;
-  legs: FlightLeg[];
-  cancellationPolicy: string;
-}
+export type { FlightLeg };
 
 export const SelectedFlightBox: React.FC<SelectedFlightBoxProps> = ({
   airlineName,

@@ -7,10 +7,10 @@ import defaultFlightLogo from '../../../assets/icons/ellipse.png';
 import { SectionHeader } from '../../../components/SectionHeader/SectionHeader';
 
 import { Topbar, type ChatMessage } from '../../../components/SectionChatPage/Topbar';
-import { FareHeader } from './Fare/FareHeader';
-import { SelectedFlightBox } from './Fare/SelectedFlightBox';
-import { FareCards } from './Fare/FareCards';
-import { PriceDetailsSidebar } from './Fare/PriceDetailsSidebar';
+import { FareHeader } from '../../../components/FlightFare/FareHeader';
+import { SelectedFlightBox } from '../../../components/FlightFare/SelectedFlightBox';
+import { FareCards } from '../../../components/FlightFare/FareCards';
+import { PriceDetailsSidebar } from '../../../components/FlightFare/PriceDetailsSidebar';
 
 // Import Service & Types
 import { getFareDetailsApi } from '../../../services/fareService';

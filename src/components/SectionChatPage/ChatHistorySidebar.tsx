@@ -1,11 +1,8 @@
 import React from 'react';
 import iconSearch from '../../assets/icons/search-normal.png'
+import type { ChatSession } from '../../types/chat';
 
-export interface ChatSession {
-  id: string;
-  title: string;
-  group?: string;
-}
+export type { ChatSession };
 
 interface ChatHistorySidebarProps {
   searchQuery: string;

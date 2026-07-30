@@ -1,14 +1,7 @@
 import React from 'react';
-import { Card } from '../../../../components/Card/Card';
-import { InfoRow } from '../../../../components/InfoRow/InfoRow';
-
-// Props definition for price calculation breakdown
-interface PriceDetailsSidebarProps {
-  pricePerTraveller: number;
-  flightDues: number;
-  taxesAndFees: number;
-  totalAmount: number;
-}
+import { Card } from '../../components/Card/Card';
+import { InfoRow } from '../../components/InfoRow/InfoRow';
+import type { PriceDetailsSidebarProps } from '../../types/flightfare';
 
 export const PriceDetailsSidebar: React.FC<PriceDetailsSidebarProps> = ({
   pricePerTraveller,

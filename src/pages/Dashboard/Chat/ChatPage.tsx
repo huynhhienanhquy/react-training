@@ -48,7 +48,7 @@ export const ChatPage: React.FC = () => {
       const newSession: ChatSession = {
         id: targetSessionId,
         title: text.length > 28 ? text.substring(0, 28) + '...' : text,
-        group: 'TODAY', // Gán vào nhóm "TODAY" cho Sidebar
+        group: 'TODAY',
       };
 
       setSessions((prev) => [newSession, ...prev]);
@@ -111,7 +111,7 @@ export const ChatPage: React.FC = () => {
     setIsViewingHotel(false);
   };
 
-  // Chọn đoạn chat từ Sidebar
+  // Select a chat from the Sidebar
   const handleSelectSession = (sessionId: string) => {
     setActiveSessionId(sessionId);
     setIsViewingFare(false);
