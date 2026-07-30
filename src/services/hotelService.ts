@@ -1,46 +1,16 @@
-import api from './api';
-
-export interface RoomOption {
-  id: 'standard' | 'deluxe' | 'suite' | string;
-  name: string;
-  price: number;
-  bedType: string;
-  maxGuests: number;
-  features: string[];
-}
-
-export interface HotelData {
-  id: string;
-  hotelName: string;
-  location: string;
-  address: string;
-  rating: number;
-  reviewCount: number;
-  priceUnit: string;
-  coverImage?: string;
-  imageUrl?: string;
-  images: string[];
-  description: string;
-  amenities: string[];
-  cancellationPolicy: string;
-  roomOptions: RoomOption[];
-  importantInformation: string[];
-  priceBreakdown: {
-    roomRate: number;
-    taxesAndFees: number;
-  };
-}
+import { flightApi } from './api';
+import type { HotelData } from '../types/hotel';
 
 //Get a list of all hotels
 export const getHotelListApi = async (): Promise<HotelData[]> => {
-  const response = await api.get<HotelData[]>('/hotel');
+  const response = await flightApi.get<HotelData[]>('/hotel');
   return response.data;
 };
 
 
 //Get details of a hotel by ID.
 export const getHotelDetailsApi = async (id: string = '1'): Promise<HotelData> => {
-  const response = await api.get<HotelData | HotelData[]>(`/hotel`);
+  const response = await flightApi.get<HotelData | HotelData[]>(`/hotel`);
 
   if (Array.isArray(response.data)) {
     const found = response.data.find((item) => item.id === id);

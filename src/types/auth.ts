@@ -6,3 +6,8 @@ export interface User {
   avatar?: string;
   [key: string]: unknown;
 }
+
+export interface LoginPayload {
+  email: string;
+  password: string;
+}

@@ -1,25 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Calendar, Clock, MapPin } from 'lucide-react';
 import { AxiosError } from 'axios';
-import { Button } from '../../../../components/Button/Button';
-import { getItineraryListApi, type DayItinerary } from '../../../../services/travelService';
+import { Button } from '../Button/Button';
+import { getItineraryListApi } from '../../services/travelService';
+import type {
+  DayItinerary,
+  ItineraryCardWidgetProps,
+} from '../../types/travel';
 
-interface ItineraryCardWidgetProps {
-  itinerary?: DayItinerary[];
-  onViewAll?: () => void;
-}
+export type { DayItinerary };
 
-export const ItineraryCardWidget: React.FC<ItineraryCardWidgetProps> = ({
+export function ItineraryCardWidget({
   itinerary: initialItinerary,
   onViewAll,
-}) => {
-  const [itineraryList, setItineraryList] = useState<DayItinerary[]>(initialItinerary || []);
-  const [loading, setLoading] = useState<boolean>(!initialItinerary);
+}: ItineraryCardWidgetProps) {
+  const [apiItinerary, setApiItinerary] = useState<DayItinerary[]>([]);
+  const [loading, setLoading] = useState(!initialItinerary);
   const [error, setError] = useState<string | null>(null);
 
+  const itineraryList = initialItinerary ?? apiItinerary;
+
   useEffect(() => {
-    // If the itinerary is passed via props, there's no need to call the API.
-    if (initialItinerary) return;
+    if (initialItinerary) {
+      return;
+    }
 
     const fetchItinerary = async () => {
       try {
@@ -27,22 +31,27 @@ export const ItineraryCardWidget: React.FC<ItineraryCardWidgetProps> = ({
         setError(null);
 
         const data = await getItineraryListApi();
-        setItineraryList(Array.isArray(data) ? data : []);
+        setApiItinerary(Array.isArray(data) ? data : []);
       } catch (err: unknown) {
         if (err instanceof AxiosError) {
-          setError(err.response?.data?.message || err.message || 'Server connection error');
+          setError(
+            err.response?.data?.message ??
+              err.message ??
+              'Server connection error'
+          );
         } else if (err instanceof Error) {
           setError(err.message);
         } else {
           setError('Unable to download the trip itinerary.');
         }
-        setItineraryList([]);
+
+        setApiItinerary([]);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchItinerary();
+    void fetchItinerary();
   }, [initialItinerary]);
 
   return (
@@ -70,7 +79,9 @@ export const ItineraryCardWidget: React.FC<ItineraryCardWidgetProps> = ({
       {loading && (
         <div className="py-8 flex flex-col items-center justify-center gap-2">
           <div className="w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
-          <p className="text-xs text-slate-400 font-medium">Loading schedule from server...</p>
+          <p className="text-xs text-slate-400 font-medium">
+            Loading schedule from server...
+          </p>
         </div>
       )}
 
@@ -92,29 +103,31 @@ export const ItineraryCardWidget: React.FC<ItineraryCardWidgetProps> = ({
       {!loading && !error && itineraryList.length > 0 && (
         <div className="space-y-4">
           {itineraryList.map((dayPlan, dayIdx) => (
-            <div key={dayPlan.id || dayPlan.day || dayIdx} className="space-y-2.5">
-              {/* Day Header Badge */}
+            <div
+              key={dayPlan.id || dayPlan.day || dayIdx}
+              className="space-y-2.5"
+            >
               <div className="flex items-center gap-2">
                 <span className="px-2.5 py-0.5 bg-blue-600 text-white text-[11px] font-bold rounded-full">
                   Day {dayPlan.day || dayIdx + 1}
                 </span>
+
                 <h5 className="text-xs md:text-sm font-bold text-slate-800 truncate">
                   {dayPlan.dateTitle}
                 </h5>
               </div>
 
-              {/* Activities Card List */}
               <div className="bg-white rounded-xl p-3 border border-slate-200/60 space-y-2">
                 {dayPlan.activities?.map((act, index) => (
                   <div
                     key={act.id || index}
                     className="flex items-start justify-between gap-3 pt-2 first:pt-0 border-t border-slate-100 first:border-t-0"
                   >
-                    {/* Activity Details */}
                     <div className="flex-1 min-w-0">
                       <h6 className="text-xs md:text-sm font-semibold text-slate-900 truncate">
                         {act.title}
                       </h6>
+
                       {act.location && (
                         <p className="text-xs text-slate-500 flex items-center gap-1 font-medium mt-0.5 truncate">
                           <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" />
@@ -123,7 +136,6 @@ export const ItineraryCardWidget: React.FC<ItineraryCardWidgetProps> = ({
                       )}
                     </div>
 
-                    {/* Activity Schedule Time */}
                     <div className="flex items-center gap-1 text-[11px] font-semibold text-slate-500 bg-slate-100 px-2 py-1 rounded-md shrink-0">
                       <Clock className="w-3 h-3 text-slate-400" />
                       <span>{act.time}</span>
@@ -136,7 +148,6 @@ export const ItineraryCardWidget: React.FC<ItineraryCardWidgetProps> = ({
         </div>
       )}
 
-      {/* Primary Action Button */}
       <div className="pt-1">
         <Button
           variant="dark"
@@ -160,4 +171,4 @@ export const ItineraryCardWidget: React.FC<ItineraryCardWidgetProps> = ({
       </div>
     </div>
   );
-};
+}

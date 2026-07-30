@@ -1,5 +1,5 @@
 import React from 'react';
-import iconSearch from '../../../../assets/icons/search-normal.png'
+import iconSearch from '../../assets/icons/search-normal.png'
 
 export interface ChatSession {
   id: string;

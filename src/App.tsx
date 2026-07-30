@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthProvider';
 
 // Import Guards
-import { ProtectedRoute } from './components/SectionAuthentication/ProtectedRoute';
-import { GuestRoute } from './components/SectionAuthentication/GuestRoute';
+import { ProtectedRoute } from './routes/guards/ProtectedRoute';
+import { GuestRoute } from './routes/guards/GuestRoute';
 
 // Import Pages
 import { Login } from './pages/Authentication/Login';

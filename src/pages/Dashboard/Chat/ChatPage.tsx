@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { SidebarNav } from './Sections/SidebarNav';
-import { ChatHistorySidebar, type ChatSession } from './Sections/ChatHistorySidebar';
-import { Topbar } from './Sections/Topbar';
-import { WelcomeState } from './Sections/WelcomeState';
-import { ChatMessageList, type ChatMessage } from './Sections/ChatMessageList';
-import { ChatInputBox } from './Sections/ChatInputBox';
+import { SidebarNav } from '../../../components/SectionChatPage/SidebarNav';
+import { ChatHistorySidebar, type ChatSession } from '../../../components/SectionChatPage/ChatHistorySidebar';
+import { Topbar } from '../../../components/SectionChatPage/Topbar';
+import { WelcomeState } from '../../../components/SectionChatPage/WelcomeState';
+import { ChatMessageList, type ChatMessage } from '../../../components/SectionChatPage/ChatMessageList';
+import { ChatInputBox } from '../../../components/SectionChatPage/ChatInputBox';
 import { SelectFarePage } from '../Flight/SelectFarePage';
 import { SelectHotelPage } from '../Hotel/SelectHotelPage';
 

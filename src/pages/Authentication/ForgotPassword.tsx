@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useFormState } from '../../hooks/useFormState';
 import { AuthLayout } from '../../components/SectionAuthentication/AuthLayout';
 import { Button } from '../../components/Button/Button';
-import { InputField } from '../../components/TextField/InputField';
+import { InputField } from '../../components/Input/InputField';
 import { AuthHeader } from '../../components/SectionAuthentication/AuthHeader';
 import { AuthFooter } from '../../components/SectionAuthentication/AuthFooter';
 

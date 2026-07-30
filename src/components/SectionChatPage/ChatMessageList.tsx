@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from 'react';
-import { ThinkingLoader } from '../../../../components/Thinking/ThinkingLoader';
+import { ThinkingLoader } from '../Thinking/ThinkingLoader';
 import { FlightRecommendations } from '../Recommendations/FlightRecommendations';
 import { HotelRecommendations } from '../Recommendations/HotelRecommendations';
 import { PlacesCardWidget } from '../Recommendations/PlacesCardWidget';
 import { ItineraryCardWidget } from '../Recommendations/ItineraryCardWidget';
-import type { PlaceData, DayItinerary } from '../../../../services/travelService';
+import type {  PlaceData, DayItinerary } from '../../types/travel';
 
 // Custom payload inside a chat message
 export type MessageData = PlaceData[] | DayItinerary[] | unknown;

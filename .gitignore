@@ -24,3 +24,5 @@ public
 
 *storybook.log
 storybook-static
+coverage
+.gitignore

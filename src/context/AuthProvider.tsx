@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import type { User } from '../types/auth';
 import { AuthContext } from './AuthContext';
-import { loginApi } from '../services/loginAPI';
+import { loginApi } from '../services/authService';
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   // Initialize the user state directly from localStorage (Lazy Initialization)
@@ -12,7 +12,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       try {
         return JSON.parse(savedUser) as User;
       } catch (error) {
-        console.error('Lỗi parse user:', error);
+        console.error('Cross user error:', error);
         localStorage.removeItem('user');
       }
     }
@@ -26,15 +26,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setLoading(true);
     try {
       const userData = await loginApi({ email, password });
-      const mockToken = `mock_token_${userData.id}_${Date.now()}`;
-
-      localStorage.setItem('accessToken', mockToken);
-      localStorage.setItem('user', JSON.stringify(userData));
-
       setUser(userData);
     } catch {
-      // Not declaring a variable -> Completely ignore the unused variable error!
-      throw new Error('Email hoặc mật khẩu không chính xác!');
+      throw new Error('Incorrect email or password!');
     } finally {
       setLoading(false);
     }

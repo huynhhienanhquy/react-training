@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { AxiosError } from 'axios';
-import { SidebarNav } from '../Chat/Sections/SidebarNav';
-import { Topbar, type ChatMessage } from '../Chat/Sections/Topbar';
+import { SidebarNav } from '../../../components/SectionChatPage/SidebarNav';
+import { Topbar, type ChatMessage } from '../../../components/SectionChatPage/Topbar';
 import { SectionHeader } from '../../../components/SectionHeader/SectionHeader';
-import { getHotelDetailsApi, type HotelData } from '../../../services/hotelService';
+import { getHotelDetailsApi } from '../../../services/hotelService';
+import type { HotelData } from '../../../types/hotel';
 
 import defaultHotelImg from '../../../assets/icons/ellipse.png';
 import bookingIcon from '../../../assets/icons/booking.png';

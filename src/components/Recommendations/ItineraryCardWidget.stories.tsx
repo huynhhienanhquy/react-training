@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { ItineraryCardWidget } from './ItineraryCardWidget'
-import type { DayItinerary } from '../../../../services/travelService'
+import type { DayItinerary } from '../../services/travelService'
 
 const meta: Meta<typeof ItineraryCardWidget> = {
   title: 'Chat/ItineraryCardWidget',

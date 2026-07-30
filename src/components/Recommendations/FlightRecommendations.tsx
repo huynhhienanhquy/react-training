@@ -1,84 +1,70 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { AxiosError } from 'axios';
 import { RecommendationWrapper } from './RecommendationWrapper';
-import { FavoriteButton } from '../../../../components/Button/FavoriteButton';
-import { Button } from '../../../../components/Button/Button';
-import { PriceDisplay } from '../../../../components/PriceDisplay/PriceDisplay';
-import defaultFlightLogo from '../../../../assets/icons/ellipse.png';
+import { FavoriteButton } from '../Button/FavoriteButton';
+import { Button } from '../Button/Button';
+import { PriceDisplay } from '../PriceDisplay/PriceDisplay';
+import defaultFlightLogo from '../../assets/icons/ellipse.png';
 
-// Import Service API
-import { getFlightListApi, type FareData } from '../../../../services/fareService';
+import { getFlightListApi } from '../../services/fareService';
+import type {
+  FareData,
+  FlightOption,
+  FlightLegInfo,
+  FlightRecommendationsProps,
+} from '../../types/flight';
 
-// Type definitions for outbound/return flights
-export interface FlightLeg {
-  time: string;
-  route: string;
-  duration: string;
-  stops: string;
-}
+export type { FlightOption, FlightLegInfo };
 
-// Interface for flight suggestion card
-export interface FlightOption {
-  id: string;
-  airline: string;
-  logoUrl?: string;
-  outbound: FlightLeg;
-  returnLeg: FlightLeg;
-  price: string;
-  tag?: string;
-  isFavorite?: boolean;
-}
-
-// Component props interface
-interface FlightRecommendationsProps {
-  title?: string;
-  flights?: FlightOption[];
-  onBookNow?: (flightId: string) => void;
-  onSeeAll?: () => void;
-}
-
-const mapFareDataToFlightOption = (fareData: FareData, index: number): FlightOption => {
-  const legs = fareData?.legs || [];
-  const fareOptions = fareData?.fareOptions || [];
+const mapFareDataToFlightOption = (
+  fareData: FareData,
+  index: number,
+): FlightOption => {
+  const legs = fareData.legs ?? [];
+  const fareOptions = fareData.fareOptions ?? [];
 
   const outboundLeg = legs[0];
-  const returnLeg = legs[1] || legs[0];
+  const returnLeg = legs[1] ?? legs[0];
   const lowestPrice = fareOptions[0]?.price ?? 0;
 
   return {
-    id: fareData?.id ? String(fareData.id) : `flight-${index + 1}`,
-    airline: fareData?.airlineName || 'Airline',
+    id: fareData.id ? String(fareData.id) : `flight-${index + 1}`,
+    airline: fareData.airlineName ?? 'Airline',
     outbound: {
-      time: outboundLeg?.times || 'N/A',
-      route: outboundLeg?.route || 'N/A',
-      duration: outboundLeg?.duration || 'N/A',
-      stops: outboundLeg?.stops || 'Direct',
+      time: outboundLeg?.times ?? 'N/A',
+      route: outboundLeg?.route ?? 'N/A',
+      duration: outboundLeg?.duration ?? 'N/A',
+      stops: outboundLeg?.stops ?? 'Direct',
     },
     returnLeg: {
-      time: returnLeg?.times || 'N/A',
-      route: returnLeg?.route || 'N/A',
-      duration: returnLeg?.duration || 'N/A',
-      stops: returnLeg?.stops || 'Direct',
+      time: returnLeg?.times ?? 'N/A',
+      route: returnLeg?.route ?? 'N/A',
+      duration: returnLeg?.duration ?? 'N/A',
+      stops: returnLeg?.stops ?? 'Direct',
     },
     price: `$${lowestPrice}`,
     tag: 'Cheap',
   };
 };
 
-export const FlightRecommendations: React.FC<FlightRecommendationsProps> = ({
+export function FlightRecommendations({
   title = 'Recommended Flights For a Round Trip Journey',
   flights: initialFlights,
   onBookNow,
   onSeeAll,
-}) => {
-  const [flightList, setFlightList] = useState<FlightOption[]>(initialFlights || []);
-  const [loading, setLoading] = useState<boolean>(!initialFlights);
+}: FlightRecommendationsProps) {
+  const [apiFlights, setApiFlights] = useState<FlightOption[]>([]);
+  const [loading, setLoading] = useState(!initialFlights);
   const [error, setError] = useState<string | null>(null);
 
   const [favorites, setFavorites] = useState<Record<string, boolean>>({});
 
+  const flightList = initialFlights ?? apiFlights;
+
   useEffect(() => {
-    if (initialFlights) return;
+    if (initialFlights) {
+      return;
+    }
 
     const fetchFlights = async () => {
       try {
@@ -87,28 +73,39 @@ export const FlightRecommendations: React.FC<FlightRecommendationsProps> = ({
 
         const data = await getFlightListApi();
         const items = Array.isArray(data) ? data : [data];
-        const mappedList = items.map((item, index) => mapFareDataToFlightOption(item, index));
 
-        setFlightList(mappedList);
+        setApiFlights(
+          items.map((item, index) =>
+            mapFareDataToFlightOption(item, index),
+          ),
+        );
       } catch (err: unknown) {
         if (err instanceof AxiosError) {
-          setError(err.response?.data?.message || err.message || 'Server connection error');
+          setError(
+            err.response?.data?.message ??
+              err.message ??
+              'Server connection error',
+          );
         } else if (err instanceof Error) {
           setError(err.message);
         } else {
           setError('Unable to load flight information from the server.');
         }
-        setFlightList([]);
+
+        setApiFlights([]);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchFlights();
+    void fetchFlights();
   }, [initialFlights]);
 
   const toggleFavorite = (id: string) => {
-    setFavorites((prev) => ({ ...prev, [id]: !prev[id] }));
+    setFavorites((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
   };
 
   return (

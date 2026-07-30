@@ -1,31 +1,5 @@
-import travelApi from './travelApi';
-
-// 1. TYPES & INTERFACES FOR PLACE
-export interface PlaceData {
-  id: string;
-  name: string;
-  location: string;
-  description?: string;
-  imageUrl?: string;
-  rating?: number;
-  category?: string;
-}
-
-// 2. TYPES & INTERFACES FOR ITINERARY
-export interface ActivityItem {
-  id: string;
-  title: string;
-  time: string;
-  location?: string;
-  description?: string;
-}
-
-export interface DayItinerary {
-  id?: string;
-  day: number;
-  dateTitle: string;
-  activities: ActivityItem[];
-}
+import { travelApi } from './api';
+import type { PlaceData, DayItinerary } from '../types/travel';
 
 // 3. API CALLS FOR PLACE (/place)
 //Get a list of suggested locations.

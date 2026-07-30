@@ -3,7 +3,7 @@ import { AuthLayout } from './AuthLayout'
 import { AuthHeader } from './AuthHeader'
 import { AuthFooter } from './AuthFooter'
 import { Button } from '../Button/Button'
-import { InputField } from '../TextField/InputField'
+import { InputField } from '../Input/InputField'
 
 const meta: Meta<typeof AuthLayout> = {
   title: 'Auth/AuthLayout',

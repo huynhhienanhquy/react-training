@@ -1,8 +1,8 @@
 import React from 'react';
 
-import iconPlus from '../../../../assets/icons/add-dark.png';
-import iconMic from '../../../../assets/icons/microphone-2.png';
-import iconSend from '../../../../assets/icons/send-2.png';
+import iconPlus from '../../assets/icons/add-dark.png';
+import iconMic from '../../assets/icons/microphone-2.png';
+import iconSend from '../../assets/icons/send-2.png';
 
 // Props definition for managing chat input, recording, and submission
 interface ChatInputBoxProps {

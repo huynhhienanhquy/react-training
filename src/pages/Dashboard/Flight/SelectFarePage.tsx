@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { AxiosError } from 'axios';
-import { SidebarNav } from '../Chat/Sections/SidebarNav';
+import { SidebarNav } from '../../../components/SectionChatPage/SidebarNav';
 
 import iconHeart from '../../../assets/icons/heart-blue.png';
 import defaultFlightLogo from '../../../assets/icons/ellipse.png';
 import { SectionHeader } from '../../../components/SectionHeader/SectionHeader';
 
-import { Topbar, type ChatMessage } from '../Chat/Sections/Topbar';
+import { Topbar, type ChatMessage } from '../../../components/SectionChatPage/Topbar';
 import { FareHeader } from './Fare/FareHeader';
 import { SelectedFlightBox } from './Fare/SelectedFlightBox';
 import { FareCards } from './Fare/FareCards';
 import { PriceDetailsSidebar } from './Fare/PriceDetailsSidebar';
 
 // Import Service & Types
-import { getFareDetailsApi, type FareData } from '../../../services/fareService';
+import { getFareDetailsApi } from '../../../services/fareService';
+import type { FareData } from '../../../types/flight';
 
 interface SelectFarePageProps {
   chatTitle?: string;

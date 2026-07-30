@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Menu } from 'lucide-react';
-import { useClickOutside } from '../../../../hooks/useClickOutside';
-import { useAuth } from '../../../../hooks/useAuth';
+import { useClickOutside } from '../../hooks/useClickOutside';
+import { useAuth } from '../../hooks/useAuth';
 
-import logo from '../../../../assets/icons/Logo.png';
-import iconChat from '../../../../assets/icons/chat.png';
-import iconHeart from '../../../../assets/icons/heart.png';
-import iconMedal from '../../../../assets/icons/medal.png';
-import iconMap from '../../../../assets/icons/map.png';
-import iconCommunity from '../../../../assets/icons/people.png';
-import iconSettings from '../../../../assets/icons/setting.png';
-import userAvatar from '../../../../assets/icons/user.png';
+import logo from '../../assets/icons/Logo.png';
+import iconChat from '../../assets/icons/chat.png';
+import iconHeart from '../../assets/icons/heart.png';
+import iconMedal from '../../assets/icons/medal.png';
+import iconMap from '../../assets/icons/map.png';
+import iconCommunity from '../../assets/icons/people.png';
+import iconSettings from '../../assets/icons/setting.png';
+import userAvatar from '../../assets/icons/user.png';
 
 interface SidebarNavProps {
   activeNav: string;

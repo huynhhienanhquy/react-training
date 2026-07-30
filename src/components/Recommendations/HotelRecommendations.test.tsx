@@ -14,13 +14,13 @@ import {
 } from "vitest";
 
 import { HotelRecommendations } from "./HotelRecommendations";
-import { getHotelListApi } from "../../../../services/hotelService";
-import type { HotelData } from "../../../../services/hotelService";
+import { getHotelListApi } from "../../services/hotelService";
+import type { HotelData } from "../../services/hotelService";
 
 
 vi.mock("../../../../services/hotelService", async () => {
   const actual = await vi.importActual<
-    typeof import("../../../../services/hotelService")
+    typeof import("../../services/hotelService")
   >("../../../../services/hotelService");
 
   return {

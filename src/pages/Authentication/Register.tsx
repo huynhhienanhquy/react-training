@@ -6,7 +6,7 @@ import iconGoogle from '../../assets/icons/logo-google.png';
 import iconApple from '../../assets/icons/logo-apple.png';
 import { Button } from '../../components/Button/Button';
 import { AuthHeader } from '../../components/SectionAuthentication/AuthHeader';
-import { InputField } from '../../components/TextField/InputField';
+import { InputField } from '../../components/Input/InputField';
 import { AuthFooter } from '../../components/SectionAuthentication/AuthFooter';
 
 export const Register: React.FC = () => {

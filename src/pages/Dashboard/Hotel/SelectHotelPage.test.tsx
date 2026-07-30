@@ -1,7 +1,8 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { SelectHotelPage } from './SelectHotelPage'
-import { getHotelDetailsApi, type HotelData } from '../../../services/hotelService'
+import { getHotelDetailsApi } from '../../../services/hotelService'
+import type { HotelData } from '../../../types/hotel'
 
 // Mock react-router-dom
 vi.mock('react-router-dom', () => ({

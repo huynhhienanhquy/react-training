@@ -1,23 +1,10 @@
-import api from './api';
-
-export interface ActivityItem {
-  id: string;
-  title: string;
-  time: string;
-  location?: string;
-  description?: string;
-}
-
-export interface DayItinerary {
-  day: number;
-  dateTitle: string;
-  activities: ActivityItem[];
-}
+import { flightApi } from './api';
+import type { DayItinerary } from '../types/travel';
 
 
 //Get suggested itineraries from MockAPI (/itinerary)
 export const getItineraryListApi = async (): Promise<DayItinerary[]> => {
-  const response = await api.get<DayItinerary[] | { days: DayItinerary[] }>('/itinerary');
+  const response = await flightApi.get<DayItinerary[] | { days: DayItinerary[] }>('/itinerary');
 
   // Handle flexibly if MockAPI returns an Array or Object wrapped in { days: [...] }
   if (Array.isArray(response.data)) {

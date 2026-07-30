@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { MemoryRouter } from 'react-router-dom'
 import { SidebarNav } from './SidebarNav'
-import { AuthProvider } from '../../../../context/AuthProvider'
+import { AuthProvider } from '../../context/AuthProvider'
 
 const meta: Meta<typeof SidebarNav> = {
   title: 'Chat/SidebarNav',

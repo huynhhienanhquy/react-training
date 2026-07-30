@@ -1,30 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { AxiosError } from 'axios';
 import { RecommendationWrapper } from './RecommendationWrapper';
-import { FavoriteButton } from '../../../../components/Button/FavoriteButton';
-import { Button } from '../../../../components/Button/Button';
-import { getHotelListApi, type HotelData } from '../../../../services/hotelService';
+import { FavoriteButton } from '../Button/FavoriteButton';
+import { Button } from '../Button/Button';
+import { getHotelListApi } from '../../services/hotelService';
+import type { HotelData, HotelOption, HotelRecommendationsProps } from '../../types/hotel';
+
+export type { HotelOption };
 
 const defaultHotelImg =
   'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80';
 
-export interface HotelOption {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  imageUrl?: string;
-  tag?: string;
-  isFavorite?: boolean;
-  rawData?: HotelData;
-}
 
-interface HotelRecommendationsProps {
-  title?: string;
-  hotels?: HotelOption[];
-  onBookNow?: (hotel: HotelOption) => void;
-  onSeeAll?: () => void;
-}
 
 const mapHotelDataToOption = (hotel: HotelData, index: number): HotelOption => {
   const lowestPrice = hotel.roomOptions?.[0]?.price ?? hotel.priceBreakdown?.roomRate ?? 1200;
