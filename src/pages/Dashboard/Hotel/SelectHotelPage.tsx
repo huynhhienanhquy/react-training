@@ -1,16 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { AxiosError } from 'axios';
+import React, { useCallback, useState } from 'react';
+
 import { SidebarNav } from '../../../components/chat/SidebarNav/SidebarNav';
 import { Topbar } from '../../../components/chat/Topbar/Topbar';
-import { SectionHeader } from '../../../components/SectionHeader/SectionHeader';
+import { SectionHeader } from '../../../components/FlightFare/SectionHeader/SectionHeader';
+
 import { getHotelDetailsApi } from '../../../services/hotelService';
-import type { HotelData,SelectHotelPageProps } from '../../../types/hotel';
+import { Button } from '../../../components/Button/Button';
+
+import type {
+  HotelData,
+  SelectHotelPageProps,
+} from '../../../types/hotel';
 
 import defaultHotelImg from '../../../assets/icons/ellipse.png';
 import bookingIcon from '../../../assets/icons/booking.png';
 import expediaIcon from '../../../assets/icons/expedia.png';
 
-
+import { useApiRequest } from '../../../hooks/useApiRequest';
 
 export const SelectHotelPage = ({
   chatTitle,
@@ -23,71 +29,89 @@ export const SelectHotelPage = ({
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isComparePrice, setIsComparePrice] = useState(false);
 
-  // State manages the hotel listing data.
-  const [hotelList, setHotelList] = useState<HotelData[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  // Fetch hotel data
+  const fetchHotels = useCallback(
+    async (): Promise<HotelData[]> => {
+      const rawData = await getHotelDetailsApi();
 
-  // Retrieving API data when a component is mounted.
-  useEffect(() => {
-    const fetchHotels = async () => {
-      try {
-        setLoading(true);
-        setError(null);
+      let dataList: HotelData[] = Array.isArray(rawData)
+        ? rawData
+        : [rawData];
 
-        const rawData = await getHotelDetailsApi();
-        let dataList: HotelData[] = Array.isArray(rawData) ? rawData : [rawData];
+      //Synchronize with LocalStorage.If a hotel was previously selected,move it to the top of the list.
+      const savedHotelJson =
+        localStorage.getItem('selectedHotel');
 
-        // SYNCHRONIZE: Read selected data from LocalStorage (if available) to prioritize it at the top.
-        const savedHotelJson = localStorage.getItem('selectedHotel');
-        if (savedHotelJson) {
-          try {
-            const savedHotel: HotelData = JSON.parse(savedHotelJson);
-            if (savedHotel && savedHotel.hotelName) {
-              dataList = [savedHotel, ...dataList.filter((h) => h.id !== savedHotel.id)];
-            }
-          } catch (e) {
-            console.error('Error parsing saved hotel:', e);
+      if (savedHotelJson) {
+        try {
+          const savedHotel: HotelData =
+            JSON.parse(savedHotelJson);
+
+          if (savedHotel?.hotelName) {
+            dataList = [
+              savedHotel,
+              ...dataList.filter(
+                (hotel) => hotel.id !== savedHotel.id,
+              ),
+            ];
           }
+        } catch (err) {
+          console.error(
+            'Error parsing saved hotel:',
+            err,
+          );
         }
-
-        if (dataList.length > 0) {
-          setHotelList(dataList);
-        } else {
-          setError('No matching hotel data available.');
-        }
-      } catch (err: unknown) {
-        if (err instanceof AxiosError) {
-          setError(err.response?.data?.message || err.message || 'Server connection error');
-        } else if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError('Unable to retrieve hotel data.');
-        }
-      } finally {
-        setLoading(false);
       }
-    };
 
-    fetchHotels();
-  }, []);
+      if (dataList.length === 0) {
+        throw new Error(
+          'No matching hotel data available.',
+        );
+      }
 
-  // Handle the Topbar header display similarly to SelectFarePage.
-  const firstUserMessage = messages.find((m) => m.sender === 'user')?.text;
+      return dataList;
+    },
+    [],
+  );
+
+  const {
+    data: hotelData,
+    loading,
+    error,
+  } = useApiRequest<HotelData[]>(fetchHotels);
+
+  const hotelList = hotelData ?? [];
+
+  // Handle the Topbar header display
+  const firstUserMessage = messages.find(
+    (m) => m.sender === 'user',
+  )?.text;
+
   const resolvedChatTitle =
     chatTitle ||
     firstUserMessage ||
     'Other available accommodations';
 
   // Handling when clicking "Book Hotel"
-  const handleBookHotel = (e: React.MouseEvent, selectedHotel: HotelData) => {
+  const handleBookHotel = (
+    e: React.MouseEvent,
+    selectedHotel: HotelData,
+  ) => {
     e.stopPropagation();
-    localStorage.setItem('selectedHotel', JSON.stringify(selectedHotel));
+
+    localStorage.setItem(
+      'selectedHotel',
+      JSON.stringify(selectedHotel),
+    );
 
     if (onSelectHotel) {
       onSelectHotel(selectedHotel);
     } else {
-      alert(`The hotel you have chosen: ${selectedHotel.hotelName || 'Hotel'}`);
+      alert(
+        `The hotel you have chosen: ${
+          selectedHotel.hotelName || 'Hotel'
+        }`,
+      );
     }
   };
 
@@ -127,12 +151,15 @@ export const SelectHotelPage = ({
           <div className="flex-1 flex items-center justify-center p-8">
             <div className="bg-red-50 text-red-600 p-6 rounded-2xl border border-red-100 max-w-md text-center">
               <p className="font-semibold">{error}</p>
-              <button
+              <Button
+                type="button"
+                variant="danger"
+                size="sm"
+                className="mt-4"
                 onClick={() => window.location.reload()}
-                className="mt-4 px-4 py-2 bg-red-600 text-white text-xs font-bold rounded-xl hover:bg-red-700 transition cursor-pointer"
               >
                 Retry
-              </button>
+              </Button>
             </div>
           </div>
         )}
@@ -186,13 +213,13 @@ export const SelectHotelPage = ({
 
             {/* LIST ACCOMMODATIONS */}
             <div className="space-y-4">
-              {hotelList.map((hotel, index) => {
+              {hotelList.map((hotel) => {
                 const hotelImage = hotel.coverImage || hotel.images?.[0] || defaultHotelImg;
                 const mainPrice = hotel.priceBreakdown?.roomRate || hotel.roomOptions?.[0]?.price || 1200;
 
                 return (
                   <div
-                    key={hotel.id || index}
+                    key={hotel.id }
                     className="bg-white rounded-[28px] p-5 md:p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col md:flex-row items-stretch gap-6"
                   >
                     {/* Information on the left */}
