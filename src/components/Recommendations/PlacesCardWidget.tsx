@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import {
   MapPin,
   Star,
@@ -8,109 +7,82 @@ import {
   Compass,
   Hotel,
 } from 'lucide-react';
-import { AxiosError } from 'axios';
 import { Button } from '../Button/Button';
 import { getPlaceListApi } from '../../services/travelService';
-import type { PlaceData, PlacesCardWidgetProps } from '../../types/travel';
+import type {
+  PlaceData,
+  PlacesCardWidgetProps,
+} from '../../types/travel';
+import { useAsyncData } from '../../hooks/useAsyncData';
 
 export type { PlaceData };
 
 const DEFAULT_IMAGE =
   'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80';
 
+const getCategoryBadge = (category?: string) => {
+  const cat = category?.toLowerCase() ?? '';
+
+  if (cat.includes('food') || cat.includes('cuisine')) {
+    return {
+      label: 'Cuisine',
+      icon: Utensils,
+      color: 'bg-amber-100/70 text-amber-700',
+    };
+  }
+
+  if (cat.includes('sight') || cat.includes('cam')) {
+    return {
+      label: 'Sightseeing',
+      icon: Camera,
+      color: 'bg-emerald-100/70 text-emerald-700',
+    };
+  }
+
+  if (cat.includes('shop') || cat.includes('shopping')) {
+    return {
+      label: 'Shopping',
+      icon: ShoppingBag,
+      color: 'bg-purple-100/70 text-purple-700',
+    };
+  }
+
+  if (
+    cat.includes('hotel') ||
+    cat.includes('resort') ||
+    cat.includes('ryokan')
+  ) {
+    return {
+      label: category ?? 'Stay',
+      icon: Hotel,
+      color: 'bg-indigo-100/70 text-indigo-700',
+    };
+  }
+
+  return {
+    label: category ?? 'Entertainment',
+    icon: Compass,
+    color: 'bg-blue-100/70 text-blue-700',
+  };
+};
+
 export function PlacesCardWidget({
   places: initialPlaces,
   onViewAll,
 }: PlacesCardWidgetProps) {
-  const [apiPlaces, setApiPlaces] = useState<PlaceData[]>([]);
-  const [loading, setLoading] = useState(!initialPlaces);
-  const [error, setError] = useState<string | null>(null);
+  const {
+    data: apiPlaces,
+    loading,
+    error,
+  } = useAsyncData(getPlaceListApi, {
+    skip: Boolean(initialPlaces),
+  });
 
-  const placesList = initialPlaces ?? apiPlaces;
-
-  useEffect(() => {
-  if (initialPlaces) {
-    return;
-  }
-
-  const fetchPlaces = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-
-      const data = await getPlaceListApi();
-      setApiPlaces(Array.isArray(data) ? data : []);
-    } catch (err: unknown) {
-      if (err instanceof AxiosError) {
-        setError(
-          err.response?.data?.message ??
-            err.message ??
-            'Server connection error'
-        );
-      } else if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError('Unable to load the list of locations');
-      }
-
-      setApiPlaces([]);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  void fetchPlaces();
-}, [initialPlaces]);
-
-  const getCategoryBadge = (category?: string) => {
-    const cat = category?.toLowerCase() ?? '';
-
-    if (cat.includes('food') || cat.includes('cuisine')) {
-      return {
-        label: 'Cuisine',
-        icon: Utensils,
-        color: 'bg-amber-100/70 text-amber-700',
-      };
-    }
-
-    if (cat.includes('sight') || cat.includes('cam')) {
-      return {
-        label: 'Sightseeing',
-        icon: Camera,
-        color: 'bg-emerald-100/70 text-emerald-700',
-      };
-    }
-
-    if (cat.includes('shop') || cat.includes('shopping')) {
-      return {
-        label: 'Shopping',
-        icon: ShoppingBag,
-        color: 'bg-purple-100/70 text-purple-700',
-      };
-    }
-
-    if (
-      cat.includes('hotel') ||
-      cat.includes('resort') ||
-      cat.includes('ryokan')
-    ) {
-      return {
-        label: category ?? 'Stay',
-        icon: Hotel,
-        color: 'bg-indigo-100/70 text-indigo-700',
-      };
-    }
-
-    return {
-      label: category ?? 'Entertainment',
-      icon: Compass,
-      color: 'bg-blue-100/70 text-blue-700',
-    };
-  };
+  const placesList =
+    initialPlaces ?? apiPlaces ?? [];
 
   return (
     <div className="bg-[#F8FAFC] rounded-2xl p-4 md:p-5 flex flex-col gap-4 border-none max-w-2xl w-full">
-      {/* Widget Header */}
       <div className="flex items-center justify-between pb-3 border-b border-slate-200/60">
         <div className="flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-600 shrink-0">
@@ -138,6 +110,7 @@ export function PlacesCardWidget({
       {loading && (
         <div className="py-8 flex flex-col items-center justify-center gap-2">
           <div className="w-6 h-6 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
+
           <p className="text-xs text-slate-400 font-medium">
             Loading list of locations...
           </p>
@@ -162,8 +135,11 @@ export function PlacesCardWidget({
             const badge = getCategoryBadge(place.category);
             const CategoryIcon = badge.icon;
 
-            const imageSrc = place.imageUrl ?? DEFAULT_IMAGE;
-            const addressText = place.location ?? 'N/A';
+            const imageSrc =
+              place.imageUrl ?? DEFAULT_IMAGE;
+
+            const addressText =
+              place.location ?? 'N/A';
 
             return (
               <div
@@ -190,6 +166,7 @@ export function PlacesCardWidget({
                     {place.rating !== undefined && (
                       <div className="flex items-center gap-1 shrink-0">
                         <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+
                         <span className="text-xs font-bold text-slate-800">
                           {place.rating}
                         </span>
@@ -203,6 +180,7 @@ export function PlacesCardWidget({
 
                   <p className="text-xs text-slate-500 truncate flex items-center gap-1 font-medium">
                     <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+
                     <span>{addressText}</span>
                   </p>
                 </div>

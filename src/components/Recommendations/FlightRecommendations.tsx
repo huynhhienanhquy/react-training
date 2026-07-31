@@ -52,54 +52,57 @@ export function FlightRecommendations({
   onBookNow,
   onSeeAll,
 }: FlightRecommendationsProps) {
-  const isControlled = !!initialFlights;
+  const isControlled = Boolean(initialFlights);
 
-  const { data: apiFlights, loading, error } = useAsyncData(async () => {
-    const data = await getFlightListApi();
-    const items = Array.isArray(data) ? data : [data];
-    return items.map((item, index) => mapFareDataToFlightOption(item, index));
-  }, { skip: isControlled });
+  const {
+    data: fareData,
+    loading,
+    error,
+  } = useAsyncData(getFlightListApi, {
+    skip: isControlled,
+  });
 
   const { favorites, toggleFavorite } = useFavorites();
 
-  const flightList = initialFlights ?? (apiFlights as FlightOption[]) ?? [];
+  const apiFlights =
+    fareData?.map(mapFareDataToFlightOption) ?? [];
+
+  const flightList = initialFlights ?? apiFlights;
 
   return (
     <RecommendationWrapper title={title} onSeeAll={onSeeAll}>
-      {/* LOADING STATE */}
       {!isControlled && loading && (
         <div className="py-8 flex flex-col items-center justify-center gap-2">
           <div className="w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
-          <p className="text-xs text-slate-400 font-medium">Loading flight list...</p>
+          <p className="text-xs text-slate-400 font-medium">
+            Loading flight list...
+          </p>
         </div>
       )}
 
-      {/* ERROR STATE */}
       {!isControlled && error && !loading && (
         <div className="p-4 bg-red-50 text-red-600 rounded-2xl border border-red-100 text-xs text-center font-medium my-2">
           {error}
         </div>
       )}
 
-      {/* EMPTY STATE */}
       {!isControlled && !loading && !error && flightList.length === 0 && (
         <div className="p-6 text-center text-xs text-slate-400">
           No suitable flights were found.
         </div>
       )}
 
-      {/* FLIGHT LIST DISPLAY */}
       {(isControlled || (!loading && !error)) &&
-        flightList.map((flight, idx) => {
-          const isFav = !!(favorites[flight.id] || flight.isFavorite);
-          const uniqueKey = `${flight.id}-${idx}`;
+        flightList.map((flight) => {
+          const isFav = Boolean(
+            favorites[flight.id] || flight.isFavorite,
+          );
 
           return (
             <div
-              key={uniqueKey}
+              key={flight.id}
               className="bg-[#F8FAFC] rounded-2xl p-3.5 sm:p-5 flex flex-col gap-3.5 border-none mb-3 overflow-hidden"
             >
-              {/* Header: Logo, Airline Name & Action Controls */}
               <div className="flex items-center justify-between gap-2">
                 <div className="flex items-center gap-2 min-w-0">
                   <div className="w-6 h-6 flex items-center justify-center shrink-0 overflow-hidden">
@@ -109,6 +112,7 @@ export function FlightRecommendations({
                       className="w-full h-full object-contain"
                     />
                   </div>
+
                   <span className="text-xs sm:text-sm font-semibold text-slate-700 truncate">
                     {flight.airline}
                   </span>
@@ -133,38 +137,38 @@ export function FlightRecommendations({
                 </div>
               </div>
 
-              {/* Schedules & Pricing Details */}
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 pt-1 border-t border-slate-100/60">
-                {/* Outbound & Return Legs */}
                 <div className="space-y-2 text-xs sm:text-sm flex-1">
-                  {/* Outbound Leg */}
                   <div className="flex flex-wrap sm:flex-nowrap items-baseline sm:items-center gap-x-3 gap-y-0.5">
                     <span className="font-bold text-slate-900 shrink-0 text-xs sm:text-sm">
                       {flight.outbound.time}
                     </span>
+
                     <span className="text-slate-500 font-medium text-[11px] sm:text-xs leading-tight">
-                      {flight.outbound.route} • {flight.outbound.duration} • {flight.outbound.stops}
+                      {flight.outbound.route} • {flight.outbound.duration} •{' '}
+                      {flight.outbound.stops}
                     </span>
                   </div>
 
-                  {/* Return Leg */}
                   <div className="flex flex-wrap sm:flex-nowrap items-baseline sm:items-center gap-x-3 gap-y-0.5">
                     <span className="font-bold text-slate-900 shrink-0 text-xs sm:text-sm">
                       {flight.returnLeg.time}
                     </span>
+
                     <span className="text-slate-500 font-medium text-[11px] sm:text-xs leading-tight">
-                      {flight.returnLeg.route} • {flight.returnLeg.duration} • {flight.returnLeg.stops}
+                      {flight.returnLeg.route} • {flight.returnLeg.duration} •{' '}
+                      {flight.returnLeg.stops}
                     </span>
                   </div>
                 </div>
 
-                {/* Price Display and Tag */}
                 <div className="flex items-center sm:flex-col justify-between sm:justify-end sm:items-end gap-1.5 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-200/40 shrink-0">
                   {flight.tag && (
                     <span className="px-2.5 py-0.5 bg-emerald-100/80 text-emerald-700 text-[10px] sm:text-[11px] font-bold rounded-full">
                       {flight.tag}
                     </span>
                   )}
+
                   <PriceDisplay amount={flight.price} size="sm" />
                 </div>
               </div>
@@ -173,4 +177,4 @@ export function FlightRecommendations({
         })}
     </RecommendationWrapper>
   );
-};
+}
