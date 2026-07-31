@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormState } from '../../../hooks/useFormState';
 import { AuthLayout } from '../../../components/auth/AuthLayout/AuthLayout';
-import iconGoogle from '../../../assets/icons/logo-google.png';
-import iconApple from '../../../assets/icons/logo-apple.png';
 import { Button } from '../../../components/Button/Button';
 import { AuthHeader } from '../../../components/auth/AuthHeader/AuthHeader';
 import { InputField } from '../../../components/Input/InputField';
