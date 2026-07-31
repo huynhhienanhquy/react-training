@@ -1,22 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { AxiosError } from 'axios';
 import { SidebarNav } from '../../../components/chat/SidebarNav/SidebarNav';
-import { Topbar, type ChatMessage } from '../../../components/chat/Topbar/Topbar';
+import { Topbar } from '../../../components/chat/Topbar/Topbar';
 import { SectionHeader } from '../../../components/SectionHeader/SectionHeader';
 import { getHotelDetailsApi } from '../../../services/hotelService';
-import type { HotelData } from '../../../types/hotel';
+import type { HotelData,SelectHotelPageProps } from '../../../types/hotel';
 
 import defaultHotelImg from '../../../assets/icons/ellipse.png';
 import bookingIcon from '../../../assets/icons/booking.png';
 import expediaIcon from '../../../assets/icons/expedia.png';
 
-interface SelectHotelPageProps {
-  chatTitle?: string;
-  messages?: ChatMessage[];
-  onBackToChat?: () => void;
-  onStartNewChat?: () => void;
-  onSelectHotel?: (hotel: HotelData) => void;
-}
+
 
 export const SelectHotelPage = ({
   chatTitle,

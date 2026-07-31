@@ -11,3 +11,23 @@ export interface LoginPayload {
   email: string;
   password: string;
 }
+
+export interface AuthFooterProps {
+  questionText: string;
+  actionText: string;
+  onActionClick: () => void;
+  className?: string;
+}
+
+export interface AuthHeaderProps {
+  title: string;
+  subtitle: string;
+  className?: string;
+}
+
+export interface AuthLayoutProps {
+  children: React.ReactNode;
+  isLoading?: boolean;
+}
+
+

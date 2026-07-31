@@ -1,3 +1,5 @@
+import { type ChatMessage } from '../components/chat/Topbar/Topbar';
+
 export interface RoomOption {
   id: string;
   name: string;
@@ -46,4 +48,12 @@ export interface HotelRecommendationsProps {
   hotels?: HotelOption[];
   onBookNow?: (hotel: HotelOption) => void;
   onSeeAll?: () => void;
+}
+
+export interface SelectHotelPageProps {
+  chatTitle?: string;
+  messages?: ChatMessage[];
+  onBackToChat?: () => void;
+  onStartNewChat?: () => void;
+  onSelectHotel?: (hotel: HotelData) => void;
 }

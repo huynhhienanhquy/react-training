@@ -6,7 +6,7 @@ import iconHeart from '../../../assets/icons/heart-blue.png';
 import defaultFlightLogo from '../../../assets/icons/ellipse.png';
 import { SectionHeader } from '../../../components/SectionHeader/SectionHeader';
 
-import { Topbar, type ChatMessage } from '../../../components/chat/Topbar/Topbar';
+import { Topbar } from '../../../components/chat/Topbar/Topbar';
 import { FareHeader } from '../../../components/FlightFare/FareHeader';
 import { SelectedFlightBox } from '../../../components/FlightFare/SelectedFlightBox';
 import { FareCards } from '../../../components/FlightFare/FareCards';
@@ -14,14 +14,7 @@ import { PriceDetailsSidebar } from '../../../components/FlightFare/PriceDetails
 
 // Import Service & Types
 import { getFareDetailsApi } from '../../../services/fareService';
-import type { FareData } from '../../../types/flight';
-
-interface SelectFarePageProps {
-  chatTitle?: string;
-  messages?: ChatMessage[];
-  onBackToChat?: () => void;
-  onStartNewChat?: () => void;
-}
+import type { FareData, SelectFarePageProps } from '../../../types/flight';
 
 export const SelectFarePage = ({
   chatTitle,

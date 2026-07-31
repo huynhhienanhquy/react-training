@@ -1,11 +1,4 @@
-
-
-interface PriceDisplayProps {
-  amount: string;
-  period?: string;
-  size?: 'sm' | 'md' | 'lg';
-  className?: string;
-}
+import {type PriceDisplayProps}  from '../../types/price'
 
 const sizeClasses = {
   sm: 'text-xl md:text-2xl font-black',

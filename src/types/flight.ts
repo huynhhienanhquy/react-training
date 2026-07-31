@@ -1,3 +1,5 @@
+import { type ChatMessage } from '../components/chat/Topbar/Topbar';
+
 export interface FareOption {
   id: 'economy' | 'business';
   name: string;
@@ -55,4 +57,11 @@ export interface FlightRecommendationsProps {
   flights?: FlightOption[];
   onBookNow?: (flightId: string) => void;
   onSeeAll?: () => void;
+}
+
+export interface SelectFarePageProps {
+  chatTitle?: string;
+  messages?: ChatMessage[];
+  onBackToChat?: () => void;
+  onStartNewChat?: () => void;
 }

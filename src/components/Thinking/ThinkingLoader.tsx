@@ -1,8 +1,4 @@
-
-
-interface ThinkingLoaderProps {
-  text?: string;
-}
+import {type ThinkingLoaderProps}  from '../../types/loading'
 
 export const ThinkingLoader = ({
   text = "Travelpal is thinking..."

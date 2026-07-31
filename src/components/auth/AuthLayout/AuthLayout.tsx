@@ -1,11 +1,7 @@
 import React from 'react';
 import { LoadingOverlay } from '../../Loading/LoadingOverlay';
 import authBg from '../../../assets/images/background.png';
-
-interface AuthLayoutProps {
-  children: React.ReactNode;
-  isLoading?: boolean;
-}
+import {type AuthLayoutProps}  from '../../../types/auth'
 
 export const AuthLayout = ({ children, isLoading = false }: AuthLayoutProps) => {
   return (

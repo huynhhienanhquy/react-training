@@ -1,11 +1,4 @@
-
-
-interface AuthFooterProps {
-  questionText: string;
-  actionText: string;
-  onActionClick: () => void;
-  className?: string;
-}
+import {type AuthFooterProps}  from '../../../types/auth'
 
 export const AuthFooter = ({
   questionText,

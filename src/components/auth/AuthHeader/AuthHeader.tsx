@@ -1,10 +1,5 @@
+import {type AuthHeaderProps}  from '../../../types/auth'
 
-
-interface AuthHeaderProps {
-  title: string;
-  subtitle: string;
-  className?: string;
-}
 
 export const AuthHeader = ({
   title,
