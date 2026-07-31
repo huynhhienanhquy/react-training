@@ -4,8 +4,6 @@ import { useAuth } from '../../../hooks/useAuth';
 import { useFormState } from '../../../hooks/useFormState';
 import { AuthLayout } from '../../../components/auth/AuthLayout/AuthLayout';
 import { getAuthErrorMessage } from '../../../utils/authHelpers';
-import iconGoogle from '../../../assets/icons/logo-google.png';
-import iconApple from '../../../assets/icons/logo-apple.png';
 import { Button } from '../../../components/Button/Button';
 import { InputField } from '../../../components/Input/InputField';
 import { ErrorMessage } from '../../../components/Error/ErrorMessage';
@@ -86,17 +84,16 @@ export const Login = () => {
             type="button"
             variant="social"
             size="md"
-            leftIcon={<img src={iconGoogle} alt="Google" className="w-5 h-5 object-contain" />}
+            socialIcon="google"
             onClick={() => { /* TODO: Implement Google login */ }}
-          >
-            Continue with Google
-          </Button>
+            >
+              Continue with Google
+            </Button>
 
           <Button
             type="button"
             variant="social"
-            size="md"
-            leftIcon={<img src={iconApple} alt="Apple" className="w-5 h-5 object-contain" />}
+            size="md" socialIcon="apple"
             onClick={() => { /* TODO: Implement Apple login */ }}
           >
             Continue with Apple
@@ -108,11 +105,7 @@ export const Login = () => {
           <Button
             type="submit"
             isLoading={isLoading}
-            rightIcon={
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            }
+            showArrow
           >
             Sign In
           </Button>

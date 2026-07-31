@@ -68,8 +68,12 @@ export const Onboarding = () => {
 
         {/* 4. Button submit*/}
         <div className="pt-4">
-          <Button isLoading={isLoading} rightIcon={<svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>}>
-            Create a Free Account
+          <Button
+            type="submit"
+            isLoading={isLoading}
+            showArrow
+          >
+                      Create a Free Account
           </Button>
         </div>
       </form>

@@ -43,17 +43,14 @@ export const ForgotPassword = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-
           <Button
+            type="submit"
             isLoading={isLoading}
-            rightIcon={
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            }
+            showArrow
           >
             Send OTP Code
           </Button>
+
         </form>
 
         {/* 3. Footer link is right below the button*/}

@@ -75,7 +75,7 @@ export const Register = () => {
             type="button"
             variant="social"
             size="md"
-            leftIcon={<img src={iconGoogle} alt="Google" className="w-5 h-5 object-contain" />}
+            socialIcon="google"
             onClick={() => { /* TODO: Implement Google login */ }}
           >
             Continue with Google
@@ -85,7 +85,7 @@ export const Register = () => {
             type="button"
             variant="social"
             size="md"
-            leftIcon={<img src={iconApple} alt="Apple" className="w-5 h-5 object-contain" />}
+            socialIcon="apple"
             onClick={() => { /* TODO: Implement Apple login */ }}
           >
             Continue with Apple
@@ -97,11 +97,7 @@ export const Register = () => {
           <Button
             type="submit"
             isLoading={isLoading}
-            rightIcon={
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            }
+            showArrow
           >
             Create a Free Account
           </Button>
