@@ -14,13 +14,13 @@ interface TopbarProps {
   onNewChat?: () => void;
 }
 
-export const Topbar: React.FC<TopbarProps> = ({
+export const Topbar = ({
   isBreadcrumbMode = false,
   chatTitle,
   messages = [],
   onBackToChat,
   onNewChat,
-}) => {
+}: TopbarProps) => {
   const firstUserMessage = messages.find((m) => m.sender === 'user')?.text;
   const displayTitle =
     chatTitle ||

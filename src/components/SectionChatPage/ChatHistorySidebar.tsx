@@ -1,4 +1,4 @@
-import React from 'react';
+
 import iconSearch from '../../assets/icons/search-normal.png'
 import type { ChatSession } from '../../types/chat';
 
@@ -12,13 +12,13 @@ interface ChatHistorySidebarProps {
   onSelectSession: (id: string) => void;
 }
 
-export const ChatHistorySidebar: React.FC<ChatHistorySidebarProps> = ({
+export const ChatHistorySidebar = ({
   searchQuery,
   setSearchQuery,
   sessions,
   activeSessionId,
   onSelectSession,
-}) => {
+}: ChatHistorySidebarProps) => {
   // 1. Filter conversations by search keywords.
   const filteredSessions = sessions.filter((s) =>
     s.title.toLowerCase().includes(searchQuery.toLowerCase())

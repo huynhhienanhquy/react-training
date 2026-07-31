@@ -29,14 +29,14 @@ interface ChatMessageListProps {
   onViewAllItinerary?: (itinerary?: DayItinerary[]) => void;
 }
 
-export const ChatMessageList: React.FC<ChatMessageListProps> = ({
+export const ChatMessageList = ({
   messages,
   isTyping,
   onBookFlight,
   onBookHotel,
   onViewAllPlaces,
   onViewAllItinerary,
-}) => {
+}: ChatMessageListProps) => {
   const { ref: messagesEndRef } = useAutoScroll([messages, isTyping]);
 
   return (
@@ -130,7 +130,7 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
                       onBookHotel(String(hotel.id));
                     }
                   }}
-                  onSeeAll={() => console.log('See all recommendations')}
+                  onSeeAll={() => { /* TODO: Implement see all */ }}
                 />
               )}
 

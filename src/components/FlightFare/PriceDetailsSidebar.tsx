@@ -1,14 +1,14 @@
-import React from 'react';
+
 import { Card } from '../../components/Card/Card';
 import { InfoRow } from '../../components/InfoRow/InfoRow';
 import type { PriceDetailsSidebarProps } from '../../types/flightfare';
 
-export const PriceDetailsSidebar: React.FC<PriceDetailsSidebarProps> = ({
+export const PriceDetailsSidebar = ({
   pricePerTraveller,
   flightDues,
   taxesAndFees,
   totalAmount,
-}) => {
+}: PriceDetailsSidebarProps) => {
   return (
     /* Sticky sidebar card for price summary */
     <Card variant="surface" className="p-6 space-y-6 lg:sticky lg:top-24">

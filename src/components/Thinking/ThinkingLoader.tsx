@@ -1,12 +1,12 @@
-import React from 'react';
+
 
 interface ThinkingLoaderProps {
   text?: string;
 }
 
-export const ThinkingLoader: React.FC<ThinkingLoaderProps> = ({
+export const ThinkingLoader = ({
   text = "Travelpal is thinking..."
-}) => {
+}: ThinkingLoaderProps) => {
   return (
     <div className="flex items-center gap-2.5 py-2 px-1 text-slate-400 select-none">
       {/* 🔹 iOS Style Spinner  */}

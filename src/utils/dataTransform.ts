@@ -1,6 +1,5 @@
 import type { FareData, FlightOption, FlightLegInfo } from '../types/flight';
 import type { HotelData, HotelOption } from '../types/hotel';
-import type { PlaceData } from '../types/travel';
 
 export const mapFareDataToFlightOption = (fareData: FareData): FlightOption[] => {
   const fareOptions =

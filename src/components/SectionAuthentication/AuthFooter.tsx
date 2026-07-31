@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 interface AuthFooterProps {
   questionText: string;
@@ -7,12 +7,12 @@ interface AuthFooterProps {
   className?: string;
 }
 
-export const AuthFooter: React.FC<AuthFooterProps> = ({
+export const AuthFooter = ({
   questionText,
   actionText,
   onActionClick,
   className = '',
-}) => {
+}: AuthFooterProps) => {
   return (
     <div className={`text-center text-sm2 text-gray-400 mt-8 md:mt-12 ${className}`}>
       {questionText}{" "}

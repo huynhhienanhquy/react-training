@@ -7,7 +7,7 @@ import { InputField } from '../../components/Input/InputField';
 import { AuthHeader } from '../../components/SectionAuthentication/AuthHeader';
 import { AuthFooter } from '../../components/SectionAuthentication/AuthFooter';
 
-export const ForgotPassword: React.FC = () => {
+export const ForgotPassword = () => {
   const navigate = useNavigate();
   const { isLoading, startLoading, stopLoading } = useFormState();
   const [email, setEmail] = useState<string>("");

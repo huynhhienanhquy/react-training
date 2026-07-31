@@ -18,13 +18,13 @@ interface SelectHotelPageProps {
   onSelectHotel?: (hotel: HotelData) => void;
 }
 
-export const SelectHotelPage: React.FC<SelectHotelPageProps> = ({
+export const SelectHotelPage = ({
   chatTitle,
   messages = [],
   onBackToChat,
   onStartNewChat,
   onSelectHotel,
-}) => {
+}: SelectHotelPageProps) => {
   const [activeNav, setActiveNav] = useState('chats');
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isComparePrice, setIsComparePrice] = useState(false);

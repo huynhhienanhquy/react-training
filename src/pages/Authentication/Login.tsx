@@ -12,7 +12,7 @@ import { ErrorMessage } from '../../components/Error/ErrorMessage';
 import { AuthHeader } from '../../components/SectionAuthentication/AuthHeader';
 import { AuthFooter } from '../../components/SectionAuthentication/AuthFooter';
 
-export const Login: React.FC = () => {
+export const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
   const { isLoading, error, startLoading, stopLoading, setError } = useFormState();
@@ -87,7 +87,7 @@ export const Login: React.FC = () => {
             variant="social"
             size="md"
             leftIcon={<img src={iconGoogle} alt="Google" className="w-5 h-5 object-contain" />}
-            onClick={() => console.log('Google login')}
+            onClick={() => { /* TODO: Implement Google login */ }}
           >
             Continue with Google
           </Button>
@@ -97,7 +97,7 @@ export const Login: React.FC = () => {
             variant="social"
             size="md"
             leftIcon={<img src={iconApple} alt="Apple" className="w-5 h-5 object-contain" />}
-            onClick={() => console.log('Apple login')}
+            onClick={() => { /* TODO: Implement Apple login */ }}
           >
             Continue with Apple
           </Button>

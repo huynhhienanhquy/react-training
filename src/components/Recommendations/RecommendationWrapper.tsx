@@ -7,12 +7,12 @@ interface RecommendationWrapperProps {
   seeAllText?: string;
 }
 
-export const RecommendationWrapper: React.FC<RecommendationWrapperProps> = ({
+export const RecommendationWrapper = ({
   title,
   children,
   onSeeAll,
   seeAllText = 'See all recommendations',
-}) => {
+}: RecommendationWrapperProps) => {
   return (
     <div className="w-full max-w-2xl my-3 space-y-4">
       {/* Title */}

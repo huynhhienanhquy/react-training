@@ -1,11 +1,11 @@
-import React from 'react';
+
 import appLogo from '../../assets/icons/Logo.png';
 
 interface LoadingOverlayProps {
   isVisible?: boolean;
 }
 
-export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ isVisible = true }) => {
+export const LoadingOverlay = ({ isVisible = true }: LoadingOverlayProps) => {
   if (!isVisible) return null;
 
   return (

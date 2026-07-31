@@ -8,7 +8,7 @@ import { ChatInputBox } from '../../../components/SectionChatPage/ChatInputBox';
 import { SelectFarePage } from '../Flight/SelectFarePage';
 import { SelectHotelPage } from '../Hotel/SelectHotelPage';
 
-export const ChatPage: React.FC = () => {
+export const ChatPage = () => {
   const [activeNav, setActiveNav] = useState('chats');
   const [searchQuery, setSearchQuery] = useState('');
   const [inputMessage, setInputMessage] = useState('');

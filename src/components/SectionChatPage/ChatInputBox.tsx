@@ -13,13 +13,13 @@ interface ChatInputBoxProps {
   setIsRecording: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const ChatInputBox: React.FC<ChatInputBoxProps> = ({
+export const ChatInputBox = ({
   inputMessage,
   setInputMessage,
   onSend,
   isRecording,
   setIsRecording,
-}) => {
+}: ChatInputBoxProps) => {
   return (
     /* Floating chat input container with focus state highlight */
     <div className="w-full max-w-3xl bg-white rounded-3xl p-4 md:p-5 shadow-xl shadow-slate-200/60 border border-slate-200/80 transition focus-within:border-blue-400">

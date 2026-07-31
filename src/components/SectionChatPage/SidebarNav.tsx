@@ -20,7 +20,7 @@ interface SidebarNavProps {
   onMobileToggle?: () => void;
 }
 
-export const SidebarNav: React.FC<SidebarNavProps> = ({ activeNav, setActiveNav, isMobileOpen, onMobileToggle }) => {
+export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileToggle }: SidebarNavProps) => {
   const navigate = useNavigate();
   const { logout } = useAuth();
 

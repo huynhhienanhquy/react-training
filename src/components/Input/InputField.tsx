@@ -4,12 +4,12 @@ type InputFieldProps = {
   label: string;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
-export const InputField: React.FC<InputFieldProps> = ({
+export const InputField = ({
   label,
   type = 'text',
   className = '',
   ...props
-}) => {
+}: InputFieldProps) => {
   const isPassword = type === 'password';
   const [showPassword, setShowPassword] = useState(false);
   const inputType = isPassword ? (showPassword ? 'text' : 'password') : type;

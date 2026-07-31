@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 interface InfoRowProps {
   label: string;
@@ -6,7 +6,7 @@ interface InfoRowProps {
   className?: string;
 }
 
-export const InfoRow: React.FC<InfoRowProps> = ({ label, value, className = '' }) => {
+export const InfoRow = ({ label, value, className = '' }: InfoRowProps) => {
   return (
     <div className={`flex justify-between text-slate-500 text-xs md:text-sm ${className}`}>
       <span>{label}</span>

@@ -13,11 +13,11 @@ const variants = {
   surface: 'bg-surface rounded-3xl border border-slate-100 shadow-sm',
 };
 
-export const Card: React.FC<CardProps> = ({
+export const Card = ({
   children,
   variant = 'default',
   className = '',
-}) => {
+}: CardProps) => {
   return (
     /* Universal content card container merging variant styles and custom layout classes */
     <div className={`${variants[variant]} ${className}`}>

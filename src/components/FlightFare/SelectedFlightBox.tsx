@@ -7,13 +7,13 @@ import type { SelectedFlightBoxProps } from '../../types/flightfare';
 
 export type { FlightLeg };
 
-export const SelectedFlightBox: React.FC<SelectedFlightBoxProps> = ({
+export const SelectedFlightBox = ({
   airlineName,
   defaultFlightLogo,
   iconHeart,
   legs,
   cancellationPolicy,
-}) => {
+}: SelectedFlightBoxProps) => {
   // State to manage bookmark / favorite button toggle
   const [isFavorite, setIsFavorite] = useState(false);
 

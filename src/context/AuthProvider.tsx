@@ -3,7 +3,7 @@ import type { User } from '../types/auth';
 import { AuthContext } from './AuthContext';
 import { loginApi } from '../services/authService';
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   // Initialize the user state directly from localStorage (Lazy Initialization)
   // Help prevent unnecessary re-rendering or useEffect errors in your application.
   const [user, setUser] = useState<User | null>(() => {

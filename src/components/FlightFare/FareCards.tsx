@@ -1,4 +1,4 @@
-  import React from 'react';
+
 import { CheckCircle2 } from 'lucide-react';
 import { SectionHeader } from '../../components/SectionHeader/SectionHeader';
 import { PriceDisplay } from '../../components/PriceDisplay/PriceDisplay';
@@ -8,12 +8,12 @@ import type { FareCardsProps } from '../../types/flightfare';
 
 export type { FareOption };
 
-  export const FareCards: React.FC<FareCardsProps> = ({
+  export const FareCards = ({
     fareOptions,
     selectedFareId,
     defaultFlightLogo,
     onSelectFare,
-  }) => {
+  }: FareCardsProps) => {
     return (
       <div className="space-y-3">
         {/* Section Title */}

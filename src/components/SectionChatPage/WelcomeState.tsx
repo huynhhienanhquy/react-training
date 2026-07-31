@@ -1,4 +1,4 @@
-import React from 'react';
+
 import image1 from '../../assets/images/Rectangle 1.png'
 import image2 from '../../assets/images/Rectangle 2.png'
 import image3 from '../../assets/images/Rectangle 3.png'
@@ -8,7 +8,7 @@ interface WelcomeStateProps {
   onSelectPrompt: (prompt: string) => void;
 }
 
-export const WelcomeState: React.FC<WelcomeStateProps> = ({ prompts, onSelectPrompt }) => {
+export const WelcomeState = ({ prompts, onSelectPrompt }: WelcomeStateProps) => {
   return (
     <div className="w-full flex-1 flex flex-col items-center justify-center text-center my-auto py-6">
       {/* Visual Header Images */}
@@ -31,7 +31,7 @@ export const WelcomeState: React.FC<WelcomeStateProps> = ({ prompts, onSelectPro
       <div className="flex flex-wrap justify-center gap-2.5 max-w-3xl mb-8">
         {prompts.map((prompt, index) => (
           <button
-            key={index}
+            key={prompt}
             onClick={() => onSelectPrompt(prompt)}
             className="bg-white hover:bg-blue-50/50 text-slate-700 text-xs md:text-sm px-4 py-2.5 rounded-full border border-slate-200 shadow-sm font-medium transition hover:-translate-y-0.5"
           >

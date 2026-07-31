@@ -7,7 +7,7 @@ import { AuthLayout } from '../../components/SectionAuthentication/AuthLayout';
 import { Button } from '../../components/Button/Button';
 import { AuthHeader } from '../../components/SectionAuthentication/AuthHeader';
 
-export const VerifyOTP: React.FC = () => {
+export const VerifyOTP = () => {
   const navigate = useNavigate();
   const { isLoading, startLoading, stopLoading } = useFormState();
   const { otp, inputRefs, handleChange, handleKeyDown, handlePaste } = useOtpInput(6);
@@ -37,7 +37,7 @@ export const VerifyOTP: React.FC = () => {
         <form className="space-y-3" onSubmit={handleVerify}>
           <div className="flex items-center justify-center gap-1 md:gap-2 py-1">
             {otp.map((data, index) => (
-              <React.Fragment key={index}>
+              <React.Fragment key={`otp-${index}`}>
                 <input
                   type="text"
                   maxLength={1}

@@ -9,7 +9,7 @@ import { AuthHeader } from '../../components/SectionAuthentication/AuthHeader';
 import { InputField } from '../../components/Input/InputField';
 import { AuthFooter } from '../../components/SectionAuthentication/AuthFooter';
 
-export const Register: React.FC = () => {
+export const Register = () => {
   const navigate = useNavigate();
   const { isLoading, startLoading, stopLoading } = useFormState();
   const [email, setEmail] = useState("");
@@ -76,7 +76,7 @@ export const Register: React.FC = () => {
             variant="social"
             size="md"
             leftIcon={<img src={iconGoogle} alt="Google" className="w-5 h-5 object-contain" />}
-            onClick={() => console.log('Google login')}
+            onClick={() => { /* TODO: Implement Google login */ }}
           >
             Continue with Google
           </Button>
@@ -86,7 +86,7 @@ export const Register: React.FC = () => {
             variant="social"
             size="md"
             leftIcon={<img src={iconApple} alt="Apple" className="w-5 h-5 object-contain" />}
-            onClick={() => console.log('Apple login')}
+            onClick={() => { /* TODO: Implement Apple login */ }}
           >
             Continue with Apple
           </Button>

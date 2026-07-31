@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 interface AuthHeaderProps {
   title: string;
@@ -6,11 +6,11 @@ interface AuthHeaderProps {
   className?: string;
 }
 
-export const AuthHeader: React.FC<AuthHeaderProps> = ({
+export const AuthHeader = ({
   title,
   subtitle,
   className = '',
-}) => {
+}: AuthHeaderProps) => {
   return (
     <div className={`space-y-2 mb-6 md:mb-10 ${className}`}>
       <h2 className="text-2xl md:text-display-sm font-bold text-brand-dark-alt tracking-tight">

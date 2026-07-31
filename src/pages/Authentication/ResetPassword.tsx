@@ -8,7 +8,7 @@ import { InputField } from '../../components/Input/InputField';
 import { ErrorMessage } from '../../components/Error/ErrorMessage';
 import { AuthFooter } from '../../components/SectionAuthentication/AuthFooter';
 
-export const ResetPassword: React.FC = () => {
+export const ResetPassword = () => {
   const navigate = useNavigate();
   const { isLoading, error, startLoading, stopLoading, setError } = useFormState();
   const [password, setPassword] = useState<string>("");

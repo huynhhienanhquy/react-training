@@ -27,12 +27,12 @@ const mapHotelDataToOption = (hotel: HotelData, index: number): HotelOption => {
   };
 };
 
-export const HotelRecommendations: React.FC<HotelRecommendationsProps> = ({
+export const HotelRecommendations = ({
   title = 'Recommended Hotels',
   hotels: initialHotels,
   onBookNow,
   onSeeAll,
-}) => {
+}: HotelRecommendationsProps) => {
   const isControlled = !!initialHotels;
 
   const { data: apiHotels, loading, error } = useAsyncData(async () => {

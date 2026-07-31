@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthProvider';
 
@@ -15,7 +15,7 @@ import { VerifyOTP } from './pages/Authentication/VerifyOTP';
 import { ResetPassword } from './pages/Authentication/ResetPassword';
 import { ChatPage } from './pages/Dashboard/Chat/ChatPage';
 
-const App: React.FC = () => {
+export const App = () => {
   return (
     <BrowserRouter>
       <AuthProvider>
@@ -44,4 +44,3 @@ const App: React.FC = () => {
   );
 };
 
-export default App;

@@ -7,7 +7,7 @@ interface AuthLayoutProps {
   isLoading?: boolean;
 }
 
-export const AuthLayout: React.FC<AuthLayoutProps> = ({ children, isLoading = false }) => {
+export const AuthLayout = ({ children, isLoading = false }: AuthLayoutProps) => {
   return (
     <div
       className="min-h-screen w-full relative flex items-center justify-center px-4 sm:px-6 lg:pl-12 lg:pr-8 py-8 lg:py-0 bg-cover bg-center overflow-hidden"

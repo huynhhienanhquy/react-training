@@ -23,12 +23,12 @@ interface SelectFarePageProps {
   onStartNewChat?: () => void;
 }
 
-export const SelectFarePage: React.FC<SelectFarePageProps> = ({
+export const SelectFarePage = ({
   chatTitle,
   messages = [],
   onBackToChat,
   onStartNewChat,
-}) => {
+}: SelectFarePageProps) => {
   const [activeNav, setActiveNav] = useState('chats');
   const [selectedFareId, setSelectedFareId] = useState<'economy' | 'business'>('economy');
 
@@ -165,7 +165,7 @@ export const SelectFarePage: React.FC<SelectFarePageProps> = ({
                 <SectionHeader title="Important information" />
                 <div className="bg-surface p-6 rounded-3xl border border-slate-100 text-xs text-slate-400 leading-relaxed space-y-2 shadow-sm">
                   {(fareData.importantInformation || []).map((paragraph, index) => (
-                    <p key={index}>{paragraph}</p>
+                    <p key={`info-${index}`}>{paragraph}</p>
                   ))}
                 </div>
               </div>

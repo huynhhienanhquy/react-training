@@ -8,7 +8,7 @@ import { AuthHeader } from '../../components/SectionAuthentication/AuthHeader';
 import { InputField } from '../../components/Input/InputField';
 import { AuthFooter } from '../../components/SectionAuthentication/AuthFooter';
 
-export const Onboarding: React.FC = () => {
+export const Onboarding = () => {
   const navigate = useNavigate();
   const { isLoading, startLoading, stopLoading } = useFormState();
   const [fullName, setFullName] = useState("");

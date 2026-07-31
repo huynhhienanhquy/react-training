@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 interface PriceDisplayProps {
   amount: string;
@@ -13,7 +13,7 @@ const sizeClasses = {
   lg: 'text-2xl md:text-3xl font-black',
 };
 
-export const PriceDisplay: React.FC<PriceDisplayProps> = ({ amount, period, size = 'sm', className = '' }) => {
+export const PriceDisplay = ({ amount, period, size = 'sm', className = '' }: PriceDisplayProps) => {
   return (
     <div className={`flex items-baseline gap-1 ${className}`}>
       <span className={`${sizeClasses[size]} text-slate-900 tracking-tight`}>
