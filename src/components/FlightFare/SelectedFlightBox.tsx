@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SectionHeader } from '../../components/SectionHeader/SectionHeader';
+import { SectionHeader } from './SectionHeader/SectionHeader';
 import { Card } from '../../components/Card/Card';
 import type { FlightLeg } from '../../types/flight';
 import type { SelectedFlightBoxProps } from '../../types/flightfare';

@@ -1,6 +1,6 @@
 
 import { CheckCircle2 } from 'lucide-react';
-import { SectionHeader } from '../../components/SectionHeader/SectionHeader';
+import { SectionHeader } from './SectionHeader/SectionHeader';
 import { PriceDisplay } from '../../components/PriceDisplay/PriceDisplay';
 
 import type { FareOption } from '../../types/flight';
