@@ -1,17 +1,17 @@
 import { RecommendationWrapper } from './RecommendationWrapper';
-import { Button } from '../Button/Button';
+import { Button } from '@/components/Button/Button';
 import { PriceDisplay } from '../PriceDisplay/PriceDisplay';
-import defaultFlightLogo from '../../assets/icons/ellipse.png';
+import defaultFlightLogo from '@/assets/icons/ellipse.png';
 
-import { getFlightListApi } from '../../services/fareService';
+import { getFlightListApi } from '@/services/fareService';
 import type {
   FareData,
   FlightOption,
   FlightLegInfo,
   FlightRecommendationsProps,
-} from '../../types/flight';
-import { useAsyncData } from '../../hooks/useAsyncData';
-import { useFavorites } from '../../hooks/useFavorites';
+} from '@/types/flight';
+import { useAsyncData } from '@/hooks/useAsyncData';
+import { useFavorites } from '@/hooks/useFavorites';
 
 export type { FlightOption, FlightLegInfo };
 

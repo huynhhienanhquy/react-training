@@ -1,24 +1,24 @@
 import React, { useCallback, useState } from 'react';
-import { SidebarNav } from '../../../components/chat/SidebarNav/SidebarNav';
-import { Button } from '../../../components/Button/Button';
+import { SidebarNav } from '@/components/chat/SidebarNav/SidebarNav';
+import { Button } from '@/components/Button/Button';
 
-import iconHeart from '../../../assets/icons/heart-blue.png';
-import defaultFlightLogo from '../../../assets/icons/ellipse.png';
-import { SectionHeader } from '../../../components/FlightFare/SectionHeader/SectionHeader';
+import iconHeart from '@/assets/icons/heart-blue.png';
+import defaultFlightLogo from '@/assets/icons/ellipse.png';
+import { SectionHeader } from '@/components/FlightFare/SectionHeader/SectionHeader';
 
-import { Topbar } from '../../../components/chat/Topbar/Topbar';
-import { FareHeader } from '../../../components/FlightFare/FareHeader';
-import { SelectedFlightBox } from '../../../components/FlightFare/SelectedFlightBox';
-import { FareCards } from '../../../components/FlightFare/FareCards';
-import { PriceDetailsSidebar } from '../../../components/FlightFare/PriceDetailsSidebar';
+import { Topbar } from '@/components/chat/Topbar/Topbar';
+import { FareHeader } from '@/components/FlightFare/FareHeader';
+import { SelectedFlightBox } from '@/components/FlightFare/SelectedFlightBox';
+import { FareCards } from '@/components/FlightFare/FareCards';
+import { PriceDetailsSidebar } from '@/components/FlightFare/PriceDetailsSidebar';
 
-import { getFareDetailsApi } from '../../../services/fareService';
+import { getFareDetailsApi } from '@/services/fareService';
 import type {
   FareData,
   SelectFarePageProps,
-} from '../../../types/flight';
+} from '@/types/flight';
 
-import { useApiRequest } from '../../../hooks/useApiRequest';
+import { useApiRequest } from '@/hooks/useApiRequest';
 
 export const SelectFarePage = ({
   chatTitle,

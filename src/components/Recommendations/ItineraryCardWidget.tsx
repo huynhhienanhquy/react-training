@@ -1,11 +1,11 @@
 import { Calendar, Clock, MapPin } from 'lucide-react';
-import { Button } from '../Button/Button';
-import { getItineraryListApi } from '../../services/travelService';
+import { Button } from '@/components/Button/Button';
+import { getItineraryListApi } from '@/services/travelService';
 import type {
   DayItinerary,
   ItineraryCardWidgetProps,
 } from '../../types/travel';
-import { useAsyncData } from '../../hooks/useAsyncData';
+import { useAsyncData } from '@/hooks/useAsyncData';
 
 export type { DayItinerary };
 

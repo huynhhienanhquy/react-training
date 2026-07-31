@@ -1,7 +1,7 @@
 import React from 'react';
-import { LoadingOverlay } from '../../Loading/LoadingOverlay';
-import authBg from '../../../assets/images/background.png';
-import {type AuthLayoutProps}  from '../../../types/auth'
+import { LoadingOverlay } from '@/components/Loading/LoadingOverlay';
+import authBg from '@/assets/images/background.png';
+import {type AuthLayoutProps}  from '@/types/auth'
 
 export const AuthLayout = ({ children, isLoading = false }: AuthLayoutProps) => {
   return (

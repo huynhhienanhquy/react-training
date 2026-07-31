@@ -1,8 +1,8 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
-import iconHeart from '../../assets/icons/heart-blue.png';
-import iconArrowRight from '../../assets/icons/arrow-right.png';
-import iconGoogle from '../../assets/icons/logo-google.png';
-import iconApple from '../../assets/icons/logo-apple.png';
+import iconHeart from '@/assets/icons/heart-blue.png';
+import iconArrowRight from '@/assets/icons/arrow-right.png';
+import iconGoogle from '@/assets/icons/logo-google.png';
+import iconApple from '@/assets/icons/logo-apple.png';
 
 type ButtonVariant =
   | 'primary'

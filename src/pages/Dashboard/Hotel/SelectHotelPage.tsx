@@ -1,22 +1,22 @@
 import React, { useCallback, useState } from 'react';
 
-import { SidebarNav } from '../../../components/chat/SidebarNav/SidebarNav';
-import { Topbar } from '../../../components/chat/Topbar/Topbar';
-import { SectionHeader } from '../../../components/FlightFare/SectionHeader/SectionHeader';
+import { SidebarNav } from '@/components/chat/SidebarNav/SidebarNav';
+import { Topbar } from '@/components/chat/Topbar/Topbar';
+import { SectionHeader } from '@/components/FlightFare/SectionHeader/SectionHeader';
 
-import { getHotelDetailsApi } from '../../../services/hotelService';
-import { Button } from '../../../components/Button/Button';
+import { getHotelDetailsApi } from '@/services/hotelService';
+import { Button } from '@/components/Button/Button';
 
 import type {
   HotelData,
   SelectHotelPageProps,
-} from '../../../types/hotel';
+} from '@/types/hotel';
 
-import defaultHotelImg from '../../../assets/icons/ellipse.png';
-import bookingIcon from '../../../assets/icons/booking.png';
-import expediaIcon from '../../../assets/icons/expedia.png';
+import defaultHotelImg from '@/assets/icons/ellipse.png';
+import bookingIcon from '@/assets/icons/booking.png';
+import expediaIcon from '@/assets/icons/expedia.png';
 
-import { useApiRequest } from '../../../hooks/useApiRequest';
+import { useApiRequest } from '@/hooks/useApiRequest';
 
 export const SelectHotelPage = ({
   chatTitle,

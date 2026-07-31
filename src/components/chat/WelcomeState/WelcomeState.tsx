@@ -1,12 +1,9 @@
 
-import image1 from '../../../assets/images/Rectangle 1.png'
-import image2 from '../../../assets/images/Rectangle 2.png'
-import image3 from '../../../assets/images/Rectangle 3.png'
+import image1 from '@/assets/images/Rectangle 1.png'
+import image2 from '@/assets/images/Rectangle 2.png'
+import image3 from '@/assets/images/Rectangle 3.png'
+import { type WelcomeStateProps } from "@/types/chat";
 
-interface WelcomeStateProps {
-  prompts: string[];
-  onSelectPrompt: (prompt: string) => void;
-}
 
 export const WelcomeState = ({ prompts, onSelectPrompt }: WelcomeStateProps) => {
   return (

@@ -14,8 +14,8 @@ import {
 } from "vitest";
 
 import { HotelRecommendations } from "./HotelRecommendations";
-import { getHotelListApi } from "../../services/hotelService";
-import type { HotelData } from "../../services/hotelService";
+import { getHotelListApi } from "@/services/hotelService";
+import type { HotelData } from "@/types/hotel";
 
 
 vi.mock("../../../../services/hotelService", async () => {

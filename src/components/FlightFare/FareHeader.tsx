@@ -1,7 +1,7 @@
 import React from 'react';
-import { Card } from '../../components/Card/Card';
-import { PriceDisplay } from '../../components/PriceDisplay/PriceDisplay';
-import type { FareHeaderProps } from '../../types/flightfare';
+import { Card } from '@/components/Card/Card';
+import { PriceDisplay } from '@/components/PriceDisplay/PriceDisplay';
+import type { FareHeaderProps } from '@/types/flightfare';
 
 export function FareHeader({
   destination,

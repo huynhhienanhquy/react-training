@@ -1,9 +1,6 @@
 
+import {type SectionHeaderProps } from "@/types/card";
 
-interface SectionHeaderProps {
-  title: string;
-  className?: string;
-}
 
 export const SectionHeader = ({ title, className = '' }: SectionHeaderProps) => {
   return (

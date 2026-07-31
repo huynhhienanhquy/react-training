@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { FlightRecommendations } from "./FlightRecommendations";
-import { getFlightListApi } from "../../services/fareService";
+import { getFlightListApi } from "@/services/fareService";
 
 
 vi.mock("../../../../services/fareService", async () => {

@@ -1,24 +1,19 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Menu } from 'lucide-react';
-import { useClickOutside } from '../../../hooks/useClickOutside';
-import { useAuth } from '../../../hooks/useAuth';
+import { useClickOutside } from '@/hooks/useClickOutside';
+import { useAuth } from '@/hooks/useAuth';
 
-import logo from '../../../assets/icons/Logo.png';
-import iconChat from '../../../assets/icons/chat.png';
-import iconHeart from '../../../assets/icons/heart.png';
-import iconMedal from '../../../assets/icons/medal.png';
-import iconMap from '../../../assets/icons/map.png';
-import iconCommunity from '../../../assets/icons/people.png';
-import iconSettings from '../../../assets/icons/setting.png';
-import userAvatar from '../../../assets/icons/user.png';
-
-interface SidebarNavProps {
-  activeNav: string;
-  setActiveNav: (id: string) => void;
-  isMobileOpen?: boolean;
-  onMobileToggle?: () => void;
-}
+import logo from '@/assets/icons/Logo.png';
+import iconChat from '@/assets/icons/chat.png';
+import iconHeart from '@/assets/icons/heart.png';
+import iconMedal from '@/assets/icons/medal.png';
+import iconMap from '@/assets/icons/map.png';
+import iconCommunity from '@/assets/icons/people.png';
+import iconSettings from '@/assets/icons/setting.png';
+import userAvatar from '@/assets/icons/user.png';
+import { type SidebarNavProps } from "@/types/chat";
+import { Button } from "@/components/Button/Button";
 
 export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileToggle }: SidebarNavProps) => {
   const navigate = useNavigate();
@@ -188,12 +183,15 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
             </div>
 
             {/* The logout button, in the form of a small icon or text, fits perfectly within a width of 18 inches.*/}
-            <button
-              onClick={handleLogout}
-              className="text-[11px] font-semibold text-red-600 hover:bg-red-50 px-2 py-1.5 rounded-lg transition"
-            >
-              Log out
-            </button>
+            <Button
+  type="button"
+  variant="danger"
+  size="sm"
+  className="text-[11px] px-2 py-1.5 rounded-lg"
+  onClick={handleLogout}
+>
+  Log out
+</Button>
           </aside>
         </div>
       )}

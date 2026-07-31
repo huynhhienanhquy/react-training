@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
 import { PlacesCardWidget } from "./PlacesCardWidget";
-import { getPlaceListApi } from "../../services/travelService";
+import { getPlaceListApi } from "@/services/travelService";
 
 
 vi.mock("../../../../services/travelService", () => ({

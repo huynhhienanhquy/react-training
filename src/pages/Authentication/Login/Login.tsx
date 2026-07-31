@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../../hooks/useAuth';
-import { useFormState } from '../../../hooks/useFormState';
-import { AuthLayout } from '../../../components/auth/AuthLayout/AuthLayout';
-import { getAuthErrorMessage } from '../../../utils/authHelpers';
-import { Button } from '../../../components/Button/Button';
-import { InputField } from '../../../components/Input/InputField';
-import { ErrorMessage } from '../../../components/Error/ErrorMessage';
-import { AuthHeader } from '../../../components/auth/AuthHeader/AuthHeader';
-import { AuthFooter } from '../../../components/auth/AuthFooter/AuthFooter';
+import { useAuth } from '@/hooks/useAuth';
+import { useFormState } from '@/hooks/useFormState';
+import { AuthLayout } from '@/components/auth/AuthLayout/AuthLayout';
+import { getAuthErrorMessage } from '@/utils/authHelpers';
+import { Button } from '@/components/Button/Button';
+import { InputField } from '@/components/Input/InputField';
+import { ErrorMessage } from '@/components/Error/ErrorMessage';
+import { AuthHeader } from '@/components/auth/AuthHeader/AuthHeader';
+import { AuthFooter } from '@/components/auth/AuthFooter/AuthFooter';
 
 export const Login = () => {
   const { login } = useAuth();

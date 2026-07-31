@@ -1,4 +1,4 @@
-import {type PriceDisplayProps}  from '../../types/price'
+import {type PriceDisplayProps}  from '@/types/price'
 
 const sizeClasses = {
   sm: 'text-xl md:text-2xl font-black',

@@ -1,14 +1,14 @@
 import React from 'react';
 import { RecommendationWrapper } from './RecommendationWrapper';
 import { Button } from '../Button/Button';
-import { getHotelListApi } from '../../services/hotelService';
+import { getHotelListApi } from '@/services/hotelService';
 import type {
   HotelData,
   HotelOption,
   HotelRecommendationsProps,
-} from '../../types/hotel';
-import { useAsyncData } from '../../hooks/useAsyncData';
-import { useFavorites } from '../../hooks/useFavorites';
+} from '@/types/hotel';
+import { useAsyncData } from '@/hooks/useAsyncData';
+import { useFavorites } from '@/hooks/useFavorites';
 
 export type { HotelOption };
 

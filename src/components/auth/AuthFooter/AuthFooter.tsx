@@ -1,4 +1,4 @@
-import {type AuthFooterProps}  from '../../../types/auth'
+import {type AuthFooterProps}  from '@/types/auth'
 
 export const AuthFooter = ({
   questionText,

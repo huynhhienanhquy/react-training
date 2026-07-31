@@ -1,7 +1,7 @@
 
-import { Card } from '../../components/Card/Card';
-import { InfoRow } from '../../components/InfoRow/InfoRow';
-import type { PriceDetailsSidebarProps } from '../../types/flightfare';
+import { Card } from '@/components/Card/Card';
+import { InfoRow } from '@/components/InfoRow/InfoRow';
+import type { PriceDetailsSidebarProps } from '@/types/flightfare';
 
 export const PriceDetailsSidebar = ({
   pricePerTraveller,

@@ -7,13 +7,13 @@ import {
   Compass,
   Hotel,
 } from 'lucide-react';
-import { Button } from '../Button/Button';
-import { getPlaceListApi } from '../../services/travelService';
+import { Button } from '@/components/Button/Button';
+import { getPlaceListApi } from '@/services/travelService';
 import type {
   PlaceData,
   PlacesCardWidgetProps,
 } from '../../types/travel';
-import { useAsyncData } from '../../hooks/useAsyncData';
+import { useAsyncData } from '@/hooks/useAsyncData';
 
 export type { PlaceData };
 

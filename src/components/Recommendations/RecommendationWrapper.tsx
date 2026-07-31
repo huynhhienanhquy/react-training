@@ -1,11 +1,5 @@
 import React from 'react';
-
-interface RecommendationWrapperProps {
-  title: string;
-  children: React.ReactNode;
-  onSeeAll?: () => void;
-  seeAllText?: string;
-}
+import {type RecommendationWrapperProps } from "@/types/card";
 
 export const RecommendationWrapper = ({
   title,

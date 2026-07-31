@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { SectionHeader } from './SectionHeader/SectionHeader';
-import { Card } from '../../components/Card/Card';
-import type { FlightLeg } from '../../types/flight';
-import type { SelectedFlightBoxProps } from '../../types/flightfare';
+import { Card } from '@/components/Card/Card';
+import type { FlightLeg } from '@/types/flight';
+import type { SelectedFlightBoxProps } from '@/types/flightfare';
 
 
 export type { FlightLeg };

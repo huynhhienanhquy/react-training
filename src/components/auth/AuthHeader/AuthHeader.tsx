@@ -1,4 +1,4 @@
-import {type AuthHeaderProps}  from '../../../types/auth'
+import {type AuthHeaderProps}  from '@/types/auth'
 
 
 export const AuthHeader = ({

@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { SelectFarePage } from './SelectFarePage'
-import { getFareDetailsApi } from '../../../services/fareService'
+import { getFareDetailsApi } from '@/services/fareService'
 
 // Mock react-router-dom
 vi.mock('react-router-dom', () => ({

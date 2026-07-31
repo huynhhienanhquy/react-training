@@ -1,11 +1,6 @@
 import React from 'react';
+import { type CardProps } from "@/types/card";
 
-// Props interface for the reusable container Card component
-interface CardProps {
-  children: React.ReactNode;
-  variant?: 'default' | 'surface'; // Predefined style variants for card background
-  className?: string;
-}
 
 // Predefined style maps for card variants
 const variants = {

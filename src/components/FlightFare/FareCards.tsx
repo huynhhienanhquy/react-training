@@ -1,10 +1,10 @@
 
 import { CheckCircle2 } from 'lucide-react';
 import { SectionHeader } from './SectionHeader/SectionHeader';
-import { PriceDisplay } from '../../components/PriceDisplay/PriceDisplay';
+import { PriceDisplay } from '@/components/PriceDisplay/PriceDisplay';
 
-import type { FareOption } from '../../types/flight';
-import type { FareCardsProps } from '../../types/flightfare';
+import type { FareOption } from '@/types/flight';
+import type { FareCardsProps } from '@/types/flightfare';
 
 export type { FareOption };
 
