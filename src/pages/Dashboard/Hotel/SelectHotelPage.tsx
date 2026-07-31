@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { AxiosError } from 'axios';
-import { SidebarNav } from '../../../components/SectionChatPage/SidebarNav';
-import { Topbar, type ChatMessage } from '../../../components/SectionChatPage/Topbar';
+import { SidebarNav } from '../../../components/chat/SidebarNav/SidebarNav';
+import { Topbar, type ChatMessage } from '../../../components/chat/Topbar/Topbar';
 import { SectionHeader } from '../../../components/SectionHeader/SectionHeader';
 import { getHotelDetailsApi } from '../../../services/hotelService';
 import type { HotelData } from '../../../types/hotel';

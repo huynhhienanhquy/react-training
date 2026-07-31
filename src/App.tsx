@@ -7,12 +7,12 @@ import { ProtectedRoute } from './routes/guards/ProtectedRoute';
 import { GuestRoute } from './routes/guards/GuestRoute';
 
 // Import Pages
-import { Login } from './pages/Authentication/Login';
-import { Register } from './pages/Authentication/Register';
-import { Onboarding } from './pages/Authentication/Onboarding';
-import { ForgotPassword } from './pages/Authentication/ForgotPassword';
-import { VerifyOTP } from './pages/Authentication/VerifyOTP';
-import { ResetPassword } from './pages/Authentication/ResetPassword';
+import { Login } from './pages/Authentication/Login/Login';
+import { Register } from './pages/Authentication/Register/Register';
+import { Onboarding } from './pages/Authentication/Onboarding/Onboarding';
+import { ForgotPassword } from './pages/Authentication/ForgotPassword/ForgotPassword';
+import { VerifyOTP } from './pages/Authentication/VerifyOTP/VerifyOTP';
+import { ResetPassword } from './pages/Authentication/RessetPassword/ResetPassword';
 import { ChatPage } from './pages/Dashboard/Chat/ChatPage';
 
 export const App = () => {

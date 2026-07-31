@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { AxiosError } from 'axios';
-import { SidebarNav } from '../../../components/SectionChatPage/SidebarNav';
+import { SidebarNav } from '../../../components/chat/SidebarNav/SidebarNav';
 
 import iconHeart from '../../../assets/icons/heart-blue.png';
 import defaultFlightLogo from '../../../assets/icons/ellipse.png';
 import { SectionHeader } from '../../../components/SectionHeader/SectionHeader';
 
-import { Topbar, type ChatMessage } from '../../../components/SectionChatPage/Topbar';
+import { Topbar, type ChatMessage } from '../../../components/chat/Topbar/Topbar';
 import { FareHeader } from '../../../components/FlightFare/FareHeader';
 import { SelectedFlightBox } from '../../../components/FlightFare/SelectedFlightBox';
 import { FareCards } from '../../../components/FlightFare/FareCards';
