@@ -68,7 +68,7 @@ export const Register = () => {
         </div>
 
         {/* Button Social Login */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 mt-11 translate-y-[100px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 mt-11 translate-y-100">
           <Button
             type="button"
             variant="social"

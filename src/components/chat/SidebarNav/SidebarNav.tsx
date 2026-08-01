@@ -54,7 +54,7 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
       )}
 
       {/* Desktop sidebar */}
-      <aside className="hidden md:flex w-[125px] min-w-[80px] bg-surface-sidebar border-r-[10px] border-surface-section flex-col items-center justify-between py-6 z-20 shrink-0 select-none">        <div className="flex flex-col items-center gap-7 w-full px-2">
+      <aside className="hidden md:flex w-125 min-w-80 bg-surface-sidebar border-r-10 border-surface-section flex-col items-center justify-between py-6 z-20 shrink-0 select-none">        <div className="flex flex-col items-center gap-7 w-full px-2">
           {/* App Logo */}
           <button className="w-11 h-11 rounded-2xl flex items-center justify-center p-1.5 hover:opacity-90 transition mt-3">
             <img
@@ -142,8 +142,6 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
       {isMobileOpen && (
         <div className="md:hidden fixed inset-0 z-40 flex">
           <div className="fixed inset-0 bg-black/40 backdrop-blur-xs" onClick={onMobileToggle} />
-
-          {/* Đã chỉnh: w-18 md:w-20 để thu nhỏ thanh Sidebar trên Mobile */}
           <aside className="relative w-18 bg-surface-sidebar h-full flex flex-col items-center justify-between py-6 z-50 shadow-2xl select-none animate-in slide-in-from-left duration-200">
             <div className="flex flex-col items-center gap-7 w-full px-10">
               <button className="w-11 h-11 rounded-2xl flex items-center justify-center p-1.5">
@@ -183,14 +181,14 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
 
             {/* The logout button, in the form of a small icon or text, fits perfectly within a width of 18 inches.*/}
             <Button
-  type="button"
-  variant="danger"
-  size="sm"
-  className="text-[11px] px-2 py-1.5 rounded-lg"
-  onClick={handleLogout}
->
-  Log out
-</Button>
+              type="button"
+              variant="danger"
+              size="sm"
+              className="text-xxs px-2 py-1.5 rounded-lg"
+              onClick={handleLogout}
+            >
+              Log out
+            </Button>
           </aside>
         </div>
       )}

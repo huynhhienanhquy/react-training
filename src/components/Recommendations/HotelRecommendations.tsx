@@ -112,7 +112,7 @@ export const HotelRecommendations = ({
           return (
             <div
               key={hotel.id}
-              className="bg-[#F8FAFC] rounded-2xl p-4 flex flex-col md:flex-row items-center gap-4 mb-3 border-none"
+              className="bg-brand-light rounded-2xl p-4 flex flex-col md:flex-row items-center gap-4 mb-3 border-none"
             >
               <div className="w-full md:w-36 h-36 md:h-32 rounded-xl overflow-hidden shrink-0">
                 <img
@@ -124,7 +124,7 @@ export const HotelRecommendations = ({
 
               <div className="flex-1 flex flex-col justify-between h-full space-y-2 text-left w-full">
                 <div>
-                  <h3 className="text-base md:text-lg font-bold text-[#101828] leading-snug">
+                  <h3 className="text-base md:text-lg font-bold text-ink leading-snug">
                     {hotel.name}
                   </h3>
 
@@ -134,21 +134,20 @@ export const HotelRecommendations = ({
                 </div>
 
                 <div className="flex items-center gap-3 text-slate-400 pt-2">
-                  {/* giữ nguyên 3 SVG icon của bạn */}
                 </div>
               </div>
 
               <div className="flex flex-col items-end justify-between w-full md:w-auto h-full self-stretch space-y-3 shrink-0">
                 <div>
                   {hotel.tag && (
-                    <span className="px-3 py-0.5 bg-emerald-50 text-emerald-600 text-[11px] font-medium rounded-full border border-emerald-100">
+                    <span className="px-3 py-0.5 bg-emerald-50 text-emerald-600 text-xxs font-medium rounded-full border border-emerald-100">
                       {hotel.tag}
                     </span>
                   )}
                 </div>
 
                 <div className="text-right my-1">
-                  <span className="text-xl md:text-2xl font-bold text-[#101828]">
+                  <span className="text-xl md:text-2xl font-bold text-ink">
                     ${hotel.price}
                   </span>
 

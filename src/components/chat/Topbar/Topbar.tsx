@@ -39,7 +39,7 @@ export const Topbar = ({
             )}
             <button
               onClick={onBackToChat}
-              className="hidden md:inline text-slate-500 hover:text-blue-600 font-medium transition truncate max-w-[120px] md:max-w-[200px]"
+              className="hidden md:inline text-slate-500 hover:text-blue-600 font-medium transition truncate max-w-120 md:max-w-200"
               title={displayTitle}
             >
               {displayTitle}
@@ -48,7 +48,7 @@ export const Topbar = ({
             <span className="font-bold text-slate-800 truncate text-xs md:text-sm">Select Fare</span>
           </>
         ) : (
-          <h2 className="text-sm md:text-base font-semibold text-slate-800 truncate max-w-[120px] md:max-w-md">
+          <h2 className="text-sm md:text-base font-semibold text-slate-800 truncate max-w-120 md:max-w-md">
             {displayTitle}
           </h2>
         )}

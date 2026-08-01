@@ -82,7 +82,7 @@ export function PlacesCardWidget({
     initialPlaces ?? apiPlaces ?? [];
 
   return (
-    <div className="bg-[#F8FAFC] rounded-2xl p-4 md:p-5 flex flex-col gap-4 border-none max-w-2xl w-full">
+    <div className="bg-brand-light rounded-2xl p-4 md:p-5 flex flex-col gap-4 border-none max-w-2xl w-full">
       <div className="flex items-center justify-between pb-3 border-b border-slate-200/60">
         <div className="flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-600 shrink-0">
@@ -102,7 +102,7 @@ export function PlacesCardWidget({
           </div>
         </div>
 
-        <span className="px-3 py-1 bg-emerald-100/70 text-emerald-700 text-[11px] font-bold rounded-full">
+        <span className="px-3 py-1 bg-emerald-100/70 text-emerald-700 text-xxs font-bold rounded-full">
           Featured
         </span>
       </div>
@@ -157,7 +157,7 @@ export function PlacesCardWidget({
                 <div className="flex-1 min-w-0 space-y-1">
                   <div className="flex items-center justify-between gap-2">
                     <span
-                      className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full ${badge.color}`}
+                      className={`inline-flex items-center gap-1 text-2xs font-bold px-2 py-0.5 rounded-full ${badge.color}`}
                     >
                       <CategoryIcon className="w-3 h-3" />
                       {badge.label}

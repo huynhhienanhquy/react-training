@@ -61,7 +61,7 @@ describe('LoadingOverlay', () => {
     expect(spinner).toBeInTheDocument();
     expect(spinner).toHaveClass(
       'rounded-full',
-      'border-[3px]',
+      'border-3',
       'border-t-blue-500',
       'border-l-blue-400',
     );

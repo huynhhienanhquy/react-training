@@ -31,10 +31,10 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    'bg-gradient-to-r from-[#3B62FF] to-[#1A47FF] hover:from-[#2A52EF] hover:to-[#0936EF] text-white shadow-md shadow-blue-500/20',
+    'bg-gradient-to-r from-primary to-primary-dark hover:from-primary-hover hover:to-primary-dark-hover text-white shadow-md shadow-blue-500/20',
 
   secondary:
-    'bg-[#EEF2FF] hover:bg-blue-600 hover:text-white text-blue-600',
+    'bg-primary-light hover:bg-blue-600 hover:text-white text-blue-600',
 
   social:
     'bg-social-bg hover:bg-blue-100/70 text-blue-600',
@@ -76,7 +76,7 @@ export function Button({
     variant === 'favorite'
       ? isFavorite
         ? 'bg-blue-600 text-white shadow-md shadow-blue-200'
-        : 'bg-[#EEF2FF] hover:bg-blue-100'
+        : 'bg-primary-light hover:bg-blue-100'
       : '';
 
   return (

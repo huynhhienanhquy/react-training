@@ -45,7 +45,6 @@ export const Login = () => {
         subtitle="We're happy you're back. Let's get back to planning your adventures"
       />
 
-      {/* Toàn bộ Form di chuyển xuống */}
       <form
         className="space-y-6 font-helvetica translate-y-10"
         onSubmit={handleLogin}

@@ -12,7 +12,7 @@ export const LoadingOverlay = ({ isVisible = true }: LoadingOverlayProps) => {
       <div className="relative flex items-center justify-center w-16 h-16">
 
         {/* Light blue sloping rotating bezel */}
-        <div className="absolute inset-0 rounded-full border-[3px] border-white/30 border-t-blue-500 border-l-blue-400 animate-spin" />
+        <div className="absolute inset-0 rounded-full border-3 border-white/30 border-t-blue-500 border-l-blue-400 animate-spin" />
 
         {/* Tripal Logo icon in the center*/}
         <div className="w-10 h-10 rounded-xl bg-blue-600 shadow-md flex items-center justify-center p-2">

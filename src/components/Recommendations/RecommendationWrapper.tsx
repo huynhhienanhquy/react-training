@@ -15,14 +15,14 @@ export const RecommendationWrapper = ({
       </h3>
 
       {/* Main Container */}
-      <div className="bg-white p-4 md:p-5 rounded-[28px] space-y-3.5 shadow-sm border border-slate-100/50">
+      <div className="bg-white p-4 md:p-5 rounded-card space-y-3.5 shadow-sm border border-slate-100/50">
         {children}
 
         {/* See All Button */}
         {onSeeAll && (
           <button
             onClick={onSeeAll}
-            className="w-full py-3 bg-[#EEF2FF] hover:bg-blue-600 hover:text-white text-blue-600 text-xs font-bold rounded-xl transition-all duration-200 text-center mt-2 cursor-pointer"
+            className="w-full py-3 bg-primary-light hover:bg-blue-600 hover:text-white text-blue-600 text-xs font-bold rounded-xl transition-all duration-200 text-center mt-2 cursor-pointer"
           >
             {seeAllText}
           </button>

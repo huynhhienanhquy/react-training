@@ -220,7 +220,7 @@ export const SelectHotelPage = ({
                 return (
                   <div
                     key={hotel.id }
-                    className="bg-white rounded-[28px] p-5 md:p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col md:flex-row items-stretch gap-6"
+                    className="bg-white rounded-card p-5 md:p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col md:flex-row items-stretch gap-6"
                   >
                     {/* Information on the left */}
                     <div className="flex flex-1 flex-col sm:flex-row items-center sm:items-start md:items-center gap-5 min-w-0">
@@ -234,7 +234,7 @@ export const SelectHotelPage = ({
 
                       <div className="flex-1 min-w-0 space-y-4 w-full">
                         <div>
-                          <h3 className="text-xl sm:text-2xl font-extrabold text-[#0F0C3B] tracking-tight truncate">
+                          <h3 className="text-xl sm:text-2xl font-extrabold text-ink-alt tracking-tight truncate">
                             {hotel.hotelName || 'Five Star Hotel, Lagos'}
                           </h3>
                           <p className="text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-wide mt-1">
@@ -251,9 +251,9 @@ export const SelectHotelPage = ({
                                 alt="Booking.com"
                                 className="w-4 h-4 object-contain rounded-xs shrink-0"
                               />
-                              <span className="font-semibold text-[#0F0C3B]">Booking.com</span>
+                              <span className="font-semibold text-ink-alt">Booking.com</span>
                             </div>
-                            <span className="font-bold text-[#0F0C3B]">${mainPrice}</span>
+                            <span className="font-bold text-ink-alt">${mainPrice}</span>
                           </div>
 
                           <div className="flex items-center justify-between text-xs sm:text-sm">
@@ -263,9 +263,9 @@ export const SelectHotelPage = ({
                                 alt="Expedia"
                                 className="w-4 h-4 object-contain rounded-xs shrink-0"
                               />
-                              <span className="font-semibold text-[#0F0C3B]">Expedia</span>
+                              <span className="font-semibold text-ink-alt">Expedia</span>
                             </div>
-                            <span className="font-bold text-[#0F0C3B]">${mainPrice}</span>
+                            <span className="font-bold text-ink-alt">${mainPrice}</span>
                           </div>
                         </div>
                       </div>
@@ -273,14 +273,14 @@ export const SelectHotelPage = ({
 
                     {/* Price column & Booking button on the right */}
                     <div className="flex md:flex-col items-center md:items-end justify-between md:justify-center gap-4 pt-4 md:pt-0 border-t md:border-t-0 md:border-l border-slate-200/60 md:pl-8 shrink-0 min-w-[160px]">
-                      <span className="text-2xl sm:text-3xl font-black text-[#0F0C3B] tracking-tight">
+                      <span className="text-2xl sm:text-3xl font-black text-ink-alt tracking-tight">
                         ${mainPrice}
                       </span>
 
                       <button
                         type="button"
                         onClick={(e) => handleBookHotel(e, hotel)}
-                        className="px-6 py-3 bg-[#EAF1FF] hover:bg-blue-100 text-[#2563EB] font-bold text-xs sm:text-sm rounded-2xl transition-colors duration-150 active:scale-95 cursor-pointer"
+                        className="px-6 py-3 bg-primary-soft hover:bg-blue-100 text-primary-strong font-bold text-xs sm:text-sm rounded-2xl transition-colors duration-150 active:scale-95 cursor-pointer"
                       >
                         Book Hotel
                       </button>

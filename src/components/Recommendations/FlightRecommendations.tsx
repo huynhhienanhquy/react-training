@@ -101,7 +101,7 @@ export function FlightRecommendations({
           return (
             <div
               key={flight.id}
-              className="bg-[#F8FAFC] rounded-2xl p-3.5 sm:p-5 flex flex-col gap-3.5 border-none mb-3 overflow-hidden w-full min-h-[200px] "
+              className="bg-brand-light rounded-2xl p-3.5 sm:p-5 flex flex-col gap-3.5 border-none mb-3 overflow-hidden w-full min-h-200 "
             >
               <div className="flex items-center justify-between gap-2">
                 <div className="flex items-center gap-2 min-w-0">
@@ -144,7 +144,7 @@ export function FlightRecommendations({
                       {flight.outbound.time}
                     </span>
 
-                    <span className="text-slate-500 font-medium text-[11px] sm:text-xs leading-tight">
+                    <span className="text-slate-500 font-medium text-xxs sm:text-xs leading-tight">
                       {flight.outbound.route} • {flight.outbound.duration} •{' '}
                       {flight.outbound.stops}
                     </span>
@@ -155,7 +155,7 @@ export function FlightRecommendations({
                       {flight.returnLeg.time}
                     </span>
 
-                    <span className="text-slate-500 font-medium text-[11px] sm:text-xs leading-tight">
+                    <span className="text-slate-500 font-medium text-xxs sm:text-xs leading-tight">
                       {flight.returnLeg.route} • {flight.returnLeg.duration} •{' '}
                       {flight.returnLeg.stops}
                     </span>
@@ -164,7 +164,7 @@ export function FlightRecommendations({
 
                 <div className="pb-10 flex items-center sm:flex-col justify-between sm:justify-end sm:items-end gap-1.5 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-200/40 shrink-0">
                   {flight.tag && (
-                    <span className="px-2.5 py-0.5 bg-emerald-100/80 text-emerald-700 text-[10px] sm:text-[11px] font-bold rounded-full">
+                    <span className="px-2.5 py-0.5 bg-emerald-100/80 text-emerald-700 text-2xs sm:text-xxs font-bold rounded-full">
                       {flight.tag}
                     </span>
                   )}

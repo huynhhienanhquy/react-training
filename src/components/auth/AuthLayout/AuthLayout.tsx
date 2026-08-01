@@ -22,24 +22,24 @@ export const AuthLayout = ({
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
 
       {/* Main content container */}
-      <div className="relative z-10 w-full max-w-[1440px] min-h-screen flex items-center justify-center lg:justify-end">
+      <div className="relative z-10 w-full max-w-1440 min-h-screen flex items-center justify-center lg:justify-end">
 
         {/* TEXT ON THE LEFT */}
-        <div className="absolute bottom-[120px] left-0 w-full lg:w-[45%] xl:w-[50%] text-white space-y-2 p-4 hidden lg:block">
-          <h1 className="text-3xl xl:text-display-md font-bold leading-[1.2] tracking-tight">
+        <div className="absolute bottom-120 left-0 w-full lg:w-[45%] xl:w-[50%] text-white space-y-2 p-4 hidden lg:block">
+          <h1 className="text-3xl xl:text-display-md font-bold leading-1.2 tracking-tight">
             Discover Amazing Deals & Thrilling Adventures
           </h1>
 
-          <p className="text-sm lg:text-base text-gray-200 font-light max-w-[480px]">
+          <p className="text-sm lg:text-base text-gray-200 font-light max-w-480">
             Tripal is designed to ease trip and vacation planning. Explore amazing deals and offers
           </p>
         </div>
 
         {/* Outer Glassmorphic Border Card */}
-        <div className="w-full max-w-[400px] sm:max-w-[460px] md:max-w-[540px] lg:w-[580px] xl:w-[680px] lg:max-w-none lg:h-[980px] lg:ml-auto p-1.5 sm:p-2 rounded-[24px] sm:rounded-[32px] bg-white/15 backdrop-blur-md shadow-auth shrink-0 flex flex-col">
+        <div className="w-full max-w-400 sm:max-w-460 md:max-w-540 lg:w-580 xl:w-680 lg:max-w-none lg:h-980 lg:ml-auto p-1.5 sm:p-2 rounded-auth-sm sm:rounded-auth bg-white/15 backdrop-blur-md shadow-auth shrink-0 flex flex-col">
 
           {/* Inner White Form Card */}
-          <div className="relative w-full h-full bg-white rounded-[18px] sm:rounded-[26px] p-6 sm:p-8 md:p-10 lg:p-12 shadow-sm flex flex-col min-h-0 overflow-y-auto">
+          <div className="relative w-full h-full bg-white rounded-auth-inner-sm sm:rounded-auth-inner p-6 sm:p-8 md:p-10 lg:p-12 shadow-sm flex flex-col min-h-0 overflow-y-auto">
             {children}
           </div>
 

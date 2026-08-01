@@ -17,8 +17,8 @@ describe('Button', () => {
     const button = screen.getByRole('button', { name: 'Continue' });
 
     expect(button).toHaveClass(
-      'from-[#3B62FF]',
-      'to-[#1A47FF]',
+      'from-primary',
+      'to-primary-dark',
       'text-white',
       'w-full',
       'py-4',
@@ -28,7 +28,7 @@ describe('Button', () => {
 
   it.each([
     ['primary', 'bg-gradient-to-r'],
-    ['secondary', 'bg-[#EEF2FF]'],
+    ['secondary', 'bg-primary-light'],
     ['social', 'bg-social-bg'],
     ['dark', 'bg-slate-900'],
     ['ghost', 'bg-transparent'],
