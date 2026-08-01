@@ -39,7 +39,6 @@ export const Login = () => {
 
   return (
     <AuthLayout isLoading={isLoading}>
-      {/* Header giữ nguyên */}
       <AuthHeader
         title="Continue Planning Your Trips"
         subtitle="We're happy you're back. Let's get back to planning your adventures"
