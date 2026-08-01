@@ -25,7 +25,7 @@ export const Topbar = ({
 
   return (
     <header
-      className="w-full flex items-center justify-between sticky top-0 z-10 shrink-0 border-b transition-colors bg-white/80 backdrop-blur-md border-slate-200/80 px-4 md:px-6 py-3.5 shadow-sm">
+      className="w-full flex items-center justify-between sticky top-0 z-10 shrink-0 border-b transition-colors bg-white/80 backdrop-blur-md border-slate-200/80 px-4 md:px-6 py-6 shadow-sm">
       <div className="flex items-center gap-1 md:gap-2 text-sm min-w-0">
         {isBreadcrumbMode ? (
           <>
@@ -54,9 +54,22 @@ export const Topbar = ({
         )}
       </div>
 
-      <Button variant="primary" size="sm" leftIcon={<img src={iconAdd} alt="Add" className="w-4 h-4" />} onClick={onNewChat}>
-        <span className="hidden sm:inline">Start New Chat</span>
-      </Button>
+      <div className="-translate-x-4 -translate-y-2">
+        <Button
+          variant="primary"
+          size="md"
+          leftIcon={
+            <img
+              src={iconAdd}
+              alt="Add"
+              className="w-5 h-5"
+            />
+          }
+          onClick={onNewChat}
+        >
+          <span className="hidden sm:inline">Start New Chat</span>
+        </Button>
+      </div>
     </header>
   );
 };

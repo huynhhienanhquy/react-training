@@ -101,7 +101,7 @@ export function FlightRecommendations({
           return (
             <div
               key={flight.id}
-              className="bg-[#F8FAFC] rounded-2xl p-3.5 sm:p-5 flex flex-col gap-3.5 border-none mb-3 overflow-hidden"
+              className="bg-[#F8FAFC] rounded-2xl p-3.5 sm:p-5 flex flex-col gap-3.5 border-none mb-3 overflow-hidden w-full min-h-[200px] "
             >
               <div className="flex items-center justify-between gap-2">
                 <div className="flex items-center gap-2 min-w-0">
@@ -118,7 +118,7 @@ export function FlightRecommendations({
                   </span>
                 </div>
 
-                <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                <div className="pb-2 flex items-center gap-1.5 sm:gap-2 shrink-0">
                   <Button
                     type="button"
                     variant="favorite"
@@ -139,7 +139,7 @@ export function FlightRecommendations({
 
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 pt-1 border-t border-slate-100/60">
                 <div className="space-y-2 text-xs sm:text-sm flex-1">
-                  <div className="flex flex-wrap sm:flex-nowrap items-baseline sm:items-center gap-x-3 gap-y-0.5">
+                  <div className="pb-7 flex flex-wrap sm:flex-nowrap items-baseline sm:items-center gap-x-3 gap-y-0.5">
                     <span className="font-bold text-slate-900 shrink-0 text-xs sm:text-sm">
                       {flight.outbound.time}
                     </span>
@@ -162,7 +162,7 @@ export function FlightRecommendations({
                   </div>
                 </div>
 
-                <div className="flex items-center sm:flex-col justify-between sm:justify-end sm:items-end gap-1.5 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-200/40 shrink-0">
+                <div className="pb-10 flex items-center sm:flex-col justify-between sm:justify-end sm:items-end gap-1.5 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-200/40 shrink-0">
                   {flight.tag && (
                     <span className="px-2.5 py-0.5 bg-emerald-100/80 text-emerald-700 text-[10px] sm:text-[11px] font-bold rounded-full">
                       {flight.tag}

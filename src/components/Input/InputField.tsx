@@ -15,7 +15,7 @@ export const InputField = ({
   const inputType = isPassword ? (showPassword ? 'text' : 'password') : type;
 
   return (
-    <div className="flex flex-col space-y-2 relative">
+    <div className="flex flex-col space-y-2 relative mb-10">
       <label className="text-sm2 font-bold text-brand-dark-alt">
         {label}
       </label>

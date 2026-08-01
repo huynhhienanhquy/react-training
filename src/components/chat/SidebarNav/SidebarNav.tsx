@@ -54,10 +54,9 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
       )}
 
       {/* Desktop sidebar */}
-      <aside className="hidden md:flex w-18 md:w-20 bg-surface-sidebar border-r-[10px] border-surface-section flex-col items-center justify-between py-6 z-20 shrink-0 select-none">
-        <div className="flex flex-col items-center gap-7 w-full px-2">
+      <aside className="hidden md:flex w-[125px] min-w-[80px] bg-surface-sidebar border-r-[10px] border-surface-section flex-col items-center justify-between py-6 z-20 shrink-0 select-none">        <div className="flex flex-col items-center gap-7 w-full px-2">
           {/* App Logo */}
-          <button className="w-11 h-11 rounded-2xl flex items-center justify-center p-1.5 hover:opacity-90 transition">
+          <button className="w-11 h-11 rounded-2xl flex items-center justify-center p-1.5 hover:opacity-90 transition mt-3">
             <img
               src={logo}
               alt="Logo"
@@ -95,7 +94,7 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
         </div>
 
         {/* User Avatar & Logout Popover */}
-        <div className="relative" ref={menuRef}>
+        <div className="relative mb-4" ref={menuRef}>
           <svg width="0" height="0" className="absolute">
             <defs>
               <clipPath id="pentagon-clip" clipPathUnits="objectBoundingBox">
@@ -106,7 +105,7 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
 
           <button
             onClick={() => setShowProfileMenu((prev) => !prev)}
-            className="w-12 h-12 transition transform active:scale-95 flex items-center justify-center focus:outline-none relative drop-shadow-sm"
+            className="w-17 h-17 transition transform active:scale-95 flex items-center justify-center focus:outline-none relative drop-shadow-sm"
           >
             <div
               className="w-full h-full bg-white flex items-center justify-center p-1"
@@ -146,7 +145,7 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
 
           {/* Đã chỉnh: w-18 md:w-20 để thu nhỏ thanh Sidebar trên Mobile */}
           <aside className="relative w-18 bg-surface-sidebar h-full flex flex-col items-center justify-between py-6 z-50 shadow-2xl select-none animate-in slide-in-from-left duration-200">
-            <div className="flex flex-col items-center gap-7 w-full px-2">
+            <div className="flex flex-col items-center gap-7 w-full px-10">
               <button className="w-11 h-11 rounded-2xl flex items-center justify-center p-1.5">
                 <img src={logo} alt="Logo" className="w-full h-full object-contain" />
               </button>

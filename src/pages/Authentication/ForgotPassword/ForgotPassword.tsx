@@ -34,7 +34,7 @@ export const ForgotPassword = () => {
         />
 
         {/* 2. Form */}
-        <form className="space-y-3" onSubmit={handleSendOTP} autoComplete="off">
+        <form className="space-y-3 translate-y-8" onSubmit={handleSendOTP} autoComplete="off">
           <InputField
             label="Email address"
             type="email"
@@ -44,6 +44,7 @@ export const ForgotPassword = () => {
             required
           />
           <Button
+            className="translate-y-4"
             type="submit"
             isLoading={isLoading}
             showArrow
@@ -55,6 +56,7 @@ export const ForgotPassword = () => {
 
         {/* 3. Footer link is right below the button*/}
         <AuthFooter
+          className="space-y-3 translate-y-14"
           questionText="Don't have an account?"
           actionText="Sign Up"
           onActionClick={() => navigate('/register')}

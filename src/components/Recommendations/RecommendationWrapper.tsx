@@ -1,5 +1,5 @@
 import React from 'react';
-import {type RecommendationWrapperProps } from "@/types/card";
+import { type RecommendationWrapperProps } from '@/types/card';
 
 export const RecommendationWrapper = ({
   title,
@@ -8,7 +8,7 @@ export const RecommendationWrapper = ({
   seeAllText = 'See all recommendations',
 }: RecommendationWrapperProps) => {
   return (
-    <div className="w-full max-w-2xl my-3 space-y-4">
+    <div className="w-full  my-3 space-y-4">
       {/* Title */}
       <h3 className="text-lg md:text-xl font-bold text-slate-900 tracking-tight pl-1">
         {title}

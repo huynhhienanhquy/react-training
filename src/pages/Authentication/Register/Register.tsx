@@ -32,7 +32,7 @@ export const Register = () => {
       />
 
       {/* 2. Form*/}
-      <form className="space-y-3.5 my-auto" onSubmit={handleSubmit}>
+      <form className="space-y-3 translate-y-10" onSubmit={handleSubmit}>
         {/* Email input field */}
         <InputField
           label="Email address"
@@ -55,7 +55,7 @@ export const Register = () => {
         />
 
         {/* Terms of Service (Checkbox) */}
-        <div className="flex items-start gap-2.5 py-0.5">
+        <div className="flex items-start gap-2.5 py-0.5 translate-y-12">
           <input
             type="checkbox"
             id="terms"
@@ -68,7 +68,7 @@ export const Register = () => {
         </div>
 
         {/* Button Social Login */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 mt-11 translate-y-[100px]">
           <Button
             type="button"
             variant="social"
@@ -91,7 +91,7 @@ export const Register = () => {
         </div>
 
         {/* 3. Button + Footer  */}
-        <div className="flex flex-col gap-0.5">
+        <div className="flex flex-col gap-0.5 translate-y-40">
           <Button
             type="submit"
             isLoading={isLoading}

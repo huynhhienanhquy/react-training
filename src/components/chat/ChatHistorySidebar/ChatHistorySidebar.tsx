@@ -27,12 +27,11 @@ export const ChatHistorySidebar = ({
   }, {} as Record<string, ChatSession[]>);
 
   return (
-    <aside className="hidden lg:flex w-72 md:w-80 bg-surface-sidebar flex-col h-full shrink-0 border-r border-slate-200/50 select-none">
-      {/* Header Chats & Search Box */}
-      <div className="p-6 pb-2">
+<aside className="hidden lg:flex w-[370px] min-w-[280px] max-w-[300px] bg-surface-sidebar flex-col h-full border-r border-slate-200/50 select-none">      {/* Header Chats & Search Box */}
+      <div className="px-6 pt-12 pb-2">
         <h1 className="text-2xl font-bold text-brand-dark tracking-tight">Chats</h1>
 
-        <div className="mt-4 relative">
+        <div className=" relative pt-7">
           <img src={iconSearch} alt="Search" className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
           <input
             type="text"

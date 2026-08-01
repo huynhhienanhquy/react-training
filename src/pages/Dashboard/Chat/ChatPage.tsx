@@ -142,13 +142,15 @@ export const ChatPage = () => {
     <div className="bg-slate-100 font-sans text-slate-700 h-screen overflow-hidden flex antialiased">
       <SidebarNav activeNav={activeNav} setActiveNav={setActiveNav} isMobileOpen={isMobileMenuOpen} onMobileToggle={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
 
-      <ChatHistorySidebar
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        sessions={sessions}
-        activeSessionId={activeSessionId}
-        onSelectSession={handleSelectSession}
-      />
+      <div className="ml-1.5">
+        <ChatHistorySidebar
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          sessions={sessions}
+          activeSessionId={activeSessionId}
+          onSelectSession={handleSelectSession}
+        />
+      </div>
 
       <main className="flex-1 bg-surface-section flex flex-col h-full relative overflow-hidden">
         <Topbar

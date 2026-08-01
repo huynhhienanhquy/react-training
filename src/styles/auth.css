@@ -14,7 +14,7 @@
   }
 
   .auth-subtitle {
-    @apply text-sm text-slate-500 mt-2 font-normal;
+    @apply text-sm text-slate-600 mt-2 font-normal;
   }
 
   /* Input label */

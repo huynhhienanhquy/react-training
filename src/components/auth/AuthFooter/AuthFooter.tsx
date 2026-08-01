@@ -7,7 +7,7 @@ export const AuthFooter = ({
   className = '',
 }: AuthFooterProps) => {
   return (
-    <div className={`text-center text-sm2 text-gray-400 mt-8 md:mt-12 ${className}`}>
+    <div className={`text-center text-sm2 text-gray-400 mt-8 md:mt-4 ${className}`}>
       {questionText}{" "}
       <span
         onClick={onActionClick}
