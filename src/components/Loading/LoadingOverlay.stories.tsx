@@ -4,6 +4,10 @@ import { LoadingOverlay } from './LoadingOverlay'
 const meta: Meta<typeof LoadingOverlay> = {
   title: 'UI/LoadingOverlay',
   component: LoadingOverlay,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'fullscreen',
+  },
   argTypes: {
     isVisible: { control: 'boolean' },
   },

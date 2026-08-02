@@ -4,6 +4,10 @@ import { SectionHeader } from './SectionHeader'
 const meta: Meta<typeof SectionHeader> = {
   title: 'UI/SectionHeader',
   component: SectionHeader,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
   argTypes: {
     title: { control: 'text' },
   },

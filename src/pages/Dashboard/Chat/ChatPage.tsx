@@ -1,31 +1,34 @@
 import React, { useState } from 'react';
 import { SidebarNav } from '@/components/chat/SidebarNav/SidebarNav';
-import { ChatHistorySidebar, type ChatSession } from '../../../components/chat/ChatHistorySidebar/ChatHistorySidebar';
+import { ChatHistorySidebar } from '../../../components/chat/ChatHistorySidebar/ChatHistorySidebar';
 import { Topbar } from '@/components/chat/Topbar/Topbar';
 import { WelcomeState } from '@/components/chat/WelcomeState/WelcomeState';
-import { ChatMessageList, type ChatMessage } from '@/components/chat/ChatMessageList/ChatMessageList';
+import { ChatMessageList } from '@/components/chat/ChatMessageList/ChatMessageList';
 import { ChatInputBox } from '@/components/chat/ChatInputBox/ChatInputBox';
 import { SelectFarePage } from '@/pages/Dashboard/Flight/SelectFarePage';
 import { SelectHotelPage } from '@/pages/Dashboard/Hotel/SelectHotelPage';
+import { useChatSessions } from '@/hooks/useChatSessions';
+import { useSidebarNav } from '@/hooks/useSidebarNav';
 
 export const ChatPage = () => {
-  const [activeNav, setActiveNav] = useState('chats');
+  const { activeNav, setActiveNav, isMobileOpen, onMobileToggle } =
+    useSidebarNav();
   const [searchQuery, setSearchQuery] = useState('');
   const [inputMessage, setInputMessage] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const [isViewingFare, setIsViewingFare] = useState(false);
   const [isViewingHotel, setIsViewingHotel] = useState(false);
 
-  // Manage chat and messaging sessions by session ID.
-  const [sessions, setSessions] = useState<ChatSession[]>([]);
-  const [activeSessionId, setActiveSessionId] = useState<string | null>(null);
-  const [sessionMessages, setSessionMessages] = useState<Record<string, ChatMessage[]>>({});
-
-  // Get the current message list based on activeSessionId
-  const currentMessages = activeSessionId ? sessionMessages[activeSessionId] || [] : [];
+  const {
+    sessions,
+    activeSessionId,
+    currentMessages,
+    isTyping,
+    sendMessage,
+    startNewChat,
+    selectSession,
+  } = useChatSessions();
 
   const suggestionPrompts = [
     'Cheap flights from my location to Lagos',
@@ -38,82 +41,22 @@ export const ChatPage = () => {
 
   const handleSendMessage = (textToSend?: string) => {
     const text = textToSend || inputMessage;
-    if (!text.trim()) return;
-
-    let targetSessionId = activeSessionId;
-
-    // If you haven't selected a chat session yet -> Create a new chat session
-    if (!targetSessionId) {
-      targetSessionId = Date.now().toString();
-      const newSession: ChatSession = {
-        id: targetSessionId,
-        title: text.length > 28 ? text.substring(0, 28) + '...' : text,
-        group: 'TODAY',
-      };
-
-      setSessions((prev) => [newSession, ...prev]);
-      setActiveSessionId(targetSessionId);
+    if (sendMessage(text)) {
+      setInputMessage('');
     }
-
-    const userMsg: ChatMessage = {
-      id: Date.now().toString(),
-      sender: 'user',
-      text,
-    };
-
-    // Save the user's message to the corresponding session.
-    setSessionMessages((prev) => ({
-      ...prev,
-      [targetSessionId!]: [...(prev[targetSessionId!] || []), userMsg],
-    }));
-
-    setInputMessage('');
-    setIsTyping(true);
-
-    // Simulated AI response
-    setTimeout(() => {
-      const userQuery = text.toLowerCase();
-
-      let aiText = "I'd be happy to help you plan that! Here are the best deals and travel packages.";
-      let messageType: 'text' | 'flight' | 'hotel' = 'text';
-
-      if (userQuery.includes('hotel') || userQuery.includes('hotels') || userQuery.includes('bahamas') || userQuery.includes('staycation')) {
-        aiText = "Sure! I have some excellent recommendation for your trip to Bahamas. My recommendations are tailored for a round trip";
-        messageType = 'hotel';
-      } else if (userQuery.includes('flight') || userQuery.includes('flights') || userQuery.includes('lagos') || userQuery.includes('bay')) {
-        aiText = "Sure! I have some excellent recommendation for flights from your location to Lagos. My recommendations are tailored for a round trip.";
-        messageType = 'flight';
-      }
-
-      //Initialize AI message object
-      const aiMsg: ChatMessage = {
-        id: (Date.now() + 1).toString(),
-        sender: 'ai',
-        text: aiText,
-        type: messageType,
-      };
-
-      // Update message state
-      setSessionMessages((prev) => ({
-        ...prev,
-        [targetSessionId!]: [...(prev[targetSessionId!] || []), aiMsg],
-      }));
-
-      setIsTyping(false);
-    }, 1200);
   };
 
   // New chat button
   const handleStartNewChat = () => {
     setInputMessage('');
-    setActiveSessionId(null);
+    startNewChat();
     setIsViewingFare(false);
     setIsViewingHotel(false);
   };
 
   // Select a chat from the Sidebar
   const handleSelectSession = (sessionId: string) => {
-    setActiveSessionId(sessionId);
+    selectSession(sessionId);
     setIsViewingFare(false);
     setIsViewingHotel(false);
   };
@@ -140,7 +83,7 @@ export const ChatPage = () => {
 
   return (
     <div className="bg-slate-100 font-sans text-slate-700 h-screen overflow-hidden flex antialiased">
-      <SidebarNav activeNav={activeNav} setActiveNav={setActiveNav} isMobileOpen={isMobileMenuOpen} onMobileToggle={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
+      <SidebarNav activeNav={activeNav} setActiveNav={setActiveNav} isMobileOpen={isMobileOpen} onMobileToggle={onMobileToggle} />
 
       <div className="ml-1.5">
         <ChatHistorySidebar

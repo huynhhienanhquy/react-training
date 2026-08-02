@@ -4,6 +4,10 @@ import { Card } from './Card'
 const meta: Meta<typeof Card> = {
   title: 'UI/Card',
   component: Card,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
   argTypes: {
     variant: { control: 'select', options: ['default', 'surface'] },
   },

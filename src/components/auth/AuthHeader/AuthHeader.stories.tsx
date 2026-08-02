@@ -4,6 +4,10 @@ import { AuthHeader } from './AuthHeader'
 const meta: Meta<typeof AuthHeader> = {
   title: 'Auth/AuthHeader',
   component: AuthHeader,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
   argTypes: {
     title: { control: 'text' },
     subtitle: { control: 'text' },

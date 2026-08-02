@@ -4,6 +4,10 @@ import { PriceDetailsSidebar } from './PriceDetailsSidebar'
 const meta: Meta<typeof PriceDetailsSidebar> = {
   title: 'Fare/PriceDetailsSidebar',
   component: PriceDetailsSidebar,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'padded',
+  },
   decorators: [
     (Story) => (
       <div className="p-6 bg-slate-50 max-w-sm mx-auto">

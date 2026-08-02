@@ -19,6 +19,8 @@ import type {
 } from '@/types/flight';
 
 import { useApiRequest } from '@/hooks/useApiRequest';
+import { useSidebarNav } from '@/hooks/useSidebarNav';
+import { useChatTitle } from '@/hooks/useChatTitle';
 
 export const SelectFarePage = ({
   chatTitle,
@@ -26,7 +28,7 @@ export const SelectFarePage = ({
   onBackToChat,
   onStartNewChat,
 }: SelectFarePageProps) => {
-  const [activeNav, setActiveNav] = useState('chats');
+  const { activeNav, setActiveNav } = useSidebarNav();
   const [selectedFareId, setSelectedFareId] =
     useState<'economy' | 'business'>('economy');
 
@@ -53,18 +55,15 @@ export const SelectFarePage = ({
   } = useApiRequest<FareData>(fetchFare);
 
   // Chat title
-  const firstUserMessage = messages.find(
-    (m) => m.sender === 'user',
-  )?.text;
-
-  const resolvedChatTitle =
-    chatTitle ||
-    firstUserMessage ||
+  const resolvedChatTitle = useChatTitle(
+    chatTitle,
+    messages,
     `Cheap flights to ${
       fareData?.destination
         ? fareData.destination.split('-')[0].trim()
         : 'Destination'
-    }`;
+    }`,
+  );
 
   // Fare options
   const fareOptions = fareData?.fareOptions ?? [];

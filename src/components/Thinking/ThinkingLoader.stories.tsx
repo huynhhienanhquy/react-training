@@ -4,6 +4,10 @@ import { ThinkingLoader } from './ThinkingLoader'
 const meta: Meta<typeof ThinkingLoader> = {
   title: 'UI/ThinkingLoader',
   component: ThinkingLoader,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
   argTypes: {
     text: { control: 'text' },
   },

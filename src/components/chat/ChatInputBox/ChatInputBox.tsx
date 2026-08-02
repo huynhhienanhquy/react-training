@@ -4,6 +4,7 @@ import iconPlus from '@/assets/icons/add-dark.png';
 import iconMic from '@/assets/icons/microphone-2.png';
 import iconSend from '@/assets/icons/send-2.png';
 import { type ChatInputBoxProps } from "@/types/chat";
+import { useEnterToSend } from '@/hooks/useEnterToSend';
 
 export const ChatInputBox = ({
   inputMessage,
@@ -12,6 +13,8 @@ export const ChatInputBox = ({
   isRecording,
   setIsRecording,
 }: ChatInputBoxProps) => {
+  const handleKeyDown = useEnterToSend(onSend);
+
   return (
     /* Floating chat input container with focus state highlight */
     <div className="w-full max-w-4xl bg-white rounded-3xl p-20 md:p-10   shadow-xl shadow-slate-200/60 border border-slate-200/80 transition focus-within:border-blue-400">
@@ -21,13 +24,7 @@ export const ChatInputBox = ({
         rows={2}
         value={inputMessage}
         onChange={(e) => setInputMessage(e.target.value)}
-        onKeyDown={(e) => {
-          // Trigger send on Enter (without holding Shift)
-          if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            onSend();
-          }
-        }}
+        onKeyDown={handleKeyDown}
         placeholder="Tell me where you are going to and how you prefer to get there"
         className=" -translate-y-5 -translate-x-4 w-full resize-none text-slate-700 placeholder-slate-400 italic text-sm md:text-base focus:outline-none bg-transparent"
       />

@@ -4,6 +4,10 @@ import { InfoRow } from './InfoRow'
 const meta: Meta<typeof InfoRow> = {
   title: 'UI/InfoRow',
   component: InfoRow,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
   argTypes: {
     label: { control: 'text' },
     value: { control: 'text' },

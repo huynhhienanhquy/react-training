@@ -8,6 +8,8 @@ const meta: Meta<typeof InputField> = {
     type: { control: 'select', options: ['text', 'email', 'password'] },
     placeholder: { control: 'text' },
     label: { control: 'text' },
+    value: { control: 'text' },
+    onChange: { action: 'changed' },
   },
 }
 
@@ -27,5 +29,5 @@ export const Password: Story = {
 }
 
 export const WithValue: Story = {
-  args: { label: 'Email address', type: 'email', value: 'user@example.com', onChange: () => {} },
+  args: { label: 'Email address', type: 'email', value: 'user@example.com' },
 }

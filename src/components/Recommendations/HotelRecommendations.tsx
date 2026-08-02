@@ -9,6 +9,7 @@ import type {
 } from '@/types/hotel';
 import { useAsyncData } from '@/hooks/useAsyncData';
 import { useFavorites } from '@/hooks/useFavorites';
+import { useSelectedHotel } from '@/hooks/useSelectedHotel';
 
 export type { HotelOption };
 
@@ -57,6 +58,7 @@ export const HotelRecommendations = ({
   });
 
   const { favorites, toggleFavorite } = useFavorites();
+  const { selectHotel } = useSelectedHotel();
 
   const apiHotels =
     hotelData?.map(mapHotelDataToOption) ?? [];
@@ -69,10 +71,7 @@ export const HotelRecommendations = ({
   ) => {
     e.stopPropagation();
 
-    localStorage.setItem(
-      'selectedHotel',
-      JSON.stringify(hotel.rawData || hotel),
-    );
+    selectHotel(hotel.rawData || hotel);
 
     onBookNow?.(hotel);
   };

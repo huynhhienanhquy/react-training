@@ -5,8 +5,14 @@ import type { FlightOption } from './FlightRecommendations'
 const meta: Meta<typeof FlightRecommendations> = {
   title: 'Chat/FlightRecommendations',
   component: FlightRecommendations,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'padded',
+  },
   argTypes: {
     title: { control: 'text' },
+    onBookNow: { action: 'bookFlight' },
+    onSeeAll: { action: 'seeAllFlights' },
   },
 }
 
@@ -36,7 +42,5 @@ export const Default: Story = {
   args: {
     title: 'Recommended Flights For a Round Trip Journey',
     flights: MOCK_FLIGHTS,
-    onBookNow: (id) => alert('Book flight: ' + id),
-    onSeeAll: () => alert('See all flights'),
   },
 }

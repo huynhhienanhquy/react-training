@@ -4,9 +4,15 @@ import { Topbar } from './Topbar'
 const meta: Meta<typeof Topbar> = {
   title: 'Chat/Topbar',
   component: Topbar,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'padded',
+  },
   argTypes: {
     isBreadcrumbMode: { control: 'boolean' },
     chatTitle: { control: 'text' },
+    onBackToChat: { action: 'backToChat' },
+    onNewChat: { action: 'newChat' },
   },
 }
 
@@ -24,8 +30,6 @@ export const BreadcrumbMode: Story = {
   args: {
     isBreadcrumbMode: true,
     chatTitle: 'Cheap flights to Lagos',
-    onBackToChat: () => alert('Back to chat'),
-    onNewChat: () => alert('New chat'),
   },
 }
 

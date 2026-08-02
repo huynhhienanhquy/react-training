@@ -4,6 +4,10 @@ import { ErrorMessage } from './ErrorMessage'
 const meta: Meta<typeof ErrorMessage> = {
   title: 'UI/ErrorMessage',
   component: ErrorMessage,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
   argTypes: {
     message: { control: 'text' },
   },

@@ -10,6 +10,10 @@ const MOCK_HEART_ICON =
 const meta: Meta<typeof SelectedFlightBox> = {
   title: 'Fare/SelectedFlightBox',
   component: SelectedFlightBox,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'padded',
+  },
   decorators: [
     (Story) => (
       <div className="p-6 bg-slate-50 max-w-xl mx-auto">

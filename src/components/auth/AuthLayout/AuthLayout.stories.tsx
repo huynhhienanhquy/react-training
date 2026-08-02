@@ -8,6 +8,10 @@ import { InputField } from '../../Input/InputField'
 const meta: Meta<typeof AuthLayout> = {
   title: 'Auth/AuthLayout',
   component: AuthLayout,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'fullscreen',
+  },
   argTypes: {
     isLoading: { control: 'boolean' },
   },

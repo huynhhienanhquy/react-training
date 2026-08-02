@@ -5,6 +5,15 @@ import type { ChatSession } from '../ChatHistorySidebar/ChatHistorySidebar'
 const meta: Meta<typeof ChatHistorySidebar> = {
   title: 'Chat/ChatHistorySidebar',
   component: ChatHistorySidebar,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'padded',
+  },
+  argTypes: {
+    searchQuery: { control: 'text' },
+    setSearchQuery: { action: 'searchQueryChanged' },
+    onSelectSession: { action: 'sessionSelected' },
+  },
 }
 
 export default meta
@@ -22,29 +31,23 @@ const MOCK_SESSIONS: ChatSession[] = [
 export const Default: Story = {
   args: {
     searchQuery: '',
-    setSearchQuery: () => {},
     sessions: MOCK_SESSIONS,
     activeSessionId: '1',
-    onSelectSession: (id) => console.log('Select session:', id),
   },
 }
 
 export const WithSearch: Story = {
   args: {
     searchQuery: 'flights',
-    setSearchQuery: () => {},
     sessions: MOCK_SESSIONS,
     activeSessionId: null,
-    onSelectSession: () => {},
   },
 }
 
 export const Empty: Story = {
   args: {
     searchQuery: '',
-    setSearchQuery: () => {},
     sessions: [],
     activeSessionId: null,
-    onSelectSession: () => {},
   },
 }

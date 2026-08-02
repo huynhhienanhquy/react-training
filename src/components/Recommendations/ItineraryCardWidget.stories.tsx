@@ -5,6 +5,13 @@ import type { DayItinerary } from '@/types/travel'
 const meta: Meta<typeof ItineraryCardWidget> = {
   title: 'Chat/ItineraryCardWidget',
   component: ItineraryCardWidget,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'padded',
+  },
+  argTypes: {
+    onViewAll: { action: 'viewAllItinerary' },
+  },
 }
 
 export default meta
@@ -33,7 +40,6 @@ const MOCK_ITINERARY: DayItinerary[] = [
 export const Default: Story = {
   args: {
     itinerary: MOCK_ITINERARY,
-    onViewAll: () => alert('View full itinerary'),
   },
 }
 

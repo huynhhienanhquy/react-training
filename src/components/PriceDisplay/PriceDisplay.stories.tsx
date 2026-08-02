@@ -4,6 +4,10 @@ import { PriceDisplay } from './PriceDisplay'
 const meta: Meta<typeof PriceDisplay> = {
   title: 'UI/PriceDisplay',
   component: PriceDisplay,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
     amount: { control: 'text' },

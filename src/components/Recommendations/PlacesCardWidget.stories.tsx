@@ -5,6 +5,13 @@ import type { PlaceData } from '@/types/travel'
 const meta: Meta<typeof PlacesCardWidget> = {
   title: 'Chat/PlacesCardWidget',
   component: PlacesCardWidget,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'padded',
+  },
+  argTypes: {
+    onViewAll: { action: 'viewAllPlaces' },
+  },
 }
 
 export default meta
@@ -40,7 +47,6 @@ const MOCK_PLACES: PlaceData[] = [
 export const Default: Story = {
   args: {
     places: MOCK_PLACES,
-    onViewAll: () => alert('View all places'),
   },
 }
 

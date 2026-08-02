@@ -37,6 +37,10 @@ const MOCK_FARE_OPTIONS: FareOption[] = [
 const meta: Meta<typeof FareCards> = {
   title: 'Fare/FareCards',
   component: FareCards,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'padded',
+  },
   decorators: [
     (Story) => (
       <div className="p-6 bg-slate-50 max-w-3xl mx-auto">

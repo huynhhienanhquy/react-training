@@ -6,10 +6,13 @@ import { AuthProvider } from '../../../context/AuthProvider'
 const meta: Meta<typeof SidebarNav> = {
   title: 'Chat/SidebarNav',
   component: SidebarNav,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'fullscreen',
+  },
   decorators: [
     (Story) => (
       <MemoryRouter>
-        {/* 2. Bọc AuthProvider ở đây */}
         <AuthProvider>
           <div className="h-screen bg-slate-100 flex">
             <Story />

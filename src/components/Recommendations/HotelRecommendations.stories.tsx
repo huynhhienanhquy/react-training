@@ -5,8 +5,14 @@ import type { HotelOption } from './HotelRecommendations'
 const meta: Meta<typeof HotelRecommendations> = {
   title: 'Chat/HotelRecommendations',
   component: HotelRecommendations,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'padded',
+  },
   argTypes: {
     title: { control: 'text' },
+    onBookNow: { action: 'bookHotel' },
+    onSeeAll: { action: 'seeAllHotels' },
   },
 }
 
@@ -36,7 +42,5 @@ export const Default: Story = {
   args: {
     title: 'Recommended Hotels For a Three-Night Staycation',
     hotels: MOCK_HOTELS,
-    onBookNow: (id) => alert('Book hotel: ' + id),
-    onSeeAll: () => alert('See all hotels'),
   },
 }

@@ -4,6 +4,10 @@ import { FareHeader } from './FareHeader'
 const meta: Meta<typeof FareHeader> = {
   title: 'Fare/FareHeader',
   component: FareHeader,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'padded',
+  },
   decorators: [
     (Story) => (
       <div className="p-6 bg-slate-50 max-w-2xl mx-auto">

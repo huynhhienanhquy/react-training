@@ -17,6 +17,9 @@ import bookingIcon from '@/assets/icons/booking.png';
 import expediaIcon from '@/assets/icons/expedia.png';
 
 import { useApiRequest } from '@/hooks/useApiRequest';
+import { useSidebarNav } from '@/hooks/useSidebarNav';
+import { useChatTitle } from '@/hooks/useChatTitle';
+import { useSelectedHotel, getSavedHotel } from '@/hooks/useSelectedHotel';
 
 export const SelectHotelPage = ({
   chatTitle,
@@ -25,9 +28,11 @@ export const SelectHotelPage = ({
   onStartNewChat,
   onSelectHotel,
 }: SelectHotelPageProps) => {
-  const [activeNav, setActiveNav] = useState('chats');
-  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const { activeNav, setActiveNav, isMobileOpen, onMobileToggle } =
+    useSidebarNav();
   const [isComparePrice, setIsComparePrice] = useState(false);
+
+  const { selectHotel } = useSelectedHotel();
 
   // Fetch hotel data
   const fetchHotels = useCallback(
@@ -39,28 +44,15 @@ export const SelectHotelPage = ({
         : [rawData];
 
       //Synchronize with LocalStorage.If a hotel was previously selected,move it to the top of the list.
-      const savedHotelJson =
-        localStorage.getItem('selectedHotel');
+      const savedHotel = getSavedHotel();
 
-      if (savedHotelJson) {
-        try {
-          const savedHotel: HotelData =
-            JSON.parse(savedHotelJson);
-
-          if (savedHotel?.hotelName) {
-            dataList = [
-              savedHotel,
-              ...dataList.filter(
-                (hotel) => hotel.id !== savedHotel.id,
-              ),
-            ];
-          }
-        } catch (err) {
-          console.error(
-            'Error parsing saved hotel:',
-            err,
-          );
-        }
+      if (savedHotel?.hotelName) {
+        dataList = [
+          savedHotel,
+          ...dataList.filter(
+            (hotel) => hotel.id !== savedHotel.id,
+          ),
+        ];
       }
 
       if (dataList.length === 0) {
@@ -83,14 +75,11 @@ export const SelectHotelPage = ({
   const hotelList = hotelData ?? [];
 
   // Handle the Topbar header display
-  const firstUserMessage = messages.find(
-    (m) => m.sender === 'user',
-  )?.text;
-
-  const resolvedChatTitle =
-    chatTitle ||
-    firstUserMessage ||
-    'Other available accommodations';
+  const resolvedChatTitle = useChatTitle(
+    chatTitle,
+    messages,
+    'Other available accommodations',
+  );
 
   // Handling when clicking "Book Hotel"
   const handleBookHotel = (
@@ -99,10 +88,7 @@ export const SelectHotelPage = ({
   ) => {
     e.stopPropagation();
 
-    localStorage.setItem(
-      'selectedHotel',
-      JSON.stringify(selectedHotel),
-    );
+    selectHotel(selectedHotel);
 
     if (onSelectHotel) {
       onSelectHotel(selectedHotel);
@@ -122,7 +108,7 @@ export const SelectHotelPage = ({
         activeNav={activeNav}
         setActiveNav={setActiveNav}
         isMobileOpen={isMobileOpen}
-        onMobileToggle={() => setIsMobileOpen(!isMobileOpen)}
+        onMobileToggle={onMobileToggle}
       />
 
       {/* 2. Main Content */}

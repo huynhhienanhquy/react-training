@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Menu } from 'lucide-react';
-import { useClickOutside } from '@/hooks/useClickOutside';
 import { useAuth } from '@/hooks/useAuth';
+import { useProfileMenu } from '@/hooks/useProfileMenu';
 
 import logo from '@/assets/icons/Logo.png';
 import iconChat from '@/assets/icons/chat.png';
@@ -18,9 +18,12 @@ import { Button } from "@/components/Button/Button";
 export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileToggle }: SidebarNavProps) => {
   const navigate = useNavigate();
   const { logout } = useAuth();
-
-  const [showProfileMenu, setShowProfileMenu] = useState(false);
-  const menuRef = useClickOutside<HTMLDivElement>(() => setShowProfileMenu(false));
+  const {
+    isOpen: showProfileMenu,
+    ref: menuRef,
+    toggle: toggleProfileMenu,
+    close: closeProfileMenu,
+  } = useProfileMenu();
 
   const navItems = [
     { id: 'chats', icon: iconChat, alt: 'Chats' },
@@ -33,7 +36,7 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
 
   const handleLogout = async () => {
     try {
-      setShowProfileMenu(false);
+      closeProfileMenu();
       await logout();
       navigate('/login', { replace: true });
     } catch (error) {
@@ -104,7 +107,7 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
           </svg>
 
           <button
-            onClick={() => setShowProfileMenu((prev) => !prev)}
+            onClick={toggleProfileMenu}
             className="w-17 h-17 transition transform active:scale-95 flex items-center justify-center focus:outline-none relative drop-shadow-sm"
           >
             <div

@@ -5,6 +5,17 @@ import type { ChatMessage } from '../ChatMessageList/ChatMessageList'
 const meta: Meta<typeof ChatMessageList> = {
   title: 'Chat/ChatMessageList',
   component: ChatMessageList,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'padded',
+  },
+  argTypes: {
+    isTyping: { control: 'boolean' },
+    onBookFlight: { action: 'bookFlight' },
+    onBookHotel: { action: 'bookHotel' },
+    onViewAllPlaces: { action: 'viewAllPlaces' },
+    onViewAllItinerary: { action: 'viewAllItinerary' },
+  },
 }
 
 export default meta

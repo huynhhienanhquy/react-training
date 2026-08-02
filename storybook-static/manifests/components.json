@@ -1,0 +1,1017 @@
+{
+  "v": 0,
+  "components": {
+    "ui-button": {
+      "id": "ui-button",
+      "name": "Button",
+      "path": "./src/components/Button/Button.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "Button",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\Button\\Button.tsx",
+        "actualName": "Button",
+        "exportName": "Button",
+        "props": {
+          "variant": {
+            "required": false,
+            "tsType": {
+              "name": "union",
+              "raw": "| 'primary'\r\n| 'secondary'\r\n| 'social'\r\n| 'dark'\r\n| 'ghost'\r\n| 'danger'\r\n| 'favorite'",
+              "elements": [
+                {
+                  "name": "literal",
+                  "value": "'primary'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'secondary'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'social'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'dark'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'ghost'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'danger'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'favorite'"
+                }
+              ]
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "'primary'",
+              "computed": false
+            }
+          },
+          "size": {
+            "required": false,
+            "tsType": {
+              "name": "union",
+              "raw": "'sm' | 'md' | 'lg' | 'icon'",
+              "elements": [
+                {
+                  "name": "literal",
+                  "value": "'sm'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'md'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'lg'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'icon'"
+                }
+              ]
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "'lg'",
+              "computed": false
+            }
+          },
+          "leftIcon": {
+            "required": false,
+            "tsType": {
+              "name": "ReactNode"
+            },
+            "description": ""
+          },
+          "rightIcon": {
+            "required": false,
+            "tsType": {
+              "name": "ReactNode"
+            },
+            "description": ""
+          },
+          "showArrow": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "false",
+              "computed": false
+            }
+          },
+          "socialIcon": {
+            "required": false,
+            "tsType": {
+              "name": "union",
+              "raw": "'google' | 'apple'",
+              "elements": [
+                {
+                  "name": "literal",
+                  "value": "'google'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'apple'"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "isLoading": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "false",
+              "computed": false
+            }
+          },
+          "isFavorite": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "false",
+              "computed": false
+            }
+          },
+          "children": {
+            "required": false,
+            "tsType": {
+              "name": "ReactNode"
+            },
+            "description": ""
+          },
+          "className": {
+            "defaultValue": {
+              "value": "''",
+              "computed": false
+            },
+            "required": false
+          }
+        },
+        "composes": [
+          "ButtonHTMLAttributes"
+        ]
+      },
+      "stories": [
+        {
+          "id": "ui-button--primary",
+          "name": "Primary",
+          "snippet": "const Primary = () => <Button variant=\"primary\" size=\"lg\">Create a Free Account</Button>;"
+        },
+        {
+          "id": "ui-button--secondary",
+          "name": "Secondary",
+          "snippet": "const Secondary = () => <Button variant=\"secondary\" size=\"sm\">Book Now</Button>;"
+        },
+        {
+          "id": "ui-button--social",
+          "name": "Social",
+          "snippet": "const Social = () => <Button\r\n    variant=\"social\"\r\n    size=\"md\"\r\n    leftIcon={(<svg className=\"w-5 h-5\" viewBox=\"0 0 24 24\">\r\n      <path fill=\"#4285F4\" d=\"M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z\"/>\r\n      <path fill=\"#34A853\" d=\"M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z\"/>\r\n      <path fill=\"#FBBC05\" d=\"M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z\"/>\r\n      <path fill=\"#EA4335\" d=\"M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z\"/>\r\n    </svg>)}>Continue with Google</Button>;"
+        },
+        {
+          "id": "ui-button--dark",
+          "name": "Dark",
+          "snippet": "const Dark = () => <Button variant=\"dark\" size=\"md\" className=\"w-full\">View Full Itinerary</Button>;"
+        },
+        {
+          "id": "ui-button--ghost",
+          "name": "Ghost",
+          "snippet": "const Ghost = () => <Button variant=\"ghost\" size=\"md\">Cancel</Button>;"
+        },
+        {
+          "id": "ui-button--with-right-icon",
+          "name": "With Right Icon",
+          "snippet": "const WithRightIcon = () => <Button\r\n    variant=\"primary\"\r\n    size=\"lg\"\r\n    rightIcon={(<svg className=\"w-4 h-4\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2\">\r\n      <path d=\"M5 12h14M12 5l7 7-7 7\" />\r\n    </svg>)}>Continue</Button>;"
+        },
+        {
+          "id": "ui-button--loading",
+          "name": "Loading",
+          "snippet": "const Loading = () => <Button variant=\"primary\" size=\"lg\" isLoading>Please wait...</Button>;"
+        },
+        {
+          "id": "ui-button--disabled",
+          "name": "Disabled",
+          "snippet": "const Disabled = () => <Button variant=\"primary\" size=\"lg\" disabled>Submit</Button>;"
+        },
+        {
+          "id": "ui-button--small",
+          "name": "Small",
+          "snippet": "const Small = () => <Button variant=\"primary\" size=\"sm\">Start New Chat</Button>;"
+        }
+      ],
+      "import": "import { Button } from \"example1\";"
+    },
+    "ui-card": {
+      "id": "ui-card",
+      "name": "Card",
+      "path": "./src/components/Card/Card.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component definition found",
+        "message": "File: D:\\react-training\\examples\\src\\components\\Card\\Card.tsx\nError:\nCannot find module '@/types/card'\nYou can debug your component file in this playground: https://react-docgen.dev/playground\nCode:\nimport React from 'react';\r\nimport { type CardProps } from \"@/types/card\";\r\n\r\n\r\n// Predefined style maps for card variants\r\nconst variants = {\r\n  default: 'bg-white rounded-3xl border border-slate-100 shadow-sm',\r\n  surface: 'bg-surface rounded-3xl border border-slate-100 shadow-sm',\r\n};\r\n\r\nexport const Card = ({\r\n  children,\r\n  variant = 'default',\r\n  className = '',\r\n}: CardProps) => {\r\n  return (\r\n    /* Universal content card container merging variant styles and custom layout classes */\r\n    <div className={`${variants[variant]} ${className}`}>\r\n      {children}\r\n    </div>\r\n  );\r\n};\r\n"
+      },
+      "stories": [
+        {
+          "id": "ui-card--default",
+          "name": "Default",
+          "snippet": "const Default = () => <Card variant=\"default\"><div className=\"p-6 text-slate-700\">Card content</div></Card>;"
+        },
+        {
+          "id": "ui-card--surface",
+          "name": "Surface",
+          "snippet": "const Surface = () => <Card variant=\"surface\"><div className=\"p-6 text-slate-700\">Surface card content</div></Card>;"
+        },
+        {
+          "id": "ui-card--custom-class",
+          "name": "Custom Class",
+          "snippet": "const CustomClass = () => <Card className=\"rounded-2xl\"><div className=\"p-6 text-slate-700\">Card with extra rounding</div></Card>;"
+        }
+      ],
+      "import": "import { Card } from \"example1\";"
+    },
+    "ui-errormessage": {
+      "id": "ui-errormessage",
+      "name": "ErrorMessage",
+      "path": "./src/components/Error/ErrorMessage.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component definition found",
+        "message": "File: D:\\react-training\\examples\\src\\components\\Error\\ErrorMessage.tsx\nError:\nCannot find module '@/types/error'\nYou can debug your component file in this playground: https://react-docgen.dev/playground\nCode:\n\r\nimport { type ErrorMessageProps } from \"@/types/error\";\r\nexport const ErrorMessage = ({ message, className = '' }: ErrorMessageProps) => {\r\n  if (!message) return null;\r\n\r\n  return (\r\n    <p className={`text-sm text-red-500 font-medium px-1 bg-red-50/50 rounded-lg py-1 border border-red-100/40 text-center ${className}`}>\r\n      {message}\r\n    </p>\r\n  );\r\n};\r\n"
+      },
+      "stories": [
+        {
+          "id": "ui-errormessage--with-message",
+          "name": "With Message",
+          "snippet": "const WithMessage = () => <ErrorMessage message=\"Invalid email or password. Please try again.\" />;"
+        },
+        {
+          "id": "ui-errormessage--empty",
+          "name": "Empty",
+          "snippet": "const Empty = () => <ErrorMessage message=\"\" />;"
+        },
+        {
+          "id": "ui-errormessage--custom-class",
+          "name": "Custom Class",
+          "snippet": "const CustomClass = () => <ErrorMessage message=\"Something went wrong.\" className=\"text-red-600 font-bold\" />;"
+        }
+      ],
+      "import": "import { ErrorMessage } from \"example1\";"
+    },
+    "fare-farecards": {
+      "id": "fare-farecards",
+      "name": "FareCards",
+      "path": "./src/components/FlightFare/FareCards.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component definition found",
+        "message": "File: D:\\react-training\\examples\\src\\components\\FlightFare\\FareCards.tsx\nError:\nCannot find module '@/types/flight'\nYou can debug your component file in this playground: https://react-docgen.dev/playground\nCode:\n\r\nimport { CheckCircle2 } from 'lucide-react';\r\nimport { SectionHeader } from './SectionHeader/SectionHeader';\r\nimport { PriceDisplay } from '@/components/PriceDisplay/PriceDisplay';\r\n\r\nimport type { FareOption } from '@/types/flight';\r\nimport type { FareCardsProps } from '@/types/flightfare';\r\n\r\nexport type { FareOption };\r\n\r\n  export const FareCards = ({\r\n    fareOptions,\r\n    selectedFareId,\r\n    defaultFlightLogo,\r\n    onSelectFare,\r\n  }: FareCardsProps) => {\r\n    return (\r\n      <div className=\"space-y-3\">\r\n        {/* Section Title */}\r\n        <SectionHeader title=\"Select fare\" />\r\n\r\n        {/* Grid containing Economy and Business fare cards */}\r\n        <div className=\"grid grid-cols-1 md:grid-cols-2 gap-4\">\r\n          {fareOptions.map((fare) => {\r\n            // Check if the current card is active/selected\r\n            const isSelected = selectedFareId === fare.id;\r\n\r\n            return (\r\n              <div\r\n                key={fare.id}\r\n                className={`bg-surface p-6 rounded-3xl border transition-all shadow-sm flex flex-col justify-between space-y-6 ${\r\n                  isSelected\r\n                    ? 'border-blue-500 ring-2 ring-blue-500/20' // Highlight border when selected\r\n                    : 'border-slate-100'\r\n                }`}\r\n              >\r\n                <div className=\"space-y-4\">\r\n                  {/* Airline Logo & Name */}\r\n                  <div className=\"flex items-center gap-2\">\r\n                    <img\r\n                      src={defaultFlightLogo}\r\n                      alt={fare.airline}\r\n                      className=\"w-4 h-4 object-contain\"\r\n                    />\r\n                    <span className=\"text-xs font-medium text-slate-500\">\r\n                      {fare.airline}\r\n                    </span>\r\n                  </div>\r\n\r\n                  {/* Fare Price & Cabin Class Title */}\r\n                  <div>\r\n                    <PriceDisplay amount={`$${fare.price}`} size=\"md\" className=\"text-brand-dark\" />\r\n                    <div className=\"text-xs font-bold text-slate-400 uppercase tracking-wider mt-0.5\">\r\n                      {fare.name}\r\n                    </div>\r\n                  </div>\r\n\r\n                  {/* List of included benefits/features */}\r\n                  <ul className=\"space-y-3 text-xs text-slate-500\">\r\n                    {fare.features.map((feature, idx) => (\r\n                      <li key={idx} className=\"flex items-center gap-2\">\r\n                        <CheckCircle2 className=\"w-4 h-4 text-slate-400 shrink-0\" />\r\n                        <span>{feature}</span>\r\n                      </li>\r\n                    ))}\r\n                  </ul>\r\n                </div>\r\n\r\n                {/* Action Button to pick the fare class */}\r\n                <button\r\n                  onClick={() => onSelectFare(fare.id)}\r\n                  className={`w-full py-3 rounded-2xl text-xs font-bold transition cursor-pointer active:scale-95 ${\r\n                    isSelected\r\n                      ? 'bg-blue-600 text-white' // Primary button style for active selection\r\n                      : 'bg-surface-section text-blue-600 hover:bg-blue-100' // Secondary style for inactive cards\r\n                  }`}\r\n                >\r\n                  Select\r\n                </button>\r\n              </div>\r\n            );\r\n          })}\r\n        </div>\r\n      </div>\r\n    );\r\n  };\r\n"
+      },
+      "stories": [
+        {
+          "id": "fare-farecards--default-economy-selected",
+          "name": "Default Economy Selected",
+          "snippet": "const DefaultEconomySelected = () => <FareCards\r\n    fareOptions={MOCK_FARE_OPTIONS}\r\n    selectedFareId=\"economy\"\r\n    defaultFlightLogo={MOCK_FLIGHT_LOGO} />;"
+        },
+        {
+          "id": "fare-farecards--business-selected",
+          "name": "Business Selected",
+          "snippet": "const BusinessSelected = () => <FareCards\r\n    fareOptions={MOCK_FARE_OPTIONS}\r\n    selectedFareId=\"business\"\r\n    defaultFlightLogo={MOCK_FLIGHT_LOGO} />;"
+        },
+        {
+          "id": "fare-farecards--interactive",
+          "name": "Interactive",
+          "snippet": "const Interactive = () => {\r\n    const [selectedId, setSelectedId] = useState<'economy' | 'business'>('economy')\r\n\r\n    return (\r\n        <FareCards\r\n            fareOptions={MOCK_FARE_OPTIONS}\r\n            defaultFlightLogo={MOCK_FLIGHT_LOGO}\r\n            selectedFareId={selectedId}\r\n            onSelectFare={(id) => {\r\n              setSelectedId(id)\r\n              args.onSelectFare?.(id)\r\n            }} />\r\n    );\r\n};"
+        }
+      ],
+      "import": "import { FareCards } from \"example1\";"
+    },
+    "fare-fareheader": {
+      "id": "fare-fareheader",
+      "name": "FareHeader",
+      "path": "./src/components/FlightFare/FareHeader.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component definition found",
+        "message": "File: D:\\react-training\\examples\\src\\components\\FlightFare\\FareHeader.tsx\nError:\nCannot find module '@/types/flightfare'\nYou can debug your component file in this playground: https://react-docgen.dev/playground\nCode:\nimport React from 'react';\r\nimport { Card } from '@/components/Card/Card';\r\nimport { PriceDisplay } from '@/components/PriceDisplay/PriceDisplay';\r\nimport type { FareHeaderProps } from '@/types/flightfare';\r\n\r\nexport function FareHeader({\r\n  destination,\r\n  tripType,\r\n  cabinClass,\r\n  price,\r\n  priceUnit,\r\n}: FareHeaderProps) {\r\n  return (\r\n    <Card variant=\"surface\" className=\"p-6 flex items-center justify-between\">\r\n      <div>\r\n        <h2 className=\"text-xl md:text-2xl font-bold text-brand-dark\">\r\n          {destination}\r\n        </h2>\r\n        <p className=\"text-xs md:text-sm text-slate-400 font-medium mt-1\">\r\n          {tripType} • {cabinClass}\r\n        </p>\r\n      </div>\r\n\r\n      <div className=\"text-right\">\r\n        <PriceDisplay amount={`$${price}`} size=\"md\" />\r\n        <p className=\"text-xs text-slate-400 mt-0.5\">{priceUnit}</p>\r\n      </div>\r\n    </Card>\r\n  );\r\n}\r\n"
+      },
+      "stories": [
+        {
+          "id": "fare-fareheader--round-trip",
+          "name": "Round Trip",
+          "snippet": "const RoundTrip = () => <FareHeader\r\n    destination=\"Lagos to Owerri\"\r\n    tripType=\"Round trip\"\r\n    cabinClass=\"Economy Class\"\r\n    price={320}\r\n    priceUnit=\"per passenger\" />;"
+        },
+        {
+          "id": "fare-fareheader--business-class",
+          "name": "Business Class",
+          "snippet": "const BusinessClass = () => <FareHeader\r\n    destination=\"Tokyo to Paris\"\r\n    tripType=\"Round trip\"\r\n    cabinClass=\"Business Class\"\r\n    price={2450}\r\n    priceUnit=\"total base fare\" />;"
+        },
+        {
+          "id": "fare-fareheader--one-way",
+          "name": "One Way",
+          "snippet": "const OneWay = () => <FareHeader\r\n    destination=\"Da Nang to Hanoi\"\r\n    tripType=\"One way\"\r\n    cabinClass=\"Economy Class\"\r\n    price={85}\r\n    priceUnit=\"incl. taxes & fees\" />;"
+        }
+      ],
+      "import": "import { FareHeader } from \"example1\";"
+    },
+    "fare-pricedetailssidebar": {
+      "id": "fare-pricedetailssidebar",
+      "name": "PriceDetailsSidebar",
+      "path": "./src/components/FlightFare/PriceDetailsSidebar.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component definition found",
+        "message": "File: D:\\react-training\\examples\\src\\components\\FlightFare\\PriceDetailsSidebar.tsx\nError:\nCannot find module '@/types/flightfare'\nYou can debug your component file in this playground: https://react-docgen.dev/playground\nCode:\n\r\nimport { Card } from '@/components/Card/Card';\r\nimport { InfoRow } from '@/components/InfoRow/InfoRow';\r\nimport type { PriceDetailsSidebarProps } from '@/types/flightfare';\r\n\r\nexport const PriceDetailsSidebar = ({\r\n  pricePerTraveller,\r\n  flightDues,\r\n  taxesAndFees,\r\n  totalAmount,\r\n}: PriceDetailsSidebarProps) => {\r\n  return (\r\n    /* Sticky sidebar card for price summary */\r\n    <Card variant=\"surface\" className=\"p-6 space-y-6 lg:sticky lg:top-24\">\r\n      {/* Sidebar Header */}\r\n      <h3 className=\"text-lg font-bold text-brand-dark\">Price Details</h3>\r\n\r\n      {/* Itemized Price Breakdown */}\r\n      <div className=\"space-y-4\">\r\n        <InfoRow label=\"Price per traveller\" value={`$${pricePerTraveller}`} />\r\n        <InfoRow label=\"Flight dues\" value={`$${flightDues}`} />\r\n        <InfoRow label=\"Taxes and fees\" value={`$${taxesAndFees}`} />\r\n\r\n        {/* Total Cost Display */}\r\n        <div className=\"pt-4 border-t border-slate-100 flex justify-between items-center\">\r\n          <span className=\"font-bold text-brand-dark\">Trip Total</span>\r\n          <span className=\"text-xl font-bold text-brand-dark\">\r\n            ${totalAmount}\r\n          </span>\r\n        </div>\r\n      </div>\r\n\r\n      {/* Primary Call To Action (CTA) Button */}\r\n      <button className=\"w-full py-3.5 bg-surface-section hover:bg-blue-600 hover:text-white text-blue-600 font-semibold text-xs md:text-sm rounded-2xl transition cursor-pointer active:scale-95\">\r\n        Select booking platform\r\n      </button>\r\n    </Card>\r\n  );\r\n};\r\n"
+      },
+      "stories": [
+        {
+          "id": "fare-pricedetailssidebar--single-traveller",
+          "name": "Single Traveller",
+          "snippet": "const SingleTraveller = () => <PriceDetailsSidebar\r\n    pricePerTraveller={320}\r\n    flightDues={45}\r\n    taxesAndFees={35}\r\n    totalAmount={400} />;"
+        },
+        {
+          "id": "fare-pricedetailssidebar--family-group",
+          "name": "Family Group",
+          "snippet": "const FamilyGroup = () => <PriceDetailsSidebar\r\n    pricePerTraveller={1280}\r\n    flightDues={180}\r\n    taxesAndFees={140}\r\n    totalAmount={1600} />;"
+        },
+        {
+          "id": "fare-pricedetailssidebar--discounted-fare",
+          "name": "Discounted Fare",
+          "snippet": "const DiscountedFare = () => <PriceDetailsSidebar\r\n    pricePerTraveller={199}\r\n    flightDues={0}\r\n    taxesAndFees={21}\r\n    totalAmount={220} />;"
+        }
+      ],
+      "import": "import { PriceDetailsSidebar } from \"example1\";"
+    },
+    "ui-sectionheader": {
+      "id": "ui-sectionheader",
+      "name": "SectionHeader",
+      "path": "./src/components/FlightFare/SectionHeader/SectionHeader.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component definition found",
+        "message": "File: D:\\react-training\\examples\\src\\components\\FlightFare\\SectionHeader\\SectionHeader.tsx\nError:\nCannot find module '@/types/card'\nYou can debug your component file in this playground: https://react-docgen.dev/playground\nCode:\n\r\nimport {type SectionHeaderProps } from \"@/types/card\";\r\n\r\n\r\nexport const SectionHeader = ({ title, className = '' }: SectionHeaderProps) => {\r\n  return (\r\n    <h3 className={`text-xs font-bold text-slate-500 uppercase tracking-wider ${className}`}>\r\n      {title}\r\n    </h3>\r\n  );\r\n};\r\n"
+      },
+      "stories": [
+        {
+          "id": "ui-sectionheader--default",
+          "name": "Default",
+          "snippet": "const Default = () => <SectionHeader title=\"Flight Details\" />;"
+        },
+        {
+          "id": "ui-sectionheader--custom-class",
+          "name": "Custom Class",
+          "snippet": "const CustomClass = () => <SectionHeader title=\"Hotel Information\" className=\"text-blue-600\" />;"
+        }
+      ],
+      "import": "import { SectionHeader } from \"example1\";"
+    },
+    "fare-selectedflightbox": {
+      "id": "fare-selectedflightbox",
+      "name": "SelectedFlightBox",
+      "path": "./src/components/FlightFare/SelectedFlightBox.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component definition found",
+        "message": "File: D:\\react-training\\examples\\src\\components\\FlightFare\\SelectedFlightBox.tsx\nError:\nCannot find module '@/types/flight'\nYou can debug your component file in this playground: https://react-docgen.dev/playground\nCode:\nimport React, { useState } from 'react';\r\nimport { SectionHeader } from './SectionHeader/SectionHeader';\r\nimport { Card } from '@/components/Card/Card';\r\nimport type { FlightLeg } from '@/types/flight';\r\nimport type { SelectedFlightBoxProps } from '@/types/flightfare';\r\n\r\n\r\nexport type { FlightLeg };\r\n\r\nexport const SelectedFlightBox = ({\r\n  airlineName,\r\n  defaultFlightLogo,\r\n  iconHeart,\r\n  legs,\r\n  cancellationPolicy,\r\n}: SelectedFlightBoxProps) => {\r\n  // State to manage bookmark / favorite button toggle\r\n  const [isFavorite, setIsFavorite] = useState(false);\r\n\r\n  return (\r\n    <div className=\"space-y-3\">\r\n      {/* Section Title */}\r\n      <SectionHeader title=\"Selected flights\" />\r\n\r\n      <Card variant=\"surface\" className=\"p-6 space-y-4\">\r\n        {/* Header: Airline info, favorite button, and change flight action */}\r\n        <div className=\"flex items-center justify-between\">\r\n          {/* Airline Logo & Name */}\r\n          <div className=\"flex items-center gap-2.5\">\r\n            <img\r\n              src={defaultFlightLogo}\r\n              alt={airlineName}\r\n              className=\"w-5 h-5 object-contain\"\r\n            />\r\n            <span className=\"text-sm font-semibold text-slate-600\">\r\n              {airlineName}\r\n            </span>\r\n          </div>\r\n\r\n          {/* Action Buttons */}\r\n          <div className=\"flex items-center gap-2\">\r\n            {/* Bookmark / Favorite Toggle Button */}\r\n            <button\r\n              onClick={() => setIsFavorite(!isFavorite)}\r\n              className={`w-9 h-9 rounded-xl flex items-center justify-center transition p-2 cursor-pointer active:scale-95 ${\r\n                isFavorite ? 'bg-blue-100' : 'bg-surface-section hover:bg-blue-100'\r\n              }`}\r\n            >\r\n              <img\r\n                src={iconHeart}\r\n                alt=\"Favorite\"\r\n                className={`w-4 h-4 object-contain transition-transform ${\r\n                  isFavorite ? 'scale-110' : ''\r\n                }`}\r\n              />\r\n            </button>\r\n\r\n            {/* Button to switch or re-select flight */}\r\n            <button className=\"px-4 py-2 bg-surface-section hover:bg-blue-100 text-blue-600 text-xs font-semibold rounded-xl transition cursor-pointer active:scale-95\">\r\n              Change Flight\r\n            </button>\r\n          </div>\r\n        </div>\r\n\r\n        {/* List of Flight Legs / Routes */}\r\n        <div className=\"space-y-2 text-xs md:text-sm pt-2\">\r\n          {legs.map((leg) => (\r\n            <div key={leg.id} className=\"flex items-center gap-4\">\r\n              <span className=\"font-bold text-brand-dark w-24 md:w-32 text-xs md:text-sm\">{leg.times}</span>\r\n              <span className=\"text-slate-400 text-xs md:text-sm\">\r\n                {leg.route} • {leg.duration} • {leg.stops}\r\n              </span>\r\n            </div>\r\n          ))}\r\n        </div>\r\n\r\n        {/* Cancellation policy note */}\r\n        <p className=\"text-xs text-slate-400 pt-2 border-t border-slate-100\">\r\n          {cancellationPolicy}\r\n        </p>\r\n      </Card>\r\n    </div>\r\n  );\r\n};\r\n"
+      },
+      "stories": [
+        {
+          "id": "fare-selectedflightbox--round-trip",
+          "name": "Round Trip",
+          "snippet": "const RoundTrip = () => <SelectedFlightBox\r\n    airlineName=\"Qatar Airways\"\r\n    defaultFlightLogo={MOCK_AIRLINE_LOGO}\r\n    iconHeart={MOCK_HEART_ICON}\r\n    cancellationPolicy=\"Refundable up to 24 hours before departure (fee may apply).\"\r\n    legs={[\r\n      {\r\n        id: 'leg-1',\r\n        times: '08:30 - 14:15',\r\n        route: 'SGN - DOH',\r\n        duration: '7h 45m',\r\n        stops: 'Non-stop',\r\n      },\r\n      {\r\n        id: 'leg-2',\r\n        times: '18:00 - 06:20 (+1)',\r\n        route: 'DOH - SGN',\r\n        duration: '8h 20m',\r\n        stops: 'Non-stop',\r\n      },\r\n    ]} />;"
+        },
+        {
+          "id": "fare-selectedflightbox--one-way",
+          "name": "One Way",
+          "snippet": "const OneWay = () => <SelectedFlightBox\r\n    airlineName=\"Vietnam Airlines\"\r\n    defaultFlightLogo={MOCK_AIRLINE_LOGO}\r\n    iconHeart={MOCK_HEART_ICON}\r\n    cancellationPolicy=\"Non-refundable. Ticket change allowed with a fee.\"\r\n    legs={[\r\n      {\r\n        id: 'leg-1',\r\n        times: '10:00 - 12:15',\r\n        route: 'HAN - DAD',\r\n        duration: '2h 15m',\r\n        stops: 'Direct',\r\n      },\r\n    ]} />;"
+        },
+        {
+          "id": "fare-selectedflightbox--multi-stop",
+          "name": "Multi Stop",
+          "snippet": "const MultiStop = () => <SelectedFlightBox\r\n    airlineName=\"Emirates\"\r\n    defaultFlightLogo={MOCK_AIRLINE_LOGO}\r\n    iconHeart={MOCK_HEART_ICON}\r\n    cancellationPolicy=\"Free cancellation within 24 hours of booking.\"\r\n    legs={[\r\n      {\r\n        id: 'leg-1',\r\n        times: '23:55 - 11:30 (+1)',\r\n        route: 'SGN - DXB - LHR',\r\n        duration: '15h 35m',\r\n        stops: '1 Stop (DXB)',\r\n      },\r\n    ]} />;"
+        }
+      ],
+      "import": "import { SelectedFlightBox } from \"example1\";"
+    },
+    "ui-inforow": {
+      "id": "ui-inforow",
+      "name": "InfoRow",
+      "path": "./src/components/InfoRow/InfoRow.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component definition found",
+        "message": "File: D:\\react-training\\examples\\src\\components\\InfoRow\\InfoRow.tsx\nError:\nCannot find module '@/types/inforow'\nYou can debug your component file in this playground: https://react-docgen.dev/playground\nCode:\nimport {type InfoRowProps}  from '@/types/inforow'\r\n\r\n\r\nexport const InfoRow = ({ label, value, className = '' }: InfoRowProps) => {\r\n  return (\r\n    <div className={`flex justify-between text-slate-500 text-xs md:text-sm ${className}`}>\r\n      <span>{label}</span>\r\n      <span className=\"font-semibold text-brand-dark\">{value}</span>\r\n    </div>\r\n  );\r\n};\r\n"
+      },
+      "stories": [
+        {
+          "id": "ui-inforow--default",
+          "name": "Default",
+          "snippet": "const Default = () => <InfoRow label=\"Airline\" value=\"Emirates\" />;"
+        },
+        {
+          "id": "ui-inforow--price",
+          "name": "Price",
+          "snippet": "const Price = () => <InfoRow label=\"Total\" value=\"$1,200\" />;"
+        },
+        {
+          "id": "ui-inforow--custom-class",
+          "name": "Custom Class",
+          "snippet": "const CustomClass = () => <InfoRow label=\"Duration\" value=\"9h 24m\" className=\"text-sm\" />;"
+        }
+      ],
+      "import": "import { InfoRow } from \"example1\";"
+    },
+    "ui-inputfield": {
+      "id": "ui-inputfield",
+      "name": "InputField",
+      "path": "./src/components/Input/InputField.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "InputField",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\Input\\InputField.tsx",
+        "actualName": "InputField",
+        "exportName": "InputField",
+        "props": {
+          "label": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "type": {
+            "defaultValue": {
+              "value": "'text'",
+              "computed": false
+            },
+            "required": false
+          },
+          "className": {
+            "defaultValue": {
+              "value": "''",
+              "computed": false
+            },
+            "required": false
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "ui-inputfield--text",
+          "name": "Text",
+          "snippet": "const Text = () => <InputField label=\"Full Name\" type=\"text\" placeholder=\"Enter your full name\" />;"
+        },
+        {
+          "id": "ui-inputfield--email",
+          "name": "Email",
+          "snippet": "const Email = () => <InputField label=\"Email address\" type=\"email\" placeholder=\"Enter your email\" />;"
+        },
+        {
+          "id": "ui-inputfield--password",
+          "name": "Password",
+          "snippet": "const Password = () => <InputField label=\"Password\" type=\"password\" placeholder=\"Enter your password\" />;"
+        },
+        {
+          "id": "ui-inputfield--with-value",
+          "name": "With Value",
+          "snippet": "const WithValue = () => <InputField label=\"Email address\" type=\"email\" value=\"user@example.com\" />;"
+        }
+      ],
+      "import": "import { InputField } from \"example1\";"
+    },
+    "ui-loadingoverlay": {
+      "id": "ui-loadingoverlay",
+      "name": "LoadingOverlay",
+      "path": "./src/components/Loading/LoadingOverlay.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component definition found",
+        "message": "File: D:\\react-training\\examples\\src\\components\\Loading\\LoadingOverlay.tsx\nError:\nCannot find module '@/types/loading'\nYou can debug your component file in this playground: https://react-docgen.dev/playground\nCode:\nimport {type LoadingOverlayProps}  from '@/types/loading'\r\nimport appLogo from '@/assets/icons/Logo.png';\r\n\r\nexport const LoadingOverlay = ({ isVisible = true }: LoadingOverlayProps) => {\r\n  if (!isVisible) return null;\r\n\r\n  return (\r\n    //  Matte finish for the ENTIRE screen\r\n    <div className=\"fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-xs transition-all duration-300\">\r\n\r\n      {/* Spinner ring + Logo are located in the center of the screen.*/}\r\n      <div className=\"relative flex items-center justify-center w-16 h-16\">\r\n\r\n        {/* Light blue sloping rotating bezel */}\r\n        <div className=\"absolute inset-0 rounded-full border-3 border-white/30 border-t-blue-500 border-l-blue-400 animate-spin\" />\r\n\r\n        {/* Tripal Logo icon in the center*/}\r\n        <div className=\"w-10 h-10 rounded-xl bg-blue-600 shadow-md flex items-center justify-center p-2\">\r\n          <img\r\n            src={appLogo}\r\n            alt=\"Tripal Logo\"\r\n            className=\"w-full h-full object-contain\"\r\n          />\r\n        </div>\r\n\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\n"
+      },
+      "stories": [
+        {
+          "id": "ui-loadingoverlay--visible",
+          "name": "Visible",
+          "snippet": "const Visible = () => <LoadingOverlay isVisible />;"
+        },
+        {
+          "id": "ui-loadingoverlay--hidden",
+          "name": "Hidden",
+          "snippet": "const Hidden = () => <LoadingOverlay isVisible={false} />;"
+        }
+      ],
+      "import": "import { LoadingOverlay } from \"example1\";"
+    },
+    "ui-pricedisplay": {
+      "id": "ui-pricedisplay",
+      "name": "PriceDisplay",
+      "path": "./src/components/PriceDisplay/PriceDisplay.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component definition found",
+        "message": "File: D:\\react-training\\examples\\src\\components\\PriceDisplay\\PriceDisplay.tsx\nError:\nCannot find module '@/types/price'\nYou can debug your component file in this playground: https://react-docgen.dev/playground\nCode:\nimport {type PriceDisplayProps}  from '@/types/price'\r\n\r\nconst sizeClasses = {\r\n  sm: 'text-xl md:text-2xl font-black',\r\n  md: 'text-2xl md:text-3xl font-bold',\r\n  lg: 'text-2xl md:text-3xl font-black',\r\n};\r\n\r\nexport const PriceDisplay = ({ amount, period, size = 'sm', className = '' }: PriceDisplayProps) => {\r\n  return (\r\n    <div className={`flex items-baseline gap-1 ${className}`}>\r\n      <span className={`${sizeClasses[size]} text-slate-900 tracking-tight`}>\r\n        {amount}\r\n      </span>\r\n      {period && (\r\n        <span className=\"text-xs text-slate-500 font-medium\">{period}</span>\r\n      )}\r\n    </div>\r\n  );\r\n};\r\n"
+      },
+      "stories": [
+        {
+          "id": "ui-pricedisplay--small",
+          "name": "Small",
+          "snippet": "const Small = () => <PriceDisplay amount=\"$1,200\" size=\"sm\" />;"
+        },
+        {
+          "id": "ui-pricedisplay--with-period",
+          "name": "With Period",
+          "snippet": "const WithPeriod = () => <PriceDisplay amount=\"$1,200\" period=\"/per night\" size=\"sm\" />;"
+        },
+        {
+          "id": "ui-pricedisplay--medium",
+          "name": "Medium",
+          "snippet": "const Medium = () => <PriceDisplay amount=\"$899\" size=\"md\" />;"
+        },
+        {
+          "id": "ui-pricedisplay--large",
+          "name": "Large",
+          "snippet": "const Large = () => <PriceDisplay amount=\"$2,500\" size=\"lg\" />;"
+        }
+      ],
+      "import": "import { PriceDisplay } from \"example1\";"
+    },
+    "chat-flightrecommendations": {
+      "id": "chat-flightrecommendations",
+      "name": "FlightRecommendations",
+      "path": "./src/components/Recommendations/FlightRecommendations.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component definition found",
+        "message": "File: D:\\react-training\\examples\\src\\components\\Recommendations\\FlightRecommendations.tsx\nError:\nCannot find module '@/types/flight'\nYou can debug your component file in this playground: https://react-docgen.dev/playground\nCode:\nimport { RecommendationWrapper } from './RecommendationWrapper';\r\nimport { Button } from '@/components/Button/Button';\r\nimport { PriceDisplay } from '../PriceDisplay/PriceDisplay';\r\nimport defaultFlightLogo from '@/assets/icons/ellipse.png';\r\n\r\nimport { getFlightListApi } from '@/services/fareService';\r\nimport type {\r\n  FareData,\r\n  FlightOption,\r\n  FlightLegInfo,\r\n  FlightRecommendationsProps,\r\n} from '@/types/flight';\r\nimport { useAsyncData } from '@/hooks/useAsyncData';\r\nimport { useFavorites } from '@/hooks/useFavorites';\r\n\r\nexport type { FlightOption, FlightLegInfo };\r\n\r\nconst mapFareDataToFlightOption = (\r\n  fareData: FareData,\r\n  index: number,\r\n): FlightOption => {\r\n  const legs = fareData.legs ?? [];\r\n  const fareOptions = fareData.fareOptions ?? [];\r\n\r\n  const outboundLeg = legs[0];\r\n  const returnLeg = legs[1] ?? legs[0];\r\n  const lowestPrice = fareOptions[0]?.price ?? 0;\r\n\r\n  return {\r\n    id: fareData.id ? String(fareData.id) : `flight-${index + 1}`,\r\n    airline: fareData.airlineName ?? 'Airline',\r\n    outbound: {\r\n      time: outboundLeg?.times ?? 'N/A',\r\n      route: outboundLeg?.route ?? 'N/A',\r\n      duration: outboundLeg?.duration ?? 'N/A',\r\n      stops: outboundLeg?.stops ?? 'Direct',\r\n    },\r\n    returnLeg: {\r\n      time: returnLeg?.times ?? 'N/A',\r\n      route: returnLeg?.route ?? 'N/A',\r\n      duration: returnLeg?.duration ?? 'N/A',\r\n      stops: returnLeg?.stops ?? 'Direct',\r\n    },\r\n    price: `$${lowestPrice}`,\r\n    tag: 'Cheap',\r\n  };\r\n};\r\n\r\nexport function FlightRecommendations({\r\n  title = 'Recommended Flights For a Round Trip Journey',\r\n  flights: initialFlights,\r\n  onBookNow,\r\n  onSeeAll,\r\n}: FlightRecommendationsProps) {\r\n  const isControlled = Boolean(initialFlights);\r\n\r\n  const {\r\n    data: fareData,\r\n    loading,\r\n    error,\r\n  } = useAsyncData(getFlightListApi, {\r\n    skip: isControlled,\r\n  });\r\n\r\n  const { favorites, toggleFavorite } = useFavorites();\r\n\r\n  const apiFlights =\r\n    fareData?.map(mapFareDataToFlightOption) ?? [];\r\n\r\n  const flightList = initialFlights ?? apiFlights;\r\n\r\n  return (\r\n    <RecommendationWrapper title={title} onSeeAll={onSeeAll}>\r\n      {!isControlled && loading && (\r\n        <div className=\"py-8 flex flex-col items-center justify-center gap-2\">\r\n          <div className=\"w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin\" />\r\n          <p className=\"text-xs text-slate-400 font-medium\">\r\n            Loading flight list...\r\n          </p>\r\n        </div>\r\n      )}\r\n\r\n      {!isControlled && error && !loading && (\r\n        <div className=\"p-4 bg-red-50 text-red-600 rounded-2xl border border-red-100 text-xs text-center font-medium my-2\">\r\n          {error}\r\n        </div>\r\n      )}\r\n\r\n      {!isControlled && !loading && !error && flightList.length === 0 && (\r\n        <div className=\"p-6 text-center text-xs text-slate-400\">\r\n          No suitable flights were found.\r\n        </div>\r\n      )}\r\n\r\n      {(isControlled || (!loading && !error)) &&\r\n        flightList.map((flight) => {\r\n          const isFav = Boolean(\r\n            favorites[flight.id] || flight.isFavorite,\r\n          );\r\n\r\n          return (\r\n            <div\r\n              key={flight.id}\r\n              className=\"bg-brand-light rounded-2xl p-3.5 sm:p-5 flex flex-col gap-3.5 border-none mb-3 overflow-hidden w-full min-h-200 \"\r\n            >\r\n              <div className=\"flex items-center justify-between gap-2\">\r\n                <div className=\"flex items-center gap-2 min-w-0\">\r\n                  <div className=\"w-6 h-6 flex items-center justify-center shrink-0 overflow-hidden\">\r\n                    <img\r\n                      src={flight.logoUrl || defaultFlightLogo}\r\n                      alt={flight.airline}\r\n                      className=\"w-full h-full object-contain\"\r\n                    />\r\n                  </div>\r\n\r\n                  <span className=\"text-xs sm:text-sm font-semibold text-slate-700 truncate\">\r\n                    {flight.airline}\r\n                  </span>\r\n                </div>\r\n\r\n                <div className=\"pb-2 flex items-center gap-1.5 sm:gap-2 shrink-0\">\r\n                  <Button\r\n                    type=\"button\"\r\n                    variant=\"favorite\"\r\n                    size=\"icon\"\r\n                    isFavorite={isFav}\r\n                    onClick={() => toggleFavorite(flight.id)}\r\n                  />\r\n\r\n                  <Button\r\n                    variant=\"secondary\"\r\n                    size=\"sm\"\r\n                    onClick={() => onBookNow?.(flight.id)}\r\n                  >\r\n                    Book Now\r\n                  </Button>\r\n                </div>\r\n              </div>\r\n\r\n              <div className=\"flex flex-col sm:flex-row sm:items-end justify-between gap-3 pt-1 border-t border-slate-100/60\">\r\n                <div className=\"space-y-2 text-xs sm:text-sm flex-1\">\r\n                  <div className=\"pb-7 flex flex-wrap sm:flex-nowrap items-baseline sm:items-center gap-x-3 gap-y-0.5\">\r\n                    <span className=\"font-bold text-slate-900 shrink-0 text-xs sm:text-sm\">\r\n                      {flight.outbound.time}\r\n                    </span>\r\n\r\n                    <span className=\"text-slate-500 font-medium text-xxs sm:text-xs leading-tight\">\r\n                      {flight.outbound.route} • {flight.outbound.duration} •{' '}\r\n                      {flight.outbound.stops}\r\n                    </span>\r\n                  </div>\r\n\r\n                  <div className=\"flex flex-wrap sm:flex-nowrap items-baseline sm:items-center gap-x-3 gap-y-0.5\">\r\n                    <span className=\"font-bold text-slate-900 shrink-0 text-xs sm:text-sm\">\r\n                      {flight.returnLeg.time}\r\n                    </span>\r\n\r\n                    <span className=\"text-slate-500 font-medium text-xxs sm:text-xs leading-tight\">\r\n                      {flight.returnLeg.route} • {flight.returnLeg.duration} •{' '}\r\n                      {flight.returnLeg.stops}\r\n                    </span>\r\n                  </div>\r\n                </div>\r\n\r\n                <div className=\"pb-10 flex items-center sm:flex-col justify-between sm:justify-end sm:items-end gap-1.5 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-200/40 shrink-0\">\r\n                  {flight.tag && (\r\n                    <span className=\"px-2.5 py-0.5 bg-emerald-100/80 text-emerald-700 text-2xs sm:text-xxs font-bold rounded-full\">\r\n                      {flight.tag}\r\n                    </span>\r\n                  )}\r\n\r\n                  <PriceDisplay amount={flight.price} size=\"sm\" />\r\n                </div>\r\n              </div>\r\n            </div>\r\n          );\r\n        })}\r\n    </RecommendationWrapper>\r\n  );\r\n}\r\n"
+      },
+      "stories": [
+        {
+          "id": "chat-flightrecommendations--default",
+          "name": "Default",
+          "snippet": "const Default = () => <FlightRecommendations\r\n    title=\"Recommended Flights For a Round Trip Journey\"\r\n    flights={MOCK_FLIGHTS} />;"
+        }
+      ],
+      "import": "import { FlightRecommendations } from \"example1\";"
+    },
+    "chat-hotelrecommendations": {
+      "id": "chat-hotelrecommendations",
+      "name": "HotelRecommendations",
+      "path": "./src/components/Recommendations/HotelRecommendations.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component definition found",
+        "message": "File: D:\\react-training\\examples\\src\\components\\Recommendations\\HotelRecommendations.tsx\nError:\nCannot find module '@/types/hotel'\nYou can debug your component file in this playground: https://react-docgen.dev/playground\nCode:\nimport React from 'react';\nimport { RecommendationWrapper } from './RecommendationWrapper';\nimport { Button } from '../Button/Button';\nimport { getHotelListApi } from '@/services/hotelService';\nimport type {\n  HotelData,\n  HotelOption,\n  HotelRecommendationsProps,\n} from '@/types/hotel';\nimport { useAsyncData } from '@/hooks/useAsyncData';\nimport { useFavorites } from '@/hooks/useFavorites';\nimport { useSelectedHotel } from '@/hooks/useSelectedHotel';\n\nexport type { HotelOption };\n\nconst defaultHotelImg =\n  'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80';\n\nconst mapHotelDataToOption = (\n  hotel: HotelData,\n  index: number,\n): HotelOption => {\n  const lowestPrice =\n    hotel.roomOptions?.[0]?.price ??\n    hotel.priceBreakdown?.roomRate ??\n    1200;\n\n  return {\n    id: hotel.id ? String(hotel.id) : `hotel-${index + 1}`,\n    name: hotel.hotelName || 'Five Star Hotel, Bahamas',\n    description:\n      hotel.description ||\n      'Exclusive suites and large rooms dedicated to your comfort and luxury. Free wifi available',\n    price: lowestPrice,\n    tag: 'Cheap',\n    imageUrl:\n      hotel.coverImage ||\n      hotel.images?.[0] ||\n      defaultHotelImg,\n    rawData: hotel,\n  };\n};\n\nexport const HotelRecommendations = ({\n  title = 'Recommended Hotels',\n  hotels: initialHotels,\n  onBookNow,\n  onSeeAll,\n}: HotelRecommendationsProps) => {\n  const isControlled = Boolean(initialHotels);\n\n  const {\n    data: hotelData,\n    loading,\n    error,\n  } = useAsyncData(getHotelListApi, {\n    skip: isControlled,\n  });\n\n  const { favorites, toggleFavorite } = useFavorites();\n  const { selectHotel } = useSelectedHotel();\n\n  const apiHotels =\n    hotelData?.map(mapHotelDataToOption) ?? [];\n\n  const hotelList = initialHotels ?? apiHotels;\n\n  const handleBookNow = (\n    e: React.MouseEvent,\n    hotel: HotelOption,\n  ) => {\n    e.stopPropagation();\n\n    selectHotel(hotel.rawData || hotel);\n\n    onBookNow?.(hotel);\n  };\n\n  return (\n    <RecommendationWrapper\n      title={title}\n      onSeeAll={onSeeAll}\n    >\n      {!isControlled && loading && (\n        <div className=\"py-8 flex flex-col items-center justify-center gap-2\">\n          <div className=\"w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin\" />\n          <p className=\"text-xs text-slate-400 font-medium\">\n            Loading hotel list...\n          </p>\n        </div>\n      )}\n\n      {!isControlled && error && !loading && (\n        <div className=\"p-4 bg-red-50 text-red-600 rounded-2xl border border-red-100 text-xs text-center font-medium my-2\">\n          {error}\n        </div>\n      )}\n\n      {!isControlled && !loading && !error && hotelList.length === 0 && (\n        <div className=\"p-6 text-center text-xs text-slate-400\">\n          No suitable hotels were found.\n        </div>\n      )}\n\n      {(isControlled || (!loading && !error)) &&\n        hotelList.map((hotel) => {\n          const isFav = Boolean(\n            favorites[hotel.id] || hotel.isFavorite,\n          );\n\n          return (\n            <div\n              key={hotel.id}\n              className=\"bg-brand-light rounded-2xl p-4 flex flex-col md:flex-row items-center gap-4 mb-3 border-none\"\n            >\n              <div className=\"w-full md:w-36 h-36 md:h-32 rounded-xl overflow-hidden shrink-0\">\n                <img\n                  src={hotel.imageUrl || defaultHotelImg}\n                  alt={hotel.name}\n                  className=\"w-full h-full object-cover\"\n                />\n              </div>\n\n              <div className=\"flex-1 flex flex-col justify-between h-full space-y-2 text-left w-full\">\n                <div>\n                  <h3 className=\"text-base md:text-lg font-bold text-ink leading-snug\">\n                    {hotel.name}\n                  </h3>\n\n                  <p className=\"text-xs text-slate-500 line-clamp-2 mt-1 leading-relaxed\">\n                    {hotel.description}\n                  </p>\n                </div>\n\n                <div className=\"flex items-center gap-3 text-slate-400 pt-2\">\n                </div>\n              </div>\n\n              <div className=\"flex flex-col items-end justify-between w-full md:w-auto h-full self-stretch space-y-3 shrink-0\">\n                <div>\n                  {hotel.tag && (\n                    <span className=\"px-3 py-0.5 bg-emerald-50 text-emerald-600 text-xxs font-medium rounded-full border border-emerald-100\">\n                      {hotel.tag}\n                    </span>\n                  )}\n                </div>\n\n                <div className=\"text-right my-1\">\n                  <span className=\"text-xl md:text-2xl font-bold text-ink\">\n                    ${hotel.price}\n                  </span>\n\n                  <span className=\"text-xs text-slate-400 font-normal\">\n                    /per night\n                  </span>\n                </div>\n\n                <div className=\"flex items-center gap-2\">\n                  <Button\n                    type=\"button\"\n                    variant=\"favorite\"\n                    size=\"icon\"\n                    isFavorite={isFav}\n                    onClick={() =>\n                      toggleFavorite(hotel.id)\n                    }\n                  />\n\n                  <Button\n                    variant=\"secondary\"\n                    size=\"sm\"\n                    onClick={(e) =>\n                      handleBookNow(e, hotel)\n                    }\n                  >\n                    Book Now\n                  </Button>\n                </div>\n              </div>\n            </div>\n          );\n        })}\n    </RecommendationWrapper>\n  );\n};\n"
+      },
+      "stories": [
+        {
+          "id": "chat-hotelrecommendations--default",
+          "name": "Default",
+          "snippet": "const Default = () => <HotelRecommendations\r\n    title=\"Recommended Hotels For a Three-Night Staycation\"\r\n    hotels={MOCK_HOTELS} />;"
+        }
+      ],
+      "import": "import { HotelRecommendations } from \"example1\";"
+    },
+    "chat-itinerarycardwidget": {
+      "id": "chat-itinerarycardwidget",
+      "name": "ItineraryCardWidget",
+      "path": "./src/components/Recommendations/ItineraryCardWidget.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component definition found",
+        "message": "File: D:\\react-training\\examples\\src\\components\\Recommendations\\ItineraryCardWidget.tsx\nError:\nCannot find module '@/hooks/useAsyncData'\nYou can debug your component file in this playground: https://react-docgen.dev/playground\nCode:\nimport { Calendar, Clock, MapPin } from 'lucide-react';\r\nimport { Button } from '@/components/Button/Button';\r\nimport { getItineraryListApi } from '@/services/travelService';\r\nimport type {\r\n  DayItinerary,\r\n  ItineraryCardWidgetProps,\r\n} from '../../types/travel';\r\nimport { useAsyncData } from '@/hooks/useAsyncData';\r\n\r\nexport type { DayItinerary };\r\n\r\nexport function ItineraryCardWidget({\r\n  itinerary: initialItinerary,\r\n  onViewAll,\r\n}: ItineraryCardWidgetProps) {\r\n  const {\r\n    data: apiItinerary,\r\n    loading,\r\n    error,\r\n  } = useAsyncData(getItineraryListApi, {\r\n    skip: Boolean(initialItinerary),\r\n  });\r\n\r\n  const itineraryList =\r\n    initialItinerary ?? apiItinerary ?? [];\r\n\r\n  return (\r\n    <div className=\"bg-brand-light rounded-2xl p-4 md:p-5 flex flex-col gap-4 border-none max-w-2xl w-full\">\r\n      <div className=\"flex items-center justify-between pb-3 border-b border-slate-200/60\">\r\n        <div className=\"flex items-center gap-2.5\">\r\n          <div className=\"w-8 h-8 rounded-xl bg-blue-600/10 flex items-center justify-center text-blue-600 shrink-0\">\r\n            <Calendar className=\"w-4 h-4\" />\r\n          </div>\r\n\r\n          <div>\r\n            <h4 className=\"text-sm md:text-base font-bold text-slate-900\">\r\n              Suggested Itinerary\r\n            </h4>\r\n\r\n            <p className=\"text-xs text-slate-500 font-medium\">\r\n              {itineraryList.length > 0\r\n                ? `${itineraryList.length} day trip plan recommendation`\r\n                : 'Trip schedule overview'}\r\n            </p>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      {loading && (\r\n        <div className=\"py-8 flex flex-col items-center justify-center gap-2\">\r\n          <div className=\"w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin\" />\r\n\r\n          <p className=\"text-xs text-slate-400 font-medium\">\r\n            Loading schedule from server...\r\n          </p>\r\n        </div>\r\n      )}\r\n\r\n      {error && !loading && (\r\n        <div className=\"p-3 bg-red-50 text-red-600 rounded-xl border border-red-100 text-xs text-center font-medium my-1\">\r\n          {error}\r\n        </div>\r\n      )}\r\n\r\n      {!loading && !error && itineraryList.length === 0 && (\r\n        <div className=\"p-6 text-center text-xs text-slate-400 font-medium\">\r\n          No schedule has been created yet.\r\n        </div>\r\n      )}\r\n\r\n      {!loading && !error && itineraryList.length > 0 && (\r\n        <div className=\"space-y-4\">\r\n          {itineraryList.map((dayPlan) => (\r\n          <div\r\n            key={dayPlan.id ?? `${dayPlan.day}-${dayPlan.dateTitle}`}\r\n            className=\"space-y-2.5\"\r\n          >\r\n            <div className=\"flex items-center gap-2\">\r\n              <span className=\"px-2.5 py-0.5 bg-blue-600 text-white text-xxs font-bold rounded-full\">\r\n                Day {dayPlan.day}\r\n              </span>\r\n\r\n              <h5 className=\"text-xs md:text-sm font-bold text-slate-800 truncate\">\r\n                {dayPlan.dateTitle}\r\n              </h5>\r\n            </div>\r\n\r\n            <div className=\"bg-white rounded-xl p-3 border border-slate-200/60 space-y-2\">\r\n              {dayPlan.activities?.map((act) => (\r\n                <div\r\n                  key={act.id ?? `${act.title}-${act.time}`}\r\n                  className=\"flex items-start justify-between gap-3 pt-2 first:pt-0 border-t border-slate-100 first:border-t-0\"\r\n                >\r\n                  <div className=\"flex-1 min-w-0\">\r\n                    <h6 className=\"text-xs md:text-sm font-semibold text-slate-900 truncate\">\r\n                      {act.title}\r\n                    </h6>\r\n\r\n                    {act.location && (\r\n                      <p className=\"text-xs text-slate-500 flex items-center gap-1 font-medium mt-0.5 truncate\">\r\n                        <MapPin className=\"w-3.5 h-3.5 text-slate-400 shrink-0\" />\r\n                        <span>{act.location}</span>\r\n                      </p>\r\n                    )}\r\n                  </div>\r\n\r\n                  <div className=\"flex items-center gap-1 text-xxs font-semibold text-slate-500 bg-slate-100 px-2 py-1 rounded-md shrink-0\">\r\n                    <Clock className=\"w-3 h-3 text-slate-400\" />\r\n                    <span>{act.time}</span>\r\n                  </div>\r\n                </div>\r\n              ))}\r\n            </div>\r\n          </div>\r\n        ))}\r\n        </div>\r\n      )}\r\n\r\n      <div className=\"pt-1\">\r\n        <Button\r\n          variant=\"dark\"\r\n          size=\"md\"\r\n          className=\"w-full rounded-2xl\"\r\n          rightIcon={\r\n            <svg\r\n              className=\"w-4 h-4\"\r\n              viewBox=\"0 0 24 24\"\r\n              fill=\"none\"\r\n              stroke=\"currentColor\"\r\n              strokeWidth=\"2\"\r\n            >\r\n              <path d=\"M5 12h14M12 5l7 7-7 7\" />\r\n            </svg>\r\n          }\r\n          onClick={onViewAll}\r\n        >\r\n          View Full Itinerary Details\r\n        </Button>\r\n      </div>\r\n    </div>\r\n  );\r\n}\r\n"
+      },
+      "stories": [
+        {
+          "id": "chat-itinerarycardwidget--default",
+          "name": "Default",
+          "snippet": "const Default = () => <ItineraryCardWidget itinerary={MOCK_ITINERARY} />;"
+        },
+        {
+          "id": "chat-itinerarycardwidget--single-day",
+          "name": "Single Day",
+          "snippet": "const SingleDay = () => <ItineraryCardWidget itinerary={[MOCK_ITINERARY[0]]} />;"
+        },
+        {
+          "id": "chat-itinerarycardwidget--loading",
+          "name": "Loading",
+          "snippet": "const Loading = () => <ItineraryCardWidget />;"
+        }
+      ],
+      "import": "import { ItineraryCardWidget } from \"example1\";"
+    },
+    "chat-placescardwidget": {
+      "id": "chat-placescardwidget",
+      "name": "PlacesCardWidget",
+      "path": "./src/components/Recommendations/PlacesCardWidget.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component definition found",
+        "message": "File: D:\\react-training\\examples\\src\\components\\Recommendations\\PlacesCardWidget.tsx\nError:\nCannot find module '@/hooks/useAsyncData'\nYou can debug your component file in this playground: https://react-docgen.dev/playground\nCode:\nimport {\r\n  MapPin,\r\n  Star,\r\n  Utensils,\r\n  Camera,\r\n  ShoppingBag,\r\n  Compass,\r\n  Hotel,\r\n} from 'lucide-react';\r\nimport { Button } from '@/components/Button/Button';\r\nimport { getPlaceListApi } from '@/services/travelService';\r\nimport type {\r\n  PlaceData,\r\n  PlacesCardWidgetProps,\r\n} from '../../types/travel';\r\nimport { useAsyncData } from '@/hooks/useAsyncData';\r\n\r\nexport type { PlaceData };\r\n\r\nconst DEFAULT_IMAGE =\r\n  'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80';\r\n\r\nconst getCategoryBadge = (category?: string) => {\r\n  const cat = category?.toLowerCase() ?? '';\r\n\r\n  if (cat.includes('food') || cat.includes('cuisine')) {\r\n    return {\r\n      label: 'Cuisine',\r\n      icon: Utensils,\r\n      color: 'bg-amber-100/70 text-amber-700',\r\n    };\r\n  }\r\n\r\n  if (cat.includes('sight') || cat.includes('cam')) {\r\n    return {\r\n      label: 'Sightseeing',\r\n      icon: Camera,\r\n      color: 'bg-emerald-100/70 text-emerald-700',\r\n    };\r\n  }\r\n\r\n  if (cat.includes('shop') || cat.includes('shopping')) {\r\n    return {\r\n      label: 'Shopping',\r\n      icon: ShoppingBag,\r\n      color: 'bg-purple-100/70 text-purple-700',\r\n    };\r\n  }\r\n\r\n  if (\r\n    cat.includes('hotel') ||\r\n    cat.includes('resort') ||\r\n    cat.includes('ryokan')\r\n  ) {\r\n    return {\r\n      label: category ?? 'Stay',\r\n      icon: Hotel,\r\n      color: 'bg-indigo-100/70 text-indigo-700',\r\n    };\r\n  }\r\n\r\n  return {\r\n    label: category ?? 'Entertainment',\r\n    icon: Compass,\r\n    color: 'bg-blue-100/70 text-blue-700',\r\n  };\r\n};\r\n\r\nexport function PlacesCardWidget({\r\n  places: initialPlaces,\r\n  onViewAll,\r\n}: PlacesCardWidgetProps) {\r\n  const {\r\n    data: apiPlaces,\r\n    loading,\r\n    error,\r\n  } = useAsyncData(getPlaceListApi, {\r\n    skip: Boolean(initialPlaces),\r\n  });\r\n\r\n  const placesList =\r\n    initialPlaces ?? apiPlaces ?? [];\r\n\r\n  return (\r\n    <div className=\"bg-brand-light rounded-2xl p-4 md:p-5 flex flex-col gap-4 border-none max-w-2xl w-full\">\r\n      <div className=\"flex items-center justify-between pb-3 border-b border-slate-200/60\">\r\n        <div className=\"flex items-center gap-2.5\">\r\n          <div className=\"w-8 h-8 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-600 shrink-0\">\r\n            <MapPin className=\"w-4 h-4\" />\r\n          </div>\r\n\r\n          <div>\r\n            <h4 className=\"text-sm md:text-base font-bold text-slate-900\">\r\n              Featured Places\r\n            </h4>\r\n\r\n            <p className=\"text-xs text-slate-500 font-medium\">\r\n              {placesList.length > 0\r\n                ? `${placesList.length} recommended locations nearby`\r\n                : 'Recommended locations nearby'}\r\n            </p>\r\n          </div>\r\n        </div>\r\n\r\n        <span className=\"px-3 py-1 bg-emerald-100/70 text-emerald-700 text-xxs font-bold rounded-full\">\r\n          Featured\r\n        </span>\r\n      </div>\r\n\r\n      {loading && (\r\n        <div className=\"py-8 flex flex-col items-center justify-center gap-2\">\r\n          <div className=\"w-6 h-6 border-2 border-amber-500 border-t-transparent rounded-full animate-spin\" />\r\n\r\n          <p className=\"text-xs text-slate-400 font-medium\">\r\n            Loading list of locations...\r\n          </p>\r\n        </div>\r\n      )}\r\n\r\n      {error && !loading && (\r\n        <div className=\"p-3 bg-red-50 text-red-600 rounded-xl border border-red-100 text-xs text-center font-medium my-1\">\r\n          {error}\r\n        </div>\r\n      )}\r\n\r\n      {!loading && !error && placesList.length === 0 && (\r\n        <div className=\"p-6 text-center text-xs text-slate-400 font-medium\">\r\n          No location has been chosen yet.\r\n        </div>\r\n      )}\r\n\r\n      {!loading && !error && placesList.length > 0 && (\r\n        <div className=\"space-y-3\">\r\n          {placesList.map((place) => {\r\n            const badge = getCategoryBadge(place.category);\r\n            const CategoryIcon = badge.icon;\r\n\r\n            const imageSrc =\r\n              place.imageUrl ?? DEFAULT_IMAGE;\r\n\r\n            const addressText =\r\n              place.location ?? 'N/A';\r\n\r\n            return (\r\n              <div\r\n                key={place.id}\r\n                className=\"bg-white rounded-xl p-3 border border-slate-200/60 flex items-center gap-3.5 hover:border-slate-300 transition-colors cursor-pointer\"\r\n              >\r\n                <div className=\"w-16 h-16 rounded-lg overflow-hidden shrink-0 bg-slate-100\">\r\n                  <img\r\n                    src={imageSrc}\r\n                    alt={place.name}\r\n                    className=\"w-full h-full object-cover\"\r\n                  />\r\n                </div>\r\n\r\n                <div className=\"flex-1 min-w-0 space-y-1\">\r\n                  <div className=\"flex items-center justify-between gap-2\">\r\n                    <span\r\n                      className={`inline-flex items-center gap-1 text-2xs font-bold px-2 py-0.5 rounded-full ${badge.color}`}\r\n                    >\r\n                      <CategoryIcon className=\"w-3 h-3\" />\r\n                      {badge.label}\r\n                    </span>\r\n\r\n                    {place.rating !== undefined && (\r\n                      <div className=\"flex items-center gap-1 shrink-0\">\r\n                        <Star className=\"w-3.5 h-3.5 text-amber-400 fill-amber-400\" />\r\n\r\n                        <span className=\"text-xs font-bold text-slate-800\">\r\n                          {place.rating}\r\n                        </span>\r\n                      </div>\r\n                    )}\r\n                  </div>\r\n\r\n                  <h5 className=\"font-bold text-xs md:text-sm text-slate-900 truncate\">\r\n                    {place.name}\r\n                  </h5>\r\n\r\n                  <p className=\"text-xs text-slate-500 truncate flex items-center gap-1 font-medium\">\r\n                    <MapPin className=\"w-3.5 h-3.5 text-slate-400 shrink-0\" />\r\n\r\n                    <span>{addressText}</span>\r\n                  </p>\r\n                </div>\r\n              </div>\r\n            );\r\n          })}\r\n        </div>\r\n      )}\r\n\r\n      <div className=\"pt-1\">\r\n        <Button\r\n          variant=\"dark\"\r\n          size=\"md\"\r\n          className=\"w-full rounded-2xl\"\r\n          rightIcon={\r\n            <svg\r\n              className=\"w-4 h-4\"\r\n              viewBox=\"0 0 24 24\"\r\n              fill=\"none\"\r\n              stroke=\"currentColor\"\r\n              strokeWidth=\"2\"\r\n            >\r\n              <path d=\"M5 12h14M12 5l7 7-7 7\" />\r\n            </svg>\r\n          }\r\n          onClick={onViewAll}\r\n        >\r\n          See All Recommended Locations\r\n        </Button>\r\n      </div>\r\n    </div>\r\n  );\r\n}\r\n"
+      },
+      "stories": [
+        {
+          "id": "chat-placescardwidget--default",
+          "name": "Default",
+          "snippet": "const Default = () => <PlacesCardWidget places={MOCK_PLACES} />;"
+        },
+        {
+          "id": "chat-placescardwidget--single-place",
+          "name": "Single Place",
+          "snippet": "const SinglePlace = () => <PlacesCardWidget places={[MOCK_PLACES[0]]} />;"
+        },
+        {
+          "id": "chat-placescardwidget--loading",
+          "name": "Loading",
+          "snippet": "const Loading = () => <PlacesCardWidget />;"
+        }
+      ],
+      "import": "import { PlacesCardWidget } from \"example1\";"
+    },
+    "chat-recommendationwrapper": {
+      "id": "chat-recommendationwrapper",
+      "name": "RecommendationWrapper",
+      "path": "./src/components/Recommendations/RecommendationWrapper.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component definition found",
+        "message": "File: D:\\react-training\\examples\\src\\components\\Recommendations\\RecommendationWrapper.tsx\nError:\nCannot find module '@/types/card'\nYou can debug your component file in this playground: https://react-docgen.dev/playground\nCode:\nimport React from 'react';\r\nimport { type RecommendationWrapperProps } from '@/types/card';\r\n\r\nexport const RecommendationWrapper = ({\r\n  title,\r\n  children,\r\n  onSeeAll,\r\n  seeAllText = 'See all recommendations',\r\n}: RecommendationWrapperProps) => {\r\n  return (\r\n    <div className=\"w-full  my-3 space-y-4\">\r\n      {/* Title */}\r\n      <h3 className=\"text-lg md:text-xl font-bold text-slate-900 tracking-tight pl-1\">\r\n        {title}\r\n      </h3>\r\n\r\n      {/* Main Container */}\r\n      <div className=\"bg-white p-4 md:p-5 rounded-card space-y-3.5 shadow-sm border border-slate-100/50\">\r\n        {children}\r\n\r\n        {/* See All Button */}\r\n        {onSeeAll && (\r\n          <button\r\n            onClick={onSeeAll}\r\n            className=\"w-full py-3 bg-primary-light hover:bg-blue-600 hover:text-white text-blue-600 text-xs font-bold rounded-xl transition-all duration-200 text-center mt-2 cursor-pointer\"\r\n          >\r\n            {seeAllText}\r\n          </button>\r\n        )}\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\n"
+      },
+      "stories": [
+        {
+          "id": "chat-recommendationwrapper--default",
+          "name": "Default",
+          "snippet": "const Default = () => <RecommendationWrapper title=\"Top Recommendations\"><div className=\"p-4 text-center text-slate-500\">Recommendation Content Here</div></RecommendationWrapper>;"
+        },
+        {
+          "id": "chat-recommendationwrapper--with-see-all",
+          "name": "With See All",
+          "snippet": "const WithSeeAll = () => <RecommendationWrapper title=\"Popular Destinations\"><div className=\"p-4 text-center text-slate-500\">Destination Cards Here</div></RecommendationWrapper>;"
+        },
+        {
+          "id": "chat-recommendationwrapper--custom-see-all-text",
+          "name": "Custom See All Text",
+          "snippet": "const CustomSeeAllText = () => <RecommendationWrapper title=\"Nearby Hotels\" seeAllText=\"View All Hotels\"><div className=\"p-4 text-center text-slate-500\">Hotel Cards Here</div></RecommendationWrapper>;"
+        },
+        {
+          "id": "chat-recommendationwrapper--with-multiple-children",
+          "name": "With Multiple Children",
+          "snippet": "const WithMultipleChildren = () => <RecommendationWrapper title=\"Trending Flights\">(<div className=\"flex flex-col gap-2\">\r\n      <div className=\"bg-slate-50 p-3 rounded-lg text-sm\">Flight 1 - $200</div>\r\n      <div className=\"bg-slate-50 p-3 rounded-lg text-sm\">Flight 2 - $300</div>\r\n      <div className=\"bg-slate-50 p-3 rounded-lg text-sm\">Flight 3 - $400</div>\r\n    </div>)</RecommendationWrapper>;"
+        }
+      ],
+      "import": "import { RecommendationWrapper } from \"example1\";"
+    },
+    "ui-thinkingloader": {
+      "id": "ui-thinkingloader",
+      "name": "ThinkingLoader",
+      "path": "./src/components/Thinking/ThinkingLoader.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component definition found",
+        "message": "File: D:\\react-training\\examples\\src\\components\\Thinking\\ThinkingLoader.tsx\nError:\nCannot find module '@/types/loading'\nYou can debug your component file in this playground: https://react-docgen.dev/playground\nCode:\nimport {type ThinkingLoaderProps}  from '@/types/loading'\r\n\r\nexport const ThinkingLoader = ({\r\n  text = \"Travelpal is thinking...\"\r\n}: ThinkingLoaderProps) => {\r\n  return (\r\n    <div className=\"flex items-center gap-2.5 py-2 px-1 text-slate-400 select-none\">\r\n      {/* 🔹 iOS Style Spinner  */}\r\n      <svg\r\n        className=\"animate-spin w-4 h-4 text-slate-400 shrink-0\"\r\n        xmlns=\"http://www.w3.org/2000/svg\"\r\n        fill=\"none\"\r\n        viewBox=\"0 0 24 24\"\r\n      >\r\n        <g stroke=\"currentColor\" strokeWidth=\"2.5\" strokeLinecap=\"round\">\r\n          <line x1=\"12\" y1=\"2\" x2=\"12\" y2=\"6\" opacity=\"1\" />\r\n          <line x1=\"17\" y1=\"3.34\" x2=\"15\" y2=\"6.8\" opacity=\"0.9\" />\r\n          <line x1=\"20.66\" y1=\"7\" x2=\"17.2\" y2=\"9\" opacity=\"0.8\" />\r\n          <line x1=\"22\" y1=\"12\" x2=\"18\" y2=\"12\" opacity=\"0.7\" />\r\n          <line x1=\"20.66\" y1=\"17\" x2=\"17.2\" y2=\"15\" opacity=\"0.6\" />\r\n          <line x1=\"17\" y1=\"20.66\" x2=\"15\" y2=\"17.2\" opacity=\"0.5\" />\r\n          <line x1=\"12\" y1=\"22\" x2=\"12\" y2=\"18\" opacity=\"0.4\" />\r\n          <line x1=\"7\" y1=\"20.66\" x2=\"9\" y2=\"17.2\" opacity=\"0.3\" />\r\n          <line x1=\"3.34\" y1=\"17\" x2=\"6.8\" y2=\"15\" opacity=\"0.25\" />\r\n          <line x1=\"2\" y1=\"12\" x2=\"6\" y2=\"12\" opacity=\"0.2\" />\r\n          <line x1=\"3.34\" y1=\"7\" x2=\"6.8\" y2=\"9\" opacity=\"0.15\" />\r\n          <line x1=\"7\" y1=\"3.34\" x2=\"9\" y2=\"6.8\" opacity=\"0.1\" />\r\n        </g>\r\n      </svg>\r\n\r\n      {/* 🔹 Text \"Travelpal is thinking...\" */}\r\n      <span className=\"text-sm font-normal text-slate-400/90 tracking-wide\">\r\n        {text}\r\n      </span>\r\n    </div>\r\n  );\r\n};\r\n"
+      },
+      "stories": [
+        {
+          "id": "ui-thinkingloader--default",
+          "name": "Default",
+          "snippet": "const Default = () => <ThinkingLoader />;"
+        },
+        {
+          "id": "ui-thinkingloader--custom-text",
+          "name": "Custom Text",
+          "snippet": "const CustomText = () => <ThinkingLoader text=\"Searching for flights...\" />;"
+        }
+      ],
+      "import": "import { ThinkingLoader } from \"example1\";"
+    },
+    "auth-authfooter": {
+      "id": "auth-authfooter",
+      "name": "AuthFooter",
+      "path": "./src/components/auth/AuthFooter/AuthFooter.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component definition found",
+        "message": "File: D:\\react-training\\examples\\src\\components\\auth\\AuthFooter\\AuthFooter.tsx\nError:\nCannot find module '@/types/auth'\nYou can debug your component file in this playground: https://react-docgen.dev/playground\nCode:\nimport {type AuthFooterProps}  from '@/types/auth'\n\nexport const AuthFooter = ({\n  questionText,\n  actionText,\n  onActionClick,\n  className = '',\n}: AuthFooterProps) => {\n  return (\n    <div className={`text-center text-sm2 text-gray-400 mt-8 md:mt-4 ${className}`}>\n      {questionText}{\" \"}\n      <span\n        onClick={onActionClick}\n        className=\"text-blue-700 font-bold hover:underline cursor-pointer ml-1 px-2 py-1 inline-block\"\n      >\n        {actionText}\n      </span>\n    </div>\n  );\n};\n"
+      },
+      "stories": [
+        {
+          "id": "auth-authfooter--sign-in",
+          "name": "Sign In",
+          "snippet": "const SignIn = () => <AuthFooter questionText=\"Don't have an account?\" actionText=\"Sign Up\" />;"
+        },
+        {
+          "id": "auth-authfooter--sign-up",
+          "name": "Sign Up",
+          "snippet": "const SignUp = () => <AuthFooter questionText=\"Already have an account?\" actionText=\"Sign In\" />;"
+        }
+      ],
+      "import": "import { AuthFooter } from \"example1\";"
+    },
+    "auth-authheader": {
+      "id": "auth-authheader",
+      "name": "AuthHeader",
+      "path": "./src/components/auth/AuthHeader/AuthHeader.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component definition found",
+        "message": "File: D:\\react-training\\examples\\src\\components\\auth\\AuthHeader\\AuthHeader.tsx\nError:\nCannot find module '@/types/auth'\nYou can debug your component file in this playground: https://react-docgen.dev/playground\nCode:\nimport { type AuthHeaderProps } from '@/types/auth';\n\nexport const AuthHeader = ({\n  title,\n  subtitle,\n  className = '',\n}: AuthHeaderProps) => {\n  return (\n    <div className={`space-y-2 mb-2 md:mb-4 mt-6 ${className}`}>\n      <h2 className=\"text-2xl md:text-display-sm font-bold text-brand-dark-alt tracking-tight\">\n        {title}\n      </h2>\n\n      <p className=\"text-sm md:text-sm2 text-gray-400 font-normal\">\n        {subtitle}\n      </p>\n    </div>\n  );\n};\n"
+      },
+      "stories": [
+        {
+          "id": "auth-authheader--login",
+          "name": "Login",
+          "snippet": "const Login = () => <AuthHeader\r\n    title=\"Continue Planning Your Trips\"\r\n    subtitle=\"We're happy you're back. Let's get back to planning your adventures\" />;"
+        },
+        {
+          "id": "auth-authheader--register",
+          "name": "Register",
+          "snippet": "const Register = () => <AuthHeader\r\n    title=\"Unlock Your Next Adventure\"\r\n    subtitle=\"Create a free account to start planning trips with Tripal\" />;"
+        },
+        {
+          "id": "auth-authheader--resset-password",
+          "name": "Resset Password",
+          "snippet": "const RessetPassword = () => <AuthHeader title=\"Reset Password\" subtitle=\"Enter your new password below\" />;"
+        },
+        {
+          "id": "auth-authheader--onboarding",
+          "name": "Onboarding",
+          "snippet": "const Onboarding = () => <AuthHeader\r\n    title=\"Let’s Get To Know You!\"\r\n    subtitle=\"Provide only the information provided so that Tripal can know you better\" />;"
+        },
+        {
+          "id": "auth-authheader--forgot-password",
+          "name": "Forgot Password",
+          "snippet": "const ForgotPassword = () => <AuthHeader\r\n    title=\"Verify Email\"\r\n    subtitle=\"Enter your email address to receive verification OTP\" />;"
+        },
+        {
+          "id": "auth-authheader--verify-otp",
+          "name": "Verify OTP",
+          "snippet": "const VerifyOTP = () => <AuthHeader\r\n    title=\"Enter OTP\"\r\n    subtitle=\"Enter your email address to receive verification OTP\" />;"
+        }
+      ],
+      "import": "import { AuthHeader } from \"example1\";"
+    },
+    "auth-authlayout": {
+      "id": "auth-authlayout",
+      "name": "AuthLayout",
+      "path": "./src/components/auth/AuthLayout/AuthLayout.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component definition found",
+        "message": "File: D:\\react-training\\examples\\src\\components\\auth\\AuthLayout\\AuthLayout.tsx\nError:\nCannot find module '@/types/auth'\nYou can debug your component file in this playground: https://react-docgen.dev/playground\nCode:\nimport React from 'react';\nimport { LoadingOverlay } from '@/components/Loading/LoadingOverlay';\nimport authBg from '@/assets/images/background.png';\nimport { type AuthLayoutProps } from '@/types/auth';\n\nexport const AuthLayout = ({\n  children,\n  isLoading = false,\n}: AuthLayoutProps) => {\n  return (\n    <div\n      className=\"min-h-screen w-full relative flex items-center justify-center px-4 sm:px-6 lg:pl-12 lg:pr-8 py-8 lg:py-0 bg-cover bg-center overflow-hidden\"\n      style={{ backgroundImage: `url(${authBg})` }}\n    >\n      {/* LoadingOverlay */}\n      <LoadingOverlay isVisible={isLoading} />\n\n      {/* Background Dim */}\n      <div className=\"absolute inset-0 bg-black/30 pointer-events-none\" />\n\n      {/* Dark gradient overlay */}\n      <div className=\"absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none\" />\n\n      {/* Main content container */}\n      <div className=\"relative z-10 w-full max-w-1440 min-h-screen flex items-center justify-center lg:justify-end\">\n\n        {/* TEXT ON THE LEFT */}\n        <div className=\"absolute bottom-120 left-0 w-full lg:w-[45%] xl:w-[50%] text-white space-y-2 p-4 hidden lg:block\">\n          <h1 className=\"text-3xl xl:text-display-md font-bold leading-1.2 tracking-tight\">\n            Discover Amazing Deals & Thrilling Adventures\n          </h1>\n\n          <p className=\"text-sm lg:text-base text-gray-200 font-light max-w-480\">\n            Tripal is designed to ease trip and vacation planning. Explore amazing deals and offers\n          </p>\n        </div>\n\n        {/* Outer Glassmorphic Border Card */}\n        <div className=\"w-full max-w-400 sm:max-w-460 md:max-w-540 lg:w-580 xl:w-680 lg:max-w-none lg:h-980 lg:ml-auto p-1.5 sm:p-2 rounded-auth-sm sm:rounded-auth bg-white/15 backdrop-blur-md shadow-auth shrink-0 flex flex-col\">\n\n          {/* Inner White Form Card */}\n          <div className=\"relative w-full h-full bg-white rounded-auth-inner-sm sm:rounded-auth-inner p-6 sm:p-8 md:p-10 lg:p-12 shadow-sm flex flex-col min-h-0 overflow-y-auto\">\n            {children}\n          </div>\n\n        </div>\n      </div>\n    </div>\n  );\n};\n"
+      },
+      "stories": [
+        {
+          "id": "auth-authlayout--default",
+          "name": "Default",
+          "snippet": "const Default = () => <AuthLayout isLoading={false}>(<div className=\"flex flex-col gap-6\">\r\n      <AuthHeader\r\n        title=\"Continue Planning Your Trips\"\r\n        subtitle=\"Welcome back. Let's get back to planning your adventures\"\r\n      />\r\n      <InputField label=\"Email address\" type=\"email\" placeholder=\"Enter your email\" />\r\n      <InputField label=\"Password\" type=\"password\" placeholder=\"Enter your password\" />\r\n      <Button>Sign In</Button>\r\n      <AuthFooter questionText=\"Don't have an account?\" actionText=\"Sign Up\" onActionClick={() => {}} />\r\n    </div>)</AuthLayout>;"
+        },
+        {
+          "id": "auth-authlayout--loading",
+          "name": "Loading",
+          "snippet": "const Loading = () => <AuthLayout isLoading><div /></AuthLayout>;"
+        }
+      ],
+      "import": "import { AuthFooter, AuthHeader, AuthLayout, Button, InputField } from \"example1\";"
+    },
+    "chat-chathistorysidebar": {
+      "id": "chat-chathistorysidebar",
+      "name": "ChatHistorySidebar",
+      "path": "./src/components/chat/ChatHistorySidebar/ChatHistorySidebar.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component definition found",
+        "message": "File: D:\\react-training\\examples\\src\\components\\chat\\ChatHistorySidebar\\ChatHistorySidebar.tsx\nError:\nCannot find module '@/types/chat'\nYou can debug your component file in this playground: https://react-docgen.dev/playground\nCode:\n\nimport iconSearch from '@/assets/icons/search-normal.png'\nimport type { ChatSession, ChatHistorySidebarProps } from '@/types/chat';\n\nexport type { ChatSession };\n\nexport const ChatHistorySidebar = ({\n  searchQuery,\n  setSearchQuery,\n  sessions,\n  activeSessionId,\n  onSelectSession,\n}: ChatHistorySidebarProps) => {\n  // 1. Filter conversations by search keywords.\n  const filteredSessions = sessions.filter((s) =>\n    s.title.toLowerCase().includes(searchQuery.toLowerCase())\n  );\n\n  // 2. Automatically group conversations by the group field (Default is TODAY if not assigned).\n  const groupedSessions = filteredSessions.reduce((acc, session) => {\n    const groupName = session.group || 'TODAY';\n    if (!acc[groupName]) {\n      acc[groupName] = [];\n    }\n    acc[groupName].push(session);\n    return acc;\n  }, {} as Record<string, ChatSession[]>);\n\n  return (\n<aside className=\"hidden lg:flex w-370 min-w-280 max-w-300 bg-surface-sidebar flex-col h-full border-r border-slate-200/50 select-none\">      {/* Header Chats & Search Box */}\n      <div className=\"px-6 pt-12 pb-2\">\n        <h1 className=\"text-2xl font-bold text-brand-dark tracking-tight\">Chats</h1>\n\n        <div className=\" relative pt-7\">\n          <img src={iconSearch} alt=\"Search\" className=\"w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none\" />\n          <input\n            type=\"text\"\n            placeholder=\"Search\"\n            value={searchQuery}\n            onChange={(e) => setSearchQuery(e.target.value)}\n            className=\"w-full bg-white border border-slate-100/80 text-sm rounded-2xl pl-10 pr-4 py-3 text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/10 focus:border-blue-400 transition shadow-sm shadow-slate-200/50\"\n          />\n        </div>\n      </div>\n\n      {/* List of historical groups */}\n      <div className=\"flex-1 overflow-y-auto px-5 py-3 space-y-6\">\n        {Object.keys(groupedSessions).length === 0 ? (\n          <div className=\"text-center py-8 text-xs text-slate-400\">\n            {searchQuery ? 'No chats found' : ''}\n          </div>\n        ) : (\n          Object.entries(groupedSessions).map(([groupTitle, items]) => (\n            <div key={groupTitle} className=\"space-y-2\">\n              {/* Group title (TODAY, YESTERDAY, ...) */}\n              <h3 className=\"text-xxs font-bold text-slate-400/90 tracking-wider uppercase px-1\">\n                {groupTitle}\n              </h3>\n\n              {/* List of items in the group */}\n              <div className=\"space-y-1\">\n                {items.map((session) => {\n                  const isActive = session.id === activeSessionId;\n                  return (\n                    <button\n                      key={session.id}\n                      onClick={() => onSelectSession(session.id)}\n                      className={`w-full text-left px-3.5 py-3 min-h-11 rounded-2xl text-xs md:text-sm transition font-medium truncate block ${\n                        isActive\n                          ? 'bg-surface-active text-brand-dark font-semibold'\n                          : 'text-brand-dark hover:bg-slate-100/60'\n                      }`}\n                    >\n                      {session.title}\n                    </button>\n                  );\n                })}\n              </div>\n            </div>\n          ))\n        )}\n      </div>\n    </aside>\n  );\n};\n"
+      },
+      "stories": [
+        {
+          "id": "chat-chathistorysidebar--default",
+          "name": "Default",
+          "snippet": "const Default = () => <ChatHistorySidebar searchQuery=\"\" sessions={MOCK_SESSIONS} activeSessionId=\"1\" />;"
+        },
+        {
+          "id": "chat-chathistorysidebar--with-search",
+          "name": "With Search",
+          "snippet": "const WithSearch = () => <ChatHistorySidebar searchQuery=\"flights\" sessions={MOCK_SESSIONS} activeSessionId={null} />;"
+        },
+        {
+          "id": "chat-chathistorysidebar--empty",
+          "name": "Empty",
+          "snippet": "const Empty = () => <ChatHistorySidebar searchQuery=\"\" sessions={[]} activeSessionId={null} />;"
+        }
+      ],
+      "import": "import { ChatHistorySidebar } from \"example1\";"
+    },
+    "chat-chatinputbox": {
+      "id": "chat-chatinputbox",
+      "name": "ChatInputBox",
+      "path": "./src/components/chat/ChatInputBox/ChatInputBox.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component definition found",
+        "message": "File: D:\\react-training\\examples\\src\\components\\chat\\ChatInputBox\\ChatInputBox.tsx\nError:\nCannot find module '@/types/chat'\nYou can debug your component file in this playground: https://react-docgen.dev/playground\nCode:\nimport React from 'react';\n\nimport iconPlus from '@/assets/icons/add-dark.png';\nimport iconMic from '@/assets/icons/microphone-2.png';\nimport iconSend from '@/assets/icons/send-2.png';\nimport { type ChatInputBoxProps } from \"@/types/chat\";\nimport { useEnterToSend } from '@/hooks/useEnterToSend';\n\nexport const ChatInputBox = ({\n  inputMessage,\n  setInputMessage,\n  onSend,\n  isRecording,\n  setIsRecording,\n}: ChatInputBoxProps) => {\n  const handleKeyDown = useEnterToSend(onSend);\n\n  return (\n    /* Floating chat input container with focus state highlight */\n    <div className=\"w-full max-w-4xl bg-white rounded-3xl p-20 md:p-10   shadow-xl shadow-slate-200/60 border border-slate-200/80 transition focus-within:border-blue-400\">\n\n      {/* Multiline Textarea for prompt input */}\n      <textarea\n        rows={2}\n        value={inputMessage}\n        onChange={(e) => setInputMessage(e.target.value)}\n        onKeyDown={handleKeyDown}\n        placeholder=\"Tell me where you are going to and how you prefer to get there\"\n        className=\" -translate-y-5 -translate-x-4 w-full resize-none text-slate-700 placeholder-slate-400 italic text-sm md:text-base focus:outline-none bg-transparent\"\n      />\n\n      {/* Action Toolbar */}\n      <div className=\"flex items-center justify-between pt-2 mt-2\">\n        {/* Attachment / Plus Action Button */}\n        <button className=\"-translate-x-7 translate-y-2  w-9 h-9 rounded-full flex items-center justify-center hover:bg-slate-100 transition p-2 cursor-pointer\">\n          <img\n            src={iconPlus}\n            alt=\"Add attachment\"\n            className=\"w-5 h-5 object-contain opacity-40 hover:opacity-70\"\n          />\n        </button>\n\n        <div className=\"flex items-center gap-3\">\n          {/* Voice Recording Toggle Button */}\n          <button\n            onClick={() => setIsRecording((prev) => !prev)}\n            className={`w-10 h-10 md:w-9 md:h-9 rounded-full flex items-center justify-center transition p-2 ${\n              isRecording ? 'bg-red-50 animate-pulse' : 'hover:bg-slate-100'\n            }`}\n          >\n            <img\n              src={iconMic}\n              alt=\"Voice input\"\n              className={`w-5 h-5 object-contain transition ${\n                isRecording ? 'filter-red' : 'opacity-40 hover:opacity-70'\n              }`}\n            />\n          </button>\n\n          {/* Message Submit Button */}\n          <button\n            onClick={onSend}\n            className=\"w-11 h-11 md:w-14 md:h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl flex items-center justify-center p-2.5 shadow-md shadow-blue-500/30 transition transform active:scale-95 shrink-0\"\n          >\n            <img\n              src={iconSend}\n              alt=\"Send message\"\n              className=\"w-5 h-5 object-contain filter brightness-0 invert\"\n            />\n          </button>\n        </div>\n      </div>\n    </div>\n  );\n};\n"
+      },
+      "stories": [
+        {
+          "id": "chat-chatinputbox--default",
+          "name": "Default",
+          "snippet": "const Default = () => <ChatInputBoxWithState />;"
+        },
+        {
+          "id": "chat-chatinputbox--recording",
+          "name": "Recording",
+          "snippet": "const Recording = () => <ChatInputBoxWithState isRecording />;"
+        },
+        {
+          "id": "chat-chatinputbox--with-text",
+          "name": "With Text",
+          "snippet": "const WithText = () => <ChatInputBoxWithState inputMessage=\"Find flights to Lagos\" />;"
+        }
+      ],
+      "import": "import { ChatInputBox } from \"example1\";"
+    },
+    "chat-chatmessagelist": {
+      "id": "chat-chatmessagelist",
+      "name": "ChatMessageList",
+      "path": "./src/components/chat/ChatMessageList/ChatMessageList.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component definition found",
+        "message": "File: D:\\react-training\\examples\\src\\components\\chat\\ChatMessageList\\ChatMessageList.tsx\nError:\nCannot find module '@/types/chat'\nYou can debug your component file in this playground: https://react-docgen.dev/playground\nCode:\nimport React from 'react';\r\nimport { ThinkingLoader } from '@/components/Thinking/ThinkingLoader';\r\nimport { FlightRecommendations } from '@/components/Recommendations/FlightRecommendations';\r\nimport { HotelRecommendations } from '@/components/Recommendations/HotelRecommendations';\r\nimport { PlacesCardWidget } from '@/components/Recommendations/PlacesCardWidget';\r\nimport { ItineraryCardWidget } from '@/components/Recommendations/ItineraryCardWidget';\r\nimport type { PlaceData, DayItinerary } from '@/types/travel';\r\nimport { useAutoScroll } from '@/hooks/useAutoScroll';\r\nimport type { ChatMessageListProps } from '@/types/chat';\r\n\r\n// Custom payload inside a chat message\r\nexport type MessageData = PlaceData[] | DayItinerary[] | unknown;\r\n\r\n// Type definition for an individual chat message item\r\nexport interface ChatMessage {\r\n  id: string;\r\n  sender: 'user' | 'ai';\r\n  text: string;\r\n  type?: 'text' | 'flight' | 'hotel' | 'places' | 'itinerary';\r\n  data?: MessageData;\r\n}\r\n\r\n// Props definition for managing chat message list rendering and callbacks\r\n\r\n\r\nexport const ChatMessageList = ({\r\n  messages,\r\n  isTyping,\r\n  onBookFlight,\r\n  onBookHotel,\r\n  onViewAllPlaces,\r\n  onViewAllItinerary,\r\n}: ChatMessageListProps) => {\r\n  const { ref: messagesEndRef } = useAutoScroll([messages, isTyping]);\r\n\r\n  return (\r\n    /* Message stream container with custom hidden scrollbars */\r\n    <div className=\"w-full flex-1 overflow-y-auto space-y-4 py-4 px-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]\">\r\n      {messages.map((msg, index) => {\r\n        const textLower = msg.text.toLowerCase();\r\n\r\n        // Get the previous message to infer context if necessary\r\n        const prevMsg = index > 0 ? messages[index - 1] : null;\r\n        const prevTextLower = prevMsg ? prevMsg.text.toLowerCase() : '';\r\n\r\n        // Detect if current message should render Flight recommendations\r\n        const isFlightType =\r\n          msg.type === 'flight' ||\r\n          (msg.sender === 'ai' && (textLower.includes('flight') || prevTextLower.includes('flight')));\r\n\r\n        // Detect if current message should render Hotel recommendations\r\n        const isHotelType =\r\n          msg.type === 'hotel' ||\r\n          (msg.sender === 'ai' && (textLower.includes('hotel') || prevTextLower.includes('hotel') || textLower.includes('bahamas')));\r\n\r\n        // Detect if current message should render Places widget\r\n        const isPlacesType =\r\n          msg.type === 'places' ||\r\n          (msg.sender === 'ai' && (\r\n            textLower.includes('place') ||\r\n            textLower.includes('place') ||\r\n            prevTextLower.includes('places') ||\r\n            prevTextLower.includes('place')\r\n          ));\r\n\r\n        // Detect if current message should render Itinerary widget\r\n        const isItineraryType =\r\n          msg.type === 'itinerary' ||\r\n          (msg.sender === 'ai' && (\r\n            textLower.includes('itinerary') ||\r\n            textLower.includes('itinerary') ||\r\n            prevTextLower.includes('itinerary') ||\r\n            prevTextLower.includes('itinerary')\r\n          ));\r\n\r\n        // Pass custom payload if exists; otherwise undefined so widgets fetch via API\r\n        const placesData = (Array.isArray(msg.data) && msg.data.length > 0)\r\n          ? (msg.data as PlaceData[])\r\n          : undefined;\r\n\r\n        const itineraryData = (Array.isArray(msg.data) && msg.data.length > 0)\r\n          ? (msg.data as DayItinerary[])\r\n          : undefined;\r\n\r\n        return (\r\n          <div\r\n            key={msg.id}\r\n            className={`flex ${msg.sender === 'user' ? 'justify-end' : 'items-start gap-3'}`}\r\n          >\r\n            <div className=\"flex flex-col gap-2 max-w-2xl w-full\">\r\n              {/* Message text bubble */}\r\n              {msg.text && (\r\n                <div\r\n                  className={`text-sm md:text-base whitespace-pre-line w-fit ${\r\n                    msg.sender === 'user'\r\n                      ? 'bg-white text-slate-900 px-6 py-4 rounded-2xl rounded-br-none ml-auto shadow-none border border-slate-100'\r\n                      : 'bg-transparent border-none text-slate-800 p-0 shadow-none'\r\n                  }`}\r\n                >\r\n                  {msg.text}\r\n                </div>\r\n              )}\r\n\r\n              {/* Render Flight Recommendation Card */}\r\n              {isFlightType && msg.sender === 'ai' && (\r\n                <FlightRecommendations\r\n                  title=\"Recommended Flights For a Round Trip Journey\"\r\n                  onBookNow={(id) => {\r\n                    if (onBookFlight) onBookFlight(id);\r\n                  }}\r\n                />\r\n              )}\r\n\r\n              {/* Render Hotel Recommendation Card */}\r\n              {isHotelType && msg.sender === 'ai' && (\r\n                <HotelRecommendations\r\n                  title=\"Recommended Hotels For a Three-Night Staycation\"\r\n                  onBookNow={(hotel) => {\r\n                    if (!onBookHotel) return;\r\n\r\n                    if (typeof hotel === 'string') {\r\n                      onBookHotel(hotel);\r\n                    } else if (hotel && typeof hotel === 'object' && 'id' in hotel) {\r\n                      onBookHotel(String(hotel.id));\r\n                    }\r\n                  }}\r\n                  onSeeAll={() => { /* TODO: Implement see all */ }}\r\n                />\r\n              )}\r\n\r\n              {/* Render Places Card Widget */}\r\n              {isPlacesType && msg.sender === 'ai' && (\r\n                <PlacesCardWidget\r\n                  places={placesData}\r\n                  onViewAll={() => onViewAllPlaces?.(placesData)}\r\n                />\r\n              )}\r\n\r\n              {/* Render Itinerary Card Widget */}\r\n              {isItineraryType && msg.sender === 'ai' && (\r\n                <ItineraryCardWidget\r\n                  itinerary={itineraryData}\r\n                  onViewAll={() => onViewAllItinerary?.(itineraryData)}\r\n                />\r\n              )}\r\n            </div>\r\n          </div>\r\n        );\r\n      })}\r\n\r\n      {/* Render AI thinking indicator when processing a query */}\r\n      {isTyping && (\r\n        <div className=\"flex items-center gap-3 pl-1\">\r\n          <ThinkingLoader text=\"Travelpal is thinking...\" />\r\n        </div>\r\n      )}\r\n\r\n      {/* Scroll anchor target */}\r\n      <div ref={messagesEndRef} />\r\n    </div>\r\n  );\r\n};\r\n"
+      },
+      "stories": [
+        {
+          "id": "chat-chatmessagelist--with-typing",
+          "name": "With Typing",
+          "snippet": "const WithTyping = () => <ChatMessageList messages={FLIGHT_MESSAGES} isTyping />;"
+        },
+        {
+          "id": "chat-chatmessagelist--flight-recommendations",
+          "name": "Flight Recommendations",
+          "snippet": "const FlightRecommendations = () => <ChatMessageList messages={TEXT_MESSAGES} isTyping={false} />;"
+        },
+        {
+          "id": "chat-chatmessagelist--hotel-recommendations",
+          "name": "Hotel Recommendations",
+          "snippet": "const HotelRecommendations = () => <ChatMessageList messages={HOTEL_MESSAGES} isTyping={false} />;"
+        },
+        {
+          "id": "chat-chatmessagelist--places-recommendations",
+          "name": "Places Recommendations",
+          "snippet": "const PlacesRecommendations = () => <ChatMessageList messages={PLACES_MESSAGES} isTyping={false} />;"
+        },
+        {
+          "id": "chat-chatmessagelist--itinerary-recommendations",
+          "name": "Itinerary Recommendations",
+          "snippet": "const ItineraryRecommendations = () => <ChatMessageList messages={ITINERARY_MESSAGES} isTyping={false} />;"
+        },
+        {
+          "id": "chat-chatmessagelist--empty",
+          "name": "Empty",
+          "snippet": "const Empty = () => <ChatMessageList messages={[]} isTyping={false} />;"
+        }
+      ],
+      "import": "import { ChatMessageList } from \"example1\";"
+    },
+    "chat-sidebarnav": {
+      "id": "chat-sidebarnav",
+      "name": "SidebarNav",
+      "path": "./src/components/chat/SidebarNav/SidebarNav.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component definition found",
+        "message": "File: D:\\react-training\\examples\\src\\components\\chat\\SidebarNav\\SidebarNav.tsx\nError:\nCannot find module '@/types/chat'\nYou can debug your component file in this playground: https://react-docgen.dev/playground\nCode:\nimport React from 'react';\nimport { useNavigate } from 'react-router-dom';\nimport { Menu } from 'lucide-react';\nimport { useAuth } from '@/hooks/useAuth';\nimport { useProfileMenu } from '@/hooks/useProfileMenu';\n\nimport logo from '@/assets/icons/Logo.png';\nimport iconChat from '@/assets/icons/chat.png';\nimport iconHeart from '@/assets/icons/heart.png';\nimport iconMedal from '@/assets/icons/medal.png';\nimport iconMap from '@/assets/icons/map.png';\nimport iconCommunity from '@/assets/icons/people.png';\nimport iconSettings from '@/assets/icons/setting.png';\nimport userAvatar from '@/assets/icons/user.png';\nimport { type SidebarNavProps } from \"@/types/chat\";\nimport { Button } from \"@/components/Button/Button\";\n\nexport const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileToggle }: SidebarNavProps) => {\n  const navigate = useNavigate();\n  const { logout } = useAuth();\n  const {\n    isOpen: showProfileMenu,\n    ref: menuRef,\n    toggle: toggleProfileMenu,\n    close: closeProfileMenu,\n  } = useProfileMenu();\n\n  const navItems = [\n    { id: 'chats', icon: iconChat, alt: 'Chats' },\n    { id: 'favorites', icon: iconHeart, alt: 'Favorites' },\n    { id: 'medal', icon: iconMedal, alt: 'Medal' },\n    { id: 'map', icon: iconMap, alt: 'Routes Map' },\n    { id: 'community', icon: iconCommunity, alt: 'Community' },\n    { id: 'settings', icon: iconSettings, alt: 'Settings' },\n  ];\n\n  const handleLogout = async () => {\n    try {\n      closeProfileMenu();\n      await logout();\n      navigate('/login', { replace: true });\n    } catch (error) {\n      console.error('Logout error:', error);\n    }\n  };\n\n  return (\n    <>\n      {/* Mobile hamburger button */}\n      {onMobileToggle && (\n        <button\n          onClick={onMobileToggle}\n          className=\"md:hidden fixed top-3 left-3 z-30 w-11 h-11 bg-white rounded-xl shadow-md border border-slate-100 flex items-center justify-center\"\n        >\n          <Menu className=\"w-5 h-5 text-slate-700\" />\n        </button>\n      )}\n\n      {/* Desktop sidebar */}\n      <aside className=\"hidden md:flex w-125 min-w-80 bg-surface-sidebar border-r-10 border-surface-section flex-col items-center justify-between py-6 z-20 shrink-0 select-none\">        <div className=\"flex flex-col items-center gap-7 w-full px-2\">\n          {/* App Logo */}\n          <button className=\"w-11 h-11 rounded-2xl flex items-center justify-center p-1.5 hover:opacity-90 transition mt-3\">\n            <img\n              src={logo}\n              alt=\"Logo\"\n              className=\"w-full h-full object-contain\"\n            />\n          </button>\n\n          {/* Navigation Items */}\n          <nav className=\"flex flex-col gap-3.5 items-center w-full\">\n            {navItems.map((item) => {\n              const isActive = activeNav === item.id;\n              return (\n                <button\n                  key={item.id}\n                  onClick={() => setActiveNav(item.id)}\n                  className={`w-11 h-11 rounded-2xl flex items-center justify-center transition p-2.5 ${\n                    isActive\n                      ? 'bg-blue-50 border border-blue-200 shadow-sm shadow-blue-100/50'\n                      : 'bg-transparent border border-transparent hover:bg-white/80 hover:border-slate-200/60'\n                  }`}\n                >\n                  <img\n                    src={item.icon}\n                    alt={item.alt}\n                    className={`w-5 h-5 object-contain transition-all duration-200 ${\n                      isActive\n                        ? 'opacity-100 scale-105 [filter:invert(38%)_sepia(88%)_saturate(2421%)_hue-rotate(200deg)_brightness(98%)_contrast(96%)]'\n                        : 'opacity-70 hover:opacity-100'\n                    }`}\n                  />\n                </button>\n              );\n            })}\n          </nav>\n        </div>\n\n        {/* User Avatar & Logout Popover */}\n        <div className=\"relative mb-4\" ref={menuRef}>\n          <svg width=\"0\" height=\"0\" className=\"absolute\">\n            <defs>\n              <clipPath id=\"pentagon-clip\" clipPathUnits=\"objectBoundingBox\">\n                <path d=\"M 0.5 0.05 C 0.52 0.05, 0.93 0.32, 0.95 0.35 C 0.97 0.38, 0.88 0.88, 0.85 0.92 C 0.82 0.96, 0.18 0.96, 0.15 0.92 C 0.12 0.88, 0.03 0.38, 0.05 0.35 C 0.07 0.32, 0.48 0.05, 0.5 0.05 Z\" />\n              </clipPath>\n            </defs>\n          </svg>\n\n          <button\n            onClick={toggleProfileMenu}\n            className=\"w-17 h-17 transition transform active:scale-95 flex items-center justify-center focus:outline-none relative drop-shadow-sm\"\n          >\n            <div\n              className=\"w-full h-full bg-white flex items-center justify-center p-1\"\n              style={{ clipPath: 'url(#pentagon-clip)' }}\n            >\n              <div\n                className=\"w-full h-full bg-slate-200 overflow-hidden\"\n                style={{ clipPath: 'url(#pentagon-clip)' }}\n              >\n                <img\n                  src={userAvatar}\n                  alt=\"User Avatar\"\n                  className=\"w-full h-full object-cover scale-110\"\n                />\n              </div>\n            </div>\n          </button>\n\n          {/* Dropdown Logout */}\n          {showProfileMenu && (\n            <div className=\"absolute bottom-2 left-16 w-48 bg-white rounded-2xl shadow-xl border border-slate-100 p-2 z-50 animate-in fade-in zoom-in-95 duration-150\">\n              <button\n                onClick={handleLogout}\n                className=\"w-full text-left px-3 py-2 rounded-xl text-xs font-medium text-red-600 hover:bg-red-50 flex items-center gap-2.5 transition\"\n              >\n                <span>Log out</span>\n              </button>\n            </div>\n          )}\n        </div>\n      </aside>\n\n      {/* Mobile drawer overlay */}\n      {isMobileOpen && (\n        <div className=\"md:hidden fixed inset-0 z-40 flex\">\n          <div className=\"fixed inset-0 bg-black/40 backdrop-blur-xs\" onClick={onMobileToggle} />\n          <aside className=\"relative w-18 bg-surface-sidebar h-full flex flex-col items-center justify-between py-6 z-50 shadow-2xl select-none animate-in slide-in-from-left duration-200\">\n            <div className=\"flex flex-col items-center gap-7 w-full px-10\">\n              <button className=\"w-11 h-11 rounded-2xl flex items-center justify-center p-1.5\">\n                <img src={logo} alt=\"Logo\" className=\"w-full h-full object-contain\" />\n              </button>\n\n              <nav className=\"flex flex-col gap-3.5 items-center w-full\">\n                {navItems.map((item) => {\n                  const isActive = activeNav === item.id;\n                  return (\n                    <button\n                      key={item.id}\n                      onClick={() => {\n                        setActiveNav(item.id);\n                        onMobileToggle?.();\n                      }}\n                      className={`w-11 h-11 rounded-2xl flex items-center justify-center transition p-2.5 ${\n                        isActive\n                          ? 'bg-blue-50 border border-blue-200 shadow-sm shadow-blue-100/50'\n                          : 'bg-transparent border border-transparent hover:bg-white/80 hover:border-slate-200/60'\n                      }`}\n                    >\n                      <img\n                        src={item.icon}\n                        alt={item.alt}\n                        className={`w-5 h-5 object-contain transition-all duration-200 ${\n                          isActive\n                            ? 'opacity-100 scale-105 [filter:invert(38%)_sepia(88%)_saturate(2421%)_hue-rotate(200deg)_brightness(98%)_contrast(96%)]'\n                            : 'opacity-70 hover:opacity-100'\n                        }`}\n                      />\n                    </button>\n                  );\n                })}\n              </nav>\n            </div>\n\n            {/* The logout button, in the form of a small icon or text, fits perfectly within a width of 18 inches.*/}\n            <Button\n              type=\"button\"\n              variant=\"danger\"\n              size=\"sm\"\n              className=\"text-xxs px-2 py-1.5 rounded-lg\"\n              onClick={handleLogout}\n            >\n              Log out\n            </Button>\n          </aside>\n        </div>\n      )}\n    </>\n  );\n};\n"
+      },
+      "stories": [
+        {
+          "id": "chat-sidebarnav--default-desktop",
+          "name": "Default Desktop",
+          "snippet": "const DefaultDesktop = () => <SidebarNav activeNav=\"chats\" isMobileOpen={false} />;"
+        },
+        {
+          "id": "chat-sidebarnav--map-active",
+          "name": "Map Active",
+          "snippet": "const MapActive = () => <SidebarNav activeNav=\"map\" isMobileOpen={false} />;"
+        },
+        {
+          "id": "chat-sidebarnav--mobile-drawer-open",
+          "name": "Mobile Drawer Open",
+          "snippet": "const MobileDrawerOpen = () => <SidebarNav activeNav=\"chats\" isMobileOpen />;"
+        }
+      ],
+      "import": "import { AuthProvider, SidebarNav } from \"example1\";\nimport { MemoryRouter } from \"react-router-dom\";"
+    },
+    "chat-topbar": {
+      "id": "chat-topbar",
+      "name": "Topbar",
+      "path": "./src/components/chat/Topbar/Topbar.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component definition found",
+        "message": "File: D:\\react-training\\examples\\src\\components\\chat\\Topbar\\Topbar.tsx\nError:\nCannot find module '@/types/chat'\nYou can debug your component file in this playground: https://react-docgen.dev/playground\nCode:\nimport React from 'react';\nimport { ArrowLeft } from 'lucide-react';\nimport { Button } from '@/components/Button/Button';\nimport iconAdd from '@/assets/icons/add-light.png';\n\nexport type { ChatMessage } from '../ChatMessageList/ChatMessageList';\nimport { type TopbarProps } from \"@/types/chat\";\n\n\nexport const Topbar = ({\n  isBreadcrumbMode = false,\n  chatTitle,\n  messages = [],\n  onBackToChat,\n  onNewChat,\n}: TopbarProps) => {\n  const firstUserMessage = messages.find((m) => m.sender === 'user')?.text;\n  const displayTitle =\n    chatTitle ||\n    (firstUserMessage\n      ? firstUserMessage.length > 30\n        ? `${firstUserMessage.slice(0, 30)}...`\n        : firstUserMessage\n      : '');\n\n  return (\n    <header\n      className=\"w-full flex items-center justify-between sticky top-0 z-10 shrink-0 border-b transition-colors bg-white/80 backdrop-blur-md border-slate-200/80 px-4 md:px-6 py-6 shadow-sm\">\n      <div className=\"flex items-center gap-1 md:gap-2 text-sm min-w-0\">\n        {isBreadcrumbMode ? (\n          <>\n            {onBackToChat && (\n              <button\n                onClick={onBackToChat}\n                className=\"md:hidden w-8 h-8 rounded-xl flex items-center justify-center hover:bg-slate-100 transition shrink-0\"\n              >\n                <ArrowLeft className=\"w-4 h-4 text-slate-600\" />\n              </button>\n            )}\n            <button\n              onClick={onBackToChat}\n              className=\"hidden md:inline text-slate-500 hover:text-blue-600 font-medium transition truncate max-w-120 md:max-w-200\"\n              title={displayTitle}\n            >\n              {displayTitle}\n            </button>\n            <span className=\"text-slate-400 hidden md:inline\">&gt;</span>\n            <span className=\"font-bold text-slate-800 truncate text-xs md:text-sm\">Select Fare</span>\n          </>\n        ) : (\n          <h2 className=\"text-sm md:text-base font-semibold text-slate-800 truncate max-w-120 md:max-w-md\">\n            {displayTitle}\n          </h2>\n        )}\n      </div>\n\n      <div className=\"-translate-x-4 -translate-y-2\">\n        <Button\n          variant=\"primary\"\n          size=\"md\"\n          leftIcon={\n            <img\n              src={iconAdd}\n              alt=\"Add\"\n              className=\"w-5 h-5\"\n            />\n          }\n          onClick={onNewChat}\n        >\n          <span className=\"hidden sm:inline\">Start New Chat</span>\n        </Button>\n      </div>\n    </header>\n  );\n};\n\n\nFile: D:\\react-training\\examples\\src\\components\\chat\\ChatMessageList\\ChatMessageList.tsx\nError:\nCannot find module '@/types/chat'\nYou can debug your component file in this playground: https://react-docgen.dev/playground\nCode:\nimport React from 'react';\r\nimport { ThinkingLoader } from '@/components/Thinking/ThinkingLoader';\r\nimport { FlightRecommendations } from '@/components/Recommendations/FlightRecommendations';\r\nimport { HotelRecommendations } from '@/components/Recommendations/HotelRecommendations';\r\nimport { PlacesCardWidget } from '@/components/Recommendations/PlacesCardWidget';\r\nimport { ItineraryCardWidget } from '@/components/Recommendations/ItineraryCardWidget';\r\nimport type { PlaceData, DayItinerary } from '@/types/travel';\r\nimport { useAutoScroll } from '@/hooks/useAutoScroll';\r\nimport type { ChatMessageListProps } from '@/types/chat';\r\n\r\n// Custom payload inside a chat message\r\nexport type MessageData = PlaceData[] | DayItinerary[] | unknown;\r\n\r\n// Type definition for an individual chat message item\r\nexport interface ChatMessage {\r\n  id: string;\r\n  sender: 'user' | 'ai';\r\n  text: string;\r\n  type?: 'text' | 'flight' | 'hotel' | 'places' | 'itinerary';\r\n  data?: MessageData;\r\n}\r\n\r\n// Props definition for managing chat message list rendering and callbacks\r\n\r\n\r\nexport const ChatMessageList = ({\r\n  messages,\r\n  isTyping,\r\n  onBookFlight,\r\n  onBookHotel,\r\n  onViewAllPlaces,\r\n  onViewAllItinerary,\r\n}: ChatMessageListProps) => {\r\n  const { ref: messagesEndRef } = useAutoScroll([messages, isTyping]);\r\n\r\n  return (\r\n    /* Message stream container with custom hidden scrollbars */\r\n    <div className=\"w-full flex-1 overflow-y-auto space-y-4 py-4 px-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]\">\r\n      {messages.map((msg, index) => {\r\n        const textLower = msg.text.toLowerCase();\r\n\r\n        // Get the previous message to infer context if necessary\r\n        const prevMsg = index > 0 ? messages[index - 1] : null;\r\n        const prevTextLower = prevMsg ? prevMsg.text.toLowerCase() : '';\r\n\r\n        // Detect if current message should render Flight recommendations\r\n        const isFlightType =\r\n          msg.type === 'flight' ||\r\n          (msg.sender === 'ai' && (textLower.includes('flight') || prevTextLower.includes('flight')));\r\n\r\n        // Detect if current message should render Hotel recommendations\r\n        const isHotelType =\r\n          msg.type === 'hotel' ||\r\n          (msg.sender === 'ai' && (textLower.includes('hotel') || prevTextLower.includes('hotel') || textLower.includes('bahamas')));\r\n\r\n        // Detect if current message should render Places widget\r\n        const isPlacesType =\r\n          msg.type === 'places' ||\r\n          (msg.sender === 'ai' && (\r\n            textLower.includes('place') ||\r\n            textLower.includes('place') ||\r\n            prevTextLower.includes('places') ||\r\n            prevTextLower.includes('place')\r\n          ));\r\n\r\n        // Detect if current message should render Itinerary widget\r\n        const isItineraryType =\r\n          msg.type === 'itinerary' ||\r\n          (msg.sender === 'ai' && (\r\n            textLower.includes('itinerary') ||\r\n            textLower.includes('itinerary') ||\r\n            prevTextLower.includes('itinerary') ||\r\n            prevTextLower.includes('itinerary')\r\n          ));\r\n\r\n        // Pass custom payload if exists; otherwise undefined so widgets fetch via API\r\n        const placesData = (Array.isArray(msg.data) && msg.data.length > 0)\r\n          ? (msg.data as PlaceData[])\r\n          : undefined;\r\n\r\n        const itineraryData = (Array.isArray(msg.data) && msg.data.length > 0)\r\n          ? (msg.data as DayItinerary[])\r\n          : undefined;\r\n\r\n        return (\r\n          <div\r\n            key={msg.id}\r\n            className={`flex ${msg.sender === 'user' ? 'justify-end' : 'items-start gap-3'}`}\r\n          >\r\n            <div className=\"flex flex-col gap-2 max-w-2xl w-full\">\r\n              {/* Message text bubble */}\r\n              {msg.text && (\r\n                <div\r\n                  className={`text-sm md:text-base whitespace-pre-line w-fit ${\r\n                    msg.sender === 'user'\r\n                      ? 'bg-white text-slate-900 px-6 py-4 rounded-2xl rounded-br-none ml-auto shadow-none border border-slate-100'\r\n                      : 'bg-transparent border-none text-slate-800 p-0 shadow-none'\r\n                  }`}\r\n                >\r\n                  {msg.text}\r\n                </div>\r\n              )}\r\n\r\n              {/* Render Flight Recommendation Card */}\r\n              {isFlightType && msg.sender === 'ai' && (\r\n                <FlightRecommendations\r\n                  title=\"Recommended Flights For a Round Trip Journey\"\r\n                  onBookNow={(id) => {\r\n                    if (onBookFlight) onBookFlight(id);\r\n                  }}\r\n                />\r\n              )}\r\n\r\n              {/* Render Hotel Recommendation Card */}\r\n              {isHotelType && msg.sender === 'ai' && (\r\n                <HotelRecommendations\r\n                  title=\"Recommended Hotels For a Three-Night Staycation\"\r\n                  onBookNow={(hotel) => {\r\n                    if (!onBookHotel) return;\r\n\r\n                    if (typeof hotel === 'string') {\r\n                      onBookHotel(hotel);\r\n                    } else if (hotel && typeof hotel === 'object' && 'id' in hotel) {\r\n                      onBookHotel(String(hotel.id));\r\n                    }\r\n                  }}\r\n                  onSeeAll={() => { /* TODO: Implement see all */ }}\r\n                />\r\n              )}\r\n\r\n              {/* Render Places Card Widget */}\r\n              {isPlacesType && msg.sender === 'ai' && (\r\n                <PlacesCardWidget\r\n                  places={placesData}\r\n                  onViewAll={() => onViewAllPlaces?.(placesData)}\r\n                />\r\n              )}\r\n\r\n              {/* Render Itinerary Card Widget */}\r\n              {isItineraryType && msg.sender === 'ai' && (\r\n                <ItineraryCardWidget\r\n                  itinerary={itineraryData}\r\n                  onViewAll={() => onViewAllItinerary?.(itineraryData)}\r\n                />\r\n              )}\r\n            </div>\r\n          </div>\r\n        );\r\n      })}\r\n\r\n      {/* Render AI thinking indicator when processing a query */}\r\n      {isTyping && (\r\n        <div className=\"flex items-center gap-3 pl-1\">\r\n          <ThinkingLoader text=\"Travelpal is thinking...\" />\r\n        </div>\r\n      )}\r\n\r\n      {/* Scroll anchor target */}\r\n      <div ref={messagesEndRef} />\r\n    </div>\r\n  );\r\n};\r\n"
+      },
+      "stories": [
+        {
+          "id": "chat-topbar--default",
+          "name": "Default",
+          "snippet": "const Default = () => <Topbar\r\n    chatTitle=\"Cheap flights to Lagos\"\r\n    messages={[{ id: '1', sender: 'user', text: 'Find cheap flights from Owerri to Lagos', type: 'text' }]} />;"
+        },
+        {
+          "id": "chat-topbar--breadcrumb-mode",
+          "name": "Breadcrumb Mode",
+          "snippet": "const BreadcrumbMode = () => <Topbar isBreadcrumbMode chatTitle=\"Cheap flights to Lagos\" />;"
+        },
+        {
+          "id": "chat-topbar--empty",
+          "name": "Empty",
+          "snippet": "const Empty = () => <Topbar messages={[]} />;"
+        }
+      ],
+      "import": "import { Topbar } from \"example1\";"
+    },
+    "chat-welcomestate": {
+      "id": "chat-welcomestate",
+      "name": "WelcomeState",
+      "path": "./src/components/chat/WelcomeState/WelcomeState.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "WelcomeState",
+        "definedInFile": "D:\\react-training\\examples\\src\\components\\chat\\WelcomeState\\WelcomeState.tsx",
+        "actualName": "WelcomeState",
+        "exportName": "WelcomeState",
+        "props": {
+          "prompts": {
+            "required": false,
+            "tsType": {
+              "name": "Array",
+              "elements": [
+                {
+                  "name": "string"
+                }
+              ],
+              "raw": "string[]"
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "[\n  \"Cheap flights from my location to Lagos\",\n  \"Trending places to visit in Akwa-Ibom\",\n  \"Plan a trip for the Calabar carnival\",\n  \"How much will it cost to travel the Bahamas from Mali?\",\n  \"Find Business Class flight from Owerri to Delta\",\n  \"Routes from Miami to Long Island Beach\"\n]",
+              "computed": false
+            }
+          },
+          "onSelectPrompt": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(prompt: string) => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "type": {
+                      "name": "string"
+                    },
+                    "name": "prompt"
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "chat-welcomestate--default",
+          "name": "Default",
+          "snippet": "const Default = () => <WelcomeState prompts={DEFAULT_PROMPTS} />;"
+        }
+      ],
+      "import": "import { WelcomeState } from \"example1\";"
+    }
+  },
+  "meta": {
+    "docgen": "react-docgen",
+    "durationMs": 817
+  }
+}

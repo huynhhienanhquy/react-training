@@ -2,11 +2,16 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { RecommendationWrapper } from './RecommendationWrapper'
 
 const meta: Meta<typeof RecommendationWrapper> = {
-  title: 'Components/Recommendations/RecommendationWrapper',
+  title: 'Chat/RecommendationWrapper',
   component: RecommendationWrapper,
   tags: ['autodocs'],
-  args: {
-    onSeeAll: () => {},
+  parameters: {
+    layout: 'padded',
+  },
+  argTypes: {
+    title: { control: 'text' },
+    seeAllText: { control: 'text' },
+    onSeeAll: { action: 'seeAll' },
   },
 }
 
@@ -24,7 +29,6 @@ export const WithSeeAll: Story = {
   args: {
     title: 'Popular Destinations',
     children: <div className="p-4 text-center text-slate-500">Destination Cards Here</div>,
-    onSeeAll: () => {},
   },
 }
 
@@ -32,7 +36,6 @@ export const CustomSeeAllText: Story = {
   args: {
     title: 'Nearby Hotels',
     children: <div className="p-4 text-center text-slate-500">Hotel Cards Here</div>,
-    onSeeAll: () => {},
     seeAllText: 'View All Hotels',
   },
 }
@@ -47,6 +50,5 @@ export const WithMultipleChildren: Story = {
         <div className="bg-slate-50 p-3 rounded-lg text-sm">Flight 3 - $400</div>
       </div>
     ),
-    onSeeAll: () => {},
   },
 }
