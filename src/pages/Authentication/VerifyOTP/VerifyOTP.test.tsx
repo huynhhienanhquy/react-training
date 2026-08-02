@@ -13,7 +13,7 @@ vi.mock("react-router-dom", () => ({
   useNavigate: () => mockNavigate,
 }));
 
-vi.mock("../../hooks/useFormState", () => ({
+vi.mock("@/hooks/useFormState", () => ({
   useFormState: () => ({
     isLoading: false,
     startLoading: mockStartLoading,
@@ -21,11 +21,11 @@ vi.mock("../../hooks/useFormState", () => ({
   }),
 }));
 
-vi.mock("../../components/SectionAuthentication/AuthLayout", () => ({
+vi.mock("@/components/auth/AuthLayout/AuthLayout", () => ({
   AuthLayout: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
 }));
 
-vi.mock("../../components/SectionAuthentication/AuthHeader", () => ({
+vi.mock("@/components/auth/AuthHeader/AuthHeader", () => ({
   AuthHeader: ({ title, subtitle }: { title: string; subtitle: string }) => (
     <>
       <h1>{title}</h1>
@@ -34,7 +34,7 @@ vi.mock("../../components/SectionAuthentication/AuthHeader", () => ({
   ),
 }));
 
-vi.mock("../../components/Button/Button", () => ({
+vi.mock("@/components/Button/Button", () => ({
   Button: ({ children }: { children: React.ReactNode }) => <button type="submit">{children}</button>,
 }));
 
@@ -47,7 +47,7 @@ describe("VerifyOTP", () => {
     vi.useFakeTimers();
     render(<VerifyOTP />);
 
-    expect(screen.getByText("Enter OTP")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Enter OTP" })).toBeInTheDocument();
     expect(screen.getByText("Verify OTP")).toBeInTheDocument();
     expect(screen.getByText(/Resend in 00:29/)).toBeInTheDocument();
     vi.useRealTimers();
@@ -140,7 +140,7 @@ describe("VerifyOTP", () => {
     expect(mockStartLoading).toHaveBeenCalled();
 
     act(() => {
-      vi.advanceTimersByTime(300);
+      vi.advanceTimersByTime(1600);
     });
 
     expect(mockStopLoading).toHaveBeenCalled();

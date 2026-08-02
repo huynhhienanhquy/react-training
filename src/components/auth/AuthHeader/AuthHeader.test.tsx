@@ -44,8 +44,8 @@ describe("AuthHeader", () => {
     );
 
     expect(container.firstChild).toHaveClass("space-y-2");
-    expect(container.firstChild).toHaveClass("mb-6");
-    expect(container.firstChild).toHaveClass("md:mb-10");
+    expect(container.firstChild).toHaveClass("mb-2");
+    expect(container.firstChild).toHaveClass("md:mb-4");
   });
 
   it("renders the title as an h2 element", () => {

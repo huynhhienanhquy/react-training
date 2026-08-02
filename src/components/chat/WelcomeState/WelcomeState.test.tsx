@@ -78,17 +78,17 @@ describe('WelcomeState', () => {
 
 
     expect(
-      screen.getByAltText('Beach')
+      screen.getByAltText('Nature')
     ).toBeInTheDocument();
 
 
     expect(
-      screen.getByAltText('Travel')
+      screen.getByAltText('Travel group')
     ).toBeInTheDocument();
 
 
     expect(
-      screen.getByAltText('Resort')
+      screen.getByAltText('Resort beach')
     ).toBeInTheDocument();
   });
 

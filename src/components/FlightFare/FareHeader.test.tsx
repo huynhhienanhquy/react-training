@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { FareHeader } from './FareHeader';
 
-vi.mock('../../../../components/Card/Card', () => ({
+vi.mock('@/components/Card/Card', () => ({
   Card: ({
     children,
     variant,
@@ -19,7 +19,7 @@ vi.mock('../../../../components/Card/Card', () => ({
   ),
 }));
 
-vi.mock('../../../../components/PriceDisplay/PriceDisplay', () => ({
+vi.mock('@/components/PriceDisplay/PriceDisplay', () => ({
   PriceDisplay: ({
     amount,
     size,

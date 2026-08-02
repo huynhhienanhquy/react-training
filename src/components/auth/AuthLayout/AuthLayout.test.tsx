@@ -3,7 +3,7 @@ import { describe, it, expect, vi } from "vitest";
 import { AuthLayout } from "./AuthLayout";
 
 // Mock LoadingOverlay
-vi.mock("../Loading/LoadingOverlay", () => ({
+vi.mock("@/components/Loading/LoadingOverlay", () => ({
   LoadingOverlay: ({ isVisible }: { isVisible: boolean }) => (
     <div data-testid="loading-overlay">
       {isVisible ? "Loading" : "Not Loading"}

@@ -18,7 +18,7 @@ vi.mock("react-router-dom", () => ({
   useNavigate: () => mockNavigate,
 }));
 
-vi.mock("../../hooks/useFormState", () => ({
+vi.mock("@/hooks/useFormState", () => ({
   useFormState: () => ({
     isLoading: false,
     startLoading: mockStartLoading,
@@ -26,13 +26,13 @@ vi.mock("../../hooks/useFormState", () => ({
   }),
 }));
 
-vi.mock("../../components/SectionAuthentication/AuthLayout", () => ({
+vi.mock("@/components/auth/AuthLayout/AuthLayout", () => ({
   AuthLayout: ({ children }: { children: React.ReactNode }) => (
     <div>{children}</div>
   ),
 }));
 
-vi.mock("../../components/SectionAuthentication/AuthHeader", () => ({
+vi.mock("@/components/auth/AuthHeader/AuthHeader", () => ({
   AuthHeader: ({
     title,
     subtitle,
@@ -47,7 +47,7 @@ vi.mock("../../components/SectionAuthentication/AuthHeader", () => ({
   ),
 }));
 
-vi.mock("../../components/TextField/InputField", () => ({
+vi.mock("@/components/Input/InputField", () => ({
   InputField: ({
     label,
     value,
@@ -65,7 +65,7 @@ vi.mock("../../components/TextField/InputField", () => ({
   ),
 }));
 
-vi.mock("../../components/Button/Button", () => ({
+vi.mock("@/components/Button/Button", () => ({
   Button: ({
     children,
   }: {
@@ -77,7 +77,7 @@ vi.mock("../../components/Button/Button", () => ({
   ),
 }));
 
-vi.mock("../../components/SectionAuthentication/AuthFooter", () => ({
+vi.mock("@/components/auth/AuthFooter/AuthFooter", () => ({
   AuthFooter: ({
     actionText,
     onActionClick,

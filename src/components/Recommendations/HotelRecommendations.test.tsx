@@ -18,10 +18,10 @@ import { getHotelListApi } from "@/services/hotelService";
 import type { HotelData } from "@/types/hotel";
 
 
-vi.mock("../../../../services/hotelService", async () => {
-  const actual = await vi.importActual<
-    typeof import("../../services/hotelService")
-  >("../../../../services/hotelService");
+vi.mock("@/services/hotelService", async () => {
+  const actual = await vi.importActual<typeof import("@/services/hotelService")>(
+    "@/services/hotelService"
+  );
 
   return {
     ...actual,
@@ -42,36 +42,6 @@ vi.mock("./RecommendationWrapper", () => ({
       <h2>{title}</h2>
       {children}
     </div>
-  ),
-}));
-
-
-vi.mock("../../../../components/Button/FavoriteButton", () => ({
-  FavoriteButton: ({
-    isFavorite,
-    onToggle,
-  }: {
-    isFavorite: boolean;
-    onToggle: () => void;
-  }) => (
-    <button onClick={onToggle}>
-      {isFavorite ? "Unfavorite" : "Favorite"}
-    </button>
-  ),
-}));
-
-
-vi.mock("../../../../components/Button/Button", () => ({
-  Button: ({
-    children,
-    onClick,
-  }: {
-    children: React.ReactNode;
-    onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  }) => (
-    <button onClick={onClick}>
-      {children}
-    </button>
   ),
 }));
 
@@ -409,18 +379,20 @@ describe("HotelRecommendations", () => {
     );
 
 
+    const favoriteButton = screen.getByRole(
+      "button",
+      { name: /favorite/i }
+    );
+
+
     await user.click(
-      screen.getByText(
-        "Favorite"
-      )
+      favoriteButton
     );
 
 
     expect(
-      screen.getByText(
-        "Unfavorite"
-      )
-    ).toBeInTheDocument();
+      favoriteButton
+    ).toHaveClass("bg-blue-600");
 
   });
 

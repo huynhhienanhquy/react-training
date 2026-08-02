@@ -7,10 +7,10 @@ import { FlightRecommendations } from "./FlightRecommendations";
 import { getFlightListApi } from "@/services/fareService";
 
 
-vi.mock("../../../../services/fareService", async () => {
-  const actual = await vi.importActual<
-    typeof import("../../services/fareService")
-  >("../../../../services/fareService");
+vi.mock("@/services/fareService", async () => {
+  const actual = await vi.importActual<typeof import("@/services/fareService")>(
+    "@/services/fareService"
+  );
 
   return {
     ...actual,
@@ -31,48 +31,6 @@ vi.mock("./RecommendationWrapper", () => ({
       <h2>{title}</h2>
       {children}
     </div>
-  ),
-}));
-
-
-vi.mock("../../../../components/Button/FavoriteButton", () => ({
-  FavoriteButton: ({
-    isFavorite,
-    onToggle,
-  }: {
-    isFavorite: boolean;
-    onToggle: () => void;
-  }) => (
-    <button onClick={onToggle}>
-      {isFavorite ? "Unfavorite" : "Favorite"}
-    </button>
-  ),
-}));
-
-
-vi.mock("../../../../components/Button/Button", () => ({
-  Button: ({
-    children,
-    onClick,
-  }: {
-    children: React.ReactNode;
-    onClick?: () => void;
-  }) => (
-    <button onClick={onClick}>
-      {children}
-    </button>
-  ),
-}));
-
-
-vi.mock("../../../../components/PriceDisplay/PriceDisplay", () => ({
-  PriceDisplay: ({
-    amount,
-  }: {
-    amount: string;
-    size: "sm" | "md" | "lg";
-  }) => (
-    <span>{amount}</span>
   ),
 }));
 
@@ -326,24 +284,30 @@ describe("FlightRecommendations", () => {
     );
 
 
+    const favoriteButton = screen.getByRole(
+      "button",
+      { name: /favorite/i }
+    );
+
+
     await user.click(
-      screen.getByText("Favorite")
+      favoriteButton
     );
 
 
     expect(
-      screen.getByText("Unfavorite")
-    ).toBeInTheDocument();
+      favoriteButton
+    ).toHaveClass("bg-blue-600");
 
 
     await user.click(
-      screen.getByText("Unfavorite")
+      favoriteButton
     );
 
 
     expect(
-      screen.getByText("Favorite")
-    ).toBeInTheDocument();
+      favoriteButton
+    ).toHaveClass("bg-primary-light");
   });
 
 

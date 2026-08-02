@@ -6,12 +6,12 @@ import { ItineraryCardWidget } from './ItineraryCardWidget';
 import { getItineraryListApi } from '@/services/travelService';
 
 
-vi.mock('../../../../services/travelService', () => ({
+vi.mock('@/services/travelService', () => ({
   getItineraryListApi: vi.fn(),
 }));
 
 
-vi.mock('../../../../components/Button/Button', () => ({
+vi.mock('@/components/Button/Button', () => ({
   Button: ({
     children,
     onClick,

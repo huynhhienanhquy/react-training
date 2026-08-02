@@ -6,12 +6,12 @@ import { PlacesCardWidget } from "./PlacesCardWidget";
 import { getPlaceListApi } from "@/services/travelService";
 
 
-vi.mock("../../../../services/travelService", () => ({
+vi.mock("@/services/travelService", () => ({
   getPlaceListApi: vi.fn(),
 }));
 
 
-vi.mock("../../../../components/Button/Button", () => ({
+vi.mock("@/components/Button/Button", () => ({
   Button: ({
     children,
     onClick,

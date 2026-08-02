@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { AuthLayout } from './AuthLayout'
-import { AuthHeader } from '../auth/AuthHeader/AuthHeader'
-import { AuthFooter } from '../auth/AuthFooter/AuthFooter'
-import { Button } from '../Button/Button'
-import { InputField } from '../Input/InputField'
+import { AuthHeader } from '../AuthHeader/AuthHeader'
+import { AuthFooter } from '../AuthFooter/AuthFooter'
+import { Button } from '../../Button/Button'
+import { InputField } from '../../Input/InputField'
 
 const meta: Meta<typeof AuthLayout> = {
   title: 'Auth/AuthLayout',
