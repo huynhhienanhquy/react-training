@@ -75,37 +75,37 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
             }
           />
 
-{/* Navigation Items */}
-<nav className="flex flex-col gap-3.5 items-center w-full">
-  {navItems.map((item) => {
-    const isActive = activeNav === item.id;
+          {/* Navigation Items */}
+          <nav className="flex flex-col gap-3.5 items-center w-full">
+            {navItems.map((item) => {
+              const isActive = activeNav === item.id;
 
-    return (
-      <Button
-        key={item.id}
-        type="button"
-        variant="ghost"
-        size="icon"
-        className={`w-11 h-11 min-w-11 min-h-11 !p-0 !flex !items-center !justify-center !rounded-xl ${
-          isActive
-            ? 'bg-blue-50 border-2 border-blue-200 shadow-sm shadow-blue-100/50'
-            : 'bg-transparent border-2 border-transparent hover:bg-white/80 hover:border-slate-200/60'
-        }`}
-        onClick={() => setActiveNav(item.id)}
-      >
-        <img
-          src={item.icon}
-          alt={item.alt}
-          className={`block w-5 h-5 object-contain transition-all duration-200 ${
-            isActive
-              ? 'opacity-100 scale-105 [filter:invert(38%)_sepia(88%)_saturate(2421%)_hue-rotate(200deg)_brightness(98%)_contrast(96%)]'
-              : 'opacity-70 hover:opacity-100'
-          }`}
-        />
-      </Button>
-    );
-  })}
-</nav>
+              return (
+                <Button
+                  key={item.id}
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  className={`w-11 h-11 min-w-11 min-h-11 !p-0 !flex !items-center !justify-center !rounded-xl ${
+                    isActive
+                      ? 'bg-blue-50 border-2 border-blue-200 shadow-sm shadow-blue-100/50'
+                      : 'bg-transparent border-2 border-transparent hover:bg-white/80 hover:border-slate-200/60'
+                  }`}
+                  onClick={() => setActiveNav(item.id)}
+                >
+                  <img
+                    src={item.icon}
+                    alt={item.alt}
+                    className={`block w-5 h-5 object-contain transition-all duration-200 ${
+                      isActive
+                        ? 'opacity-100 scale-105 filter-logo-active'
+                        : 'opacity-70 hover:opacity-100'
+                    }`}
+                  />
+                </Button>
+              );
+            })}
+          </nav>
         </div>
 
         {/* User Avatar & Logout Popover */}
@@ -203,7 +203,7 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
                           alt={item.alt}
                           className={`w-5 h-5 object-contain transition-all duration-200 ${
                             isActive
-                              ? 'opacity-100 scale-105 [filter:invert(38%)_sepia(88%)_saturate(2421%)_hue-rotate(200deg)_brightness(98%)_contrast(96%)]'
+                              ? 'opacity-100 scale-105 filter-logo-active'
                               : 'opacity-70 hover:opacity-100'
                           }`}
                         />

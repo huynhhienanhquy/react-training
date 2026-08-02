@@ -35,7 +35,7 @@ export const ChatMessageList = ({
 
   return (
     /* Message stream container with custom hidden scrollbars */
-    <div className="w-full flex-1 overflow-y-auto space-y-4 py-4 px-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+    <div className="w-full flex-1 overflow-y-auto space-y-4 py-4 px-2 scrollbar-hide">
       {messages.map((msg, index) => {
         const textLower = msg.text.toLowerCase();
 

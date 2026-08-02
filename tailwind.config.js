@@ -80,6 +80,7 @@ export default {
       },
 
       spacing: {
+        17: '4.25rem',
         18: '4.5rem',
         22: '5.5rem',
 
@@ -89,6 +90,7 @@ export default {
         120: '120px',
         125: '125px',
         150: '150px',
+        160: '160px',
         200: '200px',
         280: '280px',
         300: '300px',
@@ -106,6 +108,14 @@ export default {
       borderWidth: {
         3: '3px',
         10: '10px',
+      },
+
+      width: {
+        45: '45%',
+      },
+
+      scale: {
+        99: '0.99',
       },
 
       fontSize: {

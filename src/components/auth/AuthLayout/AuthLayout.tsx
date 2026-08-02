@@ -25,7 +25,7 @@ export const AuthLayout = ({
       <div className="relative z-10 w-full max-w-1440 min-h-screen flex items-center justify-center lg:justify-end">
 
         {/* TEXT ON THE LEFT */}
-        <div className="absolute bottom-120 left-0 w-full lg:w-[45%] xl:w-[50%] text-white space-y-2 p-4 hidden lg:block">
+        <div className="absolute bottom-120 left-0 w-full lg:w-45 xl:w-1/2 text-white space-y-2 p-4 hidden lg:block">
           <h1 className="text-3xl xl:text-display-md font-bold leading-1.2 tracking-tight">
             Discover Amazing Deals & Thrilling Adventures
           </h1>

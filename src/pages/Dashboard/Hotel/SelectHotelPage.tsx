@@ -261,7 +261,7 @@ export const SelectHotelPage = ({
                     </div>
 
                     {/* Price column & Booking button on the right */}
-                    <div className="flex md:flex-col items-center md:items-end justify-between md:justify-center gap-4 pt-4 md:pt-0 border-t md:border-t-0 md:border-l border-slate-200/60 md:pl-8 shrink-0 min-w-[160px]">
+                    <div className="flex md:flex-col items-center md:items-end justify-between md:justify-center gap-4 pt-4 md:pt-0 border-t md:border-t-0 md:border-l border-slate-200/60 md:pl-8 shrink-0 min-w-160">
                       <span className="text-2xl sm:text-3xl font-black text-ink-alt tracking-tight">
                         ${mainPrice}
                       </span>
