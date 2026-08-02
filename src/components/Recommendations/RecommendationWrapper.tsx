@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from '@/components/Button/Button';
 import { type RecommendationWrapperProps } from '@/types/card';
 
 export const RecommendationWrapper = ({
@@ -20,12 +21,15 @@ export const RecommendationWrapper = ({
 
         {/* See All Button */}
         {onSeeAll && (
-          <button
+          <Button
+            type="button"
+            variant="secondary"
+            size="none"
+            className="w-full py-3 text-xs rounded-xl mt-2"
             onClick={onSeeAll}
-            className="w-full py-3 bg-primary-light hover:bg-blue-600 hover:text-white text-blue-600 text-xs font-bold rounded-xl transition-all duration-200 text-center mt-2 cursor-pointer"
           >
             {seeAllText}
-          </button>
+          </Button>
         )}
       </div>
     </div>

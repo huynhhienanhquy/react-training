@@ -1,6 +1,7 @@
 import image1 from '@/assets/images/Rectangle 1.png';
 import image2 from '@/assets/images/Rectangle 2.png';
 import image3 from '@/assets/images/Rectangle 3.png';
+import { Button } from '@/components/Button/Button';
 
 const DEFAULT_PROMPTS = [
   "Cheap flights from my location to Lagos",
@@ -58,37 +59,46 @@ export const WelcomeState = ({
       <div className="flex flex-col items-center gap-3 w-full max-w-4xl mb-8">
         <div className="flex flex-wrap justify-center gap-3">
           {prompts.slice(0, 3).map((prompt, index) => (
-            <button
+            <Button
               key={index}
+              type="button"
+              variant="outline"
+              size="sm"
+              className="px-4 py-2.5 rounded-2xl"
               onClick={() => onSelectPrompt(prompt)}
-              className="bg-white hover:bg-slate-50 text-slate-600 text-xs md:text-sm px-4 py-2.5 rounded-2xl border border-slate-100 shadow-sm font-medium transition duration-200"
             >
               {prompt}
-            </button>
+            </Button>
           ))}
         </div>
 
         <div className="flex flex-wrap justify-center gap-3">
           {prompts.slice(3, 5).map((prompt, index) => (
-            <button
+            <Button
               key={index + 3}
+              type="button"
+              variant="outline"
+              size="sm"
+              className="px-4 py-2.5 rounded-2xl"
               onClick={() => onSelectPrompt(prompt)}
-              className="bg-white hover:bg-slate-50 text-slate-600 text-xs md:text-sm px-4 py-2.5 rounded-2xl border border-slate-100 shadow-sm font-medium transition duration-200"
             >
               {prompt}
-            </button>
+            </Button>
           ))}
         </div>
 
         <div className="flex flex-wrap justify-center gap-3">
           {prompts.slice(5, 6).map((prompt, index) => (
-            <button
+            <Button
               key={index + 5}
+              type="button"
+              variant="outline"
+              size="sm"
+              className="px-4 py-2.5 rounded-2xl"
               onClick={() => onSelectPrompt(prompt)}
-              className="bg-white hover:bg-slate-50 text-slate-600 text-xs md:text-sm px-4 py-2.5 rounded-2xl border border-slate-100 shadow-sm font-medium transition duration-200"
             >
               {prompt}
-            </button>
+            </Button>
           ))}
         </div>
       </div>

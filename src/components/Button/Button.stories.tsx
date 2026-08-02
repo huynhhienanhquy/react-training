@@ -9,8 +9,8 @@ const meta: Meta<typeof Button> = {
     layout: 'centered',
   },
   argTypes: {
-    variant: { control: 'select', options: ['primary', 'secondary', 'social', 'dark', 'ghost'] },
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    variant: { control: 'select', options: ['primary', 'secondary', 'social', 'dark', 'ghost', 'danger', 'favorite', 'light', 'outline'] },
+    size: { control: 'select', options: ['sm', 'md', 'lg', 'icon', 'none'] },
     isLoading: { control: 'boolean' },
     disabled: { control: 'boolean' },
   },
@@ -49,6 +49,14 @@ export const Dark: Story = {
 
 export const Ghost: Story = {
   args: { children: 'Cancel', variant: 'ghost', size: 'md' },
+}
+
+export const Light: Story = {
+  args: { children: 'Change Flight', variant: 'light', size: 'sm' },
+}
+
+export const Outline: Story = {
+  args: { children: 'Find me the best restaurants', variant: 'outline', size: 'sm' },
 }
 
 export const WithRightIcon: Story = {

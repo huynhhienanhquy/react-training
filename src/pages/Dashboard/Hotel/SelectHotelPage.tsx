@@ -159,9 +159,12 @@ export const SelectHotelPage = ({
               <div className="flex items-center gap-2">
                 {/* The Back button is dedicated to mobile devices. */}
                 {onBackToChat && (
-                  <button
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="none"
+                    className="md:hidden p-2 -ml-2 rounded-xl text-slate-600 hover:bg-slate-200/60 active:scale-95"
                     onClick={onBackToChat}
-                    className="md:hidden p-2 -ml-2 rounded-xl text-slate-600 hover:bg-slate-200/60 active:scale-95 transition-all cursor-pointer"
                     aria-label="Go back to chat"
                   >
                     <svg
@@ -177,7 +180,7 @@ export const SelectHotelPage = ({
                         d="M15 19l-7-7 7-7"
                       />
                     </svg>
-                  </button>
+                  </Button>
                 )}
 
                 <SectionHeader title="Other available accommodations" />
@@ -263,13 +266,15 @@ export const SelectHotelPage = ({
                         ${mainPrice}
                       </span>
 
-                      <button
+                      <Button
                         type="button"
+                        variant="light"
+                        size="none"
+                        className="px-6 py-3 bg-primary-soft text-primary-strong text-xs sm:text-sm rounded-2xl"
                         onClick={(e) => handleBookHotel(e, hotel)}
-                        className="px-6 py-3 bg-primary-soft hover:bg-blue-100 text-primary-strong font-bold text-xs sm:text-sm rounded-2xl transition-colors duration-150 active:scale-95 cursor-pointer"
                       >
                         Book Hotel
-                      </button>
+                      </Button>
                     </div>
 
                   </div>

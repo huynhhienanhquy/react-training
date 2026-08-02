@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button } from '@/components/Button/Button';
 
 type InputFieldProps = {
   label: string;
@@ -31,10 +32,12 @@ export const InputField = ({
         />
 
         {isPassword && (
-          <button
+          <Button
             type="button"
+            variant="ghost"
+            size="icon"
+            className="absolute inset-y-0 right-4 w-auto h-auto md:w-auto md:h-auto p-0 active:scale-95 select-none"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute inset-y-0 right-4 flex items-center justify-center transition active:scale-95 select-none"
             tabIndex={-1}
           >
             {showPassword ? (
@@ -48,7 +51,7 @@ export const InputField = ({
                 <circle cx="12" cy="12" r="3" />
               </svg>
             )}
-          </button>
+          </Button>
         )}
       </div>
     </div>

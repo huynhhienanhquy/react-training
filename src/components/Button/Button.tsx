@@ -1,4 +1,5 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import { twMerge } from 'tailwind-merge';
 import iconHeart from '@/assets/icons/heart-blue.png';
 import iconArrowRight from '@/assets/icons/arrow-right.png';
 import iconGoogle from '@/assets/icons/logo-google.png';
@@ -11,9 +12,11 @@ type ButtonVariant =
   | 'dark'
   | 'ghost'
   | 'danger'
-  | 'favorite';
+  | 'favorite'
+  | 'light'
+  | 'outline';
 
-type ButtonSize = 'sm' | 'md' | 'lg' | 'icon';
+type ButtonSize = 'sm' | 'md' | 'lg' | 'icon' | 'none';
 
 type SocialIcon = 'google' | 'apple';
 
@@ -49,6 +52,12 @@ const variantStyles: Record<ButtonVariant, string> = {
     'bg-red-600 hover:bg-red-700 text-white',
 
   favorite: '',
+
+  light:
+    'bg-surface-section hover:bg-blue-100 text-blue-600',
+
+  outline:
+    'bg-white hover:bg-slate-50 text-slate-600 border border-slate-100 shadow-sm',
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
@@ -56,7 +65,11 @@ const sizeStyles: Record<ButtonSize, string> = {
   md: 'px-5 py-3 text-sm rounded-xl',
   lg: 'w-full py-4 text-base rounded-xl',
   icon: 'w-10 h-10 md:w-9 md:h-9 rounded-xl',
+  none: '',
 };
+
+const baseStyles =
+  'font-bold transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.99] cursor-pointer';
 
 export function Button({
   variant = 'primary',
@@ -82,12 +95,13 @@ export function Button({
   return (
     <button
       disabled={disabled || isLoading}
-      className={`font-bold transition-all duration-200 flex items-center justify-center gap-2
-        disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.99] cursor-pointer
-        ${variantStyles[variant]}
-        ${sizeStyles[size]}
-        ${favoriteStyle}
-        ${className}`}
+      className={twMerge(
+        baseStyles,
+        variantStyles[variant],
+        sizeStyles[size],
+        favoriteStyle,
+        className,
+      )}
       {...props}
     >
       {isLoading && (
@@ -130,22 +144,26 @@ export function Button({
             />
           )}
 
-          {!socialIcon && leftIcon && (
+          {!socialIcon && variant !== 'favorite' && leftIcon && (
             <span className="shrink-0">{leftIcon}</span>
           )}
         </>
       )}
 
       {variant === 'favorite' ? (
-        <img
-          src={iconHeart}
-          alt="Favorite"
-          className={`w-4 h-4 transition-all duration-200 object-contain ${
-            isFavorite
-              ? 'brightness-0 invert scale-110'
-              : 'opacity-70 hover:opacity-100'
-          }`}
-        />
+        leftIcon ? (
+          <span className="shrink-0">{leftIcon}</span>
+        ) : (
+          <img
+            src={iconHeart}
+            alt="Favorite"
+            className={`w-4 h-4 transition-all duration-200 object-contain ${
+              isFavorite
+                ? 'brightness-0 invert scale-110'
+                : 'opacity-70 hover:opacity-100'
+            }`}
+          />
+        )
       ) : (
         <>
           <span>{children}</span>
@@ -166,4 +184,3 @@ export function Button({
     </button>
   );
 }
-

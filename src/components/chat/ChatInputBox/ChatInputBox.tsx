@@ -5,6 +5,7 @@ import iconMic from '@/assets/icons/microphone-2.png';
 import iconSend from '@/assets/icons/send-2.png';
 import { type ChatInputBoxProps } from "@/types/chat";
 import { useEnterToSend } from '@/hooks/useEnterToSend';
+import { Button } from '@/components/Button/Button';
 
 export const ChatInputBox = ({
   inputMessage,
@@ -32,42 +33,56 @@ export const ChatInputBox = ({
       {/* Action Toolbar */}
       <div className="flex items-center justify-between pt-2 mt-2">
         {/* Attachment / Plus Action Button */}
-        <button className="-translate-x-7 translate-y-2  w-9 h-9 rounded-full flex items-center justify-center hover:bg-slate-100 transition p-2 cursor-pointer">
-          <img
-            src={iconPlus}
-            alt="Add attachment"
-            className="w-5 h-5 object-contain opacity-40 hover:opacity-70"
-          />
-        </button>
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon"
+          className="-translate-x-7 translate-y-2 w-9 h-9 rounded-full p-2"
+          leftIcon={
+            <img
+              src={iconPlus}
+              alt="Add attachment"
+              className="w-5 h-5 object-contain opacity-40 hover:opacity-70"
+            />
+          }
+        />
 
         <div className="flex items-center gap-3">
           {/* Voice Recording Toggle Button */}
-          <button
-            onClick={() => setIsRecording((prev) => !prev)}
-            className={`w-10 h-10 md:w-9 md:h-9 rounded-full flex items-center justify-center transition p-2 ${
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            className={`w-10 h-10 md:w-9 md:h-9 rounded-full p-2 ${
               isRecording ? 'bg-red-50 animate-pulse' : 'hover:bg-slate-100'
             }`}
-          >
-            <img
-              src={iconMic}
-              alt="Voice input"
-              className={`w-5 h-5 object-contain transition ${
-                isRecording ? 'filter-red' : 'opacity-40 hover:opacity-70'
-              }`}
-            />
-          </button>
+            onClick={() => setIsRecording((prev) => !prev)}
+            leftIcon={
+              <img
+                src={iconMic}
+                alt="Voice input"
+                className={`w-5 h-5 object-contain transition ${
+                  isRecording ? 'filter-red' : 'opacity-40 hover:opacity-70'
+                }`}
+              />
+            }
+          />
 
           {/* Message Submit Button */}
-          <button
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            className="w-11 h-11 md:w-14 md:h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl p-2.5 shadow-md shadow-blue-500/30 shrink-0"
             onClick={onSend}
-            className="w-11 h-11 md:w-14 md:h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl flex items-center justify-center p-2.5 shadow-md shadow-blue-500/30 transition transform active:scale-95 shrink-0"
-          >
-            <img
-              src={iconSend}
-              alt="Send message"
-              className="w-5 h-5 object-contain filter brightness-0 invert"
-            />
-          </button>
+            leftIcon={
+              <img
+                src={iconSend}
+                alt="Send message"
+                className="w-5 h-5 object-contain filter brightness-0 invert"
+              />
+            }
+          />
         </div>
       </div>
     </div>

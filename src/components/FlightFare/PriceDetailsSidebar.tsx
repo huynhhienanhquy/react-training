@@ -1,6 +1,7 @@
 
 import { Card } from '@/components/Card/Card';
 import { InfoRow } from '@/components/InfoRow/InfoRow';
+import { Button } from '@/components/Button/Button';
 import type { PriceDetailsSidebarProps } from '@/types/flightfare';
 
 export const PriceDetailsSidebar = ({
@@ -31,9 +32,14 @@ export const PriceDetailsSidebar = ({
       </div>
 
       {/* Primary Call To Action (CTA) Button */}
-      <button className="w-full py-3.5 bg-surface-section hover:bg-blue-600 hover:text-white text-blue-600 font-semibold text-xs md:text-sm rounded-2xl transition cursor-pointer active:scale-95">
+      <Button
+        type="button"
+        variant="light"
+        size="none"
+        className="w-full py-3.5 text-xs md:text-sm rounded-2xl hover:bg-blue-600 hover:text-white active:scale-95"
+      >
         Select booking platform
-      </button>
+      </Button>
     </Card>
   );
 };

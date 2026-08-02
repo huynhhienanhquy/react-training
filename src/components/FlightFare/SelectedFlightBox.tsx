@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { SectionHeader } from './SectionHeader/SectionHeader';
 import { Card } from '@/components/Card/Card';
+import { Button } from '@/components/Button/Button';
 import type { FlightLeg } from '@/types/flight';
 import type { SelectedFlightBoxProps } from '@/types/flightfare';
 
@@ -40,25 +41,33 @@ export const SelectedFlightBox = ({
           {/* Action Buttons */}
           <div className="flex items-center gap-2">
             {/* Bookmark / Favorite Toggle Button */}
-            <button
+            <Button
+              type="button"
+              variant="favorite"
+              size="icon"
+              isFavorite={isFavorite}
+              className="w-9 h-9 rounded-xl p-2 active:scale-95"
               onClick={() => setIsFavorite(!isFavorite)}
-              className={`w-9 h-9 rounded-xl flex items-center justify-center transition p-2 cursor-pointer active:scale-95 ${
-                isFavorite ? 'bg-blue-100' : 'bg-surface-section hover:bg-blue-100'
-              }`}
-            >
-              <img
-                src={iconHeart}
-                alt="Favorite"
-                className={`w-4 h-4 object-contain transition-transform ${
-                  isFavorite ? 'scale-110' : ''
-                }`}
-              />
-            </button>
+              leftIcon={
+                <img
+                  src={iconHeart}
+                  alt="Favorite"
+                  className={`w-4 h-4 object-contain transition-transform ${
+                    isFavorite ? 'scale-110' : ''
+                  }`}
+                />
+              }
+            />
 
             {/* Button to switch or re-select flight */}
-            <button className="px-4 py-2 bg-surface-section hover:bg-blue-100 text-blue-600 text-xs font-semibold rounded-xl transition cursor-pointer active:scale-95">
+            <Button
+              type="button"
+              variant="light"
+              size="sm"
+              className="px-4 active:scale-95"
+            >
               Change Flight
-            </button>
+            </Button>
           </div>
         </div>
 

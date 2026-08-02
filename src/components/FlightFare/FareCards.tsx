@@ -2,6 +2,7 @@
 import { CheckCircle2 } from 'lucide-react';
 import { SectionHeader } from './SectionHeader/SectionHeader';
 import { PriceDisplay } from '@/components/PriceDisplay/PriceDisplay';
+import { Button } from '@/components/Button/Button';
 
 import type { FareOption } from '@/types/flight';
 import type { FareCardsProps } from '@/types/flightfare';
@@ -67,16 +68,15 @@ export type { FareOption };
                 </div>
 
                 {/* Action Button to pick the fare class */}
-                <button
+                <Button
+                  type="button"
+                  variant={isSelected ? 'primary' : 'light'}
+                  size="none"
+                  className="w-full py-3 rounded-2xl text-xs active:scale-95"
                   onClick={() => onSelectFare(fare.id)}
-                  className={`w-full py-3 rounded-2xl text-xs font-bold transition cursor-pointer active:scale-95 ${
-                    isSelected
-                      ? 'bg-blue-600 text-white' // Primary button style for active selection
-                      : 'bg-surface-section text-blue-600 hover:bg-blue-100' // Secondary style for inactive cards
-                  }`}
                 >
                   Select
-                </button>
+                </Button>
               </div>
             );
           })}

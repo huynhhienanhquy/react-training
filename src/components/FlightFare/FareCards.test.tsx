@@ -68,7 +68,7 @@ describe('FareCards', () => {
 
     const buttons = screen.getAllByRole('button', { name: 'Select' });
     expect(buttons[0]).toHaveClass('bg-surface-section');
-    expect(buttons[1]).toHaveClass('bg-blue-600', 'text-white');
+    expect(buttons[1]).toHaveClass('from-primary', 'text-white');
   });
 
   it('calls onSelectFare with the clicked fare id', () => {

@@ -30,20 +30,25 @@ export const Topbar = ({
         {isBreadcrumbMode ? (
           <>
             {onBackToChat && (
-              <button
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="md:hidden w-8 h-8 rounded-xl shrink-0"
                 onClick={onBackToChat}
-                className="md:hidden w-8 h-8 rounded-xl flex items-center justify-center hover:bg-slate-100 transition shrink-0"
-              >
-                <ArrowLeft className="w-4 h-4 text-slate-600" />
-              </button>
+                leftIcon={<ArrowLeft className="w-4 h-4 text-slate-600" />}
+              />
             )}
-            <button
-              onClick={onBackToChat}
+            <Button
+              type="button"
+              variant="ghost"
+              size="none"
               className="hidden md:inline text-slate-500 hover:text-blue-600 font-medium transition truncate max-w-120 md:max-w-200"
+              onClick={onBackToChat}
               title={displayTitle}
             >
               {displayTitle}
-            </button>
+            </Button>
             <span className="text-slate-400 hidden md:inline">&gt;</span>
             <span className="font-bold text-slate-800 truncate text-xs md:text-sm">Select Fare</span>
           </>

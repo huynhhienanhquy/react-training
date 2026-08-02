@@ -1,5 +1,6 @@
 
 import iconSearch from '@/assets/icons/search-normal.png'
+import { Button } from '@/components/Button/Button';
 import type { ChatSession, ChatHistorySidebarProps } from '@/types/chat';
 
 export type { ChatSession };
@@ -62,17 +63,20 @@ export const ChatHistorySidebar = ({
                 {items.map((session) => {
                   const isActive = session.id === activeSessionId;
                   return (
-                    <button
+                    <Button
                       key={session.id}
+                      type="button"
+                      variant="ghost"
+                      size="none"
                       onClick={() => onSelectSession(session.id)}
-                      className={`w-full text-left px-3.5 py-3 min-h-11 rounded-2xl text-xs md:text-sm transition font-medium truncate block ${
+                      className={`w-full justify-start text-left px-3.5 py-3 min-h-11 rounded-2xl text-xs md:text-sm transition font-medium truncate block ${
                         isActive
                           ? 'bg-surface-active text-brand-dark font-semibold'
                           : 'text-brand-dark hover:bg-slate-100/60'
                       }`}
                     >
                       {session.title}
-                    </button>
+                    </Button>
                   );
                 })}
               </div>

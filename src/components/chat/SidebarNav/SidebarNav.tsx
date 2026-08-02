@@ -48,52 +48,64 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
     <>
       {/* Mobile hamburger button */}
       {onMobileToggle && (
-        <button
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon"
+          className="md:hidden fixed top-3 left-3 z-30 w-11 h-11 bg-white rounded-xl shadow-md border border-slate-100"
           onClick={onMobileToggle}
-          className="md:hidden fixed top-3 left-3 z-30 w-11 h-11 bg-white rounded-xl shadow-md border border-slate-100 flex items-center justify-center"
-        >
-          <Menu className="w-5 h-5 text-slate-700" />
-        </button>
+          leftIcon={<Menu className="w-5 h-5 text-slate-700" />}
+        />
       )}
 
       {/* Desktop sidebar */}
       <aside className="hidden md:flex w-125 min-w-80 bg-surface-sidebar border-r-10 border-surface-section flex-col items-center justify-between py-6 z-20 shrink-0 select-none">        <div className="flex flex-col items-center gap-7 w-full px-2">
           {/* App Logo */}
-          <button className="w-11 h-11 rounded-2xl flex items-center justify-center p-1.5 hover:opacity-90 transition mt-3">
-            <img
-              src={logo}
-              alt="Logo"
-              className="w-full h-full object-contain"
-            />
-          </button>
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            className="w-11 h-11 rounded-2xl p-1.5 hover:opacity-90 mt-3"
+            leftIcon={
+              <img
+                src={logo}
+                alt="Logo"
+                className="w-8 h-8 object-contain"
+              />
+            }
+          />
 
-          {/* Navigation Items */}
-          <nav className="flex flex-col gap-3.5 items-center w-full">
-            {navItems.map((item) => {
-              const isActive = activeNav === item.id;
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => setActiveNav(item.id)}
-                  className={`w-11 h-11 rounded-2xl flex items-center justify-center transition p-2.5 ${
-                    isActive
-                      ? 'bg-blue-50 border border-blue-200 shadow-sm shadow-blue-100/50'
-                      : 'bg-transparent border border-transparent hover:bg-white/80 hover:border-slate-200/60'
-                  }`}
-                >
-                  <img
-                    src={item.icon}
-                    alt={item.alt}
-                    className={`w-5 h-5 object-contain transition-all duration-200 ${
-                      isActive
-                        ? 'opacity-100 scale-105 [filter:invert(38%)_sepia(88%)_saturate(2421%)_hue-rotate(200deg)_brightness(98%)_contrast(96%)]'
-                        : 'opacity-70 hover:opacity-100'
-                    }`}
-                  />
-                </button>
-              );
-            })}
-          </nav>
+{/* Navigation Items */}
+<nav className="flex flex-col gap-3.5 items-center w-full">
+  {navItems.map((item) => {
+    const isActive = activeNav === item.id;
+
+    return (
+      <Button
+        key={item.id}
+        type="button"
+        variant="ghost"
+        size="icon"
+        className={`w-11 h-11 min-w-11 min-h-11 !p-0 !flex !items-center !justify-center !rounded-xl ${
+          isActive
+            ? 'bg-blue-50 border-2 border-blue-200 shadow-sm shadow-blue-100/50'
+            : 'bg-transparent border-2 border-transparent hover:bg-white/80 hover:border-slate-200/60'
+        }`}
+        onClick={() => setActiveNav(item.id)}
+      >
+        <img
+          src={item.icon}
+          alt={item.alt}
+          className={`block w-5 h-5 object-contain transition-all duration-200 ${
+            isActive
+              ? 'opacity-100 scale-105 [filter:invert(38%)_sepia(88%)_saturate(2421%)_hue-rotate(200deg)_brightness(98%)_contrast(96%)]'
+              : 'opacity-70 hover:opacity-100'
+          }`}
+        />
+      </Button>
+    );
+  })}
+</nav>
         </div>
 
         {/* User Avatar & Logout Popover */}
@@ -106,9 +118,12 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
             </defs>
           </svg>
 
-          <button
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            className="w-17 h-17 md:w-17 md:h-17 transition transform active:scale-95 focus:outline-none relative drop-shadow-sm"
             onClick={toggleProfileMenu}
-            className="w-17 h-17 transition transform active:scale-95 flex items-center justify-center focus:outline-none relative drop-shadow-sm"
           >
             <div
               className="w-full h-full bg-white flex items-center justify-center p-1"
@@ -125,17 +140,20 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
                 />
               </div>
             </div>
-          </button>
+          </Button>
 
           {/* Dropdown Logout */}
           {showProfileMenu && (
             <div className="absolute bottom-2 left-16 w-48 bg-white rounded-2xl shadow-xl border border-slate-100 p-2 z-50 animate-in fade-in zoom-in-95 duration-150">
-              <button
+              <Button
+                type="button"
+                variant="ghost"
+                size="none"
+                className="w-full justify-start text-left px-3 py-2 rounded-xl text-xs font-medium text-red-600 hover:bg-red-50 gap-2.5"
                 onClick={handleLogout}
-                className="w-full text-left px-3 py-2 rounded-xl text-xs font-medium text-red-600 hover:bg-red-50 flex items-center gap-2.5 transition"
               >
-                <span>Log out</span>
-              </button>
+                Log out
+              </Button>
             </div>
           )}
         </div>
@@ -147,36 +165,50 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
           <div className="fixed inset-0 bg-black/40 backdrop-blur-xs" onClick={onMobileToggle} />
           <aside className="relative w-18 bg-surface-sidebar h-full flex flex-col items-center justify-between py-6 z-50 shadow-2xl select-none animate-in slide-in-from-left duration-200">
             <div className="flex flex-col items-center gap-7 w-full px-10">
-              <button className="w-11 h-11 rounded-2xl flex items-center justify-center p-1.5">
-                <img src={logo} alt="Logo" className="w-full h-full object-contain" />
-              </button>
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="w-11 h-11 rounded-2xl p-1.5"
+                leftIcon={
+                  <img
+                    src={logo}
+                    alt="Logo"
+                    className="w-full h-full object-contain"
+                  />
+                }
+              />
 
               <nav className="flex flex-col gap-3.5 items-center w-full">
                 {navItems.map((item) => {
                   const isActive = activeNav === item.id;
                   return (
-                    <button
+                    <Button
                       key={item.id}
-                      onClick={() => {
-                        setActiveNav(item.id);
-                        onMobileToggle?.();
-                      }}
-                      className={`w-11 h-11 rounded-2xl flex items-center justify-center transition p-2.5 ${
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      className={`w-11 h-11 rounded-2xl p-2.5 ${
                         isActive
                           ? 'bg-blue-50 border border-blue-200 shadow-sm shadow-blue-100/50'
                           : 'bg-transparent border border-transparent hover:bg-white/80 hover:border-slate-200/60'
                       }`}
-                    >
-                      <img
-                        src={item.icon}
-                        alt={item.alt}
-                        className={`w-5 h-5 object-contain transition-all duration-200 ${
-                          isActive
-                            ? 'opacity-100 scale-105 [filter:invert(38%)_sepia(88%)_saturate(2421%)_hue-rotate(200deg)_brightness(98%)_contrast(96%)]'
-                            : 'opacity-70 hover:opacity-100'
-                        }`}
-                      />
-                    </button>
+                      onClick={() => {
+                        setActiveNav(item.id);
+                        onMobileToggle?.();
+                      }}
+                      leftIcon={
+                        <img
+                          src={item.icon}
+                          alt={item.alt}
+                          className={`w-5 h-5 object-contain transition-all duration-200 ${
+                            isActive
+                              ? 'opacity-100 scale-105 [filter:invert(38%)_sepia(88%)_saturate(2421%)_hue-rotate(200deg)_brightness(98%)_contrast(96%)]'
+                              : 'opacity-70 hover:opacity-100'
+                          }`}
+                        />
+                      }
+                    />
                   );
                 })}
               </nav>

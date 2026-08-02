@@ -100,17 +100,17 @@ describe('SelectedFlightBox', () => {
     const favoriteImage = screen.getByAltText('Favorite');
     const favoriteButton = favoriteImage.closest('button');
 
-    expect(favoriteButton).toHaveClass('bg-surface-section');
+    expect(favoriteButton).toHaveClass('bg-primary-light');
     expect(favoriteImage).not.toHaveClass('scale-110');
 
     fireEvent.click(favoriteButton!);
 
-    expect(favoriteButton).toHaveClass('bg-blue-100');
+    expect(favoriteButton).toHaveClass('bg-blue-600');
     expect(favoriteImage).toHaveClass('scale-110');
 
     fireEvent.click(favoriteButton!);
 
-    expect(favoriteButton).toHaveClass('bg-surface-section');
+    expect(favoriteButton).toHaveClass('bg-primary-light');
     expect(favoriteImage).not.toHaveClass('scale-110');
   });
 });

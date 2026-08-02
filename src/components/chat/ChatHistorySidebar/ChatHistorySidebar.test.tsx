@@ -107,9 +107,9 @@ describe("ChatHistorySidebar", () => {
       />
     );
 
-    expect(screen.getByText("Hotel in Bahamas")).toHaveClass(
-      "bg-surface-active"
-    );
+    expect(
+      screen.getByRole("button", { name: "Hotel in Bahamas" })
+    ).toHaveClass("bg-surface-active");
   });
 
   it("renders grouped session titles", () => {
