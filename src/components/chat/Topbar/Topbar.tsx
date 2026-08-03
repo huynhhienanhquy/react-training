@@ -1,10 +1,9 @@
-import { ArrowLeft } from 'lucide-react';
-import { Button } from '@/components/Button/Button';
-import iconAdd from '@/assets/icons/add-light.png';
+import { ArrowLeft } from 'lucide-react'
+import { Button } from '@/components/Button/Button'
+import AddIcon from '@/assets/icons/add'
+import type { ChatMessage, TopbarProps } from '@/types/chat'
 
-export type { ChatMessage } from '../ChatMessageList/ChatMessageList';
-import { type TopbarProps } from "@/types/chat";
-
+export type { ChatMessage }
 
 export const Topbar = ({
   isBreadcrumbMode = false,
@@ -13,18 +12,18 @@ export const Topbar = ({
   onBackToChat,
   onNewChat,
 }: TopbarProps) => {
-  const firstUserMessage = messages.find((m) => m.sender === 'user')?.text;
+  const firstUserMessage = messages.find((m) => m.sender === 'user')?.text
+
   const displayTitle =
     chatTitle ||
     (firstUserMessage
       ? firstUserMessage.length > 30
         ? `${firstUserMessage.slice(0, 30)}...`
         : firstUserMessage
-      : '');
+      : '')
 
   return (
-    <header
-      className="w-full flex items-center justify-between sticky top-0 z-10 shrink-0 border-b transition-colors bg-white/80 backdrop-blur-md border-slate-200/80 px-4 md:px-6 py-6 shadow-sm">
+    <header className="w-full flex items-center justify-between sticky top-0 z-10 shrink-0 border-b transition-colors bg-white/80 backdrop-blur-md border-slate-200/80 px-4 md:px-6 py-6 shadow-sm">
       <div className="flex items-center gap-1 md:gap-2 text-sm min-w-0">
         {isBreadcrumbMode ? (
           <>
@@ -35,9 +34,16 @@ export const Topbar = ({
                 size="icon"
                 className="md:hidden w-8 h-8 rounded-xl shrink-0"
                 onClick={onBackToChat}
-                leftIcon={<ArrowLeft className="w-4 h-4 text-slate-600" />}
+                aria-label="Back to chat"
+                leftIcon={
+                  <ArrowLeft
+                    className="w-4 h-4 text-slate-600"
+                    aria-hidden="true"
+                  />
+                }
               />
             )}
+
             <Button
               type="button"
               variant="ghost"
@@ -48,8 +54,12 @@ export const Topbar = ({
             >
               {displayTitle}
             </Button>
+
             <span className="text-slate-400 hidden md:inline">&gt;</span>
-            <span className="font-bold text-slate-800 truncate text-xs md:text-sm">Select Fare</span>
+
+            <span className="font-bold text-slate-800 truncate text-xs md:text-sm">
+              Select Fare
+            </span>
           </>
         ) : (
           <h2 className="text-sm md:text-base font-semibold text-slate-800 truncate max-w-120 md:max-w-md">
@@ -63,10 +73,11 @@ export const Topbar = ({
           variant="primary"
           size="md"
           leftIcon={
-            <img
-              src={iconAdd}
-              alt="Add"
-              className="w-5 h-5"
+            <AddIcon
+              width={20}
+              height={20}
+              color="#FFFFFF"
+              aria-hidden="true"
             />
           }
           onClick={onNewChat}
@@ -75,5 +86,5 @@ export const Topbar = ({
         </Button>
       </div>
     </header>
-  );
-};
+  )
+}

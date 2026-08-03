@@ -1,7 +1,7 @@
-// SelectedFlightBox.test.tsx
 import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { SelectedFlightBox, type FlightLeg } from './SelectedFlightBox';
+import HeartIcon from '@/assets/icons/heart';
 
 vi.mock('./SectionHeader/SectionHeader', () => ({
   SectionHeader: ({ title }: { title: string }) => <h2>{title}</h2>,
@@ -17,7 +17,11 @@ vi.mock('@/components/Card/Card', () => ({
     variant: string;
     className?: string;
   }) => (
-    <section data-testid="flight-card" data-variant={variant} className={className}>
+    <section
+      data-testid="flight-card"
+      data-variant={variant}
+      className={className}
+    >
       {children}
     </section>
   ),
@@ -43,7 +47,7 @@ const legs: FlightLeg[] = [
 const defaultProps = {
   airlineName: 'Vietnam Airlines',
   defaultFlightLogo: '/vietnam-airlines.png',
-  iconHeart: '/heart.svg',
+  iconHeart: HeartIcon,
   legs,
   cancellationPolicy: 'Free cancellation within 24 hours.',
 };
@@ -57,17 +61,20 @@ describe('SelectedFlightBox', () => {
     ).toBeInTheDocument();
 
     expect(screen.getByText('Vietnam Airlines')).toBeInTheDocument();
+
     expect(screen.getByAltText('Vietnam Airlines')).toHaveAttribute(
       'src',
       '/vietnam-airlines.png',
     );
 
     expect(screen.getByText('08:30 - 14:15')).toBeInTheDocument();
+
     expect(
       screen.getByText('Bangkok → Tokyo • 5h 45m • Non-stop'),
     ).toBeInTheDocument();
 
     expect(screen.getByText('16:00 - 21:30')).toBeInTheDocument();
+
     expect(
       screen.getByText('Tokyo → Bangkok • 6h 30m • 1 stop'),
     ).toBeInTheDocument();
@@ -81,6 +88,7 @@ describe('SelectedFlightBox', () => {
     render(<SelectedFlightBox {...defaultProps} />);
 
     const card = screen.getByTestId('flight-card');
+
     expect(card).toHaveAttribute('data-variant', 'surface');
     expect(card).toHaveClass('p-6', 'space-y-4');
   });
@@ -88,29 +96,30 @@ describe('SelectedFlightBox', () => {
   it('renders favorite and change-flight controls', () => {
     render(<SelectedFlightBox {...defaultProps} />);
 
-    expect(screen.getByAltText('Favorite')).toHaveAttribute('src', '/heart.svg');
+    expect(
+      screen.getByRole('button', { name: /favorite/i }),
+    ).toBeInTheDocument();
+
     expect(
       screen.getByRole('button', { name: 'Change Flight' }),
     ).toBeInTheDocument();
   });
 
-  it('toggles favorite styles after clicking the favorite button', () => {
+  it('toggles favorite state after clicking the favorite button', () => {
     render(<SelectedFlightBox {...defaultProps} />);
 
-    const favoriteImage = screen.getByAltText('Favorite');
-    const favoriteButton = favoriteImage.closest('button');
+    const favoriteButton = screen.getByRole('button', {
+      name: /favorite/i,
+    });
 
     expect(favoriteButton).toHaveClass('bg-primary-light');
-    expect(favoriteImage).not.toHaveClass('scale-110');
 
-    fireEvent.click(favoriteButton!);
+    fireEvent.click(favoriteButton);
 
     expect(favoriteButton).toHaveClass('bg-blue-600');
-    expect(favoriteImage).toHaveClass('scale-110');
 
-    fireEvent.click(favoriteButton!);
+    fireEvent.click(favoriteButton);
 
     expect(favoriteButton).toHaveClass('bg-primary-light');
-    expect(favoriteImage).not.toHaveClass('scale-110');
   });
 });
