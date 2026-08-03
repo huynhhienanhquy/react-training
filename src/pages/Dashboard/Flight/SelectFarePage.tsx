@@ -18,7 +18,7 @@ import type {
   SelectFarePageProps,
 } from '@/types/flight';
 
-import { useApiRequest } from '@/hooks/useApiRequest';
+import { useAsyncData } from '@/hooks/useAsyncData';
 import { useSidebarNav } from '@/hooks/useSidebarNav';
 import { useChatTitle } from '@/hooks/useChatTitle';
 
@@ -52,7 +52,7 @@ export const SelectFarePage = ({
     data: fareData,
     loading,
     error,
-  } = useApiRequest<FareData>(fetchFare);
+  } = useAsyncData<FareData>(fetchFare);
 
   // Chat title
   const resolvedChatTitle = useChatTitle(
