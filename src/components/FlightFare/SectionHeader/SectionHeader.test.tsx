@@ -1,7 +1,7 @@
 // SectionHeader.test.tsx
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { SectionHeader } from './SectionHeader';
+import { SectionHeader } from '.';
 
 describe('SectionHeader', () => {
   it('renders the provided title', () => {

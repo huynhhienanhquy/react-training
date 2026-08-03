@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { ChatHistorySidebar } from '../ChatHistorySidebar/ChatHistorySidebar'
-import type { ChatSession } from '../ChatHistorySidebar/ChatHistorySidebar'
+import { ChatHistorySidebar } from '.'
+import type { ChatSession } from '.'
 
 const meta: Meta<typeof ChatHistorySidebar> = {
   title: 'Chat/ChatHistorySidebar',

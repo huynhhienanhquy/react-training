@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
-import { AuthHeader } from "./AuthHeader";
+import { AuthHeader } from ".";
 
 describe("AuthHeader", () => {
   it("renders title and subtitle", () => {

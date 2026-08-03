@@ -1,7 +1,7 @@
 // InfoRow.test.tsx
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { InfoRow } from './InfoRow';
+import { InfoRow } from '.';
 
 describe('InfoRow', () => {
   it('renders the label and value', () => {

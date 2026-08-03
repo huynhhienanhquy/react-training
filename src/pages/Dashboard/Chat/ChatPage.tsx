@@ -1,9 +1,9 @@
 import  { useState } from 'react';
-import { SidebarNav } from '@/components/chat/SidebarNav/SidebarNav';
-import { ChatHistorySidebar } from '@/components/chat/ChatHistorySidebar/ChatHistorySidebar';
-import { Topbar } from '@/components/chat/Topbar/Topbar';
-import { WelcomeState } from '@/components/chat/WelcomeState/WelcomeState';
-import { ChatMessageList } from '@/components/chat/ChatMessageList/ChatMessageList';
+import { SidebarNav } from '@/components/chat/SidebarNav';
+import { ChatHistorySidebar } from '@/components/chat/ChatHistorySidebar';
+import { Topbar } from '@/components/chat/Topbar';
+import { WelcomeState } from '@/components/chat/WelcomeState';
+import { ChatMessageList } from '@/components/chat/ChatMessageList';
 import { ChatInputBox } from '@/components/chat/ChatInputBox/ChatInputBox';
 import { SelectFarePage } from '@/pages/Dashboard/Flight/SelectFarePage';
 import { SelectHotelPage } from '@/pages/Dashboard/Hotel/SelectHotelPage';
