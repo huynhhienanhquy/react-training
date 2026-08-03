@@ -4,10 +4,9 @@ import { AuthContext } from './AuthContext';
 import { loginApi } from '../services/authService';
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  // Initialize the user state directly from localStorage (Lazy Initialization)
-  // Help prevent unnecessary re-rendering or useEffect errors in your application.
   const [user, setUser] = useState<User | null>(() => {
     const savedUser = localStorage.getItem('user');
+
     if (savedUser) {
       try {
         return JSON.parse(savedUser) as User;
@@ -16,16 +15,23 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         localStorage.removeItem('user');
       }
     }
+
     return null;
   });
 
   const [loading, setLoading] = useState(false);
 
-  // Login function
   const login = async (email: string, password: string) => {
     setLoading(true);
+
     try {
       const userData = await loginApi({ email, password });
+
+      const accessToken = `mock_token_${userData.id}_${Date.now()}`;
+
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('user', JSON.stringify(userData));
+
       setUser(userData);
     } catch {
       throw new Error('Incorrect email or password!');
@@ -34,7 +40,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  //Logout Function
   const logout = () => {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('user');
