@@ -16,7 +16,7 @@ import defaultHotelImg from '@/assets/icons/ellipse.png';
 import bookingIcon from '@/assets/icons/booking.png';
 import expediaIcon from '@/assets/icons/expedia.png';
 
-import { useApiRequest } from '@/hooks/useApiRequest';
+import { useAsyncData } from '@/hooks/useAsyncData';
 import { useSidebarNav } from '@/hooks/useSidebarNav';
 import { useChatTitle } from '@/hooks/useChatTitle';
 import { useSelectedHotel, getSavedHotel } from '@/hooks/useSelectedHotel';
@@ -70,7 +70,7 @@ export const SelectHotelPage = ({
     data: hotelData,
     loading,
     error,
-  } = useApiRequest<HotelData[]>(fetchHotels);
+  } = useAsyncData<HotelData[]>(fetchHotels);
 
   const hotelList = hotelData ?? [];
 
