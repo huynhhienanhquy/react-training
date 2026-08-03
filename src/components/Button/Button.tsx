@@ -94,7 +94,9 @@ export function Button({
 
   return (
     <button
+      {...props}
       disabled={disabled || isLoading}
+      aria-pressed={variant === 'favorite' ? isFavorite : props['aria-pressed']}
       className={twMerge(
         baseStyles,
         variantStyles[variant],
@@ -102,13 +104,14 @@ export function Button({
         favoriteStyle,
         className,
       )}
-      {...props}
     >
       {isLoading && (
         <svg
-          className="animate-spin w-4 h-4"
+          className="h-4 w-4 animate-spin"
           viewBox="0 0 24 24"
           fill="none"
+          role="status"
+          aria-label="Loading"
         >
           <circle
             className="opacity-25"
@@ -132,7 +135,7 @@ export function Button({
             <img
               src={iconGoogle}
               alt="Google"
-              className="w-5 h-5 object-contain"
+              className="h-5 w-5 object-contain"
             />
           )}
 
@@ -140,7 +143,7 @@ export function Button({
             <img
               src={iconApple}
               alt="Apple"
-              className="w-5 h-5 object-contain"
+              className="h-5 w-5 object-contain"
             />
           )}
 
@@ -157,7 +160,7 @@ export function Button({
           <img
             src={iconHeart}
             alt="Favorite"
-            className={`w-4 h-4 transition-all duration-200 object-contain ${
+            className={`h-4 w-4 object-contain transition-all duration-200 ${
               isFavorite
                 ? 'brightness-0 invert scale-110'
                 : 'opacity-70 hover:opacity-100'
@@ -172,7 +175,7 @@ export function Button({
             <img
               src={iconArrowRight}
               alt=""
-              className="w-4 h-4 object-contain"
+              className="h-4 w-4 object-contain"
             />
           )}
 
