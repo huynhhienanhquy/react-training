@@ -5,7 +5,7 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
-import { GuestRoute } from "./GuestRoute";
+import { GuestRoute } from "@/routes/guards/GuestRoute";
 
 const mockUseAuth = vi.fn();
 

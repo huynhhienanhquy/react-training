@@ -1,7 +1,7 @@
 import { renderHook, act } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import type { KeyboardEvent } from 'react';
-import { useEnterToSend } from './useEnterToSend';
+import { useEnterToSend } from '../useEnterToSend';
 
 const makeKeyDown = (key: string, shiftKey = false) =>
   ({

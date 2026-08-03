@@ -1,11 +1,11 @@
 import { renderHook, act } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { useFavorites } from './useFavorites';
+import { useFavorites } from '../useFavorites';
 
 describe('useFavorites', () => {
   it('toggleFavorite adds/removes', () => {
     const { result } = renderHook(() => useFavorites());
-    
+
     expect(result.current.favorites).toEqual({});
 
     act(() => {

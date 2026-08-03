@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import { useAuth } from './useAuth';
-import { AuthContext, type AuthContextType } from '../context/AuthContext';
+import { useAuth } from '../useAuth';
+import { AuthContext, type AuthContextType } from '../../context/AuthContext';
 import React from 'react';
 
 describe('useAuth', () => {
@@ -9,11 +9,11 @@ describe('useAuth', () => {
     // Suppress console.error for expected thrown error
     const consoleError = console.error;
     console.error = () => {};
-    
+
     expect(() => {
       renderHook(() => useAuth());
     }).toThrow('useAuth must be used within an AuthProvider');
-    
+
     console.error = consoleError;
   });
 

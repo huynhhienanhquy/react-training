@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import { describe, expect, it, beforeEach } from 'vitest';
-import { useLocalStorage } from './useLocalStorage';
+import { useLocalStorage } from '../useLocalStorage';
 
 describe('useLocalStorage', () => {
   beforeEach(() => {
@@ -37,7 +37,7 @@ describe('useLocalStorage', () => {
     act(() => {
       result.current.setValue('new-value');
     });
-    
+
     act(() => {
       result.current.removeValue();
     });

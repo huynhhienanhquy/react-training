@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { useSidebarNav } from './useSidebarNav';
+import { useSidebarNav } from '../useSidebarNav';
 
 describe('useSidebarNav', () => {
   it('starts with the default nav and closed mobile drawer', () => {

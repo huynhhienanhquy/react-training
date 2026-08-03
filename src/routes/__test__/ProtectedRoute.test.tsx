@@ -7,7 +7,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import { ProtectedRoute } from "./ProtectedRoute";
+import { ProtectedRoute } from "@/routes/guards/ProtectedRoute";
 
 const mockUseAuth = vi.fn();
 

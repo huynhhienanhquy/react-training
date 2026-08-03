@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { useSelectedHotel, getSavedHotel } from './useSelectedHotel';
+import { useSelectedHotel, getSavedHotel } from '../useSelectedHotel';
 import type { HotelData } from '@/types/hotel';
 
 const hotel: HotelData = {

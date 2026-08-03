@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { useProfileMenu } from './useProfileMenu';
+import { useProfileMenu } from '../useProfileMenu';
 
 describe('useProfileMenu', () => {
   it('starts closed', () => {

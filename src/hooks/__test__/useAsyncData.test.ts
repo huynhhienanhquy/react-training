@@ -1,13 +1,13 @@
 import { renderHook, act } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import { useAsyncData } from './useAsyncData';
+import { useAsyncData } from '../useAsyncData';
 import { AxiosError } from 'axios';
 
 describe('useAsyncData', () => {
   it('has correct initial loading state', () => {
     const fetchFn = vi.fn().mockResolvedValue('data');
     const { result } = renderHook(() => useAsyncData(fetchFn));
-    
+
     expect(result.current.loading).toBe(true);
     expect(result.current.data).toBeNull();
     expect(result.current.error).toBeNull();
@@ -18,7 +18,7 @@ describe('useAsyncData', () => {
     const { result } = renderHook(() => useAsyncData(fetchFn));
 
     expect(result.current.loading).toBe(true);
-    
+
     await act(async () => {
       await Promise.resolve(); // wait for fetch to complete
     });
@@ -31,7 +31,7 @@ describe('useAsyncData', () => {
   it('handles error handling with AxiosError', async () => {
     const error = new AxiosError('Network Error');
     const fetchFn = vi.fn().mockRejectedValue(error);
-    
+
     const { result } = renderHook(() => useAsyncData(fetchFn));
 
     await act(async () => {
@@ -47,7 +47,7 @@ describe('useAsyncData', () => {
     const fetchFn = vi.fn()
       .mockResolvedValueOnce('first')
       .mockResolvedValueOnce('second');
-      
+
     const { result } = renderHook(() => useAsyncData(fetchFn));
 
     await act(async () => {

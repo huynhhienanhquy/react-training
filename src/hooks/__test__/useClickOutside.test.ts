@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import { useClickOutside } from './useClickOutside';
+import { useClickOutside } from '../useClickOutside';
 
 describe('useClickOutside', () => {
   it('calls handler on outside click', () => {
@@ -9,7 +9,7 @@ describe('useClickOutside', () => {
 
     const div = document.createElement('div');
     Object.defineProperty(result.current, 'current', { value: div, writable: true });
-    
+
     // Simulating click outside
     const event = new MouseEvent('mousedown', { bubbles: true });
     document.dispatchEvent(event);
@@ -24,7 +24,7 @@ describe('useClickOutside', () => {
     const div = document.createElement('div');
     const child = document.createElement('span');
     div.appendChild(child);
-    
+
     Object.defineProperty(result.current, 'current', { value: div, writable: true });
 
     // Simulating click inside
