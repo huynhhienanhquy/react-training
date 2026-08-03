@@ -2,9 +2,17 @@
 import iconPlus from '@/assets/icons/add-dark.png';
 import iconMic from '@/assets/icons/microphone-2.png';
 import iconSend from '@/assets/icons/send-2.png';
-import { type ChatInputBoxProps } from "@/types/chat";
 import { useEnterToSend } from '@/hooks/useEnterToSend';
 import { Button } from '@/components/Button/Button';
+
+// Props definition for managing chat input, recording, and submission
+export interface ChatInputBoxProps {
+  inputMessage: string;
+  setInputMessage: (val: string) => void;
+  onSend: () => void;
+  isRecording: boolean;
+  setIsRecording: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 export const ChatInputBox = ({
   inputMessage,

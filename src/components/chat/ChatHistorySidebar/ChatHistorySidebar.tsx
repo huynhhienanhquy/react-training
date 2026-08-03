@@ -1,9 +1,18 @@
 
 import iconSearch from '@/assets/icons/search-normal.png'
 import { Button } from '@/components/Button/Button';
-import type { ChatSession, ChatHistorySidebarProps } from '@/types/chat';
+import type { ChatSession } from '@/types/chat';
 
 export type { ChatSession };
+
+export interface ChatHistorySidebarProps {
+  searchQuery: string;
+  setSearchQuery: (q: string) => void;
+  sessions: ChatSession[];
+  activeSessionId: string | null;
+  onSelectSession: (id: string) => void;
+}
+
 
 export const ChatHistorySidebar = ({
   searchQuery,

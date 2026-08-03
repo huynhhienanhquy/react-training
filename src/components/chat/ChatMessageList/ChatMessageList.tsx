@@ -1,14 +1,22 @@
 import { ThinkingLoader } from '@/components/Thinking/ThinkingLoader';
-import { FlightRecommendations } from '@/components/Recommendations/FlightRecommendations';
-import { HotelRecommendations } from '@/components/Recommendations/HotelRecommendations';
-import { PlacesCardWidget } from '@/components/Recommendations/PlacesCardWidget';
-import { ItineraryCardWidget } from '@/components/Recommendations/ItineraryCardWidget';
+import { FlightRecommendations } from '@/pages/Dashboard/Chat/sections/Recommendations/FlightRecommendations';
+import { HotelRecommendations } from '@/pages/Dashboard/Chat/sections/Recommendations/HotelRecommendations';
+import { PlacesCardWidget } from '@/pages/Dashboard/Chat/sections/Recommendations/PlacesCardWidget';
+import { ItineraryCardWidget } from '@/pages/Dashboard/Chat/sections/Recommendations/ItineraryCardWidget';
 import type { PlaceData, DayItinerary } from '@/types/travel';
 import { useAutoScroll } from '@/hooks/useAutoScroll';
-import type { ChatMessageListProps } from '@/types/chat';
 
 // Custom payload inside a chat message
 export type MessageData = PlaceData[] | DayItinerary[] | unknown;
+
+export interface ChatMessageListProps {
+  messages: ChatMessage[];
+  isTyping: boolean;
+  onBookFlight?: (flightId?: string) => void;
+  onBookHotel?: (hotelId?: string) => void;
+  onViewAllPlaces?: (places?: PlaceData[]) => void;
+  onViewAllItinerary?: (itinerary?: DayItinerary[]) => void;
+}
 
 // Type definition for an individual chat message item
 export interface ChatMessage {

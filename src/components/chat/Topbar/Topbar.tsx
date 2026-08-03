@@ -2,10 +2,15 @@ import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/Button/Button';
 import iconAdd from '@/assets/icons/add-light.png';
 
-export type { ChatMessage } from '../ChatMessageList/ChatMessageList';
-import { type TopbarProps } from "@/types/chat";
+import { type ChatMessage } from '@/types/chat';
 
-
+export interface TopbarProps {
+  isBreadcrumbMode?: boolean;
+  chatTitle?: string;
+  messages?: ChatMessage[];
+  onBackToChat?: () => void;
+  onNewChat?: () => void;
+}
 export const Topbar = ({
   isBreadcrumbMode = false,
   chatTitle,

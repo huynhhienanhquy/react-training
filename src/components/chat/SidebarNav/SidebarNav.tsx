@@ -11,8 +11,14 @@ import iconMap from '@/assets/icons/map.png';
 import iconCommunity from '@/assets/icons/people.png';
 import iconSettings from '@/assets/icons/setting.png';
 import userAvatar from '@/assets/icons/user.png';
-import { type SidebarNavProps } from "@/types/chat";
 import { Button } from "@/components/Button/Button";
+
+export interface SidebarNavProps {
+  activeNav: string;
+  setActiveNav: (id: string) => void;
+  isMobileOpen?: boolean;
+  onMobileToggle?: () => void;
+}
 
 export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileToggle }: SidebarNavProps) => {
   const navigate = useNavigate();
