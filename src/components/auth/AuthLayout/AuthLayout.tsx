@@ -1,4 +1,3 @@
-import React from 'react';
 import { LoadingOverlay } from '@/components/Loading/LoadingOverlay';
 import authBg from '@/assets/images/background.png';
 import { type AuthLayoutProps } from '@/types/auth';

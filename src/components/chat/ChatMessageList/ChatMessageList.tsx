@@ -1,4 +1,3 @@
-import React from 'react';
 import { ThinkingLoader } from '@/components/Thinking/ThinkingLoader';
 import { FlightRecommendations } from '@/components/Recommendations/FlightRecommendations';
 import { HotelRecommendations } from '@/components/Recommendations/HotelRecommendations';

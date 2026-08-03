@@ -1,4 +1,3 @@
-import React from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/Button/Button';
 import iconAdd from '@/assets/icons/add-light.png';

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import  { useCallback, useState } from 'react';
 import { SidebarNav } from '@/components/chat/SidebarNav/SidebarNav';
 import { Button } from '@/components/Button/Button';
 

@@ -1,4 +1,3 @@
-import React from 'react';
 
 import iconPlus from '@/assets/icons/add-dark.png';
 import iconMic from '@/assets/icons/microphone-2.png';

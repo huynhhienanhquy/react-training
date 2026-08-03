@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { SectionHeader } from './SectionHeader/SectionHeader';
 import { Card } from '@/components/Card/Card';
 import { Button } from '@/components/Button/Button';

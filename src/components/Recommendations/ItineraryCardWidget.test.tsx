@@ -67,7 +67,6 @@ describe('ItineraryCardWidget', () => {
                 title: 'Visit Eiffel Tower',
                 time: '10:00 AM',
                 location: 'Paris',
-                description: 'Sightseeing',
               },
             ],
           },

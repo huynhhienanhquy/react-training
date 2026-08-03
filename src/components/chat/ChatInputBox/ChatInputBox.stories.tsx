@@ -21,7 +21,7 @@ const meta: Meta<typeof ChatInputBox> = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const ChatInputBoxWithState = (args: Story['args']) => {
+const ChatInputBoxWithState = (args: Story['args'] = {}) => {
   const [inputMessage, setInputMessage] = useState(args.inputMessage || '')
   const [isRecording, setIsRecording] = useState(args.isRecording || false)
 
