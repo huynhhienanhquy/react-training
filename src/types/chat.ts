@@ -1,11 +1,13 @@
 import type { PlaceData, DayItinerary } from './travel';
 
+export type MessageData = PlaceData[] | DayItinerary[];
+
 export interface ChatMessage {
   id: string;
   sender: 'user' | 'ai';
   text: string;
   type?: 'text' | 'flight' | 'hotel' | 'places' | 'itinerary';
-  data?: unknown;
+  data?: MessageData;
 }
 
 export interface ChatSession {
