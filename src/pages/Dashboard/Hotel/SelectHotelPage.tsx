@@ -1,105 +1,105 @@
-import React, { useCallback, useState } from 'react';
+  import React, { useCallback, useState } from 'react';
 
-import { SidebarNav } from '@/components/chat/SidebarNav/SidebarNav';
-import { Topbar } from '@/components/chat/Topbar/Topbar';
-import { SectionHeader } from '@/components/FlightFare/SectionHeader/SectionHeader';
+  import { SidebarNav } from '@/components/chat/SidebarNav/SidebarNav';
+  import { Topbar } from '@/components/chat/Topbar/Topbar';
+  import { SectionHeader } from '@/components/FlightFare/SectionHeader/SectionHeader';
 
-import { getHotelDetailsApi } from '@/services/hotelService';
-import { Button } from '@/components/Button/Button';
+  import { getHotelDetailsApi } from '@/services/hotelService';
+  import { Button } from '@/components/Button/Button';
 
-import type {
-  HotelData,
-  SelectHotelPageProps,
-} from '@/types/hotel';
+  import type {
+    HotelData,
+    SelectHotelPageProps,
+  } from '@/types/hotel';
 
-import defaultHotelImg from '@/assets/icons/ellipse.png';
-import bookingIcon from '@/assets/icons/booking.png';
-import expediaIcon from '@/assets/icons/expedia.png';
+  import defaultHotelImg from '@/assets/icons/ellipse.png';
+  import bookingIcon from '@/assets/icons/booking.png';
+  import expediaIcon from '@/assets/icons/expedia.png';
 
-import { useAsyncData } from '@/hooks/useAsyncData';
-import { useSidebarNav } from '@/hooks/useSidebarNav';
-import { useChatTitle } from '@/hooks/useChatTitle';
-import { useSelectedHotel, getSavedHotel } from '@/hooks/useSelectedHotel';
+  import { useAsyncData } from '@/hooks/useAsyncData';
+  import { useSidebarNav } from '@/hooks/useSidebarNav';
+  import { useChatTitle } from '@/hooks/useChatTitle';
+  import { useSelectedHotel, getSavedHotel } from '@/hooks/useSelectedHotel';
 
-export const SelectHotelPage = ({
-  chatTitle,
-  messages = [],
-  onBackToChat,
-  onStartNewChat,
-  onSelectHotel,
-}: SelectHotelPageProps) => {
-  const { activeNav, setActiveNav, isMobileOpen, onMobileToggle } =
-    useSidebarNav();
-  const [isComparePrice, setIsComparePrice] = useState(false);
+  export const SelectHotelPage = ({
+    chatTitle,
+    messages = [],
+    onBackToChat,
+    onStartNewChat,
+    onSelectHotel,
+  }: SelectHotelPageProps) => {
+    const { activeNav, setActiveNav, isMobileOpen, onMobileToggle } =
+      useSidebarNav();
+    const [isComparePrice, setIsComparePrice] = useState(false);
 
-  const { selectHotel } = useSelectedHotel();
+    const { selectHotel } = useSelectedHotel();
 
-  // Fetch hotel data
-  const fetchHotels = useCallback(
-    async (): Promise<HotelData[]> => {
-      const rawData = await getHotelDetailsApi();
+    // Fetch hotel data
+    const fetchHotels = useCallback(
+      async (): Promise<HotelData[]> => {
+        const rawData = await getHotelDetailsApi();
 
-      let dataList: HotelData[] = Array.isArray(rawData)
-        ? rawData
-        : [rawData];
+        let dataList: HotelData[] = Array.isArray(rawData)
+          ? rawData
+          : [rawData];
 
-      //Synchronize with LocalStorage.If a hotel was previously selected,move it to the top of the list.
-      const savedHotel = getSavedHotel();
+        //Synchronize with LocalStorage.If a hotel was previously selected,move it to the top of the list.
+        const savedHotel = getSavedHotel();
 
-      if (savedHotel?.hotelName) {
-        dataList = [
-          savedHotel,
-          ...dataList.filter(
-            (hotel) => hotel.id !== savedHotel.id,
-          ),
-        ];
-      }
+        if (savedHotel?.hotelName) {
+          dataList = [
+            savedHotel,
+            ...dataList.filter(
+              (hotel) => hotel.id !== savedHotel.id,
+            ),
+          ];
+        }
 
-      if (dataList.length === 0) {
-        throw new Error(
-          'No matching hotel data available.',
+        if (dataList.length === 0) {
+          throw new Error(
+            'No matching hotel data available.',
+          );
+        }
+
+        return dataList;
+      },
+      [],
+    );
+
+    const {
+      data: hotelData,
+      loading,
+      error,
+    } = useAsyncData<HotelData[]>(fetchHotels);
+
+    const hotelList = hotelData ?? [];
+
+    // Handle the Topbar header display
+    const resolvedChatTitle = useChatTitle(
+      chatTitle,
+      messages,
+      'Other available accommodations',
+    );
+
+    // Handling when clicking "Book Hotel"
+    const handleBookHotel = (
+      e: React.MouseEvent,
+      selectedHotel: HotelData,
+    ) => {
+      e.stopPropagation();
+
+      selectHotel(selectedHotel);
+
+      if (onSelectHotel) {
+        onSelectHotel(selectedHotel);
+      } else {
+        alert(
+          `The hotel you have chosen: ${
+            selectedHotel.hotelName || 'Hotel'
+          }`,
         );
       }
-
-      return dataList;
-    },
-    [],
-  );
-
-  const {
-    data: hotelData,
-    loading,
-    error,
-  } = useAsyncData<HotelData[]>(fetchHotels);
-
-  const hotelList = hotelData ?? [];
-
-  // Handle the Topbar header display
-  const resolvedChatTitle = useChatTitle(
-    chatTitle,
-    messages,
-    'Other available accommodations',
-  );
-
-  // Handling when clicking "Book Hotel"
-  const handleBookHotel = (
-    e: React.MouseEvent,
-    selectedHotel: HotelData,
-  ) => {
-    e.stopPropagation();
-
-    selectHotel(selectedHotel);
-
-    if (onSelectHotel) {
-      onSelectHotel(selectedHotel);
-    } else {
-      alert(
-        `The hotel you have chosen: ${
-          selectedHotel.hotelName || 'Hotel'
-        }`,
-      );
-    }
-  };
+    };
 
   return (
     <div className="bg-slate-100 font-sans text-slate-700 h-screen overflow-hidden flex antialiased">
