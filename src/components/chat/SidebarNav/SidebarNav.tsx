@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { Menu } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { useProfileMenu } from '@/hooks/useProfileMenu';
+import { PentagonClipPath } from '@/components/Icons/PentagonClipPath';
 
 import logo from '@/assets/icons/Logo.png';
 import iconChat from '@/assets/icons/chat.png';
@@ -109,14 +110,7 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
 
         {/* User Avatar & Logout Popover */}
         <div className="relative mb-4" ref={menuRef}>
-          <svg width="0" height="0" className="absolute">
-            <defs>
-              <clipPath id="pentagon-clip" clipPathUnits="objectBoundingBox">
-                <path d="M 0.5 0.05 C 0.52 0.05, 0.93 0.32, 0.95 0.35 C 0.97 0.38, 0.88 0.88, 0.85 0.92 C 0.82 0.96, 0.18 0.96, 0.15 0.92 C 0.12 0.88, 0.03 0.38, 0.05 0.35 C 0.07 0.32, 0.48 0.05, 0.5 0.05 Z" />
-              </clipPath>
-            </defs>
-          </svg>
-
+          <PentagonClipPath />
           <Button
             type="button"
             variant="ghost"
