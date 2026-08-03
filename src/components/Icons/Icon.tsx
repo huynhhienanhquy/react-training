@@ -11,18 +11,20 @@ type IconProps = SVGProps<SVGSVGElement> & {
   name: IconName;
 };
 
-export const Icon = ({ name, ...props }: IconProps) => {
+export const Icon = ({
+  name,
+  width = 24,
+  height = 24,
+  color = 'currentColor',
+  ...props
+}: IconProps) => {
   const icons = {
     'arrow-left': (
-      <>
-        <path d="M15 19l-7-7 7-7" />
-      </>
+      <path d="M15 19l-7-7 7-7" />
     ),
 
     'arrow-right': (
-      <>
-        <path d="M5 12h14M12 5l7 7-7 7" />
-      </>
+      <path d="M5 12h14M12 5l7 7-7 7" />
     ),
 
     eye: (
@@ -40,19 +42,19 @@ export const Icon = ({ name, ...props }: IconProps) => {
     ),
 
     spinner: (
-      <>
-        <path
-          d="M12 2a10 10 0 1 0 10 10"
-          strokeLinecap="round"
-        />
-      </>
+      <path
+        d="M12 2a10 10 0 1 0 10 10"
+        strokeLinecap="round"
+      />
     ),
   };
 
   return (
     <svg
+      width={width}
+      height={height}
       fill="none"
-      stroke="currentColor"
+      stroke={color}
       strokeWidth="2"
       viewBox="0 0 24 24"
       {...props}
