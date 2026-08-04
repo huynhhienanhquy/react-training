@@ -51,6 +51,7 @@ export interface HotelRecommendationsProps {
 }
 
 export interface SelectHotelPageProps {
+  selectedHotel?: HotelData | null;
   chatTitle?: string;
   messages?: ChatMessage[];
   onBackToChat?: () => void;

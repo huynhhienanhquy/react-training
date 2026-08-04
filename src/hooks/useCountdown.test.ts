@@ -12,6 +12,7 @@ describe('useCountdown', () => {
   });
 
   it('countdown decrements', () => {
+    const setIntervalSpy = vi.spyOn(globalThis, 'setInterval');
     const { result } = renderHook(() => useCountdown(10));
 
     expect(result.current.counter).toBe(10);
@@ -27,6 +28,7 @@ describe('useCountdown', () => {
     });
 
     expect(result.current.counter).toBe(7);
+    expect(setIntervalSpy).toHaveBeenCalledTimes(1);
   });
 
   it('countdown stops at 0', () => {

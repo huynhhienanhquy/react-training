@@ -94,14 +94,12 @@ describe('SelectHotelPage Component', () => {
     expect(screen.getAllByText('Expedia').length).toBeGreaterThan(0)
   })
 
-  it('prioritizes saved hotel from localStorage at top of the list', async () => {
-    // Hotel 2 is saved in localStorage beforehand
-    const savedHotel = mockHotelsData[1]
-    localStorage.setItem('selectedHotel', JSON.stringify(savedHotel))
+  it('prioritizes the hotel selected in the current chat at the top of the list', async () => {
+    const selectedHotel = mockHotelsData[1]
 
     ;(getHotelDetailsApi as ReturnType<typeof vi.fn>).mockResolvedValue(mockHotelsData)
 
-    render(<SelectHotelPage />)
+    render(<SelectHotelPage selectedHotel={selectedHotel} />)
 
     await waitFor(() => {
       expect(screen.getByText('Eko Hotels & Suites')).toBeInTheDocument()
@@ -135,9 +133,7 @@ describe('SelectHotelPage Component', () => {
     expect(onSelectHotelMock).toHaveBeenCalledTimes(1)
     expect(onSelectHotelMock).toHaveBeenCalledWith(mockHotelsData[0])
 
-    // Verify localStorage has saved the selected hotel
-    const storedHotel = JSON.parse(localStorage.getItem('selectedHotel') || '{}')
-    expect(storedHotel.id).toBe('hotel-1')
+    expect(localStorage.getItem('selectedHotel')).toBeNull()
   })
 
   it('toggles compare price checkbox', async () => {

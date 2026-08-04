@@ -194,7 +194,9 @@ describe("ChatMessageList", () => {
 
     await user.click(screen.getByText("Hotel Widget"));
 
-    expect(onBookHotel).toHaveBeenCalledWith("hotel-1");
+    expect(onBookHotel).toHaveBeenCalledWith(
+      expect.objectContaining({ id: "hotel-1" }),
+    );
   });
 
   it("renders places widget", () => {

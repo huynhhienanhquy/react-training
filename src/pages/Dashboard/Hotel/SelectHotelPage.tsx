@@ -19,7 +19,6 @@
   import { useAsyncData } from '@/hooks/useAsyncData';
   import { useSidebarNav } from '@/hooks/useSidebarNav';
   import { useChatTitle } from '@/hooks/useChatTitle';
-  import { useSelectedHotel, getSavedHotel } from '@/hooks/useSelectedHotel';
 
   export const SelectHotelPage = ({
     chatTitle,
@@ -27,12 +26,11 @@
     onBackToChat,
     onStartNewChat,
     onSelectHotel,
+    selectedHotel,
   }: SelectHotelPageProps) => {
     const { activeNav, setActiveNav, isMobileOpen, onMobileToggle } =
       useSidebarNav();
     const [isComparePrice, setIsComparePrice] = useState(false);
-
-    const { selectHotel } = useSelectedHotel();
 
     // Fetch hotel data
     const fetchHotels = useCallback(
@@ -43,14 +41,12 @@
           ? rawData
           : [rawData];
 
-        //Synchronize with LocalStorage.If a hotel was previously selected,move it to the top of the list.
-        const savedHotel = getSavedHotel();
-
-        if (savedHotel?.hotelName) {
+        // Keep the hotel selected in this chat at the top of the list.
+        if (selectedHotel?.hotelName) {
           dataList = [
-            savedHotel,
+            selectedHotel,
             ...dataList.filter(
-              (hotel) => hotel.id !== savedHotel.id,
+              (hotel) => hotel.id !== selectedHotel.id,
             ),
           ];
         }
@@ -63,7 +59,7 @@
 
         return dataList;
       },
-      [],
+      [selectedHotel],
     );
 
     const {
@@ -87,8 +83,6 @@
       selectedHotel: HotelData,
     ) => {
       e.stopPropagation();
-
-      selectHotel(selectedHotel);
 
       if (onSelectHotel) {
         onSelectHotel(selectedHotel);
@@ -116,6 +110,7 @@
         {/* Topbar */}
         <Topbar
           isBreadcrumbMode={true}
+          breadcrumbLabel="Select Hotel"
           chatTitle={resolvedChatTitle}
           messages={messages}
           onBackToChat={onBackToChat}

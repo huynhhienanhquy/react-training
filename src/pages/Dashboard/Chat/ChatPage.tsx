@@ -9,6 +9,7 @@ import { SelectFarePage } from '@/pages/Dashboard/Flight/SelectFarePage';
 import { SelectHotelPage } from '@/pages/Dashboard/Hotel/SelectHotelPage';
 import { useChatSessions } from '@/hooks/useChatSessions';
 import { useSidebarNav } from '@/hooks/useSidebarNav';
+import type { HotelData } from '@/types/hotel';
 
 export const ChatPage = () => {
   const { activeNav, setActiveNav, isMobileOpen, onMobileToggle } =
@@ -19,6 +20,7 @@ export const ChatPage = () => {
 
   const [isViewingFare, setIsViewingFare] = useState(false);
   const [isViewingHotel, setIsViewingHotel] = useState(false);
+  const [selectedHotel, setSelectedHotel] = useState<HotelData | null>(null);
 
   const {
     sessions,
@@ -52,6 +54,7 @@ export const ChatPage = () => {
     startNewChat();
     setIsViewingFare(false);
     setIsViewingHotel(false);
+    setSelectedHotel(null);
   };
 
   // Select a chat from the Sidebar
@@ -75,8 +78,10 @@ export const ChatPage = () => {
   if (isViewingHotel) {
     return (
       <SelectHotelPage
+        selectedHotel={selectedHotel}
         onBackToChat={() => setIsViewingHotel(false)}
         onStartNewChat={handleStartNewChat}
+        onSelectHotel={setSelectedHotel}
       />
     );
   }
@@ -111,7 +116,10 @@ export const ChatPage = () => {
               messages={currentMessages}
               isTyping={isTyping}
               onBookFlight={() => setIsViewingFare(true)}
-              onBookHotel={() => setIsViewingHotel(true)}
+              onBookHotel={(hotel) => {
+                setSelectedHotel(hotel);
+                setIsViewingHotel(true);
+              }}
             />
           )}
 

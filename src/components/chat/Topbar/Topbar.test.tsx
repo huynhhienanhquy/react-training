@@ -102,6 +102,7 @@ describe("Topbar", () => {
       <Topbar
         isBreadcrumbMode
         chatTitle="Tokyo Trip"
+        breadcrumbLabel="Select Fare"
       />
     );
 
