@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { PriceDisplay } from './PriceDisplay'
+import { PriceDisplay } from '.'
 
 const meta: Meta<typeof PriceDisplay> = {
   title: 'UI/PriceDisplay',

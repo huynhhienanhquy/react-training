@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { InputField } from "./InputField";
+import { InputField } from ".";
 
 describe("InputField", () => {
   it("renders the label and a text input by default", () => {
