@@ -43,11 +43,22 @@ export const SelectHotelPage = ({
         ? rawData
         : [rawData];
 
-      if (selectedHotel?.hotelName) {
+      const savedHotel = (() => {
+        try {
+          const storedHotel = localStorage.getItem('selectedHotel');
+          return storedHotel ? (JSON.parse(storedHotel) as HotelData) : null;
+        } catch {
+          return null;
+        }
+      })();
+
+      const prioritizedHotel = selectedHotel ?? savedHotel;
+
+      if (prioritizedHotel?.id) {
         dataList = [
-          selectedHotel,
+          prioritizedHotel,
           ...dataList.filter(
-            (hotel) => hotel.id !== selectedHotel.id,
+            (hotel) => hotel.id !== prioritizedHotel.id,
           ),
         ];
       }

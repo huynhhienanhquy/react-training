@@ -8,14 +8,14 @@ describe('useSelectedHotel', () => {
     localStorage.clear();
   });
 
-  it('keeps the selection in application state', () => {
+  it('keeps the selection in application state and localStorage', () => {
     const hotel = { id: 'hotel-1', hotelName: 'Grand Hyatt Lagos' };
     const { result } = renderHook(() => useSelectedHotel());
 
     act(() => result.current.selectHotel(hotel));
 
     expect(result.current.selectedHotel).toEqual(hotel);
-    expect(localStorage.getItem('selectedHotel')).toBeNull();
+    expect(localStorage.getItem('selectedHotel')).toBe(JSON.stringify(hotel));
   });
 
   it('clears the selection', () => {
@@ -24,5 +24,6 @@ describe('useSelectedHotel', () => {
     act(() => result.current.clearHotel());
 
     expect(result.current.selectedHotel).toBeNull();
+    expect(localStorage.getItem('selectedHotel')).toBeNull();
   });
 });

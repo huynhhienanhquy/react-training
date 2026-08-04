@@ -3,7 +3,7 @@ import { SidebarNav } from '@/components/chat/SidebarNav/SidebarNav';
 import { Button } from '@/components/Button/Button';
 
 import iconHeart from '@/assets/icons/heart-blue.png';
-import defaultFlightLogo from '@/assets/icons/ellipse.png';
+import defaultFlightLogo from '@/assets/images/ellipse.png';
 import { SectionHeader } from '@/components/FlightFare/SectionHeader/SectionHeader';
 
 import { Topbar } from '@/components/chat/Topbar/Topbar';
