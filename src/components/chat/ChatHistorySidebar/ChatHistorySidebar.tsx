@@ -1,4 +1,4 @@
-import SearchIcon from '@/assets/icons/search'
+import SearchIcon from '@/components/icons/SearchIcon'
 import { Button } from '@/components/Button/Button'
 import type { ChatSession, ChatHistorySidebarProps } from '@/types/chat'
 

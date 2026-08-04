@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { SelectedFlightBox, type FlightLeg } from './SelectedFlightBox';
-import HeartIcon from '@/assets/icons/heart';
+import HeartIcon from '@/components/icons/HeartIcon';
 
 vi.mock('./SectionHeader/SectionHeader', () => ({
   SectionHeader: ({ title }: { title: string }) => <h2>{title}</h2>,

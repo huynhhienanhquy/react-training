@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react'
 import { SidebarNav } from '@/components/chat/SidebarNav/SidebarNav'
 import { Button } from '@/components/Button/Button'
 
-import HeartIcon from '@/assets/icons/heart'
+import HeartIcon from '@/components/icons/HeartIcon'
 import defaultFlightLogo from '@/assets/icons/ellipse.png'
 import { SectionHeader } from '@/components/FlightFare/SectionHeader/SectionHeader'
 

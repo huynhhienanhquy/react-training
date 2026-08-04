@@ -1,6 +1,6 @@
 import { ArrowLeft } from 'lucide-react'
 import { Button } from '@/components/Button/Button'
-import AddIcon from '@/assets/icons/add'
+import AddIcon from '@/components/icons/AddIcon'
 import type { ChatMessage, TopbarProps } from '@/types/chat'
 
 export type { ChatMessage }

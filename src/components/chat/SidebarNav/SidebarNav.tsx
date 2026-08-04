@@ -6,13 +6,13 @@ import { Button } from '@/components/Button/Button'
 import type { SidebarNavProps } from '@/types/chat'
 
 import LogoIcon from '@/assets/icons/Logo.png'
-import ChatIcon from '@/assets/icons/message'
-import HeartIcon from '@/assets/icons/heart'
-import MedalIcon from '@/assets/icons/medal'
-import MapIcon from '@/assets/icons/map'
-import CommunityIcon from '@/assets/icons/people'
-import SettingsIcon from '@/assets/icons/setting'
-import UserIcon from '@/assets/icons/people'
+import ChatIcon from '@/components/icons/MessageIcon'
+import HeartIcon from '@/components/icons/HeartIcon'
+import MedalIcon from '@/components/icons/MedalIcon'
+import MapIcon from '@/components/icons/MapIcon'
+import CommunityIcon from '@/components/icons/PeopleIcon'
+import SettingsIcon from '@/components/icons/SettingsIcon'
+import UserIcon from '@/components/icons/PeopleIcon'
 
 export const SidebarNav = ({
   activeNav,
