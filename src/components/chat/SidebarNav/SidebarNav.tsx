@@ -5,7 +5,7 @@ import { useProfileMenu } from '@/hooks/useProfileMenu'
 import { Button } from '@/components/Button/Button'
 import type { SidebarNavProps } from '@/types/chat'
 
-import LogoIcon from '@/assets/icons/Logo.png'
+import LogoIcon from '@/assets/images/Logo.png'
 import ChatIcon from '@/components/icons/MessageIcon'
 import HeartIcon from '@/components/icons/HeartIcon'
 import MedalIcon from '@/components/icons/MedalIcon'

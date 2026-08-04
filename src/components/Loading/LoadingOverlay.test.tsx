@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { LoadingOverlay } from './LoadingOverlay';
 
-vi.mock('../../assets/icons/Logo.png', () => ({
+vi.mock('../../assets/images/Logo.png', () => ({
   default: '/assets/logo.png',
 }));
 

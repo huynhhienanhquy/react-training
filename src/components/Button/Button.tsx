@@ -3,8 +3,8 @@ import { twMerge } from 'tailwind-merge';
 
 import HeartIcon from '@/components/icons/HeartIcon';
 import ArrowRightIcon from '@/components/icons/ArrowRightIcon';
-import GoogleIcon from '@/assets/icons/logo-google.png';
-import AppleIcon from '@/assets/icons/logo-apple.png';
+import GoogleIcon from '@/assets/images/logo-google.png';
+import AppleIcon from '@/assets/images/logo-apple.png';
 
 type ButtonVariant =
   | 'primary'

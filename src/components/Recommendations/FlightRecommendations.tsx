@@ -1,7 +1,7 @@
 import { RecommendationWrapper } from './RecommendationWrapper';
 import { Button } from '@/components/Button/Button';
 import { PriceDisplay } from '../PriceDisplay/PriceDisplay';
-import defaultFlightLogo from '@/assets/icons/ellipse.png';
+import defaultFlightLogo from '@/assets/images/ellipse.png';
 
 import { getFlightListApi } from '@/services/fareService';
 import type {

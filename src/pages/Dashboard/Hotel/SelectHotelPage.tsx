@@ -12,9 +12,9 @@ import type {
   SelectHotelPageProps,
 } from '@/types/hotel';
 
-import defaultHotelImg from '@/assets/icons/ellipse.png';
-import bookingIcon from '@/assets/icons/booking.png';
-import expediaIcon from '@/assets/icons/expedia.png';
+import defaultHotelImg from '@/assets/images/ellipse.png';
+import bookingIcon from '@/assets/images/booking.png';
+import expediaIcon from '@/assets/images/expedia.png';
 
 import { useAsyncData } from '@/hooks/useAsyncData';
 import { useSidebarNav } from '@/hooks/useSidebarNav';
