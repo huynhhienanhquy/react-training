@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { AuthFooter } from './AuthFooter'
+import { AuthFooter } from '.'
 
 const meta: Meta<typeof AuthFooter> = {
   title: 'Auth/AuthFooter',

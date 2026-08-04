@@ -5,13 +5,13 @@ import { Button } from '@/components/Button/Button';
 
 import iconHeart from '@/assets/icons/heart-blue.png';
 import defaultFlightLogo from '@/assets/icons/ellipse.png';
-import { SectionHeader } from '@/components/FlightFare/SectionHeader/SectionHeader';
+import { SectionHeader } from '@/components/FlightFare/SectionHeader';
 
-import { Topbar } from '@/components/chat/Topbar/Topbar';
+import { Topbar } from '@/components/chat/Topbar';
 import { FareHeader } from '@/components/FlightFare/FareHeader';
-import { SelectedFlightBox } from '@/components/FlightFare/SelectedFlightBox';
-import { FareCards } from '@/components/FlightFare/FareCards';
-import { PriceDetailsSidebar } from '@/components/FlightFare/PriceDetailsSidebar';
+import { SelectedFlightBox } from '@/components/FlightFare/SelectedFlight';
+import { FareCards } from '@/components/FlightFare/FareCard';
+import { PriceDetailsSidebar } from '@/components/FlightFare/PriceDetail';
 
 import { getFareDetailsApi } from '@/services/fareService';
 import type {

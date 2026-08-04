@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { Topbar } from './Topbar'
+import { Topbar } from '.'
 
 const meta: Meta<typeof Topbar> = {
   title: 'Chat/Topbar',

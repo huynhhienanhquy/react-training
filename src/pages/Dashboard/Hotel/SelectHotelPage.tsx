@@ -1,12 +1,12 @@
 import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { SidebarNav } from '@/components/chat/SidebarNav/SidebarNav';
-import { Topbar } from '@/components/chat/Topbar/Topbar';
-import { SectionHeader } from '@/components/FlightFare/SectionHeader/SectionHeader';
+import { SidebarNav } from '@/components/chat/SidebarNav';
+import { Topbar } from '@/components/chat/Topbar';
+import { SectionHeader } from '@/components/FlightFare/SectionHeader';
 
 import { getHotelDetailsApi } from '@/services/hotelService';
-import { Button } from '@/components/Button/Button';
+import { Button } from '@/components/Button';
 
 import type {
   HotelData,
