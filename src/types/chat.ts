@@ -19,10 +19,10 @@ export interface ChatSession {
 // Props definition for managing chat input, recording, and submission
 export interface ChatInputBoxProps {
   inputMessage: string;
-  setInputMessage: (val: string) => void;
+  onInputChange: (value: string) => void;
   onSend: () => void;
   isRecording: boolean;
-  setIsRecording: React.Dispatch<React.SetStateAction<boolean>>;
+  onToggleRecording: () => void;
 }
 
 export interface ChatHistorySidebarProps {

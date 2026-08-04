@@ -117,10 +117,10 @@ export const ChatPage = () => {
 
           <ChatInputBox
             inputMessage={inputMessage}
-            setInputMessage={setInputMessage}
+            onInputChange={setInputMessage}
             onSend={() => handleSendMessage()}
             isRecording={isRecording}
-            setIsRecording={setIsRecording}
+            onToggleRecording={() => setIsRecording((prev) => !prev)}
           />
         </div>
       </main>
