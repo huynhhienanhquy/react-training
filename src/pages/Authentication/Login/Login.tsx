@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { useFormState } from '@/hooks/useFormState';
 import { AuthLayout } from '@/components/auth/AuthLayout/AuthLayout';
-import { getAuthErrorMessage } from '@/utils/authHelpers';
+import { getAuthErrorMessage } from '@/helpers/auth';
 import { Button } from '@/components/Button/Button';
 import { InputField } from '@/components/Input/InputField';
 import { ErrorMessage } from '@/components/Error/ErrorMessage';

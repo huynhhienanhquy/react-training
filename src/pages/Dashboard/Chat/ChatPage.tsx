@@ -1,18 +1,14 @@
 import  { useState } from 'react';
-import { SidebarNav } from '@/components/chat/SidebarNav/SidebarNav';
 import { ChatHistorySidebar } from '@/components/chat/ChatHistorySidebar/ChatHistorySidebar';
-import { Topbar } from '@/components/chat/Topbar/Topbar';
 import { WelcomeState } from '@/components/chat/WelcomeState/WelcomeState';
 import { ChatMessageList } from '@/components/chat/ChatMessageList/ChatMessageList';
 import { ChatInputBox } from '@/components/chat/ChatInputBox/ChatInputBox';
 import { SelectFarePage } from '@/pages/Dashboard/Flight/SelectFarePage';
 import { SelectHotelPage } from '@/pages/Dashboard/Hotel/SelectHotelPage';
 import { useChatSessions } from '@/hooks/useChatSessions';
-import { useSidebarNav } from '@/hooks/useSidebarNav';
+import { DashboardLayout } from '@/layouts/DashboardLayout';
 
 export const ChatPage = () => {
-  const { activeNav, setActiveNav, isMobileOpen, onMobileToggle } =
-    useSidebarNav();
   const [searchQuery, setSearchQuery] = useState('');
   const [inputMessage, setInputMessage] = useState('');
   const [isRecording, setIsRecording] = useState(false);
@@ -82,24 +78,21 @@ export const ChatPage = () => {
   }
 
   return (
-    <div className="bg-slate-100 font-sans text-slate-700 h-screen overflow-hidden flex antialiased">
-      <SidebarNav activeNav={activeNav} setActiveNav={setActiveNav} isMobileOpen={isMobileOpen} onMobileToggle={onMobileToggle} />
-
-      <div className="ml-1.5">
-        <ChatHistorySidebar
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-          sessions={sessions}
-          activeSessionId={activeSessionId}
-          onSelectSession={handleSelectSession}
-        />
-      </div>
-
-      <main className="flex-1 bg-surface-section flex flex-col h-full relative overflow-hidden">
-        <Topbar
-          onNewChat={handleStartNewChat}
-        />
-
+    <DashboardLayout
+      topbarProps={{ onNewChat: handleStartNewChat }}
+      mainClassName="relative overflow-hidden"
+      secondarySidebar={
+        <div className="ml-1.5">
+          <ChatHistorySidebar
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            sessions={sessions}
+            activeSessionId={activeSessionId}
+            onSelectSession={handleSelectSession}
+          />
+        </div>
+      }
+    >
         <div className="flex-1 overflow-y-auto px-4 md:px-8 pb-6 pt-2 flex flex-col justify-between items-center max-w-5xl mx-auto w-full">
           {currentMessages.length === 0 ? (
             <WelcomeState
@@ -123,7 +116,6 @@ export const ChatPage = () => {
             setIsRecording={setIsRecording}
           />
         </div>
-      </main>
-    </div>
+    </DashboardLayout>
   );
 };

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { DEFAULT_NAV_ID } from '@/config/navigation';
 
 export interface UseSidebarNavResult {
   activeNav: string;
@@ -8,7 +9,7 @@ export interface UseSidebarNavResult {
 }
 
 export const useSidebarNav = (
-  initialNav = 'chats',
+  initialNav = DEFAULT_NAV_ID,
 ): UseSidebarNavResult => {
   const [activeNav, setActiveNav] = useState(initialNav);
   const [isMobileOpen, setIsMobileOpen] = useState(false);

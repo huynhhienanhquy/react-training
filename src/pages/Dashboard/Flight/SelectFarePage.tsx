@@ -1,12 +1,9 @@
 import  { useCallback, useState } from 'react';
-import { SidebarNav } from '@/components/chat/SidebarNav/SidebarNav';
-import { Button } from '@/components/Button/Button';
 
 import iconHeart from '@/assets/icons/heart-blue.png';
 import defaultFlightLogo from '@/assets/icons/ellipse.png';
 import { SectionHeader } from '@/components/FlightFare/SectionHeader/SectionHeader';
 
-import { Topbar } from '@/components/chat/Topbar/Topbar';
 import { FareHeader } from '@/components/FlightFare/FareHeader';
 import { SelectedFlightBox } from '@/components/FlightFare/SelectedFlightBox';
 import { FareCards } from '@/components/FlightFare/FareCards';
@@ -19,8 +16,9 @@ import type {
 } from '@/types/flight';
 
 import { useAsyncData } from '@/hooks/useAsyncData';
-import { useSidebarNav } from '@/hooks/useSidebarNav';
 import { useChatTitle } from '@/hooks/useChatTitle';
+import { DashboardLayout } from '@/layouts/DashboardLayout';
+import { ErrorState, LoadingState } from '@/components/common/AsyncState';
 
 export const SelectFarePage = ({
   chatTitle,
@@ -28,7 +26,6 @@ export const SelectFarePage = ({
   onBackToChat,
   onStartNewChat,
 }: SelectFarePageProps) => {
-  const { activeNav, setActiveNav } = useSidebarNav();
   const [selectedFareId, setSelectedFareId] =
     useState<'economy' | 'business'>('economy');
 
@@ -87,53 +84,22 @@ export const SelectFarePage = ({
       : 0;
 
   return (
-    <div className="bg-slate-100 font-helvetica text-slate-700 h-screen overflow-hidden flex antialiased">
-      {/* 1. Sidebar Navigation */}
-      <SidebarNav
-        activeNav={activeNav}
-        setActiveNav={setActiveNav}
-      />
-
-      {/* 2. Main Content */}
-      <main className="flex-1 bg-surface-section flex flex-col h-full overflow-y-auto">
-        {/* Topbar */}
-        <Topbar
-          isBreadcrumbMode={true}
-          chatTitle={resolvedChatTitle}
-          messages={messages}
-          onBackToChat={onBackToChat}
-          onNewChat={onStartNewChat}
-        />
+    <DashboardLayout
+      topbarProps={{
+        isBreadcrumbMode: true,
+        chatTitle: resolvedChatTitle,
+        messages,
+        onBackToChat,
+        onNewChat: onStartNewChat,
+      }}
+    >
 
         {/* LOADING STATE */}
-        {loading && (
-          <div className="flex-1 flex items-center justify-center p-8">
-            <div className="flex flex-col items-center gap-3">
-              <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
-
-              <p className="text-sm font-medium text-slate-500">
-                Loading flight information...
-              </p>
-            </div>
-          </div>
-        )}
+        {loading && <LoadingState message="Loading flight information..." />}
 
         {/* ERROR STATE */}
         {error && !loading && (
-          <div className="flex-1 flex items-center justify-center p-8">
-            <div className="bg-red-50 text-red-600 p-6 rounded-2xl border border-red-100 max-w-md text-center">
-              <p className="font-semibold">{error}</p>
-              <Button
-                type="button"
-                variant="danger"
-                size="sm"
-                className="mt-4"
-                onClick={() => window.location.reload()}
-              >
-                Retry
-              </Button>
-            </div>
-          </div>
+          <ErrorState message={error} onRetry={() => window.location.reload()} />
         )}
 
         {/* MAIN DATA GRID */}
@@ -193,7 +159,6 @@ export const SelectFarePage = ({
             </div>
           </div>
         )}
-      </main>
-    </div>
+    </DashboardLayout>
   );
 };

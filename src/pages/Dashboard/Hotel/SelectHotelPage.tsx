@@ -1,7 +1,5 @@
 import React, { useCallback, useState } from 'react';
 
-import { SidebarNav } from '@/components/chat/SidebarNav/SidebarNav';
-import { Topbar } from '@/components/chat/Topbar/Topbar';
 import { SectionHeader } from '@/components/FlightFare/SectionHeader/SectionHeader';
 
 import { getHotelDetailsApi } from '@/services/hotelService';
@@ -17,9 +15,10 @@ import bookingIcon from '@/assets/icons/booking.png';
 import expediaIcon from '@/assets/icons/expedia.png';
 
 import { useAsyncData } from '@/hooks/useAsyncData';
-import { useSidebarNav } from '@/hooks/useSidebarNav';
 import { useChatTitle } from '@/hooks/useChatTitle';
 import { useSelectedHotel, getSavedHotel } from '@/hooks/useSelectedHotel';
+import { DashboardLayout } from '@/layouts/DashboardLayout';
+import { ErrorState, LoadingState } from '@/components/common/AsyncState';
 
 export const SelectHotelPage = ({
   chatTitle,
@@ -28,8 +27,6 @@ export const SelectHotelPage = ({
   onStartNewChat,
   onSelectHotel,
 }: SelectHotelPageProps) => {
-  const { activeNav, setActiveNav, isMobileOpen, onMobileToggle } =
-    useSidebarNav();
   const [isComparePrice, setIsComparePrice] = useState(false);
 
   const { selectHotel } = useSelectedHotel();
@@ -102,52 +99,22 @@ export const SelectHotelPage = ({
   };
 
   return (
-    <div className="bg-slate-100 font-sans text-slate-700 h-screen overflow-hidden flex antialiased">
-      {/* 1. Sidebar Navigation  */}
-      <SidebarNav
-        activeNav={activeNav}
-        setActiveNav={setActiveNav}
-        isMobileOpen={isMobileOpen}
-        onMobileToggle={onMobileToggle}
-      />
-
-      {/* 2. Main Content */}
-      <main className="flex-1 bg-surface-section flex flex-col h-full overflow-y-auto">
-        {/* Topbar */}
-        <Topbar
-          isBreadcrumbMode={true}
-          chatTitle={resolvedChatTitle}
-          messages={messages}
-          onBackToChat={onBackToChat}
-          onNewChat={onStartNewChat}
-        />
+    <DashboardLayout
+      topbarProps={{
+        isBreadcrumbMode: true,
+        chatTitle: resolvedChatTitle,
+        messages,
+        onBackToChat,
+        onNewChat: onStartNewChat,
+      }}
+    >
 
         {/* LOADING STATE */}
-        {loading && (
-          <div className="flex-1 flex items-center justify-center p-8">
-            <div className="flex flex-col items-center gap-3">
-              <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
-              <p className="text-sm font-medium text-slate-500">Loading accommodation list...</p>
-            </div>
-          </div>
-        )}
+        {loading && <LoadingState message="Loading accommodation list..." />}
 
         {/* ERROR STATE */}
         {error && !loading && (
-          <div className="flex-1 flex items-center justify-center p-8">
-            <div className="bg-red-50 text-red-600 p-6 rounded-2xl border border-red-100 max-w-md text-center">
-              <p className="font-semibold">{error}</p>
-              <Button
-                type="button"
-                variant="danger"
-                size="sm"
-                className="mt-4"
-                onClick={() => window.location.reload()}
-              >
-                Retry
-              </Button>
-            </div>
-          </div>
+          <ErrorState message={error} onRetry={() => window.location.reload()} />
         )}
 
         {/* MAIN DATA GRID  */}
@@ -283,7 +250,6 @@ export const SelectHotelPage = ({
             </div>
           </div>
         )}
-      </main>
-    </div>
+    </DashboardLayout>
   );
 };
