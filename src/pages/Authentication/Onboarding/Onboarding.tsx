@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useFormState } from '@/hooks/useFormState';
 import { AuthLayout } from '@/components/auth/AuthLayout/AuthLayout';
 import { Button } from '@/components/Button/Button';
-import iconArrowDown from '@/assets/icons/arrow-down.png'
+import ArrowDownIcon from '@/assets/icons/arrow-down';
 import { AuthHeader } from '@/components/auth/AuthHeader/AuthHeader';
 import { InputField } from '@/components/Input/InputField';
 import { AuthFooter } from '@/components/auth/AuthFooter/AuthFooter';
@@ -76,7 +76,12 @@ export const Onboarding = () => {
 
               {/* Dropdown arrow */}
               <div className="pointer-events-none absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 text-2xs">
-                <img src={iconArrowDown} alt="iconArrowDown" />
+                <ArrowDownIcon
+                  width={16}
+                  height={16}
+                  color="currentColor"
+                  aria-hidden="true"
+                />
               </div>
             </div>
           </div>

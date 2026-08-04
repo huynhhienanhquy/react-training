@@ -1,41 +1,40 @@
-import type { SVGProps } from 'react'
+import type { SVGProps } from 'react';
 
-interface SVGRProps {
-  title?: string
-  titleId?: string
-  width?: number | string
-  height?: number | string
-  color?: string
+interface ArrowDownIconProps extends SVGProps<SVGSVGElement> {
+  title?: string;
+  titleId?: string;
+  width?: number | string;
+  height?: number | string;
+  color?: string;
 }
 
-const SvgComponent = ({
+const ArrowDownIcon = ({
   title,
   titleId,
   width = '1em',
   height = '1em',
-  color = '#fff',
+  color = 'currentColor',
   ...props
-}: SVGProps<SVGSVGElement> & SVGRProps) => (
+}: ArrowDownIconProps) => (
   <svg
     {...props}
     xmlns="http://www.w3.org/2000/svg"
     width={width}
     height={height}
-    viewBox="0 0 20 20"
+    viewBox="0 0 16 16"
     fill="none"
     focusable="false"
     aria-labelledby={titleId}
   >
     {title ? <title id={titleId}>{title}</title> : null}
-
     <path
+      d="m4 6 4 4 4-4"
       stroke={color}
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={1.5}
-      d="M5 10h10M10 15V5"
     />
   </svg>
-)
+);
 
-export default SvgComponent
+export default ArrowDownIcon;
