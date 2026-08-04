@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-export const useAutoScroll = (deps: unknown[]) => {
+export const useAutoScroll = (messages: unknown[], isTyping: boolean) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -9,7 +9,7 @@ export const useAutoScroll = (deps: unknown[]) => {
 
   useEffect(() => {
     scrollToBottom();
-  }, deps);
+  }, [messages, isTyping]);
 
   return { ref, scrollToBottom };
 };

@@ -53,7 +53,11 @@ export const ChatInputBox = ({
               isRecording ? 'bg-red-50 animate-pulse' : 'hover:bg-slate-100'
             }`}
             onClick={() => setIsRecording((prev) => !prev)}
-            aria-label={isRecording ? 'Stop recording' : 'Start recording'}
+            aria-label={
+              isRecording
+                ? 'Voice input: stop recording'
+                : 'Voice input: start recording'
+            }
             aria-pressed={isRecording}
             leftIcon={
               <MicrophoneIcon

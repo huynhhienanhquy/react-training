@@ -5,7 +5,7 @@ import { useProfileMenu } from '@/hooks/useProfileMenu'
 import { Button } from '@/components/Button/Button'
 import type { SidebarNavProps } from '@/types/chat'
 
-import LogoIcon from '@/assets/images/Logo.png'
+import logoIcon from '@/assets/images/Logo.png'
 import ChatIcon from '@/components/icons/MessageIcon'
 import HeartIcon from '@/components/icons/HeartIcon'
 import MedalIcon from '@/components/icons/MedalIcon'
@@ -80,8 +80,11 @@ export const SidebarNav = ({
             className="w-11 h-11 rounded-2xl p-1.5 hover:opacity-90 mt-3"
             aria-label="Home"
             leftIcon={
-              <LogoIcon
+              <img
+                src={logoIcon}
+                alt=""
                 aria-hidden="true"
+                className="h-full w-full object-contain"
               />
             }
           />
@@ -195,8 +198,11 @@ export const SidebarNav = ({
                 className="w-11 h-11 rounded-2xl p-1.5"
                 aria-label="Home"
                 leftIcon={
-                  <LogoIcon
+                  <img
+                    src={logoIcon}
+                    alt=""
                     aria-hidden="true"
+                    className="h-full w-full object-contain"
                   />
                 }
               />

@@ -28,7 +28,8 @@ export const SelectFarePage = ({
   onBackToChat,
   onStartNewChat,
 }: SelectFarePageProps) => {
-  const { activeNav, setActiveNav } = useSidebarNav()
+  const { activeNav, setActiveNav, isMobileOpen, onMobileToggle } =
+    useSidebarNav()
 
   const [selectedFareId, setSelectedFareId] =
     useState<'economy' | 'business'>('economy')
@@ -93,6 +94,8 @@ export const SelectFarePage = ({
       <SidebarNav
         activeNav={activeNav}
         setActiveNav={setActiveNav}
+        isMobileOpen={isMobileOpen}
+        onMobileToggle={onMobileToggle}
       />
 
       {/* Main Content */}

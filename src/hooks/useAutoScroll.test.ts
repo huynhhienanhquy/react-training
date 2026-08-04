@@ -4,7 +4,7 @@ import { useAutoScroll } from './useAutoScroll';
 
 describe('useAutoScroll', () => {
   it('returns a ref and scrollToBottom function', () => {
-    const { result } = renderHook(() => useAutoScroll([1]));
+    const { result } = renderHook(() => useAutoScroll([1], false));
 
     expect(result.current.ref).toBeDefined();
     expect(result.current.scrollToBottom).toBeInstanceOf(Function);
@@ -15,7 +15,7 @@ describe('useAutoScroll', () => {
     const div = document.createElement('div');
     div.scrollIntoView = scrollIntoViewMock;
 
-    const { result } = renderHook(() => useAutoScroll([1]));
+    const { result } = renderHook(() => useAutoScroll([1], false));
 
     // Assign the mock element to the ref
     Object.defineProperty(result.current.ref, 'current', { value: div, writable: true });

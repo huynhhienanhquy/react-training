@@ -3,8 +3,8 @@ import { twMerge } from 'tailwind-merge';
 
 import HeartIcon from '@/components/icons/HeartIcon';
 import ArrowRightIcon from '@/components/icons/ArrowRightIcon';
-import GoogleIcon from '@/assets/images/logo-google.png';
-import AppleIcon from '@/assets/images/logo-apple.png';
+import googleIcon from '@/assets/images/logo-google.png';
+import appleIcon from '@/assets/images/logo-apple.png';
 
 type ButtonVariant =
   | 'primary'
@@ -111,7 +111,7 @@ export function Button({
           viewBox="0 0 24 24"
           fill="none"
           role="status"
-          aria-label="Loading"
+          aria-hidden="true"
         >
           <circle
             className="opacity-25"
@@ -132,14 +132,20 @@ export function Button({
       {!isLoading && (
         <>
           {socialIcon === 'google' && (
-            <GoogleIcon
+            <img
+              src={googleIcon}
+              alt=""
               aria-hidden="true"
+              className="h-5 w-5"
             />
           )}
 
           {socialIcon === 'apple' && (
-            <AppleIcon
+            <img
+              src={appleIcon}
+              alt=""
               aria-hidden="true"
+              className="h-5 w-5"
             />
           )}
 

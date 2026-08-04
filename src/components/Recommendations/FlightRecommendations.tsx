@@ -125,6 +125,11 @@ export function FlightRecommendations({
                     size="icon"
                     isFavorite={isFav}
                     onClick={() => toggleFavorite(flight.id)}
+                    aria-label={
+                      isFav
+                        ? `Remove ${flight.airline} from favorites`
+                        : `Add ${flight.airline} to favorites`
+                    }
                   />
 
                   <Button
