@@ -12,14 +12,14 @@ import type {
   SelectHotelPageProps,
 } from '@/types/hotel';
 
-import defaultHotelImg from '@/assets/icons/ellipse.png';
-import bookingIcon from '@/assets/icons/booking.png';
-import expediaIcon from '@/assets/icons/expedia.png';
+import defaultHotelImg from '@/assets/images/ellipse.png';
+import bookingIcon from '@/assets/images/booking.png';
+import expediaIcon from '@/assets/images/expedia.png';
 
 import { useAsyncData } from '@/hooks/useAsyncData';
 import { useSidebarNav } from '@/hooks/useSidebarNav';
 import { useChatTitle } from '@/hooks/useChatTitle';
-import { useSelectedHotel, getSavedHotel } from '@/hooks/useSelectedHotel';
+import { useSelectedHotel } from '@/hooks/useSelectedHotel';
 
 export const SelectHotelPage = ({
   chatTitle,
@@ -32,7 +32,7 @@ export const SelectHotelPage = ({
     useSidebarNav();
   const [isComparePrice, setIsComparePrice] = useState(false);
 
-  const { selectHotel } = useSelectedHotel();
+  const { selectedHotel, selectHotel } = useSelectedHotel();
 
   // Fetch hotel data
   const fetchHotels = useCallback(
@@ -43,14 +43,11 @@ export const SelectHotelPage = ({
         ? rawData
         : [rawData];
 
-      //Synchronize with LocalStorage.If a hotel was previously selected,move it to the top of the list.
-      const savedHotel = getSavedHotel();
-
-      if (savedHotel?.hotelName) {
+      if (selectedHotel?.hotelName) {
         dataList = [
-          savedHotel,
+          selectedHotel,
           ...dataList.filter(
-            (hotel) => hotel.id !== savedHotel.id,
+            (hotel) => hotel.id !== selectedHotel.id,
           ),
         ];
       }
@@ -63,7 +60,7 @@ export const SelectHotelPage = ({
 
       return dataList;
     },
-    [],
+    [selectedHotel],
   );
 
   const {
