@@ -1,24 +1,22 @@
 import  { useState } from 'react';
-import { SidebarNav } from '@/components/chat/SidebarNav';
-import { ChatHistorySidebar } from '@/components/chat/ChatHistorySidebar';
-import { Topbar } from '@/components/chat/Topbar';
-import { WelcomeState } from '@/components/chat/WelcomeState';
-import { ChatMessageList } from '@/components/chat/ChatMessageList';
+import { useNavigate } from 'react-router-dom';
+import { SidebarNav } from '@/components/chat/SidebarNav/SidebarNav';
+import { ChatHistorySidebar } from '@/components/chat/ChatHistorySidebar/ChatHistorySidebar';
+import { Topbar } from '@/components/chat/Topbar/Topbar';
+import { WelcomeState } from '@/components/chat/WelcomeState/WelcomeState';
+import { ChatMessageList } from '@/components/chat/ChatMessageList/ChatMessageList';
 import { ChatInputBox } from '@/components/chat/ChatInputBox/ChatInputBox';
-import { SelectFarePage } from '@/pages/Dashboard/Flight/SelectFarePage';
-import { SelectHotelPage } from '@/pages/Dashboard/Hotel/SelectHotelPage';
 import { useChatSessions } from '@/hooks/useChatSessions';
 import { useSidebarNav } from '@/hooks/useSidebarNav';
 
 export const ChatPage = () => {
+  const navigate = useNavigate();
   const { activeNav, setActiveNav, isMobileOpen, onMobileToggle } =
     useSidebarNav();
   const [searchQuery, setSearchQuery] = useState('');
   const [inputMessage, setInputMessage] = useState('');
   const [isRecording, setIsRecording] = useState(false);
 
-  const [isViewingFare, setIsViewingFare] = useState(false);
-  const [isViewingHotel, setIsViewingHotel] = useState(false);
 
   const {
     sessions,
@@ -50,35 +48,11 @@ export const ChatPage = () => {
   const handleStartNewChat = () => {
     setInputMessage('');
     startNewChat();
-    setIsViewingFare(false);
-    setIsViewingHotel(false);
   };
 
   // Select a chat from the Sidebar
   const handleSelectSession = (sessionId: string) => {
     selectSession(sessionId);
-    setIsViewingFare(false);
-    setIsViewingHotel(false);
-  };
-
-  // If you are viewing ticket details (Select Fare)
-  if (isViewingFare) {
-    return (
-      <SelectFarePage
-        onBackToChat={() => setIsViewingFare(false)}
-        onStartNewChat={handleStartNewChat}
-      />
-    );
-  }
-
-  // If you are viewing hotel details
-  if (isViewingHotel) {
-    return (
-      <SelectHotelPage
-        onBackToChat={() => setIsViewingHotel(false)}
-        onStartNewChat={handleStartNewChat}
-      />
-    );
   }
 
   return (
@@ -110,8 +84,8 @@ export const ChatPage = () => {
             <ChatMessageList
               messages={currentMessages}
               isTyping={isTyping}
-              onBookFlight={() => setIsViewingFare(true)}
-              onBookHotel={() => setIsViewingHotel(true)}
+              onBookFlight={() => navigate('/chats/fares')}
+              onBookHotel={() => navigate('/chats/hotels')}
             />
           )}
 

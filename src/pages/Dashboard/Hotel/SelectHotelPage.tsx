@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { SidebarNav } from '@/components/chat/SidebarNav';
 import { Topbar } from '@/components/chat/Topbar';
@@ -28,6 +29,9 @@ export const SelectHotelPage = ({
   onStartNewChat,
   onSelectHotel,
 }: SelectHotelPageProps) => {
+  const navigate = useNavigate();
+  const backToChat = onBackToChat ?? (() => navigate('/chats'));
+  const startNewChat = onStartNewChat ?? (() => navigate('/chats'));
   const { activeNav, setActiveNav, isMobileOpen, onMobileToggle } =
     useSidebarNav();
   const [isComparePrice, setIsComparePrice] = useState(false);
@@ -118,8 +122,8 @@ export const SelectHotelPage = ({
           isBreadcrumbMode={true}
           chatTitle={resolvedChatTitle}
           messages={messages}
-          onBackToChat={onBackToChat}
-          onNewChat={onStartNewChat}
+          onBackToChat={backToChat}
+          onNewChat={startNewChat}
         />
 
         {/* LOADING STATE */}

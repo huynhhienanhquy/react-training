@@ -1,6 +1,7 @@
 import  { useCallback, useState } from 'react';
-import { SidebarNav } from '@/components/chat/SidebarNav';
-import { Button } from '@/components/Button';
+import { useNavigate } from 'react-router-dom';
+import { SidebarNav } from '@/components/chat/SidebarNav/SidebarNav';
+import { Button } from '@/components/Button/Button';
 
 import iconHeart from '@/assets/icons/heart-blue.png';
 import defaultFlightLogo from '@/assets/icons/ellipse.png';
@@ -28,6 +29,9 @@ export const SelectFarePage = ({
   onBackToChat,
   onStartNewChat,
 }: SelectFarePageProps) => {
+  const navigate = useNavigate();
+  const backToChat = onBackToChat ?? (() => navigate('/chats'));
+  const startNewChat = onStartNewChat ?? (() => navigate('/chats'));
   const { activeNav, setActiveNav } = useSidebarNav();
   const [selectedFareId, setSelectedFareId] =
     useState<'economy' | 'business'>('economy');
@@ -101,8 +105,8 @@ export const SelectFarePage = ({
           isBreadcrumbMode={true}
           chatTitle={resolvedChatTitle}
           messages={messages}
-          onBackToChat={onBackToChat}
-          onNewChat={onStartNewChat}
+          onBackToChat={backToChat}
+          onNewChat={startNewChat}
         />
 
         {/* LOADING STATE */}
