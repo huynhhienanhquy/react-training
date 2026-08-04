@@ -9,6 +9,12 @@ import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { ChatPage } from "./ChatPage";
 
+const mockNavigate = vi.fn();
+
+vi.mock('react-router-dom', () => ({
+  useNavigate: () => mockNavigate,
+}));
+
 vi.mock("@/components/chat/SidebarNav/SidebarNav", () => ({
   SidebarNav: () => <div>SidebarNav</div>,
 }));
@@ -101,30 +107,6 @@ vi.mock("@/components/chat/ChatInputBox/ChatInputBox", () => ({
   ),
 }));
 
-vi.mock("@/pages/Dashboard/Flight/SelectFarePage", () => ({
-  SelectFarePage: ({
-    onBackToChat,
-  }: {
-    onBackToChat: () => void;
-  }) => (
-    <button onClick={onBackToChat}>
-      Fare Page
-    </button>
-  ),
-}));
-
-vi.mock("@/pages/Dashboard/Hotel/SelectHotelPage", () => ({
-  SelectHotelPage: ({
-    onBackToChat,
-  }: {
-    onBackToChat: () => void;
-  }) => (
-    <button onClick={onBackToChat}>
-      Hotel Page
-    </button>
-  ),
-}));
-
 describe("ChatPage", () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -150,7 +132,7 @@ describe("ChatPage", () => {
     });
   });
 
-  it("shows flight page", async () => {
+  it("navigates to the fare route", async () => {
     const user = userEvent.setup();
 
     render(<ChatPage />);
@@ -169,12 +151,10 @@ describe("ChatPage", () => {
 
     await user.click(screen.getByText("Book Flight"));
 
-    expect(
-      screen.getByText("Fare Page")
-    ).toBeInTheDocument();
+    expect(mockNavigate).toHaveBeenCalledWith('/chats/fares');
   });
 
-  it("returns from fare page", async () => {
+  it("navigates to the hotel route", async () => {
     const user = userEvent.setup();
 
     render(<ChatPage />);
@@ -185,19 +165,10 @@ describe("ChatPage", () => {
       expect(screen.getAllByText(/Cheap flights to Lagos/i).length).toBeGreaterThan(0);
     });
 
-    await waitFor(() =>
-      expect(
-        screen.getByText("Book Flight")
-      ).toBeInTheDocument()
-    );
+    await waitFor(() => expect(screen.getByText('Book Hotel')).toBeInTheDocument());
+    await user.click(screen.getByText('Book Hotel'));
 
-    await user.click(screen.getByText("Book Flight"));
-
-    await user.click(screen.getByText("Fare Page"));
-
-    expect(
-      screen.getAllByText(/Cheap flights to Lagos/i).length
-    ).toBeGreaterThan(0);
+    expect(mockNavigate).toHaveBeenCalledWith('/chats/hotels');
   });
 
   it("starts a new chat", async () => {
