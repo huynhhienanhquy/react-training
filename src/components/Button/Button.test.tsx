@@ -115,6 +115,23 @@ describe('Button', () => {
     ).toBeDisabled();
   });
 
+  it('exposes favorite state through aria-pressed', () => {
+    const { rerender } = render(
+      <Button variant="favorite" isFavorite={false} aria-label="Favorite" />,
+    );
+
+    expect(screen.getByRole('button', { name: 'Favorite' })).toHaveAttribute(
+      'aria-pressed',
+      'false',
+    );
+
+    rerender(<Button variant="favorite" isFavorite aria-label="Favorite" />);
+    expect(screen.getByRole('button', { name: 'Favorite' })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    );
+  });
+
   it('merges custom className and native button props', () => {
     render(
       <Button

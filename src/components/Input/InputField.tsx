@@ -50,7 +50,9 @@ export const InputField = ({
           type={inputType}
           aria-invalid={hasError ? 'true' : undefined}
           aria-describedby={
-            hasError ? errorId : ariaDescribedBy
+            [ariaDescribedBy, hasError ? errorId : undefined]
+              .filter(Boolean)
+              .join(' ') || undefined
           }
           className={`w-full rounded-xl border border-gray-100 px-5 py-3.5 transition placeholder:text-gray-300 focus:outline-none ${
             isPassword
@@ -99,6 +101,16 @@ export const InputField = ({
           </Button>
         )}
       </div>
+
+      {hasError && (
+        <p
+          id={errorId}
+          role="alert"
+          className="text-sm text-red-500 font-medium px-1"
+        >
+          {error}
+        </p>
+      )}
     </div>
   );
 };

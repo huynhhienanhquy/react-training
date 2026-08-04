@@ -68,11 +68,6 @@ vi.mock('@/components/Button/Button', () => ({
   ),
 }));
 
-vi.mock('@/components/Error/ErrorMessage', () => ({
-  ErrorMessage: ({ message }: { message: string | null }) =>
-    message ? <div role="alert">{message}</div> : null,
-}));
-
 vi.mock('@/components/auth/AuthFooter/AuthFooter', () => ({
   AuthFooter: ({
     actionText,

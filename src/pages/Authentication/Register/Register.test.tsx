@@ -35,18 +35,6 @@ vi.mock("@/components/auth/AuthHeader/AuthHeader", () => ({
   ),
 }));
 
-vi.mock("@/components/Input/InputField", () => ({
-  InputField: ({
-    label,
-    value,
-    onChange,
-  }: {
-    label: string;
-    value: string;
-    onChange: React.ChangeEventHandler<HTMLInputElement>;
-  }) => <input aria-label={label} value={value} onChange={onChange} />,
-}));
-
 vi.mock("@/components/Button/Button", () => ({
   Button: ({
     children,
