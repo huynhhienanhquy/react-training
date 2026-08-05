@@ -83,4 +83,23 @@ describe('useAsyncData', () => {
 
     expect(fetchFn).toHaveBeenCalledTimes(1);
   });
+
+  it('refetches when an explicit request dependency changes', async () => {
+    const fetchFn = vi.fn().mockImplementation((id: number) =>
+      Promise.resolve(`data-${id}`),
+    );
+    const { result, rerender } = renderHook(
+      ({ id }) => useAsyncData(() => fetchFn(id), { dependencies: [id] }),
+      { initialProps: { id: 1 } },
+    );
+
+    await act(async () => Promise.resolve());
+    expect(result.current.data).toBe('data-1');
+
+    rerender({ id: 2 });
+    await act(async () => Promise.resolve());
+
+    expect(result.current.data).toBe('data-2');
+    expect(fetchFn).toHaveBeenCalledTimes(2);
+  });
 });

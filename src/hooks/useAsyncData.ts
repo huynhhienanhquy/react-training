@@ -1,4 +1,10 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type DependencyList,
+} from 'react';
 import { AxiosError } from 'axios';
 
 /* eslint-disable react-hooks/set-state-in-effect */
@@ -11,6 +17,7 @@ interface AsyncDataState<T> {
 
 interface UseAsyncDataOptions {
   skip?: boolean;
+  dependencies?: DependencyList;
 }
 
 interface UseAsyncDataReturn<T> extends AsyncDataState<T> {
@@ -21,7 +28,7 @@ export const useAsyncData = <T>(
   fetchFn: () => Promise<T>,
   options?: UseAsyncDataOptions,
 ): UseAsyncDataReturn<T> => {
-  const { skip = false } = options ?? {};
+  const { skip = false, dependencies = [] } = options ?? {};
   const fetchFnRef = useRef(fetchFn);
 
   useEffect(() => {
@@ -71,7 +78,10 @@ export const useAsyncData = <T>(
         error: message,
       });
     }
-  }, [skip]);
+  // Callers can explicitly declare the values that change the request while
+  // inline fetch functions remain safe from identity-only refetch loops.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [skip, ...dependencies]);
 
   useEffect(() => {
     if (!skip) {

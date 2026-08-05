@@ -43,4 +43,19 @@ describe('useAutoScroll', () => {
     rerender({ trigger: 2 });
     expect(scrollIntoViewMock).toHaveBeenCalledTimes(1);
   });
+
+  it('scrolls when the secondary trigger changes', () => {
+    const scrollIntoViewMock = vi.fn();
+    const div = document.createElement('div');
+    div.scrollIntoView = scrollIntoViewMock;
+    const { result, rerender } = renderHook(
+      ({ typing }) => useAutoScroll('same-messages', typing),
+      { initialProps: { typing: false } },
+    );
+    Object.defineProperty(result.current.ref, 'current', { value: div, writable: true });
+
+    rerender({ typing: true });
+
+    expect(scrollIntoViewMock).toHaveBeenCalledTimes(1);
+  });
 });

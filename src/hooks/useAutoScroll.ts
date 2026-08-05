@@ -1,6 +1,9 @@
 import { useCallback, useEffect, useRef } from 'react';
 
-export const useAutoScroll = (trigger: unknown) => {
+export const useAutoScroll = (
+  trigger: unknown,
+  secondaryTrigger?: unknown,
+) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = useCallback(() => {
@@ -9,7 +12,7 @@ export const useAutoScroll = (trigger: unknown) => {
 
   useEffect(() => {
     scrollToBottom();
-  }, [scrollToBottom, trigger]);
+  }, [scrollToBottom, trigger, secondaryTrigger]);
 
   return { ref, scrollToBottom };
 };
