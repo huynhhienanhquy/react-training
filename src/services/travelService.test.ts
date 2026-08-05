@@ -22,4 +22,12 @@ describe('getItineraryListApi', () => {
     await expect(getItineraryListApi()).resolves.toEqual(days);
     expect(travelApi.get).toHaveBeenCalledWith('/itinerary');
   });
+
+  it('rejects a malformed itinerary envelope', async () => {
+    vi.mocked(travelApi.get).mockResolvedValue({ data: {} });
+
+    await expect(getItineraryListApi()).rejects.toThrow(
+      'Invalid itinerary response',
+    );
+  });
 });

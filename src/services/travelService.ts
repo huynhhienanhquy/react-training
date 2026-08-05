@@ -21,7 +21,16 @@ type ItineraryListResponse = DayItinerary[] | { days: DayItinerary[] };
 
 export const getItineraryListApi = async (): Promise<DayItinerary[]> => {
   const response = await travelApi.get<ItineraryListResponse>('/itinerary');
-  return Array.isArray(response.data) ? response.data : response.data.days;
+
+  if (Array.isArray(response.data)) {
+    return response.data;
+  }
+
+  if (Array.isArray(response.data.days)) {
+    return response.data.days;
+  }
+
+  throw new Error('Invalid itinerary response');
 };
 
 
