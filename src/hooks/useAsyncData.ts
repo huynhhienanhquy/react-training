@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { AxiosError } from 'axios';
+import { getErrorMessage } from '@/utils/errorHelpers';
 
 /* eslint-disable react-hooks/set-state-in-effect */
 
@@ -49,21 +49,10 @@ export const useAsyncData = <T>(
         error: null,
       });
     } catch (err: unknown) {
-      let message = 'Unable to retrieve data.';
-
-      if (err instanceof AxiosError) {
-        message =
-          err.response?.data?.message ??
-          err.message ??
-          'Server connection error';
-      } else if (err instanceof Error) {
-        message = err.message;
-      }
-
       setState({
         data: null,
         loading: false,
-        error: message,
+        error: getErrorMessage(err),
       });
     }
   }, [fetchFn, skip]);

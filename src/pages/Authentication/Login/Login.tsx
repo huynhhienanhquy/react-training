@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { useFormState } from '@/hooks/useFormState';
 import { AuthLayout } from '@/components/auth/AuthLayout';
-import { getAuthErrorMessage } from '@/utils/authHelpers';
+import { getErrorMessage } from '@/utils/errorHelpers';
 import { Button } from '@/components/Button';
 import { InputField } from '@/components/Input';
 import { ErrorMessage } from '@/components/Error';
@@ -27,11 +27,7 @@ export const Login = () => {
       await login(email, password);
       navigate('/chats');
     } catch (err: unknown) {
-      if (err instanceof Error && err.message) {
-        setError(err.message);
-      } else {
-        setError(getAuthErrorMessage(err));
-      }
+      setError(getErrorMessage(err));
     } finally {
       stopLoading();
     }
