@@ -1,4 +1,4 @@
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosHeaders } from 'axios';
 import { describe, expect, it } from 'vitest';
 import { getErrorMessage } from './errorHelpers';
 
@@ -14,7 +14,7 @@ describe('getErrorMessage', () => {
         status: 401,
         statusText: 'Unauthorized',
         headers: {},
-        config: { headers: {} },
+        config: { headers: new AxiosHeaders() },
       },
     );
 
