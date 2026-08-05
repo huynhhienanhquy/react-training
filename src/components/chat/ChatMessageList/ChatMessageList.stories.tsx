@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { ChatMessageList } from '../ChatMessageList/ChatMessageList'
-import type { ChatMessage } from '../ChatMessageList/ChatMessageList'
+import type { ChatMessage } from '@/types/chat'
 
 const meta: Meta<typeof ChatMessageList> = {
   title: 'Chat/ChatMessageList',
@@ -57,19 +57,19 @@ const PLACES_MESSAGES: ChatMessage[] = [
     data: [
       {
         id: 'p1',
-        title: 'Ba Na Hills',
-        subtitle: 'Da Nang, Vietnam',
-        image: 'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=500',
+        name: 'Ba Na Hills',
+        location: 'Da Nang, Vietnam',
+        imageUrl: 'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=500',
         rating: 4.8,
-        price: '$40/person',
+        category: 'Attraction',
       },
       {
         id: 'p2',
-        title: 'My Khe Beach',
-        subtitle: 'Da Nang, Vietnam',
-        image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500',
+        name: 'My Khe Beach',
+        location: 'Da Nang, Vietnam',
+        imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500',
         rating: 4.7,
-        price: 'Free',
+        category: 'Beach',
       },
     ],
   },
