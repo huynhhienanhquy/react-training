@@ -1,0 +1,25 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { travelApi } from './api';
+import { getItineraryListApi } from './travelService';
+
+vi.mock('./api', () => ({
+  travelApi: { get: vi.fn() },
+}));
+
+const days = [
+  { id: 'day-1', day: 1, dateTitle: 'Arrival', activities: [] },
+];
+
+describe('getItineraryListApi', () => {
+  beforeEach(() => vi.clearAllMocks());
+
+  it.each([
+    ['an array response', days],
+    ['a days envelope', { days }],
+  ])('exposes DayItinerary[] for %s', async (_label, data) => {
+    vi.mocked(travelApi.get).mockResolvedValue({ data });
+
+    await expect(getItineraryListApi()).resolves.toEqual(days);
+    expect(travelApi.get).toHaveBeenCalledWith('/itinerary');
+  });
+});

@@ -17,9 +17,11 @@ export const getPlaceDetailApi = async (id: string): Promise<PlaceData> => {
 
 // 4. API CALLS FOR ITINERARY (/itinerary)
 //Get a list of suggested itineraries
+type ItineraryListResponse = DayItinerary[] | { days: DayItinerary[] };
+
 export const getItineraryListApi = async (): Promise<DayItinerary[]> => {
-  const response = await travelApi.get<DayItinerary[]>('/itinerary');
-  return response.data;
+  const response = await travelApi.get<ItineraryListResponse>('/itinerary');
+  return Array.isArray(response.data) ? response.data : response.data.days;
 };
 
 
