@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { AxiosError } from 'axios';
 
 /* eslint-disable react-hooks/set-state-in-effect */
@@ -22,6 +22,11 @@ export const useAsyncData = <T>(
   options?: UseAsyncDataOptions,
 ): UseAsyncDataReturn<T> => {
   const { skip = false } = options ?? {};
+  const fetchFnRef = useRef(fetchFn);
+
+  useEffect(() => {
+    fetchFnRef.current = fetchFn;
+  }, [fetchFn]);
 
   const [state, setState] = useState<AsyncDataState<T>>({
     data: null,
@@ -41,7 +46,7 @@ export const useAsyncData = <T>(
     }));
 
     try {
-      const data = await fetchFn();
+      const data = await fetchFnRef.current();
 
       setState({
         data,
@@ -66,7 +71,7 @@ export const useAsyncData = <T>(
         error: message,
       });
     }
-  }, [fetchFn, skip]);
+  }, [skip]);
 
   useEffect(() => {
     if (!skip) {
@@ -76,8 +81,6 @@ export const useAsyncData = <T>(
 
   return {
     ...state,
-    refetch: () => {
-      void fetchData();
-    },
+    refetch: fetchData,
   };
 };

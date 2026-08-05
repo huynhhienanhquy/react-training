@@ -34,4 +34,26 @@ describe('useClickOutside', () => {
 
     expect(handler).not.toHaveBeenCalled();
   });
+
+  it('keeps one listener while using the latest inline callback', () => {
+    const addListenerSpy = vi.spyOn(document, 'addEventListener');
+    const firstHandler = vi.fn();
+    const latestHandler = vi.fn();
+    const { result, rerender } = renderHook(
+      ({ handler }) => useClickOutside<HTMLDivElement>(() => handler()),
+      { initialProps: { handler: firstHandler } },
+    );
+    const div = document.createElement('div');
+    Object.defineProperty(result.current, 'current', { value: div, writable: true });
+
+    rerender({ handler: latestHandler });
+    document.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+
+    const mousedownRegistrations = addListenerSpy.mock.calls.filter(
+      ([eventName]) => eventName === 'mousedown',
+    );
+    expect(mousedownRegistrations).toHaveLength(1);
+    expect(firstHandler).not.toHaveBeenCalled();
+    expect(latestHandler).toHaveBeenCalledTimes(1);
+  });
 });

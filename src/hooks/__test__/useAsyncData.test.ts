@@ -69,4 +69,18 @@ describe('useAsyncData', () => {
     expect(result.current.data).toBe('second');
     expect(fetchFn).toHaveBeenCalledTimes(2);
   });
+
+  it('does not refetch when an inline fetch function changes identity', async () => {
+    const fetchFn = vi.fn().mockResolvedValue('data');
+    const { rerender } = renderHook(() => useAsyncData(() => fetchFn()));
+
+    await act(async () => {
+      await Promise.resolve();
+    });
+
+    rerender();
+    rerender();
+
+    expect(fetchFn).toHaveBeenCalledTimes(1);
+  });
 });

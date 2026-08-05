@@ -16,7 +16,9 @@ export const ChatMessageList = ({
   onViewAllPlaces,
   onViewAllItinerary,
 }: ChatMessageListProps) => {
-  const { ref: messagesEndRef } = useAutoScroll([messages, isTyping]);
+  const { ref: messagesEndRef } = useAutoScroll(
+    `${messages.length}:${isTyping}`,
+  );
 
   return (
     <div className="w-full flex-1 overflow-y-auto space-y-4 py-4 px-2 scrollbar-hide">
