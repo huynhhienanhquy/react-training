@@ -2,7 +2,7 @@ import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/Button/Button';
 import iconAdd from '@/assets/icons/add-light.png';
 
-export type { ChatMessage } from '../ChatMessageList/ChatMessageList';
+export type { ChatMessage } from '@/types/chat';
 import { type TopbarProps } from "@/types/chat";
 
 

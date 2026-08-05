@@ -66,4 +66,17 @@ describe('useCountdown', () => {
 
     expect(result.current.counter).toBe(5);
   });
+
+  it('restarts after reset when the countdown reached zero', () => {
+    const { result } = renderHook(() => useCountdown(1));
+
+    act(() => vi.advanceTimersByTime(1000));
+    expect(result.current.counter).toBe(0);
+
+    act(() => result.current.reset());
+    expect(result.current.counter).toBe(1);
+
+    act(() => vi.advanceTimersByTime(1000));
+    expect(result.current.counter).toBe(0);
+  });
 });
