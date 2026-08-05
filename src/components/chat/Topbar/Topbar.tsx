@@ -8,6 +8,7 @@ import { type TopbarProps } from "@/types/chat";
 
 export const Topbar = ({
   isBreadcrumbMode = false,
+  breadcrumbLabel = 'Select Fare',
   chatTitle,
   messages = [],
   onBackToChat,
@@ -49,7 +50,7 @@ export const Topbar = ({
               {displayTitle}
             </Button>
             <span className="text-slate-400 hidden md:inline">&gt;</span>
-            <span className="font-bold text-slate-800 truncate text-xs md:text-sm">Select Fare</span>
+            <span className="font-bold text-slate-800 truncate text-xs md:text-sm">{breadcrumbLabel}</span>
           </>
         ) : (
           <h2 className="text-sm md:text-base font-semibold text-slate-800 truncate max-w-120 md:max-w-md">

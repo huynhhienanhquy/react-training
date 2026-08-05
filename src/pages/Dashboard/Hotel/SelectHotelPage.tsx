@@ -114,7 +114,7 @@ export const SelectHotelPage = ({
       {/* 1. Sidebar Navigation  */}
       <SidebarNav
         activeNav={activeNav}
-        setActiveNav={setActiveNav}
+        onNavChange={setActiveNav}
         isMobileOpen={isMobileOpen}
         onMobileToggle={onMobileToggle}
       />
@@ -124,6 +124,7 @@ export const SelectHotelPage = ({
         {/* Topbar */}
         <Topbar
           isBreadcrumbMode={true}
+          breadcrumbLabel="Select Hotel"
           chatTitle={resolvedChatTitle}
           messages={messages}
           onBackToChat={onBackToChat}

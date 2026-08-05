@@ -116,6 +116,19 @@ describe("Topbar", () => {
     ).toBeInTheDocument();
   });
 
+  it("renders the provided breadcrumb label", () => {
+    render(
+      <Topbar
+        isBreadcrumbMode
+        breadcrumbLabel="Select Hotel"
+        chatTitle="Tokyo Trip"
+      />
+    );
+
+    expect(screen.getByText("Select Hotel")).toBeInTheDocument();
+    expect(screen.queryByText("Select Fare")).not.toBeInTheDocument();
+  });
+
 
   it("calls onBackToChat when clicking breadcrumb button", async () => {
     const user = userEvent.setup();

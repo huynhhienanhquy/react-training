@@ -91,7 +91,7 @@ export const SelectFarePage = ({
       {/* 1. Sidebar Navigation */}
       <SidebarNav
         activeNav={activeNav}
-        setActiveNav={setActiveNav}
+        onNavChange={setActiveNav}
       />
 
       {/* 2. Main Content */}
@@ -99,6 +99,7 @@ export const SelectFarePage = ({
         {/* Topbar */}
         <Topbar
           isBreadcrumbMode={true}
+          breadcrumbLabel="Select Fare"
           chatTitle={resolvedChatTitle}
           messages={messages}
           onBackToChat={onBackToChat}

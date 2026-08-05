@@ -27,7 +27,7 @@ export interface ChatInputBoxProps {
 
 export interface ChatHistorySidebarProps {
   searchQuery: string;
-  setSearchQuery: (q: string) => void;
+  onSearchChange: (query: string) => void;
   sessions: ChatSession[];
   activeSessionId: string | null;
   onSelectSession: (id: string) => void;
@@ -45,13 +45,14 @@ export interface ChatMessageListProps {
 
 export interface SidebarNavProps {
   activeNav: string;
-  setActiveNav: (id: string) => void;
+  onNavChange: (id: string) => void;
   isMobileOpen?: boolean;
   onMobileToggle?: () => void;
 }
 
 export interface TopbarProps {
   isBreadcrumbMode?: boolean;
+  breadcrumbLabel?: string;
   chatTitle?: string;
   messages?: ChatMessage[];
   onBackToChat?: () => void;

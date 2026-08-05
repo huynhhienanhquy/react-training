@@ -10,6 +10,7 @@ const meta: Meta<typeof Topbar> = {
   },
   argTypes: {
     isBreadcrumbMode: { control: 'boolean' },
+    breadcrumbLabel: { control: 'text' },
     chatTitle: { control: 'text' },
     onBackToChat: { action: 'backToChat' },
     onNewChat: { action: 'newChat' },
@@ -29,6 +30,7 @@ export const Default: Story = {
 export const BreadcrumbMode: Story = {
   args: {
     isBreadcrumbMode: true,
+    breadcrumbLabel: 'Select Fare',
     chatTitle: 'Cheap flights to Lagos',
   },
 }

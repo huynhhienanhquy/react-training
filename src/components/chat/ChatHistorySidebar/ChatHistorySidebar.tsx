@@ -7,7 +7,7 @@ export type { ChatSession };
 
 export const ChatHistorySidebar = ({
   searchQuery,
-  setSearchQuery,
+  onSearchChange,
   sessions,
   activeSessionId,
   onSelectSession,
@@ -44,7 +44,7 @@ export const ChatHistorySidebar = ({
             type="text"
             placeholder="Search"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => onSearchChange(e.target.value)}
             className="w-full bg-white border border-slate-100/80 text-sm rounded-2xl pl-10 pr-4 py-3 text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/10 focus:border-blue-400 transition shadow-sm shadow-slate-200/50"
           />
         </div>
