@@ -26,7 +26,7 @@ const meta: Meta<typeof SidebarNav> = {
       control: { type: 'select' },
       options: ['chats', 'favorites', 'medal', 'map', 'community', 'settings'],
     },
-    setActiveNav: { action: 'navigated' },
+    onNavChange: { action: 'navigated' },
     onMobileToggle: { action: 'mobileToggled' },
   },
 }

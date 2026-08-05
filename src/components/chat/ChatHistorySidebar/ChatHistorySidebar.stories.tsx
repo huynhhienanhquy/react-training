@@ -11,7 +11,7 @@ const meta: Meta<typeof ChatHistorySidebar> = {
   },
   argTypes: {
     searchQuery: { control: 'text' },
-    setSearchQuery: { action: 'searchQueryChanged' },
+    onSearchChange: { action: 'searchQueryChanged' },
     onSelectSession: { action: 'sessionSelected' },
   },
 }
