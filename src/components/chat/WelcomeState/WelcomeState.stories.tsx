@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { WelcomeState } from './WelcomeState'
+import { WelcomeState } from '.'
 
 const meta: Meta<typeof WelcomeState> = {
   title: 'Chat/WelcomeState',

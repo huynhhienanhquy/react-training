@@ -1,7 +1,7 @@
 // ThinkingLoader.test.tsx
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { ThinkingLoader } from './ThinkingLoader';
+import { ThinkingLoader } from '.';
 
 describe('ThinkingLoader', () => {
   it('renders the default text', () => {

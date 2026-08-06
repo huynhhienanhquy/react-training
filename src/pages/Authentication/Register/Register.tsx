@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormState } from '@/hooks/useFormState';
-import { AuthLayout } from '@/components/auth/AuthLayout/AuthLayout';
-import { Button } from '@/components/Button/Button';
-import { AuthHeader } from '@/components/auth/AuthHeader/AuthHeader';
-import { InputField } from '@/components/Input/InputField';
-import { AuthFooter } from '@/components/auth/AuthFooter/AuthFooter';
+import { AuthLayout } from '@/components/auth/AuthLayout';
+import { Button } from '@/components/Button';
+import { AuthHeader } from '@/components/auth/AuthHeader';
+import { InputField } from '@/components/Input';
+import { AuthFooter } from '@/components/auth/AuthFooter';
 
 export const Register = () => {
   const navigate = useNavigate();
