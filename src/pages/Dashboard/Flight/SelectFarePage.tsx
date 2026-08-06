@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { SidebarNav } from '@/components/chat/SidebarNav/index';
 import { Button } from '@/components/Button/index';
 
-import iconHeart from '@/assets/icons/heart-blue.png';
-import defaultFlightLogo from '@/assets/icons/ellipse.png';
+import HeartIcon from '@/components/icons/HeartIcon';
+import defaultFlightLogo from '@/assets/images/ellipse.png';
 import { SectionHeader } from '@/components/FlightFare/SectionHeader';
 
 import { Topbar } from '@/components/chat/Topbar';
@@ -155,7 +155,7 @@ export const SelectFarePage = ({
               <SelectedFlightBox
                 airlineName={fareData.airlineName || ''}
                 defaultFlightLogo={defaultFlightLogo}
-                iconHeart={iconHeart}
+                iconHeart={HeartIcon}
                 legs={fareData.legs || []}
                 cancellationPolicy={
                   fareData.cancellationPolicy || ''

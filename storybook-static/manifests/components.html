@@ -588,13 +588,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">24/27 prop type errors</a><a class="filter-pill info" data-k="infos" href="#filter-infos">27/27 infos</a><span class="filter-pill ok" aria-disabled="true">85 stories ok</span></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">24/27 prop type errors</a><a class="filter-pill info" data-k="infos" href="#filter-infos">27/27 infos</a><span class="filter-pill ok" aria-disabled="true">87 stories ok</span></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note info" style="margin-bottom: 16px;">
-            <strong>Tip:</strong> You are using <code>react-docgen</code> (the default). Generation took <strong>0.8s</strong>. For higher quality prop types, consider switching to <code>react-docgen-typescript</code> in your <code>main.ts</code>:
+            <strong>Tip:</strong> You are using <code>react-docgen</code> (the default). Generation took <strong>0.7s</strong>. For higher quality prop types, consider switching to <code>react-docgen-typescript</code> in your <code>main.ts</code>:
             <pre><code>typescript: {
   reactDocgen: 'react-docgen-typescript',
 }</code></pre>
@@ -1038,7 +1038,7 @@ export const AuthLayout = ({
       <div class="badges">
         <label for="c-3-ui-button-props" class="badge ok as-toggle">10 prop types</label>
         <label for="c-3-ui-button-info" class="badge info as-toggle">1 info</label>
-        <label for="c-3-ui-button-stories" class="badge ok as-toggle">9 stories</label>
+        <label for="c-3-ui-button-stories" class="badge ok as-toggle">11 stories</label>
         
         
       </div>
@@ -1090,7 +1090,7 @@ rightIcon?: ReactNode
 
 showArrow?: boolean = false
 
-size?: &#39;sm&#39; | &#39;md&#39; | &#39;lg&#39; | &#39;icon&#39; = &#39;lg&#39;
+size?: &#39;sm&#39; | &#39;md&#39; | &#39;lg&#39; | &#39;icon&#39; | &#39;none&#39; = &#39;lg&#39;
 
 socialIcon?: &#39;google&#39; | &#39;apple&#39;
 
@@ -1100,7 +1100,9 @@ variant?: | &#39;primary&#39;
 | &#39;dark&#39;
 | &#39;ghost&#39;
 | &#39;danger&#39;
-| &#39;favorite&#39; = &#39;primary&#39;</code></pre>
+| &#39;favorite&#39;
+| &#39;light&#39;
+| &#39;outline&#39; = &#39;primary&#39;</code></pre>
           </div>
         </div>
     
@@ -1168,6 +1170,24 @@ variant?: | &#39;primary&#39;
               
               
               <pre><code>const Ghost = () =&gt; &lt;Button variant=&quot;ghost&quot; size=&quot;md&quot;&gt;Cancel&lt;/Button&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Light</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Light = () =&gt; &lt;Button variant=&quot;light&quot; size=&quot;sm&quot;&gt;Change Flight&lt;/Button&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Outline</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const Outline = () =&gt; &lt;Button variant=&quot;outline&quot; size=&quot;sm&quot;&gt;Find me the best restaurants&lt;/Button&gt;;</code></pre>
             </div>
             <div class="note ok">
               <div class="row">
@@ -1384,6 +1404,7 @@ You can debug your component file in this playground: https://react-docgen.dev/p
 Code:
 
 import iconSearch from &#39;@/assets/icons/search-normal.png&#39;
+import { Button } from &#39;@/components/Button/Button&#39;;
 import type { ChatSession, ChatHistorySidebarProps } from &#39;@/types/chat&#39;;
 
 export type { ChatSession };
@@ -1446,17 +1467,20 @@ export const ChatHistorySidebar = ({
                 {items.map((session) =&gt; {
                   const isActive = session.id === activeSessionId;
                   return (
-                    &lt;button
+                    &lt;Button
                       key={session.id}
+                      type=&quot;button&quot;
+                      variant=&quot;ghost&quot;
+                      size=&quot;none&quot;
                       onClick={() =&gt; onSelectSession(session.id)}
-                      className={`w-full text-left px-3.5 py-3 min-h-11 rounded-2xl text-xs md:text-sm transition font-medium truncate block ${
+                      className={`w-full justify-start text-left px-3.5 py-3 min-h-11 rounded-2xl text-xs md:text-sm transition font-medium truncate block ${
                         isActive
                           ? &#39;bg-surface-active text-brand-dark font-semibold&#39;
                           : &#39;text-brand-dark hover:bg-slate-100/60&#39;
                       }`}
                     &gt;
                       {session.title}
-                    &lt;/button&gt;
+                    &lt;/Button&gt;
                   );
                 })}
               &lt;/div&gt;
@@ -1575,6 +1599,7 @@ import iconMic from &#39;@/assets/icons/microphone-2.png&#39;;
 import iconSend from &#39;@/assets/icons/send-2.png&#39;;
 import { type ChatInputBoxProps } from &quot;@/types/chat&quot;;
 import { useEnterToSend } from &#39;@/hooks/useEnterToSend&#39;;
+import { Button } from &#39;@/components/Button/Button&#39;;
 
 export const ChatInputBox = ({
   inputMessage,
@@ -1602,42 +1627,56 @@ export const ChatInputBox = ({
       {/* Action Toolbar */}
       &lt;div className=&quot;flex items-center justify-between pt-2 mt-2&quot;&gt;
         {/* Attachment / Plus Action Button */}
-        &lt;button className=&quot;-translate-x-7 translate-y-2  w-9 h-9 rounded-full flex items-center justify-center hover:bg-slate-100 transition p-2 cursor-pointer&quot;&gt;
-          &lt;img
-            src={iconPlus}
-            alt=&quot;Add attachment&quot;
-            className=&quot;w-5 h-5 object-contain opacity-40 hover:opacity-70&quot;
-          /&gt;
-        &lt;/button&gt;
+        &lt;Button
+          type=&quot;button&quot;
+          variant=&quot;ghost&quot;
+          size=&quot;icon&quot;
+          className=&quot;-translate-x-7 translate-y-2 w-9 h-9 rounded-full p-2&quot;
+          leftIcon={
+            &lt;img
+              src={iconPlus}
+              alt=&quot;Add attachment&quot;
+              className=&quot;w-5 h-5 object-contain opacity-40 hover:opacity-70&quot;
+            /&gt;
+          }
+        /&gt;
 
         &lt;div className=&quot;flex items-center gap-3&quot;&gt;
           {/* Voice Recording Toggle Button */}
-          &lt;button
-            onClick={() =&gt; setIsRecording((prev) =&gt; !prev)}
-            className={`w-10 h-10 md:w-9 md:h-9 rounded-full flex items-center justify-center transition p-2 ${
+          &lt;Button
+            type=&quot;button&quot;
+            variant=&quot;ghost&quot;
+            size=&quot;icon&quot;
+            className={`w-10 h-10 md:w-9 md:h-9 rounded-full p-2 ${
               isRecording ? &#39;bg-red-50 animate-pulse&#39; : &#39;hover:bg-slate-100&#39;
             }`}
-          &gt;
-            &lt;img
-              src={iconMic}
-              alt=&quot;Voice input&quot;
-              className={`w-5 h-5 object-contain transition ${
-                isRecording ? &#39;filter-red&#39; : &#39;opacity-40 hover:opacity-70&#39;
-              }`}
-            /&gt;
-          &lt;/button&gt;
+            onClick={() =&gt; setIsRecording((prev) =&gt; !prev)}
+            leftIcon={
+              &lt;img
+                src={iconMic}
+                alt=&quot;Voice input&quot;
+                className={`w-5 h-5 object-contain transition ${
+                  isRecording ? &#39;filter-red&#39; : &#39;opacity-40 hover:opacity-70&#39;
+                }`}
+              /&gt;
+            }
+          /&gt;
 
           {/* Message Submit Button */}
-          &lt;button
+          &lt;Button
+            type=&quot;button&quot;
+            variant=&quot;ghost&quot;
+            size=&quot;icon&quot;
+            className=&quot;w-11 h-11 md:w-14 md:h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl p-2.5 shadow-md shadow-blue-500/30 shrink-0&quot;
             onClick={onSend}
-            className=&quot;w-11 h-11 md:w-14 md:h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl flex items-center justify-center p-2.5 shadow-md shadow-blue-500/30 transition transform active:scale-95 shrink-0&quot;
-          &gt;
-            &lt;img
-              src={iconSend}
-              alt=&quot;Send message&quot;
-              className=&quot;w-5 h-5 object-contain filter brightness-0 invert&quot;
-            /&gt;
-          &lt;/button&gt;
+            leftIcon={
+              &lt;img
+                src={iconSend}
+                alt=&quot;Send message&quot;
+                className=&quot;w-5 h-5 object-contain filter brightness-0 invert&quot;
+              /&gt;
+            }
+          /&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
@@ -2150,6 +2189,7 @@ Code:
 import { CheckCircle2 } from &#39;lucide-react&#39;;
 import { SectionHeader } from &#39;./SectionHeader/SectionHeader&#39;;
 import { PriceDisplay } from &#39;@/components/PriceDisplay/PriceDisplay&#39;;
+import { Button } from &#39;@/components/Button/Button&#39;;
 
 import type { FareOption } from &#39;@/types/flight&#39;;
 import type { FareCardsProps } from &#39;@/types/flightfare&#39;;
@@ -2215,16 +2255,15 @@ export type { FareOption };
                 &lt;/div&gt;
 
                 {/* Action Button to pick the fare class */}
-                &lt;button
+                &lt;Button
+                  type=&quot;button&quot;
+                  variant={isSelected ? &#39;primary&#39; : &#39;light&#39;}
+                  size=&quot;none&quot;
+                  className=&quot;w-full py-3 rounded-2xl text-xs active:scale-95&quot;
                   onClick={() =&gt; onSelectFare(fare.id)}
-                  className={`w-full py-3 rounded-2xl text-xs font-bold transition cursor-pointer active:scale-95 ${
-                    isSelected
-                      ? &#39;bg-blue-600 text-white&#39; // Primary button style for active selection
-                      : &#39;bg-surface-section text-blue-600 hover:bg-blue-100&#39; // Secondary style for inactive cards
-                  }`}
                 &gt;
                   Select
-                &lt;/button&gt;
+                &lt;/Button&gt;
               &lt;/div&gt;
             );
           })}
@@ -3942,6 +3981,7 @@ Code:
 
 import { Card } from &#39;@/components/Card/Card&#39;;
 import { InfoRow } from &#39;@/components/InfoRow/InfoRow&#39;;
+import { Button } from &#39;@/components/Button/Button&#39;;
 import type { PriceDetailsSidebarProps } from &#39;@/types/flightfare&#39;;
 
 export const PriceDetailsSidebar = ({
@@ -3972,9 +4012,14 @@ export const PriceDetailsSidebar = ({
       &lt;/div&gt;
 
       {/* Primary Call To Action (CTA) Button */}
-      &lt;button className=&quot;w-full py-3.5 bg-surface-section hover:bg-blue-600 hover:text-white text-blue-600 font-semibold text-xs md:text-sm rounded-2xl transition cursor-pointer active:scale-95&quot;&gt;
+      &lt;Button
+        type=&quot;button&quot;
+        variant=&quot;light&quot;
+        size=&quot;none&quot;
+        className=&quot;w-full py-3.5 text-xs md:text-sm rounded-2xl hover:bg-blue-600 hover:text-white active:scale-95&quot;
+      &gt;
         Select booking platform
-      &lt;/button&gt;
+      &lt;/Button&gt;
     &lt;/Card&gt;
   );
 };
@@ -4222,6 +4267,7 @@ Cannot find module &#39;@/types/card&#39;
 You can debug your component file in this playground: https://react-docgen.dev/playground
 Code:
 import React from &#39;react&#39;;
+import { Button } from &#39;@/components/Button/Button&#39;;
 import { type RecommendationWrapperProps } from &#39;@/types/card&#39;;
 
 export const RecommendationWrapper = ({
@@ -4243,12 +4289,15 @@ export const RecommendationWrapper = ({
 
         {/* See All Button */}
         {onSeeAll &amp;&amp; (
-          &lt;button
+          &lt;Button
+            type=&quot;button&quot;
+            variant=&quot;secondary&quot;
+            size=&quot;none&quot;
+            className=&quot;w-full py-3 text-xs rounded-xl mt-2&quot;
             onClick={onSeeAll}
-            className=&quot;w-full py-3 bg-primary-light hover:bg-blue-600 hover:text-white text-blue-600 text-xs font-bold rounded-xl transition-all duration-200 text-center mt-2 cursor-pointer&quot;
           &gt;
             {seeAllText}
-          &lt;/button&gt;
+          &lt;/Button&gt;
         )}
       &lt;/div&gt;
     &lt;/div&gt;
@@ -4474,6 +4523,7 @@ Code:
 import React, { useState } from &#39;react&#39;;
 import { SectionHeader } from &#39;./SectionHeader/SectionHeader&#39;;
 import { Card } from &#39;@/components/Card/Card&#39;;
+import { Button } from &#39;@/components/Button/Button&#39;;
 import type { FlightLeg } from &#39;@/types/flight&#39;;
 import type { SelectedFlightBoxProps } from &#39;@/types/flightfare&#39;;
 
@@ -4513,25 +4563,33 @@ export const SelectedFlightBox = ({
           {/* Action Buttons */}
           &lt;div className=&quot;flex items-center gap-2&quot;&gt;
             {/* Bookmark / Favorite Toggle Button */}
-            &lt;button
+            &lt;Button
+              type=&quot;button&quot;
+              variant=&quot;favorite&quot;
+              size=&quot;icon&quot;
+              isFavorite={isFavorite}
+              className=&quot;w-9 h-9 rounded-xl p-2 active:scale-95&quot;
               onClick={() =&gt; setIsFavorite(!isFavorite)}
-              className={`w-9 h-9 rounded-xl flex items-center justify-center transition p-2 cursor-pointer active:scale-95 ${
-                isFavorite ? &#39;bg-blue-100&#39; : &#39;bg-surface-section hover:bg-blue-100&#39;
-              }`}
-            &gt;
-              &lt;img
-                src={iconHeart}
-                alt=&quot;Favorite&quot;
-                className={`w-4 h-4 object-contain transition-transform ${
-                  isFavorite ? &#39;scale-110&#39; : &#39;&#39;
-                }`}
-              /&gt;
-            &lt;/button&gt;
+              leftIcon={
+                &lt;img
+                  src={iconHeart}
+                  alt=&quot;Favorite&quot;
+                  className={`w-4 h-4 object-contain transition-transform ${
+                    isFavorite ? &#39;scale-110&#39; : &#39;&#39;
+                  }`}
+                /&gt;
+              }
+            /&gt;
 
             {/* Button to switch or re-select flight */}
-            &lt;button className=&quot;px-4 py-2 bg-surface-section hover:bg-blue-100 text-blue-600 text-xs font-semibold rounded-xl transition cursor-pointer active:scale-95&quot;&gt;
+            &lt;Button
+              type=&quot;button&quot;
+              variant=&quot;light&quot;
+              size=&quot;sm&quot;
+              className=&quot;px-4 active:scale-95&quot;
+            &gt;
               Change Flight
-            &lt;/button&gt;
+            &lt;/Button&gt;
           &lt;/div&gt;
         &lt;/div&gt;
 
@@ -4752,49 +4810,61 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
     &lt;&gt;
       {/* Mobile hamburger button */}
       {onMobileToggle &amp;&amp; (
-        &lt;button
+        &lt;Button
+          type=&quot;button&quot;
+          variant=&quot;ghost&quot;
+          size=&quot;icon&quot;
+          className=&quot;md:hidden fixed top-3 left-3 z-30 w-11 h-11 bg-white rounded-xl shadow-md border border-slate-100&quot;
           onClick={onMobileToggle}
-          className=&quot;md:hidden fixed top-3 left-3 z-30 w-11 h-11 bg-white rounded-xl shadow-md border border-slate-100 flex items-center justify-center&quot;
-        &gt;
-          &lt;Menu className=&quot;w-5 h-5 text-slate-700&quot; /&gt;
-        &lt;/button&gt;
+          leftIcon={&lt;Menu className=&quot;w-5 h-5 text-slate-700&quot; /&gt;}
+        /&gt;
       )}
 
       {/* Desktop sidebar */}
       &lt;aside className=&quot;hidden md:flex w-125 min-w-80 bg-surface-sidebar border-r-10 border-surface-section flex-col items-center justify-between py-6 z-20 shrink-0 select-none&quot;&gt;        &lt;div className=&quot;flex flex-col items-center gap-7 w-full px-2&quot;&gt;
           {/* App Logo */}
-          &lt;button className=&quot;w-11 h-11 rounded-2xl flex items-center justify-center p-1.5 hover:opacity-90 transition mt-3&quot;&gt;
-            &lt;img
-              src={logo}
-              alt=&quot;Logo&quot;
-              className=&quot;w-full h-full object-contain&quot;
-            /&gt;
-          &lt;/button&gt;
+          &lt;Button
+            type=&quot;button&quot;
+            variant=&quot;ghost&quot;
+            size=&quot;icon&quot;
+            className=&quot;w-11 h-11 rounded-2xl p-1.5 hover:opacity-90 mt-3&quot;
+            leftIcon={
+              &lt;img
+                src={logo}
+                alt=&quot;Logo&quot;
+                className=&quot;w-full h-full object-contain&quot;
+              /&gt;
+            }
+          /&gt;
 
           {/* Navigation Items */}
           &lt;nav className=&quot;flex flex-col gap-3.5 items-center w-full&quot;&gt;
             {navItems.map((item) =&gt; {
               const isActive = activeNav === item.id;
               return (
-                &lt;button
+                &lt;Button
                   key={item.id}
-                  onClick={() =&gt; setActiveNav(item.id)}
-                  className={`w-11 h-11 rounded-2xl flex items-center justify-center transition p-2.5 ${
+                  type=&quot;button&quot;
+                  variant=&quot;ghost&quot;
+                  size=&quot;icon&quot;
+                  className={`w-11 h-11 rounded-2xl p-2.5 ${
                     isActive
                       ? &#39;bg-blue-50 border border-blue-200 shadow-sm shadow-blue-100/50&#39;
                       : &#39;bg-transparent border border-transparent hover:bg-white/80 hover:border-slate-200/60&#39;
                   }`}
-                &gt;
-                  &lt;img
-                    src={item.icon}
-                    alt={item.alt}
-                    className={`w-5 h-5 object-contain transition-all duration-200 ${
-                      isActive
-                        ? &#39;opacity-100 scale-105 [filter:invert(38%)_sepia(88%)_saturate(2421%)_hue-rotate(200deg)_brightness(98%)_contrast(96%)]&#39;
-                        : &#39;opacity-70 hover:opacity-100&#39;
-                    }`}
-                  /&gt;
-                &lt;/button&gt;
+                  onClick={() =&gt; setActiveNav(item.id)}
+                  leftIcon={
+                    &lt;img
+                      src={item.icon}
+                      alt={item.alt}
+                      className={`w-5 h-5 object-contain transition-all duration-200 ${
+                        isActive
+                          ? &#39;opacity-100 scale-105 [filter:invert(38%)_sepia(88%)_saturate(2421%)_hue-rotate(200deg)_brightness(98%)_contrast(96%)]&#39;
+                          : &#39;opacity-70 hover:opacity-100&#39;
+                      }`}
+                    /&gt;
+                  }
+                /&gt;
               );
             })}
           &lt;/nav&gt;
@@ -4810,9 +4880,12 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
             &lt;/defs&gt;
           &lt;/svg&gt;
 
-          &lt;button
+          &lt;Button
+            type=&quot;button&quot;
+            variant=&quot;ghost&quot;
+            size=&quot;icon&quot;
+            className=&quot;w-17 h-17 md:w-17 md:h-17 transition transform active:scale-95 focus:outline-none relative drop-shadow-sm&quot;
             onClick={toggleProfileMenu}
-            className=&quot;w-17 h-17 transition transform active:scale-95 flex items-center justify-center focus:outline-none relative drop-shadow-sm&quot;
           &gt;
             &lt;div
               className=&quot;w-full h-full bg-white flex items-center justify-center p-1&quot;
@@ -4829,17 +4902,20 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
                 /&gt;
               &lt;/div&gt;
             &lt;/div&gt;
-          &lt;/button&gt;
+          &lt;/Button&gt;
 
           {/* Dropdown Logout */}
           {showProfileMenu &amp;&amp; (
             &lt;div className=&quot;absolute bottom-2 left-16 w-48 bg-white rounded-2xl shadow-xl border border-slate-100 p-2 z-50 animate-in fade-in zoom-in-95 duration-150&quot;&gt;
-              &lt;button
+              &lt;Button
+                type=&quot;button&quot;
+                variant=&quot;ghost&quot;
+                size=&quot;none&quot;
+                className=&quot;w-full justify-start text-left px-3 py-2 rounded-xl text-xs font-medium text-red-600 hover:bg-red-50 gap-2.5&quot;
                 onClick={handleLogout}
-                className=&quot;w-full text-left px-3 py-2 rounded-xl text-xs font-medium text-red-600 hover:bg-red-50 flex items-center gap-2.5 transition&quot;
               &gt;
-                &lt;span&gt;Log out&lt;/span&gt;
-              &lt;/button&gt;
+                Log out
+              &lt;/Button&gt;
             &lt;/div&gt;
           )}
         &lt;/div&gt;
@@ -4851,36 +4927,50 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
           &lt;div className=&quot;fixed inset-0 bg-black/40 backdrop-blur-xs&quot; onClick={onMobileToggle} /&gt;
           &lt;aside className=&quot;relative w-18 bg-surface-sidebar h-full flex flex-col items-center justify-between py-6 z-50 shadow-2xl select-none animate-in slide-in-from-left duration-200&quot;&gt;
             &lt;div className=&quot;flex flex-col items-center gap-7 w-full px-10&quot;&gt;
-              &lt;button className=&quot;w-11 h-11 rounded-2xl flex items-center justify-center p-1.5&quot;&gt;
-                &lt;img src={logo} alt=&quot;Logo&quot; className=&quot;w-full h-full object-contain&quot; /&gt;
-              &lt;/button&gt;
+              &lt;Button
+                type=&quot;button&quot;
+                variant=&quot;ghost&quot;
+                size=&quot;icon&quot;
+                className=&quot;w-11 h-11 rounded-2xl p-1.5&quot;
+                leftIcon={
+                  &lt;img
+                    src={logo}
+                    alt=&quot;Logo&quot;
+                    className=&quot;w-full h-full object-contain&quot;
+                  /&gt;
+                }
+              /&gt;
 
               &lt;nav className=&quot;flex flex-col gap-3.5 items-center w-full&quot;&gt;
                 {navItems.map((item) =&gt; {
                   const isActive = activeNav === item.id;
                   return (
-                    &lt;button
+                    &lt;Button
                       key={item.id}
-                      onClick={() =&gt; {
-                        setActiveNav(item.id);
-                        onMobileToggle?.();
-                      }}
-                      className={`w-11 h-11 rounded-2xl flex items-center justify-center transition p-2.5 ${
+                      type=&quot;button&quot;
+                      variant=&quot;ghost&quot;
+                      size=&quot;icon&quot;
+                      className={`w-11 h-11 rounded-2xl p-2.5 ${
                         isActive
                           ? &#39;bg-blue-50 border border-blue-200 shadow-sm shadow-blue-100/50&#39;
                           : &#39;bg-transparent border border-transparent hover:bg-white/80 hover:border-slate-200/60&#39;
                       }`}
-                    &gt;
-                      &lt;img
-                        src={item.icon}
-                        alt={item.alt}
-                        className={`w-5 h-5 object-contain transition-all duration-200 ${
-                          isActive
-                            ? &#39;opacity-100 scale-105 [filter:invert(38%)_sepia(88%)_saturate(2421%)_hue-rotate(200deg)_brightness(98%)_contrast(96%)]&#39;
-                            : &#39;opacity-70 hover:opacity-100&#39;
-                        }`}
-                      /&gt;
-                    &lt;/button&gt;
+                      onClick={() =&gt; {
+                        setActiveNav(item.id);
+                        onMobileToggle?.();
+                      }}
+                      leftIcon={
+                        &lt;img
+                          src={item.icon}
+                          alt={item.alt}
+                          className={`w-5 h-5 object-contain transition-all duration-200 ${
+                            isActive
+                              ? &#39;opacity-100 scale-105 [filter:invert(38%)_sepia(88%)_saturate(2421%)_hue-rotate(200deg)_brightness(98%)_contrast(96%)]&#39;
+                              : &#39;opacity-70 hover:opacity-100&#39;
+                          }`}
+                        /&gt;
+                      }
+                    /&gt;
                   );
                 })}
               &lt;/nav&gt;
@@ -5165,20 +5255,25 @@ export const Topbar = ({
         {isBreadcrumbMode ? (
           &lt;&gt;
             {onBackToChat &amp;&amp; (
-              &lt;button
+              &lt;Button
+                type=&quot;button&quot;
+                variant=&quot;ghost&quot;
+                size=&quot;icon&quot;
+                className=&quot;md:hidden w-8 h-8 rounded-xl shrink-0&quot;
                 onClick={onBackToChat}
-                className=&quot;md:hidden w-8 h-8 rounded-xl flex items-center justify-center hover:bg-slate-100 transition shrink-0&quot;
-              &gt;
-                &lt;ArrowLeft className=&quot;w-4 h-4 text-slate-600&quot; /&gt;
-              &lt;/button&gt;
+                leftIcon={&lt;ArrowLeft className=&quot;w-4 h-4 text-slate-600&quot; /&gt;}
+              /&gt;
             )}
-            &lt;button
-              onClick={onBackToChat}
+            &lt;Button
+              type=&quot;button&quot;
+              variant=&quot;ghost&quot;
+              size=&quot;none&quot;
               className=&quot;hidden md:inline text-slate-500 hover:text-blue-600 font-medium transition truncate max-w-120 md:max-w-200&quot;
+              onClick={onBackToChat}
               title={displayTitle}
             &gt;
               {displayTitle}
-            &lt;/button&gt;
+            &lt;/Button&gt;
             &lt;span className=&quot;text-slate-400 hidden md:inline&quot;&gt;&amp;gt;&lt;/span&gt;
             &lt;span className=&quot;font-bold text-slate-800 truncate text-xs md:text-sm&quot;&gt;Select Fare&lt;/span&gt;
           &lt;/&gt;
@@ -6126,6 +6221,7 @@ You can debug your component file in this playground: https://react-docgen.dev/p
 Code:
 
 import iconSearch from &#39;@/assets/icons/search-normal.png&#39;
+import { Button } from &#39;@/components/Button/Button&#39;;
 import type { ChatSession, ChatHistorySidebarProps } from &#39;@/types/chat&#39;;
 
 export type { ChatSession };
@@ -6188,17 +6284,20 @@ export const ChatHistorySidebar = ({
                 {items.map((session) =&gt; {
                   const isActive = session.id === activeSessionId;
                   return (
-                    &lt;button
+                    &lt;Button
                       key={session.id}
+                      type=&quot;button&quot;
+                      variant=&quot;ghost&quot;
+                      size=&quot;none&quot;
                       onClick={() =&gt; onSelectSession(session.id)}
-                      className={`w-full text-left px-3.5 py-3 min-h-11 rounded-2xl text-xs md:text-sm transition font-medium truncate block ${
+                      className={`w-full justify-start text-left px-3.5 py-3 min-h-11 rounded-2xl text-xs md:text-sm transition font-medium truncate block ${
                         isActive
                           ? &#39;bg-surface-active text-brand-dark font-semibold&#39;
                           : &#39;text-brand-dark hover:bg-slate-100/60&#39;
                       }`}
                     &gt;
                       {session.title}
-                    &lt;/button&gt;
+                    &lt;/Button&gt;
                   );
                 })}
               &lt;/div&gt;
@@ -6317,6 +6416,7 @@ import iconMic from &#39;@/assets/icons/microphone-2.png&#39;;
 import iconSend from &#39;@/assets/icons/send-2.png&#39;;
 import { type ChatInputBoxProps } from &quot;@/types/chat&quot;;
 import { useEnterToSend } from &#39;@/hooks/useEnterToSend&#39;;
+import { Button } from &#39;@/components/Button/Button&#39;;
 
 export const ChatInputBox = ({
   inputMessage,
@@ -6344,42 +6444,56 @@ export const ChatInputBox = ({
       {/* Action Toolbar */}
       &lt;div className=&quot;flex items-center justify-between pt-2 mt-2&quot;&gt;
         {/* Attachment / Plus Action Button */}
-        &lt;button className=&quot;-translate-x-7 translate-y-2  w-9 h-9 rounded-full flex items-center justify-center hover:bg-slate-100 transition p-2 cursor-pointer&quot;&gt;
-          &lt;img
-            src={iconPlus}
-            alt=&quot;Add attachment&quot;
-            className=&quot;w-5 h-5 object-contain opacity-40 hover:opacity-70&quot;
-          /&gt;
-        &lt;/button&gt;
+        &lt;Button
+          type=&quot;button&quot;
+          variant=&quot;ghost&quot;
+          size=&quot;icon&quot;
+          className=&quot;-translate-x-7 translate-y-2 w-9 h-9 rounded-full p-2&quot;
+          leftIcon={
+            &lt;img
+              src={iconPlus}
+              alt=&quot;Add attachment&quot;
+              className=&quot;w-5 h-5 object-contain opacity-40 hover:opacity-70&quot;
+            /&gt;
+          }
+        /&gt;
 
         &lt;div className=&quot;flex items-center gap-3&quot;&gt;
           {/* Voice Recording Toggle Button */}
-          &lt;button
-            onClick={() =&gt; setIsRecording((prev) =&gt; !prev)}
-            className={`w-10 h-10 md:w-9 md:h-9 rounded-full flex items-center justify-center transition p-2 ${
+          &lt;Button
+            type=&quot;button&quot;
+            variant=&quot;ghost&quot;
+            size=&quot;icon&quot;
+            className={`w-10 h-10 md:w-9 md:h-9 rounded-full p-2 ${
               isRecording ? &#39;bg-red-50 animate-pulse&#39; : &#39;hover:bg-slate-100&#39;
             }`}
-          &gt;
-            &lt;img
-              src={iconMic}
-              alt=&quot;Voice input&quot;
-              className={`w-5 h-5 object-contain transition ${
-                isRecording ? &#39;filter-red&#39; : &#39;opacity-40 hover:opacity-70&#39;
-              }`}
-            /&gt;
-          &lt;/button&gt;
+            onClick={() =&gt; setIsRecording((prev) =&gt; !prev)}
+            leftIcon={
+              &lt;img
+                src={iconMic}
+                alt=&quot;Voice input&quot;
+                className={`w-5 h-5 object-contain transition ${
+                  isRecording ? &#39;filter-red&#39; : &#39;opacity-40 hover:opacity-70&#39;
+                }`}
+              /&gt;
+            }
+          /&gt;
 
           {/* Message Submit Button */}
-          &lt;button
+          &lt;Button
+            type=&quot;button&quot;
+            variant=&quot;ghost&quot;
+            size=&quot;icon&quot;
+            className=&quot;w-11 h-11 md:w-14 md:h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl p-2.5 shadow-md shadow-blue-500/30 shrink-0&quot;
             onClick={onSend}
-            className=&quot;w-11 h-11 md:w-14 md:h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl flex items-center justify-center p-2.5 shadow-md shadow-blue-500/30 transition transform active:scale-95 shrink-0&quot;
-          &gt;
-            &lt;img
-              src={iconSend}
-              alt=&quot;Send message&quot;
-              className=&quot;w-5 h-5 object-contain filter brightness-0 invert&quot;
-            /&gt;
-          &lt;/button&gt;
+            leftIcon={
+              &lt;img
+                src={iconSend}
+                alt=&quot;Send message&quot;
+                className=&quot;w-5 h-5 object-contain filter brightness-0 invert&quot;
+              /&gt;
+            }
+          /&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
@@ -6892,6 +7006,7 @@ Code:
 import { CheckCircle2 } from &#39;lucide-react&#39;;
 import { SectionHeader } from &#39;./SectionHeader/SectionHeader&#39;;
 import { PriceDisplay } from &#39;@/components/PriceDisplay/PriceDisplay&#39;;
+import { Button } from &#39;@/components/Button/Button&#39;;
 
 import type { FareOption } from &#39;@/types/flight&#39;;
 import type { FareCardsProps } from &#39;@/types/flightfare&#39;;
@@ -6957,16 +7072,15 @@ export type { FareOption };
                 &lt;/div&gt;
 
                 {/* Action Button to pick the fare class */}
-                &lt;button
+                &lt;Button
+                  type=&quot;button&quot;
+                  variant={isSelected ? &#39;primary&#39; : &#39;light&#39;}
+                  size=&quot;none&quot;
+                  className=&quot;w-full py-3 rounded-2xl text-xs active:scale-95&quot;
                   onClick={() =&gt; onSelectFare(fare.id)}
-                  className={`w-full py-3 rounded-2xl text-xs font-bold transition cursor-pointer active:scale-95 ${
-                    isSelected
-                      ? &#39;bg-blue-600 text-white&#39; // Primary button style for active selection
-                      : &#39;bg-surface-section text-blue-600 hover:bg-blue-100&#39; // Secondary style for inactive cards
-                  }`}
                 &gt;
                   Select
-                &lt;/button&gt;
+                &lt;/Button&gt;
               &lt;/div&gt;
             );
           })}
@@ -8571,6 +8685,7 @@ Code:
 
 import { Card } from &#39;@/components/Card/Card&#39;;
 import { InfoRow } from &#39;@/components/InfoRow/InfoRow&#39;;
+import { Button } from &#39;@/components/Button/Button&#39;;
 import type { PriceDetailsSidebarProps } from &#39;@/types/flightfare&#39;;
 
 export const PriceDetailsSidebar = ({
@@ -8601,9 +8716,14 @@ export const PriceDetailsSidebar = ({
       &lt;/div&gt;
 
       {/* Primary Call To Action (CTA) Button */}
-      &lt;button className=&quot;w-full py-3.5 bg-surface-section hover:bg-blue-600 hover:text-white text-blue-600 font-semibold text-xs md:text-sm rounded-2xl transition cursor-pointer active:scale-95&quot;&gt;
+      &lt;Button
+        type=&quot;button&quot;
+        variant=&quot;light&quot;
+        size=&quot;none&quot;
+        className=&quot;w-full py-3.5 text-xs md:text-sm rounded-2xl hover:bg-blue-600 hover:text-white active:scale-95&quot;
+      &gt;
         Select booking platform
-      &lt;/button&gt;
+      &lt;/Button&gt;
     &lt;/Card&gt;
   );
 };
@@ -8851,6 +8971,7 @@ Cannot find module &#39;@/types/card&#39;
 You can debug your component file in this playground: https://react-docgen.dev/playground
 Code:
 import React from &#39;react&#39;;
+import { Button } from &#39;@/components/Button/Button&#39;;
 import { type RecommendationWrapperProps } from &#39;@/types/card&#39;;
 
 export const RecommendationWrapper = ({
@@ -8872,12 +8993,15 @@ export const RecommendationWrapper = ({
 
         {/* See All Button */}
         {onSeeAll &amp;&amp; (
-          &lt;button
+          &lt;Button
+            type=&quot;button&quot;
+            variant=&quot;secondary&quot;
+            size=&quot;none&quot;
+            className=&quot;w-full py-3 text-xs rounded-xl mt-2&quot;
             onClick={onSeeAll}
-            className=&quot;w-full py-3 bg-primary-light hover:bg-blue-600 hover:text-white text-blue-600 text-xs font-bold rounded-xl transition-all duration-200 text-center mt-2 cursor-pointer&quot;
           &gt;
             {seeAllText}
-          &lt;/button&gt;
+          &lt;/Button&gt;
         )}
       &lt;/div&gt;
     &lt;/div&gt;
@@ -9103,6 +9227,7 @@ Code:
 import React, { useState } from &#39;react&#39;;
 import { SectionHeader } from &#39;./SectionHeader/SectionHeader&#39;;
 import { Card } from &#39;@/components/Card/Card&#39;;
+import { Button } from &#39;@/components/Button/Button&#39;;
 import type { FlightLeg } from &#39;@/types/flight&#39;;
 import type { SelectedFlightBoxProps } from &#39;@/types/flightfare&#39;;
 
@@ -9142,25 +9267,33 @@ export const SelectedFlightBox = ({
           {/* Action Buttons */}
           &lt;div className=&quot;flex items-center gap-2&quot;&gt;
             {/* Bookmark / Favorite Toggle Button */}
-            &lt;button
+            &lt;Button
+              type=&quot;button&quot;
+              variant=&quot;favorite&quot;
+              size=&quot;icon&quot;
+              isFavorite={isFavorite}
+              className=&quot;w-9 h-9 rounded-xl p-2 active:scale-95&quot;
               onClick={() =&gt; setIsFavorite(!isFavorite)}
-              className={`w-9 h-9 rounded-xl flex items-center justify-center transition p-2 cursor-pointer active:scale-95 ${
-                isFavorite ? &#39;bg-blue-100&#39; : &#39;bg-surface-section hover:bg-blue-100&#39;
-              }`}
-            &gt;
-              &lt;img
-                src={iconHeart}
-                alt=&quot;Favorite&quot;
-                className={`w-4 h-4 object-contain transition-transform ${
-                  isFavorite ? &#39;scale-110&#39; : &#39;&#39;
-                }`}
-              /&gt;
-            &lt;/button&gt;
+              leftIcon={
+                &lt;img
+                  src={iconHeart}
+                  alt=&quot;Favorite&quot;
+                  className={`w-4 h-4 object-contain transition-transform ${
+                    isFavorite ? &#39;scale-110&#39; : &#39;&#39;
+                  }`}
+                /&gt;
+              }
+            /&gt;
 
             {/* Button to switch or re-select flight */}
-            &lt;button className=&quot;px-4 py-2 bg-surface-section hover:bg-blue-100 text-blue-600 text-xs font-semibold rounded-xl transition cursor-pointer active:scale-95&quot;&gt;
+            &lt;Button
+              type=&quot;button&quot;
+              variant=&quot;light&quot;
+              size=&quot;sm&quot;
+              className=&quot;px-4 active:scale-95&quot;
+            &gt;
               Change Flight
-            &lt;/button&gt;
+            &lt;/Button&gt;
           &lt;/div&gt;
         &lt;/div&gt;
 
@@ -9381,49 +9514,61 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
     &lt;&gt;
       {/* Mobile hamburger button */}
       {onMobileToggle &amp;&amp; (
-        &lt;button
+        &lt;Button
+          type=&quot;button&quot;
+          variant=&quot;ghost&quot;
+          size=&quot;icon&quot;
+          className=&quot;md:hidden fixed top-3 left-3 z-30 w-11 h-11 bg-white rounded-xl shadow-md border border-slate-100&quot;
           onClick={onMobileToggle}
-          className=&quot;md:hidden fixed top-3 left-3 z-30 w-11 h-11 bg-white rounded-xl shadow-md border border-slate-100 flex items-center justify-center&quot;
-        &gt;
-          &lt;Menu className=&quot;w-5 h-5 text-slate-700&quot; /&gt;
-        &lt;/button&gt;
+          leftIcon={&lt;Menu className=&quot;w-5 h-5 text-slate-700&quot; /&gt;}
+        /&gt;
       )}
 
       {/* Desktop sidebar */}
       &lt;aside className=&quot;hidden md:flex w-125 min-w-80 bg-surface-sidebar border-r-10 border-surface-section flex-col items-center justify-between py-6 z-20 shrink-0 select-none&quot;&gt;        &lt;div className=&quot;flex flex-col items-center gap-7 w-full px-2&quot;&gt;
           {/* App Logo */}
-          &lt;button className=&quot;w-11 h-11 rounded-2xl flex items-center justify-center p-1.5 hover:opacity-90 transition mt-3&quot;&gt;
-            &lt;img
-              src={logo}
-              alt=&quot;Logo&quot;
-              className=&quot;w-full h-full object-contain&quot;
-            /&gt;
-          &lt;/button&gt;
+          &lt;Button
+            type=&quot;button&quot;
+            variant=&quot;ghost&quot;
+            size=&quot;icon&quot;
+            className=&quot;w-11 h-11 rounded-2xl p-1.5 hover:opacity-90 mt-3&quot;
+            leftIcon={
+              &lt;img
+                src={logo}
+                alt=&quot;Logo&quot;
+                className=&quot;w-full h-full object-contain&quot;
+              /&gt;
+            }
+          /&gt;
 
           {/* Navigation Items */}
           &lt;nav className=&quot;flex flex-col gap-3.5 items-center w-full&quot;&gt;
             {navItems.map((item) =&gt; {
               const isActive = activeNav === item.id;
               return (
-                &lt;button
+                &lt;Button
                   key={item.id}
-                  onClick={() =&gt; setActiveNav(item.id)}
-                  className={`w-11 h-11 rounded-2xl flex items-center justify-center transition p-2.5 ${
+                  type=&quot;button&quot;
+                  variant=&quot;ghost&quot;
+                  size=&quot;icon&quot;
+                  className={`w-11 h-11 rounded-2xl p-2.5 ${
                     isActive
                       ? &#39;bg-blue-50 border border-blue-200 shadow-sm shadow-blue-100/50&#39;
                       : &#39;bg-transparent border border-transparent hover:bg-white/80 hover:border-slate-200/60&#39;
                   }`}
-                &gt;
-                  &lt;img
-                    src={item.icon}
-                    alt={item.alt}
-                    className={`w-5 h-5 object-contain transition-all duration-200 ${
-                      isActive
-                        ? &#39;opacity-100 scale-105 [filter:invert(38%)_sepia(88%)_saturate(2421%)_hue-rotate(200deg)_brightness(98%)_contrast(96%)]&#39;
-                        : &#39;opacity-70 hover:opacity-100&#39;
-                    }`}
-                  /&gt;
-                &lt;/button&gt;
+                  onClick={() =&gt; setActiveNav(item.id)}
+                  leftIcon={
+                    &lt;img
+                      src={item.icon}
+                      alt={item.alt}
+                      className={`w-5 h-5 object-contain transition-all duration-200 ${
+                        isActive
+                          ? &#39;opacity-100 scale-105 [filter:invert(38%)_sepia(88%)_saturate(2421%)_hue-rotate(200deg)_brightness(98%)_contrast(96%)]&#39;
+                          : &#39;opacity-70 hover:opacity-100&#39;
+                      }`}
+                    /&gt;
+                  }
+                /&gt;
               );
             })}
           &lt;/nav&gt;
@@ -9439,9 +9584,12 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
             &lt;/defs&gt;
           &lt;/svg&gt;
 
-          &lt;button
+          &lt;Button
+            type=&quot;button&quot;
+            variant=&quot;ghost&quot;
+            size=&quot;icon&quot;
+            className=&quot;w-17 h-17 md:w-17 md:h-17 transition transform active:scale-95 focus:outline-none relative drop-shadow-sm&quot;
             onClick={toggleProfileMenu}
-            className=&quot;w-17 h-17 transition transform active:scale-95 flex items-center justify-center focus:outline-none relative drop-shadow-sm&quot;
           &gt;
             &lt;div
               className=&quot;w-full h-full bg-white flex items-center justify-center p-1&quot;
@@ -9458,17 +9606,20 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
                 /&gt;
               &lt;/div&gt;
             &lt;/div&gt;
-          &lt;/button&gt;
+          &lt;/Button&gt;
 
           {/* Dropdown Logout */}
           {showProfileMenu &amp;&amp; (
             &lt;div className=&quot;absolute bottom-2 left-16 w-48 bg-white rounded-2xl shadow-xl border border-slate-100 p-2 z-50 animate-in fade-in zoom-in-95 duration-150&quot;&gt;
-              &lt;button
+              &lt;Button
+                type=&quot;button&quot;
+                variant=&quot;ghost&quot;
+                size=&quot;none&quot;
+                className=&quot;w-full justify-start text-left px-3 py-2 rounded-xl text-xs font-medium text-red-600 hover:bg-red-50 gap-2.5&quot;
                 onClick={handleLogout}
-                className=&quot;w-full text-left px-3 py-2 rounded-xl text-xs font-medium text-red-600 hover:bg-red-50 flex items-center gap-2.5 transition&quot;
               &gt;
-                &lt;span&gt;Log out&lt;/span&gt;
-              &lt;/button&gt;
+                Log out
+              &lt;/Button&gt;
             &lt;/div&gt;
           )}
         &lt;/div&gt;
@@ -9480,36 +9631,50 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
           &lt;div className=&quot;fixed inset-0 bg-black/40 backdrop-blur-xs&quot; onClick={onMobileToggle} /&gt;
           &lt;aside className=&quot;relative w-18 bg-surface-sidebar h-full flex flex-col items-center justify-between py-6 z-50 shadow-2xl select-none animate-in slide-in-from-left duration-200&quot;&gt;
             &lt;div className=&quot;flex flex-col items-center gap-7 w-full px-10&quot;&gt;
-              &lt;button className=&quot;w-11 h-11 rounded-2xl flex items-center justify-center p-1.5&quot;&gt;
-                &lt;img src={logo} alt=&quot;Logo&quot; className=&quot;w-full h-full object-contain&quot; /&gt;
-              &lt;/button&gt;
+              &lt;Button
+                type=&quot;button&quot;
+                variant=&quot;ghost&quot;
+                size=&quot;icon&quot;
+                className=&quot;w-11 h-11 rounded-2xl p-1.5&quot;
+                leftIcon={
+                  &lt;img
+                    src={logo}
+                    alt=&quot;Logo&quot;
+                    className=&quot;w-full h-full object-contain&quot;
+                  /&gt;
+                }
+              /&gt;
 
               &lt;nav className=&quot;flex flex-col gap-3.5 items-center w-full&quot;&gt;
                 {navItems.map((item) =&gt; {
                   const isActive = activeNav === item.id;
                   return (
-                    &lt;button
+                    &lt;Button
                       key={item.id}
-                      onClick={() =&gt; {
-                        setActiveNav(item.id);
-                        onMobileToggle?.();
-                      }}
-                      className={`w-11 h-11 rounded-2xl flex items-center justify-center transition p-2.5 ${
+                      type=&quot;button&quot;
+                      variant=&quot;ghost&quot;
+                      size=&quot;icon&quot;
+                      className={`w-11 h-11 rounded-2xl p-2.5 ${
                         isActive
                           ? &#39;bg-blue-50 border border-blue-200 shadow-sm shadow-blue-100/50&#39;
                           : &#39;bg-transparent border border-transparent hover:bg-white/80 hover:border-slate-200/60&#39;
                       }`}
-                    &gt;
-                      &lt;img
-                        src={item.icon}
-                        alt={item.alt}
-                        className={`w-5 h-5 object-contain transition-all duration-200 ${
-                          isActive
-                            ? &#39;opacity-100 scale-105 [filter:invert(38%)_sepia(88%)_saturate(2421%)_hue-rotate(200deg)_brightness(98%)_contrast(96%)]&#39;
-                            : &#39;opacity-70 hover:opacity-100&#39;
-                        }`}
-                      /&gt;
-                    &lt;/button&gt;
+                      onClick={() =&gt; {
+                        setActiveNav(item.id);
+                        onMobileToggle?.();
+                      }}
+                      leftIcon={
+                        &lt;img
+                          src={item.icon}
+                          alt={item.alt}
+                          className={`w-5 h-5 object-contain transition-all duration-200 ${
+                            isActive
+                              ? &#39;opacity-100 scale-105 [filter:invert(38%)_sepia(88%)_saturate(2421%)_hue-rotate(200deg)_brightness(98%)_contrast(96%)]&#39;
+                              : &#39;opacity-70 hover:opacity-100&#39;
+                          }`}
+                        /&gt;
+                      }
+                    /&gt;
                   );
                 })}
               &lt;/nav&gt;
@@ -9794,20 +9959,25 @@ export const Topbar = ({
         {isBreadcrumbMode ? (
           &lt;&gt;
             {onBackToChat &amp;&amp; (
-              &lt;button
+              &lt;Button
+                type=&quot;button&quot;
+                variant=&quot;ghost&quot;
+                size=&quot;icon&quot;
+                className=&quot;md:hidden w-8 h-8 rounded-xl shrink-0&quot;
                 onClick={onBackToChat}
-                className=&quot;md:hidden w-8 h-8 rounded-xl flex items-center justify-center hover:bg-slate-100 transition shrink-0&quot;
-              &gt;
-                &lt;ArrowLeft className=&quot;w-4 h-4 text-slate-600&quot; /&gt;
-              &lt;/button&gt;
+                leftIcon={&lt;ArrowLeft className=&quot;w-4 h-4 text-slate-600&quot; /&gt;}
+              /&gt;
             )}
-            &lt;button
-              onClick={onBackToChat}
+            &lt;Button
+              type=&quot;button&quot;
+              variant=&quot;ghost&quot;
+              size=&quot;none&quot;
               className=&quot;hidden md:inline text-slate-500 hover:text-blue-600 font-medium transition truncate max-w-120 md:max-w-200&quot;
+              onClick={onBackToChat}
               title={displayTitle}
             &gt;
               {displayTitle}
-            &lt;/button&gt;
+            &lt;/Button&gt;
             &lt;span className=&quot;text-slate-400 hidden md:inline&quot;&gt;&amp;gt;&lt;/span&gt;
             &lt;span className=&quot;font-bold text-slate-800 truncate text-xs md:text-sm&quot;&gt;Select Fare&lt;/span&gt;
           &lt;/&gt;

@@ -164,6 +164,11 @@ export const HotelRecommendations = ({
                     onClick={() =>
                       toggleFavorite(hotel.id)
                     }
+                    aria-label={
+                      isFav
+                        ? `Remove ${hotel.name} from favorites`
+                        : `Add ${hotel.name} to favorites`
+                    }
                   />
 
                   <Button

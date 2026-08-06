@@ -13,9 +13,9 @@ import type {
   SelectHotelPageProps,
 } from '@/types/hotel';
 
-import defaultHotelImg from '@/assets/icons/ellipse.png';
-import bookingIcon from '@/assets/icons/booking.png';
-import expediaIcon from '@/assets/icons/expedia.png';
+import defaultHotelImg from '@/assets/images/ellipse.png';
+import bookingIcon from '@/assets/images/booking.png';
+import expediaIcon from '@/assets/images/expedia.png';
 
 import { useAsyncData } from '@/hooks/useAsyncData';
 import { useSidebarNav } from '@/hooks/useSidebarNav';
@@ -232,6 +232,7 @@ export const SelectHotelPage = ({
                         </div>
 
                         {/* Comparison table of source options */}
+                        {isComparePrice && (
                         <div className="space-y-3 pt-1">
                           <div className="flex items-center justify-between text-xs sm:text-sm pb-2 border-b border-slate-100">
                             <div className="flex items-center gap-2.5">
@@ -257,6 +258,7 @@ export const SelectHotelPage = ({
                             <span className="font-bold text-ink-alt">${mainPrice}</span>
                           </div>
                         </div>
+                        )}
                       </div>
                     </div>
 

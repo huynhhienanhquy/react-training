@@ -3,14 +3,14 @@ import { Menu } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { useProfileMenu } from '@/hooks/useProfileMenu';
 
-import logo from '@/assets/icons/Logo.png';
-import iconChat from '@/assets/icons/chat.png';
-import iconHeart from '@/assets/icons/heart.png';
-import iconMedal from '@/assets/icons/medal.png';
-import iconMap from '@/assets/icons/map.png';
-import iconCommunity from '@/assets/icons/people.png';
-import iconSettings from '@/assets/icons/setting.png';
-import userAvatar from '@/assets/icons/user.png';
+import logo from '@/assets/images/Logo.png';
+import ChatIcon from '@/components/icons/MessageIcon';
+import HeartIcon from '@/components/icons/HeartIcon';
+import MedalIcon from '@/components/icons/MedalIcon';
+import MapIcon from '@/components/icons/MapIcon';
+import CommunityIcon from '@/components/icons/PeopleIcon';
+import SettingsIcon from '@/components/icons/SettingsIcon';
+import UserIcon from '@/components/icons/PeopleIcon';
 import { type SidebarNavProps } from "@/types/chat";
 import { Button } from "@/components/Button";
 
@@ -25,12 +25,12 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
   } = useProfileMenu();
 
   const navItems = [
-    { id: 'chats', icon: iconChat, alt: 'Chats' },
-    { id: 'favorites', icon: iconHeart, alt: 'Favorites' },
-    { id: 'medal', icon: iconMedal, alt: 'Medal' },
-    { id: 'map', icon: iconMap, alt: 'Routes Map' },
-    { id: 'community', icon: iconCommunity, alt: 'Community' },
-    { id: 'settings', icon: iconSettings, alt: 'Settings' },
+    { id: 'chats', icon: ChatIcon, alt: 'Chats' },
+    { id: 'favorites', icon: HeartIcon, alt: 'Favorites' },
+    { id: 'medal', icon: MedalIcon, alt: 'Medal' },
+    { id: 'map', icon: MapIcon, alt: 'Routes Map' },
+    { id: 'community', icon: CommunityIcon, alt: 'Community' },
+    { id: 'settings', icon: SettingsIcon, alt: 'Settings' },
   ];
 
   const handleLogout = async () => {
@@ -77,6 +77,7 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
           {/* Navigation Items */}
           <nav className="flex flex-col gap-3.5 items-center w-full">
             {navItems.map((item) => {
+              const Icon = item.icon;
               const isActive = activeNav === item.id;
 
               return (
@@ -92,9 +93,8 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
                   }`}
                   onClick={() => setActiveNav(item.id)}
                 >
-                  <img
-                    src={item.icon}
-                    alt={item.alt}
+                  <Icon
+                    aria-label={item.alt}
                     className={`block w-5 h-5 object-contain transition-all duration-200 ${
                       isActive
                         ? 'opacity-100 scale-105 filter-logo-active'
@@ -132,9 +132,8 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
                 className="w-full h-full bg-slate-200 overflow-hidden"
                 style={{ clipPath: 'url(#pentagon-clip)' }}
               >
-                <img
-                  src={userAvatar}
-                  alt="User Avatar"
+                <UserIcon
+                  aria-label="User Avatar"
                   className="w-full h-full object-cover scale-110"
                 />
               </div>
@@ -180,6 +179,7 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
 
               <nav className="flex flex-col gap-3.5 items-center w-full">
                 {navItems.map((item) => {
+                  const Icon = item.icon;
                   const isActive = activeNav === item.id;
                   return (
                     <Button
@@ -197,9 +197,8 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
                         onMobileToggle?.();
                       }}
                       leftIcon={
-                        <img
-                          src={item.icon}
-                          alt={item.alt}
+                        <Icon
+                          aria-label={item.alt}
                           className={`w-5 h-5 object-contain transition-all duration-200 ${
                             isActive
                               ? 'opacity-100 scale-105 filter-logo-active'

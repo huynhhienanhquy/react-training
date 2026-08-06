@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, type DependencyList } from 'react';
 import { getErrorMessage } from '@/utils/errorHelpers';
 
 /* eslint-disable react-hooks/set-state-in-effect */

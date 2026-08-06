@@ -40,7 +40,7 @@ describe("SidebarNav", () => {
       />
     );
 
-    expect(screen.getByAltText("Chats")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Chats" })).toBeInTheDocument();
   });
 
 
@@ -54,7 +54,7 @@ describe("SidebarNav", () => {
       />
     );
 
-    await user.click(screen.getByAltText("Chats"));
+    await user.click(screen.getByRole("button", { name: "Chats" }));
 
     expect(setActiveNav).toHaveBeenCalledWith("chats");
   });
@@ -68,9 +68,7 @@ describe("SidebarNav", () => {
       />
     );
 
-    const chatButton = screen
-      .getByAltText("Chats")
-      .closest("button");
+    const chatButton = screen.getByRole("button", { name: "Chats" });
 
     expect(chatButton).toHaveClass("bg-blue-50");
   });
@@ -86,7 +84,7 @@ describe("SidebarNav", () => {
       />
     );
 
-    await user.click(screen.getByAltText("User Avatar"));
+    await user.click(screen.getByRole("button", { name: "Open profile menu" }));
 
     expect(screen.getByText("Log out")).toBeInTheDocument();
   });
@@ -105,7 +103,7 @@ describe("SidebarNav", () => {
     );
 
 
-    await user.click(screen.getByAltText("User Avatar"));
+    await user.click(screen.getByRole("button", { name: "Open profile menu" }));
 
     await user.click(screen.getByText("Log out"));
 

@@ -1,6 +1,6 @@
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/Button';
-import iconAdd from '@/assets/icons/add-light.png';
+import AddIcon from '@/components/icons/AddIcon';
 
 export type { ChatMessage } from '@/types/chat';
 import { type TopbarProps } from "@/types/chat";
@@ -63,9 +63,8 @@ export const Topbar = ({
           variant="primary"
           size="md"
           leftIcon={
-            <img
-              src={iconAdd}
-              alt="Add"
+            <AddIcon
+              aria-label="Add"
               className="w-5 h-5"
             />
           }
