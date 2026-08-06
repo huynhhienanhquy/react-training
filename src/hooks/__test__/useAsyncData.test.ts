@@ -69,4 +69,37 @@ describe('useAsyncData', () => {
     expect(result.current.data).toBe('second');
     expect(fetchFn).toHaveBeenCalledTimes(2);
   });
+
+  it('does not refetch when an inline fetch function changes identity', async () => {
+    const fetchFn = vi.fn().mockResolvedValue('data');
+    const { rerender } = renderHook(() => useAsyncData(() => fetchFn()));
+
+    await act(async () => {
+      await Promise.resolve();
+    });
+
+    rerender();
+    rerender();
+
+    expect(fetchFn).toHaveBeenCalledTimes(1);
+  });
+
+  it('refetches when an explicit request dependency changes', async () => {
+    const fetchFn = vi.fn().mockImplementation((id: number) =>
+      Promise.resolve(`data-${id}`),
+    );
+    const { result, rerender } = renderHook(
+      ({ id }) => useAsyncData(() => fetchFn(id), { dependencies: [id] }),
+      { initialProps: { id: 1 } },
+    );
+
+    await act(async () => Promise.resolve());
+    expect(result.current.data).toBe('data-1');
+
+    rerender({ id: 2 });
+    await act(async () => Promise.resolve());
+
+    expect(result.current.data).toBe('data-2');
+    expect(fetchFn).toHaveBeenCalledTimes(2);
+  });
 });
