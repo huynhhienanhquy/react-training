@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
-import { Topbar } from "./Topbar";
+import { Topbar } from ".";
 import type { ChatMessage } from "@/types/chat";
 
 // Mock Button component

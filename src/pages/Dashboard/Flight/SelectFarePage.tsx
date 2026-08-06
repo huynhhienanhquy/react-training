@@ -1,26 +1,27 @@
-import { useCallback, useState } from 'react'
-import { SidebarNav } from '@/components/chat/SidebarNav/SidebarNav'
-import { Button } from '@/components/Button/Button'
+import  { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { SidebarNav } from '@/components/chat/SidebarNav/index';
+import { Button } from '@/components/Button/index';
 
-import HeartIcon from '@/components/icons/HeartIcon'
-import defaultFlightLogo from '@/assets/images/ellipse.png'
-import { SectionHeader } from '@/components/FlightFare/SectionHeader/SectionHeader'
+import HeartIcon from '@/components/icons/HeartIcon';
+import defaultFlightLogo from '@/assets/images/ellipse.png';
+import { SectionHeader } from '@/components/FlightFare/SectionHeader';
 
-import { Topbar } from '@/components/chat/Topbar/Topbar'
-import { FareHeader } from '@/components/FlightFare/FareHeader'
-import { SelectedFlightBox } from '@/components/FlightFare/SelectedFlightBox'
-import { FareCards } from '@/components/FlightFare/FareCards'
-import { PriceDetailsSidebar } from '@/components/FlightFare/PriceDetailsSidebar'
+import { Topbar } from '@/components/chat/Topbar';
+import { FareHeader } from '@/components/FlightFare/FareHeader';
+import { SelectedFlightBox } from '@/components/FlightFare/SelectedFlight';
+import { FareCards } from '@/components/FlightFare/FareCard';
+import { PriceDetailsSidebar } from '@/components/FlightFare/PriceDetail';
 
-import { getFareDetailsApi } from '@/services/fareService'
+import { getFareDetailsApi } from '@/services/fareService';
 import type {
   FareData,
   SelectFarePageProps,
-} from '@/types/flight'
+} from '@/types/flight';
 
-import { useAsyncData } from '@/hooks/useAsyncData'
-import { useSidebarNav } from '@/hooks/useSidebarNav'
-import { useChatTitle } from '@/hooks/useChatTitle'
+import { useAsyncData } from '@/hooks/useAsyncData';
+import { useSidebarNav } from '@/hooks/useSidebarNav';
+import { useChatTitle } from '@/hooks/useChatTitle';
 
 export const SelectFarePage = ({
   chatTitle,
@@ -28,33 +29,34 @@ export const SelectFarePage = ({
   onBackToChat,
   onStartNewChat,
 }: SelectFarePageProps) => {
-  const { activeNav, setActiveNav, isMobileOpen, onMobileToggle } =
-    useSidebarNav()
-
+  const navigate = useNavigate();
+  const backToChat = onBackToChat ?? (() => navigate('/chats'));
+  const startNewChat = onStartNewChat ?? (() => navigate('/chats'));
+  const { activeNav, setActiveNav } = useSidebarNav();
   const [selectedFareId, setSelectedFareId] =
-    useState<'economy' | 'business'>('economy')
+    useState<'economy' | 'business'>('economy');
 
   // Fetch fare data
   const fetchFare = useCallback(async (): Promise<FareData> => {
-    const rawData = await getFareDetailsApi()
+    const rawData = await getFareDetailsApi();
 
     // MockAPI can return an array or an object.
     const data = Array.isArray(rawData)
       ? rawData[0]
-      : rawData
+      : rawData;
 
     if (!data) {
-      throw new Error('No matching flight data available.')
+      throw new Error('No matching flight data available.');
     }
 
-    return data
-  }, [])
+    return data;
+  }, []);
 
   const {
     data: fareData,
     loading,
     error,
-  } = useAsyncData<FareData>(fetchFare)
+  } = useAsyncData<FareData>(fetchFare);
 
   // Chat title
   const resolvedChatTitle = useChatTitle(
@@ -65,47 +67,46 @@ export const SelectFarePage = ({
         ? fareData.destination.split('-')[0].trim()
         : 'Destination'
     }`,
-  )
+  );
 
   // Fare options
-  const fareOptions = fareData?.fareOptions ?? []
+  const fareOptions = fareData?.fareOptions ?? [];
 
   const selectedFare =
     fareOptions.find(
       (fare) => fare.id === selectedFareId,
-    ) ?? fareOptions[0]
+    ) ?? fareOptions[0];
 
   // Price breakdown
   const priceBreakdown = fareData?.priceBreakdown ?? {
     flightDues: 0,
     taxesAndFees: 0,
-  }
+  };
 
   const totalAmount =
     selectedFare && fareData
       ? selectedFare.price +
         priceBreakdown.flightDues +
         priceBreakdown.taxesAndFees
-      : 0
+      : 0;
 
   return (
     <div className="bg-slate-100 font-helvetica text-slate-700 h-screen overflow-hidden flex antialiased">
-      {/* Sidebar Navigation */}
+      {/* 1. Sidebar Navigation */}
       <SidebarNav
         activeNav={activeNav}
         setActiveNav={setActiveNav}
-        isMobileOpen={isMobileOpen}
-        onMobileToggle={onMobileToggle}
       />
 
-      {/* Main Content */}
+      {/* 2. Main Content */}
       <main className="flex-1 bg-surface-section flex flex-col h-full overflow-y-auto">
+        {/* Topbar */}
         <Topbar
           isBreadcrumbMode={true}
           chatTitle={resolvedChatTitle}
           messages={messages}
-          onBackToChat={onBackToChat}
-          onNewChat={onStartNewChat}
+          onBackToChat={backToChat}
+          onNewChat={startNewChat}
         />
 
         {/* LOADING STATE */}
@@ -126,7 +127,6 @@ export const SelectFarePage = ({
           <div className="flex-1 flex items-center justify-center p-8">
             <div className="bg-red-50 text-red-600 p-6 rounded-2xl border border-red-100 max-w-md text-center">
               <p className="font-semibold">{error}</p>
-
               <Button
                 type="button"
                 variant="danger"
@@ -152,12 +152,14 @@ export const SelectFarePage = ({
                 priceUnit={fareData.priceUnit || ''}
               />
 
-             <SelectedFlightBox
+              <SelectedFlightBox
                 airlineName={fareData.airlineName || ''}
                 defaultFlightLogo={defaultFlightLogo}
                 iconHeart={HeartIcon}
                 legs={fareData.legs || []}
-                cancellationPolicy={fareData.cancellationPolicy || ''}
+                cancellationPolicy={
+                  fareData.cancellationPolicy || ''
+                }
               />
 
               <FareCards
@@ -175,13 +177,11 @@ export const SelectFarePage = ({
                 <SectionHeader title="Important information" />
 
                 <div className="bg-surface p-6 rounded-3xl border border-slate-100 text-xs text-slate-400 leading-relaxed space-y-2 shadow-sm">
-                  {(fareData.importantInformation || []).map(
-                    (paragraph) => (
-                      <p key={paragraph}>
-                        {paragraph}
-                      </p>
-                    ),
-                  )}
+                  {(fareData.importantInformation || []).map((paragraph) => (
+                    <p key={paragraph}>
+                      {paragraph}
+                    </p>
+                  ))}
                 </div>
               </div>
             </div>
@@ -199,5 +199,5 @@ export const SelectFarePage = ({
         )}
       </main>
     </div>
-  )
-}
+  );
+};

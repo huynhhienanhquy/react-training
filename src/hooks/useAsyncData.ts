@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
-import { AxiosError } from 'axios';
+import { useCallback, useEffect, useRef, useState, type DependencyList } from 'react';
+import { getErrorMessage } from '@/utils/errorHelpers';
 
 /* eslint-disable react-hooks/set-state-in-effect */
 
@@ -11,6 +11,7 @@ interface AsyncDataState<T> {
 
 interface UseAsyncDataOptions {
   skip?: boolean;
+  dependencies?: DependencyList;
 }
 
 interface UseAsyncDataReturn<T> extends AsyncDataState<T> {
@@ -21,7 +22,12 @@ export const useAsyncData = <T>(
   fetchFn: () => Promise<T>,
   options?: UseAsyncDataOptions,
 ): UseAsyncDataReturn<T> => {
-  const { skip = false } = options ?? {};
+  const { skip = false, dependencies = [] } = options ?? {};
+  const fetchFnRef = useRef(fetchFn);
+
+  useEffect(() => {
+    fetchFnRef.current = fetchFn;
+  }, [fetchFn]);
 
   const [state, setState] = useState<AsyncDataState<T>>({
     data: null,
@@ -41,7 +47,7 @@ export const useAsyncData = <T>(
     }));
 
     try {
-      const data = await fetchFn();
+      const data = await fetchFnRef.current();
 
       setState({
         data,
@@ -49,24 +55,16 @@ export const useAsyncData = <T>(
         error: null,
       });
     } catch (err: unknown) {
-      let message = 'Unable to retrieve data.';
-
-      if (err instanceof AxiosError) {
-        message =
-          err.response?.data?.message ??
-          err.message ??
-          'Server connection error';
-      } else if (err instanceof Error) {
-        message = err.message;
-      }
-
       setState({
         data: null,
         loading: false,
-        error: message,
+        error: getErrorMessage(err),
       });
     }
-  }, [fetchFn, skip]);
+  // Callers can explicitly declare the values that change the request while
+  // inline fetch functions remain safe from identity-only refetch loops.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [skip, ...dependencies]);
 
   useEffect(() => {
     if (!skip) {
@@ -76,8 +74,6 @@ export const useAsyncData = <T>(
 
   return {
     ...state,
-    refetch: () => {
-      void fetchData();
-    },
+    refetch: fetchData,
   };
 };

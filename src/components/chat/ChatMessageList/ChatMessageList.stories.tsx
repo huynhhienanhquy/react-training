@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { ChatMessageList } from '../ChatMessageList/ChatMessageList'
+import { ChatMessageList } from '.'
 import type { ChatMessage } from '@/types/chat'
 
 const meta: Meta<typeof ChatMessageList> = {

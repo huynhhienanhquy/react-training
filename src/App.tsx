@@ -14,6 +14,8 @@ import { ForgotPassword } from './pages/Authentication/ForgotPassword/ForgotPass
 import { VerifyOTP } from './pages/Authentication/VerifyOTP/VerifyOTP';
 import { ResetPassword } from './pages/Authentication/RessetPassword/ResetPassword';
 import { ChatPage } from './pages/Dashboard/Chat/ChatPage';
+import { SelectFarePage } from './pages/Dashboard/Flight/SelectFarePage';
+import { SelectHotelPage } from './pages/Dashboard/Hotel/SelectHotelPage';
 
 export const App = () => {
   return (
@@ -27,13 +29,15 @@ export const App = () => {
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/verify-otp" element={<VerifyOTP />} />
             <Route path="/reset-password" element={<ResetPassword />} />
-            <Route path="/onboarding" element={<Onboarding />} />
           </Route>
 
           {/* Protected pages (Logged in) */}
           <Route element={<ProtectedRoute />}>
+            <Route path="/onboarding" element={<Onboarding />} />
             <Route path="/dashboard" element={<ChatPage />} />
             <Route path="/chats" element={<ChatPage />} />
+            <Route path="/chats/fares" element={<SelectFarePage />} />
+            <Route path="/chats/hotels" element={<SelectHotelPage />} />
           </Route>
 
           {/* Default navigation when URL is invalid */}

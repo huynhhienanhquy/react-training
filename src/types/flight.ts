@@ -1,4 +1,4 @@
-import { type ChatMessage } from '../components/chat/Topbar/Topbar';
+import { type ChatMessage } from '../components/chat/Topbar';
 
 export interface FareOption {
   id: 'economy' | 'business';

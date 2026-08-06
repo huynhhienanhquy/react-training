@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { AuthHeader } from './AuthHeader'
+import { AuthHeader } from '.'
 
 const meta: Meta<typeof AuthHeader> = {
   title: 'Auth/AuthHeader',

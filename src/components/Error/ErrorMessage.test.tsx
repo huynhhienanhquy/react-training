@@ -1,7 +1,7 @@
 // ErrorMessage.test.tsx
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { ErrorMessage } from './ErrorMessage';
+import { ErrorMessage } from '.';
 
 describe('ErrorMessage', () => {
   it('renders the provided error message', () => {
