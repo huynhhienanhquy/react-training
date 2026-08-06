@@ -1,5 +1,5 @@
 import { Calendar, Clock, MapPin } from 'lucide-react';
-import { Button } from '@/components/Button/Button';
+import { Button } from '@/components/Button';
 import { getItineraryListApi } from '@/services/travelService';
 import type {
   DayItinerary,

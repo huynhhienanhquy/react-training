@@ -1,5 +1,5 @@
 import React, { useId, useState } from 'react';
-import { Button } from '@/components/Button/Button';
+import { Button } from '@/components/Button';
 
 type InputFieldProps = {
   label: string;

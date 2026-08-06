@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormState } from '@/hooks/useFormState';
-import { AuthLayout } from '@/components/auth/AuthLayout/AuthLayout';
-import { Button } from '@/components/Button/Button';
-import iconArrowDown from '@/assets/icons/arrow-down.png'
-import { AuthHeader } from '@/components/auth/AuthHeader/AuthHeader';
-import { InputField } from '@/components/InputField/InputField';
-import { AuthFooter } from '@/components/auth/AuthFooter/AuthFooter';
+import { AuthLayout } from '@/components/auth/AuthLayout';
+import { Button } from '@/components/Button';
+import ArrowDownIcon from '@/components/icons/ArrowDownIcon'
+import { AuthHeader } from '@/components/auth/AuthHeader';
+import { InputField } from '@/components/InputField';
+import { AuthFooter } from '@/components/auth/AuthFooter';
 
 export const Onboarding = () => {
   const navigate = useNavigate();
@@ -76,7 +76,7 @@ export const Onboarding = () => {
 
               {/* Dropdown arrow */}
               <div className="pointer-events-none absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 text-2xs">
-                <img src={iconArrowDown} alt="iconArrowDown" />
+                <ArrowDownIcon aria-label="Select country" />
               </div>
             </div>
           </div>

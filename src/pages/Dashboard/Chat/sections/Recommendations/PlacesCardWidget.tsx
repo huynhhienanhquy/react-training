@@ -7,7 +7,7 @@ import {
   Compass,
   Hotel,
 } from 'lucide-react';
-import { Button } from '@/components/Button/Button';
+import { Button } from '@/components/Button';
 import { getPlaceListApi } from '@/services/travelService';
 import type {
   PlaceData,

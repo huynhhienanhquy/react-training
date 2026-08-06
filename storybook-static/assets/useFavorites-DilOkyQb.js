@@ -1,1 +1,0 @@
-import{i as e,s as t}from"./preload-helper-CT_b8DTk.js";import{N as n}from"./iframe-BbWVxoOj.js";var r,i,a=e((()=>{r=t(n(),1),i=e=>{let[t,n]=(0,r.useState)(e??{});return{favorites:t,toggleFavorite:e=>{n(t=>{let n={...t};return n[e]?delete n[e]:n[e]=!0,n})},isFavorite:e=>!!t[e]}}}));export{i as n,a as t};

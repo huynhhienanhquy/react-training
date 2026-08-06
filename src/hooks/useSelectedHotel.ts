@@ -1,18 +1,15 @@
-import { useState } from 'react';
+import { create } from 'zustand';
 import type { HotelData } from '@/types/hotel';
 
-const STORAGE_KEY = 'selectedHotel';
+const selectedHotelStorageKey = 'selectedHotel';
 
 export const getSavedHotel = (): HotelData | null => {
-  const savedHotelJson = localStorage.getItem(STORAGE_KEY);
-
-  if (!savedHotelJson) return null;
-
   try {
-    const savedHotel: HotelData = JSON.parse(savedHotelJson);
-    return savedHotel?.hotelName ? savedHotel : null;
-  } catch (err) {
-    console.error('Error parsing saved hotel:', err);
+    const storedHotel = localStorage.getItem(selectedHotelStorageKey);
+    if (!storedHotel) return null;
+    const hotel = JSON.parse(storedHotel) as HotelData;
+    return hotel?.hotelName ? hotel : null;
+  } catch {
     return null;
   }
 };
@@ -23,19 +20,14 @@ export interface UseSelectedHotelResult {
   clearHotel: () => void;
 }
 
-export const useSelectedHotel = (): UseSelectedHotelResult => {
-  const [selectedHotel, setSelectedHotel] =
-    useState<HotelData | null>(getSavedHotel);
-
-  const selectHotel = (hotel: HotelData) => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(hotel));
-    setSelectedHotel(hotel);
-  };
-
-  const clearHotel = () => {
-    localStorage.removeItem(STORAGE_KEY);
-    setSelectedHotel(null);
-  };
-
-  return { selectedHotel, selectHotel, clearHotel };
-};
+export const useSelectedHotel = create<UseSelectedHotelResult>((set) => ({
+  selectedHotel: getSavedHotel(),
+  selectHotel: (hotel) => {
+    localStorage.setItem(selectedHotelStorageKey, JSON.stringify(hotel));
+    set({ selectedHotel: hotel });
+  },
+  clearHotel: () => {
+    localStorage.removeItem(selectedHotelStorageKey);
+    set({ selectedHotel: null });
+  },
+}));
