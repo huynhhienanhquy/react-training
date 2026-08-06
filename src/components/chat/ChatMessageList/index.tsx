@@ -105,15 +105,14 @@ export const ChatMessageList = ({
                   onBookNow={(hotel) => {
                     if (!onBookHotel) return;
 
-                    if (typeof hotel === 'string') {
-                      onBookHotel(hotel);
-                    } else if (
-                      hotel &&
-                      typeof hotel === 'object' &&
-                      'id' in hotel
-                    ) {
-                      onBookHotel(String(hotel.id));
-                    }
+                    onBookHotel(
+                      hotel.rawData ?? {
+                        id: hotel.id,
+                        hotelName: hotel.name,
+                        description: hotel.description,
+                        coverImage: hotel.imageUrl,
+                      },
+                    );
                   }}
                   onSeeAll={() => {
                     /* TODO: Implement see all */

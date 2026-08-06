@@ -20,7 +20,6 @@ import expediaIcon from '@/assets/images/expedia.png';
 import { useAsyncData } from '@/hooks/useAsyncData';
 import { useSidebarNav } from '@/hooks/useSidebarNav';
 import { useChatTitle } from '@/hooks/useChatTitle';
-import { useSelectedHotel } from '@/hooks/useSelectedHotel';
 
 export const SelectHotelPage = ({
   chatTitle,
@@ -28,6 +27,7 @@ export const SelectHotelPage = ({
   onBackToChat,
   onStartNewChat,
   onSelectHotel,
+  selectedHotel,
 }: SelectHotelPageProps) => {
   const navigate = useNavigate();
   const backToChat = onBackToChat ?? (() => navigate('/chats'));
@@ -36,29 +36,16 @@ export const SelectHotelPage = ({
     useSidebarNav();
   const [isComparePrice, setIsComparePrice] = useState(false);
 
-  const { selectedHotel, selectHotel } = useSelectedHotel();
-
   // Fetch hotel data
   const fetchHotels = useCallback(
     async (): Promise<HotelData[]> => {
       let dataList = await getHotelListApi();
 
-      const savedHotel = (() => {
-        try {
-          const storedHotel = localStorage.getItem('selectedHotel');
-          return storedHotel ? (JSON.parse(storedHotel) as HotelData) : null;
-        } catch {
-          return null;
-        }
-      })();
-
-      const prioritizedHotel = selectedHotel ?? savedHotel;
-
-      if (prioritizedHotel?.id) {
+      if (selectedHotel?.id) {
         dataList = [
-          prioritizedHotel,
+          selectedHotel,
           ...dataList.filter(
-            (hotel) => hotel.id !== prioritizedHotel.id,
+            (hotel) => hotel.id !== selectedHotel.id,
           ),
         ];
       }
@@ -95,8 +82,6 @@ export const SelectHotelPage = ({
     selectedHotel: HotelData,
   ) => {
     e.stopPropagation();
-
-    selectHotel(selectedHotel);
 
     if (onSelectHotel) {
       onSelectHotel(selectedHotel);

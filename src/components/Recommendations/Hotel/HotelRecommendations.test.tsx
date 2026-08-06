@@ -317,7 +317,7 @@ describe("HotelRecommendations", () => {
 
 
 
-  it("stores selected hotel into localStorage", async () => {
+  it("does not persist a selected hotel outside its parent flow", async () => {
 
     const user = userEvent.setup();
 
@@ -352,9 +352,7 @@ describe("HotelRecommendations", () => {
       );
 
 
-    expect(
-      storedHotel
-    ).not.toBeNull();
+    expect(storedHotel).toBeNull();
 
   });
 
