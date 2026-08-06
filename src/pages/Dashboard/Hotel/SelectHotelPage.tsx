@@ -5,7 +5,7 @@ import { SidebarNav } from '@/components/chat/SidebarNav';
 import { Topbar } from '@/components/chat/Topbar';
 import { SectionHeader } from '@/components/FlightFare/SectionHeader';
 
-import { getHotelDetailsApi } from '@/services/hotelService';
+import { getHotelListApi } from '@/services/hotelService';
 import { Button } from '@/components/Button';
 
 import type {
@@ -41,11 +41,7 @@ export const SelectHotelPage = ({
   // Fetch hotel data
   const fetchHotels = useCallback(
     async (): Promise<HotelData[]> => {
-      const rawData = await getHotelDetailsApi();
-
-      let dataList: HotelData[] = Array.isArray(rawData)
-        ? rawData
-        : [rawData];
+      let dataList = await getHotelListApi();
 
       //Synchronize with LocalStorage.If a hotel was previously selected,move it to the top of the list.
       const savedHotel = getSavedHotel();

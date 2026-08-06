@@ -24,6 +24,18 @@ describe('loginApi', () => {
     expect(authApi.get).toHaveBeenCalledWith('/login');
   });
 
+  it('does not own persisted authentication state', async () => {
+    vi.mocked(authApi.get).mockResolvedValue({
+      data: [{ id: 'user-1', email: 'test@example.com', password: 'secret' }],
+    });
+    const setItem = vi.spyOn(Storage.prototype, 'setItem');
+
+    await loginApi({ email: 'test@example.com', password: 'secret' });
+
+    expect(setItem).not.toHaveBeenCalled();
+    setItem.mockRestore();
+  });
+
   it('rejects invalid credentials', async () => {
     vi.mocked(authApi.get).mockResolvedValue({ data: [] });
 
