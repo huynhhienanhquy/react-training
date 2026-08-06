@@ -1,11 +1,5 @@
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  type DependencyList,
-} from 'react';
-import { AxiosError } from 'axios';
+import { useCallback, useEffect, useState } from 'react';
+import { getErrorMessage } from '@/utils/errorHelpers';
 
 /* eslint-disable react-hooks/set-state-in-effect */
 
@@ -61,21 +55,10 @@ export const useAsyncData = <T>(
         error: null,
       });
     } catch (err: unknown) {
-      let message = 'Unable to retrieve data.';
-
-      if (err instanceof AxiosError) {
-        message =
-          err.response?.data?.message ??
-          err.message ??
-          'Server connection error';
-      } else if (err instanceof Error) {
-        message = err.message;
-      }
-
       setState({
         data: null,
         loading: false,
-        error: message,
+        error: getErrorMessage(err),
       });
     }
   // Callers can explicitly declare the values that change the request while

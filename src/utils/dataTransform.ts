@@ -1,26 +1,29 @@
 import type { FareData, FlightOption, FlightLegInfo } from '../types/flight';
 import type { HotelData, HotelOption } from '../types/hotel';
 
-export const mapFareDataToFlightOption = (fareData: FareData): FlightOption[] => {
-  const fareOptions =
-    fareData.fareOptions?.map((opt) => ({
-      id: fareData.id ? `${fareData.id}-${opt.id}` : opt.id,
-      airline: opt.airline || fareData.airlineName || 'Unknown Airline',
-      logoUrl: undefined,
-      outbound: mapLeg(fareData.legs?.[0]),
-      returnLeg: mapLeg(fareData.legs?.[1] || fareData.legs?.[0]),
-      price: opt.price?.toLocaleString() || '0',
-      tag: opt.id === 'business' ? 'Best value' : undefined,
-      isFavorite: false,
-    })) || [];
-  return fareOptions;
+export const mapFareDataToFlightOption = (
+  fareData: FareData,
+  index: number,
+): FlightOption => {
+  const outboundLeg = fareData.legs?.[0];
+  const returnLeg = fareData.legs?.[1] ?? outboundLeg;
+  const lowestPrice = fareData.fareOptions?.[0]?.price ?? 0;
+
+  return {
+    id: fareData.id ? String(fareData.id) : `flight-${index + 1}`,
+    airline: fareData.airlineName || 'Airline',
+    outbound: mapLeg(outboundLeg),
+    returnLeg: mapLeg(returnLeg),
+    price: `$${lowestPrice.toLocaleString()}`,
+    tag: 'Cheap',
+  };
 };
 
 const mapLeg = (leg?: { times?: string; route?: string; duration?: string; stops?: string }): FlightLegInfo => ({
-  time: leg?.times || '',
-  route: leg?.route || '',
-  duration: leg?.duration || '',
-  stops: leg?.stops || '0',
+  time: leg?.times || 'N/A',
+  route: leg?.route || 'N/A',
+  duration: leg?.duration || 'N/A',
+  stops: leg?.stops || 'Direct',
 });
 
 export const mapHotelDataToOption = (hotels: HotelData[]): HotelOption[] => {

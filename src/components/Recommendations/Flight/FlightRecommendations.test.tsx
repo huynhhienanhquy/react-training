@@ -144,7 +144,7 @@ describe("FlightRecommendations", () => {
             id: "economy",
             name: "Economy",
             airline: "VietJet",
-            price: 150,
+            price: 1500,
             features: [],
           },
         ],
@@ -172,7 +172,7 @@ describe("FlightRecommendations", () => {
 
 
     expect(
-      screen.getByText("$150")
+      screen.getByText("$1,500")
     ).toBeInTheDocument();
   });
 

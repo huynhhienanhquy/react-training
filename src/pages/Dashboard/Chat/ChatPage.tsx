@@ -1,10 +1,10 @@
 import  { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SidebarNav } from '@/components/chat/SidebarNav/SidebarNav';
-import { ChatHistorySidebar } from '@/components/chat/ChatHistorySidebar/ChatHistorySidebar';
-import { Topbar } from '@/components/chat/Topbar/Topbar';
-import { WelcomeState } from '@/components/chat/WelcomeState/WelcomeState';
-import { ChatMessageList } from '@/components/chat/ChatMessageList/ChatMessageList';
+import { SidebarNav } from '@/components/chat/SidebarNav/index';
+import { ChatHistorySidebar } from '@/components/chat/ChatHistorySidebar/index';
+import { Topbar } from '@/components/chat/Topbar/index';
+import { WelcomeState } from '@/components/chat/WelcomeState/index';
+import { ChatMessageList } from '@/components/chat/ChatMessageList/index';
 import { ChatInputBox } from '@/components/chat/ChatInputBox/ChatInputBox';
 import { useChatSessions } from '@/hooks/useChatSessions';
 import { useSidebarNav } from '@/hooks/useSidebarNav';
