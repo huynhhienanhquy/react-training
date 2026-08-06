@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { SelectHotelPage } from './SelectHotelPage'
-import { getHotelDetailsApi } from '@/services/hotelService'
+import { getHotelListApi } from '@/services/hotelService'
 import type { HotelData } from '@/types/hotel'
 
 // Mock react-router-dom
@@ -11,7 +11,7 @@ vi.mock('react-router-dom', () => ({
 
 // Mock Hotel API Service
 vi.mock('../../../services/hotelService', () => ({
-  getHotelDetailsApi: vi.fn(),
+  getHotelListApi: vi.fn(),
 }))
 
 // Mock Theme Context
@@ -62,7 +62,7 @@ describe('SelectHotelPage Component', () => {
 
   it('renders loading state initially', () => {
     // Return an unresolved promise to test loading state
-    ;(getHotelDetailsApi as ReturnType<typeof vi.fn>).mockReturnValue(new Promise(() => {}))
+    ;(getHotelListApi as ReturnType<typeof vi.fn>).mockReturnValue(new Promise(() => {}))
 
     render(<SelectHotelPage />)
 
@@ -70,7 +70,7 @@ describe('SelectHotelPage Component', () => {
   })
 
   it('renders hotel list successfully after API call', async () => {
-    ;(getHotelDetailsApi as ReturnType<typeof vi.fn>).mockResolvedValue(mockHotelsData)
+    ;(getHotelListApi as ReturnType<typeof vi.fn>).mockResolvedValue(mockHotelsData)
 
     render(<SelectHotelPage chatTitle="Hotels in Lagos" />)
 
@@ -89,7 +89,9 @@ describe('SelectHotelPage Component', () => {
     expect(screen.getByText('Victoria Island, Lagos')).toBeInTheDocument()
     expect(screen.getByText('Ikeja, Lagos')).toBeInTheDocument()
 
-    // Check pricing providers
+    fireEvent.click(screen.getByRole('checkbox', { name: /compare price/i }))
+
+    // Check pricing providers after enabling comparison
     expect(screen.getAllByText('Booking.com').length).toBeGreaterThan(0)
     expect(screen.getAllByText('Expedia').length).toBeGreaterThan(0)
   })
@@ -97,7 +99,7 @@ describe('SelectHotelPage Component', () => {
   it('prioritizes the hotel selected in the current chat at the top of the list', async () => {
     const selectedHotel = mockHotelsData[1]
 
-    ;(getHotelDetailsApi as ReturnType<typeof vi.fn>).mockResolvedValue(mockHotelsData)
+    ;(getHotelListApi as ReturnType<typeof vi.fn>).mockResolvedValue(mockHotelsData)
 
     render(<SelectHotelPage selectedHotel={selectedHotel} />)
 
@@ -116,7 +118,7 @@ describe('SelectHotelPage Component', () => {
   })
 
   it('handles "Book Hotel" action correctly', async () => {
-    ;(getHotelDetailsApi as ReturnType<typeof vi.fn>).mockResolvedValue(mockHotelsData)
+    ;(getHotelListApi as ReturnType<typeof vi.fn>).mockResolvedValue(mockHotelsData)
     const onSelectHotelMock = vi.fn()
 
     render(<SelectHotelPage onSelectHotel={onSelectHotelMock} />)
@@ -137,7 +139,7 @@ describe('SelectHotelPage Component', () => {
   })
 
   it('toggles compare price checkbox', async () => {
-    ;(getHotelDetailsApi as ReturnType<typeof vi.fn>).mockResolvedValue(mockHotelsData)
+    ;(getHotelListApi as ReturnType<typeof vi.fn>).mockResolvedValue(mockHotelsData)
 
     render(<SelectHotelPage />)
 
@@ -154,7 +156,7 @@ describe('SelectHotelPage Component', () => {
 
   it('renders error state when API call fails', async () => {
     const errorMessage = 'Network Error: Failed to fetch hotels'
-    ;(getHotelDetailsApi as ReturnType<typeof vi.fn>).mockRejectedValue(new Error(errorMessage))
+    ;(getHotelListApi as ReturnType<typeof vi.fn>).mockRejectedValue(new Error(errorMessage))
 
     render(<SelectHotelPage />)
 
@@ -172,7 +174,7 @@ describe('SelectHotelPage Component', () => {
       value: { ...window.location, reload: reloadMock },
     })
 
-    ;(getHotelDetailsApi as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('Server unavailable'))
+    ;(getHotelListApi as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('Server unavailable'))
 
     render(<SelectHotelPage />)
 

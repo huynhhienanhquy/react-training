@@ -1,26 +1,24 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormState } from '@/hooks/useFormState';
-import { AuthLayout } from '@/components/auth/AuthLayout/AuthLayout';
-import { Button } from '@/components/Button/Button';
-import { InputField } from '@/components/Input/InputField';
-import { AuthHeader } from '@/components/auth/AuthHeader/AuthHeader';
-import { AuthFooter } from '@/components/auth/AuthFooter/AuthFooter';
-import { useTimeout } from '@/hooks/useTimeout';
+import { AuthLayout } from '@/components/auth/AuthLayout';
+import { Button } from '@/components/Button';
+import { InputField } from '@/components/Input';
+import { AuthHeader } from '@/components/auth/AuthHeader';
+import { AuthFooter } from '@/components/auth/AuthFooter';
 
 export const ForgotPassword = () => {
   const navigate = useNavigate();
   const { isLoading, startLoading, stopLoading } = useFormState();
   const [email, setEmail] = useState<string>("");
-  const { setTimeoutCallback } = useTimeout();
 
   const handleSendOTP = (e: React.FormEvent) => {
     e.preventDefault();
     startLoading();
 
-    setTimeoutCallback(() => {
+    setTimeout(() => {
       stopLoading();
-      alert('OTP code has been sent to your email!');
+      alert("OTP code has been sent to your email!");
       navigate('/verify-otp');
     }, 300);
   };

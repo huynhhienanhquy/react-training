@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { InfoRow } from './InfoRow'
+import { InfoRow } from '.'
 
 const meta: Meta<typeof InfoRow> = {
   title: 'UI/InfoRow',

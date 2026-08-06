@@ -1,106 +1,105 @@
-  import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-  import { SidebarNav } from '@/components/chat/SidebarNav/SidebarNav';
-  import { Topbar } from '@/components/chat/Topbar/Topbar';
-  import { SectionHeader } from '@/components/FlightFare/SectionHeader/SectionHeader';
+import { SidebarNav } from '@/components/chat/SidebarNav';
+import { Topbar } from '@/components/chat/Topbar';
+import { SectionHeader } from '@/components/FlightFare/SectionHeader';
 
-  import { getHotelDetailsApi } from '@/services/hotelService';
-  import { Button } from '@/components/Button/Button';
+import { getHotelListApi } from '@/services/hotelService';
+import { Button } from '@/components/Button';
 
-  import type {
-    HotelData,
-    SelectHotelPageProps,
-  } from '@/types/hotel';
+import type {
+  HotelData,
+  SelectHotelPageProps,
+} from '@/types/hotel';
 
-  import defaultHotelImg from '@/assets/icons/ellipse.png';
-  import bookingIcon from '@/assets/icons/booking.png';
-  import expediaIcon from '@/assets/icons/expedia.png';
+import defaultHotelImg from '@/assets/images/ellipse.png';
+import bookingIcon from '@/assets/images/booking.png';
+import expediaIcon from '@/assets/images/expedia.png';
 
-  import { useAsyncData } from '@/hooks/useAsyncData';
-  import { useSidebarNav } from '@/hooks/useSidebarNav';
-  import { useChatTitle } from '@/hooks/useChatTitle';
+import { useAsyncData } from '@/hooks/useAsyncData';
+import { useSidebarNav } from '@/hooks/useSidebarNav';
+import { useChatTitle } from '@/hooks/useChatTitle';
 
-  export const SelectHotelPage = ({
-    chatTitle,
-    messages = [],
-    onBackToChat,
-    onStartNewChat,
-    onSelectHotel,
-    selectedHotel,
-  }: SelectHotelPageProps) => {
-    const { activeNav, setActiveNav, isMobileOpen, onMobileToggle } =
-      useSidebarNav();
-    const [isComparePrice, setIsComparePrice] = useState(false);
+export const SelectHotelPage = ({
+  chatTitle,
+  messages = [],
+  onBackToChat,
+  onStartNewChat,
+  onSelectHotel,
+  selectedHotel,
+}: SelectHotelPageProps) => {
+  const navigate = useNavigate();
+  const backToChat = onBackToChat ?? (() => navigate('/chats'));
+  const startNewChat = onStartNewChat ?? (() => navigate('/chats'));
+  const { activeNav, setActiveNav, isMobileOpen, onMobileToggle } =
+    useSidebarNav();
+  const [isComparePrice, setIsComparePrice] = useState(false);
 
-    // Fetch hotel data
-    const fetchHotels = useCallback(
-      async (): Promise<HotelData[]> => {
-        const rawData = await getHotelDetailsApi();
+  // Fetch hotel data
+  const fetchHotels = useCallback(
+    async (): Promise<HotelData[]> => {
+      let dataList = await getHotelListApi();
 
-        let dataList: HotelData[] = Array.isArray(rawData)
-          ? rawData
-          : [rawData];
+      if (selectedHotel?.id) {
+        dataList = [
+          selectedHotel,
+          ...dataList.filter(
+            (hotel) => hotel.id !== selectedHotel.id,
+          ),
+        ];
+      }
 
-        // Keep the hotel selected in this chat at the top of the list.
-        if (selectedHotel?.hotelName) {
-          dataList = [
-            selectedHotel,
-            ...dataList.filter(
-              (hotel) => hotel.id !== selectedHotel.id,
-            ),
-          ];
-        }
-
-        if (dataList.length === 0) {
-          throw new Error(
-            'No matching hotel data available.',
-          );
-        }
-
-        return dataList;
-      },
-      [selectedHotel],
-    );
-
-    const {
-      data: hotelData,
-      loading,
-      error,
-    } = useAsyncData<HotelData[]>(fetchHotels);
-
-    const hotelList = hotelData ?? [];
-
-    // Handle the Topbar header display
-    const resolvedChatTitle = useChatTitle(
-      chatTitle,
-      messages,
-      'Other available accommodations',
-    );
-
-    // Handling when clicking "Book Hotel"
-    const handleBookHotel = (
-      e: React.MouseEvent,
-      selectedHotel: HotelData,
-    ) => {
-      e.stopPropagation();
-
-      if (onSelectHotel) {
-        onSelectHotel(selectedHotel);
-      } else {
-        alert(
-          `The hotel you have chosen: ${
-            selectedHotel.hotelName || 'Hotel'
-          }`,
+      if (dataList.length === 0) {
+        throw new Error(
+          'No matching hotel data available.',
         );
       }
-    };
+
+      return dataList;
+    },
+    [selectedHotel],
+  );
+
+  const {
+    data: hotelData,
+    loading,
+    error,
+  } = useAsyncData<HotelData[]>(fetchHotels);
+
+  const hotelList = hotelData ?? [];
+
+  // Handle the Topbar header display
+  const resolvedChatTitle = useChatTitle(
+    chatTitle,
+    messages,
+    'Other available accommodations',
+  );
+
+  // Handling when clicking "Book Hotel"
+  const handleBookHotel = (
+    e: React.MouseEvent,
+    selectedHotel: HotelData,
+  ) => {
+    e.stopPropagation();
+
+    if (onSelectHotel) {
+      onSelectHotel(selectedHotel);
+    } else {
+      alert(
+        `The hotel you have chosen: ${
+          selectedHotel.hotelName || 'Hotel'
+        }`,
+      );
+    }
+  };
 
   return (
     <div className="bg-slate-100 font-sans text-slate-700 h-screen overflow-hidden flex antialiased">
       {/* 1. Sidebar Navigation  */}
       <SidebarNav
         activeNav={activeNav}
-        setActiveNav={setActiveNav}
+        onNavChange={setActiveNav}
         isMobileOpen={isMobileOpen}
         onMobileToggle={onMobileToggle}
       />
@@ -113,8 +112,8 @@
           breadcrumbLabel="Select Hotel"
           chatTitle={resolvedChatTitle}
           messages={messages}
-          onBackToChat={onBackToChat}
-          onNewChat={onStartNewChat}
+          onBackToChat={backToChat}
+          onNewChat={startNewChat}
         />
 
         {/* LOADING STATE */}
@@ -227,6 +226,7 @@
                         </div>
 
                         {/* Comparison table of source options */}
+                        {isComparePrice && (
                         <div className="space-y-3 pt-1">
                           <div className="flex items-center justify-between text-xs sm:text-sm pb-2 border-b border-slate-100">
                             <div className="flex items-center gap-2.5">
@@ -252,6 +252,7 @@
                             <span className="font-bold text-ink-alt">${mainPrice}</span>
                           </div>
                         </div>
+                        )}
                       </div>
                     </div>
 

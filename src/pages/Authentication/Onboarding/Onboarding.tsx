@@ -1,28 +1,24 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormState } from '@/hooks/useFormState';
-import { AuthLayout } from '@/components/auth/AuthLayout/AuthLayout';
-import { Button } from '@/components/Button/Button';
-import iconArrowDown from '@/assets/icons/arrow-down.png';
-import { AuthHeader } from '@/components/auth/AuthHeader/AuthHeader';
-import { InputField } from '@/components/Input/InputField';
-import { AuthFooter } from '@/components/auth/AuthFooter/AuthFooter';
-import { useTimeout } from '@/hooks/useTimeout';
+import { AuthLayout } from '@/components/auth/AuthLayout';
+import { Button } from '@/components/Button';
+import ArrowDownIcon from '@/components/icons/ArrowDownIcon'
+import { AuthHeader } from '@/components/auth/AuthHeader';
+import { InputField } from '@/components/Input';
+import { AuthFooter } from '@/components/auth/AuthFooter';
 
 export const Onboarding = () => {
   const navigate = useNavigate();
   const { isLoading, startLoading, stopLoading } = useFormState();
-
-  const [fullName, setFullName] = useState('');
-  const [country, setCountry] = useState('');
-
-  const { setTimeoutCallback } = useTimeout();
+  const [fullName, setFullName] = useState("");
+  const [country, setCountry] = useState("");
 
   const handleStartPlanning = (e: React.FormEvent) => {
     e.preventDefault();
     startLoading();
 
-    setTimeoutCallback(() => {
+    setTimeout(() => {
       stopLoading();
       navigate('/dashboard');
     }, 300);
@@ -74,14 +70,13 @@ export const Onboarding = () => {
                 >
                   Select country
                 </option>
-
                 <option value="VN">Vietnam</option>
                 <option value="US">United States</option>
               </select>
 
               {/* Dropdown arrow */}
               <div className="pointer-events-none absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 text-2xs">
-                <img src={iconArrowDown} alt="" />
+                <ArrowDownIcon aria-label="Select country" />
               </div>
             </div>
           </div>
@@ -104,6 +99,8 @@ export const Onboarding = () => {
             />
           </div>
         </form>
+
+
       </div>
     </AuthLayout>
   );

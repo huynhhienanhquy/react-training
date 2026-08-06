@@ -1,42 +1,40 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormState } from '@/hooks/useFormState';
-import { AuthLayout } from '@/components/auth/AuthLayout/AuthLayout';
-import { Button } from '@/components/Button/Button';
-import { AuthHeader } from '@/components/auth/AuthHeader/AuthHeader';
-import { InputField } from '@/components/Input/InputField';
-import { ErrorMessage } from '@/components/Error/ErrorMessage';
-import { AuthFooter } from '@/components/auth/AuthFooter/AuthFooter';
-import { useTimeout } from '@/hooks/useTimeout';
+import { AuthLayout } from '@/components/auth/AuthLayout';
+import { Button } from '@/components/Button';
+import { AuthHeader } from '@/components/auth/AuthHeader';
+import { InputField } from '@/components/Input';
+import { ErrorMessage } from '@/components/Error';
+import { AuthFooter } from '@/components/auth/AuthFooter';
 
 export const ResetPassword = () => {
   const navigate = useNavigate();
   const { isLoading, error, startLoading, stopLoading, setError } = useFormState();
-  const { setTimeoutCallback } = useTimeout();
-
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
 
   const handleResetPassword = (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
     if (password !== confirmPassword) {
-      setError('Passwords do not match. Please check again.');
+      setError("Passwords do not match. Please check again.");
       return;
     }
 
     startLoading();
 
-    setTimeoutCallback(() => {
+    setTimeout(() => {
       stopLoading();
-      alert('Password reset successfully! Redirecting to Sign In...');
+      alert("Password reset successfully! Redirecting to Sign In...");
       navigate('/login');
     }, 300);
   };
 
   return (
     <AuthLayout isLoading={isLoading}>
+      {/* Reduce the overall spacing between blocks to space-y-3.5 */}
       <div className="flex flex-col space-y-3.5">
         {/* 1. Header */}
         <AuthHeader
@@ -45,7 +43,7 @@ export const ResetPassword = () => {
         />
 
         {/* 2. Form */}
-        <div className="mt-5 translate-y-8">
+        <div className="mt-5  translate-y-8">
           <form
             className="space-y-3"
             onSubmit={handleResetPassword}
@@ -82,7 +80,7 @@ export const ResetPassword = () => {
               Reset Password
             </Button>
 
-            {/* 3. Footer */}
+            {/* 3. Footer  */}
             <AuthFooter
               className="translate-y-24"
               questionText="Don't have an account?"
@@ -91,6 +89,8 @@ export const ResetPassword = () => {
             />
           </form>
         </div>
+
+
       </div>
     </AuthLayout>
   );

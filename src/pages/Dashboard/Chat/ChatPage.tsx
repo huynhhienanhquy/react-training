@@ -1,26 +1,22 @@
 import  { useState } from 'react';
-import { SidebarNav } from '@/components/chat/SidebarNav/SidebarNav';
-import { ChatHistorySidebar } from '@/components/chat/ChatHistorySidebar/ChatHistorySidebar';
-import { Topbar } from '@/components/chat/Topbar/Topbar';
-import { WelcomeState } from '@/components/chat/WelcomeState/WelcomeState';
-import { ChatMessageList } from '@/components/chat/ChatMessageList/ChatMessageList';
+import { useNavigate } from 'react-router-dom';
+import { SidebarNav } from '@/components/chat/SidebarNav/index';
+import { ChatHistorySidebar } from '@/components/chat/ChatHistorySidebar/index';
+import { Topbar } from '@/components/chat/Topbar/index';
+import { WelcomeState } from '@/components/chat/WelcomeState/index';
+import { ChatMessageList } from '@/components/chat/ChatMessageList/index';
 import { ChatInputBox } from '@/components/chat/ChatInputBox/ChatInputBox';
-import { SelectFarePage } from '@/pages/Dashboard/Flight/SelectFarePage';
-import { SelectHotelPage } from '@/pages/Dashboard/Hotel/SelectHotelPage';
 import { useChatSessions } from '@/hooks/useChatSessions';
 import { useSidebarNav } from '@/hooks/useSidebarNav';
-import type { HotelData } from '@/types/hotel';
 
 export const ChatPage = () => {
+  const navigate = useNavigate();
   const { activeNav, setActiveNav, isMobileOpen, onMobileToggle } =
     useSidebarNav();
   const [searchQuery, setSearchQuery] = useState('');
   const [inputMessage, setInputMessage] = useState('');
   const [isRecording, setIsRecording] = useState(false);
 
-  const [isViewingFare, setIsViewingFare] = useState(false);
-  const [isViewingHotel, setIsViewingHotel] = useState(false);
-  const [selectedHotel, setSelectedHotel] = useState<HotelData | null>(null);
 
   const {
     sessions,
@@ -52,48 +48,21 @@ export const ChatPage = () => {
   const handleStartNewChat = () => {
     setInputMessage('');
     startNewChat();
-    setIsViewingFare(false);
-    setIsViewingHotel(false);
-    setSelectedHotel(null);
   };
 
   // Select a chat from the Sidebar
   const handleSelectSession = (sessionId: string) => {
     selectSession(sessionId);
-    setIsViewingFare(false);
-    setIsViewingHotel(false);
-  };
-
-  // If you are viewing ticket details (Select Fare)
-  if (isViewingFare) {
-    return (
-      <SelectFarePage
-        onBackToChat={() => setIsViewingFare(false)}
-        onStartNewChat={handleStartNewChat}
-      />
-    );
-  }
-
-  // If you are viewing hotel details
-  if (isViewingHotel) {
-    return (
-      <SelectHotelPage
-        selectedHotel={selectedHotel}
-        onBackToChat={() => setIsViewingHotel(false)}
-        onStartNewChat={handleStartNewChat}
-        onSelectHotel={setSelectedHotel}
-      />
-    );
   }
 
   return (
     <div className="bg-slate-100 font-sans text-slate-700 h-screen overflow-hidden flex antialiased">
-      <SidebarNav activeNav={activeNav} setActiveNav={setActiveNav} isMobileOpen={isMobileOpen} onMobileToggle={onMobileToggle} />
+      <SidebarNav activeNav={activeNav} onNavChange={setActiveNav} isMobileOpen={isMobileOpen} onMobileToggle={onMobileToggle} />
 
       <div className="ml-1.5">
         <ChatHistorySidebar
           searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
+          onSearchChange={setSearchQuery}
           sessions={sessions}
           activeSessionId={activeSessionId}
           onSelectSession={handleSelectSession}
@@ -115,20 +84,17 @@ export const ChatPage = () => {
             <ChatMessageList
               messages={currentMessages}
               isTyping={isTyping}
-              onBookFlight={() => setIsViewingFare(true)}
-              onBookHotel={(hotel) => {
-                setSelectedHotel(hotel);
-                setIsViewingHotel(true);
-              }}
+              onBookFlight={() => navigate('/chats/fares')}
+              onBookHotel={() => navigate('/chats/hotels')}
             />
           )}
 
           <ChatInputBox
             inputMessage={inputMessage}
-            setInputMessage={setInputMessage}
+            onInputChange={setInputMessage}
             onSend={() => handleSendMessage()}
             isRecording={isRecording}
-            setIsRecording={setIsRecording}
+            onToggleRecording={() => setIsRecording((prev) => !prev)}
           />
         </div>
       </main>

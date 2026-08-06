@@ -1,7 +1,7 @@
 // PriceDisplay.test.tsx
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { PriceDisplay } from './PriceDisplay';
+import { PriceDisplay } from '.';
 
 describe('PriceDisplay', () => {
   it('renders the amount', () => {

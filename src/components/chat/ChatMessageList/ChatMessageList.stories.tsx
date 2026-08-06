@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { ChatMessageList } from '../ChatMessageList/ChatMessageList'
+import { ChatMessageList } from '.'
 import type { ChatMessage } from '@/types/chat'
 
 const meta: Meta<typeof ChatMessageList> = {
@@ -48,7 +48,12 @@ const HOTEL_MESSAGES: ChatMessage[] = [
 ]
 
 const PLACES_MESSAGES: ChatMessage[] = [
-  { id: 'm7', sender: 'user', text: 'What places should I visit in Da Nang?', type: 'text' },
+  {
+    id: 'm7',
+    sender: 'user',
+    text: 'What places should I visit in Da Nang?',
+    type: 'text',
+  },
   {
     id: 'm8',
     sender: 'ai',
@@ -59,7 +64,8 @@ const PLACES_MESSAGES: ChatMessage[] = [
         id: 'p1',
         name: 'Ba Na Hills',
         location: 'Da Nang, Vietnam',
-        imageUrl: 'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=500',
+        imageUrl:
+          'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=500',
         rating: 4.8,
         category: 'Attraction',
       },
@@ -67,7 +73,8 @@ const PLACES_MESSAGES: ChatMessage[] = [
         id: 'p2',
         name: 'My Khe Beach',
         location: 'Da Nang, Vietnam',
-        imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500',
+        imageUrl:
+          'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500',
         rating: 4.7,
         category: 'Beach',
       },

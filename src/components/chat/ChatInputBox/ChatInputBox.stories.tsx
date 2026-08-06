@@ -13,8 +13,8 @@ const meta: Meta<typeof ChatInputBox> = {
     inputMessage: { control: 'text' },
     isRecording: { control: 'boolean' },
     onSend: { action: 'sent' },
-    setInputMessage: { action: 'inputChanged' },
-    setIsRecording: { action: 'recordingToggled' },
+    onInputChange: { action: 'inputChanged' },
+    onToggleRecording: { action: 'recordingToggled' },
   },
 }
 
@@ -28,18 +28,18 @@ const ChatInputBoxWithState = (args: Story['args'] = {}) => {
   return (
     <ChatInputBox
       inputMessage={inputMessage}
-      setInputMessage={(value) => {
+      onInputChange={(value) => {
         setInputMessage(value)
-        args.setInputMessage?.(value)
+        args.onInputChange?.(value)
       }}
       onSend={() => {
         args.onSend?.()
         setInputMessage('')
       }}
       isRecording={isRecording}
-      setIsRecording={(value) => {
-        setIsRecording(value)
-        args.setIsRecording?.(value)
+      onToggleRecording={() => {
+        setIsRecording((value) => !value)
+        args.onToggleRecording?.()
       }}
     />
   )
