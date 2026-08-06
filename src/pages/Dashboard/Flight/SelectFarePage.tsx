@@ -103,6 +103,7 @@ export const SelectFarePage = ({
         {/* Topbar */}
         <Topbar
           isBreadcrumbMode={true}
+          breadcrumbLabel="Select Fare"
           chatTitle={resolvedChatTitle}
           messages={messages}
           onBackToChat={backToChat}

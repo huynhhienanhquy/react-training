@@ -1,3 +1,4 @@
+import type { HotelData } from './hotel';
 import type { PlaceData, DayItinerary } from './travel';
 
 export type MessageData = PlaceData[] | DayItinerary[];
@@ -37,7 +38,7 @@ export interface ChatMessageListProps {
   messages: ChatMessage[];
   isTyping: boolean;
   onBookFlight?: (flightId?: string) => void;
-  onBookHotel?: (hotelId?: string) => void;
+  onBookHotel?: (hotel: HotelData) => void;
   onViewAllPlaces?: (places?: PlaceData[]) => void;
   onViewAllItinerary?: (itinerary?: DayItinerary[]) => void;
 }

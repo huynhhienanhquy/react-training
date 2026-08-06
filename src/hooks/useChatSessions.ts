@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { ChatMessage, ChatSession } from '@/types/chat';
 
 export interface UseChatSessionsResult {
@@ -42,7 +42,10 @@ const detectMessageType = (
     };
   }
 
-  return { text: DEFAULT_AI_TEXT, type: 'text' };
+  return {
+    text: DEFAULT_AI_TEXT,
+    type: 'text',
+  };
 };
 
 export const useChatSessions = (): UseChatSessionsResult => {
@@ -53,24 +56,39 @@ export const useChatSessions = (): UseChatSessionsResult => {
   >({});
   const [isTyping, setIsTyping] = useState(false);
 
+  const timeoutRefs = useRef<Set<ReturnType<typeof setTimeout>>>(
+    new Set(),
+  );
+
+  useEffect(() => {
+    return () => {
+      timeoutRefs.current.forEach((timeoutId) => {
+        clearTimeout(timeoutId);
+      });
+
+      timeoutRefs.current.clear();
+    };
+  }, []);
+
   const currentMessages = activeSessionId
     ? sessionMessages[activeSessionId] || []
     : [];
 
   const sendMessage = (text: string): boolean => {
     const trimmed = text.trim();
+
     if (!trimmed) return false;
 
     let targetSessionId = activeSessionId;
 
-    // If no chat session is selected yet -> create a new one
     if (!targetSessionId) {
-      targetSessionId = Date.now().toString();
+      targetSessionId = crypto.randomUUID();
+
       const newSession: ChatSession = {
         id: targetSessionId,
         title:
           trimmed.length > 28
-            ? trimmed.substring(0, 28) + '...'
+            ? `${trimmed.substring(0, 28)}...`
             : trimmed,
         group: 'TODAY',
       };
@@ -80,12 +98,11 @@ export const useChatSessions = (): UseChatSessionsResult => {
     }
 
     const userMsg: ChatMessage = {
-      id: Date.now().toString(),
+      id: crypto.randomUUID(),
       sender: 'user',
       text: trimmed,
     };
 
-    // Save the user's message to the corresponding session.
     setSessionMessages((prev) => ({
       ...prev,
       [targetSessionId!]: [
@@ -96,13 +113,12 @@ export const useChatSessions = (): UseChatSessionsResult => {
 
     setIsTyping(true);
 
-    // Simulated AI response
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       const { text: aiText, type: messageType } =
         detectMessageType(trimmed.toLowerCase());
 
       const aiMsg: ChatMessage = {
-        id: (Date.now() + 1).toString(),
+        id: crypto.randomUUID(),
         sender: 'ai',
         text: aiText,
         type: messageType,
@@ -117,7 +133,10 @@ export const useChatSessions = (): UseChatSessionsResult => {
       }));
 
       setIsTyping(false);
+      timeoutRefs.current.delete(timeoutId);
     }, 1200);
+
+    timeoutRefs.current.add(timeoutId);
 
     return true;
   };
