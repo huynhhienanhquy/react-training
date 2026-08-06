@@ -14,7 +14,7 @@ import UserIcon from '@/components/icons/PeopleIcon';
 import { type SidebarNavProps } from "@/types/chat";
 import { Button } from "@/components/Button";
 
-export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileToggle }: SidebarNavProps) => {
+export const SidebarNav = ({ activeNav, onNavChange, isMobileOpen, onMobileToggle }: SidebarNavProps) => {
   const navigate = useNavigate();
   const { logout } = useAuth();
   const {
@@ -91,7 +91,7 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
                       ? 'bg-blue-50 border-2 border-blue-200 shadow-sm shadow-blue-100/50'
                       : 'bg-transparent border-2 border-transparent hover:bg-white/80 hover:border-slate-200/60'
                   }`}
-                  onClick={() => setActiveNav(item.id)}
+                  onClick={() => onNavChange(item.id)}
                 >
                   <Icon
                     aria-label={item.alt}
@@ -193,7 +193,7 @@ export const SidebarNav = ({ activeNav, setActiveNav, isMobileOpen, onMobileTogg
                           : 'bg-transparent border border-transparent hover:bg-white/80 hover:border-slate-200/60'
                       }`}
                       onClick={() => {
-                        setActiveNav(item.id);
+                        onNavChange(item.id);
                         onMobileToggle?.();
                       }}
                       leftIcon={

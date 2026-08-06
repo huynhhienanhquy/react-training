@@ -57,12 +57,12 @@ export const ChatPage = () => {
 
   return (
     <div className="bg-slate-100 font-sans text-slate-700 h-screen overflow-hidden flex antialiased">
-      <SidebarNav activeNav={activeNav} setActiveNav={setActiveNav} isMobileOpen={isMobileOpen} onMobileToggle={onMobileToggle} />
+      <SidebarNav activeNav={activeNav} onNavChange={setActiveNav} isMobileOpen={isMobileOpen} onMobileToggle={onMobileToggle} />
 
       <div className="ml-1.5">
         <ChatHistorySidebar
           searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
+          onSearchChange={setSearchQuery}
           sessions={sessions}
           activeSessionId={activeSessionId}
           onSelectSession={handleSelectSession}
@@ -91,10 +91,10 @@ export const ChatPage = () => {
 
           <ChatInputBox
             inputMessage={inputMessage}
-            setInputMessage={setInputMessage}
+            onInputChange={setInputMessage}
             onSend={() => handleSendMessage()}
             isRecording={isRecording}
-            setIsRecording={setIsRecording}
+            onToggleRecording={() => setIsRecording((prev) => !prev)}
           />
         </div>
       </main>

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { SidebarNav } from '@/components/chat/SidebarNav/index';
 import { Button } from '@/components/Button/index';
 
-import HeartIcon from '@/components/icons/HeartIcon';
+import iconHeart from '@/assets/icons/heart-blue.png';
 import defaultFlightLogo from '@/assets/images/ellipse.png';
 import { SectionHeader } from '@/components/FlightFare/SectionHeader';
 
@@ -95,7 +95,7 @@ export const SelectFarePage = ({
       {/* 1. Sidebar Navigation */}
       <SidebarNav
         activeNav={activeNav}
-        setActiveNav={setActiveNav}
+        onNavChange={setActiveNav}
       />
 
       {/* 2. Main Content */}

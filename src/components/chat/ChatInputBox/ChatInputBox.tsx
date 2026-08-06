@@ -8,10 +8,10 @@ import { Button } from '@/components/Button';
 
 export const ChatInputBox = ({
   inputMessage,
-  setInputMessage,
+  onInputChange,
   onSend,
   isRecording,
-  setIsRecording,
+  onToggleRecording,
 }: ChatInputBoxProps) => {
   const handleKeyDown = useEnterToSend(onSend);
 
@@ -23,7 +23,7 @@ export const ChatInputBox = ({
       <textarea
         rows={2}
         value={inputMessage}
-        onChange={(e) => setInputMessage(e.target.value)}
+        onChange={(e) => onInputChange(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder="Tell me where you are going to and how you prefer to get there"
         className=" -translate-y-5 -translate-x-4 w-full resize-none text-slate-700 placeholder-slate-400 italic text-sm md:text-base focus:outline-none bg-transparent"
@@ -54,7 +54,7 @@ export const ChatInputBox = ({
             className={`w-10 h-10 md:w-9 md:h-9 rounded-full p-2 ${
               isRecording ? 'bg-red-50 animate-pulse' : 'hover:bg-slate-100'
             }`}
-            onClick={() => setIsRecording((prev) => !prev)}
+            onClick={onToggleRecording}
             leftIcon={
               <MicrophoneIcon
                 aria-label="Voice input"

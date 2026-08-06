@@ -36,7 +36,7 @@ describe("SidebarNav", () => {
     render(
       <SidebarNav
         activeNav="chats"
-        setActiveNav={setActiveNav}
+        onNavChange={setActiveNav}
       />
     );
 
@@ -50,7 +50,7 @@ describe("SidebarNav", () => {
     render(
       <SidebarNav
         activeNav="chats"
-        setActiveNav={setActiveNav}
+        onNavChange={setActiveNav}
       />
     );
 
@@ -64,7 +64,7 @@ describe("SidebarNav", () => {
     render(
       <SidebarNav
         activeNav="chats"
-        setActiveNav={setActiveNav}
+        onNavChange={setActiveNav}
       />
     );
 
@@ -80,7 +80,7 @@ describe("SidebarNav", () => {
     render(
       <SidebarNav
         activeNav="chats"
-        setActiveNav={setActiveNav}
+        onNavChange={setActiveNav}
       />
     );
 
@@ -98,7 +98,7 @@ describe("SidebarNav", () => {
     render(
       <SidebarNav
         activeNav="chats"
-        setActiveNav={setActiveNav}
+        onNavChange={setActiveNav}
       />
     );
 
@@ -122,7 +122,7 @@ describe("SidebarNav", () => {
     render(
       <SidebarNav
         activeNav="chats"
-        setActiveNav={setActiveNav}
+        onNavChange={setActiveNav}
         onMobileToggle={onMobileToggle}
       />
     );
@@ -140,7 +140,7 @@ describe("SidebarNav", () => {
     render(
       <SidebarNav
         activeNav="chats"
-        setActiveNav={setActiveNav}
+        onNavChange={setActiveNav}
         isMobileOpen={true}
         onMobileToggle={onMobileToggle}
       />

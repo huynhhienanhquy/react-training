@@ -20,7 +20,7 @@ import expediaIcon from '@/assets/images/expedia.png';
 import { useAsyncData } from '@/hooks/useAsyncData';
 import { useSidebarNav } from '@/hooks/useSidebarNav';
 import { useChatTitle } from '@/hooks/useChatTitle';
-import { useSelectedHotel, getSavedHotel } from '@/hooks/useSelectedHotel';
+import { useSelectedHotel } from '@/hooks/useSelectedHotel';
 
 export const SelectHotelPage = ({
   chatTitle,
@@ -36,21 +36,29 @@ export const SelectHotelPage = ({
     useSidebarNav();
   const [isComparePrice, setIsComparePrice] = useState(false);
 
-  const { selectHotel } = useSelectedHotel();
+  const { selectedHotel, selectHotel } = useSelectedHotel();
 
   // Fetch hotel data
   const fetchHotels = useCallback(
     async (): Promise<HotelData[]> => {
       let dataList = await getHotelListApi();
 
-      //Synchronize with LocalStorage.If a hotel was previously selected,move it to the top of the list.
-      const savedHotel = getSavedHotel();
+      const savedHotel = (() => {
+        try {
+          const storedHotel = localStorage.getItem('selectedHotel');
+          return storedHotel ? (JSON.parse(storedHotel) as HotelData) : null;
+        } catch {
+          return null;
+        }
+      })();
 
-      if (savedHotel?.hotelName) {
+      const prioritizedHotel = selectedHotel ?? savedHotel;
+
+      if (prioritizedHotel?.id) {
         dataList = [
-          savedHotel,
+          prioritizedHotel,
           ...dataList.filter(
-            (hotel) => hotel.id !== savedHotel.id,
+            (hotel) => hotel.id !== prioritizedHotel.id,
           ),
         ];
       }
@@ -63,7 +71,7 @@ export const SelectHotelPage = ({
 
       return dataList;
     },
-    [],
+    [selectedHotel],
   );
 
   const {
@@ -106,7 +114,7 @@ export const SelectHotelPage = ({
       {/* 1. Sidebar Navigation  */}
       <SidebarNav
         activeNav={activeNav}
-        setActiveNav={setActiveNav}
+        onNavChange={setActiveNav}
         isMobileOpen={isMobileOpen}
         onMobileToggle={onMobileToggle}
       />
@@ -116,6 +124,7 @@ export const SelectHotelPage = ({
         {/* Topbar */}
         <Topbar
           isBreadcrumbMode={true}
+          breadcrumbLabel="Select Hotel"
           chatTitle={resolvedChatTitle}
           messages={messages}
           onBackToChat={backToChat}
