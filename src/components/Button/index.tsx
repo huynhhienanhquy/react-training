@@ -1,9 +1,10 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import { twMerge } from 'tailwind-merge';
-import iconHeart from '@/assets/icons/heart-blue.png';
-import iconArrowRight from '@/assets/icons/arrow-right.png';
-import iconGoogle from '@/assets/icons/logo-google.png';
-import iconApple from '@/assets/icons/logo-apple.png';
+
+import HeartIcon from '@/components/icons/HeartIcon';
+import ArrowRightIcon from '@/components/icons/ArrowRightIcon';
+import googleIcon from '@/assets/images/logo-google.png';
+import appleIcon from '@/assets/images/logo-apple.png';
 
 type ButtonVariant =
   | 'primary'
@@ -109,6 +110,8 @@ export function Button({
           className="animate-spin w-4 h-4"
           viewBox="0 0 24 24"
           fill="none"
+          role="status"
+          aria-hidden="true"
         >
           <circle
             className="opacity-25"
@@ -130,17 +133,19 @@ export function Button({
         <>
           {socialIcon === 'google' && (
             <img
-              src={iconGoogle}
-              alt="Google"
-              className="w-5 h-5 object-contain"
+              src={googleIcon}
+              alt=""
+              aria-hidden="true"
+              className="h-5 w-5"
             />
           )}
 
           {socialIcon === 'apple' && (
             <img
-              src={iconApple}
-              alt="Apple"
-              className="w-5 h-5 object-contain"
+              src={appleIcon}
+              alt=""
+              aria-hidden="true"
+              className="h-5 w-5"
             />
           )}
 
@@ -154,14 +159,16 @@ export function Button({
         leftIcon ? (
           <span className="shrink-0">{leftIcon}</span>
         ) : (
-          <img
-            src={iconHeart}
-            alt="Favorite"
-            className={`w-4 h-4 transition-all duration-200 object-contain ${
+          <HeartIcon
+            width={16}
+            height={16}
+            color={isFavorite ? '#FFFFFF' : '#486CFF'}
+            className={`transition-all duration-200 ${
               isFavorite
-                ? 'brightness-0 invert scale-110'
-                : 'opacity-70 hover:opacity-100'
+                ? 'scale-110'
+                : 'opacity-70 group-hover:opacity-100'
             }`}
+            aria-hidden="true"
           />
         )
       ) : (
@@ -169,10 +176,11 @@ export function Button({
           <span>{children}</span>
 
           {showArrow && (
-            <img
-              src={iconArrowRight}
-              alt=""
-              className="w-4 h-4 object-contain"
+            <ArrowRightIcon
+              width={16}
+              height={16}
+              color="currentColor"
+              aria-hidden="true"
             />
           )}
 

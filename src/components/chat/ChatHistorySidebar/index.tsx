@@ -1,5 +1,5 @@
 
-import iconSearch from '@/assets/icons/search-normal.png'
+import SearchIcon from '@/components/icons/SearchIcon'
 import { Button } from '@/components/Button';
 import type { ChatSession, ChatHistorySidebarProps } from '@/types/chat';
 
@@ -34,9 +34,8 @@ export const ChatHistorySidebar = ({
         <h1 className="text-2xl font-bold text-brand-dark tracking-tight">Chats</h1>
 
         <div className="relative pt-7">
-          <img
-            src={iconSearch}
-            alt="Search"
+          <SearchIcon
+            aria-label="Search"
             className="absolute left-4 top-[calc(50%+14px)] -translate-y-1/2 w-4 h-4 pointer-events-none"
           />
 

@@ -155,7 +155,7 @@ export const SelectFarePage = ({
               <SelectedFlightBox
                 airlineName={fareData.airlineName || ''}
                 defaultFlightLogo={defaultFlightLogo}
-                iconHeart={iconHeart}
+                iconHeart={HeartIcon}
                 legs={fareData.legs || []}
                 cancellationPolicy={
                   fareData.cancellationPolicy || ''

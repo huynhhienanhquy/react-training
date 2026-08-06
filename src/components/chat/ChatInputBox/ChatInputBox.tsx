@@ -1,7 +1,7 @@
 
-import iconPlus from '@/assets/icons/add-dark.png';
-import iconMic from '@/assets/icons/microphone-2.png';
-import iconSend from '@/assets/icons/send-2.png';
+import AddIcon from '@/components/icons/AddIcon';
+import MicrophoneIcon from '@/components/icons/MicrophoneIcon';
+import SendIcon from '@/components/icons/SendIcon';
 import { type ChatInputBoxProps } from "@/types/chat";
 import { useEnterToSend } from '@/hooks/useEnterToSend';
 import { Button } from '@/components/Button';
@@ -38,9 +38,8 @@ export const ChatInputBox = ({
           size="icon"
           className="-translate-x-7 translate-y-2 w-9 h-9 rounded-full p-2"
           leftIcon={
-            <img
-              src={iconPlus}
-              alt="Add attachment"
+            <AddIcon
+              aria-label="Add attachment"
               className="w-5 h-5 object-contain opacity-40 hover:opacity-70"
             />
           }
@@ -57,9 +56,8 @@ export const ChatInputBox = ({
             }`}
             onClick={onToggleRecording}
             leftIcon={
-              <img
-                src={iconMic}
-                alt="Voice input"
+              <MicrophoneIcon
+                aria-label="Voice input"
                 className={`w-5 h-5 object-contain transition ${
                   isRecording ? 'filter-red' : 'opacity-40 hover:opacity-70'
                 }`}
@@ -75,9 +73,8 @@ export const ChatInputBox = ({
             className="w-11 h-11 md:w-14 md:h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl p-2.5 shadow-md shadow-blue-500/30 shrink-0"
             onClick={onSend}
             leftIcon={
-              <img
-                src={iconSend}
-                alt="Send message"
+              <SendIcon
+                aria-label="Send message"
                 className="w-5 h-5 object-contain filter brightness-0 invert"
               />
             }

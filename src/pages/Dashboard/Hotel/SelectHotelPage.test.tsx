@@ -89,7 +89,9 @@ describe('SelectHotelPage Component', () => {
     expect(screen.getByText('Victoria Island, Lagos')).toBeInTheDocument()
     expect(screen.getByText('Ikeja, Lagos')).toBeInTheDocument()
 
-    // Check pricing providers
+    fireEvent.click(screen.getByRole('checkbox', { name: /compare price/i }))
+
+    // Check pricing providers after enabling comparison
     expect(screen.getAllByText('Booking.com').length).toBeGreaterThan(0)
     expect(screen.getAllByText('Expedia').length).toBeGreaterThan(0)
   })
