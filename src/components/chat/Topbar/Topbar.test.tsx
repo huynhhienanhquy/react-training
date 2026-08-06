@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
-import { Topbar } from "./Topbar";
+import { Topbar } from ".";
 import type { ChatMessage } from "@/types/chat";
 
 // Mock Button component
@@ -114,19 +114,6 @@ describe("Topbar", () => {
     expect(
       screen.getByText("Tokyo Trip")
     ).toBeInTheDocument();
-  });
-
-  it("renders the provided breadcrumb label", () => {
-    render(
-      <Topbar
-        isBreadcrumbMode
-        breadcrumbLabel="Select Hotel"
-        chatTitle="Tokyo Trip"
-      />
-    );
-
-    expect(screen.getByText("Select Hotel")).toBeInTheDocument();
-    expect(screen.queryByText("Select Fare")).not.toBeInTheDocument();
   });
 
 

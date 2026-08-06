@@ -3,10 +3,12 @@ import type { HotelData } from '@/types/hotel';
 
 const selectedHotelStorageKey = 'selectedHotel';
 
-const getStoredHotel = (): HotelData | null => {
+export const getSavedHotel = (): HotelData | null => {
   try {
     const storedHotel = localStorage.getItem(selectedHotelStorageKey);
-    return storedHotel ? (JSON.parse(storedHotel) as HotelData) : null;
+    if (!storedHotel) return null;
+    const hotel = JSON.parse(storedHotel) as HotelData;
+    return hotel?.hotelName ? hotel : null;
   } catch {
     return null;
   }
@@ -19,7 +21,7 @@ export interface UseSelectedHotelResult {
 }
 
 export const useSelectedHotel = create<UseSelectedHotelResult>((set) => ({
-  selectedHotel: getStoredHotel(),
+  selectedHotel: getSavedHotel(),
   selectHotel: (hotel) => {
     localStorage.setItem(selectedHotelStorageKey, JSON.stringify(hotel));
     set({ selectedHotel: hotel });

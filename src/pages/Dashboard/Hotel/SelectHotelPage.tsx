@@ -1,11 +1,12 @@
 import React, { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { SidebarNav } from '@/components/chat/SidebarNav/SidebarNav';
-import { Topbar } from '@/components/chat/Topbar/Topbar';
-import { SectionHeader } from '@/components/FlightFare/SectionHeader/SectionHeader';
+import { SidebarNav } from '@/components/chat/SidebarNav';
+import { Topbar } from '@/components/chat/Topbar';
+import { SectionHeader } from '@/components/FlightFare/SectionHeader';
 
-import { getHotelDetailsApi } from '@/services/hotelService';
-import { Button } from '@/components/Button/Button';
+import { getHotelListApi } from '@/services/hotelService';
+import { Button } from '@/components/Button';
 
 import type {
   HotelData,
@@ -28,6 +29,9 @@ export const SelectHotelPage = ({
   onStartNewChat,
   onSelectHotel,
 }: SelectHotelPageProps) => {
+  const navigate = useNavigate();
+  const backToChat = onBackToChat ?? (() => navigate('/chats'));
+  const startNewChat = onStartNewChat ?? (() => navigate('/chats'));
   const { activeNav, setActiveNav, isMobileOpen, onMobileToggle } =
     useSidebarNav();
   const [isComparePrice, setIsComparePrice] = useState(false);
@@ -37,11 +41,7 @@ export const SelectHotelPage = ({
   // Fetch hotel data
   const fetchHotels = useCallback(
     async (): Promise<HotelData[]> => {
-      const rawData = await getHotelDetailsApi();
-
-      let dataList: HotelData[] = Array.isArray(rawData)
-        ? rawData
-        : [rawData];
+      let dataList = await getHotelListApi();
 
       const savedHotel = (() => {
         try {
@@ -127,8 +127,8 @@ export const SelectHotelPage = ({
           breadcrumbLabel="Select Hotel"
           chatTitle={resolvedChatTitle}
           messages={messages}
-          onBackToChat={onBackToChat}
-          onNewChat={onStartNewChat}
+          onBackToChat={backToChat}
+          onNewChat={startNewChat}
         />
 
         {/* LOADING STATE */}

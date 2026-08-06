@@ -1,16 +1,17 @@
 import  { useCallback, useState } from 'react';
-import { SidebarNav } from '@/components/chat/SidebarNav/SidebarNav';
-import { Button } from '@/components/Button/Button';
+import { useNavigate } from 'react-router-dom';
+import { SidebarNav } from '@/components/chat/SidebarNav/index';
+import { Button } from '@/components/Button/index';
 
 import iconHeart from '@/assets/icons/heart-blue.png';
 import defaultFlightLogo from '@/assets/images/ellipse.png';
-import { SectionHeader } from '@/components/FlightFare/SectionHeader/SectionHeader';
+import { SectionHeader } from '@/components/FlightFare/SectionHeader';
 
-import { Topbar } from '@/components/chat/Topbar/Topbar';
+import { Topbar } from '@/components/chat/Topbar';
 import { FareHeader } from '@/components/FlightFare/FareHeader';
-import { SelectedFlightBox } from '@/components/FlightFare/SelectedFlightBox';
-import { FareCards } from '@/components/FlightFare/FareCards';
-import { PriceDetailsSidebar } from '@/components/FlightFare/PriceDetailsSidebar';
+import { SelectedFlightBox } from '@/components/FlightFare/SelectedFlight';
+import { FareCards } from '@/components/FlightFare/FareCard';
+import { PriceDetailsSidebar } from '@/components/FlightFare/PriceDetail';
 
 import { getFareDetailsApi } from '@/services/fareService';
 import type {
@@ -28,6 +29,9 @@ export const SelectFarePage = ({
   onBackToChat,
   onStartNewChat,
 }: SelectFarePageProps) => {
+  const navigate = useNavigate();
+  const backToChat = onBackToChat ?? (() => navigate('/chats'));
+  const startNewChat = onStartNewChat ?? (() => navigate('/chats'));
   const { activeNav, setActiveNav } = useSidebarNav();
   const [selectedFareId, setSelectedFareId] =
     useState<'economy' | 'business'>('economy');
@@ -99,11 +103,10 @@ export const SelectFarePage = ({
         {/* Topbar */}
         <Topbar
           isBreadcrumbMode={true}
-          breadcrumbLabel="Select Fare"
           chatTitle={resolvedChatTitle}
           messages={messages}
-          onBackToChat={onBackToChat}
-          onNewChat={onStartNewChat}
+          onBackToChat={backToChat}
+          onNewChat={startNewChat}
         />
 
         {/* LOADING STATE */}
