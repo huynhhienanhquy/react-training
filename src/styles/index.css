@@ -61,15 +61,3 @@
     font-family: inherit;
   }
 }
-
-
-@font-face {
-  font-family: 'Helvetica Now Display';
-  src: url('/fonts/HelveticaNowDisplay-Regular.woff2') format('woff2');
-  font-weight: 400;
-}
-@font-face {
-  font-family: 'Helvetica Now Display';
-  src: url('/fonts/HelveticaNowDisplay-Bold.woff2') format('woff2');
-  font-weight: 700;
-}

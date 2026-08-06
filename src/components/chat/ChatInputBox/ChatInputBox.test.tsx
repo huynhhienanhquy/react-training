@@ -6,10 +6,10 @@ import { ChatInputBox } from "./ChatInputBox";
 describe("ChatInputBox", () => {
   const defaultProps = {
     inputMessage: "",
-    setInputMessage: vi.fn(),
+    onInputChange: vi.fn(),
     onSend: vi.fn(),
     isRecording: false,
-    setIsRecording: vi.fn(),
+    onToggleRecording: vi.fn(),
   };
 
   it("renders textarea with placeholder", () => {
@@ -22,14 +22,14 @@ describe("ChatInputBox", () => {
     ).toBeInTheDocument();
   });
 
-  it("calls setInputMessage when typing", async () => {
+  it("calls onInputChange when typing", async () => {
     const user = userEvent.setup();
-    const setInputMessage = vi.fn();
+    const onInputChange = vi.fn();
 
     render(
       <ChatInputBox
         {...defaultProps}
-        setInputMessage={setInputMessage}
+        onInputChange={onInputChange}
       />
     );
 
@@ -39,7 +39,7 @@ describe("ChatInputBox", () => {
 
     await user.type(textarea, "Hello");
 
-    expect(setInputMessage).toHaveBeenCalled();
+    expect(onInputChange).toHaveBeenCalled();
   });
 
   it("calls onSend when send button is clicked", async () => {
@@ -108,14 +108,14 @@ describe("ChatInputBox", () => {
     expect(onSend).not.toHaveBeenCalled();
   });
 
-  it("calls setIsRecording when microphone button is clicked", async () => {
+  it("calls onToggleRecording when microphone button is clicked", async () => {
     const user = userEvent.setup();
-    const setIsRecording = vi.fn();
+    const onToggleRecording = vi.fn();
 
     render(
       <ChatInputBox
         {...defaultProps}
-        setIsRecording={setIsRecording}
+        onToggleRecording={onToggleRecording}
       />
     );
 
@@ -125,7 +125,7 @@ describe("ChatInputBox", () => {
 
     await user.click(micButton);
 
-    expect(setIsRecording).toHaveBeenCalledTimes(1);
+    expect(onToggleRecording).toHaveBeenCalledTimes(1);
   });
 
   it("shows recording style when isRecording is true", () => {

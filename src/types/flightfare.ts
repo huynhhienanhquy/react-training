@@ -1,5 +1,7 @@
 import type { FareOption, FlightLeg } from './flight';
+import type { ComponentType, SVGProps } from 'react'
 
+type IconComponent = ComponentType<SVGProps<SVGSVGElement>>
 export interface FareCardsProps {
   fareOptions: FareOption[];
   selectedFareId: 'economy' | 'business';
@@ -23,9 +25,9 @@ export interface PriceDetailsSidebarProps {
 }
 
 export interface SelectedFlightBoxProps {
-  airlineName: string;
-  defaultFlightLogo: string;
-  iconHeart: string;
-  legs: FlightLeg[];
-  cancellationPolicy: string;
+  airlineName: string
+  defaultFlightLogo: string
+  iconHeart: IconComponent
+  legs: FlightLeg[]
+  cancellationPolicy: string
 }

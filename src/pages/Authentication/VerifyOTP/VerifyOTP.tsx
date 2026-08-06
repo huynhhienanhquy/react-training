@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { useFormState } from '@/hooks/useFormState';
 import { useOtpInput } from '@/hooks/useOtpInput';
 import { useCountdown } from '@/hooks/useCountdown';
-import { AuthLayout } from '@/components/auth/AuthLayout/AuthLayout';
-import { Button } from '@/components/Button/Button';
-import { AuthHeader } from '@/components/auth/AuthHeader/AuthHeader';
+import { AuthLayout } from '@/components/auth/AuthLayout';
+import { Button } from '@/components/Button';
+import { AuthHeader } from '@/components/auth/AuthHeader';
 
 export const VerifyOTP = () => {
   const navigate = useNavigate();

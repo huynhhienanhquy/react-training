@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { SidebarNav } from "./SidebarNav";
+import { SidebarNav } from ".";
 
 const mockNavigate = vi.fn();
 
@@ -36,11 +36,11 @@ describe("SidebarNav", () => {
     render(
       <SidebarNav
         activeNav="chats"
-        setActiveNav={setActiveNav}
+        onNavChange={setActiveNav}
       />
     );
 
-    expect(screen.getByAltText("Chats")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Chats" })).toBeInTheDocument();
   });
 
 
@@ -50,11 +50,11 @@ describe("SidebarNav", () => {
     render(
       <SidebarNav
         activeNav="chats"
-        setActiveNav={setActiveNav}
+        onNavChange={setActiveNav}
       />
     );
 
-    await user.click(screen.getByAltText("Chats"));
+    await user.click(screen.getByRole("button", { name: "Chats" }));
 
     expect(setActiveNav).toHaveBeenCalledWith("chats");
   });
@@ -64,13 +64,11 @@ describe("SidebarNav", () => {
     render(
       <SidebarNav
         activeNav="chats"
-        setActiveNav={setActiveNav}
+        onNavChange={setActiveNav}
       />
     );
 
-    const chatButton = screen
-      .getByAltText("Chats")
-      .closest("button");
+    const chatButton = screen.getByRole("button", { name: "Chats" });
 
     expect(chatButton).toHaveClass("bg-blue-50");
   });
@@ -82,11 +80,11 @@ describe("SidebarNav", () => {
     render(
       <SidebarNav
         activeNav="chats"
-        setActiveNav={setActiveNav}
+        onNavChange={setActiveNav}
       />
     );
 
-    await user.click(screen.getByAltText("User Avatar"));
+    await user.click(screen.getByRole("button", { name: "Open profile menu" }));
 
     expect(screen.getByText("Log out")).toBeInTheDocument();
   });
@@ -100,12 +98,12 @@ describe("SidebarNav", () => {
     render(
       <SidebarNav
         activeNav="chats"
-        setActiveNav={setActiveNav}
+        onNavChange={setActiveNav}
       />
     );
 
 
-    await user.click(screen.getByAltText("User Avatar"));
+    await user.click(screen.getByRole("button", { name: "Open profile menu" }));
 
     await user.click(screen.getByText("Log out"));
 
@@ -124,7 +122,7 @@ describe("SidebarNav", () => {
     render(
       <SidebarNav
         activeNav="chats"
-        setActiveNav={setActiveNav}
+        onNavChange={setActiveNav}
         onMobileToggle={onMobileToggle}
       />
     );
@@ -142,7 +140,7 @@ describe("SidebarNav", () => {
     render(
       <SidebarNav
         activeNav="chats"
-        setActiveNav={setActiveNav}
+        onNavChange={setActiveNav}
         isMobileOpen={true}
         onMobileToggle={onMobileToggle}
       />

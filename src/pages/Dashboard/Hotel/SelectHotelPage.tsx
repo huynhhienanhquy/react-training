@@ -1,26 +1,27 @@
 import React, { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { SidebarNav } from '@/components/chat/SidebarNav/SidebarNav';
-import { Topbar } from '@/components/chat/Topbar/Topbar';
-import { SectionHeader } from '@/components/FlightFare/SectionHeader/SectionHeader';
+import { SidebarNav } from '@/components/chat/SidebarNav';
+import { Topbar } from '@/components/chat/Topbar';
+import { SectionHeader } from '@/components/FlightFare/SectionHeader';
 
-import { getHotelDetailsApi } from '@/services/hotelService';
-import { Button } from '@/components/Button/Button';
-import { Icon } from '@/components/Icons/Icon';
+import { getHotelListApi } from '@/services/hotelService';
+import { Button } from '@/components/Button';
+import { Icon } from '@/components/icons/Icon';
 
 import type {
   HotelData,
   SelectHotelPageProps,
 } from '@/types/hotel';
 
-import defaultHotelImg from '@/assets/icons/ellipse.png';
-import bookingIcon from '@/assets/icons/booking.png';
-import expediaIcon from '@/assets/icons/expedia.png';
+import defaultHotelImg from '@/assets/images/ellipse.png';
+import bookingIcon from '@/assets/images/booking.png';
+import expediaIcon from '@/assets/images/expedia.png';
 
-import { useApiRequest } from '@/hooks/useApiRequest';
+import { useAsyncData } from '@/hooks/useAsyncData';
 import { useSidebarNav } from '@/hooks/useSidebarNav';
 import { useChatTitle } from '@/hooks/useChatTitle';
-import { useSelectedHotel, getSavedHotel } from '@/hooks/useSelectedHotel';
+import { useSelectedHotel } from '@/hooks/useSelectedHotel';
 
 export const SelectHotelPage = ({
   chatTitle,
@@ -29,29 +30,36 @@ export const SelectHotelPage = ({
   onStartNewChat,
   onSelectHotel,
 }: SelectHotelPageProps) => {
+  const navigate = useNavigate();
+  const backToChat = onBackToChat ?? (() => navigate('/chats'));
+  const startNewChat = onStartNewChat ?? (() => navigate('/chats'));
   const { activeNav, setActiveNav, isMobileOpen, onMobileToggle } =
     useSidebarNav();
   const [isComparePrice, setIsComparePrice] = useState(false);
 
-  const { selectHotel } = useSelectedHotel();
+  const { selectedHotel, selectHotel } = useSelectedHotel();
 
   // Fetch hotel data
   const fetchHotels = useCallback(
     async (): Promise<HotelData[]> => {
-      const rawData = await getHotelDetailsApi();
+      let dataList = await getHotelListApi();
 
-      let dataList: HotelData[] = Array.isArray(rawData)
-        ? rawData
-        : [rawData];
+      const savedHotel = (() => {
+        try {
+          const storedHotel = localStorage.getItem('selectedHotel');
+          return storedHotel ? (JSON.parse(storedHotel) as HotelData) : null;
+        } catch {
+          return null;
+        }
+      })();
 
-      //Synchronize with LocalStorage.If a hotel was previously selected,move it to the top of the list.
-      const savedHotel = getSavedHotel();
+      const prioritizedHotel = selectedHotel ?? savedHotel;
 
-      if (savedHotel?.hotelName) {
+      if (prioritizedHotel?.id) {
         dataList = [
-          savedHotel,
+          prioritizedHotel,
           ...dataList.filter(
-            (hotel) => hotel.id !== savedHotel.id,
+            (hotel) => hotel.id !== prioritizedHotel.id,
           ),
         ];
       }
@@ -64,14 +72,14 @@ export const SelectHotelPage = ({
 
       return dataList;
     },
-    [],
+    [selectedHotel],
   );
 
   const {
     data: hotelData,
     loading,
     error,
-  } = useApiRequest<HotelData[]>(fetchHotels);
+  } = useAsyncData<HotelData[]>(fetchHotels);
 
   const hotelList = hotelData ?? [];
 
@@ -107,7 +115,7 @@ export const SelectHotelPage = ({
       {/* 1. Sidebar Navigation  */}
       <SidebarNav
         activeNav={activeNav}
-        setActiveNav={setActiveNav}
+        onNavChange={setActiveNav}
         isMobileOpen={isMobileOpen}
         onMobileToggle={onMobileToggle}
       />
@@ -117,10 +125,11 @@ export const SelectHotelPage = ({
         {/* Topbar */}
         <Topbar
           isBreadcrumbMode={true}
+          breadcrumbLabel="Select Hotel"
           chatTitle={resolvedChatTitle}
           messages={messages}
-          onBackToChat={onBackToChat}
-          onNewChat={onStartNewChat}
+          onBackToChat={backToChat}
+          onNewChat={startNewChat}
         />
 
         {/* LOADING STATE */}
@@ -221,6 +230,7 @@ export const SelectHotelPage = ({
                         </div>
 
                         {/* Comparison table of source options */}
+                        {isComparePrice && (
                         <div className="space-y-3 pt-1">
                           <div className="flex items-center justify-between text-xs sm:text-sm pb-2 border-b border-slate-100">
                             <div className="flex items-center gap-2.5">
@@ -246,6 +256,7 @@ export const SelectHotelPage = ({
                             <span className="font-bold text-ink-alt">${mainPrice}</span>
                           </div>
                         </div>
+                        )}
                       </div>
                     </div>
 

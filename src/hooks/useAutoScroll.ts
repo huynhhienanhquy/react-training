@@ -1,15 +1,18 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
-export const useAutoScroll = (deps: unknown[]) => {
+export const useAutoScroll = (
+  trigger: unknown,
+  secondaryTrigger?: unknown,
+) => {
   const ref = useRef<HTMLDivElement>(null);
 
-  const scrollToBottom = () => {
+  const scrollToBottom = useCallback(() => {
     ref.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+  }, []);
 
   useEffect(() => {
     scrollToBottom();
-  }, deps);
+  }, [scrollToBottom, trigger, secondaryTrigger]);
 
   return { ref, scrollToBottom };
 };
