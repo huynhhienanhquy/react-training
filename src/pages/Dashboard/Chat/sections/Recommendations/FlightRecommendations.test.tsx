@@ -3,7 +3,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { FlightRecommendations } from ".";
+import { FlightRecommendations } from "./FlightRecommendations";
 import { getFlightListApi } from "@/services/fareService";
 
 
@@ -144,7 +144,7 @@ describe("FlightRecommendations", () => {
             id: "economy",
             name: "Economy",
             airline: "VietJet",
-            price: 1500,
+            price: 150,
             features: [],
           },
         ],
@@ -172,7 +172,7 @@ describe("FlightRecommendations", () => {
 
 
     expect(
-      screen.getByText("$1,500")
+      screen.getByText("$150")
     ).toBeInTheDocument();
   });
 

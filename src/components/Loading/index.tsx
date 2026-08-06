@@ -1,5 +1,8 @@
-import {type LoadingOverlayProps}  from '@/types/loading'
 import appLogo from '@/assets/images/Logo.png';
+
+interface LoadingOverlayProps {
+  isVisible?: boolean;
+}
 
 export const LoadingOverlay = ({ isVisible = true }: LoadingOverlayProps) => {
   if (!isVisible) return null;

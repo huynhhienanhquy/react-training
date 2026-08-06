@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { RecommendationWrapper } from '.'
+import { RecommendationWrapper } from './RecommendationWrapper'
 
 const meta: Meta<typeof RecommendationWrapper> = {
   title: 'Chat/RecommendationWrapper',

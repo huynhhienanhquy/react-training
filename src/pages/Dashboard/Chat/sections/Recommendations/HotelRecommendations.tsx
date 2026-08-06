@@ -1,6 +1,6 @@
 import React from 'react';
-import { RecommendationWrapper } from '../Wapper';
-import { Button } from '../../Button';
+import { RecommendationWrapper } from './RecommendationWrapper';
+import { Button } from '@/components/Button';
 import { getHotelListApi } from '@/services/hotelService';
 import type {
   HotelData,
@@ -158,11 +158,6 @@ export const HotelRecommendations = ({
                     isFavorite={isFav}
                     onClick={() =>
                       toggleFavorite(hotel.id)
-                    }
-                    aria-label={
-                      isFav
-                        ? `Remove ${hotel.name} from favorites`
-                        : `Add ${hotel.name} to favorites`
                     }
                   />
 

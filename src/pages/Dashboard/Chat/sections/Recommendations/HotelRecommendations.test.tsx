@@ -13,7 +13,7 @@ import {
   vi,
 } from "vitest";
 
-import { HotelRecommendations } from ".";
+import { HotelRecommendations } from "./HotelRecommendations";
 import { getHotelListApi } from "@/services/hotelService";
 import type { HotelData } from "@/types/hotel";
 

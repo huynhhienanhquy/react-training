@@ -1,8 +1,8 @@
 import { ThinkingLoader } from '@/components/Thinking';
-import { FlightRecommendations } from '@/components/Recommendations/Flight';
-import { HotelRecommendations } from '@/components/Recommendations/Hotel';
-import { PlacesCardWidget } from '@/components/Recommendations/Place';
-import { ItineraryCardWidget } from '@/components/Recommendations/Itinerary';
+import { FlightRecommendations } from '@/pages/Dashboard/Chat/sections/Recommendations/FlightRecommendations';
+import { HotelRecommendations } from '@/pages/Dashboard/Chat/sections/Recommendations/HotelRecommendations';
+import { PlacesCardWidget } from '@/pages/Dashboard/Chat/sections/Recommendations/PlacesCardWidget';
+import { ItineraryCardWidget } from '@/pages/Dashboard/Chat/sections/Recommendations/ItineraryCardWidget';
 import type { PlaceData, DayItinerary } from '@/types/travel';
 import { useAutoScroll } from '@/hooks/useAutoScroll';
 import type { ChatMessageListProps } from '@/types/chat';

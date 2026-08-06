@@ -1,5 +1,8 @@
-import {type InfoRowProps}  from '@/types/inforow'
-
+interface InfoRowProps {
+  label: string;
+  value: string;
+  className?: string;
+}
 
 export const InfoRow = ({ label, value, className = '' }: InfoRowProps) => {
   return (

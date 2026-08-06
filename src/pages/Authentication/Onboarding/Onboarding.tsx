@@ -5,7 +5,7 @@ import { AuthLayout } from '@/components/auth/AuthLayout';
 import { Button } from '@/components/Button';
 import ArrowDownIcon from '@/components/icons/ArrowDownIcon'
 import { AuthHeader } from '@/components/auth/AuthHeader';
-import { InputField } from '@/components/Input';
+import { InputField } from '@/components/InputField';
 import { AuthFooter } from '@/components/auth/AuthFooter';
 
 export const Onboarding = () => {

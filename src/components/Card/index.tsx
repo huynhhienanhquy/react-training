@@ -1,6 +1,9 @@
-import { type CardProps } from "@/types/card";
 
-
+interface CardProps {
+  children: React.ReactNode;
+  variant?: 'default' | 'surface';
+  className?: string;
+}
 // Predefined style maps for card variants
 const variants = {
   default: 'bg-white rounded-3xl border border-slate-100 shadow-sm',
