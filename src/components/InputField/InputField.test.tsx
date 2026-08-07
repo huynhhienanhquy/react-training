@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
+import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from "vitest";
 import { InputField } from ".";
 
@@ -182,6 +183,31 @@ describe("InputField", () => {
         "type",
         "password"
       );
+  });
+
+  it('associates its error message with the input', () => {
+    render(<InputField label="Email" error="Enter a valid email address" />);
+
+    const input = screen.getByLabelText('Email');
+    const error = screen.getByRole('alert');
+
+    expect(input).toHaveAttribute('aria-invalid', 'true');
+    expect(input).toHaveAttribute('aria-describedby', error.id);
+    expect(error).toHaveTextContent('Enter a valid email address');
+  });
+
+  it('allows the password visibility toggle to be reached and used by keyboard', async () => {
+    const user = userEvent.setup();
+    render(<InputField label="Password" type="password" />);
+
+    await user.tab();
+    await user.tab();
+
+    const toggle = screen.getByRole('button', { name: 'Show password' });
+    expect(toggle).toHaveFocus();
+
+    await user.keyboard('{Enter}');
+    expect(screen.getByLabelText('Password')).toHaveAttribute('type', 'text');
   });
 
 

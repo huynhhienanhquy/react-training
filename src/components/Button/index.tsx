@@ -95,7 +95,10 @@ export function Button({
 
   return (
     <button
+      {...props}
       disabled={disabled || isLoading}
+      aria-busy={isLoading || undefined}
+      aria-pressed={variant === 'favorite' ? isFavorite : props['aria-pressed']}
       className={twMerge(
         baseStyles,
         variantStyles[variant],
@@ -103,15 +106,13 @@ export function Button({
         favoriteStyle,
         className,
       )}
-      {...props}
     >
       {isLoading && (
-        <svg
-          className="animate-spin w-4 h-4"
-          viewBox="0 0 24 24"
-          fill="none"
-          role="status"
-          aria-hidden="true"
+          <svg
+            className="h-4 w-4 animate-spin"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
         >
           <circle
             className="opacity-25"

@@ -12,6 +12,12 @@ describe('ThinkingLoader', () => {
     ).toBeInTheDocument();
   });
 
+  it('announces loading status to assistive technology', () => {
+    render(<ThinkingLoader />);
+
+    expect(screen.getByRole('status')).toHaveAttribute('aria-live', 'polite');
+  });
+
   it('renders a custom text', () => {
     render(<ThinkingLoader text="Finding the best flights..." />);
 
