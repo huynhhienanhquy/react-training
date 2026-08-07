@@ -4,7 +4,7 @@ import { useFormState } from '@/hooks/useFormState';
 import { AuthLayout } from '@/components/auth/AuthLayout';
 import { Button } from '@/components/Button';
 import { AuthHeader } from '@/components/auth/AuthHeader';
-import { InputField } from '@/components/Input';
+import { InputField } from '@/components/InputField';
 import { ErrorMessage } from '@/components/Error';
 import { AuthFooter } from '@/components/auth/AuthFooter';
 

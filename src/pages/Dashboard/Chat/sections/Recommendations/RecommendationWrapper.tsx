@@ -1,5 +1,11 @@
 import { Button } from '@/components/Button';
-import { type RecommendationWrapperProps } from '@/types/card';
+
+interface RecommendationWrapperProps {
+  title: string;
+  children: React.ReactNode;
+  onSeeAll?: () => void;
+  seeAllText?: string;
+}
 
 export const RecommendationWrapper = ({
   title,

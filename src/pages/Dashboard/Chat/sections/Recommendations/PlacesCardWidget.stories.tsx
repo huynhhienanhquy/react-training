@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { PlacesCardWidget } from '.'
+import { PlacesCardWidget } from './PlacesCardWidget'
 import type { PlaceData } from '@/types/travel'
 
 const meta: Meta<typeof PlacesCardWidget> = {

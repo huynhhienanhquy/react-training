@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { HotelRecommendations } from '.'
-import type { HotelOption } from '.'
+import { HotelRecommendations } from './HotelRecommendations'
+import type { HotelOption } from './HotelRecommendations'
 
 const meta: Meta<typeof HotelRecommendations> = {
   title: 'Chat/HotelRecommendations',

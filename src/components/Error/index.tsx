@@ -1,5 +1,8 @@
 
-import { type ErrorMessageProps } from "@/types/error";
+interface ErrorMessageProps {
+  message: string;
+  className?: string;
+}
 export const ErrorMessage = ({ message, className = '' }: ErrorMessageProps) => {
   if (!message) return null;
 

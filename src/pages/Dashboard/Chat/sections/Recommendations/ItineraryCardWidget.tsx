@@ -4,7 +4,7 @@ import { getItineraryListApi } from '@/services/travelService';
 import type {
   DayItinerary,
   ItineraryCardWidgetProps,
-} from '../../../types/travel';
+} from '@/types/travel';
 import { useAsyncData } from '@/hooks/useAsyncData';
 import { Icon } from '@/components/icons/Icon';
 

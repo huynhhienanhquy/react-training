@@ -13,7 +13,7 @@ import {
   vi,
 } from "vitest";
 
-import { HotelRecommendations } from ".";
+import { HotelRecommendations } from "./HotelRecommendations";
 import { getHotelListApi } from "@/services/hotelService";
 import type { HotelData } from "@/types/hotel";
 
@@ -317,7 +317,7 @@ describe("HotelRecommendations", () => {
 
 
 
-  it("stores selected hotel into localStorage", async () => {
+  it("does not persist a selected hotel outside its parent flow", async () => {
 
     const user = userEvent.setup();
 
@@ -352,9 +352,7 @@ describe("HotelRecommendations", () => {
       );
 
 
-    expect(
-      storedHotel
-    ).not.toBeNull();
+    expect(storedHotel).toBeNull();
 
   });
 

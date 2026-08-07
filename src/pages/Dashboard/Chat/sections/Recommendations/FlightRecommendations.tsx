@@ -1,19 +1,50 @@
-import { RecommendationWrapper } from '../Wapper';
+import { RecommendationWrapper } from './RecommendationWrapper';
 import { Button } from '@/components/Button';
-import { PriceDisplay } from '../../PriceDisplay';
+import { PriceDisplay } from '@/components/PriceDisplay';
 import defaultFlightLogo from '@/assets/images/ellipse.png';
 
 import { getFlightListApi } from '@/services/fareService';
 import type {
+  FareData,
   FlightOption,
   FlightLegInfo,
   FlightRecommendationsProps,
 } from '@/types/flight';
 import { useAsyncData } from '@/hooks/useAsyncData';
 import { useFavorites } from '@/hooks/useFavorites';
-import { mapFareDataToFlightOption } from '@/utils/dataTransform';
 
 export type { FlightOption, FlightLegInfo };
+
+const mapFareDataToFlightOption = (
+  fareData: FareData,
+  index: number,
+): FlightOption => {
+  const legs = fareData.legs ?? [];
+  const fareOptions = fareData.fareOptions ?? [];
+
+  const outboundLeg = legs[0];
+  const returnLeg = legs[1] ?? legs[0];
+  const lowestPrice = fareOptions[0]?.price ?? 0;
+
+  return {
+    id: fareData.id ? String(fareData.id) : `flight-${index + 1}`,
+    airline: fareData.airlineName ?? 'Airline',
+    outbound: {
+      time: outboundLeg?.times ?? 'N/A',
+      route: outboundLeg?.route ?? 'N/A',
+      duration: outboundLeg?.duration ?? 'N/A',
+      stops: outboundLeg?.stops ?? 'Direct',
+    },
+    returnLeg: {
+      time: returnLeg?.times ?? 'N/A',
+      route: returnLeg?.route ?? 'N/A',
+      duration: returnLeg?.duration ?? 'N/A',
+      stops: returnLeg?.stops ?? 'Direct',
+    },
+    price: `$${lowestPrice}`,
+    tag: 'Cheap',
+  };
+};
 
 export function FlightRecommendations({
   title = 'Recommended Flights For a Round Trip Journey',
