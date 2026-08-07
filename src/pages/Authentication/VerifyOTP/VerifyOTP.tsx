@@ -13,8 +13,8 @@ export const VerifyOTP = () => {
   const { otp, inputRefs, handleChange, handleKeyDown, handlePaste } = useOtpInput(6);
   const { counter, reset } = useCountdown(29);
 
-  const handleVerify = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleVerify = (event: React.FormEvent) => {
+    event.preventDefault();
     startLoading();
 
     // Mock API call to verify OTP

@@ -6,7 +6,7 @@ import ShoppingBagIcon from '@/components/icons/ShoppingBagIcon';
 import CompassIcon from '@/components/icons/CompassIcon';
 import HotelIcon from '@/components/icons/HotelIcon';
 import { Button } from '@/components/Button';
-import { getPlaceListApi } from '@/services/travelService';
+import { getPlaces } from '@/services/travelService';
 import type {
   PlaceData,
   PlacesCardWidgetProps,
@@ -73,7 +73,7 @@ export function PlacesCardWidget({
     data: apiPlaces,
     loading,
     error,
-  } = useAsyncData(getPlaceListApi, {
+  } = useAsyncData(getPlaces, {
     skip: Boolean(initialPlaces),
   });
 

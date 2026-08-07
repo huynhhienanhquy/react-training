@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { useChatTitle } from '../useChatTitle';
+import { useChatTitle } from './useChatTitle';
 import type { ChatMessage } from '@/types/chat';
 
 const userMessage: ChatMessage = {

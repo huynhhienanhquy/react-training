@@ -14,8 +14,8 @@ export const ResetPassword = () => {
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
 
-  const handleResetPassword = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleResetPassword = (event: React.FormEvent) => {
+    event.preventDefault();
     setError("");
 
     if (password !== confirmPassword) {

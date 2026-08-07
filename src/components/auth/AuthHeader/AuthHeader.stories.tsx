@@ -31,7 +31,7 @@ export const Register: Story = {
   },
 }
 
-export const RessetPassword: Story = {
+export const ResetPassword: Story = {
   args: {
     title: 'Reset Password',
     subtitle: 'Enter your new password below',

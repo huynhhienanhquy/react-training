@@ -3,7 +3,7 @@ import { SectionHeader } from '../SectionHeader';
 import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
 import type { FlightLeg } from '@/types/flight';
-import type { SelectedFlightBoxProps } from '@/types/flightfare';
+import type { SelectedFlightBoxProps } from '@/types/flightFareTypes';
 
 export type { FlightLeg };
 

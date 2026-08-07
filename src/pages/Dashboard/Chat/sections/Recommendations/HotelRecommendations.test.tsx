@@ -14,7 +14,7 @@ import {
 } from "vitest";
 
 import { HotelRecommendations } from "./HotelRecommendations";
-import { getHotelListApi } from "@/services/hotelService";
+import { getHotels } from "@/services/hotelService";
 import type { HotelData } from "@/types/hotel";
 
 
@@ -25,7 +25,7 @@ vi.mock("@/services/hotelService", async () => {
 
   return {
     ...actual,
-    getHotelListApi: vi.fn(),
+    getHotels: vi.fn(),
   };
 });
 
@@ -46,7 +46,7 @@ vi.mock("./RecommendationWrapper", () => ({
 }));
 
 
-const mockedGetHotelListApi = vi.mocked(getHotelListApi);
+const mockedGetHotels = vi.mocked(getHotels);
 
 
 
@@ -154,7 +154,7 @@ describe("HotelRecommendations", () => {
 
 
     expect(
-      mockedGetHotelListApi
+      mockedGetHotels
     ).not.toHaveBeenCalled();
 
   });
@@ -163,7 +163,7 @@ describe("HotelRecommendations", () => {
 
   it("shows loading state", () => {
 
-    mockedGetHotelListApi.mockImplementation(
+    mockedGetHotels.mockImplementation(
       () =>
         new Promise(() => {
           // keep pending
@@ -188,7 +188,7 @@ describe("HotelRecommendations", () => {
 
   it("renders hotel data from API", async () => {
 
-    mockedGetHotelListApi.mockResolvedValue([
+    mockedGetHotels.mockResolvedValue([
       mockHotel,
     ]);
 
@@ -221,7 +221,7 @@ describe("HotelRecommendations", () => {
 
   it("shows empty state when API returns empty array", async () => {
 
-    mockedGetHotelListApi.mockResolvedValue([]);
+    mockedGetHotels.mockResolvedValue([]);
 
 
     render(
@@ -245,7 +245,7 @@ describe("HotelRecommendations", () => {
 
   it("shows error message when API fails", async () => {
 
-    mockedGetHotelListApi.mockRejectedValue(
+    mockedGetHotels.mockRejectedValue(
       new Error("Network Error")
     );
 

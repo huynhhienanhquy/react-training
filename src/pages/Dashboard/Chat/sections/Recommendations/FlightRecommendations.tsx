@@ -1,9 +1,9 @@
 import { RecommendationWrapper } from './RecommendationWrapper';
 import { Button } from '@/components/Button';
 import { PriceDisplay } from '@/components/PriceDisplay';
-import defaultFlightLogo from '@/assets/images/ellipse.png';
+import defaultFlightLogo from '@/assets/images/travel-provider-logo.png';
 
-import { getFlightListApi } from '@/services/fareService';
+import { getFlights } from '@/services/fareService';
 import type {
   FareData,
   FlightOption,
@@ -58,7 +58,7 @@ export function FlightRecommendations({
     data: fareData,
     loading,
     error,
-  } = useAsyncData(getFlightListApi, {
+  } = useAsyncData(getFlights, {
     skip: isControlled,
   });
 
@@ -94,7 +94,7 @@ export function FlightRecommendations({
 
       {(isControlled || (!loading && !error)) &&
         flightList.map((flight) => {
-          const isFav = Boolean(
+          const isFavorite = Boolean(
             favorites[flight.id] || flight.isFavorite,
           );
 
@@ -123,7 +123,7 @@ export function FlightRecommendations({
                     type="button"
                     variant="favorite"
                     size="icon"
-                    isFavorite={isFav}
+                    isFavorite={isFavorite}
                     onClick={() => toggleFavorite(flight.id)}
                   />
 

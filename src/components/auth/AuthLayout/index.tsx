@@ -1,5 +1,5 @@
 import { LoadingOverlay } from '@/components/Loading';
-import authBg from '@/assets/images/background.png';
+import authBackground from '@/assets/images/auth-background.png';
 import { type AuthLayoutProps } from '@/types/auth';
 
 export const AuthLayout = ({
@@ -9,7 +9,7 @@ export const AuthLayout = ({
   return (
     <div
       className="min-h-screen w-full relative flex items-center justify-center px-4 sm:px-6 lg:pl-12 lg:pr-8 py-8 lg:py-0 bg-cover bg-center overflow-hidden"
-      style={{ backgroundImage: `url(${authBg})` }}
+      style={{ backgroundImage: `url(${authBackground})` }}
     >
       {/* LoadingOverlay */}
       <LoadingOverlay isVisible={isLoading} />

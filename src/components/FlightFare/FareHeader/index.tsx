@@ -1,6 +1,6 @@
 import { Card } from '@/components/Card';
 import { PriceDisplay } from '@/components/PriceDisplay';
-import type { FareHeaderProps } from '@/types/flightfare';
+import type { FareHeaderProps } from '@/types/flightFareTypes';
 
 export function FareHeader({
   destination,

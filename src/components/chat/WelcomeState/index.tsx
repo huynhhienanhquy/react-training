@@ -1,6 +1,6 @@
-import image1 from '@/assets/images/Rectangle 1.png';
-import image2 from '@/assets/images/Rectangle 2.png';
-import image3 from '@/assets/images/Rectangle 3.png';
+import lakeBoardwalkImage from '@/assets/images/lake-boardwalk.png';
+import groupTravelersImage from '@/assets/images/group-travelers.png';
+import tropicalBeachImage from '@/assets/images/tropical-beach.png';
 import { Button } from '@/components/Button';
 
 const DEFAULT_PROMPTS = [
@@ -27,7 +27,7 @@ export const WelcomeState = ({
       <div className="flex items-center justify-center -space-x-3 mb-6">
         <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl overflow-hidden border-3 border-white shadow-md z-10">
           <img
-            src={image1}
+            src={lakeBoardwalkImage}
             alt="Nature"
             className="w-full h-full object-cover"
           />
@@ -35,7 +35,7 @@ export const WelcomeState = ({
 
         <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl overflow-hidden border-3 border-white shadow-md z-20">
           <img
-            src={image2}
+            src={groupTravelersImage}
             alt="Travel group"
             className="w-full h-full object-cover"
           />
@@ -43,7 +43,7 @@ export const WelcomeState = ({
 
         <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl overflow-hidden border-3 border-white shadow-md z-30">
           <img
-            src={image3}
+            src={tropicalBeachImage}
             alt="Resort beach"
             className="w-full h-full object-cover"
           />

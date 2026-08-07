@@ -12,8 +12,8 @@ export const ForgotPassword = () => {
   const { isLoading, startLoading, stopLoading } = useFormState();
   const [email, setEmail] = useState<string>("");
 
-  const handleSendOTP = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSendOTP = (event: React.FormEvent) => {
+    event.preventDefault();
     startLoading();
 
     setTimeout(() => {

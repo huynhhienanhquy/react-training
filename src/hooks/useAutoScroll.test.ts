@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import { useAutoScroll } from '../useAutoScroll';
+import { useAutoScroll } from './useAutoScroll';
 
 describe('useAutoScroll', () => {
   it('returns a ref and scrollToBottom function', () => {
