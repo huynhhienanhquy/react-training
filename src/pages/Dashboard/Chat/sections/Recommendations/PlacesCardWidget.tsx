@@ -1,12 +1,10 @@
-import {
-  MapPin,
-  Star,
-  Utensils,
-  Camera,
-  ShoppingBag,
-  Compass,
-  Hotel,
-} from 'lucide-react';
+import MapPinIcon from '@/components/icons/MapPinIcon';
+import StarIcon from '@/components/icons/StarIcon';
+import UtensilsIcon from '@/components/icons/UtensilsIcon';
+import CameraIcon from '@/components/icons/CameraIcon';
+import ShoppingBagIcon from '@/components/icons/ShoppingBagIcon';
+import CompassIcon from '@/components/icons/CompassIcon';
+import HotelIcon from '@/components/icons/HotelIcon';
 import { Button } from '@/components/Button';
 import { getPlaceListApi } from '@/services/travelService';
 import type {
@@ -27,7 +25,7 @@ const getCategoryBadge = (category?: string) => {
   if (cat.includes('food') || cat.includes('cuisine')) {
     return {
       label: 'Cuisine',
-      icon: Utensils,
+      icon: UtensilsIcon,
       color: 'bg-amber-100/70 text-amber-700',
     };
   }
@@ -35,7 +33,7 @@ const getCategoryBadge = (category?: string) => {
   if (cat.includes('sight') || cat.includes('cam')) {
     return {
       label: 'Sightseeing',
-      icon: Camera,
+      icon: CameraIcon,
       color: 'bg-emerald-100/70 text-emerald-700',
     };
   }
@@ -43,7 +41,7 @@ const getCategoryBadge = (category?: string) => {
   if (cat.includes('shop') || cat.includes('shopping')) {
     return {
       label: 'Shopping',
-      icon: ShoppingBag,
+      icon: ShoppingBagIcon,
       color: 'bg-purple-100/70 text-purple-700',
     };
   }
@@ -55,14 +53,14 @@ const getCategoryBadge = (category?: string) => {
   ) {
     return {
       label: category ?? 'Stay',
-      icon: Hotel,
+      icon: HotelIcon,
       color: 'bg-indigo-100/70 text-indigo-700',
     };
   }
 
   return {
     label: category ?? 'Entertainment',
-    icon: Compass,
+    icon: CompassIcon,
     color: 'bg-blue-100/70 text-blue-700',
   };
 };
@@ -87,7 +85,7 @@ export function PlacesCardWidget({
       <div className="flex items-center justify-between pb-3 border-b border-slate-200/60">
         <div className="flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-600 shrink-0">
-            <MapPin className="w-4 h-4" />
+            <MapPinIcon className="w-4 h-4" />
           </div>
 
           <div>
@@ -166,7 +164,7 @@ export function PlacesCardWidget({
 
                     {place.rating !== undefined && (
                       <div className="flex items-center gap-1 shrink-0">
-                        <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+                        <StarIcon className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
 
                         <span className="text-xs font-bold text-slate-800">
                           {place.rating}
@@ -180,7 +178,7 @@ export function PlacesCardWidget({
                   </h5>
 
                   <p className="text-xs text-slate-500 truncate flex items-center gap-1 font-medium">
-                    <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                    <MapPinIcon className="w-3.5 h-3.5 text-slate-400 shrink-0" />
 
                     <span>{addressText}</span>
                   </p>

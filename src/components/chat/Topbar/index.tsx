@@ -1,4 +1,4 @@
-import { ArrowLeft } from 'lucide-react';
+import ArrowLeftIcon from '@/components/icons/ArrowLeftIcon';
 import { Button } from '@/components/Button';
 import AddIcon from '@/components/icons/AddIcon';
 
@@ -36,7 +36,7 @@ export const Topbar = ({
                 size="icon"
                 className="md:hidden w-8 h-8 rounded-xl shrink-0"
                 onClick={onBackToChat}
-                leftIcon={<ArrowLeft className="w-4 h-4 text-slate-600" />}
+                leftIcon={<ArrowLeftIcon className="w-4 h-4 text-slate-600" />}
               />
             )}
             <Button

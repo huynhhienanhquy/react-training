@@ -1,5 +1,5 @@
 
-import { CheckCircle2 } from 'lucide-react';
+import CheckCircleIcon from '@/components/icons/CheckCircleIcon';
 import { SectionHeader } from '../SectionHeader';
 import { PriceDisplay } from '@/components/PriceDisplay';
 import { Button } from '@/components/Button';
@@ -60,7 +60,7 @@ export type { FareOption };
                   <ul className="space-y-3 text-xs text-slate-500">
                     {fare.features.map((feature, idx) => (
                       <li key={idx} className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-slate-400 shrink-0" />
+                        <CheckCircleIcon className="w-4 h-4 text-slate-400 shrink-0" />
                         <span>{feature}</span>
                       </li>
                     ))}

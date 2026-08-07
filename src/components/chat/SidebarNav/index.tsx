@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Menu } from 'lucide-react';
+import MenuIcon from '@/components/icons/MenuIcon';
 import { useAuth } from '@/hooks/useAuth';
 import { useProfileMenu } from '@/hooks/useProfileMenu';
 import { PentagonClipPath } from '@/components/icons/PentagonClipPath';
@@ -11,7 +11,7 @@ import MedalIcon from '@/components/icons/MedalIcon';
 import MapIcon from '@/components/icons/MapIcon';
 import CommunityIcon from '@/components/icons/PeopleIcon';
 import SettingsIcon from '@/components/icons/SettingsIcon';
-import UserIcon from '@/components/icons/PeopleIcon';
+import User from '@/assets/images/user.png';
 import { type SidebarNavProps } from "@/types/chat";
 import { Button } from "@/components/Button";
 
@@ -54,7 +54,7 @@ export const SidebarNav = ({ activeNav, onNavChange, isMobileOpen, onMobileToggl
           size="icon"
           className="md:hidden fixed top-3 left-3 z-30 w-11 h-11 bg-white rounded-xl shadow-md border border-slate-100"
           onClick={onMobileToggle}
-          leftIcon={<Menu className="w-5 h-5 text-slate-700" />}
+          leftIcon={<MenuIcon className="w-5 h-5 text-slate-700" />}
         />
       )}
 
@@ -126,8 +126,9 @@ export const SidebarNav = ({ activeNav, onNavChange, isMobileOpen, onMobileToggl
                 className="w-full h-full bg-slate-200 overflow-hidden"
                 style={{ clipPath: 'url(#pentagon-clip)' }}
               >
-                <UserIcon
-                  aria-label="User Avatar"
+                <img
+                  src={User}
+                  alt="User Avatar"
                   className="w-full h-full object-cover scale-110"
                 />
               </div>
