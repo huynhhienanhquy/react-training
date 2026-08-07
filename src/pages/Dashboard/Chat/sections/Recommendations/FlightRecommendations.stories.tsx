@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { FlightRecommendations } from '.'
-import type { FlightOption } from '.'
+import { FlightRecommendations } from './FlightRecommendations'
+import type { FlightOption } from './FlightRecommendations'
 
 const meta: Meta<typeof FlightRecommendations> = {
   title: 'Chat/FlightRecommendations',

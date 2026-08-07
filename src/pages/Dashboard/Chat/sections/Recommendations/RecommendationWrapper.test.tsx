@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
-import { RecommendationWrapper } from '.';
+import { RecommendationWrapper } from './RecommendationWrapper';
 
 describe('RecommendationWrapper', () => {
   it('renders title correctly', () => {
@@ -28,7 +28,7 @@ describe('RecommendationWrapper', () => {
     const onSeeAll = vi.fn();
     const user = userEvent.setup();
     render(<RecommendationWrapper title="Test Title" onSeeAll={onSeeAll}>Content</RecommendationWrapper>);
-
+    
     await user.click(screen.getByRole('button', { name: 'See all recommendations' }));
     expect(onSeeAll).toHaveBeenCalledTimes(1);
   });

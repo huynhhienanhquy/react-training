@@ -12,7 +12,7 @@ import { getPlaceListApi } from '@/services/travelService';
 import type {
   PlaceData,
   PlacesCardWidgetProps,
-} from '../../../types/travel';
+} from '@/types/travel';
 import { useAsyncData } from '@/hooks/useAsyncData';
 
 export type { PlaceData };

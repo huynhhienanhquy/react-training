@@ -1,6 +1,6 @@
 import React from 'react';
-import { RecommendationWrapper } from '../Wapper';
-import { Button } from '../../Button';
+import { RecommendationWrapper } from './RecommendationWrapper';
+import { Button } from '@/components/Button';
 import { getHotelListApi } from '@/services/hotelService';
 import type {
   HotelData,
@@ -9,7 +9,6 @@ import type {
 } from '@/types/hotel';
 import { useAsyncData } from '@/hooks/useAsyncData';
 import { useFavorites } from '@/hooks/useFavorites';
-import { useSelectedHotel } from '@/hooks/useSelectedHotel';
 
 export type { HotelOption };
 
@@ -58,8 +57,6 @@ export const HotelRecommendations = ({
   });
 
   const { favorites, toggleFavorite } = useFavorites();
-  const { selectHotel } = useSelectedHotel();
-
   const apiHotels =
     hotelData?.map(mapHotelDataToOption) ?? [];
 
@@ -70,8 +67,6 @@ export const HotelRecommendations = ({
     hotel: HotelOption,
   ) => {
     e.stopPropagation();
-
-    selectHotel(hotel.rawData || hotel);
 
     onBookNow?.(hotel);
   };
@@ -163,11 +158,6 @@ export const HotelRecommendations = ({
                     isFavorite={isFav}
                     onClick={() =>
                       toggleFavorite(hotel.id)
-                    }
-                    aria-label={
-                      isFav
-                        ? `Remove ${hotel.name} from favorites`
-                        : `Add ${hotel.name} to favorites`
                     }
                   />
 

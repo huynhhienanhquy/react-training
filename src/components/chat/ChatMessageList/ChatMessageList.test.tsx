@@ -15,7 +15,7 @@ vi.mock("@/components/Thinking/ThinkingLoader", () => ({
 }));
 
 // Mock FlightRecommendations
-vi.mock("@/components/Recommendations/FlightRecommendations", () => ({
+vi.mock("@/pages/Dashboard/Chat/sections/Recommendations/FlightRecommendations", () => ({
   FlightRecommendations: ({
     onBookNow,
   }: {
@@ -32,7 +32,7 @@ type MockHotel = {
 };
 
 // Mock HotelRecommendations
-vi.mock("@/components/Recommendations/HotelRecommendations", () => ({
+vi.mock("@/pages/Dashboard/Chat/sections/Recommendations/HotelRecommendations", () => ({
   HotelRecommendations: ({
     onBookNow,
   }: {
@@ -45,7 +45,7 @@ vi.mock("@/components/Recommendations/HotelRecommendations", () => ({
 }));
 
 // Mock PlacesCardWidget
-vi.mock("@/components/Recommendations/PlacesCardWidget", () => ({
+vi.mock("@/pages/Dashboard/Chat/sections/Recommendations/PlacesCardWidget", () => ({
   PlacesCardWidget: ({
     places,
     onViewAll,
@@ -60,7 +60,7 @@ vi.mock("@/components/Recommendations/PlacesCardWidget", () => ({
 }));
 
 // Mock ItineraryCardWidget
-vi.mock("@/components/Recommendations/ItineraryCardWidget", () => ({
+vi.mock("@/pages/Dashboard/Chat/sections/Recommendations/ItineraryCardWidget", () => ({
   ItineraryCardWidget: ({
     itinerary,
     onViewAll,
@@ -194,7 +194,9 @@ describe("ChatMessageList", () => {
 
     await user.click(screen.getByText("Hotel Widget"));
 
-    expect(onBookHotel).toHaveBeenCalledWith("hotel-1");
+    expect(onBookHotel).toHaveBeenCalledWith(
+      expect.objectContaining({ id: "hotel-1" }),
+    );
   });
 
   it("renders places widget", () => {
