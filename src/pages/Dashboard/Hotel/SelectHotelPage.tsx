@@ -7,6 +7,7 @@ import { SectionHeader } from '@/components/FlightFare/SectionHeader';
 
 import { getHotelListApi } from '@/services/hotelService';
 import { Button } from '@/components/Button';
+import { Icon } from '@/components/icons/Icon';
 
 import type {
   HotelData,
@@ -161,19 +162,7 @@ export const SelectHotelPage = ({
                     onClick={onBackToChat}
                     aria-label="Go back to chat"
                   >
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2.5"
-                        d="M15 19l-7-7 7-7"
-                      />
-                    </svg>
+                    <Icon name="arrow-left" className="w-5 h-5" />
                   </Button>
                 )}
 

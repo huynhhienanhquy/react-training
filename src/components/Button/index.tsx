@@ -1,6 +1,5 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import { twMerge } from 'tailwind-merge';
-
 import HeartIcon from '@/components/icons/HeartIcon';
 import ArrowRightIcon from '@/components/icons/ArrowRightIcon';
 import googleIcon from '@/assets/images/logo-google.png';

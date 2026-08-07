@@ -6,6 +6,7 @@ import type {
   ItineraryCardWidgetProps,
 } from '@/types/travel';
 import { useAsyncData } from '@/hooks/useAsyncData';
+import { Icon } from '@/components/icons/Icon';
 
 export type { DayItinerary };
 
@@ -122,15 +123,7 @@ export function ItineraryCardWidget({
           size="md"
           className="w-full rounded-2xl"
           rightIcon={
-            <svg
-              className="w-4 h-4"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
+            <Icon name="arrow-right" className="w-4 h-4" />
           }
           onClick={onViewAll}
         >
