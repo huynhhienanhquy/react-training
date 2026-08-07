@@ -1,5 +1,4 @@
 import React, { useId, useState } from 'react';
-import { Eye, EyeOff } from 'lucide-react';
 import { Button } from '@/components/Button';
 import { Icon } from '@/components/icons/Icon';
 
@@ -19,6 +18,7 @@ export const InputField = ({
   const generatedId = useId();
   const inputId = id ?? generatedId;
   const errorId = `${inputId}-error`;
+  const hasError = Boolean(error);
 
   const isPassword = type === 'password';
   const [showPassword, setShowPassword] = useState(false);
@@ -41,9 +41,11 @@ export const InputField = ({
 
       <div className="relative">
         <input
-          {...inputProps}
+          {...props}
           id={inputId}
           type={inputType}
+          aria-invalid={hasError || undefined}
+          aria-describedby={hasError ? errorId : props['aria-describedby']}
           className={`w-full rounded-xl border border-gray-100 px-5 py-3.5 transition placeholder:text-gray-300 focus:outline-none ${
             isPassword
               ? 'bg-blue-50/40 pr-12 focus:border-blue-400 focus:bg-blue-50/50'
