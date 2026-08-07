@@ -11,7 +11,7 @@ A React-based travel planning assistant UI with an AI-powered chat interface, fl
 | Styling | Tailwind CSS 3 |
 | Routing | React Router v7 |
 | State | Zustand |
-| Icons | Lucide React |
+| Icons | Custom React SVG components (`.tsx`) |
 | HTTP | Axios |
 | Validation | Zod |
 | Testing | Vitest + Playwright + Storybook |
