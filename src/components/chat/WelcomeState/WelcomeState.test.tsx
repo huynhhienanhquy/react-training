@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect, vi } from 'vitest';
-import { WelcomeState } from './WelcomeState';
+import { WelcomeState } from '.';
 
 describe('WelcomeState', () => {
   const prompts = [
@@ -78,17 +78,17 @@ describe('WelcomeState', () => {
 
 
     expect(
-      screen.getByAltText('Beach')
+      screen.getByAltText('Nature')
     ).toBeInTheDocument();
 
 
     expect(
-      screen.getByAltText('Travel')
+      screen.getByAltText('Travel group')
     ).toBeInTheDocument();
 
 
     expect(
-      screen.getByAltText('Resort')
+      screen.getByAltText('Resort beach')
     ).toBeInTheDocument();
   });
 

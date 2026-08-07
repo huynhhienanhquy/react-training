@@ -1,0 +1,1 @@
+import{i as e}from"./preload-helper-CT_b8DTk.js";import{i as t,r as n}from"./api-hdlBL-dW.js";var r,i,a=e((()=>{n(),r=async()=>(await t.get(`/place`)).data,i=async()=>(await t.get(`/itinerary`)).data}));export{r as n,a as r,i as t};

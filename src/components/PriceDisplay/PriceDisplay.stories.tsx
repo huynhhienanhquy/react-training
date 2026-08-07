@@ -1,9 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { PriceDisplay } from './PriceDisplay'
+import { PriceDisplay } from '.'
 
 const meta: Meta<typeof PriceDisplay> = {
   title: 'UI/PriceDisplay',
   component: PriceDisplay,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
     amount: { control: 'text' },

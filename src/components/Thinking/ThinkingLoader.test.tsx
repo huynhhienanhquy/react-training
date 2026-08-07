@@ -1,7 +1,7 @@
 // ThinkingLoader.test.tsx
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { ThinkingLoader } from './ThinkingLoader';
+import { ThinkingLoader } from '.';
 
 describe('ThinkingLoader', () => {
   it('renders the default text', () => {
@@ -10,6 +10,12 @@ describe('ThinkingLoader', () => {
     expect(
       screen.getByText('Travelpal is thinking...'),
     ).toBeInTheDocument();
+  });
+
+  it('announces loading status to assistive technology', () => {
+    render(<ThinkingLoader />);
+
+    expect(screen.getByRole('status')).toHaveAttribute('aria-live', 'polite');
   });
 
   it('renders a custom text', () => {

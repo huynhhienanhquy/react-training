@@ -1,15 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { MemoryRouter } from 'react-router-dom'
-import { SidebarNav } from './SidebarNav'
+import { SidebarNav } from '.'
 import { AuthProvider } from '../../../context/AuthProvider'
 
 const meta: Meta<typeof SidebarNav> = {
   title: 'Chat/SidebarNav',
   component: SidebarNav,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'fullscreen',
+  },
   decorators: [
     (Story) => (
       <MemoryRouter>
-        {/* 2. Bọc AuthProvider ở đây */}
         <AuthProvider>
           <div className="h-screen bg-slate-100 flex">
             <Story />
@@ -23,7 +26,7 @@ const meta: Meta<typeof SidebarNav> = {
       control: { type: 'select' },
       options: ['chats', 'favorites', 'medal', 'map', 'community', 'settings'],
     },
-    setActiveNav: { action: 'navigated' },
+    onNavChange: { action: 'navigated' },
     onMobileToggle: { action: 'mobileToggled' },
   },
 }

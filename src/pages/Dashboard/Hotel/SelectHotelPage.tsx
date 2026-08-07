@@ -1,22 +1,26 @@
 import React, { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { SidebarNav } from '@/components/chat/SidebarNav/SidebarNav';
-import { Topbar } from '@/components/chat/Topbar/Topbar';
-import { SectionHeader } from '@/components/FlightFare/SectionHeader/SectionHeader';
+import { SidebarNav } from '@/components/chat/SidebarNav';
+import { Topbar } from '@/components/chat/Topbar';
+import { SectionHeader } from '@/components/FlightFare/SectionHeader';
 
-import { getHotelDetailsApi } from '@/services/hotelService';
-import { Button } from '@/components/Button/Button';
+import { getHotelListApi } from '@/services/hotelService';
+import { Button } from '@/components/Button';
+import { Icon } from '@/components/icons/Icon';
 
 import type {
   HotelData,
   SelectHotelPageProps,
 } from '@/types/hotel';
 
-import defaultHotelImg from '@/assets/icons/ellipse.png';
-import bookingIcon from '@/assets/icons/booking.png';
-import expediaIcon from '@/assets/icons/expedia.png';
+import defaultHotelImg from '@/assets/images/ellipse.png';
+import bookingIcon from '@/assets/images/booking.png';
+import expediaIcon from '@/assets/images/expedia.png';
 
-import { useApiRequest } from '@/hooks/useApiRequest';
+import { useAsyncData } from '@/hooks/useAsyncData';
+import { useSidebarNav } from '@/hooks/useSidebarNav';
+import { useChatTitle } from '@/hooks/useChatTitle';
 
 export const SelectHotelPage = ({
   chatTitle,
@@ -24,43 +28,27 @@ export const SelectHotelPage = ({
   onBackToChat,
   onStartNewChat,
   onSelectHotel,
+  selectedHotel,
 }: SelectHotelPageProps) => {
-  const [activeNav, setActiveNav] = useState('chats');
-  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const navigate = useNavigate();
+  const backToChat = onBackToChat ?? (() => navigate('/chats'));
+  const startNewChat = onStartNewChat ?? (() => navigate('/chats'));
+  const { activeNav, setActiveNav, isMobileOpen, onMobileToggle } =
+    useSidebarNav();
   const [isComparePrice, setIsComparePrice] = useState(false);
 
   // Fetch hotel data
   const fetchHotels = useCallback(
     async (): Promise<HotelData[]> => {
-      const rawData = await getHotelDetailsApi();
+      let dataList = await getHotelListApi();
 
-      let dataList: HotelData[] = Array.isArray(rawData)
-        ? rawData
-        : [rawData];
-
-      //Synchronize with LocalStorage.If a hotel was previously selected,move it to the top of the list.
-      const savedHotelJson =
-        localStorage.getItem('selectedHotel');
-
-      if (savedHotelJson) {
-        try {
-          const savedHotel: HotelData =
-            JSON.parse(savedHotelJson);
-
-          if (savedHotel?.hotelName) {
-            dataList = [
-              savedHotel,
-              ...dataList.filter(
-                (hotel) => hotel.id !== savedHotel.id,
-              ),
-            ];
-          }
-        } catch (err) {
-          console.error(
-            'Error parsing saved hotel:',
-            err,
-          );
-        }
+      if (selectedHotel?.id) {
+        dataList = [
+          selectedHotel,
+          ...dataList.filter(
+            (hotel) => hotel.id !== selectedHotel.id,
+          ),
+        ];
       }
 
       if (dataList.length === 0) {
@@ -71,26 +59,23 @@ export const SelectHotelPage = ({
 
       return dataList;
     },
-    [],
+    [selectedHotel],
   );
 
   const {
     data: hotelData,
     loading,
     error,
-  } = useApiRequest<HotelData[]>(fetchHotels);
+  } = useAsyncData<HotelData[]>(fetchHotels);
 
   const hotelList = hotelData ?? [];
 
   // Handle the Topbar header display
-  const firstUserMessage = messages.find(
-    (m) => m.sender === 'user',
-  )?.text;
-
-  const resolvedChatTitle =
-    chatTitle ||
-    firstUserMessage ||
-    'Other available accommodations';
+  const resolvedChatTitle = useChatTitle(
+    chatTitle,
+    messages,
+    'Other available accommodations',
+  );
 
   // Handling when clicking "Book Hotel"
   const handleBookHotel = (
@@ -98,11 +83,6 @@ export const SelectHotelPage = ({
     selectedHotel: HotelData,
   ) => {
     e.stopPropagation();
-
-    localStorage.setItem(
-      'selectedHotel',
-      JSON.stringify(selectedHotel),
-    );
 
     if (onSelectHotel) {
       onSelectHotel(selectedHotel);
@@ -120,9 +100,9 @@ export const SelectHotelPage = ({
       {/* 1. Sidebar Navigation  */}
       <SidebarNav
         activeNav={activeNav}
-        setActiveNav={setActiveNav}
+        onNavChange={setActiveNav}
         isMobileOpen={isMobileOpen}
-        onMobileToggle={() => setIsMobileOpen(!isMobileOpen)}
+        onMobileToggle={onMobileToggle}
       />
 
       {/* 2. Main Content */}
@@ -130,10 +110,11 @@ export const SelectHotelPage = ({
         {/* Topbar */}
         <Topbar
           isBreadcrumbMode={true}
+          breadcrumbLabel="Select Hotel"
           chatTitle={resolvedChatTitle}
           messages={messages}
-          onBackToChat={onBackToChat}
-          onNewChat={onStartNewChat}
+          onBackToChat={backToChat}
+          onNewChat={startNewChat}
         />
 
         {/* LOADING STATE */}
@@ -173,25 +154,16 @@ export const SelectHotelPage = ({
               <div className="flex items-center gap-2">
                 {/* The Back button is dedicated to mobile devices. */}
                 {onBackToChat && (
-                  <button
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="none"
+                    className="md:hidden p-2 -ml-2 rounded-xl text-slate-600 hover:bg-slate-200/60 active:scale-95"
                     onClick={onBackToChat}
-                    className="md:hidden p-2 -ml-2 rounded-xl text-slate-600 hover:bg-slate-200/60 active:scale-95 transition-all cursor-pointer"
                     aria-label="Go back to chat"
                   >
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2.5"
-                        d="M15 19l-7-7 7-7"
-                      />
-                    </svg>
-                  </button>
+                    <Icon name="arrow-left" className="w-5 h-5" />
+                  </Button>
                 )}
 
                 <SectionHeader title="Other available accommodations" />
@@ -220,7 +192,7 @@ export const SelectHotelPage = ({
                 return (
                   <div
                     key={hotel.id }
-                    className="bg-white rounded-[28px] p-5 md:p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col md:flex-row items-stretch gap-6"
+                    className="bg-white rounded-card p-5 md:p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col md:flex-row items-stretch gap-6"
                   >
                     {/* Information on the left */}
                     <div className="flex flex-1 flex-col sm:flex-row items-center sm:items-start md:items-center gap-5 min-w-0">
@@ -234,7 +206,7 @@ export const SelectHotelPage = ({
 
                       <div className="flex-1 min-w-0 space-y-4 w-full">
                         <div>
-                          <h3 className="text-xl sm:text-2xl font-extrabold text-[#0F0C3B] tracking-tight truncate">
+                          <h3 className="text-xl sm:text-2xl font-extrabold text-ink-alt tracking-tight truncate">
                             {hotel.hotelName || 'Five Star Hotel, Lagos'}
                           </h3>
                           <p className="text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-wide mt-1">
@@ -243,6 +215,7 @@ export const SelectHotelPage = ({
                         </div>
 
                         {/* Comparison table of source options */}
+                        {isComparePrice && (
                         <div className="space-y-3 pt-1">
                           <div className="flex items-center justify-between text-xs sm:text-sm pb-2 border-b border-slate-100">
                             <div className="flex items-center gap-2.5">
@@ -251,9 +224,9 @@ export const SelectHotelPage = ({
                                 alt="Booking.com"
                                 className="w-4 h-4 object-contain rounded-xs shrink-0"
                               />
-                              <span className="font-semibold text-[#0F0C3B]">Booking.com</span>
+                              <span className="font-semibold text-ink-alt">Booking.com</span>
                             </div>
-                            <span className="font-bold text-[#0F0C3B]">${mainPrice}</span>
+                            <span className="font-bold text-ink-alt">${mainPrice}</span>
                           </div>
 
                           <div className="flex items-center justify-between text-xs sm:text-sm">
@@ -263,27 +236,30 @@ export const SelectHotelPage = ({
                                 alt="Expedia"
                                 className="w-4 h-4 object-contain rounded-xs shrink-0"
                               />
-                              <span className="font-semibold text-[#0F0C3B]">Expedia</span>
+                              <span className="font-semibold text-ink-alt">Expedia</span>
                             </div>
-                            <span className="font-bold text-[#0F0C3B]">${mainPrice}</span>
+                            <span className="font-bold text-ink-alt">${mainPrice}</span>
                           </div>
                         </div>
+                        )}
                       </div>
                     </div>
 
                     {/* Price column & Booking button on the right */}
-                    <div className="flex md:flex-col items-center md:items-end justify-between md:justify-center gap-4 pt-4 md:pt-0 border-t md:border-t-0 md:border-l border-slate-200/60 md:pl-8 shrink-0 min-w-[160px]">
-                      <span className="text-2xl sm:text-3xl font-black text-[#0F0C3B] tracking-tight">
+                    <div className="flex md:flex-col items-center md:items-end justify-between md:justify-center gap-4 pt-4 md:pt-0 border-t md:border-t-0 md:border-l border-slate-200/60 md:pl-8 shrink-0 min-w-160">
+                      <span className="text-2xl sm:text-3xl font-black text-ink-alt tracking-tight">
                         ${mainPrice}
                       </span>
 
-                      <button
+                      <Button
                         type="button"
+                        variant="light"
+                        size="none"
+                        className="px-6 py-3 bg-primary-soft text-primary-strong text-xs sm:text-sm rounded-2xl"
                         onClick={(e) => handleBookHotel(e, hotel)}
-                        className="px-6 py-3 bg-[#EAF1FF] hover:bg-blue-100 text-[#2563EB] font-bold text-xs sm:text-sm rounded-2xl transition-colors duration-150 active:scale-95 cursor-pointer"
                       >
                         Book Hotel
-                      </button>
+                      </Button>
                     </div>
 
                   </div>

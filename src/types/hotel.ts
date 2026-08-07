@@ -1,4 +1,4 @@
-import { type ChatMessage } from '../components/chat/Topbar/Topbar';
+import { type ChatMessage } from '../components/chat/Topbar';
 
 export interface RoomOption {
   id: string;
@@ -51,6 +51,7 @@ export interface HotelRecommendationsProps {
 }
 
 export interface SelectHotelPageProps {
+  selectedHotel?: HotelData | null;
   chatTitle?: string;
   messages?: ChatMessage[];
   onBackToChat?: () => void;

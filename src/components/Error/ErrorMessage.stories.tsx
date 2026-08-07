@@ -1,9 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { ErrorMessage } from './ErrorMessage'
+import { ErrorMessage } from '.'
 
 const meta: Meta<typeof ErrorMessage> = {
   title: 'UI/ErrorMessage',
   component: ErrorMessage,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
   argTypes: {
     message: { control: 'text' },
   },

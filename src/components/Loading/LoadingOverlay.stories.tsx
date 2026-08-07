@@ -1,9 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { LoadingOverlay } from './LoadingOverlay'
+import { LoadingOverlay } from '.'
 
 const meta: Meta<typeof LoadingOverlay> = {
   title: 'UI/LoadingOverlay',
   component: LoadingOverlay,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'fullscreen',
+  },
   argTypes: {
     isVisible: { control: 'boolean' },
   },

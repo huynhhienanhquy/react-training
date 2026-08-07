@@ -1,11 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { WelcomeState } from './WelcomeState'
+import { WelcomeState } from '.'
 
 const meta: Meta<typeof WelcomeState> = {
   title: 'Chat/WelcomeState',
   component: WelcomeState,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'padded',
+  },
   argTypes: {
     prompts: { control: 'object' },
+    onSelectPrompt: { action: 'promptSelected' },
   },
 }
 
@@ -21,20 +26,5 @@ const DEFAULT_PROMPTS = [
 export const Default: Story = {
   args: {
     prompts: DEFAULT_PROMPTS,
-    onSelectPrompt: (prompt) => alert('Selected: ' + prompt),
-  },
-}
-
-export const ManyPrompts: Story = {
-  args: {
-    prompts: [
-      'Find cheap flights to Lagos',
-      'Hotels with pool in Dubai',
-      'Best restaurants in Paris',
-      'Flights from New York to London',
-      'All-inclusive resorts in Maldives',
-      'Weekend getaway to Bali',
-    ],
-    onSelectPrompt: (prompt) => console.log(prompt),
   },
 }

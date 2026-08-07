@@ -1,51 +1,60 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { ChatInputBox } from './ChatInputBox'
 import { useState } from 'react'
+import { ChatInputBox } from './ChatInputBox'
 
 const meta: Meta<typeof ChatInputBox> = {
   title: 'Chat/ChatInputBox',
   component: ChatInputBox,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'padded',
+  },
+  argTypes: {
+    inputMessage: { control: 'text' },
+    isRecording: { control: 'boolean' },
+    onSend: { action: 'sent' },
+    onInputChange: { action: 'inputChanged' },
+    onToggleRecording: { action: 'recordingToggled' },
+  },
 }
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-const ChatInputBoxWithState = (args: { isRecording?: boolean }) => {
-  const [inputMessage, setInputMessage] = useState('')
+const ChatInputBoxWithState = (args: Story['args'] = {}) => {
+  const [inputMessage, setInputMessage] = useState(args.inputMessage || '')
   const [isRecording, setIsRecording] = useState(args.isRecording || false)
 
   return (
     <ChatInputBox
       inputMessage={inputMessage}
-      setInputMessage={setInputMessage}
-      onSend={() => alert('Send: ' + inputMessage)}
+      onInputChange={(value) => {
+        setInputMessage(value)
+        args.onInputChange?.(value)
+      }}
+      onSend={() => {
+        args.onSend?.()
+        setInputMessage('')
+      }}
       isRecording={isRecording}
-      setIsRecording={setIsRecording}
+      onToggleRecording={() => {
+        setIsRecording((value) => !value)
+        args.onToggleRecording?.()
+      }}
     />
   )
 }
 
 export const Default: Story = {
-  render: () => <ChatInputBoxWithState />,
+  render: (args) => <ChatInputBoxWithState {...args} />,
 }
 
 export const Recording: Story = {
-  render: () => <ChatInputBoxWithState isRecording />,
+  render: (args) => <ChatInputBoxWithState {...args} />,
+  args: { isRecording: true },
 }
 
 export const WithText: Story = {
-  render: () => {
-    const [inputMessage, setInputMessage] = useState('Find flights to Lagos')
-    const [isRecording, setIsRecording] = useState(false)
-
-    return (
-      <ChatInputBox
-        inputMessage={inputMessage}
-        setInputMessage={setInputMessage}
-        onSend={() => {}}
-        isRecording={isRecording}
-        setIsRecording={setIsRecording}
-      />
-    )
-  },
+  render: (args) => <ChatInputBoxWithState {...args} />,
+  args: { inputMessage: 'Find flights to Lagos' },
 }

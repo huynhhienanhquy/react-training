@@ -1,9 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { Card } from './Card'
+import { Card } from '.'
 
 const meta: Meta<typeof Card> = {
   title: 'UI/Card',
   component: Card,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
   argTypes: {
     variant: { control: 'select', options: ['default', 'surface'] },
   },

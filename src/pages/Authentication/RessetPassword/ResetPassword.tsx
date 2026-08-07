@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormState } from '@/hooks/useFormState';
-import { AuthLayout } from '@/components/auth/AuthLayout/AuthLayout';
-import { Button } from '@/components/Button/Button';
-import { AuthHeader } from '@/components/auth/AuthHeader/AuthHeader';
-import { InputField } from '@/components/Input/InputField';
-import { ErrorMessage } from '@/components/Error/ErrorMessage';
-import { AuthFooter } from '@/components/auth/AuthFooter/AuthFooter';
+import { AuthLayout } from '@/components/auth/AuthLayout';
+import { Button } from '@/components/Button';
+import { AuthHeader } from '@/components/auth/AuthHeader';
+import { InputField } from '@/components/InputField';
+import { ErrorMessage } from '@/components/Error';
+import { AuthFooter } from '@/components/auth/AuthFooter';
 
 export const ResetPassword = () => {
   const navigate = useNavigate();
@@ -43,44 +43,54 @@ export const ResetPassword = () => {
         />
 
         {/* 2. Form */}
-        <form className="space-y-3" onSubmit={handleResetPassword} autoComplete="off">
-          <InputField
-            label="New Password"
-            type="password"
-            placeholder="Enter your password"
-            autoComplete="new-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-
-          <InputField
-            label="Confirm New Password"
-            type="password"
-            placeholder="Confirm your password"
-            autoComplete="new-password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-
-          <ErrorMessage message={error} />
-          <Button
-            type="submit"
-            isLoading={isLoading}
-            showArrow
+        <div className="mt-5  translate-y-8">
+          <form
+            className="space-y-3"
+            onSubmit={handleResetPassword}
+            autoComplete="off"
           >
-            Reset Password
-          </Button>
+            <InputField
+              label="New Password"
+              type="password"
+              placeholder="Enter your password"
+              autoComplete="new-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
 
-        </form>
+            <InputField
+              label="Confirm New Password"
+              type="password"
+              placeholder="Confirm your password"
+              autoComplete="new-password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
 
-        {/* 3. Footer  */}
-        <AuthFooter
-          questionText="Don't have an account?"
-          actionText="Sign Up"
-          onActionClick={() => navigate('/register')}
-        />
+            <ErrorMessage message={error} />
+
+            <Button
+              className="translate-y-20"
+              type="submit"
+              isLoading={isLoading}
+              showArrow
+            >
+              Reset Password
+            </Button>
+
+            {/* 3. Footer  */}
+            <AuthFooter
+              className="translate-y-24"
+              questionText="Don't have an account?"
+              actionText="Sign Up"
+              onActionClick={() => navigate('/register')}
+            />
+          </form>
+        </div>
+
+
       </div>
     </AuthLayout>
   );

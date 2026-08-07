@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
-import { AuthLayout } from "./AuthLayout";
+import { AuthLayout } from ".";
 
 // Mock LoadingOverlay
-vi.mock("../Loading/LoadingOverlay", () => ({
+vi.mock("@/components/Loading/LoadingOverlay", () => ({
   LoadingOverlay: ({ isVisible }: { isVisible: boolean }) => (
     <div data-testid="loading-overlay">
       {isVisible ? "Loading" : "Not Loading"}

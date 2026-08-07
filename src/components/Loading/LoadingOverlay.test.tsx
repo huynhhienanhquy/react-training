@@ -1,9 +1,9 @@
 // LoadingOverlay.test.tsx
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import { LoadingOverlay } from './LoadingOverlay';
+import { LoadingOverlay } from '.';
 
-vi.mock('../../assets/icons/Logo.png', () => ({
+vi.mock('../../assets/images/Logo.png', () => ({
   default: '/assets/logo.png',
 }));
 
@@ -61,7 +61,7 @@ describe('LoadingOverlay', () => {
     expect(spinner).toBeInTheDocument();
     expect(spinner).toHaveClass(
       'rounded-full',
-      'border-[3px]',
+      'border-3',
       'border-t-blue-500',
       'border-l-blue-400',
     );

@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { ChatMessageList } from "./ChatMessageList";
+import { ChatMessageList } from ".";
 import type { PlaceData, DayItinerary } from "@/types/travel";
 
 // Mock scrollIntoView
@@ -10,12 +10,12 @@ beforeEach(() => {
 });
 
 // Mock ThinkingLoader
-vi.mock("../../../../components/Thinking/ThinkingLoader", () => ({
+vi.mock("@/components/Thinking/ThinkingLoader", () => ({
   ThinkingLoader: ({ text }: { text: string }) => <div>{text}</div>,
 }));
 
 // Mock FlightRecommendations
-vi.mock("../Recommendations/FlightRecommendations", () => ({
+vi.mock("@/pages/Dashboard/Chat/sections/Recommendations/FlightRecommendations", () => ({
   FlightRecommendations: ({
     onBookNow,
   }: {
@@ -32,7 +32,7 @@ type MockHotel = {
 };
 
 // Mock HotelRecommendations
-vi.mock("../Recommendations/HotelRecommendations", () => ({
+vi.mock("@/pages/Dashboard/Chat/sections/Recommendations/HotelRecommendations", () => ({
   HotelRecommendations: ({
     onBookNow,
   }: {
@@ -45,7 +45,7 @@ vi.mock("../Recommendations/HotelRecommendations", () => ({
 }));
 
 // Mock PlacesCardWidget
-vi.mock("../Recommendations/PlacesCardWidget", () => ({
+vi.mock("@/pages/Dashboard/Chat/sections/Recommendations/PlacesCardWidget", () => ({
   PlacesCardWidget: ({
     places,
     onViewAll,
@@ -60,7 +60,7 @@ vi.mock("../Recommendations/PlacesCardWidget", () => ({
 }));
 
 // Mock ItineraryCardWidget
-vi.mock("../Recommendations/ItineraryCardWidget", () => ({
+vi.mock("@/pages/Dashboard/Chat/sections/Recommendations/ItineraryCardWidget", () => ({
   ItineraryCardWidget: ({
     itinerary,
     onViewAll,
@@ -194,7 +194,9 @@ describe("ChatMessageList", () => {
 
     await user.click(screen.getByText("Hotel Widget"));
 
-    expect(onBookHotel).toHaveBeenCalledWith("hotel-1");
+    expect(onBookHotel).toHaveBeenCalledWith(
+      expect.objectContaining({ id: "hotel-1" }),
+    );
   });
 
   it("renders places widget", () => {

@@ -1,9 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { ThinkingLoader } from './ThinkingLoader'
+import { ThinkingLoader } from '.'
 
 const meta: Meta<typeof ThinkingLoader> = {
   title: 'UI/ThinkingLoader',
   component: ThinkingLoader,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
   argTypes: {
     text: { control: 'text' },
   },

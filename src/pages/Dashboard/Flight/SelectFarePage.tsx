@@ -1,16 +1,17 @@
-import React, { useCallback, useState } from 'react';
-import { SidebarNav } from '@/components/chat/SidebarNav/SidebarNav';
-import { Button } from '@/components/Button/Button';
+import  { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { SidebarNav } from '@/components/chat/SidebarNav/index';
+import { Button } from '@/components/Button/index';
 
-import iconHeart from '@/assets/icons/heart-blue.png';
-import defaultFlightLogo from '@/assets/icons/ellipse.png';
-import { SectionHeader } from '@/components/FlightFare/SectionHeader/SectionHeader';
+import HeartIcon from '@/components/icons/HeartIcon';
+import defaultFlightLogo from '@/assets/images/ellipse.png';
+import { SectionHeader } from '@/components/FlightFare/SectionHeader';
 
-import { Topbar } from '@/components/chat/Topbar/Topbar';
+import { Topbar } from '@/components/chat/Topbar';
 import { FareHeader } from '@/components/FlightFare/FareHeader';
-import { SelectedFlightBox } from '@/components/FlightFare/SelectedFlightBox';
-import { FareCards } from '@/components/FlightFare/FareCards';
-import { PriceDetailsSidebar } from '@/components/FlightFare/PriceDetailsSidebar';
+import { SelectedFlightBox } from '@/components/FlightFare/SelectedFlight';
+import { FareCards } from '@/components/FlightFare/FareCard';
+import { PriceDetailsSidebar } from '@/components/FlightFare/PriceDetail';
 
 import { getFareDetailsApi } from '@/services/fareService';
 import type {
@@ -18,7 +19,9 @@ import type {
   SelectFarePageProps,
 } from '@/types/flight';
 
-import { useApiRequest } from '@/hooks/useApiRequest';
+import { useAsyncData } from '@/hooks/useAsyncData';
+import { useSidebarNav } from '@/hooks/useSidebarNav';
+import { useChatTitle } from '@/hooks/useChatTitle';
 
 export const SelectFarePage = ({
   chatTitle,
@@ -26,7 +29,10 @@ export const SelectFarePage = ({
   onBackToChat,
   onStartNewChat,
 }: SelectFarePageProps) => {
-  const [activeNav, setActiveNav] = useState('chats');
+  const navigate = useNavigate();
+  const backToChat = onBackToChat ?? (() => navigate('/chats'));
+  const startNewChat = onStartNewChat ?? (() => navigate('/chats'));
+  const { activeNav, setActiveNav } = useSidebarNav();
   const [selectedFareId, setSelectedFareId] =
     useState<'economy' | 'business'>('economy');
 
@@ -50,21 +56,18 @@ export const SelectFarePage = ({
     data: fareData,
     loading,
     error,
-  } = useApiRequest<FareData>(fetchFare);
+  } = useAsyncData<FareData>(fetchFare);
 
   // Chat title
-  const firstUserMessage = messages.find(
-    (m) => m.sender === 'user',
-  )?.text;
-
-  const resolvedChatTitle =
-    chatTitle ||
-    firstUserMessage ||
+  const resolvedChatTitle = useChatTitle(
+    chatTitle,
+    messages,
     `Cheap flights to ${
       fareData?.destination
         ? fareData.destination.split('-')[0].trim()
         : 'Destination'
-    }`;
+    }`,
+  );
 
   // Fare options
   const fareOptions = fareData?.fareOptions ?? [];
@@ -92,7 +95,7 @@ export const SelectFarePage = ({
       {/* 1. Sidebar Navigation */}
       <SidebarNav
         activeNav={activeNav}
-        setActiveNav={setActiveNav}
+        onNavChange={setActiveNav}
       />
 
       {/* 2. Main Content */}
@@ -100,10 +103,11 @@ export const SelectFarePage = ({
         {/* Topbar */}
         <Topbar
           isBreadcrumbMode={true}
+          breadcrumbLabel="Select Fare"
           chatTitle={resolvedChatTitle}
           messages={messages}
-          onBackToChat={onBackToChat}
-          onNewChat={onStartNewChat}
+          onBackToChat={backToChat}
+          onNewChat={startNewChat}
         />
 
         {/* LOADING STATE */}
@@ -152,7 +156,7 @@ export const SelectFarePage = ({
               <SelectedFlightBox
                 airlineName={fareData.airlineName || ''}
                 defaultFlightLogo={defaultFlightLogo}
-                iconHeart={iconHeart}
+                iconHeart={HeartIcon}
                 legs={fareData.legs || []}
                 cancellationPolicy={
                   fareData.cancellationPolicy || ''

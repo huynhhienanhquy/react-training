@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormState } from '@/hooks/useFormState';
-import { AuthLayout } from '@/components/auth/AuthLayout/AuthLayout';
-import { Button } from '@/components/Button/Button';
-import { InputField } from '@/components/Input/InputField';
-import { AuthHeader } from '@/components/auth/AuthHeader/AuthHeader';
-import { AuthFooter } from '@/components/auth/AuthFooter/AuthFooter';
+import { AuthLayout } from '@/components/auth/AuthLayout';
+import { Button } from '@/components/Button';
+import { InputField } from '@/components/InputField';
+import { AuthHeader } from '@/components/auth/AuthHeader';
+import { AuthFooter } from '@/components/auth/AuthFooter';
 
 export const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ export const ForgotPassword = () => {
         />
 
         {/* 2. Form */}
-        <form className="space-y-3" onSubmit={handleSendOTP} autoComplete="off">
+        <form className="space-y-3 translate-y-8" onSubmit={handleSendOTP} autoComplete="off">
           <InputField
             label="Email address"
             type="email"
@@ -44,6 +44,7 @@ export const ForgotPassword = () => {
             required
           />
           <Button
+            className="translate-y-4"
             type="submit"
             isLoading={isLoading}
             showArrow
@@ -55,6 +56,7 @@ export const ForgotPassword = () => {
 
         {/* 3. Footer link is right below the button*/}
         <AuthFooter
+          className="space-y-3 translate-y-14"
           questionText="Don't have an account?"
           actionText="Sign Up"
           onActionClick={() => navigate('/register')}

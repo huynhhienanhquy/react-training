@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import { Button } from './Button';
+import { Button } from '.';
 
 describe('Button', () => {
   it('renders its children', () => {
@@ -17,8 +17,8 @@ describe('Button', () => {
     const button = screen.getByRole('button', { name: 'Continue' });
 
     expect(button).toHaveClass(
-      'from-[#3B62FF]',
-      'to-[#1A47FF]',
+      'from-primary',
+      'to-primary-dark',
       'text-white',
       'w-full',
       'py-4',
@@ -28,7 +28,7 @@ describe('Button', () => {
 
   it.each([
     ['primary', 'bg-gradient-to-r'],
-    ['secondary', 'bg-[#EEF2FF]'],
+    ['secondary', 'bg-primary-light'],
     ['social', 'bg-social-bg'],
     ['dark', 'bg-slate-900'],
     ['ghost', 'bg-transparent'],
@@ -113,6 +113,23 @@ describe('Button', () => {
     expect(
       screen.getByRole('button', { name: 'Unavailable' }),
     ).toBeDisabled();
+  });
+
+  it('exposes favorite state through aria-pressed', () => {
+    const { rerender } = render(
+      <Button variant="favorite" isFavorite={false} aria-label="Favorite" />,
+    );
+
+    expect(screen.getByRole('button', { name: 'Favorite' })).toHaveAttribute(
+      'aria-pressed',
+      'false',
+    );
+
+    rerender(<Button variant="favorite" isFavorite aria-label="Favorite" />);
+    expect(screen.getByRole('button', { name: 'Favorite' })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    );
   });
 
   it('merges custom className and native button props', () => {

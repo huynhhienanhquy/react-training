@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
-import { ChatHistorySidebar, type ChatSession } from "./ChatHistorySidebar";
+import { ChatHistorySidebar, type ChatSession } from ".";
 
 const sessions: ChatSession[] = [
   {
@@ -26,7 +26,7 @@ describe("ChatHistorySidebar", () => {
     render(
       <ChatHistorySidebar
         searchQuery=""
-        setSearchQuery={() => {}}
+        onSearchChange={() => {}}
         sessions={sessions}
         activeSessionId={null}
         onSelectSession={() => {}}
@@ -42,7 +42,7 @@ describe("ChatHistorySidebar", () => {
     render(
       <ChatHistorySidebar
         searchQuery="hotel"
-        setSearchQuery={() => {}}
+        onSearchChange={() => {}}
         sessions={sessions}
         activeSessionId={null}
         onSelectSession={() => {}}
@@ -62,7 +62,7 @@ describe("ChatHistorySidebar", () => {
     render(
       <ChatHistorySidebar
         searchQuery=""
-        setSearchQuery={setSearchQuery}
+        onSearchChange={setSearchQuery}
         sessions={sessions}
         activeSessionId={null}
         onSelectSession={() => {}}
@@ -84,7 +84,7 @@ describe("ChatHistorySidebar", () => {
     render(
       <ChatHistorySidebar
         searchQuery=""
-        setSearchQuery={() => {}}
+        onSearchChange={() => {}}
         sessions={sessions}
         activeSessionId={null}
         onSelectSession={onSelectSession}
@@ -100,23 +100,23 @@ describe("ChatHistorySidebar", () => {
     render(
       <ChatHistorySidebar
         searchQuery=""
-        setSearchQuery={() => {}}
+        onSearchChange={() => {}}
         sessions={sessions}
         activeSessionId="2"
         onSelectSession={() => {}}
       />
     );
 
-    expect(screen.getByText("Hotel in Bahamas")).toHaveClass(
-      "bg-surface-active"
-    );
+    expect(
+      screen.getByRole("button", { name: "Hotel in Bahamas" })
+    ).toHaveClass("bg-surface-active");
   });
 
   it("renders grouped session titles", () => {
     render(
       <ChatHistorySidebar
         searchQuery=""
-        setSearchQuery={() => {}}
+        onSearchChange={() => {}}
         sessions={sessions}
         activeSessionId={null}
         onSelectSession={() => {}}
@@ -131,7 +131,7 @@ describe("ChatHistorySidebar", () => {
     render(
       <ChatHistorySidebar
         searchQuery="xyz"
-        setSearchQuery={() => {}}
+        onSearchChange={() => {}}
         sessions={sessions}
         activeSessionId={null}
         onSelectSession={() => {}}

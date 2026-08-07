@@ -26,6 +26,22 @@
   font-display: swap;
 }
 
+@layer utilities {
+  /* Gray logo image turned blue when its nav item is active */
+  .filter-logo-active {
+    filter: invert(38%) sepia(88%) saturate(2421%) hue-rotate(200deg) brightness(98%) contrast(96%);
+  }
+
+  /* Hide scrollbars (Chrome/Edge + Firefox/IE) */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @layer base {
   html, body, #root {
     margin: 0;
@@ -44,16 +60,4 @@
   input, button, textarea, select {
     font-family: inherit;
   }
-}
-
-
-@font-face {
-  font-family: 'Helvetica Now Display';
-  src: url('/fonts/HelveticaNowDisplay-Regular.woff2') format('woff2');
-  font-weight: 400;
-}
-@font-face {
-  font-family: 'Helvetica Now Display';
-  src: url('/fonts/HelveticaNowDisplay-Bold.woff2') format('woff2');
-  font-weight: 700;
 }

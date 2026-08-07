@@ -9,13 +9,7 @@ export const getHotelListApi = async (): Promise<HotelData[]> => {
 
 
 //Get details of a hotel by ID.
-export const getHotelDetailsApi = async (id: string = '1'): Promise<HotelData> => {
-  const response = await flightApi.get<HotelData | HotelData[]>(`/hotel`);
-
-  if (Array.isArray(response.data)) {
-    const found = response.data.find((item) => item.id === id);
-    return found || response.data[0];
-  }
-
+export const getHotelDetailsApi = async (id: string): Promise<HotelData> => {
+  const response = await flightApi.get<HotelData>(`/hotel/${id}`);
   return response.data;
 };

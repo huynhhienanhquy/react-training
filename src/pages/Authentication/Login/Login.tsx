@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { useFormState } from '@/hooks/useFormState';
-import { AuthLayout } from '@/components/auth/AuthLayout/AuthLayout';
-import { getAuthErrorMessage } from '@/utils/authHelpers';
-import { Button } from '@/components/Button/Button';
-import { InputField } from '@/components/Input/InputField';
-import { ErrorMessage } from '@/components/Error/ErrorMessage';
-import { AuthHeader } from '@/components/auth/AuthHeader/AuthHeader';
-import { AuthFooter } from '@/components/auth/AuthFooter/AuthFooter';
+import { AuthLayout } from '@/components/auth/AuthLayout';
+import { getErrorMessage } from '@/utils/errorHelpers';
+import { Button } from '@/components/Button';
+import { InputField } from '@/components/InputField';
+import { ErrorMessage } from '@/components/Error';
+import { AuthHeader } from '@/components/auth/AuthHeader';
+import { AuthFooter } from '@/components/auth/AuthFooter';
 
 export const Login = () => {
   const { login } = useAuth();
@@ -27,11 +27,7 @@ export const Login = () => {
       await login(email, password);
       navigate('/chats');
     } catch (err: unknown) {
-      if (err instanceof Error && err.message) {
-        setError(err.message);
-      } else {
-        setError(getAuthErrorMessage(err));
-      }
+      setError(getErrorMessage(err));
     } finally {
       stopLoading();
     }
@@ -39,14 +35,15 @@ export const Login = () => {
 
   return (
     <AuthLayout isLoading={isLoading}>
-      {/* 1. Header */}
       <AuthHeader
         title="Continue Planning Your Trips"
         subtitle="We're happy you're back. Let's get back to planning your adventures"
       />
 
-      {/* 2. Form */}
-      <form className="space-y-6 font-helvetica" onSubmit={handleLogin}>
+      <form
+        className="space-y-6 font-helvetica translate-y-10"
+        onSubmit={handleLogin}
+      >
         <InputField
           label="Email address"
           type="email"
@@ -67,7 +64,7 @@ export const Login = () => {
             required
           />
 
-          <div className="text-right pt-1">
+          <div className="text-right">
             <span
               onClick={() => navigate('/forgot-password')}
               className="text-sm font-bold text-brand-dark-alt hover:text-blue-600 cursor-pointer transition"
@@ -79,29 +76,29 @@ export const Login = () => {
 
         <ErrorMessage message={error} />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 translate-y-8 ">
           <Button
             type="button"
             variant="social"
             size="md"
             socialIcon="google"
-            onClick={() => { /* TODO: Implement Google login */ }}
-            >
-              Continue with Google
-            </Button>
+            onClick={() => {}}
+          >
+            Continue with Google
+          </Button>
 
           <Button
             type="button"
             variant="social"
-            size="md" socialIcon="apple"
-            onClick={() => { /* TODO: Implement Apple login */ }}
+            size="md"
+            socialIcon="apple"
+            onClick={() => {}}
           >
             Continue with Apple
           </Button>
         </div>
 
-        {/* 3.The button and footer are wrapped very close together (gap-1.5). */}
-        <div className="flex flex-col gap-0.5">
+        <div className="flex flex-col gap-0.5 translate-y-12">
           <Button
             type="submit"
             isLoading={isLoading}

@@ -1,9 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { InfoRow } from './InfoRow'
+import { InfoRow } from '.'
 
 const meta: Meta<typeof InfoRow> = {
   title: 'UI/InfoRow',
   component: InfoRow,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
   argTypes: {
     label: { control: 'text' },
     value: { control: 'text' },

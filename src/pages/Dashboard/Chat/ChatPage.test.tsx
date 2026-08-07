@@ -1,6 +1,5 @@
 // @vitest-environment jsdom
 
-import React from "react";
 import {
   render,
   screen,
@@ -10,11 +9,17 @@ import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { ChatPage } from "./ChatPage";
 
-vi.mock("./Sections/SidebarNav", () => ({
+const mockNavigate = vi.fn();
+
+vi.mock('react-router-dom', () => ({
+  useNavigate: () => mockNavigate,
+}));
+
+vi.mock("@/components/chat/SidebarNav/SidebarNav", () => ({
   SidebarNav: () => <div>SidebarNav</div>,
 }));
 
-vi.mock("./Sections/ChatHistorySidebar", () => ({
+vi.mock("@/components/chat/ChatHistorySidebar/ChatHistorySidebar", () => ({
   ChatHistorySidebar: ({
     sessions,
     onSelectSession,
@@ -36,7 +41,7 @@ vi.mock("./Sections/ChatHistorySidebar", () => ({
   ),
 }));
 
-vi.mock("./Sections/Topbar", () => ({
+vi.mock("@/components/chat/Topbar/Topbar", () => ({
   Topbar: ({
     onNewChat,
   }: {
@@ -48,7 +53,7 @@ vi.mock("./Sections/Topbar", () => ({
   ),
 }));
 
-vi.mock("./Sections/WelcomeState", () => ({
+vi.mock("@/components/chat/WelcomeState/WelcomeState", () => ({
   WelcomeState: ({
     onSelectPrompt,
   }: {
@@ -64,7 +69,7 @@ vi.mock("./Sections/WelcomeState", () => ({
   ),
 }));
 
-vi.mock("./Sections/ChatMessageList", () => ({
+vi.mock("@/components/chat/ChatMessageList/ChatMessageList", () => ({
   ChatMessageList: ({
     messages,
     onBookFlight,
@@ -90,7 +95,7 @@ vi.mock("./Sections/ChatMessageList", () => ({
   ),
 }));
 
-vi.mock("./Sections/ChatInputBox", () => ({
+vi.mock("@/components/chat/ChatInputBox/ChatInputBox", () => ({
   ChatInputBox: ({
     onSend,
   }: {
@@ -98,30 +103,6 @@ vi.mock("./Sections/ChatInputBox", () => ({
   }) => (
     <button onClick={onSend}>
       Send
-    </button>
-  ),
-}));
-
-vi.mock("../Flight/SelectFarePage", () => ({
-  SelectFarePage: ({
-    onBackToChat,
-  }: {
-    onBackToChat: () => void;
-  }) => (
-    <button onClick={onBackToChat}>
-      Fare Page
-    </button>
-  ),
-}));
-
-vi.mock("../Hotel/SelectHotelPage", () => ({
-  SelectHotelPage: ({
-    onBackToChat,
-  }: {
-    onBackToChat: () => void;
-  }) => (
-    <button onClick={onBackToChat}>
-      Hotel Page
     </button>
   ),
 }));
@@ -151,7 +132,7 @@ describe("ChatPage", () => {
     });
   });
 
-  it("shows flight page", async () => {
+  it("navigates to the fare route", async () => {
     const user = userEvent.setup();
 
     render(<ChatPage />);
@@ -170,12 +151,10 @@ describe("ChatPage", () => {
 
     await user.click(screen.getByText("Book Flight"));
 
-    expect(
-      screen.getByText("Fare Page")
-    ).toBeInTheDocument();
+    expect(mockNavigate).toHaveBeenCalledWith('/chats/fares');
   });
 
-  it("returns from fare page", async () => {
+  it("navigates to the hotel route", async () => {
     const user = userEvent.setup();
 
     render(<ChatPage />);
@@ -186,19 +165,10 @@ describe("ChatPage", () => {
       expect(screen.getAllByText(/Cheap flights to Lagos/i).length).toBeGreaterThan(0);
     });
 
-    await waitFor(() =>
-      expect(
-        screen.getByText("Book Flight")
-      ).toBeInTheDocument()
-    );
+    await waitFor(() => expect(screen.getByText('Book Hotel')).toBeInTheDocument());
+    await user.click(screen.getByText('Book Hotel'));
 
-    await user.click(screen.getByText("Book Flight"));
-
-    await user.click(screen.getByText("Fare Page"));
-
-    expect(
-      screen.getAllByText(/Cheap flights to Lagos/i).length
-    ).toBeGreaterThan(0);
+    expect(mockNavigate).toHaveBeenCalledWith('/chats/hotels');
   });
 
   it("starts a new chat", async () => {

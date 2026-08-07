@@ -15,26 +15,9 @@ export const loginApi = async (payload: LoginPayload): Promise<User> => {
     throw new Error('Incorrect email or password!');
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { password, ...safeUser } = foundUser;
+  const safeUser = Object.fromEntries(
+    Object.entries(foundUser).filter(([key]) => key !== 'password')
+  ) as User;
 
-  localStorage.setItem('accessToken', `mock_token_${safeUser.id}_${Date.now()}`);
-  localStorage.setItem('user', JSON.stringify(safeUser));
-
-  return safeUser as User;
-};
-
-export const logoutApi = (): void => {
-  localStorage.removeItem('accessToken');
-  localStorage.removeItem('user');
-};
-
-export const getCurrentUser = (): User | null => {
-  const userJson = localStorage.getItem('user');
-  if (!userJson) return null;
-  try {
-    return JSON.parse(userJson) as User;
-  } catch {
-    return null;
-  }
+  return safeUser;
 };
