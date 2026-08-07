@@ -10,11 +10,16 @@ vi.mock("react-router-dom", () => ({
 }));
 
 const mockLogout = vi.fn();
+const mockToggleTheme = vi.fn();
 
 vi.mock("@/hooks/useAuth", () => ({
   useAuth: () => ({
     logout: mockLogout,
   }),
+}));
+
+vi.mock("@/hooks/useTheme", () => ({
+  useTheme: () => ({ theme: "light", toggleTheme: mockToggleTheme }),
 }));
 
 vi.mock("@/hooks/useClickOutside", () => ({
@@ -155,5 +160,15 @@ describe("SidebarNav", () => {
 
     expect(mobileLogo).toHaveClass("w-7", "h-7");
     expect(mobileAvatar.parentElement?.parentElement).toHaveClass("w-11", "h-11");
+  });
+
+  it("toggles dark mode from the profile menu", async () => {
+    const user = userEvent.setup();
+    render(<SidebarNav activeNav="chats" onNavChange={setActiveNav} />);
+
+    await user.click(screen.getByAltText("User Avatar").closest("button")!);
+    await user.click(screen.getByRole("button", { name: "Switch to dark mode" }));
+
+    expect(mockToggleTheme).toHaveBeenCalledTimes(1);
   });
 });

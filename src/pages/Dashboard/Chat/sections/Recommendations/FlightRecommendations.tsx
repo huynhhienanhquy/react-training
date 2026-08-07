@@ -101,7 +101,7 @@ export function FlightRecommendations({
           return (
             <div
               key={flight.id}
-              className="bg-brand-light rounded-2xl p-3.5 sm:p-5 flex flex-col gap-3.5 border-none mb-3 overflow-hidden w-full min-h-200 "
+              className="bg-brand-light dark:bg-slate-700/70 rounded-2xl p-3.5 sm:p-5 flex flex-col gap-3.5 border border-transparent dark:border-slate-600/70 mb-3 overflow-hidden w-full min-h-200 shadow-sm dark:shadow-black/20 transition-colors duration-200"
             >
               <div className="flex items-center justify-between gap-2">
                 <div className="flex items-center gap-2 min-w-0">
@@ -137,7 +137,7 @@ export function FlightRecommendations({
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 pt-1 border-t border-slate-100/60">
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 pt-1 border-t border-slate-100/60 dark:border-slate-600">
                 <div className="space-y-2 text-xs sm:text-sm flex-1">
                   <div className="pb-7 flex flex-wrap sm:flex-nowrap items-baseline sm:items-center gap-x-3 gap-y-0.5">
                     <span className="font-bold text-slate-900 shrink-0 text-xs sm:text-sm">
@@ -164,7 +164,7 @@ export function FlightRecommendations({
 
                 <div className="pb-10 flex items-center sm:flex-col justify-between sm:justify-end sm:items-end gap-1.5 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-200/40 shrink-0">
                   {flight.tag && (
-                    <span className="px-2.5 py-0.5 bg-emerald-100/80 text-emerald-700 text-2xs sm:text-xxs font-bold rounded-full">
+                    <span className="px-2.5 py-0.5 bg-emerald-100/80 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-300 text-2xs sm:text-xxs font-bold rounded-full">
                       {flight.tag}
                     </span>
                   )}

@@ -21,7 +21,7 @@ export const RecommendationWrapper = ({
       </h3>
 
       {/* Main Container */}
-      <div className="bg-white p-4 md:p-5 rounded-card space-y-3.5 shadow-sm border border-slate-100/50">
+      <div className="bg-white dark:bg-slate-800 p-4 md:p-5 rounded-card space-y-3.5 shadow-sm dark:shadow-black/30 border border-slate-100/50 dark:border-slate-700 transition-colors duration-200">
         {children}
 
         {/* See All Button */}

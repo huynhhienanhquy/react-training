@@ -28,8 +28,8 @@ export function ItineraryCardWidget({
     initialItinerary ?? apiItinerary ?? [];
 
   return (
-    <div className="bg-brand-light rounded-2xl p-4 md:p-5 flex flex-col gap-4 border-none max-w-2xl w-full">
-      <div className="flex items-center justify-between pb-3 border-b border-slate-200/60">
+    <div className="bg-brand-light dark:bg-slate-700/70 rounded-2xl p-4 md:p-5 flex flex-col gap-4 border border-transparent dark:border-slate-600/70 max-w-2xl w-full shadow-sm dark:shadow-black/20 transition-colors duration-200">
+      <div className="flex items-center justify-between pb-3 border-b border-slate-200/60 dark:border-slate-600">
         <div className="flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-xl bg-blue-600/10 flex items-center justify-center text-blue-600 shrink-0">
             <CalendarIcon className="w-4 h-4" />
@@ -88,11 +88,11 @@ export function ItineraryCardWidget({
               </h5>
             </div>
 
-            <div className="bg-white rounded-xl p-3 border border-slate-200/60 space-y-2">
+            <div className="bg-white dark:bg-slate-800 rounded-xl p-3 border border-slate-200/60 dark:border-slate-600 space-y-2 transition-colors duration-200">
               {dayPlan.activities?.map((act) => (
                 <div
                   key={act.id ?? `${act.title}-${act.time}`}
-                  className="flex items-start justify-between gap-3 pt-2 first:pt-0 border-t border-slate-100 first:border-t-0"
+                  className="flex items-start justify-between gap-3 pt-2 first:pt-0 border-t border-slate-100 dark:border-slate-700 first:border-t-0"
                 >
                   <div className="flex-1 min-w-0">
                     <h6 className="text-xs md:text-sm font-semibold text-slate-900 truncate">
@@ -107,7 +107,7 @@ export function ItineraryCardWidget({
                     )}
                   </div>
 
-                  <div className="flex items-center gap-1 text-xxs font-semibold text-slate-500 bg-slate-100 px-2 py-1 rounded-md shrink-0">
+                  <div className="flex items-center gap-1 text-xxs font-semibold text-slate-500 dark:text-slate-200 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded-md shrink-0">
                     <ClockIcon className="w-3 h-3 text-slate-400" />
                     <span>{act.time}</span>
                   </div>
@@ -123,7 +123,7 @@ export function ItineraryCardWidget({
         <Button
           variant="dark"
           size="md"
-          className="w-full rounded-2xl"
+          className="w-full rounded-2xl dark:bg-slate-950 dark:hover:bg-blue-600"
           rightIcon={
             <Icon name="arrow-right" className="w-4 h-4" />
           }

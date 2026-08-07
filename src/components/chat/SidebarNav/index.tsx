@@ -14,10 +14,13 @@ import SettingsIcon from '@/components/icons/SettingsIcon';
 import userAvatar from '@/assets/images/user-avatar.png';
 import { type SidebarNavProps } from "@/types/chat";
 import { Button } from "@/components/Button";
+import { useTheme } from '@/hooks/useTheme';
 
 export const SidebarNav = ({ activeNav, onNavChange, isMobileOpen, onMobileToggle }: SidebarNavProps) => {
   const navigate = useNavigate();
   const { logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
+  const isDark = theme === 'dark';
   const {
     isOpen: showProfileMenu,
     ref: menuRef,
@@ -137,16 +140,29 @@ export const SidebarNav = ({ activeNav, onNavChange, isMobileOpen, onMobileToggl
 
           {/* Dropdown Logout */}
           {showProfileMenu && (
-            <div className="absolute bottom-2 left-16 w-48 bg-white rounded-2xl shadow-xl border border-slate-100 p-2 z-50 animate-in fade-in zoom-in-95 duration-150">
-              <Button
-                type="button"
-                variant="ghost"
-                size="none"
-                className="w-full justify-start text-left px-3 py-2 rounded-xl text-xs font-medium text-red-600 hover:bg-red-50 gap-2.5"
-                onClick={handleLogout}
-              >
-                Log out
-              </Button>
+            <div className="absolute bottom-2 left-16 w-56 bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700 p-2 z-50 animate-in fade-in zoom-in-95 duration-150">
+              <div className="flex items-center gap-1">
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="none"
+                  className="flex-1 px-3 py-2 rounded-xl text-xs font-medium dark:text-slate-100 dark:hover:bg-slate-700"
+                  onClick={toggleTheme}
+                  aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
+                  aria-pressed={isDark}
+                >
+                  {isDark ? 'Light mode' : 'Dark mode'}
+                </Button>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="none"
+                  className="flex-1 px-3 py-2 rounded-xl text-xs font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40"
+                  onClick={handleLogout}
+                >
+                  Log out
+                </Button>
+              </div>
             </div>
           )}
         </div>
@@ -224,15 +240,28 @@ export const SidebarNav = ({ activeNav, onNavChange, isMobileOpen, onMobileToggl
                 </div>
               </div>
 
-              <Button
-                type="button"
-                variant="danger"
-                size="sm"
-                className="text-xxs px-2 py-1.5 rounded-lg"
-                onClick={handleLogout}
-              >
-                Log out
-              </Button>
+              <div className="flex items-center gap-1">
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  className="text-xxs px-2 py-1.5 rounded-lg dark:text-slate-100 dark:hover:bg-slate-700"
+                  onClick={toggleTheme}
+                  aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
+                  aria-pressed={isDark}
+                >
+                  {isDark ? 'Light' : 'Dark'}
+                </Button>
+                <Button
+                  type="button"
+                  variant="danger"
+                  size="sm"
+                  className="text-xxs px-2 py-1.5 rounded-lg"
+                  onClick={handleLogout}
+                >
+                  Log out
+                </Button>
+              </div>
             </div>
           </aside>
         </div>

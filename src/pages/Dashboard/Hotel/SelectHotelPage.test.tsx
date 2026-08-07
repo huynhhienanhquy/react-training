@@ -14,8 +14,8 @@ vi.mock('../../../services/hotelService', () => ({
   getHotels: vi.fn(),
 }))
 
-// Mock Theme Context
-vi.mock('../../../context/ThemeContext', () => ({
+// Mock Theme Hook
+vi.mock('../../../hooks/useTheme', () => ({
   useTheme: () => ({
     theme: 'light',
     toggleTheme: vi.fn(),

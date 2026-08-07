@@ -64,9 +64,30 @@
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    @apply bg-white text-slate-700 transition-colors duration-200 dark:bg-slate-950 dark:text-slate-200;
   }
 
   input, button, textarea, select {
     font-family: inherit;
+  }
+}
+
+@layer utilities {
+  .dark .bg-surface-sidebar { @apply bg-surface-dark-sidebar; }
+  .dark .bg-surface-section { @apply bg-surface-dark-section; }
+  .dark .bg-surface { @apply bg-surface-dark-DEFAULT; }
+  .dark .bg-surface-active { @apply bg-surface-dark-active; }
+  .dark .bg-white { @apply bg-slate-800; }
+  .dark .bg-slate-100 { @apply bg-slate-950; }
+  .dark .text-ink, .dark .text-ink-deep, .dark .text-ink-alt,
+  .dark .text-brand-dark, .dark .text-slate-900, .dark .text-slate-800,
+  .dark .text-slate-700, .dark .text-slate-600 { @apply text-slate-50; }
+  .dark .text-slate-500, .dark .text-slate-400,
+  .dark .text-slate-400\/90 { @apply text-slate-200; }
+  .dark .text-gray-500, .dark .text-gray-400,
+  .dark .text-gray-300 { @apply text-slate-200; }
+  .dark .border-slate-100, .dark .border-slate-200 { @apply border-slate-700; }
+  .dark input, .dark textarea, .dark select {
+    @apply text-slate-50 placeholder-slate-300;
   }
 }
