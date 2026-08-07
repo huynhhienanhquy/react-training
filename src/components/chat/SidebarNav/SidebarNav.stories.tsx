@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { MemoryRouter } from 'react-router-dom'
 import { SidebarNav } from '.'
 import { AuthProvider } from '../../../context/AuthProvider'
+import { ThemeProvider } from '../../../context/ThemeProvider'
 
 const meta: Meta<typeof SidebarNav> = {
   title: 'Chat/SidebarNav',
@@ -13,11 +14,13 @@ const meta: Meta<typeof SidebarNav> = {
   decorators: [
     (Story) => (
       <MemoryRouter>
-        <AuthProvider>
-          <div className="h-screen bg-slate-100 flex">
-            <Story />
-          </div>
-        </AuthProvider>
+        <ThemeProvider>
+          <AuthProvider>
+            <div className="h-screen bg-slate-100 flex">
+              <Story />
+            </div>
+          </AuthProvider>
+        </ThemeProvider>
       </MemoryRouter>
     ),
   ],

@@ -26,7 +26,7 @@ const getCategoryBadge = (category?: string) => {
     return {
       label: 'Cuisine',
       icon: UtensilsIcon,
-      color: 'bg-amber-100/70 text-amber-700',
+      color: 'bg-amber-100/70 dark:bg-amber-950/70 text-amber-700 dark:text-amber-300',
     };
   }
 
@@ -34,7 +34,7 @@ const getCategoryBadge = (category?: string) => {
     return {
       label: 'Sightseeing',
       icon: CameraIcon,
-      color: 'bg-emerald-100/70 text-emerald-700',
+      color: 'bg-emerald-100/70 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-300',
     };
   }
 
@@ -42,7 +42,7 @@ const getCategoryBadge = (category?: string) => {
     return {
       label: 'Shopping',
       icon: ShoppingBagIcon,
-      color: 'bg-purple-100/70 text-purple-700',
+      color: 'bg-purple-100/70 dark:bg-purple-950/70 text-purple-700 dark:text-purple-300',
     };
   }
 
@@ -54,14 +54,14 @@ const getCategoryBadge = (category?: string) => {
     return {
       label: category ?? 'Stay',
       icon: HotelIcon,
-      color: 'bg-indigo-100/70 text-indigo-700',
+      color: 'bg-indigo-100/70 dark:bg-indigo-950/70 text-indigo-700 dark:text-indigo-300',
     };
   }
 
   return {
     label: category ?? 'Entertainment',
     icon: CompassIcon,
-    color: 'bg-blue-100/70 text-blue-700',
+    color: 'bg-blue-100/70 dark:bg-blue-950/70 text-blue-700 dark:text-blue-300',
   };
 };
 
@@ -81,8 +81,8 @@ export function PlacesCardWidget({
     initialPlaces ?? apiPlaces ?? [];
 
   return (
-    <div className="bg-brand-light rounded-2xl p-4 md:p-5 flex flex-col gap-4 border-none max-w-2xl w-full">
-      <div className="flex items-center justify-between pb-3 border-b border-slate-200/60">
+    <div className="bg-brand-light dark:bg-slate-700/70 rounded-2xl p-4 md:p-5 flex flex-col gap-4 border border-transparent dark:border-slate-600/70 max-w-2xl w-full shadow-sm dark:shadow-black/20 transition-colors duration-200">
+      <div className="flex items-center justify-between pb-3 border-b border-slate-200/60 dark:border-slate-600">
         <div className="flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-600 shrink-0">
             <MapPinIcon className="w-4 h-4" />
@@ -101,7 +101,7 @@ export function PlacesCardWidget({
           </div>
         </div>
 
-        <span className="px-3 py-1 bg-emerald-100/70 text-emerald-700 text-xxs font-bold rounded-full">
+        <span className="px-3 py-1 bg-emerald-100/70 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-300 text-xxs font-bold rounded-full">
           Featured
         </span>
       </div>
@@ -143,7 +143,7 @@ export function PlacesCardWidget({
             return (
               <div
                 key={place.id}
-                className="bg-white rounded-xl p-3 border border-slate-200/60 flex items-center gap-3.5 hover:border-slate-300 transition-colors cursor-pointer"
+                className="bg-white dark:bg-slate-800 rounded-xl p-3 border border-slate-200/60 dark:border-slate-600 flex items-center gap-3.5 hover:border-slate-300 dark:hover:border-slate-500 dark:hover:bg-slate-700 transition-colors cursor-pointer"
               >
                 <div className="w-16 h-16 rounded-lg overflow-hidden shrink-0 bg-slate-100">
                   <img
@@ -193,7 +193,7 @@ export function PlacesCardWidget({
         <Button
           variant="dark"
           size="md"
-          className="w-full rounded-2xl"
+          className="w-full rounded-2xl dark:bg-slate-950 dark:hover:bg-blue-600"
           rightIcon={
             <Icon name="arrow-right" className="w-4 h-4" />
           }

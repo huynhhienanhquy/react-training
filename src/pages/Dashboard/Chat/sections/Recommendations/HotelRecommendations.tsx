@@ -106,7 +106,7 @@ export const HotelRecommendations = ({
           return (
             <div
               key={hotel.id}
-              className="bg-brand-light rounded-2xl p-4 flex flex-col md:flex-row items-center gap-4 mb-3 border-none"
+              className="bg-brand-light dark:bg-slate-700/70 rounded-2xl p-4 flex flex-col md:flex-row items-center gap-4 mb-3 border border-transparent dark:border-slate-600/70 shadow-sm dark:shadow-black/20 transition-colors duration-200"
             >
               <div className="w-full md:w-36 h-36 md:h-32 rounded-xl overflow-hidden shrink-0">
                 <img
@@ -134,7 +134,7 @@ export const HotelRecommendations = ({
               <div className="flex flex-col items-end justify-between w-full md:w-auto h-full self-stretch space-y-3 shrink-0">
                 <div>
                   {hotel.tag && (
-                    <span className="px-3 py-0.5 bg-emerald-50 text-emerald-600 text-xxs font-medium rounded-full border border-emerald-100">
+                    <span className="px-3 py-0.5 bg-emerald-50 dark:bg-emerald-950/70 text-emerald-600 dark:text-emerald-300 text-xxs font-medium rounded-full border border-emerald-100 dark:border-emerald-800">
                       {hotel.tag}
                     </span>
                   )}

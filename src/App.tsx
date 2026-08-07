@@ -1,6 +1,7 @@
 
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthProvider';
+import { ThemeProvider } from './context/ThemeProvider';
 
 // Import Guards
 import { ProtectedRoute } from './routes/guards/ProtectedRoute';
@@ -20,8 +21,9 @@ import { SelectHotelPage } from './pages/Dashboard/Hotel/SelectHotelPage';
 export const App = () => {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <Routes>
+      <ThemeProvider>
+        <AuthProvider>
+          <Routes>
           {/* Public pages (Not logged in) */}
           <Route element={<GuestRoute />}>
             <Route path="/login" element={<Login />} />
@@ -42,8 +44,9 @@ export const App = () => {
 
           {/* Default navigation when URL is invalid */}
           <Route path="*" element={<Navigate to="/login" replace />} />
-        </Routes>
-      </AuthProvider>
+          </Routes>
+        </AuthProvider>
+      </ThemeProvider>
     </BrowserRouter>
   );
 };
