@@ -13,8 +13,8 @@ vi.mock('../../../services/fareService', () => ({
   getFareDetails: vi.fn(),
 }))
 
-// Mock Theme Context
-vi.mock('../../../context/ThemeContext', () => ({
+// Mock Theme Hook
+vi.mock('../../../hooks/useTheme', () => ({
   useTheme: () => ({
     theme: 'light',
     toggleTheme: vi.fn(),
