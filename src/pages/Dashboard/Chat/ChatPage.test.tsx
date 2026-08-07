@@ -110,6 +110,7 @@ vi.mock("@/components/chat/ChatInputBox/ChatInputBox", () => ({
 describe("ChatPage", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    localStorage.clear();
   });
 
   it("renders welcome state initially", () => {
