@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import { useAuth } from './useAuth';
-import { AuthContext, type AuthContextType } from '../context/AuthContext';
+import { useAuth } from '@/hooks/useAuth';
+import { AuthContext, type AuthContextType } from '@/context/AuthContext';
 import React from 'react';
 
 describe('useAuth', () => {

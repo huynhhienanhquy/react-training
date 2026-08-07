@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { travelApi } from './api';
-import { getItineraries } from './travelService';
+import { travelApi } from '@/services/api';
+import { getItineraries } from '@/services/travelService';
 
-vi.mock('./api', () => ({
+vi.mock('@/services/api', () => ({
   travelApi: { get: vi.fn() },
 }));
 

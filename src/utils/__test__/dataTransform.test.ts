@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { FareData } from '@/types/flight';
-import { mapFareDataToFlightOption } from './dataTransform';
+import { mapFareDataToFlightOption } from '@/utils/dataTransform';
 
 const fareData: FareData = {
   destination: 'Hanoi',

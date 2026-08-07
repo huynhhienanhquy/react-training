@@ -84,7 +84,7 @@ describe("SidebarNav", () => {
       />
     );
 
-    await user.click(screen.getByRole("button", { name: "Open profile menu" }));
+    await user.click(screen.getByAltText("User Avatar").closest("button")!);
 
     expect(screen.getByText("Log out")).toBeInTheDocument();
   });
@@ -103,7 +103,7 @@ describe("SidebarNav", () => {
     );
 
 
-    await user.click(screen.getByRole("button", { name: "Open profile menu" }));
+    await user.click(screen.getByAltText("User Avatar").closest("button")!);
 
     await user.click(screen.getByText("Log out"));
 

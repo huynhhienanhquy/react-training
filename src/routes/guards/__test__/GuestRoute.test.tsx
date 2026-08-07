@@ -9,7 +9,7 @@ import { GuestRoute } from "@/routes/guards/GuestRoute";
 
 const mockUseAuth = vi.fn();
 
-vi.mock("../../hooks/useAuth", () => ({
+vi.mock("@/hooks/useAuth", () => ({
   useAuth: () => mockUseAuth(),
 }));
 

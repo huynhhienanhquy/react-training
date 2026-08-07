@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { PriceDetailsSidebar } from '.';
 
-vi.mock('@/components/Card/Card', () => ({
+vi.mock('@/components/Card', () => ({
   Card: ({
     children,
     variant,
@@ -19,7 +19,7 @@ vi.mock('@/components/Card/Card', () => ({
   ),
 }));
 
-vi.mock('@/components/InfoRow/InfoRow', () => ({
+vi.mock('@/components/InfoRow', () => ({
   InfoRow: ({ label, value }: { label: string; value: string }) => (
     <div data-testid="info-row">
       <span>{label}</span>

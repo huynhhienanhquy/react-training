@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import type { User } from '../types/auth';
 import { AuthContext } from './AuthContext';
-import { login as authenticateUser } from '../services/authService';
+import { login as authenticateUser } from '@/services/authService';
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(() => {

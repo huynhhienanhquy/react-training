@@ -284,10 +284,7 @@ describe("FlightRecommendations", () => {
     );
 
 
-    const favoriteButton = screen.getByRole(
-      "button",
-      { name: /favorite/i }
-    );
+    const favoriteButton = screen.getByRole('button', { pressed: false });
 
 
     await user.click(
