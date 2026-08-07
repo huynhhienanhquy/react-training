@@ -1,9 +1,11 @@
 import React, { useId, useState } from 'react';
+import { Eye, EyeOff } from 'lucide-react';
 import { Button } from '@/components/Button';
 import { Icon } from '@/components/icons/Icon';
 
 type InputFieldProps = {
   label: string;
+  error?: string;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 export const InputField = ({
@@ -11,10 +13,13 @@ export const InputField = ({
   type = 'text',
   className = '',
   id,
+  error,
   ...props
 }: InputFieldProps) => {
   const generatedId = useId();
   const inputId = id ?? generatedId;
+  const errorId = `${inputId}-error`;
+
   const isPassword = type === 'password';
   const [showPassword, setShowPassword] = useState(false);
 
@@ -36,6 +41,7 @@ export const InputField = ({
 
       <div className="relative">
         <input
+          {...inputProps}
           id={inputId}
           type={inputType}
           className={`w-full rounded-xl border border-gray-100 px-5 py-3.5 transition placeholder:text-gray-300 focus:outline-none ${
@@ -43,7 +49,6 @@ export const InputField = ({
               ? 'bg-blue-50/40 pr-12 focus:border-blue-400 focus:bg-blue-50/50'
               : 'bg-gray-50/30 focus:border-blue-500'
           } ${className}`}
-          {...props}
         />
 
         {isPassword && (
@@ -66,6 +71,17 @@ export const InputField = ({
           </Button>
         )}
       </div>
+
+      {hasError && (
+        <p
+          id={errorId}
+          role="alert"
+          className="text-sm text-red-500 font-medium px-1"
+        >
+          {error}
+        </p>
+      )}
     </div>
   );
 };
+

@@ -7,13 +7,18 @@ export const ThinkingLoader = ({
   text = "Travelpal is thinking..."
 }: ThinkingLoaderProps) => {
   return (
-    <div className="flex items-center gap-2.5 py-2 px-1 text-slate-400 select-none">
+    <div
+      className="flex items-center gap-2.5 py-2 px-1 text-slate-400 select-none"
+      role="status"
+      aria-live="polite"
+    >
       {/* 🔹 iOS Style Spinner  */}
       <svg
         className="animate-spin w-4 h-4 text-slate-400 shrink-0"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
+        aria-hidden="true"
       >
         <g stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
           <line x1="12" y1="2" x2="12" y2="6" opacity="1" />
