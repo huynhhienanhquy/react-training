@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import { useAsyncData } from '../useAsyncData';
+import { useAsyncData } from '@/hooks/useAsyncData';
 import { AxiosError } from 'axios';
 
 describe('useAsyncData', () => {

@@ -4,16 +4,16 @@ import { SidebarNav } from '@/components/chat/SidebarNav/index';
 import { Button } from '@/components/Button/index';
 
 import HeartIcon from '@/components/icons/HeartIcon';
-import defaultFlightLogo from '@/assets/images/ellipse.png';
+import defaultFlightLogo from '@/assets/images/travel-provider-logo.png';
 import { SectionHeader } from '@/components/FlightFare/SectionHeader';
 
 import { Topbar } from '@/components/chat/Topbar';
 import { FareHeader } from '@/components/FlightFare/FareHeader';
-import { SelectedFlightBox } from '@/components/FlightFare/SelectedFlight';
-import { FareCards } from '@/components/FlightFare/FareCard';
-import { PriceDetailsSidebar } from '@/components/FlightFare/PriceDetail';
+import { SelectedFlightBox } from '@/components/FlightFare/SelectedFlightBox';
+import { FareCards } from '@/components/FlightFare/FareCards';
+import { PriceDetailsSidebar } from '@/components/FlightFare/PriceDetailsSidebar';
 
-import { getFareDetailsApi } from '@/services/fareService';
+import { getFareDetails } from '@/services/fareService';
 import type {
   FareData,
   SelectFarePageProps,
@@ -30,15 +30,15 @@ export const SelectFarePage = ({
   onStartNewChat,
 }: SelectFarePageProps) => {
   const navigate = useNavigate();
-  const backToChat = onBackToChat ?? (() => navigate('/chats'));
-  const startNewChat = onStartNewChat ?? (() => navigate('/chats'));
+  const handleBackToChat = onBackToChat ?? (() => navigate('/chats'));
+  const handleStartNewChat = onStartNewChat ?? (() => navigate('/chats'));
   const { activeNav, setActiveNav } = useSidebarNav();
   const [selectedFareId, setSelectedFareId] =
     useState<'economy' | 'business'>('economy');
 
   // Fetch fare data
   const fetchFare = useCallback(async (): Promise<FareData> => {
-    const rawData = await getFareDetailsApi();
+    const rawData = await getFareDetails();
 
     // MockAPI can return an array or an object.
     const data = Array.isArray(rawData)
@@ -106,8 +106,8 @@ export const SelectFarePage = ({
           breadcrumbLabel="Select Fare"
           chatTitle={resolvedChatTitle}
           messages={messages}
-          onBackToChat={backToChat}
-          onNewChat={startNewChat}
+          onBackToChat={handleBackToChat}
+          onNewChat={handleStartNewChat}
         />
 
         {/* LOADING STATE */}

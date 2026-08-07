@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { travelApi } from './api';
-import { getItineraryListApi } from './travelService';
+import { travelApi } from '@/services/api';
+import { getItineraries } from '@/services/travelService';
 
-vi.mock('./api', () => ({
+vi.mock('@/services/api', () => ({
   travelApi: { get: vi.fn() },
 }));
 
@@ -10,7 +10,7 @@ const days = [
   { id: 'day-1', day: 1, dateTitle: 'Arrival', activities: [] },
 ];
 
-describe('getItineraryListApi', () => {
+describe('getItineraries', () => {
   beforeEach(() => vi.clearAllMocks());
 
   it.each([
@@ -19,14 +19,14 @@ describe('getItineraryListApi', () => {
   ])('exposes DayItinerary[] for %s', async (_label, data) => {
     vi.mocked(travelApi.get).mockResolvedValue({ data });
 
-    await expect(getItineraryListApi()).resolves.toEqual(days);
+    await expect(getItineraries()).resolves.toEqual(days);
     expect(travelApi.get).toHaveBeenCalledWith('/itinerary');
   });
 
   it('rejects a malformed itinerary envelope', async () => {
     vi.mocked(travelApi.get).mockResolvedValue({ data: {} });
 
-    await expect(getItineraryListApi()).rejects.toThrow(
+    await expect(getItineraries()).rejects.toThrow(
       'Invalid itinerary response',
     );
   });

@@ -3,11 +3,11 @@ import userEvent from '@testing-library/user-event';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 import { ItineraryCardWidget } from './ItineraryCardWidget';
-import { getItineraryListApi } from '@/services/travelService';
+import { getItineraries } from '@/services/travelService';
 
 
 vi.mock('@/services/travelService', () => ({
-  getItineraryListApi: vi.fn(),
+  getItineraries: vi.fn(),
 }));
 
 
@@ -154,7 +154,7 @@ describe('ItineraryCardWidget', () => {
   it('shows loading when fetching API', () => {
 
 
-    vi.mocked(getItineraryListApi)
+    vi.mocked(getItineraries)
       .mockImplementation(
         () => new Promise(() => {})
       );
@@ -179,7 +179,7 @@ describe('ItineraryCardWidget', () => {
   it('renders itinerary from API', async () => {
 
 
-    vi.mocked(getItineraryListApi)
+    vi.mocked(getItineraries)
       .mockResolvedValue([
         {
           day: 1,
@@ -223,7 +223,7 @@ describe('ItineraryCardWidget', () => {
   it('shows error when API failed', async () => {
 
 
-    vi.mocked(getItineraryListApi)
+    vi.mocked(getItineraries)
       .mockRejectedValue(
         new Error('Server error')
       );

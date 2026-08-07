@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import type { User } from '../types/auth';
 import { AuthContext } from './AuthContext';
-import { loginApi } from '../services/authService';
+import { login as authenticateUser } from '@/services/authService';
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(() => {
@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setLoading(true);
 
     try {
-      const userData = await loginApi({ email, password });
+      const userData = await authenticateUser({ email, password });
 
       const accessToken = `mock_token_${userData.id}_${Date.now()}`;
 

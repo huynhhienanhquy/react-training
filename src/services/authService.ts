@@ -1,7 +1,7 @@
 import { authApi } from './api';
 import type { User, LoginPayload } from '../types/auth';
 
-export const loginApi = async (payload: LoginPayload): Promise<User> => {
+export const login = async (payload: LoginPayload): Promise<User> => {
   const response = await authApi.get<User[]>('/login');
   const users = response.data || [];
 

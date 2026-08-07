@@ -5,7 +5,7 @@ import { PriceDisplay } from '@/components/PriceDisplay';
 import { Button } from '@/components/Button';
 
 import type { FareOption } from '@/types/flight';
-import type { FareCardsProps } from '@/types/flightfare';
+import type { FareCardsProps } from '@/types/flightFareTypes';
 
 export type { FareOption };
 

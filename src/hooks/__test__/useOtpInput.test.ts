@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { useOtpInput } from '../useOtpInput';
+import { useOtpInput } from '@/hooks/useOtpInput';
 import React from 'react';
 
 describe('useOtpInput', () => {

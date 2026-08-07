@@ -4,14 +4,14 @@ import { useAuth } from '@/hooks/useAuth';
 import { useProfileMenu } from '@/hooks/useProfileMenu';
 import { PentagonClipPath } from '@/components/icons/PentagonClipPath';
 
-import logo from '@/assets/images/Logo.png';
+import appLogo from '@/assets/images/app-logo.png';
 import ChatIcon from '@/components/icons/MessageIcon';
 import HeartIcon from '@/components/icons/HeartIcon';
 import MedalIcon from '@/components/icons/MedalIcon';
 import MapIcon from '@/components/icons/MapIcon';
 import CommunityIcon from '@/components/icons/PeopleIcon';
 import SettingsIcon from '@/components/icons/SettingsIcon';
-import User from '@/assets/images/user.png';
+import userAvatar from '@/assets/images/user-avatar.png';
 import { type SidebarNavProps } from "@/types/chat";
 import { Button } from "@/components/Button";
 
@@ -68,7 +68,7 @@ export const SidebarNav = ({ activeNav, onNavChange, isMobileOpen, onMobileToggl
             className="w-11 h-11 rounded-2xl p-1.5 hover:opacity-90 mt-3"
             leftIcon={
               <img
-                src={logo}
+                src={appLogo}
                 alt="Logo"
                 className="w-8 h-8 object-contain"
               />
@@ -127,7 +127,7 @@ export const SidebarNav = ({ activeNav, onNavChange, isMobileOpen, onMobileToggl
                 style={{ clipPath: 'url(#pentagon-clip)' }}
               >
                 <img
-                  src={User}
+                  src={userAvatar}
                   alt="User Avatar"
                   className="w-full h-full object-cover scale-110"
                 />
@@ -165,7 +165,7 @@ export const SidebarNav = ({ activeNav, onNavChange, isMobileOpen, onMobileToggl
                 className="w-11 h-11 rounded-2xl p-1.5"
                 leftIcon={
                   <img
-                    src={logo}
+                    src={appLogo}
                     alt="Logo"
                     className="w-full h-full object-contain"
                   />

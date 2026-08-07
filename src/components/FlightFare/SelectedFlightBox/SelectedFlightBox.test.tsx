@@ -4,11 +4,11 @@ import { describe, expect, it, vi } from 'vitest';
 import { SelectedFlightBox, type FlightLeg } from '.';
 import HeartIcon from '@/components/icons/HeartIcon';
 
-vi.mock('./SectionHeader/SectionHeader', () => ({
+vi.mock('../SectionHeader', () => ({
   SectionHeader: ({ title }: { title: string }) => <h2>{title}</h2>,
 }));
 
-vi.mock('@/components/Card/Card', () => ({
+vi.mock('@/components/Card', () => ({
   Card: ({
     children,
     variant,
@@ -89,7 +89,7 @@ describe('SelectedFlightBox', () => {
   it('renders favorite and change-flight controls', () => {
     render(<SelectedFlightBox {...defaultProps} />);
 
-    expect(screen.getByAltText('Favorite')).toHaveAttribute('src', '/heart.svg');
+    expect(screen.getByRole('button', { pressed: false })).toBeInTheDocument();
     expect(
       screen.getByRole('button', { name: 'Change Flight' }),
     ).toBeInTheDocument();
@@ -98,20 +98,19 @@ describe('SelectedFlightBox', () => {
   it('toggles favorite styles after clicking the favorite button', () => {
     render(<SelectedFlightBox {...defaultProps} />);
 
-    const favoriteImage = screen.getByAltText('Favorite');
-    const favoriteButton = favoriteImage.closest('button');
+    const favoriteButton = screen.getByRole('button', { pressed: false });
 
     expect(favoriteButton).toHaveClass('bg-primary-light');
-    expect(favoriteImage).not.toHaveClass('scale-110');
+    expect(favoriteButton).toHaveAttribute('aria-pressed', 'false');
 
     fireEvent.click(favoriteButton!);
 
     expect(favoriteButton).toHaveClass('bg-blue-600');
-    expect(favoriteImage).toHaveClass('scale-110');
+    expect(favoriteButton).toHaveAttribute('aria-pressed', 'true');
 
     fireEvent.click(favoriteButton!);
 
     expect(favoriteButton).toHaveClass('bg-primary-light');
-    expect(favoriteImage).not.toHaveClass('scale-110');
+    expect(favoriteButton).toHaveAttribute('aria-pressed', 'false');
   });
 });

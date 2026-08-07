@@ -13,8 +13,8 @@ export const VerifyOTP = () => {
   const { otp, inputRefs, handleChange, handleKeyDown, handlePaste } = useOtpInput(6);
   const { counter, reset } = useCountdown(29);
 
-  const handleVerify = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleVerify = (event: React.FormEvent) => {
+    event.preventDefault();
     startLoading();
 
     // Mock API call to verify OTP
@@ -55,7 +55,7 @@ export const VerifyOTP = () => {
                   onChange={(e) => handleChange(index, e.target.value)}
                   onKeyDown={(e) => handleKeyDown(index, e)}
                   onPaste={handlePaste}
-                  className="w-10 md:w-12 h-12 md:h-14 text-center text-lg md:text-xl font-bold rounded-xl border border-gray-200 bg-gray-50/50 text-slate-800 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 focus:bg-white transition shadow-xs font-mono"
+                  className="w-10 md:w-12 h-12 md:h-14 text-center text-lg md:text-xl font-bold rounded-xl border border-gray-200 bg-gray-50/50 text-slate-800 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 focus:bg-white transition shadow-xs font-sans"
                 />
                 {/* Visual dash separator between pairs of input boxes (after index 2) */}
                 {index === 2 && (

@@ -2,7 +2,7 @@ import CalendarIcon from '@/components/icons/CalendarIcon';
 import ClockIcon from '@/components/icons/ClockIcon';
 import MapPinIcon from '@/components/icons/MapPinIcon';
 import { Button } from '@/components/Button';
-import { getItineraryListApi } from '@/services/travelService';
+import { getItineraries } from '@/services/travelService';
 import type {
   DayItinerary,
   ItineraryCardWidgetProps,
@@ -20,7 +20,7 @@ export function ItineraryCardWidget({
     data: apiItinerary,
     loading,
     error,
-  } = useAsyncData(getItineraryListApi, {
+  } = useAsyncData(getItineraries, {
     skip: Boolean(initialItinerary),
   });
 

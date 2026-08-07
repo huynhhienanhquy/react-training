@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { SelectFarePage } from './SelectFarePage'
-import { getFareDetailsApi } from '@/services/fareService'
+import { getFareDetails } from '@/services/fareService'
 
 // Mock react-router-dom
 vi.mock('react-router-dom', () => ({
@@ -10,7 +10,7 @@ vi.mock('react-router-dom', () => ({
 
 // Mock Service API
 vi.mock('../../../services/fareService', () => ({
-  getFareDetailsApi: vi.fn(),
+  getFareDetails: vi.fn(),
 }))
 
 // Mock Theme Context
@@ -76,7 +76,7 @@ describe('SelectFarePage Component', () => {
   })
 
   it('renders loading state initially', () => {
-    ;(getFareDetailsApi as ReturnType<typeof vi.fn>).mockReturnValue(new Promise(() => {}))
+    ;(getFareDetails as ReturnType<typeof vi.fn>).mockReturnValue(new Promise(() => {}))
 
     render(<SelectFarePage />)
 
@@ -84,7 +84,7 @@ describe('SelectFarePage Component', () => {
   })
 
   it('renders fare details successfully after API call', async () => {
-    ;(getFareDetailsApi as ReturnType<typeof vi.fn>).mockResolvedValue(mockFareData)
+    ;(getFareDetails as ReturnType<typeof vi.fn>).mockResolvedValue(mockFareData)
 
     render(<SelectFarePage chatTitle="Trip to Owerri" />)
 
@@ -102,7 +102,7 @@ describe('SelectFarePage Component', () => {
   })
 
   it('updates total amount when selecting Business fare', async () => {
-    ;(getFareDetailsApi as ReturnType<typeof vi.fn>).mockResolvedValue(mockFareData)
+    ;(getFareDetails as ReturnType<typeof vi.fn>).mockResolvedValue(mockFareData)
 
     render(<SelectFarePage />)
 
@@ -123,7 +123,7 @@ describe('SelectFarePage Component', () => {
 
   it('renders error state when API call fails', async () => {
     const errorMessage = 'Failed to fetch flight data'
-    ;(getFareDetailsApi as ReturnType<typeof vi.fn>).mockRejectedValue(new Error(errorMessage))
+    ;(getFareDetails as ReturnType<typeof vi.fn>).mockRejectedValue(new Error(errorMessage))
 
     render(<SelectFarePage />)
 
@@ -141,7 +141,7 @@ describe('SelectFarePage Component', () => {
       value: { ...window.location, reload: reloadMock },
     })
 
-    ;(getFareDetailsApi as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('Network Error'))
+    ;(getFareDetails as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('Network Error'))
 
     render(<SelectFarePage />)
 

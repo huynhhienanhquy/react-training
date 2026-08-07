@@ -1,10 +1,11 @@
 import { renderHook, act } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { useChatSessions } from '../useChatSessions';
+import { useChatSessions } from '@/hooks/useChatSessions';
 
 describe('useChatSessions', () => {
   beforeEach(() => {
     vi.useFakeTimers();
+    localStorage.clear();
   });
 
   afterEach(() => {
@@ -18,6 +19,28 @@ describe('useChatSessions', () => {
     expect(result.current.activeSessionId).toBeNull();
     expect(result.current.currentMessages).toEqual([]);
     expect(result.current.isTyping).toBe(false);
+  });
+
+  it('restores the active conversation after the chat is remounted', () => {
+    const firstRender = renderHook(() => useChatSessions());
+
+    act(() => {
+      firstRender.result.current.sendMessage('Hotels in Bahamas');
+      vi.advanceTimersByTime(1200);
+    });
+
+    const activeSessionId = firstRender.result.current.activeSessionId;
+    firstRender.unmount();
+
+    const secondRender = renderHook(() => useChatSessions());
+
+    expect(secondRender.result.current.activeSessionId).toBe(activeSessionId);
+    expect(secondRender.result.current.sessions).toHaveLength(1);
+    expect(secondRender.result.current.currentMessages).toHaveLength(2);
+    expect(secondRender.result.current.currentMessages[0].text).toBe(
+      'Hotels in Bahamas',
+    );
+    expect(secondRender.result.current.currentMessages[1].type).toBe('hotel');
   });
 
   it('creates a session and appends user message on sendMessage', () => {

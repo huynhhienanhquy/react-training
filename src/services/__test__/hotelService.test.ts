@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { flightApi } from './api';
-import { getHotelDetailsApi, getHotelListApi } from './hotelService';
+import { flightApi } from '@/services/api';
+import { getHotelById, getHotels } from '@/services/hotelService';
 
-vi.mock('./api', () => ({
+vi.mock('@/services/api', () => ({
   flightApi: { get: vi.fn() },
 }));
 
@@ -13,7 +13,7 @@ describe('hotelService', () => {
     const hotels = [{ id: 'hotel-1', hotelName: 'First Hotel' }];
     vi.mocked(flightApi.get).mockResolvedValue({ data: hotels });
 
-    await expect(getHotelListApi()).resolves.toEqual(hotels);
+    await expect(getHotels()).resolves.toEqual(hotels);
     expect(flightApi.get).toHaveBeenCalledWith('/hotel');
   });
 
@@ -21,7 +21,7 @@ describe('hotelService', () => {
     const hotel = { id: 'hotel-2', hotelName: 'Second Hotel' };
     vi.mocked(flightApi.get).mockResolvedValue({ data: hotel });
 
-    await expect(getHotelDetailsApi('hotel-2')).resolves.toEqual(hotel);
+    await expect(getHotelById('hotel-2')).resolves.toEqual(hotel);
     expect(flightApi.get).toHaveBeenCalledWith('/hotel/hotel-2');
   });
 });

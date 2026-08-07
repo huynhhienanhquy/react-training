@@ -14,8 +14,8 @@ export const Onboarding = () => {
   const [fullName, setFullName] = useState("");
   const [country, setCountry] = useState("");
 
-  const handleStartPlanning = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleStartPlanning = (event: React.FormEvent) => {
+    event.preventDefault();
     startLoading();
 
     setTimeout(() => {

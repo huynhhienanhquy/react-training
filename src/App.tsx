@@ -12,7 +12,7 @@ import { Register } from './pages/Authentication/Register/Register';
 import { Onboarding } from './pages/Authentication/Onboarding/Onboarding';
 import { ForgotPassword } from './pages/Authentication/ForgotPassword/ForgotPassword';
 import { VerifyOTP } from './pages/Authentication/VerifyOTP/VerifyOTP';
-import { ResetPassword } from './pages/Authentication/RessetPassword/ResetPassword';
+import { ResetPassword } from './pages/Authentication/ResetPassword/ResetPassword';
 import { ChatPage } from './pages/Dashboard/Chat/ChatPage';
 import { SelectFarePage } from './pages/Dashboard/Flight/SelectFarePage';
 import { SelectHotelPage } from './pages/Dashboard/Hotel/SelectHotelPage';

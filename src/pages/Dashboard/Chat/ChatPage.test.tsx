@@ -15,11 +15,11 @@ vi.mock('react-router-dom', () => ({
   useNavigate: () => mockNavigate,
 }));
 
-vi.mock("@/components/chat/SidebarNav/SidebarNav", () => ({
+vi.mock("@/components/chat/SidebarNav/index", () => ({
   SidebarNav: () => <div>SidebarNav</div>,
 }));
 
-vi.mock("@/components/chat/ChatHistorySidebar/ChatHistorySidebar", () => ({
+vi.mock("@/components/chat/ChatHistorySidebar/index", () => ({
   ChatHistorySidebar: ({
     sessions,
     onSelectSession,
@@ -41,7 +41,7 @@ vi.mock("@/components/chat/ChatHistorySidebar/ChatHistorySidebar", () => ({
   ),
 }));
 
-vi.mock("@/components/chat/Topbar/Topbar", () => ({
+vi.mock("@/components/chat/Topbar/index", () => ({
   Topbar: ({
     onNewChat,
   }: {
@@ -53,7 +53,7 @@ vi.mock("@/components/chat/Topbar/Topbar", () => ({
   ),
 }));
 
-vi.mock("@/components/chat/WelcomeState/WelcomeState", () => ({
+vi.mock("@/components/chat/WelcomeState/index", () => ({
   WelcomeState: ({
     onSelectPrompt,
   }: {
@@ -69,7 +69,7 @@ vi.mock("@/components/chat/WelcomeState/WelcomeState", () => ({
   ),
 }));
 
-vi.mock("@/components/chat/ChatMessageList/ChatMessageList", () => ({
+vi.mock("@/components/chat/ChatMessageList/index", () => ({
   ChatMessageList: ({
     messages,
     onBookFlight,
@@ -110,6 +110,7 @@ vi.mock("@/components/chat/ChatInputBox/ChatInputBox", () => ({
 describe("ChatPage", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    localStorage.clear();
   });
 
   it("renders welcome state initially", () => {

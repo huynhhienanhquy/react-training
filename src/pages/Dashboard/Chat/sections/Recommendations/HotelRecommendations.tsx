@@ -1,7 +1,7 @@
 import React from 'react';
 import { RecommendationWrapper } from './RecommendationWrapper';
 import { Button } from '@/components/Button';
-import { getHotelListApi } from '@/services/hotelService';
+import { getHotels } from '@/services/hotelService';
 import type {
   HotelData,
   HotelOption,
@@ -12,7 +12,7 @@ import { useFavorites } from '@/hooks/useFavorites';
 
 export type { HotelOption };
 
-const defaultHotelImg =
+const defaultHotelImage =
   'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80';
 
 const mapHotelDataToOption = (
@@ -35,7 +35,7 @@ const mapHotelDataToOption = (
     imageUrl:
       hotel.coverImage ||
       hotel.images?.[0] ||
-      defaultHotelImg,
+      defaultHotelImage,
     rawData: hotel,
   };
 };
@@ -52,7 +52,7 @@ export const HotelRecommendations = ({
     data: hotelData,
     loading,
     error,
-  } = useAsyncData(getHotelListApi, {
+  } = useAsyncData(getHotels, {
     skip: isControlled,
   });
 
@@ -99,7 +99,7 @@ export const HotelRecommendations = ({
 
       {(isControlled || (!loading && !error)) &&
         hotelList.map((hotel) => {
-          const isFav = Boolean(
+          const isFavorite = Boolean(
             favorites[hotel.id] || hotel.isFavorite,
           );
 
@@ -110,7 +110,7 @@ export const HotelRecommendations = ({
             >
               <div className="w-full md:w-36 h-36 md:h-32 rounded-xl overflow-hidden shrink-0">
                 <img
-                  src={hotel.imageUrl || defaultHotelImg}
+                  src={hotel.imageUrl || defaultHotelImage}
                   alt={hotel.name}
                   className="w-full h-full object-cover"
                 />
@@ -155,7 +155,7 @@ export const HotelRecommendations = ({
                     type="button"
                     variant="favorite"
                     size="icon"
-                    isFavorite={isFav}
+                    isFavorite={isFavorite}
                     onClick={() =>
                       toggleFavorite(hotel.id)
                     }

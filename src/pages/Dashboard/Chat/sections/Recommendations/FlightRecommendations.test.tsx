@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { FlightRecommendations } from "./FlightRecommendations";
-import { getFlightListApi } from "@/services/fareService";
+import { getFlights } from "@/services/fareService";
 
 
 vi.mock("@/services/fareService", async () => {
@@ -14,7 +14,7 @@ vi.mock("@/services/fareService", async () => {
 
   return {
     ...actual,
-    getFlightListApi: vi.fn(),
+    getFlights: vi.fn(),
   };
 });
 
@@ -35,7 +35,7 @@ vi.mock("./RecommendationWrapper", () => ({
 }));
 
 
-const mockedApi = vi.mocked(getFlightListApi);
+const mockedGetFlights = vi.mocked(getFlights);
 
 
 const mockFlight = {
@@ -79,7 +79,7 @@ describe("FlightRecommendations", () => {
     ).toBeInTheDocument();
 
 
-    expect(mockedApi)
+    expect(mockedGetFlights)
       .not
       .toHaveBeenCalled();
   });
@@ -116,7 +116,7 @@ describe("FlightRecommendations", () => {
 
   it("shows loading then renders API data", async () => {
 
-    mockedApi.mockResolvedValue([
+    mockedGetFlights.mockResolvedValue([
       {
         id: "1",
         destination: "Hanoi",
@@ -180,7 +180,7 @@ describe("FlightRecommendations", () => {
 
   it("shows error message when API fails", async () => {
 
-    mockedApi.mockRejectedValue(
+    mockedGetFlights.mockRejectedValue(
       new Error("Network Error")
     );
 
@@ -201,7 +201,7 @@ describe("FlightRecommendations", () => {
 
   it("shows empty state", async () => {
 
-    mockedApi.mockResolvedValue([]);
+    mockedGetFlights.mockResolvedValue([]);
 
 
     render(
@@ -284,10 +284,7 @@ describe("FlightRecommendations", () => {
     );
 
 
-    const favoriteButton = screen.getByRole(
-      "button",
-      { name: /favorite/i }
-    );
+    const favoriteButton = screen.getByRole('button', { pressed: false });
 
 
     await user.click(
@@ -347,7 +344,7 @@ describe("FlightRecommendations", () => {
 
 
   it("renders API flight without fare options", async () => {
-  mockedApi.mockResolvedValue([
+  mockedGetFlights.mockResolvedValue([
     {
       id: "2",
       destination: "Tokyo",

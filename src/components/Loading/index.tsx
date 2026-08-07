@@ -1,4 +1,4 @@
-import appLogo from '@/assets/images/Logo.png';
+import appLogo from '@/assets/images/app-logo.png';
 
 interface LoadingOverlayProps {
   isVisible?: boolean;

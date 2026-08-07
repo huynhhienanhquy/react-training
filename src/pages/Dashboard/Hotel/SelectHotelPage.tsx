@@ -5,7 +5,7 @@ import { SidebarNav } from '@/components/chat/SidebarNav';
 import { Topbar } from '@/components/chat/Topbar';
 import { SectionHeader } from '@/components/FlightFare/SectionHeader';
 
-import { getHotelListApi } from '@/services/hotelService';
+import { getHotels } from '@/services/hotelService';
 import { Button } from '@/components/Button';
 import { Icon } from '@/components/icons/Icon';
 
@@ -14,9 +14,9 @@ import type {
   SelectHotelPageProps,
 } from '@/types/hotel';
 
-import defaultHotelImg from '@/assets/images/ellipse.png';
-import bookingIcon from '@/assets/images/booking.png';
-import expediaIcon from '@/assets/images/expedia.png';
+import defaultHotelImage from '@/assets/images/travel-provider-logo.png';
+import bookingIcon from '@/assets/images/booking-logo.png';
+import expediaIcon from '@/assets/images/expedia-logo.png';
 
 import { useAsyncData } from '@/hooks/useAsyncData';
 import { useSidebarNav } from '@/hooks/useSidebarNav';
@@ -31,8 +31,8 @@ export const SelectHotelPage = ({
   selectedHotel,
 }: SelectHotelPageProps) => {
   const navigate = useNavigate();
-  const backToChat = onBackToChat ?? (() => navigate('/chats'));
-  const startNewChat = onStartNewChat ?? (() => navigate('/chats'));
+  const handleBackToChat = onBackToChat ?? (() => navigate('/chats'));
+  const handleStartNewChat = onStartNewChat ?? (() => navigate('/chats'));
   const { activeNav, setActiveNav, isMobileOpen, onMobileToggle } =
     useSidebarNav();
   const [isComparePrice, setIsComparePrice] = useState(false);
@@ -40,24 +40,24 @@ export const SelectHotelPage = ({
   // Fetch hotel data
   const fetchHotels = useCallback(
     async (): Promise<HotelData[]> => {
-      let dataList = await getHotelListApi();
+      let hotels = await getHotels();
 
       if (selectedHotel?.id) {
-        dataList = [
+        hotels = [
           selectedHotel,
-          ...dataList.filter(
+          ...hotels.filter(
             (hotel) => hotel.id !== selectedHotel.id,
           ),
         ];
       }
 
-      if (dataList.length === 0) {
+      if (hotels.length === 0) {
         throw new Error(
           'No matching hotel data available.',
         );
       }
 
-      return dataList;
+      return hotels;
     },
     [selectedHotel],
   );
@@ -113,8 +113,8 @@ export const SelectHotelPage = ({
           breadcrumbLabel="Select Hotel"
           chatTitle={resolvedChatTitle}
           messages={messages}
-          onBackToChat={backToChat}
-          onNewChat={startNewChat}
+          onBackToChat={handleBackToChat}
+          onNewChat={handleStartNewChat}
         />
 
         {/* LOADING STATE */}
@@ -186,7 +186,7 @@ export const SelectHotelPage = ({
             {/* LIST ACCOMMODATIONS */}
             <div className="space-y-4">
               {hotelList.map((hotel) => {
-                const hotelImage = hotel.coverImage || hotel.images?.[0] || defaultHotelImg;
+                const hotelImage = hotel.coverImage || hotel.images?.[0] || defaultHotelImage;
                 const mainPrice = hotel.priceBreakdown?.roomRate || hotel.roomOptions?.[0]?.price || 1200;
 
                 return (

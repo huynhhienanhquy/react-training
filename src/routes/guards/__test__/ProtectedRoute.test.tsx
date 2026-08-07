@@ -11,7 +11,7 @@ import { ProtectedRoute } from "@/routes/guards/ProtectedRoute";
 
 const mockUseAuth = vi.fn();
 
-vi.mock("../../hooks/useAuth", () => ({
+vi.mock("@/hooks/useAuth", () => ({
   useAuth: () => mockUseAuth(),
 }));
 

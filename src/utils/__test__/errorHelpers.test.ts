@@ -1,6 +1,6 @@
 import { AxiosError, AxiosHeaders } from 'axios';
 import { describe, expect, it } from 'vitest';
-import { getErrorMessage } from './errorHelpers';
+import { getErrorMessage } from '@/utils/errorHelpers';
 
 describe('getErrorMessage', () => {
   it('prioritizes the API response message for Axios errors', () => {
