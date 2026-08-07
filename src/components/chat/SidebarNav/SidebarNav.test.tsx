@@ -149,5 +149,11 @@ describe("SidebarNav", () => {
     expect(
       screen.getByText("Log out")
     ).toBeInTheDocument();
+
+    const mobileLogo = screen.getAllByAltText("Logo")[1];
+    const mobileAvatar = screen.getAllByAltText("User Avatar")[1];
+
+    expect(mobileLogo).toHaveClass("w-7", "h-7");
+    expect(mobileAvatar.parentElement?.parentElement).toHaveClass("w-11", "h-11");
   });
 });

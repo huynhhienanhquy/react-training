@@ -167,7 +167,7 @@ export const SidebarNav = ({ activeNav, onNavChange, isMobileOpen, onMobileToggl
                   <img
                     src={appLogo}
                     alt="Logo"
-                    className="w-full h-full object-contain"
+                    className="w-7 h-7 object-contain"
                   />
                 }
               />
@@ -207,16 +207,33 @@ export const SidebarNav = ({ activeNav, onNavChange, isMobileOpen, onMobileToggl
               </nav>
             </div>
 
-            {/* The logout button, in the form of a small icon or text, fits perfectly within a width of 18 inches.*/}
-            <Button
-              type="button"
-              variant="danger"
-              size="sm"
-              className="text-xxs px-2 py-1.5 rounded-lg"
-              onClick={handleLogout}
-            >
-              Log out
-            </Button>
+            <div className="flex flex-col items-center gap-3">
+              <div
+                className="w-11 h-11 bg-white flex items-center justify-center p-0.5 drop-shadow-sm"
+                style={{ clipPath: 'url(#pentagon-clip)' }}
+              >
+                <div
+                  className="w-full h-full bg-slate-200 overflow-hidden"
+                  style={{ clipPath: 'url(#pentagon-clip)' }}
+                >
+                  <img
+                    src={userAvatar}
+                    alt="User Avatar"
+                    className="w-full h-full object-cover scale-110"
+                  />
+                </div>
+              </div>
+
+              <Button
+                type="button"
+                variant="danger"
+                size="sm"
+                className="text-xxs px-2 py-1.5 rounded-lg"
+                onClick={handleLogout}
+              >
+                Log out
+              </Button>
+            </div>
           </aside>
         </div>
       )}
