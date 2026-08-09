@@ -40,7 +40,8 @@ export const ChatInputBox = ({
           leftIcon={
             <AddIcon
               aria-label="Add attachment"
-              className="w-5 h-5 object-contain opacity-40 hover:opacity-70"
+              color="currentColor"
+              className="h-5 w-5 object-contain text-black transition-opacity hover:opacity-70 dark:text-white"
             />
           }
         />

@@ -101,11 +101,11 @@ export function FlightRecommendations({
           return (
             <div
               key={flight.id}
-              className="bg-brand-light dark:bg-slate-700/70 rounded-2xl p-3.5 sm:p-5 flex flex-col gap-3.5 border border-transparent dark:border-slate-600/70 mb-3 overflow-hidden w-full min-h-200 shadow-sm dark:shadow-black/20 transition-colors duration-200"
+              className="mb-2 w-full overflow-hidden rounded-2xl bg-slate-50 p-4 shadow-none transition-colors duration-200 last:mb-0 sm:p-5 dark:bg-slate-700/70"
             >
-              <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2 min-w-0">
-                  <div className="w-6 h-6 flex items-center justify-center shrink-0 overflow-hidden">
+                  <div className="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden">
                     <img
                       src={flight.logoUrl || defaultFlightLogo}
                       alt={flight.airline}
@@ -113,58 +113,60 @@ export function FlightRecommendations({
                     />
                   </div>
 
-                  <span className="text-xs sm:text-sm font-semibold text-slate-700 truncate">
+                  <span className="truncate text-sm font-semibold text-slate-500 sm:text-base">
                     {flight.airline}
                   </span>
                 </div>
 
-                <div className="pb-2 flex items-center gap-1.5 sm:gap-2 shrink-0">
+                <div className="flex shrink-0 items-center gap-2">
                   <Button
                     type="button"
                     variant="favorite"
                     size="icon"
                     isFavorite={isFavorite}
                     onClick={() => toggleFavorite(flight.id)}
+                    className="h-12 w-12 rounded-xl border border-blue-100 md:h-12 md:w-12"
                   />
 
                   <Button
                     variant="secondary"
                     size="sm"
                     onClick={() => onBookNow?.(flight.id)}
+                    className="h-12 rounded-xl px-5 text-sm"
                   >
                     Book Now
                   </Button>
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 pt-1 border-t border-slate-100/60 dark:border-slate-600">
-                <div className="space-y-2 text-xs sm:text-sm flex-1">
-                  <div className="pb-7 flex flex-wrap sm:flex-nowrap items-baseline sm:items-center gap-x-3 gap-y-0.5">
-                    <span className="font-bold text-slate-900 shrink-0 text-xs sm:text-sm">
+              <div className="mt-5 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+                <div className="flex-1 space-y-5 text-xs sm:text-sm">
+                  <div className="grid grid-cols-1 gap-1 sm:grid-cols-[190px_1fr] sm:items-center sm:gap-4">
+                    <span className="shrink-0 text-sm font-bold text-slate-950 sm:text-base">
                       {flight.outbound.time}
                     </span>
 
-                    <span className="text-slate-500 font-medium text-xxs sm:text-xs leading-tight">
+                    <span className="text-sm font-medium leading-tight text-slate-500 sm:text-base">
                       {flight.outbound.route} • {flight.outbound.duration} •{' '}
                       {flight.outbound.stops}
                     </span>
                   </div>
 
-                  <div className="flex flex-wrap sm:flex-nowrap items-baseline sm:items-center gap-x-3 gap-y-0.5">
-                    <span className="font-bold text-slate-900 shrink-0 text-xs sm:text-sm">
+                  <div className="grid grid-cols-1 gap-1 sm:grid-cols-[190px_1fr] sm:items-center sm:gap-4">
+                    <span className="shrink-0 text-sm font-bold text-slate-950 sm:text-base">
                       {flight.returnLeg.time}
                     </span>
 
-                    <span className="text-slate-500 font-medium text-xxs sm:text-xs leading-tight">
+                    <span className="text-sm font-medium leading-tight text-slate-500 sm:text-base">
                       {flight.returnLeg.route} • {flight.returnLeg.duration} •{' '}
                       {flight.returnLeg.stops}
                     </span>
                   </div>
                 </div>
 
-                <div className="pb-10 flex items-center sm:flex-col justify-between sm:justify-end sm:items-end gap-1.5 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-200/40 shrink-0">
+                <div className="flex shrink-0 items-center justify-between gap-4 border-t border-slate-200/60 pt-3 sm:flex-col sm:items-end sm:border-0 sm:pt-0">
                   {flight.tag && (
-                    <span className="px-2.5 py-0.5 bg-emerald-100/80 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-300 text-2xs sm:text-xxs font-bold rounded-full">
+                    <span className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-sm font-medium text-emerald-600 dark:border-emerald-800 dark:bg-emerald-950/70 dark:text-emerald-300">
                       {flight.tag}
                     </span>
                   )}
