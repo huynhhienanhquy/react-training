@@ -9,11 +9,9 @@ import type {
 } from '@/types/hotel';
 import { useAsyncData } from '@/hooks/useAsyncData';
 import { useFavorites } from '@/hooks/useFavorites';
+import defaultHotelImage from '@/assets/images/tropical-beach.png';
 
 export type { HotelOption };
-
-const defaultHotelImage =
-  'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80';
 
 const mapHotelDataToOption = (
   hotel: HotelData,
@@ -41,7 +39,7 @@ const mapHotelDataToOption = (
 };
 
 export const HotelRecommendations = ({
-  title = 'Recommended Hotels',
+  title = 'Recommended Hotels For a Three-Night Staycation',
   hotels: initialHotels,
   onBookNow,
   onSeeAll,
@@ -106,9 +104,9 @@ export const HotelRecommendations = ({
           return (
             <div
               key={hotel.id}
-              className="bg-brand-light dark:bg-slate-700/70 rounded-2xl p-4 flex flex-col md:flex-row items-center gap-4 mb-3 border border-transparent dark:border-slate-600/70 shadow-sm dark:shadow-black/20 transition-colors duration-200"
+              className="mb-2 grid grid-cols-1 gap-4 rounded-2xl bg-slate-50 p-4 transition-colors duration-200 last:mb-0 md:grid-cols-[220px_minmax(0,1fr)_auto] md:items-stretch dark:bg-slate-700/70"
             >
-              <div className="w-full md:w-36 h-36 md:h-32 rounded-xl overflow-hidden shrink-0">
+              <div className="h-52 w-full overflow-hidden rounded-xl md:h-48 md:w-[220px]">
                 <img
                   src={hotel.imageUrl || defaultHotelImage}
                   alt={hotel.name}
@@ -116,36 +114,39 @@ export const HotelRecommendations = ({
                 />
               </div>
 
-              <div className="flex-1 flex flex-col justify-between h-full space-y-2 text-left w-full">
+              <div className="flex min-w-0 flex-col justify-between space-y-3 text-left">
                 <div>
-                  <h3 className="text-base md:text-lg font-bold text-ink leading-snug">
+                  <h3 className="text-xl font-bold leading-snug text-ink md:text-2xl">
                     {hotel.name}
                   </h3>
 
-                  <p className="text-xs text-slate-500 line-clamp-2 mt-1 leading-relaxed">
+                  <p className="mt-2 line-clamp-2 text-sm font-medium leading-relaxed text-slate-500 md:text-base">
                     {hotel.description}
                   </p>
                 </div>
 
-                <div className="flex items-center gap-3 text-slate-400 pt-2">
+                <div className="flex items-center gap-4 pt-2 text-slate-400" aria-label="Hotel amenities">
+                  <span title="Free Wi-Fi" className="text-xl">⌁</span>
+                  <span title="Parking" className="text-lg">Ⓟ</span>
+                  <span title="Room service" className="text-xl">♨</span>
                 </div>
               </div>
 
-              <div className="flex flex-col items-end justify-between w-full md:w-auto h-full self-stretch space-y-3 shrink-0">
+              <div className="flex w-full shrink-0 flex-row flex-wrap items-center justify-between gap-4 md:w-auto md:min-w-[190px] md:flex-col md:items-end md:justify-between">
                 <div>
                   {hotel.tag && (
-                    <span className="px-3 py-0.5 bg-emerald-50 dark:bg-emerald-950/70 text-emerald-600 dark:text-emerald-300 text-xxs font-medium rounded-full border border-emerald-100 dark:border-emerald-800">
+                    <span className="inline-flex rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-sm font-medium text-emerald-600 dark:border-emerald-800 dark:bg-emerald-950/70 dark:text-emerald-300">
                       {hotel.tag}
                     </span>
                   )}
                 </div>
 
-                <div className="text-right my-1">
-                  <span className="text-xl md:text-2xl font-bold text-ink">
+                <div className="text-right md:my-auto">
+                  <span className="text-2xl font-black text-ink">
                     ${hotel.price}
                   </span>
 
-                  <span className="text-xs text-slate-400 font-normal">
+                  <span className="text-sm font-normal text-slate-400">
                     /per night
                   </span>
                 </div>
@@ -159,6 +160,7 @@ export const HotelRecommendations = ({
                     onClick={() =>
                       toggleFavorite(hotel.id)
                     }
+                    className="h-12 w-12 rounded-xl border border-blue-100 md:h-12 md:w-12"
                   />
 
                   <Button
@@ -167,6 +169,7 @@ export const HotelRecommendations = ({
                     onClick={(e) =>
                       handleBookNow(e, hotel)
                     }
+                    className="h-12 rounded-xl px-5 text-sm"
                   >
                     Book Now
                   </Button>

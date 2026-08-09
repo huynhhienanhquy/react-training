@@ -14,14 +14,14 @@ export const RecommendationWrapper = ({
   seeAllText = 'See all recommendations',
 }: RecommendationWrapperProps) => {
   return (
-    <div className="w-full  my-3 space-y-4">
+    <section className="my-5 w-full space-y-5">
       {/* Title */}
-      <h3 className="text-lg md:text-xl font-bold text-slate-900 tracking-tight pl-1">
+      <h3 className="pl-1 text-xl font-bold tracking-tight text-slate-950 md:text-2xl">
         {title}
       </h3>
 
       {/* Main Container */}
-      <div className="bg-white dark:bg-slate-800 p-4 md:p-5 rounded-card space-y-3.5 shadow-sm dark:shadow-black/30 border border-slate-100/50 dark:border-slate-700 transition-colors duration-200">
+      <div className="overflow-hidden rounded-[24px] border-[8px] border-white bg-white shadow-sm transition-colors duration-200 dark:border-slate-800 dark:bg-slate-800 dark:shadow-black/30">
         {children}
 
         {/* See All Button */}
@@ -30,13 +30,13 @@ export const RecommendationWrapper = ({
             type="button"
             variant="secondary"
             size="none"
-            className="w-full py-3 text-xs rounded-xl mt-2"
+            className="mt-2 w-full rounded-none bg-indigo-50 py-4 text-sm font-semibold text-blue-600 hover:bg-indigo-100 hover:text-blue-700 dark:bg-slate-700"
             onClick={onSeeAll}
           >
             {seeAllText}
           </Button>
         )}
       </div>
-    </div>
+    </section>
   );
 };
