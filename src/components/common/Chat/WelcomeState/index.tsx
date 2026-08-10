@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import lakeBoardwalkImage from '@/assets/images/lake-boardwalk.png';
 import groupTravelersImage from '@/assets/images/group-travelers.png';
 import tropicalBeachImage from '@/assets/images/tropical-beach.png';
@@ -17,10 +18,10 @@ interface WelcomeStateProps {
   onSelectPrompt: (prompt: string) => void;
 }
 
-export const WelcomeState = ({
+export const WelcomeState = memo(function WelcomeState({
   prompts = DEFAULT_PROMPTS,
   onSelectPrompt
-}: WelcomeStateProps) => {
+}: WelcomeStateProps) {
   const createPromptHandler = (prompt: string) => () => onSelectPrompt(prompt);
 
   return (
@@ -106,4 +107,4 @@ export const WelcomeState = ({
       </div>
     </div>
   );
-};
+});

@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MenuIcon from '@/components/common/Icons/MenuIcon';
 import { useAuth } from '@/hooks/useAuth';
@@ -16,7 +17,7 @@ import { type SidebarNavProps } from "@/types/chat";
 import { Button } from '@/components/common/Button';
 import { useTheme } from '@/hooks/useTheme';
 
-export const SidebarNav = ({ activeNav, onNavChange, isMobileOpen, onMobileToggle }: SidebarNavProps) => {
+export const SidebarNav = memo(function SidebarNav({ activeNav, onNavChange, isMobileOpen, onMobileToggle }: SidebarNavProps) {
   const navigate = useNavigate();
   const { logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
@@ -270,4 +271,4 @@ export const SidebarNav = ({ activeNav, onNavChange, isMobileOpen, onMobileToggl
       )}
     </>
   );
-};
+});

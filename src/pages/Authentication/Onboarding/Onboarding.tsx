@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent, type FormEvent } from 'react';
+import { useCallback, useState, type ChangeEvent, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthLayout } from '@/components/common/Auth/AuthLayout';
 import { AuthPageLayout } from '@/components/layouts/AuthPageLayout';
@@ -14,7 +14,7 @@ export const Onboarding = () => {
   const [country, setCountry] = useState('');
   const handleFullNameChange = (event: ChangeEvent<HTMLInputElement>) => setFullName(event.target.value);
   const handleCountryChange = (event: ChangeEvent<HTMLSelectElement>) => setCountry(event.target.value);
-  const handleSignIn = () => navigate('/login');
+  const handleSignIn = useCallback(() => navigate('/login'), [navigate]);
 
   const handleStartPlanning = (event: FormEvent) => {
     event.preventDefault();

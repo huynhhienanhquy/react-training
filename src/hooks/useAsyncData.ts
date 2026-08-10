@@ -27,9 +27,13 @@ export const useAsyncData = <T>(
   const isMountedRef = useRef(true);
   const requestIdRef = useRef(0);
 
-  useEffect(() => () => {
-    isMountedRef.current = false;
-    requestIdRef.current += 1;
+  useEffect(() => {
+    isMountedRef.current = true;
+
+    return () => {
+      isMountedRef.current = false;
+      requestIdRef.current += 1;
+    };
   }, []);
 
   useEffect(() => {

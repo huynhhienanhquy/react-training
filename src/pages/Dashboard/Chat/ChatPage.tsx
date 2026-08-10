@@ -39,6 +39,9 @@ export const ChatPage = () => {
       setInputMessage('');
     }
   }, [inputMessage, sendMessage]);
+  const handleSelectPrompt = useCallback((prompt: string) => {
+    if (sendMessage(prompt)) setInputMessage('');
+  }, [sendMessage]);
 
   // New chat button
   const handleStartNewChat = useCallback(() => {
@@ -77,7 +80,7 @@ export const ChatPage = () => {
           {currentMessages.length === 0 ? (
             <WelcomeState
               prompts={SUGGESTION_PROMPTS}
-              onSelectPrompt={handleSendMessage}
+              onSelectPrompt={handleSelectPrompt}
             />
           ) : (
             <ChatMessageList

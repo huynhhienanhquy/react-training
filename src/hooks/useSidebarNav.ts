@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 export interface UseSidebarNavResult {
   activeNav: string;
@@ -13,7 +13,10 @@ export const useSidebarNav = (
   const [activeNav, setActiveNav] = useState(initialNav);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
-  const onMobileToggle = () => setIsMobileOpen((prev) => !prev);
+  const onMobileToggle = useCallback(
+    () => setIsMobileOpen((prev) => !prev),
+    [],
+  );
 
   return { activeNav, setActiveNav, isMobileOpen, onMobileToggle };
 };

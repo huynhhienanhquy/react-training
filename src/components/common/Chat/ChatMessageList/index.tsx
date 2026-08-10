@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { ThinkingLoader } from '@/components/common/Thinking';
 import { FlightRecommendations } from '@/pages/Dashboard/Chat/sections/Recommendations/FlightRecommendations';
 import { HotelRecommendations } from '@/pages/Dashboard/Chat/sections/Recommendations/HotelRecommendations';
@@ -10,14 +11,14 @@ import { LazyRender } from '@/components/common/LazyRender';
 import type { HotelOption } from '@/types/hotel';
 
 // Custom payload inside a chat message
-export const ChatMessageList = ({
+export const ChatMessageList = memo(function ChatMessageList({
   messages,
   isTyping,
   onBookFlight,
   onBookHotel,
   onViewAllPlaces,
   onViewAllItinerary,
-}: ChatMessageListProps) => {
+}: ChatMessageListProps) {
   const { ref: messagesEndRef } = useAutoScroll(messages, isTyping);
 
   return (
@@ -157,4 +158,4 @@ export const ChatMessageList = ({
       <div ref={messagesEndRef} />
     </div>
   );
-};
+});
