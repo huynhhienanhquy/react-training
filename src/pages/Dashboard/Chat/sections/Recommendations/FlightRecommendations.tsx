@@ -1,6 +1,6 @@
 import { RecommendationWrapper } from './RecommendationWrapper';
 import { Button } from '@/components/Button';
-import { PriceDisplay } from '@/components/PriceDisplay';
+import { PriceDisplay } from '@/components/common/PriceDisplay';
 import defaultFlightLogo from '@/assets/images/travel-provider-logo.png';
 
 import { getFlights } from '@/services/fareService';

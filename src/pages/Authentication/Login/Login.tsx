@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { useFormState } from '@/hooks/useFormState';
-import { AuthLayout } from '@/components/auth/AuthLayout';
+import { AuthLayout } from '@/components/common/Auth/AuthLayout';
 import { getErrorMessage } from '@/utils/errorHelpers';
 import { Button } from '@/components/Button';
-import { InputField } from '@/components/InputField';
+import { InputField } from '@/components/common/InputField';
 import { ErrorMessage } from '@/components/Error';
-import { AuthHeader } from '@/components/auth/AuthHeader';
-import { AuthFooter } from '@/components/auth/AuthFooter';
+import { AuthHeader } from '@/components/common/Auth/AuthHeader';
+import { AuthFooter } from '@/components/common/Auth/AuthFooter';
 
 export const Login = () => {
   const { login } = useAuth();

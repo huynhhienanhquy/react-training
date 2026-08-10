@@ -1,17 +1,17 @@
 import  { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SidebarNav } from '@/components/chat/SidebarNav/index';
+import { SidebarNav } from '@/components/common/Chat/SidebarNav/index';
 import { Button } from '@/components/Button/index';
 
-import HeartIcon from '@/components/icons/HeartIcon';
+import HeartIcon from '@/components/common/Icons/HeartIcon';
 import defaultFlightLogo from '@/assets/images/travel-provider-logo.png';
-import { SectionHeader } from '@/components/FlightFare/SectionHeader';
+import { SectionHeader } from '@/components/features/flights/SectionHeader';
 
-import { Topbar } from '@/components/chat/Topbar';
-import { FareHeader } from '@/components/FlightFare/FareHeader';
-import { SelectedFlightBox } from '@/components/FlightFare/SelectedFlightBox';
-import { FareCards } from '@/components/FlightFare/FareCards';
-import { PriceDetailsSidebar } from '@/components/FlightFare/PriceDetailsSidebar';
+import { Topbar } from '@/components/common/Chat/Topbar';
+import { FareHeader } from '@/components/features/flights/FareHeader';
+import { SelectedFlightBox } from '@/components/features/flights/SelectedFlightBox';
+import { FareCards } from '@/components/features/flights/FareCards';
+import { PriceDetailsSidebar } from '@/components/features/flights/PriceDetailsSidebar';
 
 import { getFareDetails } from '@/services/fareService';
 import type {

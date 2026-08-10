@@ -1,10 +1,10 @@
-import MapPinIcon from '@/components/icons/MapPinIcon';
-import StarIcon from '@/components/icons/StarIcon';
-import UtensilsIcon from '@/components/icons/UtensilsIcon';
-import CameraIcon from '@/components/icons/CameraIcon';
-import ShoppingBagIcon from '@/components/icons/ShoppingBagIcon';
-import CompassIcon from '@/components/icons/CompassIcon';
-import HotelIcon from '@/components/icons/HotelIcon';
+import MapPinIcon from '@/components/common/Icons/MapPinIcon';
+import StarIcon from '@/components/common/Icons/StarIcon';
+import UtensilsIcon from '@/components/common/Icons/UtensilsIcon';
+import CameraIcon from '@/components/common/Icons/CameraIcon';
+import ShoppingBagIcon from '@/components/common/Icons/ShoppingBagIcon';
+import CompassIcon from '@/components/common/Icons/CompassIcon';
+import HotelIcon from '@/components/common/Icons/HotelIcon';
 import { Button } from '@/components/Button';
 import { getPlaces } from '@/services/travelService';
 import type {
@@ -12,7 +12,7 @@ import type {
   PlacesCardWidgetProps,
 } from '@/types/travel';
 import { useAsyncData } from '@/hooks/useAsyncData';
-import { Icon } from '@/components/icons/Icon';
+import { Icon } from '@/components/common/Icons/Icon';
 
 export type { PlaceData };
 

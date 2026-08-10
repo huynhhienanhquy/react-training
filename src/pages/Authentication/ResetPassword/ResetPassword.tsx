@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormState } from '@/hooks/useFormState';
-import { AuthLayout } from '@/components/auth/AuthLayout';
+import { AuthLayout } from '@/components/common/Auth/AuthLayout';
 import { Button } from '@/components/Button';
-import { AuthHeader } from '@/components/auth/AuthHeader';
-import { InputField } from '@/components/InputField';
+import { AuthHeader } from '@/components/common/Auth/AuthHeader';
+import { InputField } from '@/components/common/InputField';
 import { ErrorMessage } from '@/components/Error';
-import { AuthFooter } from '@/components/auth/AuthFooter';
+import { AuthFooter } from '@/components/common/Auth/AuthFooter';
 
 export const ResetPassword = () => {
   const navigate = useNavigate();

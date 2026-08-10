@@ -1,4 +1,4 @@
-import { type ChatMessage } from '../components/chat/Topbar';
+import { type ChatMessage } from '../components/common/Chat/Topbar';
 
 export interface RoomOption {
   id: string;

@@ -1,6 +1,6 @@
-import CalendarIcon from '@/components/icons/CalendarIcon';
-import ClockIcon from '@/components/icons/ClockIcon';
-import MapPinIcon from '@/components/icons/MapPinIcon';
+import CalendarIcon from '@/components/common/Icons/CalendarIcon';
+import ClockIcon from '@/components/common/Icons/ClockIcon';
+import MapPinIcon from '@/components/common/Icons/MapPinIcon';
 import { Button } from '@/components/Button';
 import { getItineraries } from '@/services/travelService';
 import type {
@@ -8,7 +8,7 @@ import type {
   ItineraryCardWidgetProps,
 } from '@/types/travel';
 import { useAsyncData } from '@/hooks/useAsyncData';
-import { Icon } from '@/components/icons/Icon';
+import { Icon } from '@/components/common/Icons/Icon';
 
 export type { DayItinerary };
 
