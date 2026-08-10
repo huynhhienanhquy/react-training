@@ -12,7 +12,7 @@ import { SelectedFlightBox } from '@/components/features/flights/SelectedFlightB
 import { FareCards } from '@/components/features/flights/FareCards';
 import { PriceDetailsSidebar } from '@/components/features/flights/PriceDetailsSidebar';
 
-import { getFareDetails } from '@/services/fareService';
+import { getFlights } from '@/services/fareService';
 import type {
   FareData,
   SelectFarePageProps,
@@ -35,7 +35,7 @@ export const SelectFarePage = ({
 
   // Fetch fare data
   const fetchFare = useCallback(async (): Promise<FareData> => {
-    const rawData = await getFareDetails();
+    const rawData = await getFlights();
 
     // MockAPI can return an array or an object.
     const data = Array.isArray(rawData)
