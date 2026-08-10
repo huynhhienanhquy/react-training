@@ -1,5 +1,5 @@
 import ArrowLeftIcon from '@/components/common/Icons/ArrowLeftIcon';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/common/Button';
 import AddIcon from '@/components/common/Icons/AddIcon';
 
 export type { ChatMessage } from '@/types/chat';

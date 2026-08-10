@@ -4,7 +4,7 @@ import MicrophoneIcon from '@/components/common/Icons/MicrophoneIcon';
 import SendIcon from '@/components/common/Icons/SendIcon';
 import { type ChatInputBoxProps } from "@/types/chat";
 import { useEnterToSend } from '@/hooks/useEnterToSend';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/common/Button';
 
 export const ChatInputBox = ({
   inputMessage,

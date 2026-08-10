@@ -1,12 +1,11 @@
 import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { SidebarNav } from '@/components/common/Chat/SidebarNav';
 import { Topbar } from '@/components/common/Chat/Topbar';
 import { SectionHeader } from '@/components/features/flights/SectionHeader';
 
 import { getHotels } from '@/services/hotelService';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/common/Button';
 import { Icon } from '@/components/common/Icons/Icon';
 
 import type {
@@ -19,7 +18,6 @@ import bookingIcon from '@/assets/images/booking-logo.png';
 import expediaIcon from '@/assets/images/expedia-logo.png';
 
 import { useAsyncData } from '@/hooks/useAsyncData';
-import { useSidebarNav } from '@/hooks/useSidebarNav';
 import { useChatTitle } from '@/hooks/useChatTitle';
 
 export const SelectHotelPage = ({
@@ -33,8 +31,6 @@ export const SelectHotelPage = ({
   const navigate = useNavigate();
   const handleBackToChat = onBackToChat ?? (() => navigate('/chats'));
   const handleStartNewChat = onStartNewChat ?? (() => navigate('/chats'));
-  const { activeNav, setActiveNav, isMobileOpen, onMobileToggle } =
-    useSidebarNav();
   const [isComparePrice, setIsComparePrice] = useState(false);
 
   // Fetch hotel data
@@ -96,16 +92,6 @@ export const SelectHotelPage = ({
   };
 
   return (
-    <div className="bg-slate-100 font-sans text-slate-700 h-screen overflow-hidden flex antialiased">
-      {/* 1. Sidebar Navigation  */}
-      <SidebarNav
-        activeNav={activeNav}
-        onNavChange={setActiveNav}
-        isMobileOpen={isMobileOpen}
-        onMobileToggle={onMobileToggle}
-      />
-
-      {/* 2. Main Content */}
       <main className="flex-1 bg-surface-section flex flex-col h-full overflow-y-auto">
         {/* Topbar */}
         <Topbar
@@ -269,6 +255,5 @@ export const SelectHotelPage = ({
           </div>
         )}
       </main>
-    </div>
   );
 };

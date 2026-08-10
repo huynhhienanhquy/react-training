@@ -4,7 +4,7 @@ import { useFormState } from '@/hooks/useFormState';
 import { useOtpInput } from '@/hooks/useOtpInput';
 import { useCountdown } from '@/hooks/useCountdown';
 import { AuthLayout } from '@/components/common/Auth/AuthLayout';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/common/Button';
 import { AuthHeader } from '@/components/common/Auth/AuthHeader';
 
 export const VerifyOTP = () => {

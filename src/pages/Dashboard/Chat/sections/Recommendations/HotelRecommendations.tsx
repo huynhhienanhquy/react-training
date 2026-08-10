@@ -1,6 +1,6 @@
 import React from 'react';
 import { RecommendationWrapper } from './RecommendationWrapper';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/common/Button';
 import { getHotels } from '@/services/hotelService';
 import type {
   HotelData,

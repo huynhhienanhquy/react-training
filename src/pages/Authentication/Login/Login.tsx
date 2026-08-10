@@ -4,9 +4,9 @@ import { useAuth } from '@/hooks/useAuth';
 import { useFormState } from '@/hooks/useFormState';
 import { AuthLayout } from '@/components/common/Auth/AuthLayout';
 import { getErrorMessage } from '@/utils/errorHelpers';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/common/Button';
 import { InputField } from '@/components/common/InputField';
-import { ErrorMessage } from '@/components/Error';
+import { ErrorMessage } from '@/components/common/Error';
 import { AuthHeader } from '@/components/common/Auth/AuthHeader';
 import { AuthFooter } from '@/components/common/Auth/AuthFooter';
 

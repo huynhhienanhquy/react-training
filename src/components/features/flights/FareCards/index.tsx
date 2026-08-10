@@ -2,7 +2,7 @@
 import CheckCircleIcon from '@/components/common/Icons/CheckCircleIcon';
 import { SectionHeader } from '../SectionHeader';
 import { PriceDisplay } from '@/components/common/PriceDisplay';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/common/Button';
 
 import type { FareOption } from '@/types/flight';
 import type { FareCardsProps } from '@/types/flightFareTypes';

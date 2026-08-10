@@ -1,4 +1,4 @@
-import { Card } from '@/components/Card';
+import { Card } from '@/components/common/Card';
 import { PriceDisplay } from '@/components/common/PriceDisplay';
 import type { FareHeaderProps } from '@/types/flightFareTypes';
 

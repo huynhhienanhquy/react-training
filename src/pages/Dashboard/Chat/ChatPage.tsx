@@ -1,18 +1,14 @@
 import  { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SidebarNav } from '@/components/common/Chat/SidebarNav/index';
 import { ChatHistorySidebar } from '@/components/common/Chat/ChatHistorySidebar/index';
 import { Topbar } from '@/components/common/Chat/Topbar/index';
 import { WelcomeState } from '@/components/common/Chat/WelcomeState/index';
 import { ChatMessageList } from '@/components/common/Chat/ChatMessageList/index';
 import { ChatInputBox } from '@/components/common/Chat/ChatInputBox/ChatInputBox';
 import { useChatSessions } from '@/hooks/useChatSessions';
-import { useSidebarNav } from '@/hooks/useSidebarNav';
 
 export const ChatPage = () => {
   const navigate = useNavigate();
-  const { activeNav, setActiveNav, isMobileOpen, onMobileToggle } =
-    useSidebarNav();
   const [searchQuery, setSearchQuery] = useState('');
   const [inputMessage, setInputMessage] = useState('');
   const [isRecording, setIsRecording] = useState(false);
@@ -56,9 +52,7 @@ export const ChatPage = () => {
   }
 
   return (
-    <div className="bg-slate-100 font-sans text-slate-700 h-screen overflow-hidden flex antialiased">
-      <SidebarNav activeNav={activeNav} onNavChange={setActiveNav} isMobileOpen={isMobileOpen} onMobileToggle={onMobileToggle} />
-
+    <>
       <div className="ml-1.5">
         <ChatHistorySidebar
           searchQuery={searchQuery}
@@ -98,6 +92,6 @@ export const ChatPage = () => {
           />
         </div>
       </main>
-    </div>
+    </>
   );
 };

@@ -17,6 +17,8 @@ import { ResetPassword } from './pages/Authentication/ResetPassword/ResetPasswor
 import { ChatPage } from './pages/Dashboard/Chat/ChatPage';
 import { SelectFarePage } from './pages/Dashboard/Flight/SelectFarePage';
 import { SelectHotelPage } from './pages/Dashboard/Hotel/SelectHotelPage';
+import { DashboardLayout } from './components/layouts/DashboardLayout';
+import { ComingSoonPage } from './pages/Dashboard/ComingSoonPage';
 
 export const App = () => {
   return (
@@ -36,10 +38,17 @@ export const App = () => {
           {/* Protected pages (Logged in) */}
           <Route element={<ProtectedRoute />}>
             <Route path="/onboarding" element={<Onboarding />} />
-            <Route path="/dashboard" element={<ChatPage />} />
-            <Route path="/chats" element={<ChatPage />} />
-            <Route path="/chats/fares" element={<SelectFarePage />} />
-            <Route path="/chats/hotels" element={<SelectHotelPage />} />
+            <Route element={<DashboardLayout />}>
+              <Route path="/dashboard" element={<ChatPage />} />
+              <Route path="/chats" element={<ChatPage />} />
+              <Route path="/chats/fares" element={<SelectFarePage />} />
+              <Route path="/chats/hotels" element={<SelectHotelPage />} />
+              <Route path="/favorites" element={<ComingSoonPage />} />
+              <Route path="/rewards" element={<ComingSoonPage />} />
+              <Route path="/routes-map" element={<ComingSoonPage />} />
+              <Route path="/community" element={<ComingSoonPage />} />
+              <Route path="/settings" element={<ComingSoonPage />} />
+            </Route>
           </Route>
 
           {/* Default navigation when URL is invalid */}

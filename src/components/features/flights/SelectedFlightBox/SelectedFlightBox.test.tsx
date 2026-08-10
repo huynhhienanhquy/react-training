@@ -8,7 +8,7 @@ vi.mock('../SectionHeader', () => ({
   SectionHeader: ({ title }: { title: string }) => <h2>{title}</h2>,
 }));
 
-vi.mock('@/components/Card', () => ({
+vi.mock('@/components/common/Card', () => ({
   Card: ({
     children,
     variant,

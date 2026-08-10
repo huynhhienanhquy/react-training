@@ -1,7 +1,7 @@
 import CalendarIcon from '@/components/common/Icons/CalendarIcon';
 import ClockIcon from '@/components/common/Icons/ClockIcon';
 import MapPinIcon from '@/components/common/Icons/MapPinIcon';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/common/Button';
 import { getItineraries } from '@/services/travelService';
 import type {
   DayItinerary,

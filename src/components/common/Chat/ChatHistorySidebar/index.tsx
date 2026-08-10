@@ -1,6 +1,6 @@
 
 import SearchIcon from '@/components/common/Icons/SearchIcon'
-import { Button } from '@/components/Button';
+import { Button } from '@/components/common/Button';
 import type { ChatSession, ChatHistorySidebarProps } from '@/types/chat';
 
 export type { ChatSession };

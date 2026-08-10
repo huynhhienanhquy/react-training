@@ -1,7 +1,7 @@
 import lakeBoardwalkImage from '@/assets/images/lake-boardwalk.png';
 import groupTravelersImage from '@/assets/images/group-travelers.png';
 import tropicalBeachImage from '@/assets/images/tropical-beach.png';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/common/Button';
 
 const DEFAULT_PROMPTS = [
   "Cheap flights from my location to Lagos",

@@ -13,7 +13,7 @@ import CommunityIcon from '@/components/common/Icons/PeopleIcon';
 import SettingsIcon from '@/components/common/Icons/SettingsIcon';
 import userAvatar from '@/assets/images/user-avatar.png';
 import { type SidebarNavProps } from "@/types/chat";
-import { Button } from "@/components/Button";
+import { Button } from '@/components/common/Button';
 import { useTheme } from '@/hooks/useTheme';
 
 export const SidebarNav = ({ activeNav, onNavChange, isMobileOpen, onMobileToggle }: SidebarNavProps) => {

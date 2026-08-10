@@ -1,5 +1,5 @@
 import React, { useId, useState } from 'react';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/common/Button';
 import { Icon } from '@/components/common/Icons/Icon';
 
 type InputFieldProps = {

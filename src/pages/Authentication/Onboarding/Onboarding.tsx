@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormState } from '@/hooks/useFormState';
 import { AuthLayout } from '@/components/common/Auth/AuthLayout';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/common/Button';
 import ArrowDownIcon from '@/components/common/Icons/ArrowDownIcon'
 import { AuthHeader } from '@/components/common/Auth/AuthHeader';
 import { InputField } from '@/components/common/InputField';
