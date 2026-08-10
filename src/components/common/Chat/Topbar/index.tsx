@@ -60,21 +60,23 @@ export const Topbar = memo(function Topbar({
         )}
       </div>
 
-      <div className="-translate-x-4 -translate-y-2">
-        <Button
-          variant="primary"
-          size="md"
-          leftIcon={
-            <AddIcon
-              aria-label="Add"
-              className="w-5 h-5"
-            />
-          }
-          onClick={onNewChat}
-        >
-          <span className="hidden sm:inline">Start New Chat</span>
-        </Button>
-      </div>
+      {onNewChat && (
+        <div className="-translate-x-4 -translate-y-2">
+          <Button
+            variant="primary"
+            size="md"
+            leftIcon={
+              <AddIcon
+                aria-label="Add"
+                className="w-5 h-5"
+              />
+            }
+            onClick={onNewChat}
+          >
+            <span className="hidden sm:inline">Start New Chat</span>
+          </Button>
+        </div>
+      )}
     </header>
   );
 });

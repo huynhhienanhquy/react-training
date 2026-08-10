@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Topbar } from '@/components/common/Chat/Topbar';
 import { SectionHeader } from '@/components/features/flights/SectionHeader';
 
 import { getHotels } from '@/services/hotelService';
@@ -19,18 +18,17 @@ import expediaIcon from '@/assets/images/expedia-logo.png';
 
 import { useAsyncData } from '@/hooks/useAsyncData';
 import { useChatTitle } from '@/hooks/useChatTitle';
+import { DashboardPageLayout } from '@/components/layouts/DashboardLayout';
 
 export const SelectHotelPage = ({
   chatTitle,
   messages = [],
   onBackToChat,
-  onStartNewChat,
   onSelectHotel,
   selectedHotel,
 }: SelectHotelPageProps) => {
   const navigate = useNavigate();
   const handleBackToChat = onBackToChat ?? (() => navigate('/chats'));
-  const handleStartNewChat = onStartNewChat ?? (() => navigate('/chats'));
   const [isComparePrice, setIsComparePrice] = useState(false);
 
   // Fetch hotel data
@@ -96,17 +94,14 @@ export const SelectHotelPage = ({
   const createBookHotelHandler = (hotel: HotelData) => (event: React.MouseEvent) => handleBookHotel(event, hotel);
 
   return (
-      <main className="flex-1 bg-surface-section flex flex-col h-full overflow-y-auto">
-        {/* Topbar */}
-        <Topbar
-          isBreadcrumbMode={true}
-          breadcrumbLabel="Select Hotel"
-          chatTitle={resolvedChatTitle}
-          messages={messages}
-          onBackToChat={handleBackToChat}
-          onNewChat={handleStartNewChat}
-        />
-
+      <DashboardPageLayout
+        scrollable
+        isBreadcrumbMode
+        breadcrumbLabel="Select Hotel"
+        chatTitle={resolvedChatTitle}
+        messages={messages}
+        onBackToChat={handleBackToChat}
+      >
         {/* LOADING STATE */}
         {loading && (
           <div className="flex-1 flex items-center justify-center p-8">
@@ -258,6 +253,6 @@ export const SelectHotelPage = ({
             </div>
           </div>
         )}
-      </main>
+      </DashboardPageLayout>
   );
 };

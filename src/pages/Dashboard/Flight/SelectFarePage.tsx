@@ -6,7 +6,6 @@ import HeartIcon from '@/components/common/Icons/HeartIcon';
 import defaultFlightLogo from '@/assets/images/travel-provider-logo.png';
 import { SectionHeader } from '@/components/features/flights/SectionHeader';
 
-import { Topbar } from '@/components/common/Chat/Topbar';
 import { FareHeader } from '@/components/features/flights/FareHeader';
 import { SelectedFlightBox } from '@/components/features/flights/SelectedFlightBox';
 import { FareCards } from '@/components/features/flights/FareCards';
@@ -20,16 +19,15 @@ import type {
 
 import { useAsyncData } from '@/hooks/useAsyncData';
 import { useChatTitle } from '@/hooks/useChatTitle';
+import { DashboardPageLayout } from '@/components/layouts/DashboardLayout';
 
 export const SelectFarePage = ({
   chatTitle,
   messages = [],
   onBackToChat,
-  onStartNewChat,
 }: SelectFarePageProps) => {
   const navigate = useNavigate();
   const handleBackToChat = onBackToChat ?? (() => navigate('/chats'));
-  const handleStartNewChat = onStartNewChat ?? (() => navigate('/chats'));
   const [selectedFareId, setSelectedFareId] =
     useState<'economy' | 'business'>('economy');
 
@@ -91,17 +89,15 @@ export const SelectFarePage = ({
   const handleSelectFare = (id: string) => setSelectedFareId(id as 'economy' | 'business');
 
   return (
-      <main className="flex-1 bg-surface-section flex flex-col h-full overflow-y-auto font-helvetica">
-        {/* Topbar */}
-        <Topbar
-          isBreadcrumbMode={true}
-          breadcrumbLabel="Select Fare"
-          chatTitle={resolvedChatTitle}
-          messages={messages}
-          onBackToChat={handleBackToChat}
-          onNewChat={handleStartNewChat}
-        />
-
+      <DashboardPageLayout
+        scrollable
+        className="font-helvetica"
+        isBreadcrumbMode
+        breadcrumbLabel="Select Fare"
+        chatTitle={resolvedChatTitle}
+        messages={messages}
+        onBackToChat={handleBackToChat}
+      >
         {/* LOADING STATE */}
         {loading && (
           <div className="flex-1 flex items-center justify-center p-8">
@@ -186,6 +182,6 @@ export const SelectFarePage = ({
             </div>
           </div>
         )}
-      </main>
+      </DashboardPageLayout>
   );
 };

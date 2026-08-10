@@ -164,6 +164,14 @@ describe("Topbar", () => {
       .toHaveBeenCalledTimes(1);
   });
 
+  it("hides the Start New Chat button when onNewChat is not provided", () => {
+    render(<Topbar isBreadcrumbMode chatTitle="Tokyo Trip" />);
+
+    expect(
+      screen.queryByText("Start New Chat")
+    ).not.toBeInTheDocument();
+  });
+
 
   it("renders mobile back button when breadcrumb mode enabled", () => {
     render(

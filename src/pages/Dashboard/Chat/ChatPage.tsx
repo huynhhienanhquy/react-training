@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChatHistorySidebar } from '@/components/common/Chat/ChatHistorySidebar/index';
-import { Topbar } from '@/components/common/Chat/Topbar/index';
 import { WelcomeState } from '@/components/common/Chat/WelcomeState/index';
 import { ChatMessageList } from '@/components/common/Chat/ChatMessageList/index';
 import { ChatInputBox } from '@/components/common/Chat/ChatInputBox/ChatInputBox';
 import { useChatSessions } from '@/hooks/useChatSessions';
+import { DashboardPageLayout } from '@/components/layouts/DashboardLayout';
 
 const SUGGESTION_PROMPTS = [
   'Cheap flights from my location to Lagos',
@@ -71,11 +71,7 @@ export const ChatPage = () => {
         />
       </div>
 
-      <main className="flex-1 bg-surface-section flex flex-col h-full relative overflow-hidden">
-        <Topbar
-          onNewChat={handleStartNewChat}
-        />
-
+      <DashboardPageLayout onNewChat={handleStartNewChat}>
         <div className="flex-1 overflow-y-auto px-4 md:px-8 pb-6 pt-2 flex flex-col justify-between items-center max-w-5xl mx-auto w-full">
           {currentMessages.length === 0 ? (
             <WelcomeState
@@ -99,7 +95,7 @@ export const ChatPage = () => {
             onToggleRecording={handleToggleRecording}
           />
         </div>
-      </main>
+      </DashboardPageLayout>
     </>
   );
 };
