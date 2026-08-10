@@ -20,7 +20,7 @@ describe('getItineraries', () => {
     vi.mocked(travelApi.get).mockResolvedValue({ data });
 
     await expect(getItineraries()).resolves.toEqual(days);
-    expect(travelApi.get).toHaveBeenCalledWith('/itinerary');
+    expect(travelApi.get).toHaveBeenCalledWith('/itineraries');
   });
 
   it('rejects a malformed itinerary envelope', async () => {

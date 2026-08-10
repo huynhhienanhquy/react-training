@@ -1,44 +1,40 @@
-import  { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SidebarNav } from '@/components/chat/SidebarNav/index';
-import { Button } from '@/components/Button/index';
+import { Button } from '@/components/common/Button';
 
-import HeartIcon from '@/components/icons/HeartIcon';
+import HeartIcon from '@/components/common/Icons/HeartIcon';
 import defaultFlightLogo from '@/assets/images/travel-provider-logo.png';
-import { SectionHeader } from '@/components/FlightFare/SectionHeader';
+import { SectionHeader } from '@/components/features/flights/SectionHeader';
 
-import { Topbar } from '@/components/chat/Topbar';
-import { FareHeader } from '@/components/FlightFare/FareHeader';
-import { SelectedFlightBox } from '@/components/FlightFare/SelectedFlightBox';
-import { FareCards } from '@/components/FlightFare/FareCards';
-import { PriceDetailsSidebar } from '@/components/FlightFare/PriceDetailsSidebar';
+import { FareHeader } from '@/components/features/flights/FareHeader';
+import { SelectedFlightBox } from '@/components/features/flights/SelectedFlightBox';
+import { FareCards } from '@/components/features/flights/FareCards';
+import { PriceDetailsSidebar } from '@/components/features/flights/PriceDetailsSidebar';
 
-import { getFareDetails } from '@/services/fareService';
+import { getFlights } from '@/services/fareService';
 import type {
   FareData,
   SelectFarePageProps,
 } from '@/types/flight';
 
 import { useAsyncData } from '@/hooks/useAsyncData';
-import { useSidebarNav } from '@/hooks/useSidebarNav';
 import { useChatTitle } from '@/hooks/useChatTitle';
+import { DashboardPageLayout } from '@/components/layouts/DashboardLayout';
 
 export const SelectFarePage = ({
   chatTitle,
   messages = [],
   onBackToChat,
-  onStartNewChat,
 }: SelectFarePageProps) => {
   const navigate = useNavigate();
-  const handleBackToChat = onBackToChat ?? (() => navigate('/chats'));
-  const handleStartNewChat = onStartNewChat ?? (() => navigate('/chats'));
-  const { activeNav, setActiveNav } = useSidebarNav();
+  const navigateBackToChat = useCallback(() => navigate('/chats'), [navigate]);
+  const handleBackToChat = onBackToChat ?? navigateBackToChat;
   const [selectedFareId, setSelectedFareId] =
     useState<'economy' | 'business'>('economy');
 
   // Fetch fare data
   const fetchFare = useCallback(async (): Promise<FareData> => {
-    const rawData = await getFareDetails();
+    const rawData = await getFlights();
 
     // MockAPI can return an array or an object.
     const data = Array.isArray(rawData)
@@ -70,12 +66,12 @@ export const SelectFarePage = ({
   );
 
   // Fare options
-  const fareOptions = fareData?.fareOptions ?? [];
+  const fareOptions = useMemo(() => fareData?.fareOptions ?? [], [fareData]);
 
-  const selectedFare =
+  const selectedFare = useMemo(() =>
     fareOptions.find(
       (fare) => fare.id === selectedFareId,
-    ) ?? fareOptions[0];
+    ) ?? fareOptions[0], [fareOptions, selectedFareId]);
 
   // Price breakdown
   const priceBreakdown = fareData?.priceBreakdown ?? {
@@ -90,26 +86,21 @@ export const SelectFarePage = ({
         priceBreakdown.taxesAndFees
       : 0;
 
+  const handleRetry = useCallback(() => window.location.reload(), []);
+  const handleSelectFare = useCallback((id: string) => {
+    setSelectedFareId(id as 'economy' | 'business');
+  }, []);
+
   return (
-    <div className="bg-slate-100 font-helvetica text-slate-700 h-screen overflow-hidden flex antialiased">
-      {/* 1. Sidebar Navigation */}
-      <SidebarNav
-        activeNav={activeNav}
-        onNavChange={setActiveNav}
-      />
-
-      {/* 2. Main Content */}
-      <main className="flex-1 bg-surface-section flex flex-col h-full overflow-y-auto">
-        {/* Topbar */}
-        <Topbar
-          isBreadcrumbMode={true}
-          breadcrumbLabel="Select Fare"
-          chatTitle={resolvedChatTitle}
-          messages={messages}
-          onBackToChat={handleBackToChat}
-          onNewChat={handleStartNewChat}
-        />
-
+      <DashboardPageLayout
+        scrollable
+        className="font-helvetica"
+        isBreadcrumbMode
+        breadcrumbLabel="Select Fare"
+        chatTitle={resolvedChatTitle}
+        messages={messages}
+        onBackToChat={handleBackToChat}
+      >
         {/* LOADING STATE */}
         {loading && (
           <div className="flex-1 flex items-center justify-center p-8">
@@ -133,7 +124,7 @@ export const SelectFarePage = ({
                 variant="danger"
                 size="sm"
                 className="mt-4"
-                onClick={() => window.location.reload()}
+                onClick={handleRetry}
               >
                 Retry
               </Button>
@@ -167,11 +158,7 @@ export const SelectFarePage = ({
                 fareOptions={fareOptions}
                 selectedFareId={selectedFareId}
                 defaultFlightLogo={defaultFlightLogo}
-                onSelectFare={(id) =>
-                  setSelectedFareId(
-                    id as 'economy' | 'business',
-                  )
-                }
+                onSelectFare={handleSelectFare}
               />
 
               <div className="space-y-3 pt-2">
@@ -198,7 +185,6 @@ export const SelectFarePage = ({
             </div>
           </div>
         )}
-      </main>
-    </div>
+      </DashboardPageLayout>
   );
 };

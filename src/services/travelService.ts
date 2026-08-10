@@ -1,26 +1,26 @@
 import { travelApi } from './api';
 import type { PlaceData, DayItinerary } from '../types/travel';
 
-// 3. API CALLS FOR PLACE (/place)
+// 3. API CALLS FOR PLACES (/places)
 //Get a list of suggested locations.
 export const getPlaces = async (): Promise<PlaceData[]> => {
-  const response = await travelApi.get<PlaceData[]>('/place');
+  const response = await travelApi.get<PlaceData[]>('/places');
   return response.data;
 };
 
 //Get details of a location by ID.
 export const getPlaceById = async (id: string): Promise<PlaceData> => {
-  const response = await travelApi.get<PlaceData>(`/place/${id}`);
+  const response = await travelApi.get<PlaceData>(`/places/${id}`);
   return response.data;
 };
 
 
-// 4. API CALLS FOR ITINERARY (/itinerary)
+// 4. API CALLS FOR ITINERARIES (/itineraries)
 //Get a list of suggested itineraries
 type ItineraryListResponse = DayItinerary[] | { days: DayItinerary[] };
 
 export const getItineraries = async (): Promise<DayItinerary[]> => {
-  const response = await travelApi.get<ItineraryListResponse>('/itinerary');
+  const response = await travelApi.get<ItineraryListResponse>('/itineraries');
 
   if (Array.isArray(response.data)) {
     return response.data;
@@ -36,7 +36,7 @@ export const getItineraries = async (): Promise<DayItinerary[]> => {
 
 //Get schedule details by ID
 export const getItineraryById = async (id: string): Promise<DayItinerary> => {
-  const response = await travelApi.get<DayItinerary>(`/itinerary/${id}`);
+  const response = await travelApi.get<DayItinerary>(`/itineraries/${id}`);
   return response.data;
 };
 

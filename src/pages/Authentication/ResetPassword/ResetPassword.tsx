@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormState } from '@/hooks/useFormState';
-import { AuthLayout } from '@/components/auth/AuthLayout';
-import { Button } from '@/components/Button';
-import { AuthHeader } from '@/components/auth/AuthHeader';
-import { InputField } from '@/components/InputField';
-import { ErrorMessage } from '@/components/Error';
-import { AuthFooter } from '@/components/auth/AuthFooter';
+import { AuthPageLayout } from '@/components/layouts/AuthPageLayout';
+import { Button } from '@/components/common/Button';
+import { InputField } from '@/components/common/InputField';
+import { ErrorMessage } from '@/components/common/Error';
 
 export const ResetPassword = () => {
   const navigate = useNavigate();
   const { isLoading, error, startLoading, stopLoading, setError } = useFormState();
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const handlePasswordChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value), []);
+  const handleConfirmPasswordChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => setConfirmPassword(event.target.value), []);
+  const handleSignUp = useCallback(() => navigate('/register'), [navigate]);
 
-  const handleResetPassword = (event: React.FormEvent) => {
+  const handleResetPassword = useCallback((event: React.FormEvent) => {
     event.preventDefault();
     setError("");
 
@@ -30,17 +31,24 @@ export const ResetPassword = () => {
       alert("Password reset successfully! Redirecting to Sign In...");
       navigate('/login');
     }, 300);
-  };
+  }, [confirmPassword, navigate, password, setError, startLoading, stopLoading]);
 
   return (
-    <AuthLayout isLoading={isLoading}>
+    <AuthPageLayout
+      title="Reset Password"
+      subtitle="You're all set. Please change your password now"
+      isLoading={isLoading}
+      className="flex flex-col space-y-3.5"
+      footer={{
+        questionText: "Don't have an account?",
+        actionText: 'Sign Up',
+        onActionClick: handleSignUp,
+        className: 'translate-y-24',
+      }}
+    >
       {/* Reduce the overall spacing between blocks to space-y-3.5 */}
-      <div className="flex flex-col space-y-3.5">
+      <div>
         {/* 1. Header */}
-        <AuthHeader
-          title="Reset Password"
-          subtitle="You’re all set. Please change your password now"
-        />
 
         {/* 2. Form */}
         <div className="mt-5  translate-y-8">
@@ -55,7 +63,7 @@ export const ResetPassword = () => {
               placeholder="Enter your password"
               autoComplete="new-password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handlePasswordChange}
               required
             />
 
@@ -65,7 +73,7 @@ export const ResetPassword = () => {
               placeholder="Confirm your password"
               autoComplete="new-password"
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={handleConfirmPasswordChange}
               required
             />
 
@@ -80,18 +88,11 @@ export const ResetPassword = () => {
               Reset Password
             </Button>
 
-            {/* 3. Footer  */}
-            <AuthFooter
-              className="translate-y-24"
-              questionText="Don't have an account?"
-              actionText="Sign Up"
-              onActionClick={() => navigate('/register')}
-            />
           </form>
         </div>
 
 
       </div>
-    </AuthLayout>
+    </AuthPageLayout>
   );
 };

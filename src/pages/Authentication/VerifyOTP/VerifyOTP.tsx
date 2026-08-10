@@ -1,19 +1,59 @@
-import React from 'react';
+import React, { memo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormState } from '@/hooks/useFormState';
 import { useOtpInput } from '@/hooks/useOtpInput';
 import { useCountdown } from '@/hooks/useCountdown';
-import { AuthLayout } from '@/components/auth/AuthLayout';
-import { Button } from '@/components/Button';
-import { AuthHeader } from '@/components/auth/AuthHeader';
+import { AuthPageLayout } from '@/components/layouts/AuthPageLayout';
+import { Button } from '@/components/common/Button';
+
+interface OtpDigitInputProps {
+  index: number;
+  value: string;
+  setInputRef: (index: number, element: HTMLInputElement | null) => void;
+  onChange: (index: number, value: string) => void;
+  onKeyDown: (index: number, event: React.KeyboardEvent<HTMLInputElement>) => void;
+  onPaste: (event: React.ClipboardEvent<HTMLInputElement>) => void;
+}
+
+const OtpDigitInput = memo(function OtpDigitInput({
+  index,
+  value,
+  setInputRef,
+  onChange,
+  onKeyDown,
+  onPaste,
+}: OtpDigitInputProps) {
+  const handleRef = useCallback((element: HTMLInputElement | null) => {
+    setInputRef(index, element);
+  }, [index, setInputRef]);
+  const handleInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(index, event.target.value);
+  }, [index, onChange]);
+  const handleInputKeyDown = useCallback((event: React.KeyboardEvent<HTMLInputElement>) => {
+    onKeyDown(index, event);
+  }, [index, onKeyDown]);
+
+  return (
+    <input
+      type="text"
+      maxLength={1}
+      inputMode="numeric"
+      value={value}
+      ref={handleRef}
+      onChange={handleInputChange}
+      onKeyDown={handleInputKeyDown}
+      onPaste={onPaste}
+      className="w-10 md:w-12 h-12 md:h-14 text-center text-lg md:text-xl font-bold rounded-xl border border-gray-200 bg-gray-50/50 text-slate-800 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 focus:bg-white transition shadow-xs font-sans"
+    />
+  );
+});
 
 export const VerifyOTP = () => {
   const navigate = useNavigate();
   const { isLoading, startLoading, stopLoading } = useFormState();
-  const { otp, inputRefs, handleChange, handleKeyDown, handlePaste } = useOtpInput(6);
+  const { otp, setInputRef, handleChange, handleKeyDown, handlePaste } = useOtpInput(6);
   const { counter, reset } = useCountdown(29);
-
-  const handleVerify = (event: React.FormEvent) => {
+  const handleVerify = useCallback((event: React.FormEvent) => {
     event.preventDefault();
     startLoading();
 
@@ -23,17 +63,15 @@ export const VerifyOTP = () => {
       // On success, navigate to the reset password page
       navigate('/reset-password');
     }, 1500);
-  };
+  }, [navigate, startLoading, stopLoading]);
 
   return (
-    <AuthLayout isLoading={isLoading}>
-      {/* Reduce the overall spacing between blocks */}
-      <div className="flex flex-col space-y-3.5">
-        {/* 1. Header */}
-        <AuthHeader
-          title="Enter OTP"
-          subtitle="Enter your email address to receive verification OTP"
-        />
+    <AuthPageLayout
+      title="Enter OTP"
+      subtitle="Enter your email address to receive verification OTP"
+      isLoading={isLoading}
+      className="flex flex-col space-y-3.5"
+    >
 
         {/* 2. Form */}
         <form className="space-y-3 translate-y-8" onSubmit={handleVerify}>
@@ -44,18 +82,13 @@ export const VerifyOTP = () => {
           <div className="flex items-center justify-center gap-1 md:gap-2 py-1">
             {otp.map((data, index) => (
               <React.Fragment key={`otp-${index}`}>
-                <input
-                  type="text"
-                  maxLength={1}
-                  inputMode="numeric"
+                <OtpDigitInput
+                  index={index}
                   value={data}
-                  ref={(el) => {
-                    if (el) inputRefs.current[index] = el;
-                  }}
-                  onChange={(e) => handleChange(index, e.target.value)}
-                  onKeyDown={(e) => handleKeyDown(index, e)}
+                  setInputRef={setInputRef}
+                  onChange={handleChange}
+                  onKeyDown={handleKeyDown}
                   onPaste={handlePaste}
-                  className="w-10 md:w-12 h-12 md:h-14 text-center text-lg md:text-xl font-bold rounded-xl border border-gray-200 bg-gray-50/50 text-slate-800 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 focus:bg-white transition shadow-xs font-sans"
                 />
                 {/* Visual dash separator between pairs of input boxes (after index 2) */}
                 {index === 2 && (
@@ -94,7 +127,6 @@ export const VerifyOTP = () => {
             </span>
           )}
         </div>
-      </div>
-    </AuthLayout>
+    </AuthPageLayout>
   );
 };

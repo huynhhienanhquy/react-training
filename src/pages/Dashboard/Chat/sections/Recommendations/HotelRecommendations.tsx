@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { RecommendationWrapper } from './RecommendationWrapper';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/common/Button';
 import { getHotels } from '@/services/hotelService';
 import type {
   HotelData,
@@ -55,19 +55,30 @@ export const HotelRecommendations = ({
   });
 
   const { favorites, toggleFavorite } = useFavorites();
-  const apiHotels =
-    hotelData?.map(mapHotelDataToOption) ?? [];
+  const apiHotels = useMemo(
+    () => hotelData?.map(mapHotelDataToOption) ?? [],
+    [hotelData],
+  );
 
   const hotelList = initialHotels ?? apiHotels;
 
-  const handleBookNow = (
+  const handleBookNow = useCallback((
     e: React.MouseEvent,
     hotel: HotelOption,
   ) => {
     e.stopPropagation();
 
     onBookNow?.(hotel);
-  };
+  }, [onBookNow]);
+
+  const createFavoriteHandler = useCallback(
+    (hotelId: string) => () => toggleFavorite(hotelId),
+    [toggleFavorite],
+  );
+  const createBookHandler = useCallback(
+    (hotel: HotelOption) => (event: React.MouseEvent) => handleBookNow(event, hotel),
+    [handleBookNow],
+  );
 
   return (
     <RecommendationWrapper
@@ -157,18 +168,14 @@ export const HotelRecommendations = ({
                     variant="favorite"
                     size="icon"
                     isFavorite={isFavorite}
-                    onClick={() =>
-                      toggleFavorite(hotel.id)
-                    }
+                    onClick={createFavoriteHandler(hotel.id)}
                     className="h-12 w-12 rounded-xl border border-blue-100 md:h-12 md:w-12"
                   />
 
                   <Button
                     variant="secondary"
                     size="sm"
-                    onClick={(e) =>
-                      handleBookNow(e, hotel)
-                    }
+                    onClick={createBookHandler(hotel)}
                     className="h-12 rounded-xl px-5 text-sm"
                   >
                     Book Now

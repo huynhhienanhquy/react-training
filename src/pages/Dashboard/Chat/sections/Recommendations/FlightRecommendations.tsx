@@ -1,6 +1,7 @@
+import { useCallback, useMemo } from 'react';
 import { RecommendationWrapper } from './RecommendationWrapper';
-import { Button } from '@/components/Button';
-import { PriceDisplay } from '@/components/PriceDisplay';
+import { Button } from '@/components/common/Button';
+import { PriceDisplay } from '@/components/common/PriceDisplay';
 import defaultFlightLogo from '@/assets/images/travel-provider-logo.png';
 
 import { getFlights } from '@/services/fareService';
@@ -64,10 +65,20 @@ export function FlightRecommendations({
 
   const { favorites, toggleFavorite } = useFavorites();
 
-  const apiFlights =
-    fareData?.map(mapFareDataToFlightOption) ?? [];
+  const apiFlights = useMemo(
+    () => fareData?.map(mapFareDataToFlightOption) ?? [],
+    [fareData],
+  );
 
   const flightList = initialFlights ?? apiFlights;
+  const createFavoriteHandler = useCallback(
+    (flightId: string) => () => toggleFavorite(flightId),
+    [toggleFavorite],
+  );
+  const createBookHandler = useCallback(
+    (flightId: string) => () => onBookNow?.(flightId),
+    [onBookNow],
+  );
 
   return (
     <RecommendationWrapper title={title} onSeeAll={onSeeAll}>
@@ -124,14 +135,14 @@ export function FlightRecommendations({
                     variant="favorite"
                     size="icon"
                     isFavorite={isFavorite}
-                    onClick={() => toggleFavorite(flight.id)}
+                    onClick={createFavoriteHandler(flight.id)}
                     className="h-12 w-12 rounded-xl border border-blue-100 md:h-12 md:w-12"
                   />
 
                   <Button
                     variant="secondary"
                     size="sm"
-                    onClick={() => onBookNow?.(flight.id)}
+                    onClick={createBookHandler(flight.id)}
                     className="h-12 rounded-xl px-5 text-sm"
                   >
                     Book Now

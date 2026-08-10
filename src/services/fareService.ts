@@ -1,15 +1,14 @@
 import { flightApi } from './api';
 import type { FareData } from '../types/flight';
 
-
- //Call the API to retrieve flight data from https://travel-login.free.beeceptor.com/flights
-
-export const getFareDetails = async (): Promise<FareData> => {
-  const response = await flightApi.get<FareData>('/flights');
+// Get a list of all flights.
+export const getFlights = async (): Promise<FareData[]> => {
+  const response = await flightApi.get<FareData[]>('/flights');
   return response.data;
 };
 
-export const getFlights = async (): Promise<FareData[]> => {
-  const response = await flightApi.get<FareData[]>('/flights');
+// Get details of a flight by ID.
+export const getFlightById = async (id: string): Promise<FareData> => {
+  const response = await flightApi.get<FareData>(`/flights/${id}`);
   return response.data;
 };

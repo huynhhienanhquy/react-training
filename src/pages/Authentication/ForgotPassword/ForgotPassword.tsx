@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormState } from '@/hooks/useFormState';
-import { AuthLayout } from '@/components/auth/AuthLayout';
-import { Button } from '@/components/Button';
-import { InputField } from '@/components/InputField';
-import { AuthHeader } from '@/components/auth/AuthHeader';
-import { AuthFooter } from '@/components/auth/AuthFooter';
+import { AuthPageLayout } from '@/components/layouts/AuthPageLayout';
+import { Button } from '@/components/common/Button';
+import { InputField } from '@/components/common/InputField';
 
 export const ForgotPassword = () => {
   const navigate = useNavigate();
   const { isLoading, startLoading, stopLoading } = useFormState();
   const [email, setEmail] = useState<string>("");
+  const handleEmailChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.target.value), []);
+  const handleSignUp = useCallback(() => navigate('/register'), [navigate]);
 
-  const handleSendOTP = (event: React.FormEvent) => {
+  const handleSendOTP = useCallback((event: React.FormEvent) => {
     event.preventDefault();
     startLoading();
 
@@ -21,17 +21,21 @@ export const ForgotPassword = () => {
       alert("OTP code has been sent to your email!");
       navigate('/verify-otp');
     }, 300);
-  };
+  }, [navigate, startLoading, stopLoading]);
 
   return (
-    <AuthLayout isLoading={isLoading}>
-      {/* Reduce the overall spacing between blocks to space-y-3.5 */}
-      <div className="flex flex-col space-y-3.5">
-        {/* 1. Header */}
-        <AuthHeader
-          title="Verify Email"
-          subtitle="Enter your email address to receive verification OTP"
-        />
+    <AuthPageLayout
+      title="Verify Email"
+      subtitle="Enter your email address to receive verification OTP"
+      isLoading={isLoading}
+      className="flex flex-col space-y-3.5"
+      footer={{
+        questionText: "Don't have an account?",
+        actionText: 'Sign Up',
+        onActionClick: handleSignUp,
+        className: 'space-y-3 translate-y-14',
+      }}
+    >
 
         {/* 2. Form */}
         <form className="space-y-3 translate-y-8" onSubmit={handleSendOTP} autoComplete="off">
@@ -40,7 +44,7 @@ export const ForgotPassword = () => {
             type="email"
             placeholder="Enter your email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleEmailChange}
             required
           />
           <Button
@@ -54,14 +58,6 @@ export const ForgotPassword = () => {
 
         </form>
 
-        {/* 3. Footer link is right below the button*/}
-        <AuthFooter
-          className="space-y-3 translate-y-14"
-          questionText="Don't have an account?"
-          actionText="Sign Up"
-          onActionClick={() => navigate('/register')}
-        />
-      </div>
-    </AuthLayout>
+    </AuthPageLayout>
   );
 };
