@@ -16,13 +16,13 @@ export const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.target.value);
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value);
-  const handleForgotPassword = () => navigate('/forgot-password');
-  const handleSocialLogin = () => undefined;
+  const handleEmailChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.target.value), []);
+  const handlePasswordChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value), []);
+  const handleForgotPassword = useCallback(() => navigate('/forgot-password'), [navigate]);
+  const handleSocialLogin = useCallback(() => undefined, []);
   const handleSignUp = useCallback(() => navigate('/register'), [navigate]);
 
-  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     startLoading();
     setError('');
@@ -35,7 +35,7 @@ export const Login = () => {
     } finally {
       stopLoading();
     }
-  };
+  }, [email, login, navigate, password, setError, startLoading, stopLoading]);
 
   return (
     <AuthPageLayout

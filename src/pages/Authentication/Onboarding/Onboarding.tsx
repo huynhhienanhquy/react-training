@@ -12,11 +12,11 @@ export const Onboarding = () => {
   const { isLoading, startLoading, stopLoading } = useFormState();
   const [fullName, setFullName] = useState('');
   const [country, setCountry] = useState('');
-  const handleFullNameChange = (event: ChangeEvent<HTMLInputElement>) => setFullName(event.target.value);
-  const handleCountryChange = (event: ChangeEvent<HTMLSelectElement>) => setCountry(event.target.value);
+  const handleFullNameChange = useCallback((event: ChangeEvent<HTMLInputElement>) => setFullName(event.target.value), []);
+  const handleCountryChange = useCallback((event: ChangeEvent<HTMLSelectElement>) => setCountry(event.target.value), []);
   const handleSignIn = useCallback(() => navigate('/login'), [navigate]);
 
-  const handleStartPlanning = (event: FormEvent) => {
+  const handleStartPlanning = useCallback((event: FormEvent) => {
     event.preventDefault();
     startLoading();
 
@@ -24,7 +24,7 @@ export const Onboarding = () => {
       stopLoading();
       navigate('/dashboard');
     }, 300);
-  };
+  }, [navigate, startLoading, stopLoading]);
 
   return (
     <AuthLayout>

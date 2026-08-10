@@ -10,12 +10,12 @@ export const Register = () => {
   const { isLoading, startLoading, stopLoading } = useFormState();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.target.value);
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value);
-  const handleSocialLogin = () => undefined;
+  const handleEmailChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.target.value), []);
+  const handlePasswordChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value), []);
+  const handleSocialLogin = useCallback(() => undefined, []);
   const handleSignIn = useCallback(() => navigate('/login'), [navigate]);
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = useCallback((event: React.FormEvent) => {
     event.preventDefault();
     startLoading();
 
@@ -23,7 +23,7 @@ export const Register = () => {
       stopLoading();
       navigate('/onboarding');
     }, 300);
-  };
+  }, [navigate, startLoading, stopLoading]);
 
   return (
     <AuthPageLayout

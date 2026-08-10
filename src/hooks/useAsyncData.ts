@@ -1,8 +1,6 @@
 import { useCallback, useEffect, useRef, useState, type DependencyList } from 'react';
 import { getErrorMessage } from '@/utils/errorHelpers';
 
-/* eslint-disable react-hooks/set-state-in-effect */
-
 interface AsyncDataState<T> {
   data: T | null;
   loading: boolean;
@@ -81,7 +79,7 @@ export const useAsyncData = <T>(
     }
   // Callers can explicitly declare the values that change the request while
   // inline fetch functions remain safe from identity-only refetch loops.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/use-memo
   }, [skip, ...dependencies]);
 
   useEffect(() => {

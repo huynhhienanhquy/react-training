@@ -11,11 +11,11 @@ export const ResetPassword = () => {
   const { isLoading, error, startLoading, stopLoading, setError } = useFormState();
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value);
-  const handleConfirmPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => setConfirmPassword(event.target.value);
+  const handlePasswordChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value), []);
+  const handleConfirmPasswordChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => setConfirmPassword(event.target.value), []);
   const handleSignUp = useCallback(() => navigate('/register'), [navigate]);
 
-  const handleResetPassword = (event: React.FormEvent) => {
+  const handleResetPassword = useCallback((event: React.FormEvent) => {
     event.preventDefault();
     setError("");
 
@@ -31,7 +31,7 @@ export const ResetPassword = () => {
       alert("Password reset successfully! Redirecting to Sign In...");
       navigate('/login');
     }, 300);
-  };
+  }, [confirmPassword, navigate, password, setError, startLoading, stopLoading]);
 
   return (
     <AuthPageLayout

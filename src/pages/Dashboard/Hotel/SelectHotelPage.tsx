@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { SectionHeader } from '@/components/features/flights/SectionHeader';
@@ -28,7 +28,8 @@ export const SelectHotelPage = ({
   selectedHotel,
 }: SelectHotelPageProps) => {
   const navigate = useNavigate();
-  const handleBackToChat = onBackToChat ?? (() => navigate('/chats'));
+  const navigateBackToChat = useCallback(() => navigate('/chats'), [navigate]);
+  const handleBackToChat = onBackToChat ?? navigateBackToChat;
   const [isComparePrice, setIsComparePrice] = useState(false);
 
   // Fetch hotel data
@@ -62,7 +63,7 @@ export const SelectHotelPage = ({
     error,
   } = useAsyncData<HotelData[]>(fetchHotels);
 
-  const hotelList = hotelData ?? [];
+  const hotelList = useMemo(() => hotelData ?? [], [hotelData]);
 
   // Handle the Topbar header display
   const resolvedChatTitle = useChatTitle(
@@ -72,7 +73,7 @@ export const SelectHotelPage = ({
   );
 
   // Handling when clicking "Book Hotel"
-  const handleBookHotel = (
+  const handleBookHotel = useCallback((
     e: React.MouseEvent,
     selectedHotel: HotelData,
   ) => {
@@ -87,11 +88,16 @@ export const SelectHotelPage = ({
         }`,
       );
     }
-  };
+  }, [onSelectHotel]);
 
-  const handleRetry = () => window.location.reload();
-  const handleComparePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => setIsComparePrice(event.target.checked);
-  const createBookHotelHandler = (hotel: HotelData) => (event: React.MouseEvent) => handleBookHotel(event, hotel);
+  const handleRetry = useCallback(() => window.location.reload(), []);
+  const handleComparePriceChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsComparePrice(event.target.checked);
+  }, []);
+  const createBookHotelHandler = useCallback(
+    (hotel: HotelData) => (event: React.MouseEvent) => handleBookHotel(event, hotel),
+    [handleBookHotel],
+  );
 
   return (
       <DashboardPageLayout

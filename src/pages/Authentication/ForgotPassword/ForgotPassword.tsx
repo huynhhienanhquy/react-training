@@ -9,10 +9,10 @@ export const ForgotPassword = () => {
   const navigate = useNavigate();
   const { isLoading, startLoading, stopLoading } = useFormState();
   const [email, setEmail] = useState<string>("");
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.target.value);
+  const handleEmailChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.target.value), []);
   const handleSignUp = useCallback(() => navigate('/register'), [navigate]);
 
-  const handleSendOTP = (event: React.FormEvent) => {
+  const handleSendOTP = useCallback((event: React.FormEvent) => {
     event.preventDefault();
     startLoading();
 
@@ -21,7 +21,7 @@ export const ForgotPassword = () => {
       alert("OTP code has been sent to your email!");
       navigate('/verify-otp');
     }, 300);
-  };
+  }, [navigate, startLoading, stopLoading]);
 
   return (
     <AuthPageLayout

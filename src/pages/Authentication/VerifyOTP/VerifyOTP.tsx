@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormState } from '@/hooks/useFormState';
 import { useOtpInput } from '@/hooks/useOtpInput';
@@ -6,18 +6,54 @@ import { useCountdown } from '@/hooks/useCountdown';
 import { AuthPageLayout } from '@/components/layouts/AuthPageLayout';
 import { Button } from '@/components/common/Button';
 
+interface OtpDigitInputProps {
+  index: number;
+  value: string;
+  setInputRef: (index: number, element: HTMLInputElement | null) => void;
+  onChange: (index: number, value: string) => void;
+  onKeyDown: (index: number, event: React.KeyboardEvent<HTMLInputElement>) => void;
+  onPaste: (event: React.ClipboardEvent<HTMLInputElement>) => void;
+}
+
+const OtpDigitInput = memo(function OtpDigitInput({
+  index,
+  value,
+  setInputRef,
+  onChange,
+  onKeyDown,
+  onPaste,
+}: OtpDigitInputProps) {
+  const handleRef = useCallback((element: HTMLInputElement | null) => {
+    setInputRef(index, element);
+  }, [index, setInputRef]);
+  const handleInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(index, event.target.value);
+  }, [index, onChange]);
+  const handleInputKeyDown = useCallback((event: React.KeyboardEvent<HTMLInputElement>) => {
+    onKeyDown(index, event);
+  }, [index, onKeyDown]);
+
+  return (
+    <input
+      type="text"
+      maxLength={1}
+      inputMode="numeric"
+      value={value}
+      ref={handleRef}
+      onChange={handleInputChange}
+      onKeyDown={handleInputKeyDown}
+      onPaste={onPaste}
+      className="w-10 md:w-12 h-12 md:h-14 text-center text-lg md:text-xl font-bold rounded-xl border border-gray-200 bg-gray-50/50 text-slate-800 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 focus:bg-white transition shadow-xs font-sans"
+    />
+  );
+});
+
 export const VerifyOTP = () => {
   const navigate = useNavigate();
   const { isLoading, startLoading, stopLoading } = useFormState();
-  const { otp, inputRefs, handleChange, handleKeyDown, handlePaste } = useOtpInput(6);
+  const { otp, setInputRef, handleChange, handleKeyDown, handlePaste } = useOtpInput(6);
   const { counter, reset } = useCountdown(29);
-  const createInputRef = (index: number) => (element: HTMLInputElement | null) => {
-    if (element) inputRefs.current[index] = element;
-  };
-  const createChangeHandler = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => handleChange(index, event.target.value);
-  const createKeyDownHandler = (index: number) => (event: React.KeyboardEvent<HTMLInputElement>) => handleKeyDown(index, event);
-
-  const handleVerify = (event: React.FormEvent) => {
+  const handleVerify = useCallback((event: React.FormEvent) => {
     event.preventDefault();
     startLoading();
 
@@ -27,7 +63,7 @@ export const VerifyOTP = () => {
       // On success, navigate to the reset password page
       navigate('/reset-password');
     }, 1500);
-  };
+  }, [navigate, startLoading, stopLoading]);
 
   return (
     <AuthPageLayout
@@ -46,16 +82,13 @@ export const VerifyOTP = () => {
           <div className="flex items-center justify-center gap-1 md:gap-2 py-1">
             {otp.map((data, index) => (
               <React.Fragment key={`otp-${index}`}>
-                <input
-                  type="text"
-                  maxLength={1}
-                  inputMode="numeric"
+                <OtpDigitInput
+                  index={index}
                   value={data}
-                  ref={createInputRef(index)}
-                  onChange={createChangeHandler(index)}
-                  onKeyDown={createKeyDownHandler(index)}
+                  setInputRef={setInputRef}
+                  onChange={handleChange}
+                  onKeyDown={handleKeyDown}
                   onPaste={handlePaste}
-                  className="w-10 md:w-12 h-12 md:h-14 text-center text-lg md:text-xl font-bold rounded-xl border border-gray-200 bg-gray-50/50 text-slate-800 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 focus:bg-white transition shadow-xs font-sans"
                 />
                 {/* Visual dash separator between pairs of input boxes (after index 2) */}
                 {index === 2 && (

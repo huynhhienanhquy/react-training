@@ -1,4 +1,4 @@
-import React, { useId, useState } from 'react';
+import React, { memo, useCallback, useId, useState } from 'react';
 import { Button } from '@/components/common/Button';
 import { Icon } from '@/components/common/Icons/Icon';
 
@@ -7,14 +7,14 @@ type InputFieldProps = {
   error?: string;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
-export const InputField = ({
+export const InputField = memo(function InputField({
   label,
   type = 'text',
   className = '',
   id,
   error,
   ...props
-}: InputFieldProps) => {
+}: InputFieldProps) {
   const generatedId = useId();
   const inputId = id ?? generatedId;
   const errorId = `${inputId}-error`;
@@ -29,9 +29,9 @@ export const InputField = ({
       : 'password'
     : type;
 
-  const handleTogglePassword = () => {
+  const handleTogglePassword = useCallback(() => {
     setShowPassword((prev) => !prev);
-  };
+  }, []);
 
   return (
     <div className="relative mb-10 flex flex-col space-y-2">
@@ -85,5 +85,5 @@ export const InputField = ({
       )}
     </div>
   );
-};
+});
 

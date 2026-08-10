@@ -1,4 +1,4 @@
-import  { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/common/Button';
 
@@ -27,7 +27,8 @@ export const SelectFarePage = ({
   onBackToChat,
 }: SelectFarePageProps) => {
   const navigate = useNavigate();
-  const handleBackToChat = onBackToChat ?? (() => navigate('/chats'));
+  const navigateBackToChat = useCallback(() => navigate('/chats'), [navigate]);
+  const handleBackToChat = onBackToChat ?? navigateBackToChat;
   const [selectedFareId, setSelectedFareId] =
     useState<'economy' | 'business'>('economy');
 
@@ -65,12 +66,12 @@ export const SelectFarePage = ({
   );
 
   // Fare options
-  const fareOptions = fareData?.fareOptions ?? [];
+  const fareOptions = useMemo(() => fareData?.fareOptions ?? [], [fareData]);
 
-  const selectedFare =
+  const selectedFare = useMemo(() =>
     fareOptions.find(
       (fare) => fare.id === selectedFareId,
-    ) ?? fareOptions[0];
+    ) ?? fareOptions[0], [fareOptions, selectedFareId]);
 
   // Price breakdown
   const priceBreakdown = fareData?.priceBreakdown ?? {
@@ -85,8 +86,10 @@ export const SelectFarePage = ({
         priceBreakdown.taxesAndFees
       : 0;
 
-  const handleRetry = () => window.location.reload();
-  const handleSelectFare = (id: string) => setSelectedFareId(id as 'economy' | 'business');
+  const handleRetry = useCallback(() => window.location.reload(), []);
+  const handleSelectFare = useCallback((id: string) => {
+    setSelectedFareId(id as 'economy' | 'business');
+  }, []);
 
   return (
       <DashboardPageLayout

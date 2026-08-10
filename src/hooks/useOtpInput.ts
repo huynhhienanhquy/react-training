@@ -4,6 +4,10 @@ export const useOtpInput = (length: number = 6) => {
   const [otp, setOtp] = useState<string[]>(Array(length).fill(''));
   const inputRefs = useRef<(HTMLInputElement | null)[]>(Array(length).fill(null));
 
+  const setInputRef = useCallback((index: number, element: HTMLInputElement | null) => {
+    inputRefs.current[index] = element;
+  }, []);
+
   const handleChange = useCallback(
     (index: number, value: string) => {
       if (!/^\d*$/.test(value)) return;
@@ -43,5 +47,5 @@ export const useOtpInput = (length: number = 6) => {
 
   const otpString = otp.join('');
 
-  return { otp, otpString, inputRefs, handleChange, handleKeyDown, handlePaste, setOtp };
+  return { otp, otpString, inputRefs, setInputRef, handleChange, handleKeyDown, handlePaste, setOtp };
 };
