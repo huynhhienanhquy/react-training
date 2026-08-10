@@ -24,6 +24,13 @@ export const useAsyncData = <T>(
 ): UseAsyncDataReturn<T> => {
   const { skip = false, dependencies = [] } = options ?? {};
   const fetchFnRef = useRef(fetchFn);
+  const isMountedRef = useRef(true);
+  const requestIdRef = useRef(0);
+
+  useEffect(() => () => {
+    isMountedRef.current = false;
+    requestIdRef.current += 1;
+  }, []);
 
   useEffect(() => {
     fetchFnRef.current = fetchFn;
@@ -40,6 +47,9 @@ export const useAsyncData = <T>(
       return;
     }
 
+    const requestId = requestIdRef.current + 1;
+    requestIdRef.current = requestId;
+
     setState((prev) => ({
       ...prev,
       loading: true,
@@ -49,12 +59,16 @@ export const useAsyncData = <T>(
     try {
       const data = await fetchFnRef.current();
 
+      if (!isMountedRef.current || requestId !== requestIdRef.current) return;
+
       setState({
         data,
         loading: false,
         error: null,
       });
     } catch (err: unknown) {
+      if (!isMountedRef.current || requestId !== requestIdRef.current) return;
+
       setState({
         data: null,
         loading: false,

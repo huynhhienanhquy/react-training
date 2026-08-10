@@ -6,6 +6,7 @@ import { ItineraryCardWidget } from '@/pages/Dashboard/Chat/sections/Recommendat
 import type { PlaceData, DayItinerary } from '@/types/travel';
 import { useAutoScroll } from '@/hooks/useAutoScroll';
 import type { ChatMessageListProps } from '@/types/chat';
+import { LazyRender } from '@/components/common/LazyRender';
 
 // Custom payload inside a chat message
 export const ChatMessageList = ({
@@ -89,49 +90,57 @@ export const ChatMessageList = ({
               )}
 
               {isFlightType && msg.sender === 'ai' && (
-                <FlightRecommendations
-                  title="Recommended Flights For a Round Trip Journey"
-                  onBookNow={(id) => {
-                    if (onBookFlight) {
-                      onBookFlight(id);
-                    }
-                  }}
-                />
+                <LazyRender>
+                  <FlightRecommendations
+                    title="Recommended Flights For a Round Trip Journey"
+                    onBookNow={(id) => {
+                      if (onBookFlight) {
+                        onBookFlight(id);
+                      }
+                    }}
+                  />
+                </LazyRender>
               )}
 
               {isHotelType && msg.sender === 'ai' && (
-                <HotelRecommendations
-                  title="Recommended Hotels For a Three-Night Staycation"
-                  onBookNow={(hotel) => {
-                    if (!onBookHotel) return;
+                <LazyRender>
+                  <HotelRecommendations
+                    title="Recommended Hotels For a Three-Night Staycation"
+                    onBookNow={(hotel) => {
+                      if (!onBookHotel) return;
 
-                    onBookHotel(
-                      hotel.rawData ?? {
-                        id: hotel.id,
-                        hotelName: hotel.name,
-                        description: hotel.description,
-                        coverImage: hotel.imageUrl,
-                      },
-                    );
-                  }}
-                  onSeeAll={() => {
-                    /* TODO: Implement see all */
-                  }}
-                />
+                      onBookHotel(
+                        hotel.rawData ?? {
+                          id: hotel.id,
+                          hotelName: hotel.name,
+                          description: hotel.description,
+                          coverImage: hotel.imageUrl,
+                        },
+                      );
+                    }}
+                    onSeeAll={() => {
+                      /* TODO: Implement see all */
+                    }}
+                  />
+                </LazyRender>
               )}
 
               {isPlacesType && msg.sender === 'ai' && (
-                <PlacesCardWidget
-                  places={placesData}
-                  onViewAll={() => onViewAllPlaces?.(placesData)}
-                />
+                <LazyRender>
+                  <PlacesCardWidget
+                    places={placesData}
+                    onViewAll={() => onViewAllPlaces?.(placesData)}
+                  />
+                </LazyRender>
               )}
 
               {isItineraryType && msg.sender === 'ai' && (
-                <ItineraryCardWidget
-                  itinerary={itineraryData}
-                  onViewAll={() => onViewAllItinerary?.(itineraryData)}
-                />
+                <LazyRender>
+                  <ItineraryCardWidget
+                    itinerary={itineraryData}
+                    onViewAll={() => onViewAllItinerary?.(itineraryData)}
+                  />
+                </LazyRender>
               )}
             </div>
           </div>
