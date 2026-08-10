@@ -46,12 +46,11 @@ export const Login = () => {
         questionText: "Don't have an account?",
         actionText: 'Sign Up',
         onActionClick: handleSignUp,
-        className: 'translate-y-12',
       }}
     >
 
       <form
-        className="space-y-6 font-helvetica translate-y-10"
+        className="mt-10 space-y-6 font-helvetica"
         onSubmit={handleLogin}
       >
         <InputField
@@ -86,7 +85,7 @@ export const Login = () => {
 
         <ErrorMessage message={error} />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 translate-y-8 ">
+        <div className="mt-8 grid grid-cols-1 gap-3 pt-2 sm:grid-cols-2">
           <Button
             type="button"
             variant="social"
@@ -108,7 +107,7 @@ export const Login = () => {
           </Button>
         </div>
 
-        <div className="flex flex-col gap-0.5 translate-y-12">
+        <div className="mt-8 flex flex-col gap-0.5">
           <Button
             type="submit"
             isLoading={isLoading}
