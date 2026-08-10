@@ -19,7 +19,7 @@ vi.mock('@/components/common/Card', () => ({
   ),
 }));
 
-vi.mock('@/components/InfoRow', () => ({
+vi.mock('@/components/common/InfoRow', () => ({
   InfoRow: ({ label, value }: { label: string; value: string }) => (
     <div data-testid="info-row">
       <span>{label}</span>

@@ -22,11 +22,11 @@ vi.mock("@/hooks/useFormState", () => ({
   }),
 }));
 
-vi.mock("@/components/auth/AuthLayout/AuthLayout", () => ({
+vi.mock('@/components/common/Auth/AuthLayout', () => ({
   AuthLayout: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
 }));
 
-vi.mock("@/components/auth/AuthHeader/AuthHeader", () => ({
+vi.mock('@/components/common/Auth/AuthHeader', () => ({
   AuthHeader: ({ title, subtitle }: { title: string; subtitle: string }) => (
     <>
       <h1>{title}</h1>
@@ -43,7 +43,7 @@ vi.mock('@/components/common/Button', () => ({
   }) => <button type="submit">{children}</button>,
 }));
 
-vi.mock("@/components/auth/AuthFooter/AuthFooter", () => ({
+vi.mock('@/components/common/Auth/AuthFooter', () => ({
   AuthFooter: ({
     actionText,
     onActionClick,
@@ -61,7 +61,7 @@ describe("Onboarding", () => {
   it("renders page correctly", () => {
     render(<Onboarding />);
 
-    expect(screen.getByText("Let\u2019s Get To Know You!")).toBeInTheDocument();
+    expect(screen.getByText("Let's Get To Know You!")).toBeInTheDocument();
     expect(screen.getByLabelText("Full Name")).toBeInTheDocument();
     expect(screen.getByText("Sign In")).toBeInTheDocument();
   });

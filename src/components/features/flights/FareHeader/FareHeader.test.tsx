@@ -19,7 +19,7 @@ vi.mock('@/components/common/Card', () => ({
   ),
 }));
 
-vi.mock('@/components/PriceDisplay', () => ({
+vi.mock('@/components/common/PriceDisplay', () => ({
   PriceDisplay: ({
     amount,
     size,
