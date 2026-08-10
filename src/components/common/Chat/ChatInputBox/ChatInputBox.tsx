@@ -1,5 +1,5 @@
 
-import type { ChangeEvent } from 'react';
+import { memo, type ChangeEvent } from 'react';
 import AddIcon from '@/components/common/Icons/AddIcon';
 import MicrophoneIcon from '@/components/common/Icons/MicrophoneIcon';
 import SendIcon from '@/components/common/Icons/SendIcon';
@@ -7,13 +7,13 @@ import { type ChatInputBoxProps } from "@/types/chat";
 import { useEnterToSend } from '@/hooks/useEnterToSend';
 import { Button } from '@/components/common/Button';
 
-export const ChatInputBox = ({
+export const ChatInputBox = memo(function ChatInputBox({
   inputMessage,
   onInputChange,
   onSend,
   isRecording,
   onToggleRecording,
-}: ChatInputBoxProps) => {
+}: ChatInputBoxProps) {
   const handleKeyDown = useEnterToSend(onSend);
   const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     onInputChange(event.target.value);
@@ -88,4 +88,4 @@ export const ChatInputBox = ({
       </div>
     </div>
   );
-};
+});

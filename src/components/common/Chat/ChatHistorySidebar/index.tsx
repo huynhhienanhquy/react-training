@@ -1,18 +1,18 @@
 
-import { useCallback, useMemo, type ChangeEvent } from 'react';
+import { memo, useCallback, useMemo, type ChangeEvent } from 'react';
 import SearchIcon from '@/components/common/Icons/SearchIcon'
 import { Button } from '@/components/common/Button';
 import type { ChatSession, ChatHistorySidebarProps } from '@/types/chat';
 
 export type { ChatSession };
 
-export const ChatHistorySidebar = ({
+export const ChatHistorySidebar = memo(function ChatHistorySidebar({
   searchQuery,
   onSearchChange,
   sessions,
   activeSessionId,
   onSelectSession,
-}: ChatHistorySidebarProps) => {
+}: ChatHistorySidebarProps) {
   const handleSearchChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     onSearchChange(event.target.value);
   }, [onSearchChange]);
@@ -104,4 +104,4 @@ export const ChatHistorySidebar = ({
       </div>
     </aside>
   );
-};
+});

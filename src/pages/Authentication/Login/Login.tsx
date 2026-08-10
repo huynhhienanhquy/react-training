@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { useFormState } from '@/hooks/useFormState';
@@ -20,7 +20,7 @@ export const Login = () => {
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value);
   const handleForgotPassword = () => navigate('/forgot-password');
   const handleSocialLogin = () => undefined;
-  const handleSignUp = () => navigate('/register');
+  const handleSignUp = useCallback(() => navigate('/register'), [navigate]);
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

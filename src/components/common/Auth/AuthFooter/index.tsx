@@ -1,11 +1,12 @@
-import {type AuthFooterProps}  from '@/types/auth'
+import { memo } from 'react';
+import { type AuthFooterProps } from '@/types/auth';
 
-export const AuthFooter = ({
+export const AuthFooter = memo(function AuthFooter({
   questionText,
   actionText,
   onActionClick,
   className = '',
-}: AuthFooterProps) => {
+}: AuthFooterProps) {
   return (
     <div className={`text-center text-sm2 text-gray-400 mt-8 md:mt-4 ${className}`}>
       {questionText}{" "}
@@ -17,4 +18,4 @@ export const AuthFooter = ({
       </span>
     </div>
   );
-};
+});

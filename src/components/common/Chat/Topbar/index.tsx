@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import ArrowLeftIcon from '@/components/common/Icons/ArrowLeftIcon';
 import { Button } from '@/components/common/Button';
 import AddIcon from '@/components/common/Icons/AddIcon';
@@ -6,14 +7,14 @@ export type { ChatMessage } from '@/types/chat';
 import { type TopbarProps } from "@/types/chat";
 
 
-export const Topbar = ({
+export const Topbar = memo(function Topbar({
   isBreadcrumbMode = false,
   breadcrumbLabel = 'Select Fare',
   chatTitle,
   messages = [],
   onBackToChat,
   onNewChat,
-}: TopbarProps) => {
+}: TopbarProps) {
   const firstUserMessage = messages.find((m) => m.sender === 'user')?.text;
   const displayTitle =
     chatTitle ||
@@ -76,4 +77,4 @@ export const Topbar = ({
       </div>
     </header>
   );
-};
+});

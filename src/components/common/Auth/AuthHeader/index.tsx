@@ -1,10 +1,11 @@
+import { memo } from 'react';
 import { type AuthHeaderProps } from '@/types/auth';
 
-export const AuthHeader = ({
+export const AuthHeader = memo(function AuthHeader({
   title,
   subtitle,
   className = '',
-}: AuthHeaderProps) => {
+}: AuthHeaderProps) {
   return (
     <div className={`space-y-2 mb-2 md:mb-4 mt-6 ${className}`}>
       <h2 className="text-2xl md:text-display-sm font-bold text-brand-dark-alt tracking-tight">
@@ -16,4 +17,4 @@ export const AuthHeader = ({
       </p>
     </div>
   );
-};
+});

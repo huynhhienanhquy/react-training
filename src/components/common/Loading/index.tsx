@@ -1,10 +1,11 @@
+import { memo } from 'react';
 import appLogo from '@/assets/images/app-logo.png';
 
 interface LoadingOverlayProps {
   isVisible?: boolean;
 }
 
-export const LoadingOverlay = ({ isVisible = true }: LoadingOverlayProps) => {
+export const LoadingOverlay = memo(function LoadingOverlay({ isVisible = true }: LoadingOverlayProps) {
   if (!isVisible) return null;
 
   return (
@@ -29,4 +30,4 @@ export const LoadingOverlay = ({ isVisible = true }: LoadingOverlayProps) => {
       </div>
     </div>
   );
-};
+});

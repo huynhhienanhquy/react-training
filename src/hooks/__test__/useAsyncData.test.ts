@@ -2,6 +2,7 @@ import { renderHook, act } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { useAsyncData } from '@/hooks/useAsyncData';
 import { AxiosError } from 'axios';
+import { createElement, StrictMode, type ReactNode } from 'react';
 
 describe('useAsyncData', () => {
   it('has correct initial loading state', () => {
@@ -101,5 +102,19 @@ describe('useAsyncData', () => {
 
     expect(result.current.data).toBe('data-2');
     expect(fetchFn).toHaveBeenCalledTimes(2);
+  });
+
+  it('finishes loading when effects are replayed by StrictMode', async () => {
+    const fetchFn = vi.fn().mockResolvedValue('strict-mode-data');
+    const wrapper = ({ children }: { children: ReactNode }) =>
+      createElement(StrictMode, null, children);
+
+    const { result } = renderHook(() => useAsyncData(fetchFn), { wrapper });
+
+    await act(async () => Promise.resolve());
+
+    expect(result.current.loading).toBe(false);
+    expect(result.current.data).toBe('strict-mode-data');
+    expect(result.current.error).toBeNull();
   });
 });
