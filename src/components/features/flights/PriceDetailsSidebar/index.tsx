@@ -1,7 +1,7 @@
 
-import { Card } from '@/components/Card';
+import { Card } from '@/components/common/Card';
 import { InfoRow } from '@/components/common/InfoRow';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/common/Button';
 import type { PriceDetailsSidebarProps } from '@/types/flightFareTypes';
 
 export const PriceDetailsSidebar = ({

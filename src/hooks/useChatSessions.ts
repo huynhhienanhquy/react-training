@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { ChatMessage, ChatSession } from '@/types/chat';
 
 const CHAT_SESSIONS_STORAGE_KEY = 'travel-chat-sessions';
@@ -126,11 +126,12 @@ export const useChatSessions = (): UseChatSessionsResult => {
     };
   }, []);
 
-  const currentMessages = activeSessionId
-    ? sessionMessages[activeSessionId] || []
-    : [];
+  const currentMessages = useMemo(
+    () => activeSessionId ? sessionMessages[activeSessionId] || [] : [],
+    [activeSessionId, sessionMessages],
+  );
 
-  const sendMessage = (text: string): boolean => {
+  const sendMessage = useCallback((text: string): boolean => {
     const trimmed = text.trim();
 
     if (!trimmed) return false;
@@ -195,15 +196,15 @@ export const useChatSessions = (): UseChatSessionsResult => {
     timeoutRefs.current.add(timeoutId);
 
     return true;
-  };
+  }, [activeSessionId]);
 
-  const startNewChat = () => {
+  const startNewChat = useCallback(() => {
     setActiveSessionId(null);
-  };
+  }, []);
 
-  const selectSession = (sessionId: string) => {
+  const selectSession = useCallback((sessionId: string) => {
     setActiveSessionId(sessionId);
-  };
+  }, []);
 
   return {
     sessions,

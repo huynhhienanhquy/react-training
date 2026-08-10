@@ -1,6 +1,7 @@
 import { LoadingOverlay } from '@/components/common/Loading';
 import authBackground from '@/assets/images/auth-background.png';
 import { type AuthLayoutProps } from '@/types/auth';
+import { Outlet } from 'react-router-dom';
 
 export const AuthLayout = ({
   children,
@@ -39,7 +40,7 @@ export const AuthLayout = ({
 
           {/* Inner White Form Card */}
           <div className="relative w-full h-full bg-white rounded-auth-inner-sm sm:rounded-auth-inner p-6 sm:p-8 md:p-10 lg:p-12 shadow-sm flex flex-col min-h-0 overflow-y-auto">
-            {children}
+            {children ?? <Outlet />}
           </div>
 
         </div>

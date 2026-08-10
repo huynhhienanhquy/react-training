@@ -13,7 +13,7 @@ import CommunityIcon from '@/components/common/Icons/PeopleIcon';
 import SettingsIcon from '@/components/common/Icons/SettingsIcon';
 import userAvatar from '@/assets/images/user-avatar.png';
 import { type SidebarNavProps } from "@/types/chat";
-import { Button } from "@/components/Button";
+import { Button } from '@/components/common/Button';
 import { useTheme } from '@/hooks/useTheme';
 
 export const SidebarNav = ({ activeNav, onNavChange, isMobileOpen, onMobileToggle }: SidebarNavProps) => {
@@ -45,6 +45,11 @@ export const SidebarNav = ({ activeNav, onNavChange, isMobileOpen, onMobileToggl
     } catch (error) {
       console.error('Logout error:', error);
     }
+  };
+
+  const createNavHandler = (id: string, closeMobile = false) => () => {
+    onNavChange(id);
+    if (closeMobile) onMobileToggle?.();
   };
 
   return (
@@ -95,7 +100,7 @@ export const SidebarNav = ({ activeNav, onNavChange, isMobileOpen, onMobileToggl
                       ? 'bg-blue-50 border-2 border-blue-200 shadow-sm shadow-blue-100/50'
                       : 'bg-transparent border-2 border-transparent hover:bg-white/80 hover:border-slate-200/60'
                   }`}
-                  onClick={() => onNavChange(item.id)}
+                  onClick={createNavHandler(item.id)}
                 >
                   <Icon
                     aria-label={item.alt}
@@ -203,10 +208,7 @@ export const SidebarNav = ({ activeNav, onNavChange, isMobileOpen, onMobileToggl
                           ? 'bg-blue-50 border border-blue-200 shadow-sm shadow-blue-100/50'
                           : 'bg-transparent border border-transparent hover:bg-white/80 hover:border-slate-200/60'
                       }`}
-                      onClick={() => {
-                        onNavChange(item.id);
-                        onMobileToggle?.();
-                      }}
+                      onClick={createNavHandler(item.id, true)}
                       leftIcon={
                         <Icon
                           aria-label={item.alt}

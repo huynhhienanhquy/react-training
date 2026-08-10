@@ -1,12 +1,11 @@
 import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { SidebarNav } from '@/components/common/Chat/SidebarNav';
 import { Topbar } from '@/components/common/Chat/Topbar';
 import { SectionHeader } from '@/components/features/flights/SectionHeader';
 
 import { getHotels } from '@/services/hotelService';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/common/Button';
 import { Icon } from '@/components/common/Icons/Icon';
 
 import type {
@@ -19,7 +18,6 @@ import bookingIcon from '@/assets/images/booking-logo.png';
 import expediaIcon from '@/assets/images/expedia-logo.png';
 
 import { useAsyncData } from '@/hooks/useAsyncData';
-import { useSidebarNav } from '@/hooks/useSidebarNav';
 import { useChatTitle } from '@/hooks/useChatTitle';
 
 export const SelectHotelPage = ({
@@ -33,8 +31,6 @@ export const SelectHotelPage = ({
   const navigate = useNavigate();
   const handleBackToChat = onBackToChat ?? (() => navigate('/chats'));
   const handleStartNewChat = onStartNewChat ?? (() => navigate('/chats'));
-  const { activeNav, setActiveNav, isMobileOpen, onMobileToggle } =
-    useSidebarNav();
   const [isComparePrice, setIsComparePrice] = useState(false);
 
   // Fetch hotel data
@@ -95,17 +91,11 @@ export const SelectHotelPage = ({
     }
   };
 
-  return (
-    <div className="bg-slate-100 font-sans text-slate-700 h-screen overflow-hidden flex antialiased">
-      {/* 1. Sidebar Navigation  */}
-      <SidebarNav
-        activeNav={activeNav}
-        onNavChange={setActiveNav}
-        isMobileOpen={isMobileOpen}
-        onMobileToggle={onMobileToggle}
-      />
+  const handleRetry = () => window.location.reload();
+  const handleComparePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => setIsComparePrice(event.target.checked);
+  const createBookHotelHandler = (hotel: HotelData) => (event: React.MouseEvent) => handleBookHotel(event, hotel);
 
-      {/* 2. Main Content */}
+  return (
       <main className="flex-1 bg-surface-section flex flex-col h-full overflow-y-auto">
         {/* Topbar */}
         <Topbar
@@ -137,7 +127,7 @@ export const SelectHotelPage = ({
                 variant="danger"
                 size="sm"
                 className="mt-4"
-                onClick={() => window.location.reload()}
+                onClick={handleRetry}
               >
                 Retry
               </Button>
@@ -174,7 +164,7 @@ export const SelectHotelPage = ({
                 <input
                   type="checkbox"
                   checked={isComparePrice}
-                  onChange={(e) => setIsComparePrice(e.target.checked)}
+                  onChange={handleComparePriceChange}
                   className="w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-blue-500 cursor-pointer"
                 />
                 <span className="text-xs sm:text-sm font-medium text-slate-600">
@@ -256,7 +246,7 @@ export const SelectHotelPage = ({
                         variant="light"
                         size="none"
                         className="px-6 py-3 bg-primary-soft text-primary-strong text-xs sm:text-sm rounded-2xl"
-                        onClick={(e) => handleBookHotel(e, hotel)}
+                        onClick={createBookHotelHandler(hotel)}
                       >
                         Book Hotel
                       </Button>
@@ -269,6 +259,5 @@ export const SelectHotelPage = ({
           </div>
         )}
       </main>
-    </div>
   );
 };

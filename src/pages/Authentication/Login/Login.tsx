@@ -2,13 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { useFormState } from '@/hooks/useFormState';
-import { AuthLayout } from '@/components/common/Auth/AuthLayout';
+import { AuthPageLayout } from '@/components/layouts/AuthPageLayout';
 import { getErrorMessage } from '@/utils/errorHelpers';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/common/Button';
 import { InputField } from '@/components/common/InputField';
-import { ErrorMessage } from '@/components/Error';
-import { AuthHeader } from '@/components/common/Auth/AuthHeader';
-import { AuthFooter } from '@/components/common/Auth/AuthFooter';
+import { ErrorMessage } from '@/components/common/Error';
 
 export const Login = () => {
   const { login } = useAuth();
@@ -17,6 +15,12 @@ export const Login = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.target.value);
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value);
+  const handleForgotPassword = () => navigate('/forgot-password');
+  const handleSocialLogin = () => undefined;
+  const handleSignUp = () => navigate('/register');
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -34,11 +38,17 @@ export const Login = () => {
   };
 
   return (
-    <AuthLayout isLoading={isLoading}>
-      <AuthHeader
-        title="Continue Planning Your Trips"
-        subtitle="We're happy you're back. Let's get back to planning your adventures"
-      />
+    <AuthPageLayout
+      title="Continue Planning Your Trips"
+      subtitle="We're happy you're back. Let's get back to planning your adventures"
+      isLoading={isLoading}
+      footer={{
+        questionText: "Don't have an account?",
+        actionText: 'Sign Up',
+        onActionClick: handleSignUp,
+        className: 'translate-y-12',
+      }}
+    >
 
       <form
         className="space-y-6 font-helvetica translate-y-10"
@@ -49,7 +59,7 @@ export const Login = () => {
           type="email"
           placeholder="Enter your email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={handleEmailChange}
           required
         />
 
@@ -60,13 +70,13 @@ export const Login = () => {
             placeholder="Enter your password"
             autoComplete="current-password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handlePasswordChange}
             required
           />
 
           <div className="text-right">
             <span
-              onClick={() => navigate('/forgot-password')}
+              onClick={handleForgotPassword}
               className="text-sm font-bold text-brand-dark-alt hover:text-blue-600 cursor-pointer transition"
             >
               Forgot Password?
@@ -82,7 +92,7 @@ export const Login = () => {
             variant="social"
             size="md"
             socialIcon="google"
-            onClick={() => {}}
+            onClick={handleSocialLogin}
           >
             Continue with Google
           </Button>
@@ -92,7 +102,7 @@ export const Login = () => {
             variant="social"
             size="md"
             socialIcon="apple"
-            onClick={() => {}}
+            onClick={handleSocialLogin}
           >
             Continue with Apple
           </Button>
@@ -107,13 +117,8 @@ export const Login = () => {
             Sign In
           </Button>
 
-          <AuthFooter
-            questionText="Don't have an account?"
-            actionText="Sign Up"
-            onActionClick={() => navigate('/register')}
-          />
         </div>
       </form>
-    </AuthLayout>
+    </AuthPageLayout>
   );
 };

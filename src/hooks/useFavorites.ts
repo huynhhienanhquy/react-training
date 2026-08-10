@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 export const useFavorites = (initialMap?: Record<string, boolean>) => {
   const [favorites, setFavorites] = useState<Record<string, boolean>>(initialMap ?? {});
 
-  const toggleFavorite = (id: string) => {
+  const toggleFavorite = useCallback((id: string) => {
     setFavorites((prev) => {
       const next = { ...prev };
       if (next[id]) {
@@ -13,9 +13,9 @@ export const useFavorites = (initialMap?: Record<string, boolean>) => {
       }
       return next;
     });
-  };
+  }, []);
 
-  const isFavorite = (id: string) => !!favorites[id];
+  const isFavorite = useCallback((id: string) => !!favorites[id], [favorites]);
 
   return { favorites, toggleFavorite, isFavorite };
 };

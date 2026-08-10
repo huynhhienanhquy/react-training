@@ -2,7 +2,7 @@
 import CheckCircleIcon from '@/components/common/Icons/CheckCircleIcon';
 import { SectionHeader } from '../SectionHeader';
 import { PriceDisplay } from '@/components/common/PriceDisplay';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/common/Button';
 
 import type { FareOption } from '@/types/flight';
 import type { FareCardsProps } from '@/types/flightFareTypes';
@@ -15,6 +15,7 @@ export type { FareOption };
     defaultFlightLogo,
     onSelectFare,
   }: FareCardsProps) => {
+    const createSelectHandler = (fareId: FareOption['id']) => () => onSelectFare(fareId);
     return (
       <div className="space-y-3">
         {/* Section Title */}
@@ -73,7 +74,7 @@ export type { FareOption };
                   variant={isSelected ? 'primary' : 'light'}
                   size="none"
                   className="w-full py-3 rounded-2xl text-xs active:scale-95"
-                  onClick={() => onSelectFare(fare.id)}
+                  onClick={createSelectHandler(fare.id)}
                 >
                   Select
                 </Button>

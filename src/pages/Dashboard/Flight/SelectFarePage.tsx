@@ -1,7 +1,6 @@
 import  { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SidebarNav } from '@/components/common/Chat/SidebarNav/index';
-import { Button } from '@/components/Button/index';
+import { Button } from '@/components/common/Button';
 
 import HeartIcon from '@/components/common/Icons/HeartIcon';
 import defaultFlightLogo from '@/assets/images/travel-provider-logo.png';
@@ -20,7 +19,6 @@ import type {
 } from '@/types/flight';
 
 import { useAsyncData } from '@/hooks/useAsyncData';
-import { useSidebarNav } from '@/hooks/useSidebarNav';
 import { useChatTitle } from '@/hooks/useChatTitle';
 
 export const SelectFarePage = ({
@@ -32,7 +30,6 @@ export const SelectFarePage = ({
   const navigate = useNavigate();
   const handleBackToChat = onBackToChat ?? (() => navigate('/chats'));
   const handleStartNewChat = onStartNewChat ?? (() => navigate('/chats'));
-  const { activeNav, setActiveNav } = useSidebarNav();
   const [selectedFareId, setSelectedFareId] =
     useState<'economy' | 'business'>('economy');
 
@@ -90,16 +87,11 @@ export const SelectFarePage = ({
         priceBreakdown.taxesAndFees
       : 0;
 
-  return (
-    <div className="bg-slate-100 font-helvetica text-slate-700 h-screen overflow-hidden flex antialiased">
-      {/* 1. Sidebar Navigation */}
-      <SidebarNav
-        activeNav={activeNav}
-        onNavChange={setActiveNav}
-      />
+  const handleRetry = () => window.location.reload();
+  const handleSelectFare = (id: string) => setSelectedFareId(id as 'economy' | 'business');
 
-      {/* 2. Main Content */}
-      <main className="flex-1 bg-surface-section flex flex-col h-full overflow-y-auto">
+  return (
+      <main className="flex-1 bg-surface-section flex flex-col h-full overflow-y-auto font-helvetica">
         {/* Topbar */}
         <Topbar
           isBreadcrumbMode={true}
@@ -133,7 +125,7 @@ export const SelectFarePage = ({
                 variant="danger"
                 size="sm"
                 className="mt-4"
-                onClick={() => window.location.reload()}
+                onClick={handleRetry}
               >
                 Retry
               </Button>
@@ -167,11 +159,7 @@ export const SelectFarePage = ({
                 fareOptions={fareOptions}
                 selectedFareId={selectedFareId}
                 defaultFlightLogo={defaultFlightLogo}
-                onSelectFare={(id) =>
-                  setSelectedFareId(
-                    id as 'economy' | 'business',
-                  )
-                }
+                onSelectFare={handleSelectFare}
               />
 
               <div className="space-y-3 pt-2">
@@ -199,6 +187,5 @@ export const SelectFarePage = ({
           </div>
         )}
       </main>
-    </div>
   );
 };

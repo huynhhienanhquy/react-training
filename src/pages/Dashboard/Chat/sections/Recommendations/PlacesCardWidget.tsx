@@ -5,7 +5,7 @@ import CameraIcon from '@/components/common/Icons/CameraIcon';
 import ShoppingBagIcon from '@/components/common/Icons/ShoppingBagIcon';
 import CompassIcon from '@/components/common/Icons/CompassIcon';
 import HotelIcon from '@/components/common/Icons/HotelIcon';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/common/Button';
 import { getPlaces } from '@/services/travelService';
 import type {
   PlaceData,

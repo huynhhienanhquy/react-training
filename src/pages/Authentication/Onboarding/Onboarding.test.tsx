@@ -35,7 +35,7 @@ vi.mock("@/components/auth/AuthHeader/AuthHeader", () => ({
   ),
 }));
 
-vi.mock("@/components/Button/Button", () => ({
+vi.mock('@/components/common/Button', () => ({
   Button: ({
     children,
   }: {

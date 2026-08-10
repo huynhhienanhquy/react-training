@@ -1,20 +1,22 @@
-import React, { useState } from 'react';
+import { useState, type ChangeEvent, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useFormState } from '@/hooks/useFormState';
 import { AuthLayout } from '@/components/common/Auth/AuthLayout';
-import { Button } from '@/components/Button';
-import ArrowDownIcon from '@/components/common/Icons/ArrowDownIcon'
-import { AuthHeader } from '@/components/common/Auth/AuthHeader';
+import { AuthPageLayout } from '@/components/layouts/AuthPageLayout';
+import { Button } from '@/components/common/Button';
 import { InputField } from '@/components/common/InputField';
-import { AuthFooter } from '@/components/common/Auth/AuthFooter';
+import ArrowDownIcon from '@/components/common/Icons/ArrowDownIcon';
+import { useFormState } from '@/hooks/useFormState';
 
 export const Onboarding = () => {
   const navigate = useNavigate();
   const { isLoading, startLoading, stopLoading } = useFormState();
-  const [fullName, setFullName] = useState("");
-  const [country, setCountry] = useState("");
+  const [fullName, setFullName] = useState('');
+  const [country, setCountry] = useState('');
+  const handleFullNameChange = (event: ChangeEvent<HTMLInputElement>) => setFullName(event.target.value);
+  const handleCountryChange = (event: ChangeEvent<HTMLSelectElement>) => setCountry(event.target.value);
+  const handleSignIn = () => navigate('/login');
 
-  const handleStartPlanning = (event: React.FormEvent) => {
+  const handleStartPlanning = (event: FormEvent) => {
     event.preventDefault();
     startLoading();
 
@@ -25,83 +27,64 @@ export const Onboarding = () => {
   };
 
   return (
-    <AuthLayout isLoading={isLoading}>
-      {/* 1. Header */}
-      <AuthHeader
-        title="Let’s Get To Know You!"
+    <AuthLayout>
+      <AuthPageLayout
+        title="Let's Get To Know You!"
         subtitle="Provide only the information provided so that Tripal can know you better"
-      />
+        isLoading={isLoading}
+        footer={{
+          questionText: 'Already have an account?',
+          actionText: 'Sign In',
+          onActionClick: handleSignIn,
+        }}
+      >
+        <div className="mt-5 translate-y-7">
+          <form
+            className="space-y-6"
+            onSubmit={handleStartPlanning}
+            autoComplete="off"
+          >
+            <InputField
+              label="Full Name"
+              type="text"
+              placeholder="Enter your full name"
+              value={fullName}
+              onChange={handleFullNameChange}
+              required
+            />
 
-      {/* 2. Form */}
-      <div className="mt-5 translate-y-7">
-        <form
-          className="space-y-6"
-          onSubmit={handleStartPlanning}
-          autoComplete="off"
-        >
-          {/* 2. Enter Full Name */}
-          <InputField
-            label="Full Name"
-            type="text"
-            placeholder="Enter your full name"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            required
-          />
-
-          {/* 3. Country Selection Dropdown */}
-          <div className="flex flex-col space-y-2">
-            <label className="text-sm2 font-bold text-brand-dark-alt">
-              Country
-            </label>
-
-            <div className="relative">
-              <select
-                className="w-full px-5 py-3.5 rounded-xl border border-gray-100 bg-gray-50/30 text-base focus:outline-none focus:border-blue-500 transition appearance-none cursor-pointer text-slate-700 pr-12"
-                value={country}
-                onChange={(e) => setCountry(e.target.value)}
-                required
-              >
-                <option
-                  value=""
-                  disabled
-                  hidden
-                  className="text-gray-300"
+            <div className="flex flex-col space-y-2">
+              <label className="text-sm2 font-bold text-brand-dark-alt" htmlFor="country">
+                Country
+              </label>
+              <div className="relative">
+                <select
+                  id="country"
+                  className="w-full px-5 py-3.5 rounded-xl border border-gray-100 bg-gray-50/30 text-base focus:outline-none focus:border-blue-500 transition appearance-none cursor-pointer text-slate-700 pr-12"
+                  value={country}
+                  onChange={handleCountryChange}
+                  required
                 >
-                  Select country
-                </option>
-                <option value="VN">Vietnam</option>
-                <option value="US">United States</option>
-              </select>
-
-              {/* Dropdown arrow */}
-              <div className="pointer-events-none absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 text-2xs">
-                <ArrowDownIcon aria-label="Select country" />
+                  <option value="" disabled hidden>
+                    Select country
+                  </option>
+                  <option value="VN">Vietnam</option>
+                  <option value="US">United States</option>
+                </select>
+                <div className="pointer-events-none absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 text-2xs">
+                  <ArrowDownIcon aria-label="Select country" />
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* 4. Button submit */}
-          <div className="pt-4 translate-y-7">
-            <Button
-              type="submit"
-              isLoading={isLoading}
-              showArrow
-            >
-              Start Planning Trips
-            </Button>
-
-            {/* 5. Footer */}
-            <AuthFooter
-              questionText="Already have an account?"
-              actionText="Sign In"
-              onActionClick={() => navigate('/login')}
-            />
-          </div>
-        </form>
-
-
-      </div>
+            <div className="pt-4 translate-y-7">
+              <Button type="submit" isLoading={isLoading} showArrow>
+                Start Planning Trips
+              </Button>
+            </div>
+          </form>
+        </div>
+      </AuthPageLayout>
     </AuthLayout>
   );
 };

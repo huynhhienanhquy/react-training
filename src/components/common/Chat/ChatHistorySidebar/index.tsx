@@ -1,6 +1,7 @@
 
+import { useCallback, useMemo, type ChangeEvent } from 'react';
 import SearchIcon from '@/components/common/Icons/SearchIcon'
-import { Button } from '@/components/Button';
+import { Button } from '@/components/common/Button';
 import type { ChatSession, ChatHistorySidebarProps } from '@/types/chat';
 
 export type { ChatSession };
@@ -12,20 +13,32 @@ export const ChatHistorySidebar = ({
   activeSessionId,
   onSelectSession,
 }: ChatHistorySidebarProps) => {
+  const handleSearchChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    onSearchChange(event.target.value);
+  }, [onSearchChange]);
+  const createSessionHandler = useCallback(
+    (sessionId: string) => () => onSelectSession(sessionId),
+    [onSelectSession],
+  );
+
   // 1. Filter conversations by search keywords.
-  const filteredSessions = sessions.filter((s) =>
-    s.title.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredSessions = useMemo(
+    () => sessions.filter((session) =>
+      session.title.toLowerCase().includes(searchQuery.toLowerCase()),
+    ),
+    [searchQuery, sessions],
   );
 
   // 2. Automatically group conversations by the group field (Default is TODAY if not assigned).
-  const groupedSessions = filteredSessions.reduce((acc, session) => {
-    const groupName = session.group || 'TODAY';
-    if (!acc[groupName]) {
-      acc[groupName] = [];
-    }
-    acc[groupName].push(session);
-    return acc;
-  }, {} as Record<string, ChatSession[]>);
+  const groupedSessions = useMemo(
+    () => filteredSessions.reduce((acc, session) => {
+      const groupName = session.group || 'TODAY';
+      if (!acc[groupName]) acc[groupName] = [];
+      acc[groupName].push(session);
+      return acc;
+    }, {} as Record<string, ChatSession[]>),
+    [filteredSessions],
+  );
 
   return (
 <aside className="hidden lg:flex w-370 min-w-280 max-w-300 bg-surface-sidebar flex-col h-full border-r border-slate-200/50 select-none">
@@ -43,7 +56,7 @@ export const ChatHistorySidebar = ({
             type="text"
             placeholder="Search"
             value={searchQuery}
-            onChange={(e) => onSearchChange(e.target.value)}
+            onChange={handleSearchChange}
             className="w-full bg-white border border-slate-100/80 text-sm rounded-2xl pl-10 pr-4 py-3 text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/10 focus:border-blue-400 transition shadow-sm shadow-slate-200/50"
           />
         </div>
@@ -73,7 +86,7 @@ export const ChatHistorySidebar = ({
                       type="button"
                       variant="ghost"
                       size="none"
-                      onClick={() => onSelectSession(session.id)}
+                      onClick={createSessionHandler(session.id)}
                       className={`w-full justify-start text-left px-3.5 py-3 min-h-11 rounded-2xl text-xs md:text-sm transition font-medium truncate block ${
                         isActive
                           ? 'bg-surface-active text-brand-dark font-semibold'

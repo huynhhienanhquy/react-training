@@ -11,7 +11,7 @@ vi.mock("@/services/travelService", () => ({
 }));
 
 
-vi.mock("@/components/Button/Button", () => ({
+vi.mock('@/components/common/Button', () => ({
   Button: ({
     children,
     onClick,

@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { PriceDetailsSidebar } from '.';
 
-vi.mock('@/components/Card', () => ({
+vi.mock('@/components/common/Card', () => ({
   Card: ({
     children,
     variant,

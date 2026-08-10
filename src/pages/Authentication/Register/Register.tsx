@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormState } from '@/hooks/useFormState';
-import { AuthLayout } from '@/components/common/Auth/AuthLayout';
-import { Button } from '@/components/Button';
-import { AuthHeader } from '@/components/common/Auth/AuthHeader';
+import { AuthPageLayout } from '@/components/layouts/AuthPageLayout';
+import { Button } from '@/components/common/Button';
 import { InputField } from '@/components/common/InputField';
-import { AuthFooter } from '@/components/common/Auth/AuthFooter';
 
 export const Register = () => {
   const navigate = useNavigate();
   const { isLoading, startLoading, stopLoading } = useFormState();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.target.value);
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value);
+  const handleSocialLogin = () => undefined;
+  const handleSignIn = () => navigate('/login');
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -24,12 +26,17 @@ export const Register = () => {
   };
 
   return (
-    <AuthLayout isLoading={isLoading}>
-      {/* 1. Header  */}
-      <AuthHeader
-        title="Unlock Your Next Adventure"
-        subtitle="Create a free account to start planning trips with Tripal"
-      />
+    <AuthPageLayout
+      title="Unlock Your Next Adventure"
+      subtitle="Create a free account to start planning trips with Tripal"
+      isLoading={isLoading}
+      footer={{
+        questionText: 'Already have an account?',
+        actionText: 'Sign In',
+        onActionClick: handleSignIn,
+        className: 'translate-y-40',
+      }}
+    >
 
       {/* 2. Form*/}
       <form className="space-y-3 translate-y-10" onSubmit={handleSubmit}>
@@ -39,7 +46,7 @@ export const Register = () => {
           type="email"
           placeholder="Enter your email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={handleEmailChange}
           required
         />
 
@@ -50,7 +57,7 @@ export const Register = () => {
           placeholder="Enter your password"
           autoComplete="new-password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={handlePasswordChange}
           required
         />
 
@@ -74,7 +81,7 @@ export const Register = () => {
             variant="social"
             size="md"
             socialIcon="google"
-            onClick={() => { /* TODO: Implement Google login */ }}
+            onClick={handleSocialLogin}
           >
             Continue with Google
           </Button>
@@ -84,7 +91,7 @@ export const Register = () => {
             variant="social"
             size="md"
             socialIcon="apple"
-            onClick={() => { /* TODO: Implement Apple login */ }}
+            onClick={handleSocialLogin}
           >
             Continue with Apple
           </Button>
@@ -100,13 +107,8 @@ export const Register = () => {
             Create a Free Account
           </Button>
 
-          <AuthFooter
-            questionText="Already have an account?"
-            actionText="Sign In"
-            onActionClick={() => navigate('/login')}
-          />
         </div>
       </form>
-    </AuthLayout>
+    </AuthPageLayout>
   );
 };

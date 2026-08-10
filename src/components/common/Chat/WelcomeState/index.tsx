@@ -1,7 +1,7 @@
 import lakeBoardwalkImage from '@/assets/images/lake-boardwalk.png';
 import groupTravelersImage from '@/assets/images/group-travelers.png';
 import tropicalBeachImage from '@/assets/images/tropical-beach.png';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/common/Button';
 
 const DEFAULT_PROMPTS = [
   "Cheap flights from my location to Lagos",
@@ -21,6 +21,8 @@ export const WelcomeState = ({
   prompts = DEFAULT_PROMPTS,
   onSelectPrompt
 }: WelcomeStateProps) => {
+  const createPromptHandler = (prompt: string) => () => onSelectPrompt(prompt);
+
   return (
     <div className=" w-full flex-1 flex flex-col items-center justify-center text-center my-auto py-6 px-4 -translate-y-20">
       {/* Visual Header Images */}
@@ -65,7 +67,7 @@ export const WelcomeState = ({
               variant="outline"
               size="sm"
               className="px-4 py-2.5 rounded-2xl"
-              onClick={() => onSelectPrompt(prompt)}
+              onClick={createPromptHandler(prompt)}
             >
               {prompt}
             </Button>
@@ -80,7 +82,7 @@ export const WelcomeState = ({
               variant="outline"
               size="sm"
               className="px-4 py-2.5 rounded-2xl"
-              onClick={() => onSelectPrompt(prompt)}
+              onClick={createPromptHandler(prompt)}
             >
               {prompt}
             </Button>
@@ -95,7 +97,7 @@ export const WelcomeState = ({
               variant="outline"
               size="sm"
               className="px-4 py-2.5 rounded-2xl"
-              onClick={() => onSelectPrompt(prompt)}
+              onClick={createPromptHandler(prompt)}
             >
               {prompt}
             </Button>
