@@ -26,7 +26,7 @@ export interface AuthHeaderProps {
 }
 
 export interface AuthLayoutProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   isLoading?: boolean;
 }
 

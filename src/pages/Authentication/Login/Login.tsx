@@ -2,13 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { useFormState } from '@/hooks/useFormState';
-import { AuthLayout } from '@/components/common/Auth/AuthLayout';
+import { AuthPageLayout } from '@/components/layouts/AuthPageLayout';
 import { getErrorMessage } from '@/utils/errorHelpers';
 import { Button } from '@/components/common/Button';
 import { InputField } from '@/components/common/InputField';
 import { ErrorMessage } from '@/components/common/Error';
-import { AuthHeader } from '@/components/common/Auth/AuthHeader';
-import { AuthFooter } from '@/components/common/Auth/AuthFooter';
 
 export const Login = () => {
   const { login } = useAuth();
@@ -34,11 +32,17 @@ export const Login = () => {
   };
 
   return (
-    <AuthLayout isLoading={isLoading}>
-      <AuthHeader
-        title="Continue Planning Your Trips"
-        subtitle="We're happy you're back. Let's get back to planning your adventures"
-      />
+    <AuthPageLayout
+      title="Continue Planning Your Trips"
+      subtitle="We're happy you're back. Let's get back to planning your adventures"
+      isLoading={isLoading}
+      footer={{
+        questionText: "Don't have an account?",
+        actionText: 'Sign Up',
+        onActionClick: () => navigate('/register'),
+        className: 'translate-y-12',
+      }}
+    >
 
       <form
         className="space-y-6 font-helvetica translate-y-10"
@@ -107,13 +111,8 @@ export const Login = () => {
             Sign In
           </Button>
 
-          <AuthFooter
-            questionText="Don't have an account?"
-            actionText="Sign Up"
-            onActionClick={() => navigate('/register')}
-          />
         </div>
       </form>
-    </AuthLayout>
+    </AuthPageLayout>
   );
 };

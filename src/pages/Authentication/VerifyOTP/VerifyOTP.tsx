@@ -3,9 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useFormState } from '@/hooks/useFormState';
 import { useOtpInput } from '@/hooks/useOtpInput';
 import { useCountdown } from '@/hooks/useCountdown';
-import { AuthLayout } from '@/components/common/Auth/AuthLayout';
+import { AuthPageLayout } from '@/components/layouts/AuthPageLayout';
 import { Button } from '@/components/common/Button';
-import { AuthHeader } from '@/components/common/Auth/AuthHeader';
 
 export const VerifyOTP = () => {
   const navigate = useNavigate();
@@ -26,14 +25,12 @@ export const VerifyOTP = () => {
   };
 
   return (
-    <AuthLayout isLoading={isLoading}>
-      {/* Reduce the overall spacing between blocks */}
-      <div className="flex flex-col space-y-3.5">
-        {/* 1. Header */}
-        <AuthHeader
-          title="Enter OTP"
-          subtitle="Enter your email address to receive verification OTP"
-        />
+    <AuthPageLayout
+      title="Enter OTP"
+      subtitle="Enter your email address to receive verification OTP"
+      isLoading={isLoading}
+      className="flex flex-col space-y-3.5"
+    >
 
         {/* 2. Form */}
         <form className="space-y-3 translate-y-8" onSubmit={handleVerify}>
@@ -94,7 +91,6 @@ export const VerifyOTP = () => {
             </span>
           )}
         </div>
-      </div>
-    </AuthLayout>
+    </AuthPageLayout>
   );
 };

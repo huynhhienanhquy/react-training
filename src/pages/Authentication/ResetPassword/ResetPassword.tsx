@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormState } from '@/hooks/useFormState';
-import { AuthLayout } from '@/components/common/Auth/AuthLayout';
+import { AuthPageLayout } from '@/components/layouts/AuthPageLayout';
 import { Button } from '@/components/common/Button';
-import { AuthHeader } from '@/components/common/Auth/AuthHeader';
 import { InputField } from '@/components/common/InputField';
 import { ErrorMessage } from '@/components/common/Error';
-import { AuthFooter } from '@/components/common/Auth/AuthFooter';
 
 export const ResetPassword = () => {
   const navigate = useNavigate();
@@ -33,14 +31,21 @@ export const ResetPassword = () => {
   };
 
   return (
-    <AuthLayout isLoading={isLoading}>
+    <AuthPageLayout
+      title="Reset Password"
+      subtitle="You're all set. Please change your password now"
+      isLoading={isLoading}
+      className="flex flex-col space-y-3.5"
+      footer={{
+        questionText: "Don't have an account?",
+        actionText: 'Sign Up',
+        onActionClick: () => navigate('/register'),
+        className: 'translate-y-24',
+      }}
+    >
       {/* Reduce the overall spacing between blocks to space-y-3.5 */}
-      <div className="flex flex-col space-y-3.5">
+      <div>
         {/* 1. Header */}
-        <AuthHeader
-          title="Reset Password"
-          subtitle="You’re all set. Please change your password now"
-        />
 
         {/* 2. Form */}
         <div className="mt-5  translate-y-8">
@@ -80,18 +85,11 @@ export const ResetPassword = () => {
               Reset Password
             </Button>
 
-            {/* 3. Footer  */}
-            <AuthFooter
-              className="translate-y-24"
-              questionText="Don't have an account?"
-              actionText="Sign Up"
-              onActionClick={() => navigate('/register')}
-            />
           </form>
         </div>
 
 
       </div>
-    </AuthLayout>
+    </AuthPageLayout>
   );
 };

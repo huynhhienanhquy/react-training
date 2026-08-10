@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormState } from '@/hooks/useFormState';
-import { AuthLayout } from '@/components/common/Auth/AuthLayout';
+import { AuthPageLayout } from '@/components/layouts/AuthPageLayout';
 import { Button } from '@/components/common/Button';
-import { AuthHeader } from '@/components/common/Auth/AuthHeader';
 import { InputField } from '@/components/common/InputField';
-import { AuthFooter } from '@/components/common/Auth/AuthFooter';
 
 export const Register = () => {
   const navigate = useNavigate();
@@ -24,12 +22,17 @@ export const Register = () => {
   };
 
   return (
-    <AuthLayout isLoading={isLoading}>
-      {/* 1. Header  */}
-      <AuthHeader
-        title="Unlock Your Next Adventure"
-        subtitle="Create a free account to start planning trips with Tripal"
-      />
+    <AuthPageLayout
+      title="Unlock Your Next Adventure"
+      subtitle="Create a free account to start planning trips with Tripal"
+      isLoading={isLoading}
+      footer={{
+        questionText: 'Already have an account?',
+        actionText: 'Sign In',
+        onActionClick: () => navigate('/login'),
+        className: 'translate-y-40',
+      }}
+    >
 
       {/* 2. Form*/}
       <form className="space-y-3 translate-y-10" onSubmit={handleSubmit}>
@@ -100,13 +103,8 @@ export const Register = () => {
             Create a Free Account
           </Button>
 
-          <AuthFooter
-            questionText="Already have an account?"
-            actionText="Sign In"
-            onActionClick={() => navigate('/login')}
-          />
         </div>
       </form>
-    </AuthLayout>
+    </AuthPageLayout>
   );
 };

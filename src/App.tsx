@@ -19,6 +19,7 @@ import { SelectFarePage } from './pages/Dashboard/Flight/SelectFarePage';
 import { SelectHotelPage } from './pages/Dashboard/Hotel/SelectHotelPage';
 import { DashboardLayout } from './components/layouts/DashboardLayout';
 import { ComingSoonPage } from './pages/Dashboard/ComingSoonPage';
+import { AuthLayout } from './components/common/Auth/AuthLayout';
 
 export const App = () => {
   return (
@@ -28,11 +29,13 @@ export const App = () => {
           <Routes>
           {/* Public pages (Not logged in) */}
           <Route element={<GuestRoute />}>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/verify-otp" element={<VerifyOTP />} />
-            <Route path="/reset-password" element={<ResetPassword />} />
+            <Route element={<AuthLayout />}>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/verify-otp" element={<VerifyOTP />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
+            </Route>
           </Route>
 
           {/* Protected pages (Logged in) */}
