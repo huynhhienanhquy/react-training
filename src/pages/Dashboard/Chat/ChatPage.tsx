@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChatHistorySidebar } from '@/components/common/Chat/ChatHistorySidebar/index';
 import { Topbar } from '@/components/common/Chat/Topbar/index';
@@ -6,6 +6,15 @@ import { WelcomeState } from '@/components/common/Chat/WelcomeState/index';
 import { ChatMessageList } from '@/components/common/Chat/ChatMessageList/index';
 import { ChatInputBox } from '@/components/common/Chat/ChatInputBox/ChatInputBox';
 import { useChatSessions } from '@/hooks/useChatSessions';
+
+const SUGGESTION_PROMPTS = [
+  'Cheap flights from my location to Lagos',
+  'Trending places to visit in Akwa-Ibom',
+  'Plan a trip for the Calabar carnival',
+  'How much will it cost to travel the Bahamas from Mali?',
+  'Find Business Class flight from Owerri to Delta',
+  'Routes from Miami to Long Island Beach',
+];
 
 export const ChatPage = () => {
   const navigate = useNavigate();
@@ -24,37 +33,28 @@ export const ChatPage = () => {
     selectSession,
   } = useChatSessions();
 
-  const suggestionPrompts = [
-    'Cheap flights from my location to Lagos',
-    'Trending places to visit in Akwa-Ibom',
-    'Plan a trip for the Calabar carnival',
-    'How much will it cost to travel the Bahamas from Mali?',
-    'Find Business Class flight from Owerri to Delta',
-    'Routes from Miami to Long Island Beach',
-  ];
-
-  const handleSendMessage = (textToSend?: string) => {
+  const handleSendMessage = useCallback((textToSend?: string) => {
     const text = textToSend || inputMessage;
     if (sendMessage(text)) {
       setInputMessage('');
     }
-  };
+  }, [inputMessage, sendMessage]);
 
   // New chat button
-  const handleStartNewChat = () => {
+  const handleStartNewChat = useCallback(() => {
     setInputMessage('');
     startNewChat();
-  };
+  }, [startNewChat]);
 
   // Select a chat from the Sidebar
-  const handleSelectSession = (sessionId: string) => {
+  const handleSelectSession = useCallback((sessionId: string) => {
     selectSession(sessionId);
-  }
+  }, [selectSession]);
 
-  const handleBookFlight = () => navigate('/chats/fares');
-  const handleBookHotel = () => navigate('/chats/hotels');
-  const handleSendCurrentMessage = () => handleSendMessage();
-  const handleToggleRecording = () => setIsRecording((prev) => !prev);
+  const handleBookFlight = useCallback(() => navigate('/chats/fares'), [navigate]);
+  const handleBookHotel = useCallback(() => navigate('/chats/hotels'), [navigate]);
+  const handleSendCurrentMessage = useCallback(() => handleSendMessage(), [handleSendMessage]);
+  const handleToggleRecording = useCallback(() => setIsRecording((prev) => !prev), []);
 
   return (
     <>
@@ -76,7 +76,7 @@ export const ChatPage = () => {
         <div className="flex-1 overflow-y-auto px-4 md:px-8 pb-6 pt-2 flex flex-col justify-between items-center max-w-5xl mx-auto w-full">
           {currentMessages.length === 0 ? (
             <WelcomeState
-              prompts={suggestionPrompts}
+              prompts={SUGGESTION_PROMPTS}
               onSelectPrompt={handleSendMessage}
             />
           ) : (

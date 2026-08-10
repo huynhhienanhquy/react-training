@@ -1,3 +1,4 @@
+import { useCallback, useMemo } from 'react';
 import { RecommendationWrapper } from './RecommendationWrapper';
 import { Button } from '@/components/common/Button';
 import { PriceDisplay } from '@/components/common/PriceDisplay';
@@ -64,12 +65,20 @@ export function FlightRecommendations({
 
   const { favorites, toggleFavorite } = useFavorites();
 
-  const apiFlights =
-    fareData?.map(mapFareDataToFlightOption) ?? [];
+  const apiFlights = useMemo(
+    () => fareData?.map(mapFareDataToFlightOption) ?? [],
+    [fareData],
+  );
 
   const flightList = initialFlights ?? apiFlights;
-  const createFavoriteHandler = (flightId: string) => () => toggleFavorite(flightId);
-  const createBookHandler = (flightId: string) => () => onBookNow?.(flightId);
+  const createFavoriteHandler = useCallback(
+    (flightId: string) => () => toggleFavorite(flightId),
+    [toggleFavorite],
+  );
+  const createBookHandler = useCallback(
+    (flightId: string) => () => onBookNow?.(flightId),
+    [onBookNow],
+  );
 
   return (
     <RecommendationWrapper title={title} onSeeAll={onSeeAll}>

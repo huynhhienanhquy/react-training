@@ -1,5 +1,5 @@
 
-import type { ChangeEvent } from 'react';
+import { useCallback, useMemo, type ChangeEvent } from 'react';
 import SearchIcon from '@/components/common/Icons/SearchIcon'
 import { Button } from '@/components/common/Button';
 import type { ChatSession, ChatHistorySidebarProps } from '@/types/chat';
@@ -13,23 +13,32 @@ export const ChatHistorySidebar = ({
   activeSessionId,
   onSelectSession,
 }: ChatHistorySidebarProps) => {
-  const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => onSearchChange(event.target.value);
-  const createSessionHandler = (sessionId: string) => () => onSelectSession(sessionId);
+  const handleSearchChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    onSearchChange(event.target.value);
+  }, [onSearchChange]);
+  const createSessionHandler = useCallback(
+    (sessionId: string) => () => onSelectSession(sessionId),
+    [onSelectSession],
+  );
 
   // 1. Filter conversations by search keywords.
-  const filteredSessions = sessions.filter((s) =>
-    s.title.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredSessions = useMemo(
+    () => sessions.filter((session) =>
+      session.title.toLowerCase().includes(searchQuery.toLowerCase()),
+    ),
+    [searchQuery, sessions],
   );
 
   // 2. Automatically group conversations by the group field (Default is TODAY if not assigned).
-  const groupedSessions = filteredSessions.reduce((acc, session) => {
-    const groupName = session.group || 'TODAY';
-    if (!acc[groupName]) {
-      acc[groupName] = [];
-    }
-    acc[groupName].push(session);
-    return acc;
-  }, {} as Record<string, ChatSession[]>);
+  const groupedSessions = useMemo(
+    () => filteredSessions.reduce((acc, session) => {
+      const groupName = session.group || 'TODAY';
+      if (!acc[groupName]) acc[groupName] = [];
+      acc[groupName].push(session);
+      return acc;
+    }, {} as Record<string, ChatSession[]>),
+    [filteredSessions],
+  );
 
   return (
 <aside className="hidden lg:flex w-370 min-w-280 max-w-300 bg-surface-sidebar flex-col h-full border-r border-slate-200/50 select-none">

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { RecommendationWrapper } from './RecommendationWrapper';
 import { Button } from '@/components/common/Button';
 import { getHotels } from '@/services/hotelService';
@@ -55,22 +55,30 @@ export const HotelRecommendations = ({
   });
 
   const { favorites, toggleFavorite } = useFavorites();
-  const apiHotels =
-    hotelData?.map(mapHotelDataToOption) ?? [];
+  const apiHotels = useMemo(
+    () => hotelData?.map(mapHotelDataToOption) ?? [],
+    [hotelData],
+  );
 
   const hotelList = initialHotels ?? apiHotels;
 
-  const handleBookNow = (
+  const handleBookNow = useCallback((
     e: React.MouseEvent,
     hotel: HotelOption,
   ) => {
     e.stopPropagation();
 
     onBookNow?.(hotel);
-  };
+  }, [onBookNow]);
 
-  const createFavoriteHandler = (hotelId: string) => () => toggleFavorite(hotelId);
-  const createBookHandler = (hotel: HotelOption) => (event: React.MouseEvent) => handleBookNow(event, hotel);
+  const createFavoriteHandler = useCallback(
+    (hotelId: string) => () => toggleFavorite(hotelId),
+    [toggleFavorite],
+  );
+  const createBookHandler = useCallback(
+    (hotel: HotelOption) => (event: React.MouseEvent) => handleBookNow(event, hotel),
+    [handleBookNow],
+  );
 
   return (
     <RecommendationWrapper

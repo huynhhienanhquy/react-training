@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { SidebarNav } from '@/components/common/Chat/SidebarNav';
 import { useSidebarNav } from '@/hooks/useSidebarNav';
@@ -24,13 +25,13 @@ export const DashboardLayout = () => {
   const { pathname } = useLocation();
   const { isMobileOpen, onMobileToggle } = useSidebarNav();
 
-  const handleNavChange = (id: string) => {
+  const handleNavChange = useCallback((id: string) => {
     const route = navRoutes[id];
 
     if (route) {
       navigate(route);
     }
-  };
+  }, [navigate]);
 
   return (
     <div className="bg-slate-100 font-sans text-slate-700 h-screen overflow-hidden flex antialiased">
