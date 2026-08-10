@@ -11,6 +11,9 @@ export const ResetPassword = () => {
   const { isLoading, error, startLoading, stopLoading, setError } = useFormState();
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value);
+  const handleConfirmPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => setConfirmPassword(event.target.value);
+  const handleSignUp = () => navigate('/register');
 
   const handleResetPassword = (event: React.FormEvent) => {
     event.preventDefault();
@@ -39,7 +42,7 @@ export const ResetPassword = () => {
       footer={{
         questionText: "Don't have an account?",
         actionText: 'Sign Up',
-        onActionClick: () => navigate('/register'),
+        onActionClick: handleSignUp,
         className: 'translate-y-24',
       }}
     >
@@ -60,7 +63,7 @@ export const ResetPassword = () => {
               placeholder="Enter your password"
               autoComplete="new-password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handlePasswordChange}
               required
             />
 
@@ -70,7 +73,7 @@ export const ResetPassword = () => {
               placeholder="Confirm your password"
               autoComplete="new-password"
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={handleConfirmPasswordChange}
               required
             />
 

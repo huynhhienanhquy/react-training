@@ -69,6 +69,9 @@ export const HotelRecommendations = ({
     onBookNow?.(hotel);
   };
 
+  const createFavoriteHandler = (hotelId: string) => () => toggleFavorite(hotelId);
+  const createBookHandler = (hotel: HotelOption) => (event: React.MouseEvent) => handleBookNow(event, hotel);
+
   return (
     <RecommendationWrapper
       title={title}
@@ -157,18 +160,14 @@ export const HotelRecommendations = ({
                     variant="favorite"
                     size="icon"
                     isFavorite={isFavorite}
-                    onClick={() =>
-                      toggleFavorite(hotel.id)
-                    }
+                    onClick={createFavoriteHandler(hotel.id)}
                     className="h-12 w-12 rounded-xl border border-blue-100 md:h-12 md:w-12"
                   />
 
                   <Button
                     variant="secondary"
                     size="sm"
-                    onClick={(e) =>
-                      handleBookNow(e, hotel)
-                    }
+                    onClick={createBookHandler(hotel)}
                     className="h-12 rounded-xl px-5 text-sm"
                   >
                     Book Now

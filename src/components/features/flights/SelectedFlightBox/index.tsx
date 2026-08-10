@@ -15,6 +15,7 @@ export const SelectedFlightBox = ({
   cancellationPolicy,
 }: SelectedFlightBoxProps) => {
   const [isFavorite, setIsFavorite] = useState(false);
+  const handleToggleFavorite = () => setIsFavorite((prev) => !prev);
 
   return (
     <div className="space-y-3">
@@ -51,7 +52,7 @@ export const SelectedFlightBox = ({
               }
               aria-pressed={isFavorite}
               className="w-9 h-9 rounded-xl p-2 active:scale-95"
-              onClick={() => setIsFavorite((prev) => !prev)}
+              onClick={handleToggleFavorite}
               leftIcon={
                 <HeartIcon
                   width={16}

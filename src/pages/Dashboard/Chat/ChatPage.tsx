@@ -51,6 +51,11 @@ export const ChatPage = () => {
     selectSession(sessionId);
   }
 
+  const handleBookFlight = () => navigate('/chats/fares');
+  const handleBookHotel = () => navigate('/chats/hotels');
+  const handleSendCurrentMessage = () => handleSendMessage();
+  const handleToggleRecording = () => setIsRecording((prev) => !prev);
+
   return (
     <>
       <div className="ml-1.5">
@@ -72,23 +77,23 @@ export const ChatPage = () => {
           {currentMessages.length === 0 ? (
             <WelcomeState
               prompts={suggestionPrompts}
-              onSelectPrompt={(p) => handleSendMessage(p)}
+              onSelectPrompt={handleSendMessage}
             />
           ) : (
             <ChatMessageList
               messages={currentMessages}
               isTyping={isTyping}
-              onBookFlight={() => navigate('/chats/fares')}
-              onBookHotel={() => navigate('/chats/hotels')}
+              onBookFlight={handleBookFlight}
+              onBookHotel={handleBookHotel}
             />
           )}
 
           <ChatInputBox
             inputMessage={inputMessage}
             onInputChange={setInputMessage}
-            onSend={() => handleSendMessage()}
+            onSend={handleSendCurrentMessage}
             isRecording={isRecording}
-            onToggleRecording={() => setIsRecording((prev) => !prev)}
+            onToggleRecording={handleToggleRecording}
           />
         </div>
       </main>

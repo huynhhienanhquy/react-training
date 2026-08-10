@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react';
+import { useState, type ChangeEvent, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthLayout } from '@/components/common/Auth/AuthLayout';
 import { AuthPageLayout } from '@/components/layouts/AuthPageLayout';
@@ -12,6 +12,9 @@ export const Onboarding = () => {
   const { isLoading, startLoading, stopLoading } = useFormState();
   const [fullName, setFullName] = useState('');
   const [country, setCountry] = useState('');
+  const handleFullNameChange = (event: ChangeEvent<HTMLInputElement>) => setFullName(event.target.value);
+  const handleCountryChange = (event: ChangeEvent<HTMLSelectElement>) => setCountry(event.target.value);
+  const handleSignIn = () => navigate('/login');
 
   const handleStartPlanning = (event: FormEvent) => {
     event.preventDefault();
@@ -32,7 +35,7 @@ export const Onboarding = () => {
         footer={{
           questionText: 'Already have an account?',
           actionText: 'Sign In',
-          onActionClick: () => navigate('/login'),
+          onActionClick: handleSignIn,
         }}
       >
         <div className="mt-5 translate-y-7">
@@ -46,7 +49,7 @@ export const Onboarding = () => {
               type="text"
               placeholder="Enter your full name"
               value={fullName}
-              onChange={(event) => setFullName(event.target.value)}
+              onChange={handleFullNameChange}
               required
             />
 
@@ -59,7 +62,7 @@ export const Onboarding = () => {
                   id="country"
                   className="w-full px-5 py-3.5 rounded-xl border border-gray-100 bg-gray-50/30 text-base focus:outline-none focus:border-blue-500 transition appearance-none cursor-pointer text-slate-700 pr-12"
                   value={country}
-                  onChange={(event) => setCountry(event.target.value)}
+                  onChange={handleCountryChange}
                   required
                 >
                   <option value="" disabled hidden>

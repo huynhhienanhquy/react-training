@@ -9,6 +9,8 @@ export const ForgotPassword = () => {
   const navigate = useNavigate();
   const { isLoading, startLoading, stopLoading } = useFormState();
   const [email, setEmail] = useState<string>("");
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.target.value);
+  const handleSignUp = () => navigate('/register');
 
   const handleSendOTP = (event: React.FormEvent) => {
     event.preventDefault();
@@ -30,7 +32,7 @@ export const ForgotPassword = () => {
       footer={{
         questionText: "Don't have an account?",
         actionText: 'Sign Up',
-        onActionClick: () => navigate('/register'),
+        onActionClick: handleSignUp,
         className: 'space-y-3 translate-y-14',
       }}
     >
@@ -42,7 +44,7 @@ export const ForgotPassword = () => {
             type="email"
             placeholder="Enter your email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleEmailChange}
             required
           />
           <Button

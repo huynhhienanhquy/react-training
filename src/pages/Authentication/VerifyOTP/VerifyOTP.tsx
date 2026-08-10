@@ -11,6 +11,11 @@ export const VerifyOTP = () => {
   const { isLoading, startLoading, stopLoading } = useFormState();
   const { otp, inputRefs, handleChange, handleKeyDown, handlePaste } = useOtpInput(6);
   const { counter, reset } = useCountdown(29);
+  const createInputRef = (index: number) => (element: HTMLInputElement | null) => {
+    if (element) inputRefs.current[index] = element;
+  };
+  const createChangeHandler = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => handleChange(index, event.target.value);
+  const createKeyDownHandler = (index: number) => (event: React.KeyboardEvent<HTMLInputElement>) => handleKeyDown(index, event);
 
   const handleVerify = (event: React.FormEvent) => {
     event.preventDefault();
@@ -46,11 +51,9 @@ export const VerifyOTP = () => {
                   maxLength={1}
                   inputMode="numeric"
                   value={data}
-                  ref={(el) => {
-                    if (el) inputRefs.current[index] = el;
-                  }}
-                  onChange={(e) => handleChange(index, e.target.value)}
-                  onKeyDown={(e) => handleKeyDown(index, e)}
+                  ref={createInputRef(index)}
+                  onChange={createChangeHandler(index)}
+                  onKeyDown={createKeyDownHandler(index)}
                   onPaste={handlePaste}
                   className="w-10 md:w-12 h-12 md:h-14 text-center text-lg md:text-xl font-bold rounded-xl border border-gray-200 bg-gray-50/50 text-slate-800 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 focus:bg-white transition shadow-xs font-sans"
                 />

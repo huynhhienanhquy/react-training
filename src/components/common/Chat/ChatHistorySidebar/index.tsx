@@ -1,4 +1,5 @@
 
+import type { ChangeEvent } from 'react';
 import SearchIcon from '@/components/common/Icons/SearchIcon'
 import { Button } from '@/components/common/Button';
 import type { ChatSession, ChatHistorySidebarProps } from '@/types/chat';
@@ -12,6 +13,9 @@ export const ChatHistorySidebar = ({
   activeSessionId,
   onSelectSession,
 }: ChatHistorySidebarProps) => {
+  const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => onSearchChange(event.target.value);
+  const createSessionHandler = (sessionId: string) => () => onSelectSession(sessionId);
+
   // 1. Filter conversations by search keywords.
   const filteredSessions = sessions.filter((s) =>
     s.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -43,7 +47,7 @@ export const ChatHistorySidebar = ({
             type="text"
             placeholder="Search"
             value={searchQuery}
-            onChange={(e) => onSearchChange(e.target.value)}
+            onChange={handleSearchChange}
             className="w-full bg-white border border-slate-100/80 text-sm rounded-2xl pl-10 pr-4 py-3 text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/10 focus:border-blue-400 transition shadow-sm shadow-slate-200/50"
           />
         </div>
@@ -73,7 +77,7 @@ export const ChatHistorySidebar = ({
                       type="button"
                       variant="ghost"
                       size="none"
-                      onClick={() => onSelectSession(session.id)}
+                      onClick={createSessionHandler(session.id)}
                       className={`w-full justify-start text-left px-3.5 py-3 min-h-11 rounded-2xl text-xs md:text-sm transition font-medium truncate block ${
                         isActive
                           ? 'bg-surface-active text-brand-dark font-semibold'

@@ -7,6 +7,7 @@ import type { PlaceData, DayItinerary } from '@/types/travel';
 import { useAutoScroll } from '@/hooks/useAutoScroll';
 import type { ChatMessageListProps } from '@/types/chat';
 import { LazyRender } from '@/components/common/LazyRender';
+import type { HotelOption } from '@/types/hotel';
 
 // Custom payload inside a chat message
 export const ChatMessageList = ({
@@ -67,6 +68,23 @@ export const ChatMessageList = ({
             ? (msg.data as DayItinerary[])
             : undefined;
 
+        const handleBookFlightNow = (id?: string) => onBookFlight?.(id);
+        const handleBookHotelNow = (hotel: HotelOption) => {
+          if (!onBookHotel) return;
+
+          onBookHotel(
+            hotel.rawData ?? {
+              id: hotel.id,
+              hotelName: hotel.name,
+              description: hotel.description,
+              coverImage: hotel.imageUrl,
+            },
+          );
+        };
+        const handleSeeAllHotels = () => undefined;
+        const handleViewAllPlaces = () => onViewAllPlaces?.(placesData);
+        const handleViewAllItinerary = () => onViewAllItinerary?.(itineraryData);
+
         return (
           <div
             key={msg.id}
@@ -93,11 +111,7 @@ export const ChatMessageList = ({
                 <LazyRender>
                   <FlightRecommendations
                     title="Recommended Flights For a Round Trip Journey"
-                    onBookNow={(id) => {
-                      if (onBookFlight) {
-                        onBookFlight(id);
-                      }
-                    }}
+                    onBookNow={handleBookFlightNow}
                   />
                 </LazyRender>
               )}
@@ -106,21 +120,8 @@ export const ChatMessageList = ({
                 <LazyRender>
                   <HotelRecommendations
                     title="Recommended Hotels For a Three-Night Staycation"
-                    onBookNow={(hotel) => {
-                      if (!onBookHotel) return;
-
-                      onBookHotel(
-                        hotel.rawData ?? {
-                          id: hotel.id,
-                          hotelName: hotel.name,
-                          description: hotel.description,
-                          coverImage: hotel.imageUrl,
-                        },
-                      );
-                    }}
-                    onSeeAll={() => {
-                      /* TODO: Implement see all */
-                    }}
+                    onBookNow={handleBookHotelNow}
+                    onSeeAll={handleSeeAllHotels}
                   />
                 </LazyRender>
               )}
@@ -129,7 +130,7 @@ export const ChatMessageList = ({
                 <LazyRender>
                   <PlacesCardWidget
                     places={placesData}
-                    onViewAll={() => onViewAllPlaces?.(placesData)}
+                    onViewAll={handleViewAllPlaces}
                   />
                 </LazyRender>
               )}
@@ -138,7 +139,7 @@ export const ChatMessageList = ({
                 <LazyRender>
                   <ItineraryCardWidget
                     itinerary={itineraryData}
-                    onViewAll={() => onViewAllItinerary?.(itineraryData)}
+                    onViewAll={handleViewAllItinerary}
                   />
                 </LazyRender>
               )}

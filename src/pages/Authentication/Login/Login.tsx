@@ -16,6 +16,12 @@ export const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.target.value);
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value);
+  const handleForgotPassword = () => navigate('/forgot-password');
+  const handleSocialLogin = () => undefined;
+  const handleSignUp = () => navigate('/register');
+
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     startLoading();
@@ -39,7 +45,7 @@ export const Login = () => {
       footer={{
         questionText: "Don't have an account?",
         actionText: 'Sign Up',
-        onActionClick: () => navigate('/register'),
+        onActionClick: handleSignUp,
         className: 'translate-y-12',
       }}
     >
@@ -53,7 +59,7 @@ export const Login = () => {
           type="email"
           placeholder="Enter your email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={handleEmailChange}
           required
         />
 
@@ -64,13 +70,13 @@ export const Login = () => {
             placeholder="Enter your password"
             autoComplete="current-password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handlePasswordChange}
             required
           />
 
           <div className="text-right">
             <span
-              onClick={() => navigate('/forgot-password')}
+              onClick={handleForgotPassword}
               className="text-sm font-bold text-brand-dark-alt hover:text-blue-600 cursor-pointer transition"
             >
               Forgot Password?
@@ -86,7 +92,7 @@ export const Login = () => {
             variant="social"
             size="md"
             socialIcon="google"
-            onClick={() => {}}
+            onClick={handleSocialLogin}
           >
             Continue with Google
           </Button>
@@ -96,7 +102,7 @@ export const Login = () => {
             variant="social"
             size="md"
             socialIcon="apple"
-            onClick={() => {}}
+            onClick={handleSocialLogin}
           >
             Continue with Apple
           </Button>

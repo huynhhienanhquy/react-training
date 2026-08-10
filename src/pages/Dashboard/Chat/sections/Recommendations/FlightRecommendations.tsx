@@ -68,6 +68,8 @@ export function FlightRecommendations({
     fareData?.map(mapFareDataToFlightOption) ?? [];
 
   const flightList = initialFlights ?? apiFlights;
+  const createFavoriteHandler = (flightId: string) => () => toggleFavorite(flightId);
+  const createBookHandler = (flightId: string) => () => onBookNow?.(flightId);
 
   return (
     <RecommendationWrapper title={title} onSeeAll={onSeeAll}>
@@ -124,14 +126,14 @@ export function FlightRecommendations({
                     variant="favorite"
                     size="icon"
                     isFavorite={isFavorite}
-                    onClick={() => toggleFavorite(flight.id)}
+                    onClick={createFavoriteHandler(flight.id)}
                     className="h-12 w-12 rounded-xl border border-blue-100 md:h-12 md:w-12"
                   />
 
                   <Button
                     variant="secondary"
                     size="sm"
-                    onClick={() => onBookNow?.(flight.id)}
+                    onClick={createBookHandler(flight.id)}
                     className="h-12 rounded-xl px-5 text-sm"
                   >
                     Book Now

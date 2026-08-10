@@ -87,6 +87,9 @@ export const SelectFarePage = ({
         priceBreakdown.taxesAndFees
       : 0;
 
+  const handleRetry = () => window.location.reload();
+  const handleSelectFare = (id: string) => setSelectedFareId(id as 'economy' | 'business');
+
   return (
       <main className="flex-1 bg-surface-section flex flex-col h-full overflow-y-auto font-helvetica">
         {/* Topbar */}
@@ -122,7 +125,7 @@ export const SelectFarePage = ({
                 variant="danger"
                 size="sm"
                 className="mt-4"
-                onClick={() => window.location.reload()}
+                onClick={handleRetry}
               >
                 Retry
               </Button>
@@ -156,11 +159,7 @@ export const SelectFarePage = ({
                 fareOptions={fareOptions}
                 selectedFareId={selectedFareId}
                 defaultFlightLogo={defaultFlightLogo}
-                onSelectFare={(id) =>
-                  setSelectedFareId(
-                    id as 'economy' | 'business',
-                  )
-                }
+                onSelectFare={handleSelectFare}
               />
 
               <div className="space-y-3 pt-2">

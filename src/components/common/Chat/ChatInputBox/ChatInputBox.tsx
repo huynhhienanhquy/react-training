@@ -1,4 +1,5 @@
 
+import type { ChangeEvent } from 'react';
 import AddIcon from '@/components/common/Icons/AddIcon';
 import MicrophoneIcon from '@/components/common/Icons/MicrophoneIcon';
 import SendIcon from '@/components/common/Icons/SendIcon';
@@ -14,6 +15,9 @@ export const ChatInputBox = ({
   onToggleRecording,
 }: ChatInputBoxProps) => {
   const handleKeyDown = useEnterToSend(onSend);
+  const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    onInputChange(event.target.value);
+  };
 
   return (
     /* Floating chat input container with focus state highlight */
@@ -23,7 +27,7 @@ export const ChatInputBox = ({
       <textarea
         rows={2}
         value={inputMessage}
-        onChange={(e) => onInputChange(e.target.value)}
+        onChange={handleInputChange}
         onKeyDown={handleKeyDown}
         placeholder="Tell me where you are going to and how you prefer to get there"
         className=" -translate-y-5 -translate-x-4 w-full resize-none text-slate-700 placeholder-slate-400 italic text-sm md:text-base focus:outline-none bg-transparent"

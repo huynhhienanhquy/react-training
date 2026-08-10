@@ -47,6 +47,11 @@ export const SidebarNav = ({ activeNav, onNavChange, isMobileOpen, onMobileToggl
     }
   };
 
+  const createNavHandler = (id: string, closeMobile = false) => () => {
+    onNavChange(id);
+    if (closeMobile) onMobileToggle?.();
+  };
+
   return (
     <>
       {/* Mobile hamburger button */}
@@ -95,7 +100,7 @@ export const SidebarNav = ({ activeNav, onNavChange, isMobileOpen, onMobileToggl
                       ? 'bg-blue-50 border-2 border-blue-200 shadow-sm shadow-blue-100/50'
                       : 'bg-transparent border-2 border-transparent hover:bg-white/80 hover:border-slate-200/60'
                   }`}
-                  onClick={() => onNavChange(item.id)}
+                  onClick={createNavHandler(item.id)}
                 >
                   <Icon
                     aria-label={item.alt}
@@ -203,10 +208,7 @@ export const SidebarNav = ({ activeNav, onNavChange, isMobileOpen, onMobileToggl
                           ? 'bg-blue-50 border border-blue-200 shadow-sm shadow-blue-100/50'
                           : 'bg-transparent border border-transparent hover:bg-white/80 hover:border-slate-200/60'
                       }`}
-                      onClick={() => {
-                        onNavChange(item.id);
-                        onMobileToggle?.();
-                      }}
+                      onClick={createNavHandler(item.id, true)}
                       leftIcon={
                         <Icon
                           aria-label={item.alt}

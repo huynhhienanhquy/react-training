@@ -91,6 +91,10 @@ export const SelectHotelPage = ({
     }
   };
 
+  const handleRetry = () => window.location.reload();
+  const handleComparePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => setIsComparePrice(event.target.checked);
+  const createBookHotelHandler = (hotel: HotelData) => (event: React.MouseEvent) => handleBookHotel(event, hotel);
+
   return (
       <main className="flex-1 bg-surface-section flex flex-col h-full overflow-y-auto">
         {/* Topbar */}
@@ -123,7 +127,7 @@ export const SelectHotelPage = ({
                 variant="danger"
                 size="sm"
                 className="mt-4"
-                onClick={() => window.location.reload()}
+                onClick={handleRetry}
               >
                 Retry
               </Button>
@@ -160,7 +164,7 @@ export const SelectHotelPage = ({
                 <input
                   type="checkbox"
                   checked={isComparePrice}
-                  onChange={(e) => setIsComparePrice(e.target.checked)}
+                  onChange={handleComparePriceChange}
                   className="w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-blue-500 cursor-pointer"
                 />
                 <span className="text-xs sm:text-sm font-medium text-slate-600">
@@ -242,7 +246,7 @@ export const SelectHotelPage = ({
                         variant="light"
                         size="none"
                         className="px-6 py-3 bg-primary-soft text-primary-strong text-xs sm:text-sm rounded-2xl"
-                        onClick={(e) => handleBookHotel(e, hotel)}
+                        onClick={createBookHotelHandler(hotel)}
                       >
                         Book Hotel
                       </Button>
