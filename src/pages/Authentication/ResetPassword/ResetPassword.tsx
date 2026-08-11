@@ -43,6 +43,7 @@ export const ResetPassword = () => {
         questionText: "Don't have an account?",
         actionText: 'Sign Up',
         onActionClick: handleSignUp,
+        className: 'mt-5.5 text-base',
       }}
     >
       {/* Reduce the overall spacing between blocks to space-y-3.5 */}
@@ -50,9 +51,9 @@ export const ResetPassword = () => {
         {/* 1. Header */}
 
         {/* 2. Form */}
-        <div className="mt-8">
+        <div className="mt-10">
           <form
-            className="space-y-3"
+            className=""
             onSubmit={handleResetPassword}
             autoComplete="off"
           >
@@ -63,28 +64,34 @@ export const ResetPassword = () => {
               autoComplete="new-password"
               value={password}
               onChange={handlePasswordChange}
+              className="h-14 rounded-2xl px-4 py-0 text-base"
+              wrapperClassName="mb-0 space-y-4"
               required
             />
 
-            <InputField
-              label="Confirm New Password"
-              type="password"
-              placeholder="Confirm your password"
-              autoComplete="new-password"
-              value={confirmPassword}
-              onChange={handleConfirmPasswordChange}
-              required
-            />
+            <div className="mt-14">
+              <InputField
+                label="Confirm New Password"
+                type="password"
+                placeholder="Confirm your password"
+                autoComplete="new-password"
+                value={confirmPassword}
+                onChange={handleConfirmPasswordChange}
+                className="h-14 rounded-2xl px-4 py-0 text-base"
+                wrapperClassName="mb-0 space-y-4"
+                required
+              />
+            </div>
 
             <ErrorMessage message={error} />
 
             <Button
-              className="mt-2"
+              className="mt-14 h-13 rounded-xl py-0 text-base font-normal"
               type="submit"
               isLoading={isLoading}
               showArrow
             >
-              Reset Password
+              Save and Continue to Sign In
             </Button>
 
           </form>

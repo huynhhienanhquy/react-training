@@ -22,11 +22,10 @@ describe('SectionHeader', () => {
     render(<SectionHeader title="Fare options" />);
 
     expect(screen.getByText('Fare options')).toHaveClass(
-      'text-xs',
+      'text-sm',
       'font-bold',
-      'text-slate-500',
-      'uppercase',
-      'tracking-wider',
+      'text-brand-dark',
+      'md:text-base',
     );
   });
 

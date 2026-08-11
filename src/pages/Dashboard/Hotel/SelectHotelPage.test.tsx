@@ -80,6 +80,9 @@ describe('SelectHotelPage Component', () => {
 
     // Check header titles
     expect(screen.getByText('Other available accommodations')).toBeInTheDocument()
+    expect(
+      screen.getByRole('button', { name: /start new chat/i }),
+    ).toBeInTheDocument()
 
     // Check hotel names
     expect(screen.getByText('Grand Hyatt Lagos')).toBeInTheDocument()

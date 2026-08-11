@@ -22,7 +22,7 @@ export const ChatMessageList = memo(function ChatMessageList({
   const { ref: messagesEndRef } = useAutoScroll(messages, isTyping);
 
   return (
-    <div className="w-full flex-1 overflow-y-auto space-y-4 py-4 px-2 scrollbar-hide">
+    <div className="w-full max-w-4xl flex-1 space-y-4 overflow-y-auto px-2 py-4 scrollbar-hide lg:max-w-none lg:px-0">
       {messages.map((msg, index) => {
         const textLower = msg.text.toLowerCase();
 
@@ -95,12 +95,12 @@ export const ChatMessageList = memo(function ChatMessageList({
                 : 'items-start gap-3'
             }`}
           >
-            <div className="flex flex-col gap-2 max-w-2xl w-full">
+            <div className="flex w-full max-w-2xl flex-col gap-2 lg:max-w-none">
               {msg.text && (
                 <div
                   className={`text-sm md:text-base whitespace-pre-line w-fit ${
                     msg.sender === 'user'
-                      ? 'bg-white text-slate-900 px-6 py-4 rounded-2xl rounded-br-none ml-auto shadow-none border border-slate-100'
+                      ? 'ml-auto rounded-2xl rounded-br-none border border-slate-100 bg-white px-3.5 py-3.5 text-slate-900 shadow-none'
                       : 'bg-transparent border-none text-slate-800 p-0 shadow-none'
                   }`}
                 >

@@ -61,31 +61,33 @@ export const SidebarNav = memo(function SidebarNav({ activeNav, onNavChange, isM
           type="button"
           variant="ghost"
           size="icon"
-          className="md:hidden fixed top-3 left-3 z-30 w-11 h-11 bg-white rounded-xl shadow-md border border-slate-100"
+          className="fixed left-3 top-3 z-30 h-10 w-10 rounded-xl border border-slate-100 bg-white p-0 shadow-md md:hidden"
           onClick={onMobileToggle}
+          aria-label="Open navigation"
           leftIcon={<MenuIcon className="w-5 h-5 text-slate-700" />}
         />
       )}
 
       {/* Desktop sidebar */}
-      <aside className="hidden md:flex w-125 min-w-80 bg-surface-sidebar border-r-10 border-surface-section flex-col items-center justify-between py-6 z-20 shrink-0 select-none">        <div className="flex flex-col items-center gap-7 w-full px-2">
+      <aside className="hidden w-32 min-w-32 shrink-0 select-none flex-col items-center justify-between border-r-[18px] border-surface-section bg-surface-sidebar py-6 z-20 md:flex">
+        <div className="flex w-full flex-col items-center gap-10 px-2">
           {/* App Logo */}
           <Button
             type="button"
             variant="ghost"
             size="icon"
-            className="w-11 h-11 rounded-2xl p-1.5 hover:opacity-90 mt-3"
+            className="mt-3 h-8 min-h-8 w-8 min-w-8 rounded-xl !p-0 hover:opacity-90"
             leftIcon={
               <img
                 src={appLogo}
                 alt="Logo"
-                className="w-8 h-8 object-contain"
+                className="h-8 w-8 object-contain"
               />
             }
           />
 
           {/* Navigation Items */}
-          <nav className="flex flex-col gap-3.5 items-center w-full">
+          <nav className="flex w-full flex-col items-center gap-6">
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeNav === item.id;
@@ -96,19 +98,19 @@ export const SidebarNav = memo(function SidebarNav({ activeNav, onNavChange, isM
                   type="button"
                   variant="ghost"
                   size="icon"
-                  className={`w-11 h-11 min-w-11 min-h-11 !p-0 !flex !items-center !justify-center !rounded-xl ${
+                  className={`!flex h-8 min-h-8 w-8 min-w-8 !items-center !justify-center !rounded-lg border !p-0 shadow-sm ${
                     isActive
-                      ? 'bg-blue-50 border-2 border-blue-200 shadow-sm shadow-blue-100/50'
-                      : 'bg-transparent border-2 border-transparent hover:bg-white/80 hover:border-slate-200/60'
+                      ? 'border-blue-200 bg-blue-50 shadow-blue-100/50'
+                      : 'border-slate-100 bg-white hover:border-slate-200 hover:bg-slate-50'
                   }`}
                   onClick={createNavHandler(item.id)}
                 >
                   <Icon
                     aria-label={item.alt}
-                    className={`block w-5 h-5 object-contain transition-all duration-200 ${
+                    className={`block h-4 w-4 object-contain transition-all duration-200 ${
                       isActive
                         ? 'opacity-100 scale-105 filter-logo-active'
-                        : 'opacity-70 hover:opacity-100'
+                        : 'grayscale opacity-70 hover:opacity-100'
                     }`}
                   />
                 </Button>
@@ -124,7 +126,7 @@ export const SidebarNav = memo(function SidebarNav({ activeNav, onNavChange, isM
             type="button"
             variant="ghost"
             size="icon"
-            className="w-17 h-17 md:w-17 md:h-17 transition transform active:scale-95 focus:outline-none relative drop-shadow-sm"
+            className="relative h-16 min-h-16 w-16 min-w-16 transition transform active:scale-95 focus:outline-none drop-shadow-sm md:h-16 md:w-16 [&>span]:h-full [&>span]:w-full"
             onClick={toggleProfileMenu}
           >
             <div
@@ -178,7 +180,7 @@ export const SidebarNav = memo(function SidebarNav({ activeNav, onNavChange, isM
       {isMobileOpen && (
         <div className="md:hidden fixed inset-0 z-40 flex">
           <div className="fixed inset-0 bg-black/40 backdrop-blur-xs" onClick={onMobileToggle} />
-          <aside className="relative z-50 flex h-full w-64 max-w-[85vw] flex-col justify-between bg-surface-sidebar p-4 shadow-2xl select-none animate-in slide-in-from-left duration-200">
+          <aside className="relative z-50 flex h-full w-64 max-w-drawer flex-col justify-between bg-surface-sidebar p-4 shadow-2xl select-none animate-in slide-in-from-left duration-200">
             <div className="w-full">
               <div className="mb-8 flex items-center gap-3 px-2">
                 <img
@@ -211,7 +213,7 @@ export const SidebarNav = memo(function SidebarNav({ activeNav, onNavChange, isM
                           className={`h-5 w-5 object-contain transition-all duration-200 ${
                             isActive
                               ? 'opacity-100 scale-105 filter-logo-active'
-                              : 'opacity-70 hover:opacity-100'
+                              : 'grayscale opacity-70 hover:opacity-100'
                           }`}
                         />
                       }
