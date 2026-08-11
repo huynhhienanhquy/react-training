@@ -57,10 +57,9 @@ export const SelectedFlightBox = ({
                 <HeartIcon
                   width={16}
                   height={16}
-                  color={isFavorite ? '#FFFFFF' : '#0436FF'}
                   aria-hidden="true"
-                  className={`transition-transform ${
-                    isFavorite ? 'scale-110' : ''
+                  className={`text-primary-dark transition-transform ${
+                    isFavorite ? 'scale-110 text-white' : ''
                   }`}
                 />
               }

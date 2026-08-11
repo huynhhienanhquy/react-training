@@ -13,7 +13,7 @@ const MessageIcon = ({
   titleId,
   width = '1em',
   height = '1em',
-  color = '#486CFF',
+  color = 'currentColor',
   ...props
 }: SVGProps<SVGSVGElement> & SVGRProps) => (
   <svg

@@ -13,7 +13,7 @@ const SearchIcon = ({
   titleId,
   width = '1em',
   height = '1em',
-  color = '#B1B1B1',
+  color = 'currentColor',
   ...props
 }: SVGProps<SVGSVGElement> & SVGRProps) => (
   <svg

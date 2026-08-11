@@ -70,7 +70,7 @@ export const InputField = memo(function InputField({
               name={showPassword ? 'eye-off' : 'eye'}
               width={20}
               height={20}
-              color="#9CA3AF"
+              className="text-gray-400"
               aria-hidden="true"
             />
           </Button>

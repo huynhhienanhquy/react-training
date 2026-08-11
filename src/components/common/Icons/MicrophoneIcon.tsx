@@ -13,7 +13,7 @@ const MicrophoneIcon = ({
   titleId,
   width = '1em',
   height = '1em',
-  color = '#0F053F',
+  color = 'currentColor',
   ...props
 }: SVGProps<SVGSVGElement> & SVGRProps) => (
   <svg

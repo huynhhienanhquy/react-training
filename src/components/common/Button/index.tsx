@@ -162,10 +162,9 @@ export function Button({
           <HeartIcon
             width={16}
             height={16}
-            color={isFavorite ? '#FFFFFF' : '#486CFF'}
-            className={`transition-all duration-200 ${
+            className={`text-primary transition-all duration-200 ${
               isFavorite
-                ? 'scale-110'
+                ? 'scale-110 text-white'
                 : 'opacity-70 group-hover:opacity-100'
             }`}
             aria-hidden="true"

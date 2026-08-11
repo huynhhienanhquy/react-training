@@ -72,8 +72,8 @@ export const ChatInputBox = memo(function ChatInputBox({
             leftIcon={
               <MicrophoneIcon
                 aria-label="Voice input"
-                className={`w-5 h-5 object-contain transition ${
-                  isRecording ? 'filter-red' : 'opacity-40 hover:opacity-70'
+                className={`h-5 w-5 object-contain text-icon-strong transition ${
+                  isRecording ? 'text-red-600' : 'opacity-40 hover:opacity-70'
                 }`}
               />
             }
@@ -89,7 +89,7 @@ export const ChatInputBox = memo(function ChatInputBox({
             leftIcon={
               <SendIcon
                 aria-label="Send message"
-                className="w-5 h-5 object-contain filter brightness-0 invert"
+                className="h-5 w-5 object-contain text-white"
               />
             }
           />

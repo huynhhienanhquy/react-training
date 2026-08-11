@@ -87,21 +87,21 @@ export const HotelRecommendations = ({
     >
       {!isControlled && loading && (
         <div className="py-8 flex flex-col items-center justify-center gap-2">
-          <div className="w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
-          <p className="text-xs text-slate-400 font-medium">
+          <div className="h-6 w-6 animate-spin rounded-full border-2 border-hotel-loading border-t-transparent" />
+          <p className="text-xs font-medium text-hotel-subtle">
             Loading hotel list...
           </p>
         </div>
       )}
 
       {!isControlled && error && !loading && (
-        <div className="p-4 bg-red-50 text-red-600 rounded-2xl border border-red-100 text-xs text-center font-medium my-2">
+        <div className="my-2 rounded-2xl border border-hotel-error-border bg-hotel-error-bg p-4 text-center text-xs font-medium text-hotel-error-text">
           {error}
         </div>
       )}
 
       {!isControlled && !loading && !error && hotelList.length === 0 && (
-        <div className="p-6 text-center text-xs text-slate-400">
+        <div className="p-6 text-center text-xs text-hotel-subtle">
           No suitable hotels were found.
         </div>
       )}
@@ -115,9 +115,9 @@ export const HotelRecommendations = ({
           return (
             <div
               key={hotel.id}
-              className="mb-2 grid grid-cols-1 gap-4 rounded-2xl bg-surface-card p-4 transition-colors duration-200 last:mb-0 md:min-h-202 md:grid-cols-hotel-card md:items-stretch md:gap-6 dark:bg-slate-700/70"
+              className="mb-2 grid grid-cols-1 gap-4 rounded-2xl bg-hotel-card p-4 transition-colors duration-200 last:mb-0 md:min-h-hotel-card md:grid-cols-hotel-card md:items-stretch md:gap-6 dark:bg-hotel-card-dark/70"
             >
-              <div className="h-52 w-full overflow-hidden rounded-xl md:h-171 md:w-171">
+              <div className="h-52 w-full overflow-hidden rounded-xl md:h-hotel-image md:w-hotel-image">
                 <img
                   src={hotel.imageUrl || defaultHotelImage}
                   alt={hotel.name}
@@ -127,16 +127,16 @@ export const HotelRecommendations = ({
 
               <div className="flex min-w-0 flex-col justify-between space-y-3 text-left">
                 <div>
-                  <h3 className="text-xl font-medium leading-7 text-ink md:text-2xl md:leading-8">
+                  <h3 className="text-xl font-medium leading-7 text-hotel-text md:text-2xl md:leading-8">
                     {hotel.name}
                   </h3>
 
-                  <p className="mt-2 line-clamp-2 text-sm font-normal leading-6 text-slate-500 md:text-base">
+                  <p className="mt-2 line-clamp-2 text-sm font-normal leading-6 text-hotel-muted md:text-base">
                     {hotel.description}
                   </p>
                 </div>
 
-                <div className="flex items-center gap-4 pt-2 text-slate-400" aria-label="Hotel amenities">
+                <div className="flex items-center gap-4 pt-2 text-hotel-amenity" aria-label="Hotel amenities">
                   <span title="Free Wi-Fi" className="flex h-5 w-5 items-center justify-center text-lg">⌁</span>
                   <span title="Parking" className="flex h-5 w-5 items-center justify-center text-base">Ⓟ</span>
                   <span title="Room service" className="flex h-5 w-5 items-center justify-center text-lg">♨</span>
@@ -146,18 +146,18 @@ export const HotelRecommendations = ({
               <div className="flex w-full shrink-0 flex-row flex-wrap items-center justify-between gap-4 md:w-auto md:flex-col md:items-end md:justify-between">
                 <div>
                   {hotel.tag && (
-                    <span className="inline-flex rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-base font-medium text-emerald-600 dark:border-emerald-800 dark:bg-emerald-950/70 dark:text-emerald-300">
+                    <span className="inline-flex rounded-full border border-hotel-tag-border bg-hotel-tag-bg px-3 py-1 text-base font-medium text-hotel-tag-text dark:border-hotel-tag-border-dark dark:bg-hotel-tag-bg-dark/70 dark:text-hotel-tag-text-dark">
                       {hotel.tag}
                     </span>
                   )}
                 </div>
 
                 <div className="text-right md:my-auto">
-                  <span className="text-2xl font-bold text-ink">
+                  <span className="text-2xl font-bold text-hotel-text">
                     ${hotel.price}
                   </span>
 
-                  <span className="text-base font-normal text-slate-400">
+                  <span className="text-base font-normal text-hotel-subtle">
                     /per night
                   </span>
                 </div>
@@ -169,7 +169,7 @@ export const HotelRecommendations = ({
                     size="icon"
                     isFavorite={isFavorite}
                     onClick={createFavoriteHandler(hotel.id)}
-                    className="h-12 w-13 gap-0 rounded-xl border border-blue-100 !p-0 md:h-12 md:w-13"
+                    className="h-12 w-hotel-action gap-0 rounded-xl border border-hotel-action-border !p-0"
                   />
 
                   <Button
