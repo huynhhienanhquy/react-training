@@ -7,7 +7,7 @@
   src:
     local('Helvetica Now Display Regular'),
     local('HelveticaNowDisplay-Regular'),
-    url('/fonts/HelveticaNowDisplay-Regular.woff2') format('woff2');
+    url('../assets/fonts/helvetica-now-display/HelveticaNowDisplay-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -18,7 +18,7 @@
   src:
     local('Helvetica Now Display Medium'),
     local('HelveticaNowDisplay-Medium'),
-    url('/fonts/HelveticaNowDisplay-Medium.woff2') format('woff2');
+    url('../assets/fonts/helvetica-now-display/HelveticaNowDisplay-Medium.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -29,7 +29,7 @@
   src:
     local('Helvetica Now Display Bold'),
     local('HelveticaNowDisplay-Bold'),
-    url('/fonts/HelveticaNowDisplay-Bold.woff2') format('woff2');
+    url('../assets/fonts/helvetica-now-display/HelveticaNowDisplay-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;

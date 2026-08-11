@@ -90,6 +90,8 @@ describe("SidebarNav", () => {
       "bg-white",
       "border-slate-100",
     );
+    expect(screen.getByLabelText("Favorites")).toHaveClass("grayscale");
+    expect(screen.getByLabelText("Chats")).not.toHaveClass("grayscale");
   });
 
   it("uses the design dimensions for the desktop sidebar assets", () => {

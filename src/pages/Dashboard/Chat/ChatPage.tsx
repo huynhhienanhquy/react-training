@@ -95,6 +95,7 @@ export const ChatPage = () => {
             onInputChange={setInputMessage}
             onSend={handleSendCurrentMessage}
             isRecording={isRecording}
+            isThinking={isTyping}
             onToggleRecording={handleToggleRecording}
           />
         </div>

@@ -15,7 +15,7 @@ export function FareHeader({
         <h2 className="break-words text-lg font-bold text-brand-dark sm:text-xl md:text-2xl">
           {destination}
         </h2>
-        <p className="mt-1 text-xs font-medium text-brand-dark md:text-sm lg:text-base">
+        <p className="mt-1 text-xs font-normal text-brand-dark md:text-sm lg:text-base">
           {tripType} • {cabinClass}
         </p>
       </div>

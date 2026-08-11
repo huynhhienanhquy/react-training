@@ -37,7 +37,7 @@ export type { FareOption };
                       alt={fare.airline}
                       className="w-4 h-4 object-contain"
                     />
-                    <span className="text-xs font-medium text-slate-500 md:text-sm lg:text-base">
+                    <span className="text-xs font-normal text-slate-500 md:text-sm lg:text-base">
                       {fare.airline}
                     </span>
                   </div>
@@ -49,7 +49,7 @@ export type { FareOption };
                       size="md"
                       className="[&>span:first-child]:!text-2xl [&>span:first-child]:text-brand-dark"
                     />
-                    <div className="mt-1 text-xs font-medium uppercase text-slate-500 md:text-sm lg:text-base">
+                    <div className="mt-1 text-xs font-normal uppercase text-slate-500 md:text-sm lg:text-base">
                       {fare.name}
                     </div>
                   </div>

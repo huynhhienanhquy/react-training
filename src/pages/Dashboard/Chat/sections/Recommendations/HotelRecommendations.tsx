@@ -146,18 +146,18 @@ export const HotelRecommendations = ({
               <div className="flex w-full shrink-0 flex-row flex-wrap items-center justify-between gap-4 md:w-auto md:flex-col md:items-end md:justify-between">
                 <div>
                   {hotel.tag && (
-                    <span className="inline-flex rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-sm font-medium text-emerald-600 dark:border-emerald-800 dark:bg-emerald-950/70 dark:text-emerald-300">
+                    <span className="inline-flex rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-base font-medium text-emerald-600 dark:border-emerald-800 dark:bg-emerald-950/70 dark:text-emerald-300">
                       {hotel.tag}
                     </span>
                   )}
                 </div>
 
                 <div className="text-right md:my-auto">
-                  <span className="text-2xl font-black text-ink">
+                  <span className="text-2xl font-bold text-ink">
                     ${hotel.price}
                   </span>
 
-                  <span className="text-sm font-normal text-slate-400">
+                  <span className="text-base font-normal text-slate-400">
                     /per night
                   </span>
                 </div>

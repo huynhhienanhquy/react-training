@@ -110,7 +110,7 @@ export const SidebarNav = memo(function SidebarNav({ activeNav, onNavChange, isM
                     className={`block h-4 w-4 object-contain transition-all duration-200 ${
                       isActive
                         ? 'opacity-100 scale-105 filter-logo-active'
-                        : 'opacity-70 hover:opacity-100'
+                        : 'grayscale opacity-70 hover:opacity-100'
                     }`}
                   />
                 </Button>
@@ -213,7 +213,7 @@ export const SidebarNav = memo(function SidebarNav({ activeNav, onNavChange, isM
                           className={`h-5 w-5 object-contain transition-all duration-200 ${
                             isActive
                               ? 'opacity-100 scale-105 filter-logo-active'
-                              : 'opacity-70 hover:opacity-100'
+                              : 'grayscale opacity-70 hover:opacity-100'
                           }`}
                         />
                       }

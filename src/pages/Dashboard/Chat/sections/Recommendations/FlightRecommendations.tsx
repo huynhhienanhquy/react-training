@@ -143,7 +143,7 @@ export function FlightRecommendations({
                     variant="secondary"
                     size="sm"
                     onClick={createBookHandler(flight.id)}
-                    className="h-12 rounded-xl px-5 text-sm"
+                    className="h-12 rounded-xl px-5 text-base"
                   >
                     Book Now
                   </Button>
@@ -177,7 +177,7 @@ export function FlightRecommendations({
 
                 <div className="flex shrink-0 items-center justify-between gap-4 border-t border-slate-200/60 pt-3 sm:flex-col sm:items-end sm:border-0 sm:pt-0">
                   {flight.tag && (
-                    <span className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-sm font-medium text-emerald-600 dark:border-emerald-800 dark:bg-emerald-950/70 dark:text-emerald-300">
+                    <span className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-base font-medium text-emerald-600 dark:border-emerald-800 dark:bg-emerald-950/70 dark:text-emerald-300">
                       {flight.tag}
                     </span>
                   )}

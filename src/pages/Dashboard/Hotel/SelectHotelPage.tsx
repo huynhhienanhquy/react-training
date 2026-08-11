@@ -185,7 +185,7 @@ export const SelectHotelPage = ({
 
                       <div className="flex-1 min-w-0 space-y-4 w-full">
                         <div>
-                          <h3 className="text-xl sm:text-2xl font-extrabold text-ink-alt tracking-tight truncate">
+                          <h3 className="truncate text-xl font-bold tracking-tight text-ink-alt sm:text-2xl">
                             {hotel.hotelName || 'Five Star Hotel, Lagos'}
                           </h3>
                           <p className="text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-wide mt-1">
@@ -226,7 +226,7 @@ export const SelectHotelPage = ({
 
                     {/* Price column & Booking button on the right */}
                     <div className="flex shrink-0 flex-col items-stretch justify-between gap-3 border-t border-slate-200/60 pt-4 sm:flex-row sm:items-center md:min-w-160 md:flex-col md:items-end md:justify-center md:gap-4 md:border-l md:border-t-0 md:pl-8 md:pt-0">
-                      <span className="text-2xl sm:text-3xl font-black text-ink-alt tracking-tight">
+                      <span className="text-2xl font-bold tracking-tight text-ink-alt sm:text-3xl">
                         ${mainPrice}
                       </span>
 

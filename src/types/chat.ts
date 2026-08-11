@@ -23,6 +23,7 @@ export interface ChatInputBoxProps {
   onInputChange: (value: string) => void;
   onSend: () => void;
   isRecording: boolean;
+  isThinking?: boolean;
   onToggleRecording: () => void;
 }
 
