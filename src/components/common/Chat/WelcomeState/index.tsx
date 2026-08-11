@@ -25,9 +25,9 @@ export const WelcomeState = memo(function WelcomeState({
   const createPromptHandler = (prompt: string) => () => onSelectPrompt(prompt);
 
   return (
-    <div className=" w-full flex-1 flex flex-col items-center justify-center text-center my-auto py-6 px-4 -translate-y-20">
+    <div className="my-auto flex w-full flex-1 flex-col items-center justify-center px-1 py-5 text-center md:-translate-y-10 md:px-4 md:py-6">
       {/* Visual Header Images */}
-      <div className="flex items-center justify-center -space-x-3 mb-6">
+      <div className="mb-4 flex items-center justify-center -space-x-3 md:mb-6">
         <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl overflow-hidden border-3 border-white shadow-md z-10">
           <img
             src={lakeBoardwalkImage}
@@ -54,20 +54,20 @@ export const WelcomeState = memo(function WelcomeState({
       </div>
 
       {/* Main Title */}
-      <h2 className="text-2xl md:text-4xl font-extrabold text-ink-deep tracking-tight mb-8">
+      <h2 className="mb-5 text-2xl font-extrabold tracking-tight text-ink-deep md:mb-8 md:text-4xl">
         Let’s Plan Your Next Adventure
       </h2>
 
       {/* Prompts Section  */}
-      <div className="flex flex-col items-center gap-3 w-full max-w-4xl mb-8">
-        <div className="flex flex-wrap justify-center gap-3">
+      <div className="mb-4 flex w-full max-w-4xl flex-col items-center gap-2 sm:gap-3 md:mb-8">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
           {prompts.slice(0, 3).map((prompt, index) => (
             <Button
               key={index}
               type="button"
               variant="outline"
               size="sm"
-              className="px-4 py-2.5 rounded-2xl"
+              className="max-w-full whitespace-normal rounded-2xl px-3 py-2 text-xs sm:px-4 sm:py-2.5"
               onClick={createPromptHandler(prompt)}
             >
               {prompt}
@@ -75,14 +75,14 @@ export const WelcomeState = memo(function WelcomeState({
           ))}
         </div>
 
-        <div className="flex flex-wrap justify-center gap-3">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
           {prompts.slice(3, 5).map((prompt, index) => (
             <Button
               key={index + 3}
               type="button"
               variant="outline"
               size="sm"
-              className="px-4 py-2.5 rounded-2xl"
+              className="max-w-full whitespace-normal rounded-2xl px-3 py-2 text-xs sm:px-4 sm:py-2.5"
               onClick={createPromptHandler(prompt)}
             >
               {prompt}
@@ -90,14 +90,14 @@ export const WelcomeState = memo(function WelcomeState({
           ))}
         </div>
 
-        <div className="flex flex-wrap justify-center gap-3">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
           {prompts.slice(5, 6).map((prompt, index) => (
             <Button
               key={index + 5}
               type="button"
               variant="outline"
               size="sm"
-              className="px-4 py-2.5 rounded-2xl"
+              className="max-w-full whitespace-normal rounded-2xl px-3 py-2 text-xs sm:px-4 sm:py-2.5"
               onClick={createPromptHandler(prompt)}
             >
               {prompt}

@@ -72,10 +72,12 @@ describe('FareHeader', () => {
 
     expect(card).toHaveAttribute('data-variant', 'surface');
     expect(card).toHaveClass(
-      'p-6',
       'flex',
-      'items-center',
+      'items-start',
       'justify-between',
+      'gap-3',
+      'p-4',
+      'sm:p-6',
     );
   });
 });

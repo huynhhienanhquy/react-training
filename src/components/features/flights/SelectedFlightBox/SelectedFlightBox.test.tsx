@@ -83,7 +83,7 @@ describe('SelectedFlightBox', () => {
 
     const card = screen.getByTestId('flight-card');
     expect(card).toHaveAttribute('data-variant', 'surface');
-    expect(card).toHaveClass('p-6', 'space-y-4');
+    expect(card).toHaveClass('space-y-4', 'p-4', 'sm:p-6');
   });
 
   it('renders favorite and change-flight controls', () => {

@@ -63,7 +63,7 @@ export const DashboardLayout = () => {
   }, [navigate]);
 
   return (
-    <div className="bg-slate-100 font-sans text-slate-700 h-screen overflow-hidden flex antialiased">
+    <div className="flex h-screen h-dvh min-w-0 overflow-hidden bg-slate-100 font-sans text-slate-700 antialiased">
       <SidebarNav
         activeNav={getActiveNav(pathname)}
         onNavChange={handleNavChange}

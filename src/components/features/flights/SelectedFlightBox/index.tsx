@@ -21,18 +21,18 @@ export const SelectedFlightBox = ({
     <div className="space-y-3">
       <SectionHeader title="Selected flights" />
 
-      <Card variant="surface" className="p-6 space-y-4">
+      <Card variant="surface" className="space-y-4 p-4 sm:p-6">
         {/* Header: Airline info, favorite button, and change flight action */}
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           {/* Airline Logo & Name */}
-          <div className="flex items-center gap-2.5">
+          <div className="flex min-w-0 items-center gap-2.5">
             <img
               src={defaultFlightLogo}
               alt={airlineName}
               className="w-5 h-5 object-contain"
             />
 
-            <span className="text-sm font-semibold text-slate-600">
+            <span className="truncate text-sm font-semibold text-slate-600">
               {airlineName}
             </span>
           </div>
@@ -81,12 +81,12 @@ export const SelectedFlightBox = ({
         {/* List of Flight Legs / Routes */}
         <div className="space-y-2 text-xs md:text-sm pt-2">
           {legs.map((leg) => (
-            <div key={leg.id} className="flex items-center gap-4">
-              <span className="font-bold text-brand-dark w-24 md:w-32 text-xs md:text-sm">
+            <div key={leg.id} className="flex flex-col gap-1 sm:flex-row sm:items-start sm:gap-4">
+              <span className="shrink-0 text-xs font-bold text-brand-dark sm:w-24 md:w-32 md:text-sm">
                 {leg.times}
               </span>
 
-              <span className="text-slate-400 text-xs md:text-sm">
+              <span className="min-w-0 break-words text-xs text-slate-400 md:text-sm">
                 {leg.route} • {leg.duration} • {leg.stops}
               </span>
             </div>

@@ -14,7 +14,7 @@ describe('hotelService', () => {
     vi.mocked(flightApi.get).mockResolvedValue({ data: hotels });
 
     await expect(getHotels()).resolves.toEqual(hotels);
-    expect(flightApi.get).toHaveBeenCalledWith('/hotels');
+    expect(flightApi.get).toHaveBeenCalledWith('/hotel');
   });
 
   it('uses the id in the hotel details endpoint', async () => {
@@ -22,6 +22,6 @@ describe('hotelService', () => {
     vi.mocked(flightApi.get).mockResolvedValue({ data: hotel });
 
     await expect(getHotelById('hotel-2')).resolves.toEqual(hotel);
-    expect(flightApi.get).toHaveBeenCalledWith('/hotels/hotel-2');
+    expect(flightApi.get).toHaveBeenCalledWith('/hotel/hotel-2');
   });
 });

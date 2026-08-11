@@ -10,9 +10,9 @@ export function FareHeader({
   priceUnit,
 }: FareHeaderProps) {
   return (
-    <Card variant="surface" className="p-6 flex items-center justify-between">
-      <div>
-        <h2 className="text-xl md:text-2xl font-bold text-brand-dark">
+    <Card variant="surface" className="flex items-start justify-between gap-3 p-4 sm:p-6">
+      <div className="min-w-0">
+        <h2 className="break-words text-lg font-bold text-brand-dark sm:text-xl md:text-2xl">
           {destination}
         </h2>
         <p className="text-xs md:text-sm text-slate-400 font-medium mt-1">
@@ -20,7 +20,7 @@ export function FareHeader({
         </p>
       </div>
 
-      <div className="text-right">
+      <div className="shrink-0 text-right">
         <PriceDisplay amount={`$${price}`} size="md" />
         <p className="text-xs text-slate-400 mt-0.5">{priceUnit}</p>
       </div>

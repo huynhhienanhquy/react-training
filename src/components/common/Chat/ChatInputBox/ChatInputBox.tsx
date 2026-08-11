@@ -21,7 +21,7 @@ export const ChatInputBox = memo(function ChatInputBox({
 
   return (
     /* Floating chat input container with focus state highlight */
-    <div className="w-full max-w-4xl bg-white rounded-3xl p-20 md:p-10   shadow-xl shadow-slate-200/60 border border-slate-200/80 transition focus-within:border-blue-400">
+    <div className="w-full max-w-4xl rounded-2xl border border-slate-200/80 bg-white p-3 shadow-xl shadow-slate-200/60 transition focus-within:border-blue-400 sm:p-4 md:rounded-3xl md:p-6">
 
       {/* Multiline Textarea for prompt input */}
       <textarea
@@ -30,7 +30,7 @@ export const ChatInputBox = memo(function ChatInputBox({
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
         placeholder="Tell me where you are going to and how you prefer to get there"
-        className=" -translate-y-5 -translate-x-4 w-full resize-none text-slate-700 placeholder-slate-400 italic text-sm md:text-base focus:outline-none bg-transparent"
+        className="w-full resize-none bg-transparent px-1 text-sm italic text-slate-700 placeholder-slate-400 focus:outline-none md:text-base"
       />
 
       {/* Action Toolbar */}
@@ -40,7 +40,7 @@ export const ChatInputBox = memo(function ChatInputBox({
           type="button"
           variant="ghost"
           size="icon"
-          className="-translate-x-7 translate-y-2 w-9 h-9 rounded-full p-2"
+          className="h-10 w-10 rounded-full p-2"
           leftIcon={
             <AddIcon
               aria-label="Add attachment"
@@ -50,7 +50,7 @@ export const ChatInputBox = memo(function ChatInputBox({
           }
         />
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           {/* Voice Recording Toggle Button */}
           <Button
             type="button"
@@ -75,7 +75,7 @@ export const ChatInputBox = memo(function ChatInputBox({
             type="button"
             variant="ghost"
             size="icon"
-            className="w-11 h-11 md:w-14 md:h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl p-2.5 shadow-md shadow-blue-500/30 shrink-0"
+            className="h-11 w-11 shrink-0 rounded-2xl bg-blue-600 p-2.5 text-white shadow-md shadow-blue-500/30 hover:bg-blue-700 md:h-12 md:w-12"
             onClick={onSend}
             leftIcon={
               <SendIcon

@@ -141,8 +141,8 @@ export const SelectHotelPage = ({
           <div className="max-w-6xl w-full mx-auto p-4 sm:p-6 md:p-8 space-y-6">
 
             {/* HEADER SECTION:*/}
-            <div className="flex items-center justify-between pb-2 gap-4">
-              <div className="flex items-center gap-2">
+            <div className="flex flex-col items-start gap-3 pb-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+              <div className="flex min-w-0 items-center gap-2">
                 {/* The Back button is dedicated to mobile devices. */}
                 {onBackToChat && (
                   <Button
@@ -161,7 +161,7 @@ export const SelectHotelPage = ({
               </div>
 
               {/* Compare Price Checkbox */}
-              <label className="flex items-center gap-2 cursor-pointer select-none shrink-0">
+              <label className="flex shrink-0 cursor-pointer select-none items-center gap-2 self-end sm:self-auto">
                 <input
                   type="checkbox"
                   checked={isComparePrice}
@@ -183,7 +183,7 @@ export const SelectHotelPage = ({
                 return (
                   <div
                     key={hotel.id }
-                    className="bg-white rounded-card p-5 md:p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col md:flex-row items-stretch gap-6"
+                    className="flex flex-col items-stretch gap-5 rounded-card border border-slate-100 bg-white p-4 shadow-sm transition-all duration-200 hover:shadow-md sm:p-5 md:flex-row md:gap-6 md:p-6"
                   >
                     {/* Information on the left */}
                     <div className="flex flex-1 flex-col sm:flex-row items-center sm:items-start md:items-center gap-5 min-w-0">
@@ -237,7 +237,7 @@ export const SelectHotelPage = ({
                     </div>
 
                     {/* Price column & Booking button on the right */}
-                    <div className="flex md:flex-col items-center md:items-end justify-between md:justify-center gap-4 pt-4 md:pt-0 border-t md:border-t-0 md:border-l border-slate-200/60 md:pl-8 shrink-0 min-w-160">
+                    <div className="flex shrink-0 flex-col items-stretch justify-between gap-3 border-t border-slate-200/60 pt-4 sm:flex-row sm:items-center md:min-w-160 md:flex-col md:items-end md:justify-center md:gap-4 md:border-l md:border-t-0 md:pl-8 md:pt-0">
                       <span className="text-2xl sm:text-3xl font-black text-ink-alt tracking-tight">
                         ${mainPrice}
                       </span>
@@ -246,7 +246,7 @@ export const SelectHotelPage = ({
                         type="button"
                         variant="light"
                         size="none"
-                        className="px-6 py-3 bg-primary-soft text-primary-strong text-xs sm:text-sm rounded-2xl"
+                        className="w-full rounded-2xl bg-primary-soft px-6 py-3 text-xs text-primary-strong sm:w-auto sm:text-sm"
                         onClick={createBookHotelHandler(hotel)}
                       >
                         Book Hotel

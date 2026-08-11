@@ -61,7 +61,7 @@ export const ChatPage = () => {
 
   return (
     <>
-      <div className="ml-1.5">
+      <div className="hidden lg:block lg:ml-1.5">
         <ChatHistorySidebar
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
@@ -72,7 +72,7 @@ export const ChatPage = () => {
       </div>
 
       <DashboardPageLayout onNewChat={handleStartNewChat}>
-        <div className="flex-1 overflow-y-auto px-4 md:px-8 pb-6 pt-2 flex flex-col justify-between items-center max-w-5xl mx-auto w-full">
+        <div className="mx-auto flex w-full max-w-5xl min-h-0 flex-1 flex-col items-center justify-between overflow-y-auto px-2 pb-[max(1rem,env(safe-area-inset-bottom))] pt-2 sm:px-4 md:px-8 md:pb-6">
           {currentMessages.length === 0 ? (
             <WelcomeState
               prompts={SUGGESTION_PROMPTS}
