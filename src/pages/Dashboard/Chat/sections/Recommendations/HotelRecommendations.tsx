@@ -115,7 +115,7 @@ export const HotelRecommendations = ({
           return (
             <div
               key={hotel.id}
-              className="mb-2 grid grid-cols-1 gap-4 rounded-2xl bg-slate-50 p-4 transition-colors duration-200 last:mb-0 md:min-h-202 md:grid-cols-hotel-card md:items-stretch md:gap-6 dark:bg-slate-700/70"
+              className="mb-2 grid grid-cols-1 gap-4 rounded-2xl bg-surface-card p-4 transition-colors duration-200 last:mb-0 md:min-h-202 md:grid-cols-hotel-card md:items-stretch md:gap-6 dark:bg-slate-700/70"
             >
               <div className="h-52 w-full overflow-hidden rounded-xl md:h-171 md:w-171">
                 <img
@@ -162,14 +162,14 @@ export const HotelRecommendations = ({
                   </span>
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-4">
                   <Button
                     type="button"
                     variant="favorite"
                     size="icon"
                     isFavorite={isFavorite}
                     onClick={createFavoriteHandler(hotel.id)}
-                    className="h-12 w-12 gap-0 rounded-xl border border-blue-100 !p-0 md:h-12 md:w-12"
+                    className="h-12 w-13 gap-0 rounded-xl border border-blue-100 !p-0 md:h-12 md:w-13"
                   />
 
                   <Button

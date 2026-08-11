@@ -32,7 +32,7 @@ export const Onboarding = () => {
   }, [navigate, startLoading, stopLoading]);
 
   return (
-    <AuthLayout inset>
+    <AuthLayout inset heroInset>
       <AuthPageLayout
         title="Let's Get To Know You!"
         subtitle="Provide only the information provided so that Tripal can know you better"

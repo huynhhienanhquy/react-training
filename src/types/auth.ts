@@ -29,6 +29,7 @@ export interface AuthLayoutProps {
   children?: React.ReactNode;
   isLoading?: boolean;
   inset?: boolean;
+  heroInset?: boolean;
 }
 
 

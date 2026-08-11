@@ -42,6 +42,7 @@ export default {
 
         surface: {
           DEFAULT: '#FAFBFD',
+          card: '#FAFAFA',
           sidebar: '#F8F9FB',
           section: '#EEF3FC',
           'section-alt': '#F4F7FE',
@@ -98,6 +99,7 @@ export default {
         55: '220px',
         17: '4.25rem',
         18: '4.5rem',
+        21: '84px',
         22: '5.5rem',
         26: '104px',
         27: '27px',
@@ -111,6 +113,7 @@ export default {
         127: '127px',
         150: '150px',
         160: '160px',
+        171: '171px',
         200: '200px',
         202: '202px',
         204: '204px',
@@ -140,6 +143,7 @@ export default {
       maxWidth: {
         drawer: '85vw',
         'auth-copy': '650px',
+        'auth-copy-safe': 'calc(50% - 54px)',
       },
 
       inset: {
@@ -161,6 +165,7 @@ export default {
 
       width: {
         45: '45%',
+        'auth-copy': '650px',
       },
 
       scale: {
@@ -192,6 +197,7 @@ export default {
 
       lineHeight: {
         '1.2': '1.2',
+        16: '64px',
       },
 
       boxShadow: {

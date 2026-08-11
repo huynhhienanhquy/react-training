@@ -9,6 +9,7 @@ export const AuthLayout = ({
   children,
   isLoading = false,
   inset = false,
+  heroInset = false,
 }: AuthLayoutProps) => {
   useEffect(() => {
     const root = document.documentElement;
@@ -45,15 +46,17 @@ export const AuthLayout = ({
       <div className="relative z-10 w-full max-w-1440 min-h-screen flex items-center justify-center lg:justify-end">
 
         {/* TEXT ON THE LEFT */}
-        <div className={twMerge(
-          'absolute hidden w-full space-y-5 p-4 text-white lg:block lg:w-45 xl:w-1/2',
-          inset ? 'bottom-16 left-4' : 'bottom-17 left-9.5',
-        )}>
-          <h1 className="max-w-auth-copy text-3xl font-bold leading-1.2 tracking-tight xl:text-5xl xl:leading-16">
+        <div
+          className={twMerge(
+            'absolute hidden w-auth-copy max-w-auth-copy-safe space-y-3 text-white lg:block',
+            heroInset ? 'bottom-18 left-8' : 'bottom-21 left-13.5',
+          )}
+        >
+          <h1 className="text-5xl font-bold leading-16 tracking-tight">
             Discover Amazing Deals & Thrilling Adventures
           </h1>
 
-          <p className="max-w-auth-copy text-sm font-normal leading-9 text-gray-100 lg:text-2xl">
+          <p className="text-2xl font-normal leading-9 text-gray-100">
             Tripal is designed to ease trip and vacation planning. Explore amazing deals and offers
           </p>
         </div>

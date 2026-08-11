@@ -29,13 +29,13 @@ export const App = () => {
           <Routes>
           {/* Public pages (Not logged in) */}
           <Route element={<GuestRoute />}>
-            <Route element={<AuthLayout inset />}>
+            <Route element={<AuthLayout inset heroInset />}>
               <Route path="/login" element={<Login />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/verify-otp" element={<VerifyOTP />} />
               <Route path="/reset-password" element={<ResetPassword />} />
             </Route>
-            <Route element={<AuthLayout inset />}>
+            <Route element={<AuthLayout inset heroInset />}>
               <Route path="/register" element={<Register />} />
             </Route>
             <Route path="/onboarding" element={<Onboarding />} />
