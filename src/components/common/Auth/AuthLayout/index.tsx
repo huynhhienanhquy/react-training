@@ -2,11 +2,26 @@ import { LoadingOverlay } from '@/components/common/Loading';
 import authBackground from '@/assets/images/auth-background.png';
 import { type AuthLayoutProps } from '@/types/auth';
 import { Outlet } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export const AuthLayout = ({
   children,
   isLoading = false,
 }: AuthLayoutProps) => {
+  useEffect(() => {
+    const root = document.documentElement;
+    const shouldRestoreDarkMode = root.classList.contains('dark');
+    const previousColorScheme = root.style.colorScheme;
+
+    root.classList.remove('dark');
+    root.style.colorScheme = 'light';
+
+    return () => {
+      root.classList.toggle('dark', shouldRestoreDarkMode);
+      root.style.colorScheme = previousColorScheme;
+    };
+  }, []);
+
   return (
     <div
       className="min-h-screen w-full relative flex items-center justify-center px-4 sm:px-6 lg:pl-12 lg:pr-8 py-8 lg:py-0 bg-cover bg-center overflow-hidden"
