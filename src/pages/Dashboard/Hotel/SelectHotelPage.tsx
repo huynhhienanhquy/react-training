@@ -23,12 +23,14 @@ export const SelectHotelPage = ({
   chatTitle,
   messages = [],
   onBackToChat,
+  onStartNewChat,
   onSelectHotel,
   selectedHotel,
 }: SelectHotelPageProps) => {
   const navigate = useNavigate();
   const navigateBackToChat = useCallback(() => navigate('/chats'), [navigate]);
   const handleBackToChat = onBackToChat ?? navigateBackToChat;
+  const handleStartNewChat = onStartNewChat ?? navigateBackToChat;
   const [isComparePrice, setIsComparePrice] = useState(false);
 
   // Fetch hotel data
@@ -106,6 +108,7 @@ export const SelectHotelPage = ({
         chatTitle={resolvedChatTitle}
         messages={messages}
         onBackToChat={handleBackToChat}
+        onNewChat={handleStartNewChat}
       >
         {/* LOADING STATE */}
         {loading && (

@@ -100,6 +100,7 @@ export const SelectFarePage = ({
         chatTitle={resolvedChatTitle}
         messages={messages}
         onBackToChat={handleBackToChat}
+        onNewChat={navigateBackToChat}
       >
         {/* LOADING STATE */}
         {loading && (
@@ -134,8 +135,8 @@ export const SelectFarePage = ({
 
         {/* MAIN DATA GRID */}
         {!loading && !error && fareData && selectedFare && (
-          <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-4 p-3 sm:p-4 md:gap-6 md:p-8 lg:grid-cols-3">
-            <div className="lg:col-span-2 space-y-6">
+          <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-4 p-3 sm:p-4 md:gap-6 md:p-8 lg:max-w-none lg:grid-cols-[minmax(0,2.05fr)_minmax(320px,1fr)] lg:gap-12 lg:px-[26px] lg:pb-14 lg:pt-10">
+            <div className="space-y-6 lg:space-y-10">
               <FareHeader
                 destination={fareData.destination || ''}
                 tripType={fareData.tripType || ''}
@@ -164,7 +165,7 @@ export const SelectFarePage = ({
               <div className="space-y-3 pt-2">
                 <SectionHeader title="Important information" />
 
-                <div className="bg-surface p-6 rounded-3xl border border-slate-100 text-xs text-slate-400 leading-relaxed space-y-2 shadow-sm">
+                <div className="space-y-2 rounded-3xl border border-slate-100 bg-surface p-6 text-xs leading-relaxed text-slate-500 shadow-sm lg:min-h-[204px] lg:p-8 lg:text-base lg:leading-7">
                   {(fareData.importantInformation || []).map((paragraph) => (
                     <p key={paragraph}>
                       {paragraph}
@@ -175,7 +176,7 @@ export const SelectFarePage = ({
             </div>
 
             {/* Price Details Sticky Sidebar */}
-            <div className="lg:col-span-1">
+            <div>
               <PriceDetailsSidebar
                 pricePerTraveller={selectedFare.price}
                 flightDues={priceBreakdown.flightDues}

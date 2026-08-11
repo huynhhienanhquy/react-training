@@ -62,6 +62,14 @@ describe("ChatInputBox", () => {
     expect(onSend).toHaveBeenCalledTimes(1);
   });
 
+  it("centers every toolbar icon inside its button", () => {
+    render(<ChatInputBox {...defaultProps} />);
+
+    ["Add attachment", "Voice input", "Send message"].forEach((name) => {
+      expect(screen.getByRole("button", { name })).toHaveClass("gap-0", "!p-0");
+    });
+  });
+
   it("calls onSend when pressing Enter", () => {
     const onSend = vi.fn();
 

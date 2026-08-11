@@ -17,24 +17,17 @@ export type { FareOption };
   }: FareCardsProps) => {
     const createSelectHandler = (fareId: FareOption['id']) => () => onSelectFare(fareId);
     return (
-      <div className="space-y-3">
+      <div className="space-y-3 lg:space-y-4">
         {/* Section Title */}
         <SectionHeader title="Select fare" />
 
         {/* Grid containing Economy and Business fare cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {fareOptions.map((fare) => {
-            // Check if the current card is active/selected
-            const isSelected = selectedFareId === fare.id;
-
             return (
               <div
                 key={fare.id}
-                className={`flex flex-col justify-between space-y-6 rounded-3xl border bg-surface p-4 shadow-sm transition-all sm:p-6 ${
-                  isSelected
-                    ? 'border-blue-500 ring-2 ring-blue-500/20' // Highlight border when selected
-                    : 'border-slate-100'
-                }`}
+                className="flex min-h-[506px] flex-col justify-between space-y-6 rounded-3xl border border-slate-100 bg-surface p-4 shadow-sm transition-all sm:p-6 lg:p-8"
               >
                 <div className="space-y-4">
                   {/* Airline Logo & Name */}
@@ -44,24 +37,28 @@ export type { FareOption };
                       alt={fare.airline}
                       className="w-4 h-4 object-contain"
                     />
-                    <span className="text-xs font-medium text-slate-500">
+                    <span className="text-xs font-medium text-slate-500 md:text-sm lg:text-base">
                       {fare.airline}
                     </span>
                   </div>
 
                   {/* Fare Price & Cabin Class Title */}
                   <div>
-                    <PriceDisplay amount={`$${fare.price}`} size="md" className="text-brand-dark" />
-                    <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mt-0.5">
+                    <PriceDisplay
+                      amount={`$${fare.price}`}
+                      size="md"
+                      className="[&>span:first-child]:!text-2xl [&>span:first-child]:text-brand-dark"
+                    />
+                    <div className="mt-1 text-xs font-medium uppercase text-slate-500 md:text-sm lg:text-base">
                       {fare.name}
                     </div>
                   </div>
 
                   {/* List of included benefits/features */}
-                  <ul className="space-y-3 text-xs text-slate-500">
+                  <ul className="space-y-4 border-t border-slate-100 pt-4 text-xs text-slate-500 md:text-sm lg:text-base">
                     {fare.features.map((feature, idx) => (
                       <li key={idx} className="flex items-center gap-2">
-                        <CheckCircleIcon className="w-4 h-4 text-slate-400 shrink-0" />
+                        <CheckCircleIcon className="h-[18px] w-[18px] shrink-0 text-slate-400" />
                         <span>{feature}</span>
                       </li>
                     ))}
@@ -71,9 +68,10 @@ export type { FareOption };
                 {/* Action Button to pick the fare class */}
                 <Button
                   type="button"
-                  variant={isSelected ? 'primary' : 'light'}
+                  variant="light"
                   size="none"
-                  className="w-full py-3 rounded-2xl text-xs active:scale-95"
+                  aria-pressed={selectedFareId === fare.id}
+                  className="h-12 w-full rounded-xl py-3 text-base font-normal active:scale-95"
                   onClick={createSelectHandler(fare.id)}
                 >
                   Select

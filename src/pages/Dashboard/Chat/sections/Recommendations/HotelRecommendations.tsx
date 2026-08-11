@@ -115,9 +115,9 @@ export const HotelRecommendations = ({
           return (
             <div
               key={hotel.id}
-              className="mb-2 grid grid-cols-1 gap-4 rounded-2xl bg-slate-50 p-4 transition-colors duration-200 last:mb-0 md:grid-cols-[220px_minmax(0,1fr)_auto] md:items-stretch dark:bg-slate-700/70"
+              className="mb-2 grid grid-cols-1 gap-4 rounded-2xl bg-slate-50 p-4 transition-colors duration-200 last:mb-0 md:min-h-[202px] md:grid-cols-[171px_minmax(0,1fr)_174px] md:items-stretch md:gap-6 dark:bg-slate-700/70"
             >
-              <div className="h-52 w-full overflow-hidden rounded-xl md:h-48 md:w-[220px]">
+              <div className="h-52 w-full overflow-hidden rounded-xl md:h-[171px] md:w-[171px]">
                 <img
                   src={hotel.imageUrl || defaultHotelImage}
                   alt={hotel.name}
@@ -127,23 +127,23 @@ export const HotelRecommendations = ({
 
               <div className="flex min-w-0 flex-col justify-between space-y-3 text-left">
                 <div>
-                  <h3 className="text-xl font-bold leading-snug text-ink md:text-2xl">
+                  <h3 className="text-xl font-medium leading-7 text-ink md:text-2xl md:leading-8">
                     {hotel.name}
                   </h3>
 
-                  <p className="mt-2 line-clamp-2 text-sm font-medium leading-relaxed text-slate-500 md:text-base">
+                  <p className="mt-2 line-clamp-2 text-sm font-normal leading-6 text-slate-500 md:text-base">
                     {hotel.description}
                   </p>
                 </div>
 
                 <div className="flex items-center gap-4 pt-2 text-slate-400" aria-label="Hotel amenities">
-                  <span title="Free Wi-Fi" className="text-xl">⌁</span>
-                  <span title="Parking" className="text-lg">Ⓟ</span>
-                  <span title="Room service" className="text-xl">♨</span>
+                  <span title="Free Wi-Fi" className="flex h-5 w-5 items-center justify-center text-lg">⌁</span>
+                  <span title="Parking" className="flex h-5 w-5 items-center justify-center text-base">Ⓟ</span>
+                  <span title="Room service" className="flex h-5 w-5 items-center justify-center text-lg">♨</span>
                 </div>
               </div>
 
-              <div className="flex w-full shrink-0 flex-row flex-wrap items-center justify-between gap-4 md:w-auto md:min-w-[190px] md:flex-col md:items-end md:justify-between">
+              <div className="flex w-full shrink-0 flex-row flex-wrap items-center justify-between gap-4 md:w-auto md:flex-col md:items-end md:justify-between">
                 <div>
                   {hotel.tag && (
                     <span className="inline-flex rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-sm font-medium text-emerald-600 dark:border-emerald-800 dark:bg-emerald-950/70 dark:text-emerald-300">
@@ -169,14 +169,14 @@ export const HotelRecommendations = ({
                     size="icon"
                     isFavorite={isFavorite}
                     onClick={createFavoriteHandler(hotel.id)}
-                    className="h-12 w-12 rounded-xl border border-blue-100 md:h-12 md:w-12"
+                    className="h-12 w-12 gap-0 rounded-xl border border-blue-100 !p-0 md:h-12 md:w-12"
                   />
 
                   <Button
                     variant="secondary"
                     size="sm"
                     onClick={createBookHandler(hotel)}
-                    className="h-12 rounded-xl px-5 text-sm"
+                    className="h-12 rounded-xl px-5 text-base font-normal"
                   >
                     Book Now
                   </Button>

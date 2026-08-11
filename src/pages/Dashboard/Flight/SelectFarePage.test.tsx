@@ -99,6 +99,9 @@ describe('SelectFarePage Component', () => {
     expect(screen.getByText('Check baggage allowances before departure.')).toBeInTheDocument()
 
     expect(screen.getByText('$400')).toBeInTheDocument()
+    expect(
+      screen.getByRole('button', { name: /start new chat/i }),
+    ).toBeInTheDocument()
   })
 
   it('updates total amount when selecting Business fare', async () => {

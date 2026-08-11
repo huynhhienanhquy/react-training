@@ -52,7 +52,7 @@ describe('FareCards', () => {
     expect(screen.getAllByAltText('Vietnam Airlines')).toHaveLength(2);
   });
 
-  it('highlights the selected fare and its button', () => {
+  it('keeps fare cards visually consistent with the design', () => {
     const { container } = render(
       <FareCards
         fareOptions={fareOptions}
@@ -64,11 +64,11 @@ describe('FareCards', () => {
 
     const cards = container.querySelectorAll('.bg-surface');
     expect(cards[0]).toHaveClass('border-slate-100');
-    expect(cards[1]).toHaveClass('border-blue-500', 'ring-2');
+    expect(cards[1]).toHaveClass('border-slate-100');
 
     const buttons = screen.getAllByRole('button', { name: 'Select' });
     expect(buttons[0]).toHaveClass('bg-surface-section');
-    expect(buttons[1]).toHaveClass('from-primary', 'text-white');
+    expect(buttons[1]).toHaveClass('bg-surface-section');
   });
 
   it('calls onSelectFare with the clicked fare id', () => {
