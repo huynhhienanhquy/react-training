@@ -72,7 +72,7 @@ export const ChatPage = () => {
       </div>
 
       <DashboardPageLayout onNewChat={handleStartNewChat}>
-        <div className="mx-auto flex w-full max-w-5xl min-h-0 flex-1 flex-col items-center justify-between overflow-y-auto px-2 pb-[max(1rem,env(safe-area-inset-bottom))] pt-2 sm:px-4 md:px-8 md:pb-6">
+        <div className="mx-auto flex w-full max-w-5xl min-h-0 flex-1 flex-col items-center justify-between overflow-y-auto px-2 pb-safe-bottom pt-2 sm:px-4 md:px-8 md:pb-6">
           {currentMessages.length === 0 ? (
             <WelcomeState
               prompts={SUGGESTION_PROMPTS}

@@ -21,7 +21,7 @@ export const RecommendationWrapper = ({
       </h3>
 
       {/* Main Container */}
-      <div className="overflow-hidden rounded-[24px] border-[8px] border-white bg-white shadow-sm transition-colors duration-200 dark:border-slate-800 dark:bg-slate-800 dark:shadow-black/30">
+      <div className="overflow-hidden rounded-3xl border-8 border-white bg-white shadow-sm transition-colors duration-200 dark:border-slate-800 dark:bg-slate-800 dark:shadow-black/30">
         {children}
 
         {/* See All Button */}

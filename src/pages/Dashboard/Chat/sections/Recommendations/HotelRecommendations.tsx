@@ -115,9 +115,9 @@ export const HotelRecommendations = ({
           return (
             <div
               key={hotel.id}
-              className="mb-2 grid grid-cols-1 gap-4 rounded-2xl bg-slate-50 p-4 transition-colors duration-200 last:mb-0 md:grid-cols-[220px_minmax(0,1fr)_auto] md:items-stretch dark:bg-slate-700/70"
+              className="mb-2 grid grid-cols-1 gap-4 rounded-2xl bg-slate-50 p-4 transition-colors duration-200 last:mb-0 md:grid-cols-hotel-card md:items-stretch dark:bg-slate-700/70"
             >
-              <div className="h-52 w-full overflow-hidden rounded-xl md:h-48 md:w-[220px]">
+              <div className="h-52 w-full overflow-hidden rounded-xl md:h-48 md:w-55">
                 <img
                   src={hotel.imageUrl || defaultHotelImage}
                   alt={hotel.name}
@@ -143,7 +143,7 @@ export const HotelRecommendations = ({
                 </div>
               </div>
 
-              <div className="flex w-full shrink-0 flex-row flex-wrap items-center justify-between gap-4 md:w-auto md:min-w-[190px] md:flex-col md:items-end md:justify-between">
+              <div className="flex w-full shrink-0 flex-row flex-wrap items-center justify-between gap-4 md:w-auto md:min-w-47.5 md:flex-col md:items-end md:justify-between">
                 <div>
                   {hotel.tag && (
                     <span className="inline-flex rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-sm font-medium text-emerald-600 dark:border-emerald-800 dark:bg-emerald-950/70 dark:text-emerald-300">

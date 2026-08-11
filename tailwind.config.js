@@ -10,6 +10,13 @@ export default {
   ],
 
   theme: {
+    screens: {
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+      desktop: '1440px',
+    },
     fontFamily: {
       sans: [
         '"Helvetica Now Display"',
@@ -80,6 +87,14 @@ export default {
       },
 
       spacing: {
+        5.5: '22px',
+        6.5: '26px',
+        9.5: '38px',
+        13: '52px',
+        13.5: '54px',
+        14.5: '58px',
+        47.5: '190px',
+        55: '220px',
         17: '4.25rem',
         18: '4.5rem',
         22: '5.5rem',
@@ -99,10 +114,28 @@ export default {
         460: '460px',
         480: '480px',
         540: '540px',
+        684: '684px',
+        976: '976px',
         580: '580px',
         680: '680px',
         980: '980px',
         1440: '1440px',
+        'safe-bottom': 'max(1rem, env(safe-area-inset-bottom))',
+      },
+
+      maxWidth: {
+        drawer: '85vw',
+        'auth-copy': '650px',
+      },
+
+      inset: {
+        'search-icon': 'calc(50% + 14px)',
+        'dropdown': 'calc(100% + 6px)',
+      },
+
+      gridTemplateColumns: {
+        'hotel-card': '220px minmax(0, 1fr) auto',
+        'flight-route': '190px 1fr',
       },
 
       borderWidth: {
@@ -124,6 +157,7 @@ export default {
         'sm2': ['15px', { lineHeight: '22px' }],
         'display-sm': ['38px', { lineHeight: '46px' }],
         'display-md': ['44px', { lineHeight: '52px' }],
+        'auth-title': ['40px', { lineHeight: '48px' }],
       },
 
       borderRadius: {

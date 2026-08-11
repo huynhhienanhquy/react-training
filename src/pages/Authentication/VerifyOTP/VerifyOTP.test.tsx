@@ -48,7 +48,7 @@ describe("VerifyOTP", () => {
     render(<VerifyOTP />);
 
     expect(screen.getByRole("heading", { name: "Enter OTP" })).toBeInTheDocument();
-    expect(screen.getByText("Verify OTP")).toBeInTheDocument();
+    expect(screen.getByText("Send OTP")).toBeInTheDocument();
     expect(screen.getByText(/Resend in 00:29/)).toBeInTheDocument();
     vi.useRealTimers();
   });
@@ -135,7 +135,7 @@ describe("VerifyOTP", () => {
     vi.useFakeTimers();
     render(<VerifyOTP />);
 
-    fireEvent.submit(screen.getByText("Verify OTP").closest("form")!);
+    fireEvent.submit(screen.getByText("Send OTP").closest("form")!);
 
     expect(mockStartLoading).toHaveBeenCalled();
 

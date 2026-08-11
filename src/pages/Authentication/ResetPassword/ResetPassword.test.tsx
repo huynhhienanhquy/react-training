@@ -92,7 +92,7 @@ describe("ResetPassword", () => {
     await user.type(screen.getByLabelText("New Password"), "pass1");
     await user.type(screen.getByLabelText("Confirm New Password"), "pass2");
 
-    await user.click(screen.getByRole("button", { name: "Reset Password" }));
+    await user.click(screen.getByRole("button", { name: "Save and Continue to Sign In" }));
 
     expect(mockSetError).toHaveBeenCalledWith("Passwords do not match. Please check again.");
   });
@@ -100,7 +100,7 @@ describe("ResetPassword", () => {
   it("submits and navigates on success", async () => {
     render(<ResetPassword />);
 
-    fireEvent.submit(screen.getByRole("button", { name: "Reset Password" }).closest("form")!);
+    fireEvent.submit(screen.getByRole("button", { name: "Save and Continue to Sign In" }).closest("form")!);
 
     expect(mockStartLoading).toHaveBeenCalled();
 
