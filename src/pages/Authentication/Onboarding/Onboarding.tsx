@@ -41,7 +41,7 @@ export const Onboarding = () => {
           questionText: 'Already have an account?',
           actionText: 'Sign In',
           onActionClick: handleSignIn,
-          className: 'mt-[22px] text-base',
+          className: 'mt-5.5 text-base',
         }}
       >
         <div className="mt-10">
@@ -95,7 +95,7 @@ export const Onboarding = () => {
                   <div
                     id="country-options"
                     role="listbox"
-                    className="absolute inset-x-0 top-[calc(100%+6px)] z-20 max-h-24 overflow-y-auto rounded-xl border border-slate-200 bg-white p-1 text-sm shadow-lg"
+                    className="absolute inset-x-0 top-dropdown z-20 max-h-24 overflow-y-auto rounded-xl border border-slate-200 bg-white p-1 text-sm shadow-lg"
                   >
                     <button
                       type="button"
@@ -125,7 +125,7 @@ export const Onboarding = () => {
                 type="submit"
                 isLoading={isLoading}
                 showArrow
-                className="h-[52px] rounded-xl py-0 text-base font-normal"
+                className="h-13 rounded-xl py-0 text-base font-normal"
               >
                 Start Planning Trips
               </Button>

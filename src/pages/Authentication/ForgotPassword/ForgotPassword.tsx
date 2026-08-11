@@ -33,7 +33,7 @@ export const ForgotPassword = () => {
         questionText: "Don't have an account?",
         actionText: 'Sign Up',
         onActionClick: handleSignUp,
-        className: 'mt-[22px] text-base',
+        className: 'mt-5.5 text-base',
       }}
     >
 
@@ -50,7 +50,7 @@ export const ForgotPassword = () => {
             required
           />
           <Button
-            className="mt-14 h-[52px] rounded-xl py-0 text-base font-normal"
+            className="mt-14 h-13 rounded-xl py-0 text-base font-normal"
             type="submit"
             isLoading={isLoading}
             showArrow

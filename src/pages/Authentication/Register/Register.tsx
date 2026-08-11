@@ -34,7 +34,7 @@ export const Register = () => {
         questionText: 'Already have an account?',
         actionText: 'Sign In',
         onActionClick: handleSignIn,
-        className: 'mt-[22px] text-base',
+        className: 'mt-5.5 text-base',
       }}
     >
 
@@ -72,7 +72,7 @@ export const Register = () => {
           <input
             type="checkbox"
             id="terms"
-            className="h-[26px] w-[26px] shrink-0 cursor-pointer rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+            className="h-6.5 w-6.5 shrink-0 cursor-pointer rounded border-gray-300 text-blue-600 focus:ring-blue-500"
             required
           />
           <label htmlFor="terms" className="cursor-pointer select-none text-sm leading-6 text-gray-500 sm:text-base">
@@ -87,7 +87,7 @@ export const Register = () => {
             variant="social"
             size="md"
             socialIcon="google"
-            className="h-[58px] rounded-2xl px-4 text-lg font-bold"
+            className="h-14.5 rounded-2xl px-4 text-lg font-bold"
             onClick={handleSocialLogin}
           >
             Continue with Google
@@ -98,7 +98,7 @@ export const Register = () => {
             variant="social"
             size="md"
             socialIcon="apple"
-            className="h-[58px] rounded-2xl px-4 text-lg font-bold"
+            className="h-14.5 rounded-2xl px-4 text-lg font-bold"
             onClick={handleSocialLogin}
           >
             Continue with Apple
@@ -111,7 +111,7 @@ export const Register = () => {
             type="submit"
             isLoading={isLoading}
             showArrow
-            className="h-[52px] rounded-xl py-0 text-base font-normal"
+            className="h-13 rounded-xl py-0 text-base font-normal"
           >
             Create a Free Account
           </Button>

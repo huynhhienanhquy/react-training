@@ -46,7 +46,7 @@ export const Login = () => {
         questionText: "Don't have an account?",
         actionText: 'Sign Up',
         onActionClick: handleSignUp,
-        className: 'mt-[22px] text-base',
+        className: 'mt-5.5 text-base',
       }}
     >
 
@@ -96,7 +96,7 @@ export const Login = () => {
             variant="social"
             size="md"
             socialIcon="google"
-            className="h-[58px] rounded-2xl px-4 text-lg font-bold"
+            className="h-14.5 rounded-2xl px-4 text-lg font-bold"
             onClick={handleSocialLogin}
           >
             Continue with Google
@@ -107,7 +107,7 @@ export const Login = () => {
             variant="social"
             size="md"
             socialIcon="apple"
-            className="h-[58px] rounded-2xl px-4 text-lg font-bold"
+            className="h-14.5 rounded-2xl px-4 text-lg font-bold"
             onClick={handleSocialLogin}
           >
             Continue with Apple
@@ -119,7 +119,7 @@ export const Login = () => {
             type="submit"
             isLoading={isLoading}
             showArrow
-            className="h-[52px] rounded-xl py-0 text-base font-normal"
+            className="h-13 rounded-xl py-0 text-base font-normal"
           >
             Sign In
           </Button>

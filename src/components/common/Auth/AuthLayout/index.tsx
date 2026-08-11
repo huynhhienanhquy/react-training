@@ -27,8 +27,8 @@ export const AuthLayout = ({
   return (
     <div
       className={twMerge(
-        'relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-cover bg-center px-4 py-8 sm:px-6 lg:py-0 lg:pl-12 lg:pr-8 min-[1440px]:pl-0',
-        inset ? 'min-[1440px]:pr-6' : 'min-[1440px]:pr-0',
+        'relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-cover bg-center px-4 py-8 sm:px-6 lg:py-0 lg:pl-12 lg:pr-8 desktop:pl-0',
+        inset ? 'desktop:pr-6' : 'desktop:pr-0',
       )}
       style={{ backgroundImage: `url(${authBackground})` }}
     >
@@ -47,20 +47,20 @@ export const AuthLayout = ({
         {/* TEXT ON THE LEFT */}
         <div className={twMerge(
           'absolute hidden w-full space-y-5 p-4 text-white lg:block lg:w-45 xl:w-1/2',
-          inset ? 'bottom-16 left-4' : 'bottom-[68px] left-[38px]',
+          inset ? 'bottom-16 left-4' : 'bottom-17 left-9.5',
         )}>
-          <h1 className="max-w-[650px] text-3xl font-bold leading-1.2 tracking-tight xl:text-5xl xl:leading-[64px]">
+          <h1 className="max-w-auth-copy text-3xl font-bold leading-1.2 tracking-tight xl:text-5xl xl:leading-16">
             Discover Amazing Deals & Thrilling Adventures
           </h1>
 
-          <p className="max-w-[650px] text-sm font-normal leading-9 text-gray-100 lg:text-2xl">
+          <p className="max-w-auth-copy text-sm font-normal leading-9 text-gray-100 lg:text-2xl">
             Tripal is designed to ease trip and vacation planning. Explore amazing deals and offers
           </p>
         </div>
 
         {/* Outer Glassmorphic Border Card */}
         <div className={twMerge(
-          'flex w-full max-w-400 shrink-0 flex-col rounded-auth-sm bg-white/15 p-1.5 shadow-auth backdrop-blur-md sm:max-w-460 sm:rounded-auth sm:p-2 md:max-w-540 lg:ml-auto lg:h-[976px] lg:w-580 lg:max-w-none xl:w-[684px]',
+          'flex w-full max-w-400 shrink-0 flex-col rounded-auth-sm bg-white/15 p-1.5 shadow-auth backdrop-blur-md sm:max-w-460 sm:rounded-auth sm:p-2 md:max-w-540 lg:ml-auto lg:h-976 lg:w-580 lg:max-w-none xl:w-684',
           !inset && 'lg:-translate-y-3',
         )}>
 

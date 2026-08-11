@@ -43,7 +43,7 @@ const OtpDigitInput = memo(function OtpDigitInput({
       onChange={handleInputChange}
       onKeyDown={handleInputKeyDown}
       onPaste={onPaste}
-      className="h-[54px] w-[54px] rounded-xl border border-gray-200 bg-gray-50/50 text-center font-sans text-lg font-bold text-slate-800 shadow-xs transition focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/10 md:text-xl"
+      className="h-13.5 w-13.5 rounded-xl border border-gray-200 bg-gray-50/50 text-center font-sans text-lg font-bold text-slate-800 shadow-xs transition focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/10 md:text-xl"
     />
   );
 });
@@ -102,7 +102,7 @@ export const VerifyOTP = () => {
 
           {/* Verify Button */}
           <Button
-            className="mt-14 h-[52px] rounded-xl py-0 text-base font-normal"
+            className="mt-14 h-13 rounded-xl py-0 text-base font-normal"
             type="submit"
             isLoading={isLoading}
             showArrow

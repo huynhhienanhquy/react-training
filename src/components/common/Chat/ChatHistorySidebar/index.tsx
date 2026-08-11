@@ -49,7 +49,7 @@ export const ChatHistorySidebar = memo(function ChatHistorySidebar({
         <div className="relative pt-7">
           <SearchIcon
             aria-label="Search"
-            className="absolute left-4 top-[calc(50%+14px)] -translate-y-1/2 w-4 h-4 pointer-events-none"
+            className="absolute left-4 top-search-icon -translate-y-1/2 w-4 h-4 pointer-events-none"
           />
 
           <input
