@@ -12,7 +12,7 @@ export const PriceDetailsSidebar = ({
 }: PriceDetailsSidebarProps) => {
   return (
     /* Sticky sidebar card for price summary */
-    <Card variant="surface" className="space-y-6 p-6 lg:sticky lg:top-24 lg:min-h-[379px] lg:p-8">
+    <Card variant="surface" className="space-y-6 p-6 lg:sticky lg:top-24 lg:min-h-379 lg:p-8">
       {/* Sidebar Header */}
       <h3 className="text-lg font-bold text-brand-dark md:text-xl lg:text-2xl">Price Details</h3>
 

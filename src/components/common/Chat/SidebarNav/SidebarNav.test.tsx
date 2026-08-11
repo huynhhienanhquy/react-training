@@ -199,7 +199,7 @@ describe("SidebarNav", () => {
     const mobileLogo = screen.getAllByAltText("Logo")[1];
     const mobileDrawer = mobileLogo.closest('aside');
 
-    expect(mobileDrawer).toHaveClass("w-64", "max-w-[85vw]");
+    expect(mobileDrawer).toHaveClass("w-64", "max-w-drawer");
     expect(screen.getByRole("button", { name: "Chats" })).toBeInTheDocument();
   });
 

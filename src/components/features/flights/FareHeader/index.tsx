@@ -10,7 +10,7 @@ export function FareHeader({
   priceUnit,
 }: FareHeaderProps) {
   return (
-    <Card variant="surface" className="flex items-start justify-between gap-3 p-4 sm:p-6 lg:min-h-[116px]">
+    <Card variant="surface" className="flex items-start justify-between gap-3 p-4 sm:p-6 lg:min-h-29">
       <div className="min-w-0">
         <h2 className="break-words text-lg font-bold text-brand-dark sm:text-xl md:text-2xl">
           {destination}

@@ -152,7 +152,7 @@ export function FlightRecommendations({
 
               <div className="mt-5 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
                 <div className="flex-1 space-y-5 text-xs sm:text-sm">
-                  <div className="grid grid-cols-1 gap-1 sm:grid-cols-[190px_1fr] sm:items-center sm:gap-4 min-[1440px]:grid-cols-[152px_1fr]">
+                  <div className="grid grid-cols-1 gap-1 sm:grid-cols-flight-route sm:items-center sm:gap-4 desktop:grid-cols-flight-route-desktop">
                     <span className="shrink-0 text-sm font-bold text-slate-950 sm:text-base">
                       {flight.outbound.time}
                     </span>
@@ -163,7 +163,7 @@ export function FlightRecommendations({
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-1 gap-1 sm:grid-cols-[190px_1fr] sm:items-center sm:gap-4 min-[1440px]:grid-cols-[152px_1fr]">
+                  <div className="grid grid-cols-1 gap-1 sm:grid-cols-flight-route sm:items-center sm:gap-4 desktop:grid-cols-flight-route-desktop">
                     <span className="shrink-0 text-sm font-bold text-slate-950 sm:text-base">
                       {flight.returnLeg.time}
                     </span>

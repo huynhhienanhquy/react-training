@@ -34,8 +34,7 @@ describe('WelcomeState', () => {
 
     expect(screen.getByRole('heading')).toHaveClass(
       'font-bold',
-      'lg:text-[40px]',
-      'lg:leading-[48px]',
+      'lg:text-display-title',
     );
     expect(screen.getByRole('button', { name: prompts[0] })).toHaveClass(
       'font-normal',

@@ -180,7 +180,7 @@ export const SidebarNav = memo(function SidebarNav({ activeNav, onNavChange, isM
       {isMobileOpen && (
         <div className="md:hidden fixed inset-0 z-40 flex">
           <div className="fixed inset-0 bg-black/40 backdrop-blur-xs" onClick={onMobileToggle} />
-          <aside className="relative z-50 flex h-full w-64 max-w-[85vw] flex-col justify-between bg-surface-sidebar p-4 shadow-2xl select-none animate-in slide-in-from-left duration-200">
+          <aside className="relative z-50 flex h-full w-64 max-w-drawer flex-col justify-between bg-surface-sidebar p-4 shadow-2xl select-none animate-in slide-in-from-left duration-200">
             <div className="w-full">
               <div className="mb-8 flex items-center gap-3 px-2">
                 <img

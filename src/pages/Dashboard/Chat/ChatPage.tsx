@@ -75,7 +75,7 @@ export const ChatPage = () => {
         messages={currentMessages}
         onNewChat={handleStartNewChat}
       >
-        <div className="mx-auto flex min-h-0 w-full max-w-5xl flex-1 flex-col items-center justify-between overflow-y-auto px-2 pb-[max(1rem,env(safe-area-inset-bottom))] pt-2 sm:px-4 md:px-8 md:pb-6 lg:max-w-none lg:px-[52px] lg:pb-14 lg:pt-8 min-[1440px]:relative min-[1440px]:pb-10">
+        <div className="mx-auto flex min-h-0 w-full max-w-5xl flex-1 flex-col items-center justify-between overflow-y-auto px-2 pb-safe-bottom pt-2 sm:px-4 md:px-8 md:pb-6 lg:max-w-none lg:px-13 lg:pb-14 lg:pt-8 desktop:relative desktop:pb-10">
           {currentMessages.length === 0 ? (
             <WelcomeState
               prompts={SUGGESTION_PROMPTS}

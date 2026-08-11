@@ -27,7 +27,7 @@ export type { FareOption };
             return (
               <div
                 key={fare.id}
-                className="flex min-h-[506px] flex-col justify-between space-y-6 rounded-3xl border border-slate-100 bg-surface p-4 shadow-sm transition-all sm:p-6 lg:p-8"
+                className="flex min-h-506 flex-col justify-between space-y-6 rounded-3xl border border-slate-100 bg-surface p-4 shadow-sm transition-all sm:p-6 lg:p-8"
               >
                 <div className="space-y-4">
                   {/* Airline Logo & Name */}
@@ -58,7 +58,7 @@ export type { FareOption };
                   <ul className="space-y-4 border-t border-slate-100 pt-4 text-xs text-slate-500 md:text-sm lg:text-base">
                     {fare.features.map((feature, idx) => (
                       <li key={idx} className="flex items-center gap-2">
-                        <CheckCircleIcon className="h-[18px] w-[18px] shrink-0 text-slate-400" />
+                        <CheckCircleIcon className="h-4.5 w-4.5 shrink-0 text-slate-400" />
                         <span>{feature}</span>
                       </li>
                     ))}
