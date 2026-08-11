@@ -48,6 +48,7 @@ export interface ChatMessageListProps {
 export interface SidebarNavProps {
   activeNav: string;
   onNavChange: (id: string) => void;
+  attachedToContent?: boolean;
   isMobileOpen?: boolean;
   onMobileToggle?: () => void;
 }

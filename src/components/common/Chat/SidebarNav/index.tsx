@@ -17,7 +17,7 @@ import { type SidebarNavProps } from "@/types/chat";
 import { Button } from '@/components/common/Button';
 import { useTheme } from '@/hooks/useTheme';
 
-export const SidebarNav = memo(function SidebarNav({ activeNav, onNavChange, isMobileOpen, onMobileToggle }: SidebarNavProps) {
+export const SidebarNav = memo(function SidebarNav({ activeNav, onNavChange, attachedToContent = false, isMobileOpen, onMobileToggle }: SidebarNavProps) {
   const navigate = useNavigate();
   const { logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
@@ -69,7 +69,9 @@ export const SidebarNav = memo(function SidebarNav({ activeNav, onNavChange, isM
       )}
 
       {/* Desktop sidebar */}
-      <aside className="hidden w-32 min-w-32 shrink-0 select-none flex-col items-center justify-between border-r-[18px] border-surface-section bg-surface-sidebar py-6 z-20 md:flex">
+      <aside className={`hidden w-32 min-w-32 shrink-0 select-none flex-col items-center justify-between bg-surface-sidebar py-6 z-20 md:flex ${
+        attachedToContent ? 'border-r-0' : 'border-r-[18px] border-surface-section'
+      }`}>
         <div className="flex w-full flex-col items-center gap-10 px-2">
           {/* App Logo */}
           <Button

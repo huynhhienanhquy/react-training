@@ -67,6 +67,7 @@ export const DashboardLayout = () => {
       <SidebarNav
         activeNav={getActiveNav(pathname)}
         onNavChange={handleNavChange}
+        attachedToContent={pathname === '/chats/fares' || pathname === '/chats/hotels'}
         isMobileOpen={isMobileOpen}
         onMobileToggle={onMobileToggle}
       />
