@@ -124,6 +124,7 @@ export default {
         'sm2': ['15px', { lineHeight: '22px' }],
         'display-sm': ['38px', { lineHeight: '46px' }],
         'display-md': ['44px', { lineHeight: '52px' }],
+        'auth-title': ['40px', { lineHeight: '48px' }],
       },
 
       borderRadius: {

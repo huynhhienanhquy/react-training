@@ -8,7 +8,7 @@ export const AuthHeader = memo(function AuthHeader({
 }: AuthHeaderProps) {
   return (
     <div className={`mb-2 mt-6 space-y-2 md:mb-4 ${className}`}>
-      <h2 className="text-2xl font-bold tracking-tight text-brand-dark-alt md:text-display-sm lg:text-[40px] lg:leading-[48px]">
+      <h2 className="text-2xl font-bold tracking-tight text-brand-dark-alt md:text-display-sm lg:text-auth-title">
         {title}
       </h2>
 
