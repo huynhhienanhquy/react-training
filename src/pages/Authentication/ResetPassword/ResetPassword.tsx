@@ -38,12 +38,11 @@ export const ResetPassword = () => {
       title="Reset Password"
       subtitle="You're all set. Please change your password now"
       isLoading={isLoading}
-      className="flex flex-col space-y-3.5"
+      className="flex flex-col"
       footer={{
         questionText: "Don't have an account?",
         actionText: 'Sign Up',
         onActionClick: handleSignUp,
-        className: 'translate-y-24',
       }}
     >
       {/* Reduce the overall spacing between blocks to space-y-3.5 */}
@@ -51,7 +50,7 @@ export const ResetPassword = () => {
         {/* 1. Header */}
 
         {/* 2. Form */}
-        <div className="mt-5  translate-y-8">
+        <div className="mt-8">
           <form
             className="space-y-3"
             onSubmit={handleResetPassword}
@@ -80,7 +79,7 @@ export const ResetPassword = () => {
             <ErrorMessage message={error} />
 
             <Button
-              className="translate-y-20"
+              className="mt-2"
               type="submit"
               isLoading={isLoading}
               showArrow
