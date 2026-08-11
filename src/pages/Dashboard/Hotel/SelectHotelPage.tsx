@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { SectionHeader } from '@/components/features/flights/SectionHeader';
@@ -12,9 +12,6 @@ import type {
 } from '@/types/hotel';
 
 import defaultHotelImage from '@/assets/images/travel-provider-logo.png';
-import bookingIcon from '@/assets/images/booking-logo.png';
-import expediaIcon from '@/assets/images/expedia-logo.png';
-
 import { useAsyncData } from '@/hooks/useAsyncData';
 import { useChatTitle } from '@/hooks/useChatTitle';
 import { DashboardPageLayout } from '@/components/layouts/DashboardLayout';
@@ -31,7 +28,6 @@ export const SelectHotelPage = ({
   const navigateBackToChat = useCallback(() => navigate('/chats'), [navigate]);
   const handleBackToChat = onBackToChat ?? navigateBackToChat;
   const handleStartNewChat = onStartNewChat ?? navigateBackToChat;
-  const [isComparePrice, setIsComparePrice] = useState(false);
 
   // Fetch hotel data
   const fetchHotels = useCallback(
@@ -92,9 +88,6 @@ export const SelectHotelPage = ({
   }, [onSelectHotel]);
 
   const handleRetry = useCallback(() => window.location.reload(), []);
-  const handleComparePriceChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setIsComparePrice(event.target.checked);
-  }, []);
   const createBookHotelHandler = useCallback(
     (hotel: HotelData) => (event: React.MouseEvent) => handleBookHotel(event, hotel),
     [handleBookHotel],
@@ -143,23 +136,10 @@ export const SelectHotelPage = ({
           <div className="max-w-6xl w-full mx-auto p-4 sm:p-6 md:p-8 space-y-6">
 
             {/* HEADER SECTION:*/}
-            <div className="flex flex-col items-start gap-3 pb-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+            <div className="pb-2">
               <div className="min-w-0">
                 <SectionHeader title="Other available accommodations" />
               </div>
-
-              {/* Compare Price Checkbox */}
-              <label className="flex shrink-0 cursor-pointer select-none items-center gap-2 self-end sm:self-auto">
-                <input
-                  type="checkbox"
-                  checked={isComparePrice}
-                  onChange={handleComparePriceChange}
-                  className="w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-blue-500 cursor-pointer"
-                />
-                <span className="text-xs sm:text-sm font-medium text-slate-600">
-                  Compare price
-                </span>
-              </label>
             </div>
 
             {/* LIST ACCOMMODATIONS */}
@@ -171,11 +151,11 @@ export const SelectHotelPage = ({
                 return (
                   <div
                     key={hotel.id }
-                    className="flex flex-col items-stretch gap-5 rounded-card border border-slate-100 bg-white p-4 shadow-sm transition-all duration-200 hover:shadow-md sm:p-5 md:flex-row md:gap-6 md:p-6"
+                    className="flex flex-col items-stretch gap-5 rounded-2xl bg-white p-4 shadow-sm transition-all duration-200 hover:shadow-md sm:p-5 md:min-h-[227px] md:flex-row md:gap-6 md:p-6"
                   >
                     {/* Information on the left */}
-                    <div className="flex flex-1 flex-col sm:flex-row items-center sm:items-start md:items-center gap-5 min-w-0">
-                      <div className="w-32 h-32 sm:w-36 sm:h-36 lg:w-40 lg:h-40 rounded-2xl overflow-hidden shrink-0 bg-slate-200 shadow-xs">
+                    <div className="flex min-w-0 flex-1 flex-col items-center gap-5 sm:flex-row sm:items-start md:gap-6">
+                      <div className="h-32 w-32 shrink-0 overflow-hidden rounded-lg bg-slate-200 shadow-xs sm:h-36 sm:w-36 lg:h-[179px] lg:w-[179px]">
                         <img
                           src={hotelImage}
                           alt={hotel.hotelName || 'Hotel'}
@@ -183,50 +163,21 @@ export const SelectHotelPage = ({
                         />
                       </div>
 
-                      <div className="flex-1 min-w-0 space-y-4 w-full">
+                      <div className="w-full min-w-0 flex-1 pt-1">
                         <div>
                           <h3 className="truncate text-xl font-bold tracking-tight text-ink-alt sm:text-2xl">
                             {hotel.hotelName || 'Five Star Hotel, Lagos'}
                           </h3>
-                          <p className="text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-wide mt-1">
+                          <p className="mt-2 text-xs font-medium uppercase text-slate-500 sm:text-base">
                             {hotel.location || hotel.address || 'IKEJA, LAGOS'}
                           </p>
                         </div>
-
-                        {/* Comparison table of source options */}
-                        {isComparePrice && (
-                        <div className="space-y-3 pt-1">
-                          <div className="flex items-center justify-between text-xs sm:text-sm pb-2 border-b border-slate-100">
-                            <div className="flex items-center gap-2.5">
-                              <img
-                                src={bookingIcon}
-                                alt="Booking.com"
-                                className="w-4 h-4 object-contain rounded-xs shrink-0"
-                              />
-                              <span className="font-semibold text-ink-alt">Booking.com</span>
-                            </div>
-                            <span className="font-bold text-ink-alt">${mainPrice}</span>
-                          </div>
-
-                          <div className="flex items-center justify-between text-xs sm:text-sm">
-                            <div className="flex items-center gap-2.5">
-                              <img
-                                src={expediaIcon}
-                                alt="Expedia"
-                                className="w-4 h-4 object-contain rounded-xs shrink-0"
-                              />
-                              <span className="font-semibold text-ink-alt">Expedia</span>
-                            </div>
-                            <span className="font-bold text-ink-alt">${mainPrice}</span>
-                          </div>
-                        </div>
-                        )}
                       </div>
                     </div>
 
                     {/* Price column & Booking button on the right */}
-                    <div className="flex shrink-0 flex-col items-stretch justify-between gap-3 border-t border-slate-200/60 pt-4 sm:flex-row sm:items-center md:min-w-160 md:flex-col md:items-end md:justify-center md:gap-4 md:border-l md:border-t-0 md:pl-8 md:pt-0">
-                      <span className="text-2xl font-bold tracking-tight text-ink-alt sm:text-3xl">
+                    <div className="flex shrink-0 flex-col items-end justify-end gap-4 border-t border-slate-200/60 pt-4 md:w-[126px] md:border-l md:border-t-0 md:pl-4 md:pt-0">
+                      <span className="text-[24px] font-bold tracking-tight text-ink-alt">
                         ${mainPrice}
                       </span>
 
@@ -234,7 +185,7 @@ export const SelectHotelPage = ({
                         type="button"
                         variant="light"
                         size="none"
-                        className="w-full rounded-2xl bg-primary-soft px-6 py-3 text-xs text-primary-strong sm:w-auto sm:text-sm"
+                        className="h-12 w-[110px] rounded-xl bg-primary-soft px-4 text-[16px] font-medium text-primary-strong"
                         onClick={createBookHotelHandler(hotel)}
                       >
                         Book Hotel

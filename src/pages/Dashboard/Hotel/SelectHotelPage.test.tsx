@@ -92,11 +92,9 @@ describe('SelectHotelPage Component', () => {
     expect(screen.getByText('Victoria Island, Lagos')).toBeInTheDocument()
     expect(screen.getByText('Ikeja, Lagos')).toBeInTheDocument()
 
-    fireEvent.click(screen.getByRole('checkbox', { name: /compare price/i }))
-
-    // Check pricing providers after enabling comparison
-    expect(screen.getAllByText('Booking.com').length).toBeGreaterThan(0)
-    expect(screen.getAllByText('Expedia').length).toBeGreaterThan(0)
+    expect(screen.queryByRole('checkbox', { name: /compare price/i })).not.toBeInTheDocument()
+    expect(screen.queryByText('Booking.com')).not.toBeInTheDocument()
+    expect(screen.queryByText('Expedia')).not.toBeInTheDocument()
   })
 
   it('prioritizes the hotel selected in the current chat at the top of the list', async () => {
@@ -141,7 +139,7 @@ describe('SelectHotelPage Component', () => {
     expect(localStorage.getItem('selectedHotel')).toBeNull()
   })
 
-  it('toggles compare price checkbox', async () => {
+  it('renders the simplified hotel card without price providers', async () => {
     ;(getHotels as ReturnType<typeof vi.fn>).mockResolvedValue(mockHotelsData)
 
     render(<SelectHotelPage />)
@@ -150,11 +148,9 @@ describe('SelectHotelPage Component', () => {
       expect(screen.getByText('Grand Hyatt Lagos')).toBeInTheDocument()
     })
 
-    const compareCheckbox = screen.getByRole('checkbox', { name: /compare price/i }) as HTMLInputElement
-    expect(compareCheckbox.checked).toBe(false)
-
-    fireEvent.click(compareCheckbox)
-    expect(compareCheckbox.checked).toBe(true)
+    expect(screen.queryByRole('checkbox', { name: /compare price/i })).not.toBeInTheDocument()
+    expect(screen.queryByText('Booking.com')).not.toBeInTheDocument()
+    expect(screen.queryByText('Expedia')).not.toBeInTheDocument()
   })
 
   it('renders error state when API call fails', async () => {

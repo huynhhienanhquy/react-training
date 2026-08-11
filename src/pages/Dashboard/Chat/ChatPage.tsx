@@ -61,7 +61,7 @@ export const ChatPage = () => {
 
   return (
     <>
-      <div className="hidden lg:block lg:mr-1.5">
+      <div className="hidden lg:block">
         <ChatHistorySidebar
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}

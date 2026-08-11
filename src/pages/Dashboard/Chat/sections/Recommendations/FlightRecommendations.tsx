@@ -135,6 +135,7 @@ export function FlightRecommendations({
                     variant="favorite"
                     size="icon"
                     isFavorite={isFavorite}
+                    favoriteIconSize={20}
                     onClick={createFavoriteHandler(flight.id)}
                     className="h-12 w-12 rounded-xl border border-blue-100 md:h-12 md:w-12"
                   />

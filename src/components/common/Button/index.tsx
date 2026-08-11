@@ -29,6 +29,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   socialIcon?: SocialIcon;
   isLoading?: boolean;
   isFavorite?: boolean;
+  favoriteIconSize?: number;
   children?: ReactNode;
 }
 
@@ -80,6 +81,7 @@ export function Button({
   socialIcon,
   isLoading = false,
   isFavorite = false,
+  favoriteIconSize = 16,
   className = '',
   disabled,
   children,
@@ -160,8 +162,8 @@ export function Button({
           <span className="flex shrink-0 items-center justify-center leading-none">{leftIcon}</span>
         ) : (
           <HeartIcon
-            width={16}
-            height={16}
+            width={favoriteIconSize}
+            height={favoriteIconSize}
             className={`text-primary transition-all duration-200 ${
               isFavorite
                 ? 'scale-110 text-white'

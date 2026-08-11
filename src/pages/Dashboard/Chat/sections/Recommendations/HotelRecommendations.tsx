@@ -168,8 +168,9 @@ export const HotelRecommendations = ({
                     variant="favorite"
                     size="icon"
                     isFavorite={isFavorite}
+                    favoriteIconSize={20}
                     onClick={createFavoriteHandler(hotel.id)}
-                    className="h-12 w-hotel-action gap-0 rounded-xl border border-hotel-action-border !p-0"
+                    className="h-12 w-12 gap-0 rounded-xl border border-hotel-action-border !p-0 md:h-12 md:w-12"
                   />
 
                   <Button
