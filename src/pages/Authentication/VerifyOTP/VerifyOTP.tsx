@@ -43,7 +43,7 @@ const OtpDigitInput = memo(function OtpDigitInput({
       onChange={handleInputChange}
       onKeyDown={handleInputKeyDown}
       onPaste={onPaste}
-      className="w-10 md:w-12 h-12 md:h-14 text-center text-lg md:text-xl font-bold rounded-xl border border-gray-200 bg-gray-50/50 text-slate-800 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 focus:bg-white transition shadow-xs font-sans"
+      className="h-[54px] w-[54px] rounded-xl border border-gray-200 bg-gray-50/50 text-center font-sans text-lg font-bold text-slate-800 shadow-xs transition focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/10 md:text-xl"
     />
   );
 });
@@ -74,12 +74,12 @@ export const VerifyOTP = () => {
     >
 
         {/* 2. Form */}
-        <form className="mt-8 space-y-5" onSubmit={handleVerify}>
+        <form className="mt-10" onSubmit={handleVerify}>
           {/* Label text "Enter OTP" directly above the input fields */}
-          <div className="text-sm font-medium text-slate-800  ">Enter OTP</div>
+          <div className="text-base font-medium text-brand-dark-alt">Enter OTP</div>
 
           {/* OTP Input Fields */}
-          <div className="flex items-center justify-center gap-1 md:gap-2 py-1">
+          <div className="mt-4 flex items-center justify-start gap-4">
             {otp.map((data, index) => (
               <React.Fragment key={`otp-${index}`}>
                 <OtpDigitInput
@@ -92,7 +92,7 @@ export const VerifyOTP = () => {
                 />
                 {/* Visual dash separator between pairs of input boxes (after index 2) */}
                 {index === 2 && (
-                  <span className="text-gray-300 font-normal mx-1 select-none">
+                  <span className="select-none text-2xl font-normal text-gray-300">
                     —
                   </span>
                 )}
@@ -102,17 +102,17 @@ export const VerifyOTP = () => {
 
           {/* Verify Button */}
           <Button
-            className="mt-2"
+            className="mt-14 h-[52px] rounded-xl py-0 text-base font-normal"
             type="submit"
             isLoading={isLoading}
             showArrow
           >
-            Verify OTP
+            Send OTP
           </Button>
         </form>
 
         {/* 3. Resend OTP Link */}
-        <div className="mt-6 text-center text-sm text-gray-400">
+        <div className="mt-6 text-center text-base text-gray-500">
           Didn't receive OTP?{" "}
           {counter > 0 ? (
             <span className="text-blue-700 font-bold ml-1">

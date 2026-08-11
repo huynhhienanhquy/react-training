@@ -7,12 +7,12 @@ export const AuthHeader = memo(function AuthHeader({
   className = '',
 }: AuthHeaderProps) {
   return (
-    <div className={`space-y-2 mb-2 md:mb-4 mt-6 ${className}`}>
-      <h2 className="text-2xl md:text-display-sm font-bold text-brand-dark-alt tracking-tight">
+    <div className={`mb-2 mt-6 space-y-2 md:mb-4 ${className}`}>
+      <h2 className="text-2xl font-bold tracking-tight text-brand-dark-alt md:text-display-sm lg:text-[40px] lg:leading-[48px]">
         {title}
       </h2>
 
-      <p className="text-sm md:text-sm2 text-gray-400 font-normal">
+      <p className="text-sm font-normal text-gray-500 md:text-sm2 lg:text-lg lg:leading-6">
         {subtitle}
       </p>
     </div>

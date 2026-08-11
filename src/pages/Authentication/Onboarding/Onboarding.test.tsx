@@ -76,6 +76,20 @@ describe("Onboarding", () => {
     expect(nameInput).toHaveValue("John Doe");
   });
 
+  it("opens the compact country menu and selects a country", async () => {
+    const user = userEvent.setup();
+    render(<Onboarding />);
+
+    const countryMenu = screen.getByRole("combobox", { name: "Country" });
+    await user.click(countryMenu);
+
+    expect(screen.getByRole("listbox")).toHaveClass("max-h-24", "text-sm");
+    await user.click(screen.getByRole("option", { name: "Vietnam" }));
+
+    expect(countryMenu).toHaveTextContent("Vietnam");
+    expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
+  });
+
   it("submits form and navigates to dashboard", async () => {
     render(<Onboarding />);
 

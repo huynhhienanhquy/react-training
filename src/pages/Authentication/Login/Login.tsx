@@ -46,11 +46,12 @@ export const Login = () => {
         questionText: "Don't have an account?",
         actionText: 'Sign Up',
         onActionClick: handleSignUp,
+        className: 'mt-[22px] text-base',
       }}
     >
 
       <form
-        className="mt-10 space-y-6 font-helvetica"
+        className="mt-10 font-helvetica"
         onSubmit={handleLogin}
       >
         <InputField
@@ -59,10 +60,12 @@ export const Login = () => {
           placeholder="Enter your email"
           value={email}
           onChange={handleEmailChange}
+          className="h-14 rounded-2xl px-4 py-0 text-base"
+          wrapperClassName="mb-0 space-y-4"
           required
         />
 
-        <div className="space-y-1">
+        <div className="mt-8">
           <InputField
             label="Password"
             type="password"
@@ -70,13 +73,15 @@ export const Login = () => {
             autoComplete="current-password"
             value={password}
             onChange={handlePasswordChange}
+            className="h-14 rounded-2xl px-4 py-0 text-base"
+            wrapperClassName="mb-0 space-y-4"
             required
           />
 
-          <div className="text-right">
+          <div className="mt-8 text-right">
             <span
               onClick={handleForgotPassword}
-              className="text-sm font-bold text-brand-dark-alt hover:text-blue-600 cursor-pointer transition"
+              className="cursor-pointer text-base font-medium text-brand-dark-alt transition hover:text-blue-600"
             >
               Forgot Password?
             </span>
@@ -85,12 +90,13 @@ export const Login = () => {
 
         <ErrorMessage message={error} />
 
-        <div className="mt-8 grid grid-cols-1 gap-3 pt-2 sm:grid-cols-2">
+        <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2">
           <Button
             type="button"
             variant="social"
             size="md"
             socialIcon="google"
+            className="h-[58px] rounded-2xl px-4 text-lg font-bold"
             onClick={handleSocialLogin}
           >
             Continue with Google
@@ -101,17 +107,19 @@ export const Login = () => {
             variant="social"
             size="md"
             socialIcon="apple"
+            className="h-[58px] rounded-2xl px-4 text-lg font-bold"
             onClick={handleSocialLogin}
           >
             Continue with Apple
           </Button>
         </div>
 
-        <div className="mt-8 flex flex-col gap-0.5">
+        <div className="mt-14 flex flex-col gap-0.5">
           <Button
             type="submit"
             isLoading={isLoading}
             showArrow
+            className="h-[52px] rounded-xl py-0 text-base font-normal"
           >
             Sign In
           </Button>

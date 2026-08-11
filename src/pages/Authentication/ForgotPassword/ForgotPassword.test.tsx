@@ -94,7 +94,7 @@ describe("ForgotPassword", () => {
 
     expect(
       screen.getByRole("button", {
-        name: /send otp code/i,
+        name: /send otp/i,
       })
     ).toBeInTheDocument();
   });
@@ -115,7 +115,7 @@ describe("ForgotPassword", () => {
     fireEvent.submit(
       screen
         .getByRole("button", {
-          name: /send otp code/i,
+          name: /send otp/i,
         })
         .closest("form")!
     );
