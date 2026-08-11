@@ -89,7 +89,14 @@ describe("ChatMessageList", () => {
       />
     );
 
-    expect(screen.getByText("Hello")).toBeInTheDocument();
+    const userMessage = screen.getByText("Hello");
+
+    expect(userMessage).toBeInTheDocument();
+    expect(userMessage).toHaveClass("px-3.5", "py-3.5", "ml-auto");
+    expect(userMessage.closest("div.overflow-y-auto")).toHaveClass(
+      "max-w-4xl",
+      "lg:max-w-none",
+    );
   });
 
   it("renders AI message", () => {

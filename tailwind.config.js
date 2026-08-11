@@ -87,6 +87,7 @@ export default {
       },
 
       spacing: {
+        4.5: '18px',
         5.5: '22px',
         6.5: '26px',
         9.5: '38px',
@@ -98,21 +99,30 @@ export default {
         17: '4.25rem',
         18: '4.5rem',
         22: '5.5rem',
+        26: '104px',
+        27: '27px',
+        29: '116px',
 
         // Custom spacing
         80: '80px',
         100: '100px',
         120: '120px',
         125: '125px',
+        127: '127px',
         150: '150px',
         160: '160px',
         200: '200px',
+        202: '202px',
+        204: '204px',
         280: '280px',
+        295: '295px',
         300: '300px',
         370: '370px',
+        379: '379px',
         400: '400px',
         460: '460px',
         480: '480px',
+        506: '506px',
         540: '540px',
         684: '684px',
         976: '976px',
@@ -121,6 +131,10 @@ export default {
         980: '980px',
         1440: '1440px',
         'safe-bottom': 'max(1rem, env(safe-area-inset-bottom))',
+      },
+
+      backgroundImage: {
+        'chat-thinking': 'conic-gradient(from 90deg at 50% 50%, #6ee7f9, #818cf8, #c084fc, #fb7185, #facc15, #6ee7b7, #6ee7f9)',
       },
 
       maxWidth: {
@@ -134,8 +148,10 @@ export default {
       },
 
       gridTemplateColumns: {
-        'hotel-card': '220px minmax(0, 1fr) auto',
+        'hotel-card': '171px minmax(0, 1fr) 174px',
+        'fare-page': 'minmax(0, 2.05fr) minmax(320px, 1fr)',
         'flight-route': '190px 1fr',
+        'flight-route-desktop': '152px 1fr',
       },
 
       borderWidth: {
@@ -157,6 +173,7 @@ export default {
         'sm2': ['15px', { lineHeight: '22px' }],
         'display-sm': ['38px', { lineHeight: '46px' }],
         'display-md': ['44px', { lineHeight: '52px' }],
+        'display-title': ['40px', { lineHeight: '48px' }],
         'auth-title': ['40px', { lineHeight: '48px' }],
       },
 
@@ -170,6 +187,7 @@ export default {
         'auth-sm': '24px',
         'auth-inner': '26px',
         'auth-inner-sm': '18px',
+        inherit: 'inherit',
       },
 
       lineHeight: {

@@ -6,9 +6,9 @@ interface PriceDisplayProps {
 }
 
 const sizeClasses = {
-  sm: 'text-xl md:text-2xl font-black',
+  sm: 'text-xl md:text-2xl font-bold',
   md: 'text-2xl md:text-3xl font-bold',
-  lg: 'text-2xl md:text-3xl font-black',
+  lg: 'text-2xl md:text-3xl font-bold',
 };
 
 export const PriceDisplay = ({ amount, period, size = 'sm', className = '' }: PriceDisplayProps) => {

@@ -89,11 +89,11 @@ export function PlacesCardWidget({
           </div>
 
           <div>
-            <h4 className="text-sm md:text-base font-bold text-slate-900">
+            <h4 className="text-2xl font-bold text-slate-900">
               Featured Places
             </h4>
 
-            <p className="text-xs text-slate-500 font-medium">
+            <p className="text-base text-slate-500 font-medium">
               {placesList.length > 0
                 ? `${placesList.length} recommended locations nearby`
                 : 'Recommended locations nearby'}
@@ -101,7 +101,7 @@ export function PlacesCardWidget({
           </div>
         </div>
 
-        <span className="px-3 py-1 bg-emerald-100/70 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-300 text-xxs font-bold rounded-full">
+        <span className="px-3 py-1 bg-emerald-100/70 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-300 text-base font-bold rounded-full">
           Featured
         </span>
       </div>
@@ -110,20 +110,20 @@ export function PlacesCardWidget({
         <div className="py-8 flex flex-col items-center justify-center gap-2">
           <div className="w-6 h-6 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
 
-          <p className="text-xs text-slate-400 font-medium">
+          <p className="text-base text-slate-400 font-medium">
             Loading list of locations...
           </p>
         </div>
       )}
 
       {error && !loading && (
-        <div className="p-3 bg-red-50 text-red-600 rounded-xl border border-red-100 text-xs text-center font-medium my-1">
+        <div className="p-3 bg-red-50 text-red-600 rounded-xl border border-red-100 text-base text-center font-medium my-1">
           {error}
         </div>
       )}
 
       {!loading && !error && placesList.length === 0 && (
-        <div className="p-6 text-center text-xs text-slate-400 font-medium">
+        <div className="p-6 text-center text-base text-slate-400 font-medium">
           No location has been chosen yet.
         </div>
       )}
@@ -156,7 +156,7 @@ export function PlacesCardWidget({
                 <div className="flex-1 min-w-0 space-y-1">
                   <div className="flex items-center justify-between gap-2">
                     <span
-                      className={`inline-flex items-center gap-1 text-2xs font-bold px-2 py-0.5 rounded-full ${badge.color}`}
+                      className={`inline-flex items-center gap-1 text-base font-bold px-2 py-0.5 rounded-full ${badge.color}`}
                     >
                       <CategoryIcon className="w-3 h-3" />
                       {badge.label}
@@ -166,18 +166,18 @@ export function PlacesCardWidget({
                       <div className="flex items-center gap-1 shrink-0">
                         <StarIcon className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
 
-                        <span className="text-xs font-bold text-slate-800">
+                        <span className="text-base font-bold text-slate-800">
                           {place.rating}
                         </span>
                       </div>
                     )}
                   </div>
 
-                  <h5 className="font-bold text-xs md:text-sm text-slate-900 truncate">
+                  <h5 className="font-bold text-base text-slate-900 truncate">
                     {place.name}
                   </h5>
 
-                  <p className="text-xs text-slate-500 truncate flex items-center gap-1 font-medium">
+                  <p className="text-base text-slate-500 truncate flex items-center gap-1 font-medium">
                     <MapPinIcon className="w-3.5 h-3.5 text-slate-400 shrink-0" />
 
                     <span>{addressText}</span>
@@ -193,7 +193,7 @@ export function PlacesCardWidget({
         <Button
           variant="dark"
           size="md"
-          className="w-full rounded-2xl dark:bg-slate-950 dark:hover:bg-blue-600"
+          className="w-full rounded-2xl text-base dark:bg-slate-950 dark:hover:bg-blue-600"
           rightIcon={
             <Icon name="arrow-right" className="w-4 h-4" />
           }
