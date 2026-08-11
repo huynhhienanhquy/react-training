@@ -33,16 +33,16 @@ describe('PriceDisplay', () => {
     expect(screen.getByText('$250')).toHaveClass(
       'text-xl',
       'md:text-2xl',
-      'font-black',
+      'font-bold',
       'text-slate-900',
       'tracking-tight',
     );
   });
 
   it.each([
-    ['sm', ['text-xl', 'md:text-2xl', 'font-black']],
+    ['sm', ['text-xl', 'md:text-2xl', 'font-bold']],
     ['md', ['text-2xl', 'md:text-3xl', 'font-bold']],
-    ['lg', ['text-2xl', 'md:text-3xl', 'font-black']],
+    ['lg', ['text-2xl', 'md:text-3xl', 'font-bold']],
   ] as const)('applies %s size styles', (size, expectedClasses) => {
     render(<PriceDisplay amount="$250" size={size} />);
 

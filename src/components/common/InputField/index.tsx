@@ -1,10 +1,12 @@
 import React, { memo, useCallback, useId, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 import { Button } from '@/components/common/Button';
 import { Icon } from '@/components/common/Icons/Icon';
 
 type InputFieldProps = {
   label: string;
   error?: string;
+  wrapperClassName?: string;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 export const InputField = memo(function InputField({
@@ -13,6 +15,7 @@ export const InputField = memo(function InputField({
   className = '',
   id,
   error,
+  wrapperClassName,
   ...props
 }: InputFieldProps) {
   const generatedId = useId();
@@ -34,8 +37,8 @@ export const InputField = memo(function InputField({
   }, []);
 
   return (
-    <div className="relative mb-10 flex flex-col space-y-2">
-      <label htmlFor={inputId} className="text-sm2 font-bold text-brand-dark-alt">
+    <div className={twMerge('relative mb-10 flex flex-col space-y-2', wrapperClassName)}>
+      <label htmlFor={inputId} className="text-sm2 font-medium text-brand-dark-alt lg:text-base">
         {label}
       </label>
 

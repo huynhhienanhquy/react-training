@@ -33,27 +33,29 @@ export const ForgotPassword = () => {
         questionText: "Don't have an account?",
         actionText: 'Sign Up',
         onActionClick: handleSignUp,
-        className: 'space-y-3',
+        className: 'mt-5.5 text-base',
       }}
     >
 
         {/* 2. Form */}
-        <form className="mt-8 space-y-4" onSubmit={handleSendOTP} autoComplete="off">
+        <form className="mt-10" onSubmit={handleSendOTP} autoComplete="off">
           <InputField
             label="Email address"
             type="email"
             placeholder="Enter your email"
             value={email}
             onChange={handleEmailChange}
+            className="h-14 rounded-2xl px-4 py-0 text-base"
+            wrapperClassName="mb-0 space-y-4"
             required
           />
           <Button
-            className="mt-2"
+            className="mt-14 h-13 rounded-xl py-0 text-base font-normal"
             type="submit"
             isLoading={isLoading}
             showArrow
           >
-            Send OTP Code
+            Send OTP
           </Button>
 
         </form>
