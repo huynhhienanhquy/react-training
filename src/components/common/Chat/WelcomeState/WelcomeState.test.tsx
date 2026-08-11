@@ -24,6 +24,27 @@ describe('WelcomeState', () => {
   });
 
 
+  it('matches the design typography for the title and prompt text', () => {
+    render(
+      <WelcomeState
+        prompts={prompts}
+        onSelectPrompt={vi.fn()}
+      />
+    );
+
+    expect(screen.getByRole('heading')).toHaveClass(
+      'font-bold',
+      'lg:text-display-title',
+    );
+    expect(screen.getByRole('button', { name: prompts[0] })).toHaveClass(
+      'font-normal',
+      'text-slate-500',
+      'lg:text-base',
+      'lg:leading-6',
+    );
+  });
+
+
   it('renders all prompt buttons', () => {
     render(
       <WelcomeState

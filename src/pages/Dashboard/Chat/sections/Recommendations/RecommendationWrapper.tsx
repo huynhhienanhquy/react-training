@@ -16,7 +16,7 @@ export const RecommendationWrapper = ({
   return (
     <section className="my-5 w-full space-y-5">
       {/* Title */}
-      <h3 className="pl-1 text-xl font-bold tracking-tight text-slate-950 md:text-2xl">
+      <h3 className="pl-1 text-xl font-bold tracking-tight text-slate-950 md:text-2xl lg:pl-0">
         {title}
       </h3>
 
@@ -30,7 +30,7 @@ export const RecommendationWrapper = ({
             type="button"
             variant="secondary"
             size="none"
-            className="mt-2 w-full rounded-none bg-indigo-50 py-4 text-sm font-semibold text-blue-600 hover:bg-indigo-100 hover:text-blue-700 dark:bg-slate-700"
+            className="mt-2 h-14 w-full rounded-none bg-indigo-50 py-4 text-base font-normal text-blue-600 hover:bg-indigo-100 hover:text-blue-700 dark:bg-slate-700"
             onClick={onSeeAll}
           >
             {seeAllText}

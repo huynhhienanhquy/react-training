@@ -22,6 +22,22 @@ describe("ChatInputBox", () => {
     ).toBeInTheDocument();
   });
 
+  it("shows the multicolor glow only while thinking", () => {
+    const { rerender } = render(<ChatInputBox {...defaultProps} />);
+    const input = screen.getByPlaceholderText(
+      "Tell me where you are going to and how you prefer to get there"
+    );
+
+    expect(input.parentElement?.parentElement).toHaveAttribute("data-thinking", "false");
+    expect(input.parentElement?.parentElement).toHaveClass("border-slate-200/80");
+
+    rerender(<ChatInputBox {...defaultProps} isThinking />);
+
+    expect(input.parentElement?.parentElement).toHaveAttribute("data-thinking", "true");
+    expect(input.parentElement?.parentElement).toHaveClass("before:opacity-55");
+    expect(input.parentElement?.parentElement).not.toHaveClass("border-slate-200/80");
+  });
+
   it("calls onInputChange when typing", async () => {
     const user = userEvent.setup();
     const onInputChange = vi.fn();
@@ -60,6 +76,14 @@ describe("ChatInputBox", () => {
     await user.click(sendButton);
 
     expect(onSend).toHaveBeenCalledTimes(1);
+  });
+
+  it("centers every toolbar icon inside its button", () => {
+    render(<ChatInputBox {...defaultProps} />);
+
+    ["Add attachment", "Voice input", "Send message"].forEach((name) => {
+      expect(screen.getByRole("button", { name })).toHaveClass("gap-0", "!p-0");
+    });
   });
 
   it("calls onSend when pressing Enter", () => {
