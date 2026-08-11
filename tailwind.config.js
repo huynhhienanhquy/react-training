@@ -85,6 +85,32 @@ export default {
           deep: '#0B0F2A',
           alt: '#0F0C3B',
         },
+
+        hotel: {
+          card: '#FAFAFA',
+          'card-dark': '#334155',
+          text: '#101828',
+          muted: '#64748B',
+          subtle: '#94A3B8',
+          amenity: '#94A3B8',
+          'tag-border': '#A7F3D0',
+          'tag-bg': '#ECFDF5',
+          'tag-text': '#059669',
+          'tag-border-dark': '#065F46',
+          'tag-bg-dark': '#022C22',
+          'tag-text-dark': '#6EE7B7',
+          'action-border': '#DBEAFE',
+          'loading': '#2563EB',
+          'error-bg': '#FEF2F2',
+          'error-border': '#FEE2E2',
+          'error-text': '#DC2626',
+        },
+
+        icon: {
+          DEFAULT: '#6B6B6B',
+          search: '#B1B1B1',
+          strong: '#0F053F',
+        },
       },
 
       spacing: {
@@ -113,9 +139,10 @@ export default {
         127: '127px',
         150: '150px',
         160: '160px',
-        171: '171px',
         200: '200px',
-        202: '202px',
+        'hotel-image': '171px',
+        'hotel-card': '202px',
+        'hotel-action': '52px',
         204: '204px',
         280: '280px',
         295: '295px',
@@ -152,7 +179,7 @@ export default {
       },
 
       gridTemplateColumns: {
-        'hotel-card': '171px minmax(0, 1fr) 174px',
+        'hotel-card': 'theme(spacing.hotel-image) minmax(0, 1fr) 174px',
         'fare-page': 'minmax(0, 2.05fr) minmax(320px, 1fr)',
         'flight-route': '190px 1fr',
         'flight-route-desktop': '152px 1fr',

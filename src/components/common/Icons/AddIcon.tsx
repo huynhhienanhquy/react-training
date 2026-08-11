@@ -13,7 +13,7 @@ const AddIcon = ({
   titleId,
   width = '1em',
   height = '1em',
-  color = '#fff',
+  color = 'currentColor',
   ...props
 }: SVGProps<SVGSVGElement> & SVGRProps) => (
   <svg

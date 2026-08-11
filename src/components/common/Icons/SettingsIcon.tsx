@@ -13,7 +13,7 @@ const SettingsIcon = ({
   titleId,
   width = '1em',
   height = '1em',
-  color = '#6B6B6B',
+  color = 'currentColor',
   ...props
 }: SVGProps<SVGSVGElement> & SVGRProps) => (
   <svg

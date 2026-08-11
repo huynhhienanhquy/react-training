@@ -13,7 +13,7 @@ const HeartIcon = ({
   titleId,
   width = '1em',
   height = '1em',
-  color = '#0436FF',
+  color = 'currentColor',
   ...props
 }: SVGProps<SVGSVGElement> & SVGRProps) => (
   <svg
