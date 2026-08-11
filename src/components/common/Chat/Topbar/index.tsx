@@ -26,7 +26,7 @@ export const Topbar = memo(function Topbar({
 
   return (
     <header
-      className="w-full flex items-center justify-between sticky top-0 z-10 shrink-0 border-b transition-colors duration-200 bg-white/80 dark:bg-slate-900/90 backdrop-blur-md border-slate-200/80 dark:border-slate-700/80 px-4 md:px-6 py-6 shadow-sm dark:shadow-black/30">
+      className="sticky top-0 z-10 flex w-full shrink-0 items-center justify-between gap-2 border-b border-slate-200/80 bg-white/80 py-3 pl-16 pr-3 shadow-sm backdrop-blur-md transition-colors duration-200 dark:border-slate-700/80 dark:bg-slate-900/90 dark:shadow-black/30 md:px-6 md:py-5">
       <div className="flex items-center gap-1 md:gap-2 text-sm min-w-0">
         {isBreadcrumbMode ? (
           <>
@@ -61,7 +61,7 @@ export const Topbar = memo(function Topbar({
       </div>
 
       {onNewChat && (
-        <div className="-translate-x-4 -translate-y-2">
+        <div className="shrink-0">
           <Button
             variant="primary"
             size="md"

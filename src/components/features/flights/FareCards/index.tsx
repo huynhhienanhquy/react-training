@@ -30,7 +30,7 @@ export type { FareOption };
             return (
               <div
                 key={fare.id}
-                className={`bg-surface p-6 rounded-3xl border transition-all shadow-sm flex flex-col justify-between space-y-6 ${
+                className={`flex flex-col justify-between space-y-6 rounded-3xl border bg-surface p-4 shadow-sm transition-all sm:p-6 ${
                   isSelected
                     ? 'border-blue-500 ring-2 ring-blue-500/20' // Highlight border when selected
                     : 'border-slate-100'
