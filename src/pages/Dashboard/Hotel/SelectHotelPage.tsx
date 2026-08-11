@@ -5,7 +5,6 @@ import { SectionHeader } from '@/components/features/flights/SectionHeader';
 
 import { getHotels } from '@/services/hotelService';
 import { Button } from '@/components/common/Button';
-import { Icon } from '@/components/common/Icons/Icon';
 
 import type {
   HotelData,
@@ -142,21 +141,7 @@ export const SelectHotelPage = ({
 
             {/* HEADER SECTION:*/}
             <div className="flex flex-col items-start gap-3 pb-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-              <div className="flex min-w-0 items-center gap-2">
-                {/* The Back button is dedicated to mobile devices. */}
-                {onBackToChat && (
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="none"
-                    className="md:hidden p-2 -ml-2 rounded-xl text-slate-600 hover:bg-slate-200/60 active:scale-95"
-                    onClick={onBackToChat}
-                    aria-label="Go back to chat"
-                  >
-                    <Icon name="arrow-left" className="w-5 h-5" />
-                  </Button>
-                )}
-
+              <div className="min-w-0">
                 <SectionHeader title="Other available accommodations" />
               </div>
 

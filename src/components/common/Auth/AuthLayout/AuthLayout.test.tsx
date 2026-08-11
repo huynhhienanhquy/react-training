@@ -73,4 +73,26 @@ describe("AuthLayout", () => {
       screen.getByText(/Tripal is designed to ease trip/i)
     ).toBeInTheDocument();
   });
+
+  it("forces light mode while mounted and restores dark mode on unmount", () => {
+    document.documentElement.classList.add('dark');
+    document.documentElement.style.colorScheme = 'dark';
+
+    const { unmount } = render(
+      <AuthLayout>
+        <div>Content</div>
+      </AuthLayout>
+    );
+
+    expect(document.documentElement).not.toHaveClass('dark');
+    expect(document.documentElement.style.colorScheme).toBe('light');
+
+    unmount();
+
+    expect(document.documentElement).toHaveClass('dark');
+    expect(document.documentElement.style.colorScheme).toBe('dark');
+
+    document.documentElement.classList.remove('dark');
+    document.documentElement.style.colorScheme = '';
+  });
 });

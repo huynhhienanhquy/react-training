@@ -70,11 +70,11 @@ export const VerifyOTP = () => {
       title="Enter OTP"
       subtitle="Enter your email address to receive verification OTP"
       isLoading={isLoading}
-      className="flex flex-col space-y-3.5"
+      className="flex flex-col"
     >
 
         {/* 2. Form */}
-        <form className="space-y-3 translate-y-8" onSubmit={handleVerify}>
+        <form className="mt-8 space-y-5" onSubmit={handleVerify}>
           {/* Label text "Enter OTP" directly above the input fields */}
           <div className="text-sm font-medium text-slate-800  ">Enter OTP</div>
 
@@ -102,7 +102,7 @@ export const VerifyOTP = () => {
 
           {/* Verify Button */}
           <Button
-            className=" translate-y-9"
+            className="mt-2"
             type="submit"
             isLoading={isLoading}
             showArrow
@@ -112,7 +112,7 @@ export const VerifyOTP = () => {
         </form>
 
         {/* 3. Resend OTP Link */}
-        <div className="text-center text-sm text-gray-400 translate-y-20">
+        <div className="mt-6 text-center text-sm text-gray-400">
           Didn't receive OTP?{" "}
           {counter > 0 ? (
             <span className="text-blue-700 font-bold ml-1">

@@ -38,9 +38,9 @@ export const Onboarding = () => {
           onActionClick: handleSignIn,
         }}
       >
-        <div className="mt-5 translate-y-7">
+        <div className="mt-8">
           <form
-            className="space-y-6"
+            className="space-y-5"
             onSubmit={handleStartPlanning}
             autoComplete="off"
           >
@@ -77,7 +77,7 @@ export const Onboarding = () => {
               </div>
             </div>
 
-            <div className="pt-4 translate-y-7">
+            <div className="pt-4">
               <Button type="submit" isLoading={isLoading} showArrow>
                 Start Planning Trips
               </Button>

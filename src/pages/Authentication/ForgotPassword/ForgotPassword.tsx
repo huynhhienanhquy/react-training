@@ -28,17 +28,17 @@ export const ForgotPassword = () => {
       title="Verify Email"
       subtitle="Enter your email address to receive verification OTP"
       isLoading={isLoading}
-      className="flex flex-col space-y-3.5"
+      className="flex flex-col"
       footer={{
         questionText: "Don't have an account?",
         actionText: 'Sign Up',
         onActionClick: handleSignUp,
-        className: 'space-y-3 translate-y-14',
+        className: 'space-y-3',
       }}
     >
 
         {/* 2. Form */}
-        <form className="space-y-3 translate-y-8" onSubmit={handleSendOTP} autoComplete="off">
+        <form className="mt-8 space-y-4" onSubmit={handleSendOTP} autoComplete="off">
           <InputField
             label="Email address"
             type="email"
@@ -48,7 +48,7 @@ export const ForgotPassword = () => {
             required
           />
           <Button
-            className="translate-y-4"
+            className="mt-2"
             type="submit"
             isLoading={isLoading}
             showArrow
