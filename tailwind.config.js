@@ -42,6 +42,7 @@ export default {
 
         surface: {
           DEFAULT: '#FAFBFD',
+          card: '#FAFAFA',
           sidebar: '#F8F9FB',
           section: '#EEF3FC',
           'section-alt': '#F4F7FE',
@@ -112,6 +113,7 @@ export default {
         127: '127px',
         150: '150px',
         160: '160px',
+        171: '171px',
         200: '200px',
         202: '202px',
         204: '204px',

@@ -61,7 +61,7 @@ export const SidebarNav = memo(function SidebarNav({ activeNav, onNavChange, isM
           type="button"
           variant="ghost"
           size="icon"
-          className="fixed left-3 top-3 z-30 h-10 w-10 rounded-xl border border-slate-100 bg-white p-0 shadow-md md:hidden"
+          className="fixed left-3 top-3 z-30 flex h-10 w-10 items-center justify-center gap-0 rounded-xl border border-slate-100 bg-white p-0 shadow-md md:hidden"
           onClick={onMobileToggle}
           aria-label="Open navigation"
           leftIcon={<MenuIcon className="w-5 h-5 text-slate-700" />}

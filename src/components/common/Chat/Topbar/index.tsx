@@ -65,7 +65,7 @@ export const Topbar = memo(function Topbar({
           <Button
             variant="primary"
             size="md"
-            className="h-10 w-10 !p-0 sm:h-auto sm:w-auto sm:!px-5 sm:!py-3 desktop:h-14 desktop:!px-5 desktop:!py-0 desktop:text-base desktop:font-medium"
+            className="flex h-10 w-10 items-center justify-center gap-0 !p-0 sm:h-auto sm:w-auto sm:gap-2 sm:!px-5 sm:!py-3 desktop:h-14 desktop:!px-5 desktop:!py-0 desktop:text-base desktop:font-medium"
             leftIcon={
               <AddIcon
                 aria-label="Add"
