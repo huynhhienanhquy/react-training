@@ -98,6 +98,7 @@ export default {
         55: '220px',
         17: '4.25rem',
         18: '4.5rem',
+        21: '84px',
         22: '5.5rem',
         26: '104px',
         27: '27px',
@@ -140,6 +141,7 @@ export default {
       maxWidth: {
         drawer: '85vw',
         'auth-copy': '650px',
+        'auth-copy-safe': 'calc(50% - 54px)',
       },
 
       inset: {
@@ -161,6 +163,7 @@ export default {
 
       width: {
         45: '45%',
+        'auth-copy': '650px',
       },
 
       scale: {
@@ -192,6 +195,7 @@ export default {
 
       lineHeight: {
         '1.2': '1.2',
+        16: '64px',
       },
 
       boxShadow: {
