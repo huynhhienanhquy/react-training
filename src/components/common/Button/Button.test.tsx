@@ -82,6 +82,11 @@ describe('Button', () => {
 
     expect(screen.getByTestId('left-icon')).toBeInTheDocument();
     expect(screen.getByTestId('right-icon')).toBeInTheDocument();
+    expect(screen.getByTestId('left-icon').parentElement).toHaveClass(
+      'items-center',
+      'justify-center',
+      'leading-none',
+    );
   });
 
   it('disables button and shows spinner while loading', () => {

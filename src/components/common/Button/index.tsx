@@ -150,14 +150,14 @@ export function Button({
           )}
 
           {!socialIcon && variant !== 'favorite' && leftIcon && (
-            <span className="shrink-0">{leftIcon}</span>
+            <span className="flex shrink-0 items-center justify-center leading-none">{leftIcon}</span>
           )}
         </>
       )}
 
       {variant === 'favorite' ? (
         leftIcon ? (
-          <span className="shrink-0">{leftIcon}</span>
+          <span className="flex shrink-0 items-center justify-center leading-none">{leftIcon}</span>
         ) : (
           <HeartIcon
             width={16}
@@ -176,16 +176,18 @@ export function Button({
           <span>{children}</span>
 
           {showArrow && (
-            <ArrowRightIcon
-              width={16}
-              height={16}
-              color="currentColor"
-              aria-hidden="true"
-            />
+            <span className="flex shrink-0 items-center justify-center leading-none">
+              <ArrowRightIcon
+                width={16}
+                height={16}
+                color="currentColor"
+                aria-hidden="true"
+              />
+            </span>
           )}
 
           {!showArrow && rightIcon && (
-            <span className="shrink-0">{rightIcon}</span>
+            <span className="flex shrink-0 items-center justify-center leading-none">{rightIcon}</span>
           )}
         </>
       )}

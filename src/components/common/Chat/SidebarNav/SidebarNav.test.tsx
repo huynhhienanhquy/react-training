@@ -133,9 +133,7 @@ describe("SidebarNav", () => {
     );
 
 
-    const buttons = screen.getAllByRole("button");
-
-    await user.click(buttons[0]);
+    await user.click(screen.getByRole("button", { name: "Open navigation" }));
 
     expect(onMobileToggle).toHaveBeenCalledTimes(1);
   });
