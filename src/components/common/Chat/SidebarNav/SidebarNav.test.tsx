@@ -156,10 +156,10 @@ describe("SidebarNav", () => {
     ).toBeInTheDocument();
 
     const mobileLogo = screen.getAllByAltText("Logo")[1];
-    const mobileAvatar = screen.getAllByAltText("User Avatar")[1];
+    const mobileDrawer = mobileLogo.closest('aside');
 
-    expect(mobileLogo).toHaveClass("w-7", "h-7");
-    expect(mobileAvatar.parentElement?.parentElement).toHaveClass("w-11", "h-11");
+    expect(mobileDrawer).toHaveClass("w-64", "max-w-[85vw]");
+    expect(screen.getByRole("button", { name: "Chats" })).toBeInTheDocument();
   });
 
   it("toggles dark mode from the profile menu", async () => {
