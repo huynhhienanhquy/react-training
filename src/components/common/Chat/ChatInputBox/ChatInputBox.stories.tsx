@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
-import { ChatInputBox } from './ChatInputBox'
+import { ChatInputBox } from '.'
 
 const meta: Meta<typeof ChatInputBox> = {
   title: 'Chat/ChatInputBox',
