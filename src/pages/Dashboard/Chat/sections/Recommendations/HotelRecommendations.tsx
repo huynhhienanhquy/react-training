@@ -146,7 +146,7 @@ export const HotelRecommendations = ({
               <div className="flex w-full shrink-0 flex-row flex-wrap items-center justify-between gap-4 md:w-auto md:flex-col md:items-end md:justify-between">
                 <div>
                   {hotel.tag && (
-                    <span className="inline-flex rounded-full border border-hotel-tag-border bg-hotel-tag-bg px-3 py-1 text-base font-medium text-hotel-tag-text dark:border-hotel-tag-border-dark dark:bg-hotel-tag-bg-dark/70 dark:text-hotel-tag-text-dark">
+                    <span className="mb-3 flex h-10 w-16 items-center justify-center rounded-full border border-emerald-200 bg-emerald-50 text-base font-medium text-emerald-600 dark:border-emerald-800 dark:bg-emerald-950/70 dark:text-emerald-300">
                       {hotel.tag}
                     </span>
                   )}
