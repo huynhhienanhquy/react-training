@@ -112,8 +112,7 @@ export function FlightRecommendations({
           return (
             <div
               key={flight.id}
-              className="mb-2 w-full overflow-hidden rounded-2xl bg-slate-50 p-4 shadow-none transition-colors duration-200 last:mb-0 sm:p-5 dark:bg-slate-700/70"
-            >
+className="mb-2 h-recommendation-card w-recommendation-card overflow-hidden rounded-2xl bg-slate-50 p-4 shadow-none transition-colors duration-200 last:mb-0 sm:p-5 dark:bg-slate-700/70"            >
               <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2 min-w-0">
                   <div className="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden">

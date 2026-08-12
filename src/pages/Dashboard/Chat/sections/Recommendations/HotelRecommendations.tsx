@@ -115,7 +115,7 @@ export const HotelRecommendations = ({
           return (
             <div
               key={hotel.id}
-              className="mb-2 grid grid-cols-1 gap-4 rounded-2xl bg-hotel-card p-4 transition-colors duration-200 last:mb-0 md:min-h-hotel-card md:grid-cols-hotel-card md:items-stretch md:gap-6 dark:bg-hotel-card-dark/70"
+              className="w-recommendation-card mb-2 grid grid-cols-1 gap-4 rounded-2xl bg-hotel-card p-4 transition-colors duration-200 last:mb-0 md:min-h-hotel-card md:grid-cols-hotel-card md:items-stretch md:gap-6 dark:bg-hotel-card-dark/70"
             >
               <div className="h-52 w-full overflow-hidden rounded-xl md:h-hotel-image md:w-hotel-image">
                 <img
