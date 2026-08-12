@@ -153,7 +153,7 @@ export const HotelRecommendations = ({
                 </div>
 
                 <div className="text-right md:my-auto">
-                  <span className="text-2xl font-bold text-hotel-text">
+                  <span className="mb-2 text-2xl font-bold text-hotel-text">
                     ${hotel.price}
                   </span>
 
@@ -175,9 +175,9 @@ export const HotelRecommendations = ({
 
                   <Button
                     variant="secondary"
-                    size="sm"
+                    size="none"
                     onClick={createBookHandler(hotel)}
-                    className="h-12 rounded-xl px-5 text-base font-normal"
+                    className="ml-2 h-12 w-book-now shrink-0 rounded-xl text-base"                  
                   >
                     Book Now
                   </Button>
