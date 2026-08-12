@@ -26,7 +26,7 @@ export const Topbar = memo(function Topbar({
 
   return (
     <header
-      className="sticky top-0 z-10 flex min-h-16 w-full shrink-0 items-center justify-between gap-2 border-b border-slate-200/80 bg-white/80 py-2 pl-16 pr-3 shadow-sm backdrop-blur-md transition-colors duration-200 dark:border-slate-700/80 dark:bg-slate-900/90 dark:shadow-black/30 md:min-h-0 md:px-6 md:py-5 desktop:h-22 desktop:min-h-22 desktop:pb-0 desktop:pl-6.5 desktop:pr-11 desktop:pt-0">
+      className="sticky top-0 z-10 flex min-h-16 w-full shrink-0 items-center justify-between gap-2 border-b border-slate-200/80 bg-white/80 py-2 pl-16 pr-3 shadow-sm backdrop-blur-md transition-colors duration-200 dark:border-slate-700/80 dark:bg-slate-900/90 dark:shadow-black/30 md:min-h-0 md:px-6 md:py-5 desktop:h-21 desktop:min-h-21 desktop:pb-0 desktop:pl-6.5 desktop:pr-11 desktop:pt-0">
       <div className="flex items-center gap-1 md:gap-2 text-sm min-w-0">
         {isBreadcrumbMode ? (
           <>
