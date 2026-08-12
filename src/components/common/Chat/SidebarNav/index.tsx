@@ -74,18 +74,18 @@ export const SidebarNav = memo(function SidebarNav({ activeNav, onNavChange, att
       }`}>
         <div className="flex w-full flex-col items-center gap-10 px-2">
           {/* App Logo */}
-<Button
-  type="button"
-  variant="ghost"
-  size="none"
-  className="mt-3 flex size-8 items-center justify-center rounded-xl p-0 hover:opacity-90"
->
-  <img
-    src={appLogo}
-    alt="Logo"
-    className="block size-8 object-contain"
-  />
-</Button>
+          <Button
+            type="button"
+            variant="ghost"
+            size="none"
+            className="mt-3 flex size-8 items-center justify-center rounded-xl p-0 hover:opacity-90"
+          >
+            <img
+              src={appLogo}
+              alt="Logo"
+              className="block size-8 object-contain"
+            />
+          </Button>
 
           {/* Navigation Items */}
           <nav className="flex w-full flex-col items-center gap-6">
