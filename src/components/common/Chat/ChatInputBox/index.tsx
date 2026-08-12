@@ -24,14 +24,12 @@ export const ChatInputBox = memo(function ChatInputBox({
     /* Floating chat input container with focus state highlight */
     <div
       data-thinking={isThinking}
-      className={`relative isolate w-full max-w-4xl rounded-2xl p-px shadow-xl md:rounded-3xl lg:max-w-none lg:rounded-card desktop:mt-auto ${
-        isThinking
+      className={`relative isolate box-border h-chat-input w-chat-input shrink-0 overflow-hidden rounded-2xl shadow-xl md:rounded-3xl lg:rounded-card desktop:mt-auto ${        isThinking
           ? "bg-chat-thinking shadow-slate-300/60 before:absolute before:-inset-0.5 before:-z-10 before:rounded-inherit before:bg-inherit before:opacity-55 before:blur before:content-['']"
           : 'border border-slate-200/80 bg-white shadow-slate-200/60'
       }`}
     >
-      <div className="relative z-10 rounded-inherit bg-white p-3 sm:p-4 md:p-6 lg:px-8 lg:py-7 desktop:px-6 desktop:py-27">
-
+    <div className="relative z-10 box-border h-full w-full rounded-inherit bg-white p-3 sm:p-4 md:p-6 lg:px-8 lg:py-7 desktop:px-6 desktop:py-6">
       {/* Multiline Textarea for prompt input */}
       <textarea
         rows={2}
