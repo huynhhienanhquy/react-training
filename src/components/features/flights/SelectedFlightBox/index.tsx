@@ -21,7 +21,7 @@ export const SelectedFlightBox = ({
     <div className="space-y-3 lg:space-y-4">
       <SectionHeader title="Selected flights" />
 
-      <Card variant="surface" className="space-y-4 p-4 sm:p-6 lg:min-h-64">
+      <Card variant="surface" className="space-y-4 p-4 sm:p-6 lg:min-h-64 w-select-hotel-card">
         {/* Header: Airline info, favorite button, and change flight action */}
         <div className="flex flex-wrap items-center justify-between gap-3">
           {/* Airline Logo & Name */}
@@ -69,9 +69,8 @@ export const SelectedFlightBox = ({
             <Button
               type="button"
               variant="light"
-              size="sm"
-              className="h-12 px-4 text-base font-normal active:scale-95"
-            >
+              size="none"
+              className="rounded-xl h-12 w-action-btn px-4 text-base font-normal active:scale-95"            >
               Change Flight
             </Button>
           </div>

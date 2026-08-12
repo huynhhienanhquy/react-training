@@ -27,8 +27,7 @@ export type { FareOption };
             return (
               <div
                 key={fare.id}
-                className="flex min-h-506 flex-col justify-between space-y-6 rounded-3xl border border-slate-100 bg-surface p-4 shadow-sm transition-all sm:p-6 lg:p-8"
-              >
+                className="box-border flex h-fare-card w-price-details flex-col justify-between space-y-6 rounded-3xl border border-slate-100 bg-surface p-4 shadow-sm transition-all sm:p-6 lg:p-8"              >
                 <div className="space-y-4">
                   {/* Airline Logo & Name */}
                   <div className="flex items-center gap-2">
@@ -71,7 +70,7 @@ export type { FareOption };
                   variant="light"
                   size="none"
                   aria-pressed={selectedFareId === fare.id}
-                  className="h-12 w-full rounded-xl py-3 text-base font-normal active:scale-95"
+                  className="h-12 w-330 rounded-xl py-3 text-base font-normal active:scale-95"
                   onClick={createSelectHandler(fare.id)}
                 >
                   Select
