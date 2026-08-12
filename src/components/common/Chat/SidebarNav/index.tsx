@@ -72,8 +72,7 @@ export const SidebarNav = memo(function SidebarNav({ activeNav, onNavChange, att
       <aside className={`hidden w-32 min-w-32 shrink-0 select-none flex-col items-center justify-between bg-surface-sidebar py-6 z-20 md:flex ${
         attachedToContent ? 'border-r-0' : 'border-r-[18px] border-surface-section'
       }`}>
-        <div className="flex w-full flex-col items-center gap-10 px-2">
-          {/* App Logo */}
+<div className="flex w-28 shrink-0 flex-col items-center gap-10 px-2">          {/* App Logo */}
           <Button
             type="button"
             variant="ghost"
