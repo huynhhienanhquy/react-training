@@ -21,9 +21,9 @@ export const SelectedFlightBox = ({
     <div className="space-y-3 lg:space-y-4">
       <SectionHeader title="Selected flights" />
 
-      <Card variant="surface" className="space-y-4 p-4 sm:p-6 lg:min-h-64 w-select-hotel-card">
+      <Card variant="surface" className="w-full space-y-4 p-4 sm:p-6 lg:min-h-64 desktop:w-select-hotel-card">
         {/* Header: Airline info, favorite button, and change flight action */}
-        <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
           {/* Airline Logo & Name */}
           <div className="flex min-w-0 items-center gap-2.5">
             <img
@@ -38,7 +38,7 @@ export const SelectedFlightBox = ({
           </div>
 
           {/* Action Buttons */}
-          <div className="flex items-center gap-2">
+          <div className="flex w-full items-center gap-2 sm:w-auto">
             {/* Bookmark / Favorite Toggle Button */}
             <Button
               type="button"
@@ -70,7 +70,7 @@ export const SelectedFlightBox = ({
               type="button"
               variant="light"
               size="none"
-              className="rounded-xl h-12 w-action-btn px-4 text-base font-normal active:scale-95"            >
+              className="h-12 min-w-0 flex-1 rounded-xl px-3 text-sm font-normal active:scale-95 sm:w-action-btn sm:flex-none sm:px-4 sm:text-base"            >
               Change Flight
             </Button>
           </div>

@@ -22,12 +22,12 @@ export type { FareOption };
         <SectionHeader title="Select fare" />
 
         {/* Grid containing Economy and Business fare cards */}
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="grid min-w-0 grid-cols-1 gap-4 desktop:grid-cols-2">
           {fareOptions.map((fare) => {
             return (
               <div
                 key={fare.id}
-                className="box-border flex h-fare-card w-price-details flex-col justify-between space-y-6 rounded-3xl border border-slate-100 bg-surface p-4 shadow-sm transition-all sm:p-6 lg:p-8"              >
+                className="box-border flex min-h-fare-card w-full flex-col justify-between space-y-6 rounded-3xl border border-slate-100 bg-surface p-4 shadow-sm transition-all sm:p-6 lg:p-8 desktop:h-fare-card desktop:w-price-details"              >
                 <div className="space-y-4">
                   {/* Airline Logo & Name */}
                   <div className="flex items-center gap-2">
@@ -70,7 +70,7 @@ export type { FareOption };
                   variant="light"
                   size="none"
                   aria-pressed={selectedFareId === fare.id}
-                  className="h-12 w-330 rounded-xl py-3 text-base font-normal active:scale-95"
+                  className="h-12 w-full rounded-xl py-3 text-base font-normal active:scale-95 desktop:w-330"
                   onClick={createSelectHandler(fare.id)}
                 >
                   Select

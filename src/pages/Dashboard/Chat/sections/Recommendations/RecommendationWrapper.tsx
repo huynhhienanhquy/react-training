@@ -21,7 +21,7 @@ export const RecommendationWrapper = ({
       </h3>
 
       {/* Main Container */}
-      <div className="w-chat-input overflow-hidden rounded-3xl border-8 border-white bg-white shadow-sm transition-colors duration-200 dark:border-slate-800 dark:bg-slate-800 dark:shadow-black/30">
+      <div className="w-full overflow-hidden rounded-3xl border-4 border-white bg-white shadow-sm transition-colors duration-200 sm:border-8 desktop:w-chat-input dark:border-slate-800 dark:bg-slate-800 dark:shadow-black/30">
         {children}
 
         {/* See All Button */}

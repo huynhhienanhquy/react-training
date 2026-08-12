@@ -151,11 +151,11 @@ export const SelectHotelPage = ({
                 return (
                   <div
                     key={hotel.id }
-                    className="h-select-hotel-card w-select-hotel-card flex flex-col items-stretch gap-5 rounded-2xl bg-white p-4 shadow-sm transition-all duration-200 hover:shadow-md sm:p-5 md:min-h-[227px] md:flex-row md:gap-6 md:p-6"
+                    className="flex h-auto w-full min-w-0 flex-col items-stretch gap-5 rounded-2xl bg-white p-4 shadow-sm transition-all duration-200 hover:shadow-md sm:p-5 md:p-6 desktop:h-select-hotel-card desktop:w-select-hotel-card desktop:flex-row desktop:gap-6"
                   >
                     {/* Information on the left */}
-                    <div className="flex min-w-0 flex-1 flex-col items-center gap-5 sm:flex-row sm:items-start md:gap-6">
-                      <div className="h-32 w-32 shrink-0 overflow-hidden rounded-lg bg-slate-200 shadow-xs sm:h-36 sm:w-36 lg:h-[179px] lg:w-[179px]">
+                    <div className="flex min-w-0 flex-1 flex-col items-stretch gap-5 sm:flex-row sm:items-start md:gap-6">
+                      <div className="h-44 w-full shrink-0 overflow-hidden rounded-lg bg-slate-200 shadow-xs sm:h-36 sm:w-36 desktop:h-[179px] desktop:w-[179px]">
                         <img
                           src={hotelImage}
                           alt={hotel.hotelName || 'Hotel'}
@@ -176,7 +176,7 @@ export const SelectHotelPage = ({
                     </div>
 
                     {/* Price column & Booking button on the right */}
-                    <div className="flex shrink-0 flex-col items-end justify-end gap-4 border-t border-slate-200/60 pt-4 md:w-[126px] md:border-l md:border-t-0 md:pl-4 md:pt-0">
+                    <div className="flex shrink-0 flex-row items-center justify-between gap-4 border-t border-slate-200/60 pt-4 desktop:w-[126px] desktop:flex-col desktop:items-end desktop:justify-end desktop:border-l desktop:border-t-0 desktop:pl-4 desktop:pt-0">
                       <span className="text-[24px] font-bold tracking-tight text-ink-alt">
                         ${mainPrice}
                       </span>

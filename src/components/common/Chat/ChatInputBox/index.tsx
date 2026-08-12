@@ -24,7 +24,7 @@ export const ChatInputBox = memo(function ChatInputBox({
     /* Floating chat input container with focus state highlight */
     <div
       data-thinking={isThinking}
-      className={`relative isolate box-border h-chat-input w-chat-input shrink-0 overflow-hidden rounded-2xl shadow-xl md:rounded-3xl lg:rounded-card desktop:mt-auto ${        isThinking
+      className={`relative isolate box-border min-h-40 w-full shrink-0 overflow-hidden rounded-2xl shadow-xl sm:min-h-44 md:rounded-3xl lg:min-h-chat-input lg:rounded-card desktop:mt-auto desktop:h-chat-input desktop:w-chat-input ${        isThinking
           ? "bg-chat-thinking shadow-slate-300/60 before:absolute before:-inset-0.5 before:-z-10 before:rounded-inherit before:bg-inherit before:opacity-55 before:blur before:content-['']"
           : 'border border-slate-200/80 bg-white shadow-slate-200/60'
       }`}

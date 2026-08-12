@@ -115,9 +115,9 @@ export const HotelRecommendations = ({
           return (
             <div
               key={hotel.id}
-              className="w-recommendation-card mb-2 grid grid-cols-1 gap-4 rounded-2xl bg-hotel-card p-4 transition-colors duration-200 last:mb-0 md:min-h-hotel-card md:grid-cols-hotel-card md:items-stretch md:gap-6 dark:bg-hotel-card-dark/70"
+              className="mb-2 grid w-full grid-cols-1 gap-4 rounded-2xl bg-hotel-card p-4 transition-colors duration-200 last:mb-0 desktop:min-h-hotel-card desktop:w-recommendation-card desktop:grid-cols-hotel-card desktop:items-stretch desktop:gap-6 dark:bg-hotel-card-dark/70"
             >
-              <div className="h-52 w-full overflow-hidden rounded-xl md:h-hotel-image md:w-hotel-image">
+              <div className="h-44 w-full overflow-hidden rounded-xl sm:h-52 desktop:h-hotel-image desktop:w-hotel-image">
                 <img
                   src={hotel.imageUrl || defaultHotelImage}
                   alt={hotel.name}
@@ -143,7 +143,7 @@ export const HotelRecommendations = ({
                 </div>
               </div>
 
-              <div className="flex w-full shrink-0 flex-row flex-wrap items-center justify-between gap-4 md:w-auto md:flex-col md:items-end md:justify-between">
+              <div className="flex w-full min-w-0 flex-row flex-wrap items-center justify-between gap-4 desktop:w-auto desktop:shrink-0 desktop:flex-col desktop:items-end desktop:justify-between">
                 <div>
                   {hotel.tag && (
                     <span className="mb-3 flex h-10 w-16 items-center justify-center rounded-full border border-emerald-200 bg-emerald-50 text-base font-medium text-emerald-600 dark:border-emerald-800 dark:bg-emerald-950/70 dark:text-emerald-300">
@@ -152,7 +152,7 @@ export const HotelRecommendations = ({
                   )}
                 </div>
 
-                <div className="text-right md:my-auto">
+                <div className="min-w-0 text-right desktop:my-auto">
                   <span className="mb-2 text-2xl font-bold text-hotel-text">
                     ${hotel.price}
                   </span>
@@ -177,7 +177,7 @@ export const HotelRecommendations = ({
                     variant="secondary"
                     size="none"
                     onClick={createBookHandler(hotel)}
-                    className="ml-2 h-12 w-book-now shrink-0 rounded-xl text-base"                  
+                    className="ml-0 h-12 w-book-now shrink-0 rounded-xl text-sm sm:ml-2 sm:text-base"
                   >
                     Book Now
                   </Button>
