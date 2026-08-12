@@ -74,19 +74,18 @@ export const SidebarNav = memo(function SidebarNav({ activeNav, onNavChange, att
       }`}>
         <div className="flex w-full flex-col items-center gap-10 px-2">
           {/* App Logo */}
-          <Button
-            type="button"
-            variant="ghost"
-            size="icon"
-            className="mt-3 h-8 min-h-8 w-8 min-w-8 rounded-xl !p-0 hover:opacity-90"
-            leftIcon={
-              <img
-                src={appLogo}
-                alt="Logo"
-                className="h-8 w-8 object-contain"
-              />
-            }
-          />
+<Button
+  type="button"
+  variant="ghost"
+  size="none"
+  className="mt-3 flex size-8 items-center justify-center rounded-xl p-0 hover:opacity-90"
+>
+  <img
+    src={appLogo}
+    alt="Logo"
+    className="block size-8 object-contain"
+  />
+</Button>
 
           {/* Navigation Items */}
           <nav className="flex w-full flex-col items-center gap-6">
@@ -99,8 +98,8 @@ export const SidebarNav = memo(function SidebarNav({ activeNav, onNavChange, att
                   key={item.id}
                   type="button"
                   variant="ghost"
-                  size="icon"
-                  className={`!flex h-8 min-h-8 w-8 min-w-8 !items-center !justify-center !rounded-lg border !p-0 shadow-sm ${
+                  size="none"
+                  className={`!flex size-8 !items-center !justify-center !rounded-lg border !p-0 shadow-sm ${
                     isActive
                       ? 'border-blue-200 bg-blue-50 shadow-blue-100/50'
                       : 'border-slate-100 bg-white hover:border-slate-200 hover:bg-slate-50'
