@@ -2,7 +2,7 @@ import { LoadingOverlay } from '@/components/common/Loading';
 import authBackground from '@/assets/images/auth-background.png';
 import { type AuthLayoutProps } from '@/types/auth';
 import { Outlet } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 export const AuthLayout = ({
@@ -11,7 +11,7 @@ export const AuthLayout = ({
   inset = false,
   heroInset = false,
 }: AuthLayoutProps) => {
-  useEffect(() => {
+  useLayoutEffect(() => {
     const root = document.documentElement;
     const shouldRestoreDarkMode = root.classList.contains('dark');
     const previousColorScheme = root.style.colorScheme;
@@ -39,7 +39,7 @@ export const AuthLayout = ({
       {/* Background Dim */}
       <div className="absolute inset-0 bg-black/30 pointer-events-none" />
 
-      {/* Dark gradient overlay */}
+      {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
 
       {/* Main content container */}

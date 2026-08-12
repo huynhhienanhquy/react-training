@@ -24,9 +24,8 @@ import { AuthLayout } from './components/common/Auth/AuthLayout';
 export const App = () => {
   return (
     <BrowserRouter>
-      <ThemeProvider>
-        <AuthProvider>
-          <Routes>
+      <AuthProvider>
+        <Routes>
           {/* Public pages (Not logged in) */}
           <Route element={<GuestRoute />}>
             <Route element={<AuthLayout inset heroInset />}>
@@ -42,7 +41,13 @@ export const App = () => {
           </Route>
 
           {/* Protected pages (Logged in) */}
-          <Route element={<ProtectedRoute />}>
+          <Route
+            element={(
+              <ThemeProvider>
+                <ProtectedRoute />
+              </ThemeProvider>
+            )}
+          >
             <Route element={<DashboardLayout />}>
               <Route path="/dashboard" element={<ChatPage />} />
               <Route path="/chats" element={<ChatPage />} />
@@ -58,9 +63,8 @@ export const App = () => {
 
           {/* Default navigation when URL is invalid */}
           <Route path="*" element={<Navigate to="/login" replace />} />
-          </Routes>
-        </AuthProvider>
-      </ThemeProvider>
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 };
