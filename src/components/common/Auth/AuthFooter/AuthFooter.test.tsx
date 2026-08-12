@@ -62,6 +62,6 @@ describe("AuthFooter", () => {
     );
 
     expect(container.firstChild).toHaveClass("text-center");
-    expect(container.firstChild).toHaveClass("text-sm2");
+    expect(container.firstChild).toHaveClass("text-base");
   });
 });

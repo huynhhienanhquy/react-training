@@ -105,16 +105,13 @@ describe("SidebarNav", () => {
       "border-r-[18px]",
       "py-6",
     );
-    expect(screen.getByAltText("Logo")).toHaveClass("h-8", "w-8");
-    expect(chatButton).toHaveClass("h-8", "w-8");
+    expect(screen.getByAltText("Logo")).toHaveClass("size-8");
+    expect(chatButton).toHaveClass("size-8");
     expect(screen.getByLabelText("Chats")).toHaveClass("h-4", "w-4");
     expect(screen.getByAltText("User Avatar").closest("button")).toHaveClass(
-      "h-16",
-      "w-16",
-      "md:h-16",
-      "md:w-16",
-      "[&>span]:h-full",
-      "[&>span]:w-full",
+      "!size-16",
+      "!min-h-16",
+      "!min-w-16",
     );
     expect(screen.getByAltText("User Avatar").closest("button")?.parentElement).toHaveClass(
       "mb-4",
