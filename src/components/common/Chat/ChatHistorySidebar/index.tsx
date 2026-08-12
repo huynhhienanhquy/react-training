@@ -46,10 +46,10 @@ export const ChatHistorySidebar = memo(function ChatHistorySidebar({
       <div className="px-5.5 pb-2 pt-9">
         <h1 className="text-2xl font-bold tracking-tight text-brand-dark">Chats</h1>
 
-        <div className="relative pt-7">
+        <div className="relative mt-7 h-12 w-62">
           <SearchIcon
             aria-label="Search"
-            className="pointer-events-none absolute left-4 top-search-icon h-4 w-4 -translate-y-1/2 text-icon-search"
+            className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-icon-search"
           />
 
           <input
@@ -57,7 +57,7 @@ export const ChatHistorySidebar = memo(function ChatHistorySidebar({
             placeholder="Search"
             value={searchQuery}
             onChange={handleSearchChange}
-            className="w-full rounded-2xl border border-slate-100/80 bg-white py-3 pl-10 pr-4 text-base text-slate-700 shadow-sm shadow-slate-200/50 transition placeholder:text-base placeholder:text-slate-400 focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500/10"
+            className="box-border h-full w-full rounded-2xl border border-slate-100/80 bg-white pl-10 pr-4 text-base text-slate-700 shadow-sm shadow-slate-200/50 transition placeholder:text-base placeholder:text-slate-400 focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500/10"
           />
         </div>
       </div>
@@ -72,7 +72,7 @@ export const ChatHistorySidebar = memo(function ChatHistorySidebar({
           Object.entries(groupedSessions).map(([groupTitle, items]) => (
             <div key={groupTitle} className="space-y-2">
               {/* Group title (TODAY, YESTERDAY, ...) */}
-              <h3 className="text-xxs font-bold text-slate-400/90 tracking-wider uppercase px-1">
+              <h3 className="text-sm font-bold text-slate-400/90 tracking-wider uppercase px-1">
                 {groupTitle}
               </h3>
 
