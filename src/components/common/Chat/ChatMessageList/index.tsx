@@ -22,7 +22,7 @@ export const ChatMessageList = memo(function ChatMessageList({
   const { ref: messagesEndRef } = useAutoScroll(messages, isTyping);
 
   return (
-    <div className="w-full max-w-4xl flex-1 space-y-4 overflow-y-auto px-2 py-4 scrollbar-hide lg:max-w-none lg:px-0">
+    <div className="w-full max-w-4xl flex-1 space-y-4 overflow-y-auto px-2 py-4 scrollbar-hide lg:max-w-none lg:px-0 min-[1441px]:!max-w-[908px]">
       {messages.map((msg, index) => {
         const textLower = msg.text.toLowerCase();
 

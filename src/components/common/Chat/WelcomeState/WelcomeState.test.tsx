@@ -60,6 +60,21 @@ describe('WelcomeState', () => {
     });
   });
 
+  it('keeps the 1440px layout and restores document flow above it', () => {
+    const { container } = render(
+      <WelcomeState
+        prompts={prompts}
+        onSelectPrompt={vi.fn()}
+      />
+    );
+
+    expect(container.firstElementChild).toHaveClass(
+      'desktop:absolute',
+      'min-[1441px]:relative',
+      'min-[1441px]:flex-1',
+    );
+  });
+
 
   it('calls onSelectPrompt when clicking prompt button', async () => {
     const user = userEvent.setup();
