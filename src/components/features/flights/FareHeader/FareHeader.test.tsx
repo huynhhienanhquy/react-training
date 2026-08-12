@@ -73,11 +73,15 @@ describe('FareHeader', () => {
     expect(card).toHaveAttribute('data-variant', 'surface');
     expect(card).toHaveClass(
       'flex',
-      'items-start',
-      'justify-between',
-      'gap-3',
+      'w-full',
+      'flex-col',
+      'gap-4',
       'p-4',
       'sm:p-6',
+      'sm:flex-row',
+      'sm:items-start',
+      'sm:justify-between',
+      'desktop:w-select-hotel-card',
     );
   });
 });

@@ -26,7 +26,7 @@ export const Topbar = memo(function Topbar({
 
   return (
     <header
-      className="sticky top-0 z-10 flex min-h-16 w-full shrink-0 items-center justify-between gap-2 border-b border-slate-200/80 bg-white/80 py-2 pl-16 pr-3 shadow-sm backdrop-blur-md transition-colors duration-200 dark:border-slate-700/80 dark:bg-slate-900/90 dark:shadow-black/30 md:min-h-0 md:px-6 md:py-5 desktop:h-22 desktop:min-h-22 desktop:pb-0 desktop:pl-6.5 desktop:pr-11 desktop:pt-0">
+      className="sticky top-0 z-10 flex min-h-16 w-full shrink-0 items-center justify-between gap-2 border-b border-slate-200/80 bg-white/80 py-2 pl-16 pr-3 shadow-sm backdrop-blur-md transition-colors duration-200 dark:border-slate-700/80 dark:bg-slate-900/90 dark:shadow-black/30 md:min-h-0 md:px-6 md:py-5 desktop:h-21 desktop:min-h-21 desktop:pb-0 desktop:pl-6.5 desktop:pr-11 desktop:pt-0">
       <div className="flex items-center gap-1 md:gap-2 text-sm min-w-0">
         {isBreadcrumbMode ? (
           <>
@@ -64,17 +64,19 @@ export const Topbar = memo(function Topbar({
         <div className="shrink-0">
           <Button
             variant="primary"
-            size="md"
-            className="flex h-10 w-10 items-center justify-center gap-0 !p-0 sm:h-auto sm:w-auto sm:gap-2 sm:!px-5 sm:!py-3 desktop:h-14 desktop:!px-5 desktop:!py-0 desktop:text-base desktop:font-medium"
+            size="none"
+            className="rounded-xl flex h-13 w-new-chat min-w-new-chat shrink-0 items-center justify-center gap-2 p-0 text-base font-medium"
             leftIcon={
               <AddIcon
                 aria-label="Add"
-                className="w-5 h-5"
+                className="size-5 shrink-0"
               />
             }
             onClick={onNewChat}
           >
-            <span className="hidden sm:inline">Start New Chat</span>
+            <span className="whitespace-nowrap">
+              Start New Chat
+            </span>
           </Button>
         </div>
       )}

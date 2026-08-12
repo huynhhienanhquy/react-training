@@ -72,21 +72,19 @@ export const SidebarNav = memo(function SidebarNav({ activeNav, onNavChange, att
       <aside className={`hidden w-32 min-w-32 shrink-0 select-none flex-col items-center justify-between bg-surface-sidebar py-6 z-20 md:flex ${
         attachedToContent ? 'border-r-0' : 'border-r-[18px] border-surface-section'
       }`}>
-        <div className="flex w-full flex-col items-center gap-10 px-2">
-          {/* App Logo */}
+<div className="flex w-28 shrink-0 flex-col items-center gap-10 px-2">          {/* App Logo */}
           <Button
             type="button"
             variant="ghost"
-            size="icon"
-            className="mt-3 h-8 min-h-8 w-8 min-w-8 rounded-xl !p-0 hover:opacity-90"
-            leftIcon={
-              <img
-                src={appLogo}
-                alt="Logo"
-                className="h-8 w-8 object-contain"
-              />
-            }
-          />
+            size="none"
+            className="mt-3 flex size-8 items-center justify-center rounded-xl p-0 hover:opacity-90"
+          >
+            <img
+              src={appLogo}
+              alt="Logo"
+              className="block size-8 object-contain"
+            />
+          </Button>
 
           {/* Navigation Items */}
           <nav className="flex w-full flex-col items-center gap-6">
@@ -99,8 +97,8 @@ export const SidebarNav = memo(function SidebarNav({ activeNav, onNavChange, att
                   key={item.id}
                   type="button"
                   variant="ghost"
-                  size="icon"
-                  className={`!flex h-8 min-h-8 w-8 min-w-8 !items-center !justify-center !rounded-lg border !p-0 shadow-sm ${
+                  size="none"
+                  className={`!flex size-8 !items-center !justify-center !rounded-lg border !p-0 shadow-sm ${
                     isActive
                       ? 'border-blue-200 bg-blue-50 shadow-blue-100/50'
                       : 'border-slate-100 bg-white hover:border-slate-200 hover:bg-slate-50'
@@ -127,13 +125,12 @@ export const SidebarNav = memo(function SidebarNav({ activeNav, onNavChange, att
           <Button
             type="button"
             variant="ghost"
-            size="icon"
-            className="relative h-16 min-h-16 w-16 min-w-16 transition transform active:scale-95 focus:outline-none drop-shadow-sm md:h-16 md:w-16 [&>span]:h-full [&>span]:w-full"
+            size="none"
+            className="relative !size-16 !min-h-16 !min-w-16 shrink-0 !p-0 transition active:scale-95 focus:outline-none drop-shadow-sm"           
             onClick={toggleProfileMenu}
           >
             <div
-              className="w-full h-full bg-white flex items-center justify-center p-1"
-              style={{ clipPath: 'url(#pentagon-clip)' }}
+              className="size-16 shrink-0 bg-white flex items-center justify-center p-1"              style={{ clipPath: 'url(#pentagon-clip)' }}
             >
               <div
                 className="w-full h-full bg-slate-200 overflow-hidden"

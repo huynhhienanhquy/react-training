@@ -112,9 +112,8 @@ export function FlightRecommendations({
           return (
             <div
               key={flight.id}
-              className="mb-2 w-full overflow-hidden rounded-2xl bg-slate-50 p-4 shadow-none transition-colors duration-200 last:mb-0 sm:p-5 dark:bg-slate-700/70"
-            >
-              <div className="flex items-center justify-between gap-3">
+              className="mb-2 min-h-recommendation-card w-full overflow-hidden rounded-2xl bg-slate-50 p-4 shadow-none transition-colors duration-200 last:mb-0 sm:p-5 desktop:h-recommendation-card desktop:w-recommendation-card dark:bg-slate-700/70"            >
+              <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-2 min-w-0">
                   <div className="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden">
                     <img
@@ -129,7 +128,7 @@ export function FlightRecommendations({
                   </span>
                 </div>
 
-                <div className="flex shrink-0 items-center gap-2">
+                <div className="flex w-full shrink-0 items-center gap-2 sm:w-auto">
                   <Button
                     type="button"
                     variant="favorite"
@@ -142,18 +141,18 @@ export function FlightRecommendations({
 
                   <Button
                     variant="secondary"
-                    size="sm"
+                    size="none"
                     onClick={createBookHandler(flight.id)}
-                    className="h-12 rounded-xl px-5 text-base"
-                  >
+                    className="ml-0 h-12 min-w-0 flex-1 rounded-xl text-sm sm:ml-2 sm:w-book-now sm:flex-none sm:text-base"
+                    >
                     Book Now
                   </Button>
                 </div>
               </div>
 
-              <div className="mt-5 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+              <div className="mt-5 flex flex-col justify-between gap-4 desktop:flex-row desktop:items-end">
                 <div className="flex-1 space-y-5 text-xs sm:text-sm">
-                  <div className="grid grid-cols-1 gap-1 sm:grid-cols-flight-route sm:items-center sm:gap-4 desktop:grid-cols-flight-route-desktop">
+                  <div className="grid grid-cols-1 gap-1 desktop:grid-cols-flight-route-desktop desktop:items-center desktop:gap-4">
                     <span className="shrink-0 text-sm font-bold text-slate-950 sm:text-base">
                       {flight.outbound.time}
                     </span>
@@ -164,7 +163,7 @@ export function FlightRecommendations({
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-1 gap-1 sm:grid-cols-flight-route sm:items-center sm:gap-4 desktop:grid-cols-flight-route-desktop">
+                  <div className="grid grid-cols-1 gap-1 desktop:grid-cols-flight-route-desktop desktop:items-center desktop:gap-4">
                     <span className="shrink-0 text-sm font-bold text-slate-950 sm:text-base">
                       {flight.returnLeg.time}
                     </span>
@@ -176,9 +175,9 @@ export function FlightRecommendations({
                   </div>
                 </div>
 
-                <div className="flex shrink-0 items-center justify-between gap-4 border-t border-slate-200/60 pt-3 sm:flex-col sm:items-end sm:border-0 sm:pt-0">
+                <div className="flex shrink-0 items-center justify-between gap-4 border-t border-slate-200/60 pt-3 desktop:flex-col desktop:items-end desktop:border-0 desktop:pt-0">
                   {flight.tag && (
-                    <span className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-base font-medium text-emerald-600 dark:border-emerald-800 dark:bg-emerald-950/70 dark:text-emerald-300">
+                    <span className="mb-3 flex h-10 w-16 items-center justify-center rounded-full border border-emerald-200 bg-emerald-50 text-base font-medium text-emerald-600 dark:border-emerald-800 dark:bg-emerald-950/70 dark:text-emerald-300">
                       {flight.tag}
                     </span>
                   )}

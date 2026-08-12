@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ChatHistorySidebar } from '@/components/common/Chat/ChatHistorySidebar/index';
 import { WelcomeState } from '@/components/common/Chat/WelcomeState/index';
 import { ChatMessageList } from '@/components/common/Chat/ChatMessageList/index';
-import { ChatInputBox } from '@/components/common/Chat/ChatInputBox/ChatInputBox';
+import { ChatInputBox } from '@/components/common/Chat/ChatInputBox';
 import { useChatSessions } from '@/hooks/useChatSessions';
 import { DashboardPageLayout } from '@/components/layouts/DashboardLayout';
 

@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 export default {
-  // 1. Kích hoạt Dark Mode dựa theo class trên <html>
+  
   darkMode: 'class',
 
   content: [
@@ -115,6 +115,7 @@ export default {
 
       spacing: {
         4.5: '18px',
+        4.75: '19px',
         5.5: '22px',
         6.5: '26px',
         9.5: '38px',
@@ -129,7 +130,10 @@ export default {
         22: '5.5rem',
         26: '104px',
         27: '27px',
+        28: '112px',
         29: '116px',
+        62: '248px',
+        43.25: '173px',
 
         // Custom spacing
         80: '80px',
@@ -147,6 +151,7 @@ export default {
         280: '280px',
         295: '295px',
         300: '300px',
+        330: '330px',
         370: '370px',
         379: '379px',
         400: '400px',
@@ -193,6 +198,21 @@ export default {
       width: {
         45: '45%',
         'auth-copy': '650px',
+        'new-chat': '173px',
+        'book-now': '106px',
+        'chat-input': '908px',
+        'recommendation-card': '892px',
+        'select-hotel-card': '804px',
+        'price-details': '394px',
+        'action-btn': '131px',
+      },
+
+      height: {
+        'chat-input': '201px',
+        'recommendation-card': '195px',
+        'select-hotel-card': '227px',
+        'select-fare-card': '115px',
+        'fare-card': '507px',
       },
 
       scale: {

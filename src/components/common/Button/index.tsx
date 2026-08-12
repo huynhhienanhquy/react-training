@@ -138,7 +138,7 @@ export function Button({
               src={googleIcon}
               alt=""
               aria-hidden="true"
-              className="h-5 w-5"
+              className="h-5 w-4.75"
             />
           )}
 
@@ -147,7 +147,7 @@ export function Button({
               src={appleIcon}
               alt=""
               aria-hidden="true"
-              className="h-5 w-5"
+              className="h-6 w-4.75"
             />
           )}
 

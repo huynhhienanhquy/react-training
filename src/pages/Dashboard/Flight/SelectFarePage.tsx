@@ -135,7 +135,7 @@ export const SelectFarePage = ({
 
         {/* MAIN DATA GRID */}
         {!loading && !error && fareData && selectedFare && (
-          <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-4 p-3 sm:p-4 md:gap-6 md:p-8 lg:max-w-none lg:grid-cols-fare-page lg:gap-12 lg:px-6.5 lg:pb-14 lg:pt-10">
+          <div className="mx-auto grid min-w-0 w-full max-w-6xl grid-cols-1 gap-4 p-3 sm:p-4 md:gap-6 md:p-8 desktop:max-w-none desktop:grid-cols-fare-page desktop:gap-12 desktop:px-6.5 desktop:pb-14 desktop:pt-10">
             <div className="space-y-6 lg:space-y-10">
               <FareHeader
                 destination={fareData.destination || ''}
