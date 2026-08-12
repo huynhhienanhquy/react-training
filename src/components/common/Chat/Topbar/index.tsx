@@ -61,25 +61,25 @@ export const Topbar = memo(function Topbar({
       </div>
 
       {onNewChat && (
-  <div className="shrink-0">
-    <Button
-      variant="primary"
-      size="none"
-      className="rounded-xl flex h-13 w-new-chat min-w-new-chat shrink-0 items-center justify-center gap-2 p-0 text-base font-medium"
-      leftIcon={
-        <AddIcon
-          aria-label="Add"
-          className="size-5 shrink-0"
-        />
-      }
-      onClick={onNewChat}
-    >
-      <span className="whitespace-nowrap">
-        Start New Chat
-      </span>
-    </Button>
-  </div>
-)}
+        <div className="shrink-0">
+          <Button
+            variant="primary"
+            size="none"
+            className="rounded-xl flex h-13 w-new-chat min-w-new-chat shrink-0 items-center justify-center gap-2 p-0 text-base font-medium"
+            leftIcon={
+              <AddIcon
+                aria-label="Add"
+                className="size-5 shrink-0"
+              />
+            }
+            onClick={onNewChat}
+          >
+            <span className="whitespace-nowrap">
+              Start New Chat
+            </span>
+          </Button>
+        </div>
+      )}
     </header>
   );
 });
