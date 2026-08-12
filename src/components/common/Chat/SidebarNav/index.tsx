@@ -126,13 +126,12 @@ export const SidebarNav = memo(function SidebarNav({ activeNav, onNavChange, att
           <Button
             type="button"
             variant="ghost"
-            size="icon"
-            className="relative h-16 min-h-16 w-16 min-w-16 transition transform active:scale-95 focus:outline-none drop-shadow-sm md:h-16 md:w-16 [&>span]:h-full [&>span]:w-full"
+            size="none"
+            className="relative !size-16 !min-h-16 !min-w-16 shrink-0 !p-0 transition active:scale-95 focus:outline-none drop-shadow-sm"           
             onClick={toggleProfileMenu}
           >
             <div
-              className="w-full h-full bg-white flex items-center justify-center p-1"
-              style={{ clipPath: 'url(#pentagon-clip)' }}
+              className="size-16 shrink-0 bg-white flex items-center justify-center p-1"              style={{ clipPath: 'url(#pentagon-clip)' }}
             >
               <div
                 className="w-full h-full bg-slate-200 overflow-hidden"
