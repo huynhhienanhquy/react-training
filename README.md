@@ -4,17 +4,7 @@ AI Travel is a frontend practice project that recreates a responsive travel-plan
 
 > This is a frontend project created for learning and demonstration purposes. The chatbot and access token are currently simulated in the browser, while flight, hotel, and destination data are retrieved from MockAPI.
 
-## Practice Scope
-
-* Build reusable React components with TypeScript and Tailwind CSS.
-* Organize code into pages, layouts, feature components, hooks, contexts, services, types, and utilities.
-* Implement guest and protected route layouts with React Router.
-* Manage authentication, theme, chat sessions, forms, loading, and error states with React hooks and context.
-* Fetch typed flight, hotel, place, and itinerary data through Axios services.
-* Persist the demo user, mock token, theme, and chat history in `localStorage`.
-* Document reusable UI states in Storybook and test behavior with Vitest and React Testing Library.
-
-## Implemented Features
+## Key Features
 
 * Login, registration, forgot-password, OTP verification, reset-password, and onboarding screens.
 * Guest-only and authenticated route guards.
