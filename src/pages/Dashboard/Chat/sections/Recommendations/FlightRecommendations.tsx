@@ -178,7 +178,7 @@ export function FlightRecommendations({
 
                 <div className="flex shrink-0 items-center justify-between gap-4 border-t border-slate-200/60 pt-3 sm:flex-col sm:items-end sm:border-0 sm:pt-0">
                   {flight.tag && (
-                    <span className="mb-3 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-base font-medium text-emerald-600 dark:border-emerald-800 dark:bg-emerald-950/70 dark:text-emerald-300">
+  <span className="mb-3 flex h-10 w-16 items-center justify-center rounded-full border border-emerald-200 bg-emerald-50 text-base font-medium text-emerald-600 dark:border-emerald-800 dark:bg-emerald-950/70 dark:text-emerald-300">
                       {flight.tag}
                     </span>
                   )}
