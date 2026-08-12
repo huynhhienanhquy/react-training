@@ -151,7 +151,7 @@ export const SelectHotelPage = ({
                 return (
                   <div
                     key={hotel.id }
-                    className="flex flex-col items-stretch gap-5 rounded-2xl bg-white p-4 shadow-sm transition-all duration-200 hover:shadow-md sm:p-5 md:min-h-[227px] md:flex-row md:gap-6 md:p-6"
+                    className="h-select-hotel-card w-select-hotel-card flex flex-col items-stretch gap-5 rounded-2xl bg-white p-4 shadow-sm transition-all duration-200 hover:shadow-md sm:p-5 md:min-h-[227px] md:flex-row md:gap-6 md:p-6"
                   >
                     {/* Information on the left */}
                     <div className="flex min-w-0 flex-1 flex-col items-center gap-5 sm:flex-row sm:items-start md:gap-6">
