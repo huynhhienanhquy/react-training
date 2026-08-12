@@ -1,20 +1,32 @@
-# AI Travel
+# AI Travel Practice
 
-AI Travel is a web application designed to help users plan their trips. Users can sign in, chat with a simulated travel assistant, explore flight and hotel recommendations, and compare flight classes and hotel prices.
+AI Travel is a frontend practice project that recreates a responsive travel-planning experience. Users can go through a demo authentication flow, chat with a simulated travel assistant, view travel recommendations, choose a flight fare, and browse available hotels.
 
 > This is a frontend project created for learning and demonstration purposes. The chatbot and access token are currently simulated in the browser, while flight, hotel, and destination data are retrieved from MockAPI.
 
-## Key Features
+## Practice Scope
 
-* Sign in, sign up, forgot password, OTP verification, and onboarding flows.
-* Route protection based on authentication status.
-* Multiple chat sessions with conversation history automatically saved to `localStorage`.
-* Flight, hotel, destination, and itinerary recommendations.
-* Flight class selection and detailed flight cost breakdown.
-* Hotel listings with an option to enable or disable price comparison.
-* Light and dark themes.
-* Component catalog and documentation with Storybook.
-* Unit and component testing with Vitest and React Testing Library.
+* Build reusable React components with TypeScript and Tailwind CSS.
+* Organize code into pages, layouts, feature components, hooks, contexts, services, types, and utilities.
+* Implement guest and protected route layouts with React Router.
+* Manage authentication, theme, chat sessions, forms, loading, and error states with React hooks and context.
+* Fetch typed flight, hotel, place, and itinerary data through Axios services.
+* Persist the demo user, mock token, theme, and chat history in `localStorage`.
+* Document reusable UI states in Storybook and test behavior with Vitest and React Testing Library.
+
+## Implemented Features
+
+* Login, registration, forgot-password, OTP verification, reset-password, and onboarding screens.
+* Guest-only and authenticated route guards.
+* Responsive dashboard navigation with light and dark themes.
+* Multiple simulated chat sessions with searchable history and browser persistence.
+* Keyword-based mock assistant responses that display flight or hotel recommendations.
+* Place and itinerary recommendation widgets backed by MockAPI data.
+* Economy/business fare selection with a calculated price breakdown.
+* Hotel listing and booking interactions.
+* Loading, error, retry, and success states for API-driven screens.
+
+The Favorites, Rewards, Routes Map, Community, and Settings pages are navigation placeholders and currently display a **Coming soon** message.
 
 ## Tech Stack
 
@@ -24,13 +36,13 @@ AI Travel is a web application designed to help users plan their trips. Users ca
 | Build            | Vite 8                                                     |
 | Routing          | React Router 7                                             |
 | Forms            | React Hook Form                                            |
-| HTTP             | Axios                                                      |
+| Data and HTTP    | React Context, custom hooks, Axios                         |
 | Testing          | Vitest, React Testing Library, Playwright browser provider |
 | UI Documentation | Storybook 10                                               |
 
 ## Requirements
 
-* A Node.js version compatible with Vite 8 (the latest LTS version is recommended).
+* A Node.js version compatible with Vite 8.
 * npm.
 * An Internet connection to retrieve data from MockAPI.
 
@@ -76,11 +88,16 @@ Note: The email address intentionally uses `gmaol` because it matches the curren
 | `/forgot-password` | Forgot Password        | Guests only         |
 | `/verify-otp`      | OTP Verification       | Guests only         |
 | `/reset-password`  | Reset Password         | Guests only         |
-| `/onboarding`      | Initial Setup          | Authenticated users |
+| `/onboarding`      | Initial Setup          | Guests only         |
 | `/dashboard`       | Chat                   | Authenticated users |
 | `/chats`           | Chat                   | Authenticated users |
 | `/chats/fares`     | Flight Class Selection | Authenticated users |
 | `/chats/hotels`    | Hotel Selection        | Authenticated users |
+| `/favorites`       | Coming Soon            | Authenticated users |
+| `/rewards`         | Coming Soon            | Authenticated users |
+| `/routes-map`      | Coming Soon            | Authenticated users |
+| `/community`       | Coming Soon            | Authenticated users |
+| `/settings`        | Coming Soon            | Authenticated users |
 
 Invalid URLs are redirected to `/login`. `GuestRoute` redirects authenticated users away from guest-only pages, while `ProtectedRoute` prevents unauthenticated users from accessing protected pages.
 
@@ -114,7 +131,7 @@ See `docs/ARCHITECTURE.md` for more information about the application's data flo
 
 The base URLs are currently declared directly in `src/constants/api.ts`:
 
-* `FLIGHT`: Flight and hotel data.
+* `FLIGHT`: Flight fare and hotel data.
 * `AUTH`: User data used for demo authentication.
 * `TRAVEL`: Destination and itinerary data.
 
@@ -152,7 +169,7 @@ The `vercel.json` file is configured to rewrite requests to `index.html`, allowi
 
 ## Security Notes
 
-* Authentication is currently implemented for demonstration purposes only. The frontend retrieves the user list and compares email addresses and passwords directly.
+* Authentication is currently implemented for demonstration purposes only. The frontend retrieves the demo user list and compares email addresses and passwords directly in the browser.
 * Access tokens are simulated and stored in `localStorage`.
 * The current authentication mechanism must not be used with real user accounts or sensitive data.
 * In a production environment, authentication should be handled by a backend service, passwords must be securely hashed, and tokens should have appropriate expiration and refresh mechanisms.
