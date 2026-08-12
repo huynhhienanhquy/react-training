@@ -41,7 +41,7 @@ export const ChatHistorySidebar = memo(function ChatHistorySidebar({
   );
 
   return (
-<aside className="hidden h-full w-295 shrink-0 select-none flex-col border-r border-slate-200/50 bg-surface-sidebar lg:flex">
+<aside className="hidden h-full w-300 shrink-0 select-none flex-col border-r border-slate-200/50 bg-surface-sidebar lg:flex">
 {/* Header Chats & Search Box */}
       <div className="px-5.5 pb-2 pt-9">
         <h1 className="text-2xl font-bold tracking-tight text-brand-dark">Chats</h1>
