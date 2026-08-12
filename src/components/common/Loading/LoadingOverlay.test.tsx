@@ -1,5 +1,5 @@
 // LoadingOverlay.test.tsx
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { LoadingOverlay } from '.';
 
@@ -11,35 +11,35 @@ describe('LoadingOverlay', () => {
   it('renders the loading overlay by default', () => {
     render(<LoadingOverlay />);
 
-    expect(screen.getByAltText('Tripal Logo')).toBeInTheDocument();
+    expect(document.body.querySelector('.fixed.inset-0')).toBeInTheDocument();
   });
 
   it('does not render when isVisible is false', () => {
     const { container } = render(<LoadingOverlay isVisible={false} />);
 
     expect(container).toBeEmptyDOMElement();
-    expect(screen.queryByAltText('Tripal Logo')).not.toBeInTheDocument();
+    expect(document.body.querySelector('.fixed.inset-0')).not.toBeInTheDocument();
   });
 
   it('renders when isVisible is true', () => {
     render(<LoadingOverlay isVisible />);
 
-    expect(screen.getByAltText('Tripal Logo')).toBeInTheDocument();
+    expect(document.body.querySelector('.fixed.inset-0')).toBeInTheDocument();
   });
 
   it('renders the logo with the imported image source', () => {
     render(<LoadingOverlay />);
 
-    expect(screen.getByAltText('Tripal Logo')).toHaveAttribute(
-      'src',
-      '/assets/logo.png',
-    );
+    const logo = document.body.querySelector('img[src="/assets/logo.png"]');
+
+    expect(logo).toHaveAttribute('alt', '');
+    expect(logo).toHaveAttribute('aria-hidden', 'true');
   });
 
   it('applies full-screen overlay styles', () => {
-    const { container } = render(<LoadingOverlay />);
+    render(<LoadingOverlay />);
 
-    const overlay = container.firstElementChild;
+    const overlay = document.body.querySelector('.fixed.inset-0');
 
     expect(overlay).toHaveClass(
       'fixed',
@@ -48,22 +48,24 @@ describe('LoadingOverlay', () => {
       'flex',
       'items-center',
       'justify-center',
-      'bg-black/20',
-      'backdrop-blur-xs',
+      'h-screen',
+      'w-screen',
+      'bg-white/60',
     );
   });
 
   it('renders an animated spinner', () => {
-    const { container } = render(<LoadingOverlay />);
+    render(<LoadingOverlay />);
 
-    const spinner = container.querySelector('.animate-spin');
+    const spinner = document.body.querySelector('.animate-spin');
 
     expect(spinner).toBeInTheDocument();
     expect(spinner).toHaveClass(
       'rounded-full',
-      'border-3',
-      'border-t-blue-500',
-      'border-l-blue-400',
+      'border-4',
+      'border-gray-200/70',
+      'border-l-primary',
+      'border-t-primary',
     );
   });
 });
