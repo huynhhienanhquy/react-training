@@ -28,7 +28,7 @@ export const WelcomeState = memo(function WelcomeState({
   const createPromptHandler = (prompt: string) => () => onSelectPrompt(prompt);
 
   return (
-    <div className="my-auto flex w-full flex-1 flex-col items-center justify-center px-1 py-5 text-center md:-translate-y-10 md:px-4 md:py-6 lg:translate-y-5 desktop:absolute desktop:inset-x-0 desktop:top-127 desktop:my-0 desktop:flex-none desktop:translate-y-0 desktop:py-0">
+    <div className="my-auto flex w-full flex-1 flex-col items-center justify-center px-1 py-5 text-center md:-translate-y-10 md:px-4 md:py-6 lg:translate-y-5 desktop:absolute desktop:inset-x-0 desktop:top-127 desktop:my-0 desktop:flex-none desktop:translate-y-0 desktop:py-0 min-[1441px]:relative min-[1441px]:inset-auto min-[1441px]:top-auto min-[1441px]:my-auto min-[1441px]:flex-1 min-[1441px]:py-5">
       {/* Visual Header Images */}
       <div className="mb-4 flex items-center justify-center -space-x-3 md:mb-6 lg:mb-5 desktop:mb-5">
         <div className="w-20 h-20 md:w-24 md:h-24 lg:w-26 lg:h-26 desktop:h-24 desktop:w-24 rounded-2xl overflow-hidden border-3 border-white shadow-md z-10">

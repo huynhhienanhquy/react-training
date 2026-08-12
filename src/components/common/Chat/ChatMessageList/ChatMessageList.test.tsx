@@ -96,6 +96,7 @@ describe("ChatMessageList", () => {
     expect(userMessage.closest("div.overflow-y-auto")).toHaveClass(
       "max-w-4xl",
       "lg:max-w-none",
+      "min-[1441px]:!max-w-[908px]",
     );
   });
 
