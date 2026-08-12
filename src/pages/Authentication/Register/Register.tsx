@@ -72,7 +72,7 @@ export const Register = () => {
           <input
             type="checkbox"
             id="terms"
-            className="h-6.5 w-6.5 shrink-0 cursor-pointer rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+            className="h-6 w-6 shrink-0 cursor-pointer rounded border-gray-300 text-blue-600 focus:ring-blue-500"
             required
           />
           <label htmlFor="terms" className="cursor-pointer select-none text-sm leading-6 text-gray-500 sm:text-base">
