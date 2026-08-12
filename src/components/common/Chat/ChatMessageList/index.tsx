@@ -95,7 +95,7 @@ export const ChatMessageList = memo(function ChatMessageList({
                 : 'items-start gap-3'
             }`}
           >
-            <div className="flex w-full max-w-2xl flex-col gap-2 lg:max-w-none">
+            <div className="flex flex-col gap-2 w-chat-input shrink-0">
               {msg.text && (
                 <div
                   className={`text-sm md:text-base whitespace-pre-line w-fit ${
