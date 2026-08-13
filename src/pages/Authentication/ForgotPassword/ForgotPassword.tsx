@@ -4,11 +4,13 @@ import { useFormState } from '@/hooks/useFormState';
 import { AuthPageLayout } from '@/components/layouts/AuthPageLayout';
 import { Button } from '@/components/common/Button';
 import { InputField } from '@/components/common/InputField';
+import { StatusMessage } from '@/components/common/StatusMessage';
 
 export const ForgotPassword = () => {
   const navigate = useNavigate();
   const { isLoading, startLoading, stopLoading } = useFormState();
   const [email, setEmail] = useState<string>("");
+  const [statusMessage, setStatusMessage] = useState('');
   const handleEmailChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.target.value), []);
   const handleSignUp = useCallback(() => navigate('/register'), [navigate]);
 
@@ -18,8 +20,8 @@ export const ForgotPassword = () => {
 
     setTimeout(() => {
       stopLoading();
-      alert("OTP code has been sent to your email!");
-      navigate('/verify-otp');
+      setStatusMessage('OTP code has been sent to your email.');
+      setTimeout(() => navigate('/verify-otp'), 700);
     }, 300);
   }, [navigate, startLoading, stopLoading]);
 
@@ -57,6 +59,8 @@ export const ForgotPassword = () => {
           >
             Send OTP
           </Button>
+
+          <StatusMessage message={statusMessage} className="mt-4" />
 
         </form>
 

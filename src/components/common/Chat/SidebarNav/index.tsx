@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MenuIcon from '@/components/common/Icons/MenuIcon';
 import { useAuth } from '@/hooks/useAuth';
@@ -19,6 +19,7 @@ import { useTheme } from '@/hooks/useTheme';
 
 export const SidebarNav = memo(function SidebarNav({ activeNav, onNavChange, attachedToContent = false, isMobileOpen, onMobileToggle }: SidebarNavProps) {
   const navigate = useNavigate();
+  const [logoutError, setLogoutError] = useState('');
   const { logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const isDark = theme === 'dark';
@@ -40,11 +41,12 @@ export const SidebarNav = memo(function SidebarNav({ activeNav, onNavChange, att
 
   const handleLogout = async () => {
     try {
+      setLogoutError('');
       closeProfileMenu();
       await logout();
       navigate('/login', { replace: true });
-    } catch (error) {
-      console.error('Logout error:', error);
+    } catch {
+      setLogoutError('Unable to log out. Please try again.');
     }
   };
 
@@ -170,6 +172,7 @@ export const SidebarNav = memo(function SidebarNav({ activeNav, onNavChange, att
                   Log out
                 </Button>
               </div>
+              {logoutError && <p role="alert" className="px-3 py-2 text-xs text-red-600">{logoutError}</p>}
             </div>
           )}
         </div>
@@ -237,6 +240,7 @@ export const SidebarNav = memo(function SidebarNav({ activeNav, onNavChange, att
               </div>
 
               <div className="flex flex-col gap-2">
+                {logoutError && <p role="alert" className="px-3 text-sm text-red-600">{logoutError}</p>}
                 <Button
                   type="button"
                   variant="ghost"

@@ -10,8 +10,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     if (savedUser) {
       try {
         return JSON.parse(savedUser) as User;
-      } catch (error) {
-        console.error('Cross user error:', error);
+      } catch {
         localStorage.removeItem('user');
       }
     }

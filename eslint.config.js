@@ -19,4 +19,8 @@ export default defineConfig([globalIgnores(['dist', 'coverage', 'storybook-stati
   languageOptions: {
     globals: globals.browser,
   },
+  rules: {
+    'no-alert': 'error',
+    'no-console': 'error',
+  },
 }, ...storybook.configs["flat/recommended"]])

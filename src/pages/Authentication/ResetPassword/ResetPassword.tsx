@@ -5,12 +5,14 @@ import { AuthPageLayout } from '@/components/layouts/AuthPageLayout';
 import { Button } from '@/components/common/Button';
 import { InputField } from '@/components/common/InputField';
 import { ErrorMessage } from '@/components/common/Error';
+import { StatusMessage } from '@/components/common/StatusMessage';
 
 export const ResetPassword = () => {
   const navigate = useNavigate();
   const { isLoading, error, startLoading, stopLoading, setError } = useFormState();
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [statusMessage, setStatusMessage] = useState('');
   const handlePasswordChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value), []);
   const handleConfirmPasswordChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => setConfirmPassword(event.target.value), []);
   const handleSignUp = useCallback(() => navigate('/register'), [navigate]);
@@ -28,8 +30,8 @@ export const ResetPassword = () => {
 
     setTimeout(() => {
       stopLoading();
-      alert("Password reset successfully! Redirecting to Sign In...");
-      navigate('/login');
+      setStatusMessage('Password reset successfully. Redirecting to Sign In...');
+      setTimeout(() => navigate('/login'), 700);
     }, 300);
   }, [confirmPassword, navigate, password, setError, startLoading, stopLoading]);
 
@@ -84,6 +86,7 @@ export const ResetPassword = () => {
             </div>
 
             <ErrorMessage message={error} />
+            <StatusMessage message={statusMessage} className="mt-4" />
 
             <Button
               className="mt-14 h-13 rounded-xl py-0 text-base font-normal"

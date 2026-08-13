@@ -6,15 +6,9 @@ import React from 'react';
 
 describe('useAuth', () => {
   it('throws error when used outside provider', () => {
-    // Suppress console.error for expected thrown error
-    const consoleError = console.error;
-    console.error = () => {};
-
     expect(() => {
       renderHook(() => useAuth());
     }).toThrow('useAuth must be used within an AuthProvider');
-
-    console.error = consoleError;
   });
 
   it('returns context value when inside provider', () => {

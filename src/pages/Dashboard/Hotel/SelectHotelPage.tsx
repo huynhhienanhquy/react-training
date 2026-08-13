@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { SectionHeader } from '@/components/features/flights/SectionHeader';
@@ -15,6 +15,7 @@ import defaultHotelImage from '@/assets/images/travel-provider-logo.png';
 import { useAsyncData } from '@/hooks/useAsyncData';
 import { useChatTitle } from '@/hooks/useChatTitle';
 import { DashboardPageLayout } from '@/components/layouts/DashboardLayout';
+import { StatusMessage } from '@/components/common/StatusMessage';
 
 export const SelectHotelPage = ({
   chatTitle,
@@ -25,6 +26,7 @@ export const SelectHotelPage = ({
   selectedHotel,
 }: SelectHotelPageProps) => {
   const navigate = useNavigate();
+  const [bookingMessage, setBookingMessage] = useState('');
   const navigateBackToChat = useCallback(() => navigate('/chats'), [navigate]);
   const handleBackToChat = onBackToChat ?? navigateBackToChat;
   const handleStartNewChat = onStartNewChat ?? navigateBackToChat;
@@ -79,10 +81,8 @@ export const SelectHotelPage = ({
     if (onSelectHotel) {
       onSelectHotel(selectedHotel);
     } else {
-      alert(
-        `The hotel you have chosen: ${
-          selectedHotel.hotelName || 'Hotel'
-        }`,
+      setBookingMessage(
+        `Selected hotel: ${selectedHotel.hotelName || 'Hotel'}`,
       );
     }
   }, [onSelectHotel]);
@@ -134,6 +134,8 @@ export const SelectHotelPage = ({
         {/* MAIN DATA GRID  */}
         {!loading && !error && (
           <div className="max-w-6xl w-full mx-auto p-4 sm:p-6 md:p-8 space-y-6">
+
+            <StatusMessage message={bookingMessage} />
 
             {/* HEADER SECTION:*/}
             <div className="pb-2">

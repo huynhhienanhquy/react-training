@@ -76,7 +76,6 @@ vi.mock("@/components/auth/AuthFooter/AuthFooter", () => ({
 describe("ForgotPassword", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.spyOn(window, "alert").mockImplementation(() => {});
   });
 
   it("renders page correctly", () => {
@@ -124,8 +123,8 @@ describe("ForgotPassword", () => {
 
     await vi.waitFor(() => {
       expect(mockStopLoading).toHaveBeenCalled();
-      expect(window.alert).toHaveBeenCalledWith(
-        "OTP code has been sent to your email!"
+      expect(screen.getByRole('status')).toHaveTextContent(
+        'OTP code has been sent to your email.'
       );
       expect(mockNavigate).toHaveBeenCalledWith("/verify-otp");
     }, { timeout: 2000 });
