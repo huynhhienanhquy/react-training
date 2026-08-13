@@ -52,6 +52,7 @@ export const SelectFarePage = ({
     data: fareData,
     loading,
     error,
+    refetch,
   } = useAsyncData<FareData>(fetchFare);
 
   // Chat title
@@ -86,7 +87,6 @@ export const SelectFarePage = ({
         priceBreakdown.taxesAndFees
       : 0;
 
-  const handleRetry = useCallback(() => window.location.reload(), []);
   const handleSelectFare = useCallback((id: string) => {
     setSelectedFareId(id as 'economy' | 'business');
   }, []);
@@ -125,7 +125,7 @@ export const SelectFarePage = ({
                 variant="danger"
                 size="sm"
                 className="mt-4"
-                onClick={handleRetry}
+                onClick={refetch}
               >
                 Retry
               </Button>
