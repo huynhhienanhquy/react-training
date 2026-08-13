@@ -66,7 +66,7 @@ describe('mapFareDataToFlightOption', () => {
       airlineName: '',
       legs: undefined,
       fareOptions: undefined,
-    } as FareData;
+    } as unknown as FareData;
 
     expect(mapFareDataToFlightOption(sparseFare, 0)).toMatchObject({
       airline: 'Airline',
