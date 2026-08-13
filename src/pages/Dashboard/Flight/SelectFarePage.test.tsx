@@ -137,14 +137,10 @@ describe('SelectFarePage Component', () => {
     expect(screen.getByRole('button', { name: /retry/i })).toBeInTheDocument()
   })
 
-  it('reloads page when clicking Retry button on error', async () => {
-    const reloadMock = vi.fn()
-    Object.defineProperty(window, 'location', {
-      configurable: true,
-      value: { ...window.location, reload: reloadMock },
-    })
-
-    ;(getFlights as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('Network Error'))
+  it('refetches data when clicking Retry button on error', async () => {
+    ;(getFlights as ReturnType<typeof vi.fn>)
+      .mockRejectedValueOnce(new Error('Network Error'))
+      .mockResolvedValueOnce(mockFareData)
 
     render(<SelectFarePage />)
 
@@ -155,6 +151,9 @@ describe('SelectFarePage Component', () => {
     const retryButton = screen.getByRole('button', { name: /retry/i })
     fireEvent.click(retryButton)
 
-    expect(reloadMock).toHaveBeenCalledTimes(1)
+    await waitFor(() => {
+      expect(getFlights).toHaveBeenCalledTimes(2)
+      expect(screen.queryByText('Network Error')).not.toBeInTheDocument()
+    })
   })
 })
