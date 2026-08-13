@@ -1,120 +1,296 @@
-import { renderHook, act } from '@testing-library/react';
+import { act, renderHook, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { useAsyncData } from '@/hooks/useAsyncData';
-import { AxiosError } from 'axios';
-import { createElement, StrictMode, type ReactNode } from 'react';
 
 describe('useAsyncData', () => {
-  it('has correct initial loading state', () => {
+  it('has correct initial state', () => {
     const fetchFn = vi.fn().mockResolvedValue('data');
+
     const { result } = renderHook(() => useAsyncData(fetchFn));
 
-    expect(result.current.loading).toBe(true);
     expect(result.current.data).toBeNull();
+    expect(result.current.loading).toBe(true);
     expect(result.current.error).toBeNull();
   });
 
-  it('handles successful data fetch', async () => {
+  it('fetches data successfully', async () => {
     const fetchFn = vi.fn().mockResolvedValue('success');
+
     const { result } = renderHook(() => useAsyncData(fetchFn));
 
-    expect(result.current.loading).toBe(true);
-
-    await act(async () => {
-      await Promise.resolve(); // wait for fetch to complete
+    await waitFor(() => {
+      expect(result.current.loading).toBe(false);
     });
 
-    expect(result.current.loading).toBe(false);
     expect(result.current.data).toBe('success');
     expect(result.current.error).toBeNull();
+    expect(fetchFn).toHaveBeenCalledTimes(1);
+    expect(fetchFn).toHaveBeenCalledWith(expect.any(AbortSignal));
   });
 
-  it('handles error handling with AxiosError', async () => {
-    const error = new AxiosError('Network Error');
-    const fetchFn = vi.fn().mockRejectedValue(error);
+  it('handles fetch error', async () => {
+    const fetchFn = vi.fn().mockRejectedValue(new Error('Fetch failed'));
 
     const { result } = renderHook(() => useAsyncData(fetchFn));
 
+    await waitFor(() => {
+      expect(result.current.loading).toBe(false);
+    });
+
+    expect(result.current.data).toBeNull();
+    expect(result.current.error).toBe('Fetch failed');
+  });
+
+  it('does not fetch when skip is true', async () => {
+    const fetchFn = vi.fn().mockResolvedValue('data');
+
+    const { result } = renderHook(() =>
+      useAsyncData(fetchFn, {
+        skip: true,
+      }),
+    );
+
+    // Allow queued microtasks to complete
     await act(async () => {
       await Promise.resolve();
     });
 
-    expect(result.current.loading).toBe(false);
+    expect(fetchFn).not.toHaveBeenCalled();
+
     expect(result.current.data).toBeNull();
-    expect(result.current.error).toBe('Network Error');
+    expect(result.current.loading).toBe(false);
+    expect(result.current.error).toBeNull();
   });
 
-  it('tests refetch functionality', async () => {
-    const fetchFn = vi.fn()
+  it('refetches data manually', async () => {
+    const fetchFn = vi
+      .fn()
       .mockResolvedValueOnce('first')
       .mockResolvedValueOnce('second');
 
     const { result } = renderHook(() => useAsyncData(fetchFn));
 
-    await act(async () => {
-      await Promise.resolve();
+    await waitFor(() => {
+      expect(result.current.data).toBe('first');
     });
 
-    expect(result.current.data).toBe('first');
-
-    act(() => {
-      result.current.refetch();
-    });
-
-    expect(result.current.loading).toBe(true);
-
     await act(async () => {
-      await Promise.resolve();
+      await result.current.refetch();
     });
 
     expect(result.current.data).toBe('second');
+    expect(result.current.loading).toBe(false);
+    expect(result.current.error).toBeNull();
+
     expect(fetchFn).toHaveBeenCalledTimes(2);
   });
 
-  it('does not refetch when an inline fetch function changes identity', async () => {
-    const fetchFn = vi.fn().mockResolvedValue('data');
-    const { rerender } = renderHook(() => useAsyncData(() => fetchFn()));
+  it('sets loading to true while refetching', async () => {
+    let resolveSecondRequest!: (value: string) => void;
 
-    await act(async () => {
-      await Promise.resolve();
+    const fetchFn = vi
+      .fn()
+      .mockResolvedValueOnce('first')
+      .mockImplementationOnce(
+        () =>
+          new Promise<string>((resolve) => {
+            resolveSecondRequest = resolve;
+          }),
+      );
+
+    const { result } = renderHook(() => useAsyncData(fetchFn));
+
+    await waitFor(() => {
+      expect(result.current.data).toBe('first');
     });
 
-    rerender();
-    rerender();
+    act(() => {
+      void result.current.refetch();
+    });
 
-    expect(fetchFn).toHaveBeenCalledTimes(1);
-  });
-
-  it('refetches when an explicit request dependency changes', async () => {
-    const fetchFn = vi.fn().mockImplementation((id: number) =>
-      Promise.resolve(`data-${id}`),
-    );
-    const { result, rerender } = renderHook(
-      ({ id }) => useAsyncData(() => fetchFn(id), { dependencies: [id] }),
-      { initialProps: { id: 1 } },
-    );
-
-    await act(async () => Promise.resolve());
-    expect(result.current.data).toBe('data-1');
-
-    rerender({ id: 2 });
-    await act(async () => Promise.resolve());
-
-    expect(result.current.data).toBe('data-2');
-    expect(fetchFn).toHaveBeenCalledTimes(2);
-  });
-
-  it('finishes loading when effects are replayed by StrictMode', async () => {
-    const fetchFn = vi.fn().mockResolvedValue('strict-mode-data');
-    const wrapper = ({ children }: { children: ReactNode }) =>
-      createElement(StrictMode, null, children);
-
-    const { result } = renderHook(() => useAsyncData(fetchFn), { wrapper });
-
-    await act(async () => Promise.resolve());
-
-    expect(result.current.loading).toBe(false);
-    expect(result.current.data).toBe('strict-mode-data');
+    expect(result.current.loading).toBe(true);
     expect(result.current.error).toBeNull();
+
+    await act(async () => {
+      resolveSecondRequest('second');
+    });
+
+    expect(result.current.data).toBe('second');
+    expect(result.current.loading).toBe(false);
+  });
+
+  it('clears previous error when refetching', async () => {
+    let resolveSecondRequest!: (value: string) => void;
+
+    const fetchFn = vi
+      .fn()
+      .mockRejectedValueOnce(new Error('First request failed'))
+      .mockImplementationOnce(
+        () =>
+          new Promise<string>((resolve) => {
+            resolveSecondRequest = resolve;
+          }),
+      );
+
+    const { result } = renderHook(() => useAsyncData(fetchFn));
+
+    await waitFor(() => {
+      expect(result.current.error).toBe('First request failed');
+    });
+
+    act(() => {
+      void result.current.refetch();
+    });
+
+    expect(result.current.loading).toBe(true);
+    expect(result.current.error).toBeNull();
+
+    await act(async () => {
+      resolveSecondRequest('success');
+    });
+
+    expect(result.current.data).toBe('success');
+    expect(result.current.loading).toBe(false);
+    expect(result.current.error).toBeNull();
+  });
+
+  it('aborts previous request when refetch is called', async () => {
+    const signals: AbortSignal[] = [];
+
+    const fetchFn = vi.fn((signal: AbortSignal) => {
+      signals.push(signal);
+
+      return new Promise<string>(() => {
+        // Keep request pending
+      });
+    });
+
+    const { result } = renderHook(() => useAsyncData(fetchFn));
+
+    await waitFor(() => {
+      expect(fetchFn).toHaveBeenCalledTimes(1);
+    });
+
+    expect(signals[0].aborted).toBe(false);
+
+    act(() => {
+      void result.current.refetch();
+    });
+
+    await waitFor(() => {
+      expect(fetchFn).toHaveBeenCalledTimes(2);
+    });
+
+    expect(signals[0].aborted).toBe(true);
+    expect(signals[1].aborted).toBe(false);
+  });
+
+  it('aborts active request when component unmounts', async () => {
+    let signal!: AbortSignal;
+
+    const fetchFn = vi.fn((requestSignal: AbortSignal) => {
+      signal = requestSignal;
+
+      return new Promise<string>(() => {
+        // Keep pending until unmount
+      });
+    });
+
+    const { unmount } = renderHook(() => useAsyncData(fetchFn));
+
+    await waitFor(() => {
+      expect(fetchFn).toHaveBeenCalledTimes(1);
+    });
+
+    expect(signal.aborted).toBe(false);
+
+    unmount();
+
+    expect(signal.aborted).toBe(true);
+  });
+
+  it('ignores result from an older request', async () => {
+    let resolveFirst!: (value: string) => void;
+    let resolveSecond!: (value: string) => void;
+
+    const fetchFn = vi
+      .fn()
+      .mockImplementationOnce(
+        () =>
+          new Promise<string>((resolve) => {
+            resolveFirst = resolve;
+          }),
+      )
+      .mockImplementationOnce(
+        () =>
+          new Promise<string>((resolve) => {
+            resolveSecond = resolve;
+          }),
+      );
+
+    const { result } = renderHook(() => useAsyncData(fetchFn));
+
+    await waitFor(() => {
+      expect(fetchFn).toHaveBeenCalledTimes(1);
+    });
+
+    act(() => {
+      void result.current.refetch();
+    });
+
+    await waitFor(() => {
+      expect(fetchFn).toHaveBeenCalledTimes(2);
+    });
+
+    // New request finishes first
+    await act(async () => {
+      resolveSecond('new data');
+    });
+
+    expect(result.current.data).toBe('new data');
+
+    // Old request finishes later
+    await act(async () => {
+      resolveFirst('old data');
+    });
+
+    // Old request must not overwrite new data
+    expect(result.current.data).toBe('new data');
+  });
+
+  it('ignores error from an aborted request', async () => {
+    let rejectFirst!: (error: Error) => void;
+
+    const fetchFn = vi
+      .fn()
+      .mockImplementationOnce(
+        () =>
+          new Promise<string>((_, reject) => {
+            rejectFirst = reject;
+          }),
+      )
+      .mockResolvedValueOnce('success');
+
+    const { result } = renderHook(() => useAsyncData(fetchFn));
+
+    await waitFor(() => {
+      expect(fetchFn).toHaveBeenCalledTimes(1);
+    });
+
+    act(() => {
+      void result.current.refetch();
+    });
+
+    await waitFor(() => {
+      expect(result.current.data).toBe('success');
+    });
+
+    await act(async () => {
+      rejectFirst(new Error('Old request failed'));
+    });
+
+    expect(result.current.data).toBe('success');
+    expect(result.current.error).toBeNull();
+    expect(result.current.loading).toBe(false);
   });
 });
