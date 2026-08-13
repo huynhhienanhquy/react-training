@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import { describe, expect, it, beforeEach } from 'vitest';
+import { describe, expect, it, beforeEach, vi } from 'vitest';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 describe('useLocalStorage', () => {
@@ -51,5 +51,37 @@ describe('useLocalStorage', () => {
     const { result } = renderHook(() => useLocalStorage('test-key', 'initial'));
 
     expect(result.current.value).toBe('initial');
+  });
+
+  it('uses null when storage and an initial value are both absent', () => {
+    const { result } = renderHook(() => useLocalStorage<string>('missing'));
+    expect(result.current.value).toBeNull();
+  });
+
+  it('handles storage write and removal errors', () => {
+    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => undefined);
+    const setItem = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+      throw new Error('write failed');
+    });
+    const { result } = renderHook(() => useLocalStorage('test-key', 'initial'));
+
+    act(() => result.current.setValue('next'));
+    expect(consoleError).toHaveBeenCalledWith(
+      'Error setting localStorage key "test-key":',
+      expect.any(Error),
+    );
+
+    setItem.mockRestore();
+    const removeItem = vi.spyOn(Storage.prototype, 'removeItem').mockImplementation(() => {
+      throw new Error('remove failed');
+    });
+    act(() => result.current.removeValue());
+    expect(consoleError).toHaveBeenCalledWith(
+      'Error removing localStorage key "test-key":',
+      expect.any(Error),
+    );
+
+    removeItem.mockRestore();
+    consoleError.mockRestore();
   });
 });
