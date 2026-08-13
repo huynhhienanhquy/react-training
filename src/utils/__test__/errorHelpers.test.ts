@@ -26,4 +26,24 @@ describe('getErrorMessage', () => {
       'Something went wrong. Please try again.',
     );
   });
+
+  it('uses a regular Error message', () => {
+    expect(getErrorMessage(new Error('Offline'))).toBe('Offline');
+  });
+
+  it('uses the Axios message when the response has no API message', () => {
+    expect(getErrorMessage(new AxiosError('Request timed out'))).toBe('Request timed out');
+  });
+
+  it('uses the fallback for errors with empty messages', () => {
+    expect(getErrorMessage(new Error(''))).toBe('Something went wrong. Please try again.');
+  });
+
+  it('returns a string error unchanged', () => {
+    expect(getErrorMessage('Connection lost')).toBe('Connection lost');
+  });
+
+  it('supports a custom fallback for empty Axios errors', () => {
+    expect(getErrorMessage(new AxiosError(''), 'Try later')).toBe('Try later');
+  });
 });

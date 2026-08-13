@@ -74,6 +74,19 @@ describe("AuthLayout", () => {
     ).toBeInTheDocument();
   });
 
+  it('applies inset variants', () => {
+    const { container } = render(
+      <AuthLayout inset heroInset>
+        <div>Content</div>
+      </AuthLayout>,
+    );
+
+    expect(container.firstElementChild).toHaveClass('desktop:pr-6');
+    expect(screen.getByRole('heading')).toHaveClass('text-5xl');
+    expect(screen.getByRole('heading').parentElement).toHaveClass('bottom-18', 'left-8');
+    expect(screen.getByText('Content').parentElement?.parentElement).not.toHaveClass('lg:-translate-y-3');
+  });
+
   it("forces light mode while mounted and restores dark mode on unmount", () => {
     document.documentElement.classList.add('dark');
     document.documentElement.style.colorScheme = 'dark';

@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import { describe, expect, it, beforeEach } from 'vitest';
+import { describe, expect, it, beforeEach, vi } from 'vitest';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 describe('useLocalStorage', () => {
@@ -51,5 +51,30 @@ describe('useLocalStorage', () => {
     const { result } = renderHook(() => useLocalStorage('test-key', 'initial'));
 
     expect(result.current.value).toBe('initial');
+  });
+
+  it('exposes storage write errors and clears them after a successful write', () => {
+    const { result } = renderHook(() => useLocalStorage('test-key', 'initial'));
+    const setItem = vi.spyOn(Storage.prototype, 'setItem').mockImplementationOnce(() => {
+      throw new Error('quota');
+    });
+
+    act(() => result.current.setValue('failed'));
+    expect(result.current.error).toContain('Unable to save');
+
+    act(() => result.current.setValue('saved'));
+    expect(result.current.error).toBeNull();
+    setItem.mockRestore();
+  });
+
+  it('exposes storage removal errors', () => {
+    const { result } = renderHook(() => useLocalStorage('test-key', 'initial'));
+    const removeItem = vi.spyOn(Storage.prototype, 'removeItem').mockImplementationOnce(() => {
+      throw new Error('blocked');
+    });
+
+    act(() => result.current.removeValue());
+    expect(result.current.error).toContain('Unable to remove');
+    removeItem.mockRestore();
   });
 });

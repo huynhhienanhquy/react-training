@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { useOtpInput } from '@/hooks/useOtpInput';
 import React from 'react';
 
@@ -68,5 +68,36 @@ describe('useOtpInput', () => {
     });
 
     expect(result.current.otp).toEqual(['1', '2', '3', '4']);
+  });
+
+  it('keeps only the last digit and focuses the next input', () => {
+    const { result } = renderHook(() => useOtpInput(3));
+    const focus = vi.fn();
+    act(() => result.current.setInputRef(1, { focus } as unknown as HTMLInputElement));
+    act(() => result.current.handleChange(0, '12'));
+
+    expect(result.current.otp[0]).toBe('2');
+    expect(focus).toHaveBeenCalledOnce();
+  });
+
+  it('moves focus backward on backspace from an empty input', () => {
+    const { result } = renderHook(() => useOtpInput(3));
+    const focus = vi.fn();
+    act(() => result.current.setInputRef(0, { focus } as unknown as HTMLInputElement));
+    act(() => result.current.handleKeyDown(1, { key: 'Backspace' } as React.KeyboardEvent<HTMLInputElement>));
+    expect(focus).toHaveBeenCalledOnce();
+  });
+
+  it('ignores empty pasted content and focuses after a partial paste', () => {
+    const { result } = renderHook(() => useOtpInput(4));
+    const focus = vi.fn();
+    act(() => result.current.setInputRef(2, { focus } as unknown as HTMLInputElement));
+
+    act(() => result.current.handlePaste({ clipboardData: { getData: () => 'ab' } } as unknown as React.ClipboardEvent<HTMLInputElement>));
+    expect(result.current.otpString).toBe('');
+
+    act(() => result.current.handlePaste({ clipboardData: { getData: () => '1a2' } } as unknown as React.ClipboardEvent<HTMLInputElement>));
+    expect(result.current.otp).toEqual(['1', '2', '', '']);
+    expect(focus).toHaveBeenCalledOnce();
   });
 });

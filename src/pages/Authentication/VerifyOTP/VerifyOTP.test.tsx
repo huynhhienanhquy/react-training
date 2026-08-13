@@ -72,6 +72,13 @@ describe("VerifyOTP", () => {
     expect(inputs[1]).toHaveValue("2");
   });
 
+  it('handles keyboard navigation in an OTP box', () => {
+    render(<VerifyOTP />);
+    const inputs = screen.getAllByRole('textbox');
+    fireEvent.keyDown(inputs[1], { key: 'Backspace' });
+    expect(inputs[0]).toHaveFocus();
+  });
+
   it("handles paste of 6-digit code", () => {
     vi.useFakeTimers();
     render(<VerifyOTP />);
@@ -102,6 +109,12 @@ describe("VerifyOTP", () => {
     });
 
     expect(screen.getByText(/Resend in 00:26/)).toBeInTheDocument();
+
+    act(() => {
+      vi.advanceTimersByTime(17000);
+    });
+
+    expect(screen.getByText(/Resend in 00:09/)).toBeInTheDocument();
     vi.useRealTimers();
   });
 

@@ -171,4 +171,22 @@ describe('WelcomeState', () => {
     expect(buttons)
       .toHaveLength(prompts.length);
   });
+
+  it('renders all default prompts and dispatches prompts from every row', async () => {
+    const user = userEvent.setup();
+    const onSelectPrompt = vi.fn();
+    render(<WelcomeState onSelectPrompt={onSelectPrompt} />);
+
+    const buttons = screen.getAllByRole('button');
+    expect(buttons).toHaveLength(6);
+
+    for (const button of buttons) {
+      await user.click(button);
+    }
+
+    expect(onSelectPrompt).toHaveBeenCalledTimes(6);
+    expect(onSelectPrompt).toHaveBeenLastCalledWith(
+      'Routes from Miami to Long Island Beach',
+    );
+  });
 });
