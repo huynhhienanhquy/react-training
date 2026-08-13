@@ -104,6 +104,37 @@ describe('useAsyncData', () => {
     expect(fetchFn).toHaveBeenCalledTimes(2);
   });
 
+  it('aborts the previous request when refetching', async () => {
+    const signals: AbortSignal[] = [];
+    const fetchFn = vi.fn((signal: AbortSignal) => {
+      signals.push(signal);
+      return new Promise<string>(() => undefined);
+    });
+    const { result } = renderHook(() => useAsyncData(fetchFn));
+
+    expect(signals[0].aborted).toBe(false);
+
+    act(() => {
+      result.current.refetch();
+    });
+
+    expect(signals[0].aborted).toBe(true);
+    expect(signals[1].aborted).toBe(false);
+  });
+
+  it('aborts the active request on unmount', () => {
+    let signal: AbortSignal | undefined;
+    const fetchFn = vi.fn((requestSignal: AbortSignal) => {
+      signal = requestSignal;
+      return new Promise<string>(() => undefined);
+    });
+    const { unmount } = renderHook(() => useAsyncData(fetchFn));
+
+    unmount();
+
+    expect(signal?.aborted).toBe(true);
+  });
+
   it('finishes loading when effects are replayed by StrictMode', async () => {
     const fetchFn = vi.fn().mockResolvedValue('strict-mode-data');
     const wrapper = ({ children }: { children: ReactNode }) =>
