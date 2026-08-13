@@ -10,9 +10,14 @@ const mockNavigate = vi.fn();
 const mockStartLoading = vi.fn();
 const mockStopLoading = vi.fn();
 const mockSetError = vi.fn();
+const { mockToastSuccess } = vi.hoisted(() => ({ mockToastSuccess: vi.fn() }));
 
 vi.mock("react-router-dom", () => ({
   useNavigate: () => mockNavigate,
+}));
+
+vi.mock('react-toastify', () => ({
+  toast: { success: mockToastSuccess },
 }));
 
 vi.mock("@/hooks/useFormState", () => ({
@@ -105,9 +110,8 @@ describe("ResetPassword", () => {
 
     await vi.waitFor(() => {
       expect(mockStopLoading).toHaveBeenCalled();
-      expect(mockNavigate).toHaveBeenCalledWith("/login", {
-        state: { notification: "Password reset successfully. Please sign in." },
-      });
+      expect(mockToastSuccess).toHaveBeenCalledWith("Password reset successfully. Please sign in.");
+      expect(mockNavigate).toHaveBeenCalledWith("/login");
     }, { timeout: 2000 });
   });
 

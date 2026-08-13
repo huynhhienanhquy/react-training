@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { useFormState } from '@/hooks/useFormState';
 import { AuthPageLayout } from '@/components/layouts/AuthPageLayout';
@@ -11,8 +11,6 @@ import { ErrorMessage } from '@/components/common/Error';
 export const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
-  const notification = (location.state as { notification?: string } | null)?.notification;
   const { isLoading, error, startLoading, stopLoading, setError } = useFormState();
 
   const [email, setEmail] = useState('');
@@ -51,19 +49,10 @@ export const Login = () => {
         className: 'mt-5.5 text-base',
       }}
     >
-
       <form
         className="mt-10 font-helvetica"
         onSubmit={handleLogin}
       >
-        {notification && (
-          <p
-            role="status"
-            className="mb-6 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-700"
-          >
-            {notification}
-          </p>
-        )}
         <InputField
           label="Email address"
           type="email"

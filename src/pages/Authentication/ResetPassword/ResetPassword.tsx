@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { useFormState } from '@/hooks/useFormState';
 import { AuthPageLayout } from '@/components/layouts/AuthPageLayout';
 import { Button } from '@/components/common/Button';
@@ -28,9 +29,8 @@ export const ResetPassword = () => {
 
     setTimeout(() => {
       stopLoading();
-      navigate('/login', {
-        state: { notification: 'Password reset successfully. Please sign in.' },
-      });
+      toast.success('Password reset successfully. Please sign in.');
+      navigate('/login');
     }, 300);
   }, [confirmPassword, navigate, password, setError, startLoading, stopLoading]);
 

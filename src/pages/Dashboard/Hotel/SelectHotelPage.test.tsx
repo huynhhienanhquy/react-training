@@ -4,6 +4,12 @@ import { SelectHotelPage } from './SelectHotelPage'
 import { getHotels } from '@/services/hotelService'
 import type { HotelData } from '@/types/hotel'
 
+const { mockToastSuccess } = vi.hoisted(() => ({ mockToastSuccess: vi.fn() }))
+
+vi.mock('react-toastify', () => ({
+  toast: { success: mockToastSuccess },
+}))
+
 // Mock react-router-dom
 vi.mock('react-router-dom', () => ({
   useNavigate: () => vi.fn(),
@@ -137,6 +143,16 @@ describe('SelectHotelPage Component', () => {
     expect(onSelectHotelMock).toHaveBeenCalledWith(mockHotelsData[0])
 
     expect(localStorage.getItem('selectedHotel')).toBeNull()
+  })
+
+  it('shows a success toast when no hotel selection callback is provided', async () => {
+    ;(getHotels as ReturnType<typeof vi.fn>).mockResolvedValue(mockHotelsData)
+    render(<SelectHotelPage />)
+
+    await waitFor(() => expect(screen.getByText('Grand Hyatt Lagos')).toBeInTheDocument())
+    fireEvent.click(screen.getAllByRole('button', { name: /book hotel/i })[0])
+
+    expect(mockToastSuccess).toHaveBeenCalledWith('Selected hotel: Grand Hyatt Lagos')
   })
 
   it('renders the simplified hotel card without price providers', async () => {

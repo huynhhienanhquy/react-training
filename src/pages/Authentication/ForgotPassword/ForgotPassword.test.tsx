@@ -13,9 +13,14 @@ import { ForgotPassword } from "./ForgotPassword";
 const mockNavigate = vi.fn();
 const mockStartLoading = vi.fn();
 const mockStopLoading = vi.fn();
+const { mockToastSuccess } = vi.hoisted(() => ({ mockToastSuccess: vi.fn() }));
 
 vi.mock("react-router-dom", () => ({
   useNavigate: () => mockNavigate,
+}));
+
+vi.mock('react-toastify', () => ({
+  toast: { success: mockToastSuccess },
 }));
 
 vi.mock("@/hooks/useFormState", () => ({
@@ -123,9 +128,8 @@ describe("ForgotPassword", () => {
 
     await vi.waitFor(() => {
       expect(mockStopLoading).toHaveBeenCalled();
-      expect(mockNavigate).toHaveBeenCalledWith("/verify-otp", {
-        state: { notification: "OTP code has been sent to your email." },
-      });
+      expect(mockToastSuccess).toHaveBeenCalledWith("OTP code has been sent to your email.");
+      expect(mockNavigate).toHaveBeenCalledWith("/verify-otp");
     }, { timeout: 2000 });
   });
 
