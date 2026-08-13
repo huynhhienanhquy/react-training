@@ -59,7 +59,6 @@ vi.mock("@/components/auth/AuthFooter/AuthFooter", () => ({
 describe("ResetPassword", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.spyOn(window, "alert").mockImplementation(() => {});
   });
 
   it("renders page correctly", () => {
@@ -106,8 +105,9 @@ describe("ResetPassword", () => {
 
     await vi.waitFor(() => {
       expect(mockStopLoading).toHaveBeenCalled();
-      expect(window.alert).toHaveBeenCalledWith("Password reset successfully! Redirecting to Sign In...");
-      expect(mockNavigate).toHaveBeenCalledWith("/login");
+      expect(mockNavigate).toHaveBeenCalledWith("/login", {
+        state: { notification: "Password reset successfully. Please sign in." },
+      });
     }, { timeout: 2000 });
   });
 

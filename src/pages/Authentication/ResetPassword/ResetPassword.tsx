@@ -28,8 +28,9 @@ export const ResetPassword = () => {
 
     setTimeout(() => {
       stopLoading();
-      alert("Password reset successfully! Redirecting to Sign In...");
-      navigate('/login');
+      navigate('/login', {
+        state: { notification: 'Password reset successfully. Please sign in.' },
+      });
     }, 300);
   }, [confirmPassword, navigate, password, setError, startLoading, stopLoading]);
 

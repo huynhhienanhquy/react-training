@@ -1,5 +1,5 @@
 import React, { memo, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useFormState } from '@/hooks/useFormState';
 import { useOtpInput } from '@/hooks/useOtpInput';
 import { useCountdown } from '@/hooks/useCountdown';
@@ -50,6 +50,8 @@ const OtpDigitInput = memo(function OtpDigitInput({
 
 export const VerifyOTP = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const notification = (location.state as { notification?: string } | null)?.notification;
   const { isLoading, startLoading, stopLoading } = useFormState();
   const { otp, setInputRef, handleChange, handleKeyDown, handlePaste } = useOtpInput(6);
   const { counter, reset } = useCountdown(29);
@@ -75,6 +77,14 @@ export const VerifyOTP = () => {
 
         {/* 2. Form */}
         <form className="mt-10" onSubmit={handleVerify}>
+          {notification && (
+            <p
+              role="status"
+              className="mb-6 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-700"
+            >
+              {notification}
+            </p>
+          )}
           {/* Label text "Enter OTP" directly above the input fields */}
           <div className="text-base font-medium text-brand-dark-alt">Enter OTP</div>
 

@@ -18,8 +18,9 @@ export const ForgotPassword = () => {
 
     setTimeout(() => {
       stopLoading();
-      alert("OTP code has been sent to your email!");
-      navigate('/verify-otp');
+      navigate('/verify-otp', {
+        state: { notification: 'OTP code has been sent to your email.' },
+      });
     }, 300);
   }, [navigate, startLoading, stopLoading]);
 

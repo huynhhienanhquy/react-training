@@ -11,6 +11,7 @@ const mockStopLoading = vi.fn();
 
 vi.mock("react-router-dom", () => ({
   useNavigate: () => mockNavigate,
+  useLocation: () => ({ state: null }),
 }));
 
 vi.mock("@/hooks/useFormState", () => ({
