@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState, type DependencyList } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { getErrorMessage } from '@/utils/errorHelpers';
 
 interface AsyncDataState<T> {
@@ -9,7 +9,6 @@ interface AsyncDataState<T> {
 
 interface UseAsyncDataOptions {
   skip?: boolean;
-  dependencies?: DependencyList;
 }
 
 interface UseAsyncDataReturn<T> extends AsyncDataState<T> {
@@ -20,11 +19,17 @@ export const useAsyncData = <T>(
   fetchFn: (signal: AbortSignal) => Promise<T>,
   options?: UseAsyncDataOptions,
 ): UseAsyncDataReturn<T> => {
-  const { skip = false, dependencies = [] } = options ?? {};
-  const fetchFnRef = useRef(fetchFn);
+  const { skip = false } = options ?? {};
+
   const isMountedRef = useRef(true);
   const requestIdRef = useRef(0);
   const abortControllerRef = useRef<AbortController | null>(null);
+
+  const [state, setState] = useState<AsyncDataState<T>>({
+    data: null,
+    loading: !skip,
+    error: null,
+  });
 
   useEffect(() => {
     isMountedRef.current = true;
@@ -36,26 +41,53 @@ export const useAsyncData = <T>(
     };
   }, []);
 
-  useEffect(() => {
-    fetchFnRef.current = fetchFn;
-  }, [fetchFn]);
+  const executeFetch = useCallback(
+    async (controller: AbortController, requestId: number) => {
+      try {
+        const data = await fetchFn(controller.signal);
 
-  const [state, setState] = useState<AsyncDataState<T>>({
-    data: null,
-    loading: !skip,
-    error: null,
-  });
+        if (
+          controller.signal.aborted ||
+          !isMountedRef.current ||
+          requestId !== requestIdRef.current
+        ) {
+          return;
+        }
 
-  const fetchData = useCallback(async () => {
-    if (skip) {
-      return;
-    }
+        setState({
+          data,
+          loading: false,
+          error: null,
+        });
+      } catch (err: unknown) {
+        if (
+          controller.signal.aborted ||
+          !isMountedRef.current ||
+          requestId !== requestIdRef.current
+        ) {
+          return;
+        }
+
+        setState({
+          data: null,
+          loading: false,
+          error: getErrorMessage(err),
+        });
+      }
+    },
+    [fetchFn],
+  );
+
+  const refetch = useCallback(() => {
+    if (skip) return;
+
+    abortControllerRef.current?.abort();
+
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
 
     const requestId = requestIdRef.current + 1;
     requestIdRef.current = requestId;
-    abortControllerRef.current?.abort();
-    const controller = new AbortController();
-    abortControllerRef.current = controller;
 
     setState((prev) => ({
       ...prev,
@@ -63,43 +95,29 @@ export const useAsyncData = <T>(
       error: null,
     }));
 
-    try {
-      const data = await fetchFnRef.current(controller.signal);
-
-      if (!isMountedRef.current || requestId !== requestIdRef.current) return;
-
-      setState({
-        data,
-        loading: false,
-        error: null,
-      });
-    } catch (err: unknown) {
-      if (controller.signal.aborted) return;
-      if (!isMountedRef.current || requestId !== requestIdRef.current) return;
-
-      setState({
-        data: null,
-        loading: false,
-        error: getErrorMessage(err),
-      });
-    }
-  // Callers can explicitly declare the values that change the request while
-  // inline fetch functions remain safe from identity-only refetch loops.
-  // eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/use-memo
-  }, [skip, ...dependencies]);
+    void executeFetch(controller, requestId);
+  }, [executeFetch, skip]);
 
   useEffect(() => {
-    if (!skip) {
-      void fetchData();
-    }
+    if (skip) return;
+
+    abortControllerRef.current?.abort();
+
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
+
+    const requestId = requestIdRef.current + 1;
+    requestIdRef.current = requestId;
+
+    void executeFetch(controller, requestId);
 
     return () => {
-      abortControllerRef.current?.abort();
+      controller.abort();
     };
-  }, [fetchData, skip]);
+  }, [executeFetch, skip]);
 
   return {
     ...state,
-    refetch: fetchData,
+    refetch,
   };
 };
