@@ -26,4 +26,13 @@ describe('getErrorMessage', () => {
       'Something went wrong. Please try again.',
     );
   });
+
+  it('falls back through Axios, Error, and string messages', () => {
+    expect(getErrorMessage(new AxiosError('Network down'))).toBe('Network down');
+    expect(getErrorMessage(new AxiosError(''), 'Custom fallback')).toBe('Custom fallback');
+    expect(getErrorMessage(new Error('Broken'))).toBe('Broken');
+    expect(getErrorMessage(new Error(''), 'Custom fallback')).toBe('Custom fallback');
+    expect(getErrorMessage('Plain failure')).toBe('Plain failure');
+    expect(getErrorMessage('', 'Custom fallback')).toBe('Custom fallback');
+  });
 });

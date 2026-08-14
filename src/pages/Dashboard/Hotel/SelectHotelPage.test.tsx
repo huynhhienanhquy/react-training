@@ -182,14 +182,10 @@ describe('SelectHotelPage Component', () => {
     expect(screen.getByRole('button', { name: /retry/i })).toBeInTheDocument()
   })
 
-  it('reloads page when clicking Retry button on error', async () => {
-    const reloadMock = vi.fn()
-    Object.defineProperty(window, 'location', {
-      configurable: true,
-      value: { ...window.location, reload: reloadMock },
-    })
-
-    ;(getHotels as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('Server unavailable'))
+  it('refetches hotel data when clicking Retry after an error', async () => {
+    ;(getHotels as ReturnType<typeof vi.fn>)
+      .mockRejectedValueOnce(new Error('Server unavailable'))
+      .mockResolvedValueOnce(mockHotelsData)
 
     render(<SelectHotelPage />)
 
@@ -200,6 +196,9 @@ describe('SelectHotelPage Component', () => {
     const retryButton = screen.getByRole('button', { name: /retry/i })
     fireEvent.click(retryButton)
 
-    expect(reloadMock).toHaveBeenCalledTimes(1)
+    await waitFor(() => {
+      expect(getHotels).toHaveBeenCalledTimes(2)
+      expect(screen.getByText('Grand Hyatt Lagos')).toBeInTheDocument()
+    })
   })
 })

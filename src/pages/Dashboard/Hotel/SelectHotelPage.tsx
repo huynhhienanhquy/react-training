@@ -59,6 +59,7 @@ export const SelectHotelPage = ({
     data: hotelData,
     loading,
     error,
+    refetch,
   } = useAsyncData<HotelData[]>(fetchHotels);
 
   const hotelList = useMemo(() => hotelData ?? [], [hotelData]);
@@ -84,7 +85,6 @@ export const SelectHotelPage = ({
     }
   }, [onSelectHotel]);
 
-  const handleRetry = useCallback(() => window.location.reload(), []);
   const createBookHotelHandler = useCallback(
     (hotel: HotelData) => (event: React.MouseEvent) => handleBookHotel(event, hotel),
     [handleBookHotel],
@@ -120,7 +120,7 @@ export const SelectHotelPage = ({
                 variant="danger"
                 size="sm"
                 className="mt-4"
-                onClick={handleRetry}
+                onClick={refetch}
               >
                 Retry
               </Button>

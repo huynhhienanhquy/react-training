@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState, type DependencyList } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { getErrorMessage } from '@/utils/errorHelpers';
 
 interface AsyncDataState<T> {
@@ -9,7 +9,6 @@ interface AsyncDataState<T> {
 
 interface UseAsyncDataOptions {
   skip?: boolean;
-  dependencies?: DependencyList;
 }
 
 interface UseAsyncDataReturn<T> extends AsyncDataState<T> {
@@ -17,26 +16,10 @@ interface UseAsyncDataReturn<T> extends AsyncDataState<T> {
 }
 
 export const useAsyncData = <T>(
-  fetchFn: () => Promise<T>,
+  fetchFn: (signal: AbortSignal) => Promise<T>,
   options?: UseAsyncDataOptions,
 ): UseAsyncDataReturn<T> => {
-  const { skip = false, dependencies = [] } = options ?? {};
-  const fetchFnRef = useRef(fetchFn);
-  const isMountedRef = useRef(true);
-  const requestIdRef = useRef(0);
-
-  useEffect(() => {
-    isMountedRef.current = true;
-
-    return () => {
-      isMountedRef.current = false;
-      requestIdRef.current += 1;
-    };
-  }, []);
-
-  useEffect(() => {
-    fetchFnRef.current = fetchFn;
-  }, [fetchFn]);
+  const { skip = false } = options ?? {};
 
   const [state, setState] = useState<AsyncDataState<T>>({
     data: null,
@@ -44,10 +27,30 @@ export const useAsyncData = <T>(
     error: null,
   });
 
+  const isMountedRef = useRef(true);
+  const requestIdRef = useRef(0);
+  const abortControllerRef = useRef<AbortController | null>(null);
+
+  useEffect(() => {
+    isMountedRef.current = true;
+
+    return () => {
+      isMountedRef.current = false;
+      requestIdRef.current += 1;
+      abortControllerRef.current?.abort();
+    };
+  }, []);
+
   const fetchData = useCallback(async () => {
     if (skip) {
       return;
     }
+
+    // Cancel previous request
+    abortControllerRef.current?.abort();
+
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
 
     const requestId = requestIdRef.current + 1;
     requestIdRef.current = requestId;
@@ -59,9 +62,15 @@ export const useAsyncData = <T>(
     }));
 
     try {
-      const data = await fetchFnRef.current();
+      const data = await fetchFn(controller.signal);
 
-      if (!isMountedRef.current || requestId !== requestIdRef.current) return;
+      if (
+        controller.signal.aborted ||
+        !isMountedRef.current ||
+        requestId !== requestIdRef.current
+      ) {
+        return;
+      }
 
       setState({
         data,
@@ -69,7 +78,13 @@ export const useAsyncData = <T>(
         error: null,
       });
     } catch (err: unknown) {
-      if (!isMountedRef.current || requestId !== requestIdRef.current) return;
+      if (
+        controller.signal.aborted ||
+        !isMountedRef.current ||
+        requestId !== requestIdRef.current
+      ) {
+        return;
+      }
 
       setState({
         data: null,
@@ -77,15 +92,25 @@ export const useAsyncData = <T>(
         error: getErrorMessage(err),
       });
     }
-  // Callers can explicitly declare the values that change the request while
-  // inline fetch functions remain safe from identity-only refetch loops.
-  // eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/use-memo
-  }, [skip, ...dependencies]);
+  }, [fetchFn, skip]);
 
   useEffect(() => {
-    if (!skip) {
-      void fetchData();
+    if (skip) {
+      return;
     }
+
+    let cancelled = false;
+
+    queueMicrotask(() => {
+      if (!cancelled) {
+        void fetchData();
+      }
+    });
+
+    return () => {
+      cancelled = true;
+      abortControllerRef.current?.abort();
+    };
   }, [fetchData, skip]);
 
   return {

@@ -74,6 +74,24 @@ describe("AuthLayout", () => {
     ).toBeInTheDocument();
   });
 
+  it('supports inset variants and renders the outlet when children are absent', () => {
+    const { container } = render(<AuthLayout inset heroInset />);
+    expect(container.firstChild).toHaveClass('desktop:pr-6');
+    expect(container.querySelector('.bottom-18')).toBeInTheDocument();
+    expect(container.querySelector('.lg\\:-translate-y-3')).not.toBeInTheDocument();
+  });
+
+  it('keeps light mode disabled after unmount when it was initially disabled', () => {
+    document.documentElement.classList.remove('dark');
+    document.documentElement.style.colorScheme = '';
+
+    const { unmount } = render(<AuthLayout>Content</AuthLayout>);
+    unmount();
+
+    expect(document.documentElement).not.toHaveClass('dark');
+    expect(document.documentElement.style.colorScheme).toBe('');
+  });
+
   it("forces light mode while mounted and restores dark mode on unmount", () => {
     document.documentElement.classList.add('dark');
     document.documentElement.style.colorScheme = 'dark';
