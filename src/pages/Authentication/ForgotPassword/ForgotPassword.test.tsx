@@ -15,12 +15,12 @@ const mockStartLoading = vi.fn();
 const mockStopLoading = vi.fn();
 const { mockToastSuccess } = vi.hoisted(() => ({ mockToastSuccess: vi.fn() }));
 
-vi.mock("react-router-dom", () => ({
-  useNavigate: () => mockNavigate,
+vi.mock('@/services/toast', () => ({
+  toast: { success: mockToastSuccess },
 }));
 
-vi.mock('react-toastify', () => ({
-  toast: { success: mockToastSuccess },
+vi.mock("react-router-dom", () => ({
+  useNavigate: () => mockNavigate,
 }));
 
 vi.mock("@/hooks/useFormState", () => ({

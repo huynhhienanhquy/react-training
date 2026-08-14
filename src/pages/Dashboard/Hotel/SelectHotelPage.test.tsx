@@ -6,7 +6,7 @@ import type { HotelData } from '@/types/hotel'
 
 const { mockToastSuccess } = vi.hoisted(() => ({ mockToastSuccess: vi.fn() }))
 
-vi.mock('react-toastify', () => ({
+vi.mock('@/services/toast', () => ({
   toast: { success: mockToastSuccess },
 }))
 

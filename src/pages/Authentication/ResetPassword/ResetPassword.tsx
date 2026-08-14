@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { toast } from '@/services/toast';
 import { useFormState } from '@/hooks/useFormState';
 import { AuthPageLayout } from '@/components/layouts/AuthPageLayout';
 import { Button } from '@/components/common/Button';

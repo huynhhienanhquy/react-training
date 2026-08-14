@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { toast } from '@/services/toast';
 
 import { SectionHeader } from '@/components/features/flights/SectionHeader';
 
