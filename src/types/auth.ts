@@ -31,5 +31,3 @@ export interface AuthLayoutProps {
   inset?: boolean;
   heroInset?: boolean;
 }
-
-

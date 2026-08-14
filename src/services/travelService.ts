@@ -39,5 +39,3 @@ export const getItineraryById = async (id: string): Promise<DayItinerary> => {
   const response = await travelApi.get<DayItinerary>(`/itinerary/${id}`);
   return response.data;
 };
-
-
