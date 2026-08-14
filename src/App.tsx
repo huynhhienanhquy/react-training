@@ -20,6 +20,7 @@ import { SelectHotelPage } from './pages/Dashboard/Hotel/SelectHotelPage';
 import { DashboardLayout } from './components/layouts/DashboardLayout';
 import { ComingSoonPage } from './pages/Dashboard/ComingSoonPage';
 import { AuthLayout } from './components/common/Auth/AuthLayout';
+import { ToastContainer } from './components/common/Toast';
 
 export const App = () => {
   return (
@@ -64,6 +65,7 @@ export const App = () => {
           {/* Default navigation when URL is invalid */}
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
+        <ToastContainer />
       </AuthProvider>
     </BrowserRouter>
   );

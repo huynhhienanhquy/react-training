@@ -10,6 +10,11 @@ const mockNavigate = vi.fn();
 const mockStartLoading = vi.fn();
 const mockStopLoading = vi.fn();
 const mockSetError = vi.fn();
+const { mockToastSuccess } = vi.hoisted(() => ({ mockToastSuccess: vi.fn() }));
+
+vi.mock('@/services/toast', () => ({
+  toast: { success: mockToastSuccess },
+}));
 
 vi.mock("react-router-dom", () => ({
   useNavigate: () => mockNavigate,
@@ -59,7 +64,6 @@ vi.mock("@/components/auth/AuthFooter/AuthFooter", () => ({
 describe("ResetPassword", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.spyOn(window, "alert").mockImplementation(() => {});
   });
 
   it("renders page correctly", () => {
@@ -106,7 +110,7 @@ describe("ResetPassword", () => {
 
     await vi.waitFor(() => {
       expect(mockStopLoading).toHaveBeenCalled();
-      expect(window.alert).toHaveBeenCalledWith("Password reset successfully! Redirecting to Sign In...");
+      expect(mockToastSuccess).toHaveBeenCalledWith("Password reset successfully. Please sign in.");
       expect(mockNavigate).toHaveBeenCalledWith("/login");
     }, { timeout: 2000 });
   });

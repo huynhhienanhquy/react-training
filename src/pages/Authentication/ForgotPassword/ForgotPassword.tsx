@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from '@/services/toast';
 import { useFormState } from '@/hooks/useFormState';
 import { AuthPageLayout } from '@/components/layouts/AuthPageLayout';
 import { Button } from '@/components/common/Button';
@@ -18,7 +19,7 @@ export const ForgotPassword = () => {
 
     setTimeout(() => {
       stopLoading();
-      alert("OTP code has been sent to your email!");
+      toast.success('OTP code has been sent to your email.');
       navigate('/verify-otp');
     }, 300);
   }, [navigate, startLoading, stopLoading]);

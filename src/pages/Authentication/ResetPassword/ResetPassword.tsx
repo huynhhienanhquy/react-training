@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from '@/services/toast';
 import { useFormState } from '@/hooks/useFormState';
 import { AuthPageLayout } from '@/components/layouts/AuthPageLayout';
 import { Button } from '@/components/common/Button';
@@ -28,7 +29,7 @@ export const ResetPassword = () => {
 
     setTimeout(() => {
       stopLoading();
-      alert("Password reset successfully! Redirecting to Sign In...");
+      toast.success('Password reset successfully. Please sign in.');
       navigate('/login');
     }, 300);
   }, [confirmPassword, navigate, password, setError, startLoading, stopLoading]);

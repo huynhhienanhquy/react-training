@@ -72,7 +72,6 @@ export const VerifyOTP = () => {
       isLoading={isLoading}
       className="flex flex-col"
     >
-
         {/* 2. Form */}
         <form className="mt-10" onSubmit={handleVerify}>
           {/* Label text "Enter OTP" directly above the input fields */}

@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from '@/services/toast';
 
 import { SectionHeader } from '@/components/features/flights/SectionHeader';
 
@@ -80,11 +81,7 @@ export const SelectHotelPage = ({
     if (onSelectHotel) {
       onSelectHotel(selectedHotel);
     } else {
-      alert(
-        `The hotel you have chosen: ${
-          selectedHotel.hotelName || 'Hotel'
-        }`,
-      );
+      toast.success(`Selected hotel: ${selectedHotel.hotelName || 'Hotel'}`);
     }
   }, [onSelectHotel]);
 
